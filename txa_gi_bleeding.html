@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tranexamic Acid for GI Bleeding</title>
+  <style>
+    :root {
+      --bg: #f4f7f9;
+      --panel: #ffffff;
+      --text: #22313f;
+      --muted: #5f6b76;
+      --primary: #243746;
+      --accent: #2d8cff;
+      --border: #dbe3ea;
+      --soft: #eef4f8;
+      --warn: #fff4e5;
+      --danger: #fdecec;
+      --success: #edf8f1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #243746 0%, #35526b 100%);
+      color: white;
+      padding: 32px;
+      border-radius: 18px;
+      box-shadow: 0 10px 28px rgba(36, 55, 70, 0.16);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+    .hero p {
+      margin: 0;
+      color: rgba(255,255,255,0.9);
+      max-width: 850px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 8px 22px rgba(30, 50, 70, 0.06);
+      margin-bottom: 24px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.3rem;
+      color: var(--primary);
+    }
+    h3 {
+      margin: 20px 0 10px;
+      font-size: 1.02rem;
+      color: var(--primary);
+    }
+    p { margin: 0 0 12px; }
+    ul {
+      margin: 10px 0 0 0;
+      padding-left: 20px;
+    }
+    li { margin: 8px 0; }
+    .callout {
+      border-left: 5px solid var(--accent);
+      background: var(--soft);
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin-top: 12px;
+    }
+    .danger {
+      background: var(--danger);
+      border-left-color: #c53d3d;
+    }
+    .success {
+      background: var(--success);
+      border-left-color: #2f855a;
+    }
+    .warn {
+      background: var(--warn);
+      border-left-color: #c38b18;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      color: var(--primary);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.95rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: var(--soft);
+      color: var(--primary);
+    }
+    .refs ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .refs li { margin: 10px 0; }
+    .footer-note {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 14px;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero { padding: 24px; }
+      .hero h1 { font-size: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1>Tranexamic Acid for Gastrointestinal Bleeding</h1>
+      <p>
+        Practical reference page summarizing the role of tranexamic acid (TXA) in lower GI bleeding,
+        key trial data, anticoagulant-associated bleeding considerations, the narrow hereditary hemorrhagic
+        telangiectasia exception, and a guideline-oriented management framework.
+      </p>
+    </section>
+
+    <div class="grid">
+      <main>
+        <section class="card">
+          <h2>Clinical Bottom Line</h2>
+          <div class="callout danger">
+            <p><strong>TXA should not be used for acute lower gastrointestinal bleeding (LGIB) outside of a clinical trial.</strong> The source document states that the 2023 ACG guideline recommends against antifibrinolytic agents such as TXA in LGIB, and that HALT-IT plus LGIB-specific trials showed no improvement in mortality, transfusion requirements, rebleeding, or intervention rates, with increased venous thromboembolism and seizures.</p>
+          </div>
+          <p>
+            The recommendation applies broadly, including patients with severe bleeding and those receiving anticoagulants. The uploaded review repeatedly emphasizes that TXA does not improve clinically meaningful outcomes in acute LGIB and adds harm risk.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>Key Evidence</h2>
+          <h3>HALT-IT</h3>
+          <p>
+            HALT-IT is presented as the largest and most definitive randomized trial of TXA in GI bleeding, enrolling 12,009 adults with significant upper or lower GI bleeding. Patients received 1 g IV loading followed by 3 g over 24 hours, or placebo.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Outcome</th>
+                <th>TXA vs placebo</th>
+                <th>Interpretation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Death due to bleeding within 5 days</td>
+                <td>3.7% vs 3.8%; RR 0.99 (95% CI 0.82–1.18)</td>
+                <td>No mortality benefit</td>
+              </tr>
+              <tr>
+                <td>Venous thromboembolism</td>
+                <td>0.8% vs 0.4%; RR 1.85 (95% CI 1.15–2.98)</td>
+                <td>Increased risk</td>
+              </tr>
+              <tr>
+                <td>Seizure</td>
+                <td>0.6% vs 0.4%; RR 1.73 (95% CI 1.03–2.93)</td>
+                <td>Increased risk</td>
+              </tr>
+              <tr>
+                <td>Rebleeding / intervention / transfusion</td>
+                <td>No significant reduction</td>
+                <td>No meaningful efficacy signal</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>LGIB-specific randomized trials</h3>
+          <p>
+            The uploaded summary also cites two lower-GI-specific randomized trials that showed no significant benefit in hemoglobin drop, transfusion needs, intervention rates, or hospital stay.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>Why TXA Is Not Recommended in Acute LGIB</h2>
+          <ul>
+            <li>No demonstrated reduction in death due to bleeding.</li>
+            <li>No convincing benefit for transfusion requirement, rebleeding, or procedural need.</li>
+            <li>Clear signal for harm, especially venous thromboembolism and seizure.</li>
+            <li>Guideline consensus in the uploaded document recommends avoiding antifibrinolytics such as TXA in acute LGIB.</li>
+          </ul>
+          <div class="callout warn">
+            <p><strong>Do not use TXA as salvage therapy</strong> for severe or refractory acute LGIB according to the uploaded review. The document explicitly states that even patients at risk of bleeding to death in HALT-IT did not derive benefit.</p>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Anticoagulant-Associated Lower GI Bleeding</h2>
+          <p>
+            The uploaded review specifically addresses anticoagulated patients and concludes that TXA does not improve outcomes and may be particularly problematic because it adds prothrombotic risk without correcting the underlying anticoagulant-related hemostatic defect.
+          </p>
+          <h3>Recommended approach</h3>
+          <ul>
+            <li>Hold the anticoagulant for significant bleeding requiring hospitalization.</li>
+            <li>Provide hemodynamic resuscitation with IV fluids and blood products as needed.</li>
+            <li>Use selective reversal only for life-threatening bleeding or persistent hemodynamic instability.</li>
+            <li>Proceed to endoscopic or radiologic management once clinically appropriate.</li>
+            <li>Avoid TXA.</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h2>Exception: Hereditary Hemorrhagic Telangiectasia (HHT)</h2>
+          <div class="callout success">
+            <p><strong>The only guideline-supported exception described in the uploaded review is chronic HHT-related GI bleeding</strong> from telangiectases or angiodysplasia that is refractory to usual local measures. In that setting, oral TXA may be considered as part of multidisciplinary HHT management.</p>
+          </div>
+          <p>
+            This is described as a fundamentally different situation from acute LGIB. The document notes a typical oral regimen of 1,000–1,500 mg three times daily with renal dose adjustment and thrombotic monitoring.
+          </p>
+          <p>
+            The same review states that non-HHT angiodysplasia use remains investigational and is not standard acute LGIB management.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>Suggested Management Focus Instead of TXA</h2>
+          <ul>
+            <li>Hemodynamic assessment and resuscitation.</li>
+            <li>Blood product support using standard thresholds and procedural targets.</li>
+            <li>Colonoscopy as the primary diagnostic and therapeutic modality when feasible.</li>
+            <li>CT angiography or scintigraphy when colonoscopy is not feasible or nondiagnostic.</li>
+            <li>Angiographic embolization or surgery for refractory bleeding.</li>
+            <li>Correction of coagulopathy and careful antithrombotic management.</li>
+          </ul>
+        </section>
+
+        <section class="card refs">
+          <h2>Selected References Cited in the Uploaded Review</h2>
+          <ol>
+            <li>Management of Patients With Acute Lower Gastrointestinal Bleeding: An Updated ACG Guideline. <em>Am J Gastroenterol.</em> 2023.</li>
+            <li>Effects of a High-Dose 24-H Infusion of Tranexamic Acid on Death and Thromboembolic Events in Patients With Acute Gastrointestinal Bleeding (HALT-IT). <em>Lancet.</em> 2020.</li>
+            <li>Tranexamic Acid in Gastrointestinal Bleeding: A Systematic Review and Meta-Analysis. <em>Crit Care Med.</em> 2022.</li>
+            <li>Tranexamic Acid for Lower GI Hemorrhage: A Randomized Placebo-Controlled Clinical Trial. <em>Dis Colon Rectum.</em> 2017.</li>
+            <li>The Effect of Tranexamic Acid on Blood Transfusion in Lower Gastrointestinal Bleeding. <em>World J Surg.</em> 2024.</li>
+            <li>Second International Guidelines for the Diagnosis and Management of Hereditary Hemorrhagic Telangiectasia. <em>Ann Intern Med.</em> 2020.</li>
+          </ol>
+          <p class="footer-note">
+            This HTML page is a practical summary derived from the uploaded OpenEvidence PDF and is best used as a quick reference page rather than as a substitute for the underlying primary literature.
+          </p>
+        </section>
+      </main>
+
+      <aside>
+        <section class="card">
+          <h2>At-a-Glance</h2>
+          <div class="pill-row">
+            <span class="pill">Acute LGIB: Avoid TXA</span>
+            <span class="pill">No mortality benefit</span>
+            <span class="pill">↑ VTE risk</span>
+            <span class="pill">↑ Seizure risk</span>
+            <span class="pill">Anticoagulated: Avoid TXA</span>
+            <span class="pill">HHT: narrow exception</span>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Key Numbers</h2>
+          <table>
+            <tbody>
+              <tr>
+                <th>HALT-IT sample size</th>
+                <td>12,009</td>
+              </tr>
+              <tr>
+                <th>Bleeding death RR</th>
+                <td>0.99</td>
+              </tr>
+              <tr>
+                <th>VTE RR</th>
+                <td>1.85</td>
+              </tr>
+              <tr>
+                <th>Seizure RR</th>
+                <td>1.73</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="card">
+          <h2>Who Might Still Receive TXA?</h2>
+          <p>
+            According to the uploaded review, not patients with routine acute LGIB. The only scenario supported in the document is selected patients with <strong>chronic HHT-related GI bleeding</strong>, using <strong>oral</strong> rather than high-dose IV TXA.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>Visuals in the PDF</h2>
+          <p>
+            The uploaded PDF includes a hemorrhoid treatment algorithm on page 6 and an anticoagulant bleeding management flowchart on page 16. These serve as supportive management visuals, not evidence in favor of TXA.
+          </p>
+        </section>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
