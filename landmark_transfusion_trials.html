@@ -28,7 +28,7 @@
       line-height:1.6;
     }
     .container{
-      max-width:1220px;
+      max-width:1240px;
       margin:0 auto;
       padding:24px;
     }
@@ -55,7 +55,7 @@
     }
     .hero p{
       margin:8px 0;
-      max-width:960px;
+      max-width:980px;
       color:rgba(255,255,255,.92);
     }
     .meta{
@@ -77,16 +77,16 @@
       gap:16px;
       margin-bottom:28px;
     }
-    .summary-card,.trial,.legend,.refs{
+    .summary-card,.trial,.legend,.refs,.context{
       background:var(--panel);
       border:1px solid var(--border);
       border-radius:18px;
       box-shadow:0 10px 24px rgba(36,55,70,.06);
     }
-    .summary-card{
+    .summary-card,.context{
       padding:18px;
     }
-    .summary-card h2{
+    .summary-card h2,.context h2{
       margin:0 0 8px;
       font-size:1.06rem;
       color:var(--primary);
@@ -117,6 +117,11 @@
       font-size:1.48rem;
       color:var(--primary);
     }
+    .section-badges{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
     .badge{
       background:var(--tag);
       color:var(--primary);
@@ -133,33 +138,29 @@
     .trial{
       padding:20px;
     }
-    .trial h3{
-      margin:0;
-      font-size:1.16rem;
-      color:var(--primary);
-    }
-
-    .trial-header{
+    .trial-head{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
       gap:10px;
-      margin-bottom:6px;
+    }
+    .trial h3{
+      margin:0 0 4px;
+      font-size:1.16rem;
+      color:var(--primary);
     }
     .year-badge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:58px;
-      padding:4px 10px;
-      border-radius:999px;
-      background:var(--tag);
+      flex:0 0 auto;
+      background:var(--soft);
       color:var(--primary);
-      font-size:.84rem;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:4px 9px;
+      font-size:.83rem;
       font-weight:700;
       line-height:1;
-      border:1px solid var(--border);
-      white-space:nowrap;
+      min-width:54px;
+      text-align:center;
     }
     .citation{
       color:var(--muted);
@@ -185,17 +186,13 @@
       background:var(--soft);
       border-left:4px solid var(--accent);
     }
-    .trial-link{
-      margin-top:10px;
-    }
+    .trial-link{margin-top:10px;}
     .trial-link a{
       text-decoration:none;
       font-weight:600;
       color:var(--accent);
     }
-    .trial-link a:hover{
-      text-decoration:underline;
-    }
+    .trial-link a:hover{text-decoration:underline;}
     .refs{
       margin-top:28px;
       padding:20px;
@@ -223,9 +220,7 @@
       font-size:.95rem;
       padding-bottom:24px;
     }
-    @media (max-width:850px){
-      .refs ol{columns:1;}
-    }
+    @media (max-width:850px){.refs ol{columns:1;}}
     @media (max-width:700px){
       .container{padding:16px}
       .hero{padding:22px}
@@ -239,79 +234,124 @@
 
     <section class="hero">
       <h1>Landmark Transfusion Trials</h1>
-      <p>A more comprehensive reference page for transfusion medicine trainees and on-call practice. This summary emphasizes high-yield randomized and landmark studies that shape day-to-day decisions on RBC thresholds, platelet prophylaxis, trauma resuscitation, TXA, fibrinogen replacement, and storage-age questions.</p>
-      <p>It is intentionally practical rather than exhaustive. Use it together with local policy, product availability, and patient-specific considerations.</p>
+      <p>A comprehensive reference page for transfusion medicine trainees and on-call practice. This version is organized by clinical scenario and incorporates the major trials highlighted in the uploaded teaching deck, expanded into a practical review format.</p>
+      <p>Use it with local policy, product availability, and patient-specific considerations. The cards are intentionally concise and arranged oldest to newest within each section.</p>
       <div class="meta">
-       
+        <span class="pill">Expanded from PDF trial deck</span>
+        <span class="pill">Ordered oldest → newest</span>
+        <span class="pill">Clinical call oriented</span>
       </div>
     </section>
 
     <section class="summary">
       <div class="summary-card">
-        <h2>Restrictive RBC transfusion usually wins</h2>
-        <p>Across ICU care, septic shock, GI bleeding, orthopedic surgery, and most cardiac surgery populations, restrictive thresholds are generally safe and reduce blood use.</p>
+        <h2>Restrictive RBC transfusion is usually favored</h2>
+        <p>Across ICU care, septic shock, GI bleeding, orthopedic surgery, hematopoietic transplant, and most cardiac surgery populations, restrictive thresholds are generally safe and reduce blood use.</p>
       </div>
       <div class="summary-card">
-        <h2>ACS is still nuanced</h2>
-        <p>Evidence in acute myocardial infarction remains less settled than in other populations. A very restrictive threshold may not be ideal for every ACS patient.</p>
+        <h2>ACS remains nuanced</h2>
+        <p>Acute myocardial infarction is the main adult setting where a higher hemoglobin target may be reasonable and a very restrictive threshold may not be ideal.</p>
       </div>
       <div class="summary-card">
-        <h2>Balanced trauma resuscitation matters</h2>
-        <p>Early high-ratio component therapy and TXA have major roles in hemorrhagic trauma. Hemostasis matters more than simply giving more RBCs.</p>
+        <h2>Targeted hemostatic therapy is rising</h2>
+        <p>Cardiac surgery and trauma increasingly compare plasma-based pathways with factor-concentrate strategies, fibrinogen replacement, and algorithm-guided correction.</p>
       </div>
       <div class="summary-card">
-        <h2>Fresh blood is not better</h2>
-        <p>Large trials did not show clinically meaningful benefit from using very fresh RBC units instead of standard issue inventory.</p>
+        <h2>TXA is highly context specific</h2>
+        <p>Strong in trauma and established postpartum hemorrhage, mixed or limited in ICH and prophylactic obstetrics, and negative in GI bleeding and hematologic prophylaxis.</p>
+      </div>
+      <div class="summary-card">
+        <h2>Platelets should not be reflexive</h2>
+        <p>TOPPS supports prophylaxis in hypoproliferative thrombocytopenia, but PATCH and PlaNeT-2 show that platelet transfusion can worsen outcomes in the wrong setting.</p>
+      </div>
+      <div class="summary-card">
+        <h2>Fresh blood is not better blood</h2>
+        <p>ABLE, RECESS, and TRANSFUSE did not show clinically meaningful benefit from routinely selecting fresher RBC units.</p>
       </div>
     </section>
 
     <section class="legend">
       <h2>How to read this page</h2>
       <p><span class="good">Practice-favoring signal:</span> Trial supports the intervention or more restrictive strategy.</p>
-      <p><span class="warn">Neutral / nuanced signal:</span> No clear superiority, or benefit limited to secondary outcomes or selected subgroups.</p>
-      <p><span class="danger">Practice-changing negative signal:</span> Trial argues against the intervention in routine use.</p>
+      <p><span class="warn">Neutral / nuanced signal:</span> No clear superiority, benefit limited to selected outcomes, or practice still individualized.</p>
+      <p><span class="danger">Practice-changing negative signal:</span> Trial argues against routine use of the intervention.</p>
     </section>
 
-    <div class="section"><h2>RBC threshold trials</h2><span class="badge">10 studies · oldest → newest</span></div>
+    <div class="section">
+      <h2>Cardiac surgery</h2>
+      <div class="section-badges"><span class="badge">5 studies</span><span class="badge">oldest → newest</span></div>
+    </div>
     <div class="grid">
       <article class="trial">
-        <div class="trial-header">
-          <h3>TRICC</h3>
-          <span class="year-badge">1999</span>
-        </div>
-        <div class="citation">Hebert et al., NEJM, 1999</div>
-        <p><span class="label">Population:</span> Euvolemic critically ill ICU patients with anemia and no active bleeding.</p>
-        <p><span class="label">Comparison:</span> Restrictive threshold 70 g/L vs liberal threshold 100 g/L.</p>
-        <ul>
-          <li>Restrictive strategy was at least as effective overall.</li>
-          <li>Used substantially fewer RBC units.</li>
-          <li>Helped establish modern ICU transfusion practice.</li>
-        </ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="good">A 70 g/L threshold is appropriate for many stable ICU patients</span>, with caution in active cardiac ischemia.</div>
-        <p class="trial-link"><a href="tricc_trial.html">Full trial summary →</a></p>
-      </article>
-
-      <article class="trial">
-        <div class="trial-header">
-          <h3>TRACS</h3>
-          <span class="year-badge">2010</span>
-        </div>
-        <div class="citation">Hajjar et al., JAMA, 2010</div>
+        <div class="trial-head"><h3>TRACS</h3><span class="year-badge">2010</span></div>
+        <div class="citation">Hajjar et al., JAMA</div>
         <p><span class="label">Population:</span> Cardiac surgery patients.</p>
         <p><span class="label">Comparison:</span> Restrictive vs liberal perioperative transfusion strategy.</p>
         <ul>
           <li>Restrictive approach was non-inferior for mortality and severe morbidity.</li>
           <li>Fewer patients were transfused in the restrictive arm.</li>
         </ul>
-        <div class="take-home"><strong>Take-home:</strong> Restrictive transfusion in cardiac surgery is reasonable and paved the way for later larger trials.</div>
+        <div class="take-home"><strong>Take-home:</strong> Restrictive transfusion in cardiac surgery is reasonable and helped set up later larger trials.</div>
       </article>
-      
+
       <article class="trial">
-        <div class="trial-header">
-          <h3>FOCUS</h3>
-          <span class="year-badge">2011</span>
-        </div>
-        <div class="citation">Carson et al., NEJM, 2011</div>
+        <div class="trial-head"><h3>TRICS-III</h3><span class="year-badge">2017</span></div>
+        <div class="citation">Mazer et al., NEJM</div>
+        <p><span class="label">Population:</span> Moderate- to high-risk cardiac surgery patients.</p>
+        <p><span class="label">Comparison:</span> Restrictive threshold 75 g/L vs liberal threshold 95 g/L in ICU/OR and 85 g/L on ward.</p>
+        <ul>
+          <li>Restrictive strategy was non-inferior for death, MI, stroke, or dialysis.</li>
+          <li>Substantially fewer patients were transfused in the restrictive arm.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="good">This is a cornerstone trial supporting restrictive transfusion in cardiac surgery</span>.</div>
+      </article>
+
+      <article class="trial">
+        <div class="trial-head"><h3>ATACAS</h3><span class="year-badge">2017</span></div>
+        <div class="citation">Myles et al., NEJM</div>
+        <p><span class="label">Population:</span> High-risk CABG patients.</p>
+        <p><span class="label">Comparison:</span> Prophylactic TXA vs placebo.</p>
+        <ul>
+          <li>Reduced transfusion exposure and reoperation for bleeding.</li>
+          <li>No major thrombotic benefit signal, but seizures were increased.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> TXA is effective in cardiac surgery, but <span class="warn">dose and seizure risk matter</span>.</div>
+      </article>
+
+      <article class="trial">
+        <div class="trial-head"><h3>FIBRES</h3><span class="year-badge">2019</span></div>
+        <div class="citation">Callum et al., JAMA</div>
+        <p><span class="label">Population:</span> Post-CABG bleeding with hypofibrinogenemia.</p>
+        <p><span class="label">Comparison:</span> Fibrinogen concentrate vs cryoprecipitate.</p>
+        <ul>
+          <li>Fibrinogen concentrate was non-inferior for the number of blood components transfused.</li>
+          <li>No clear difference in death, thrombosis, or treatment-related adverse events.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="good">Fibrinogen concentrate is a valid alternative to cryoprecipitate</span>.</div>
+      </article>
+
+      <article class="trial">
+        <div class="trial-head"><h3>PCC vs Frozen Plasma</h3><span class="year-badge">2022</span></div>
+        <div class="citation">Smith et al., JAMA Surgery</div>
+        <p><span class="label">Population:</span> Cardiac surgery with microvascular bleeding and prolonged PT/INR.</p>
+        <p><span class="label">Comparison:</span> PCC 15 IU/kg vs frozen plasma 10–15 mL/kg.</p>
+        <ul>
+          <li>Similar bleeding outcomes and overall safety.</li>
+          <li>Better PT/INR correction with PCC.</li>
+          <li>Trend toward fewer transfusions with PCC.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="warn">PCC is a reasonable plasma-sparing option for selected postoperative cardiac surgery coagulopathy</span>.</div>
+      </article>
+    </div>
+
+    <div class="section">
+      <h2>Non-cardiac surgery</h2>
+      <div class="section-badges"><span class="badge">2 studies</span><span class="badge">oldest → newest</span></div>
+    </div>
+    <div class="grid">
+      <article class="trial">
+        <div class="trial-head"><h3>FOCUS</h3><span class="year-badge">2011</span></div>
+        <div class="citation">Carson et al., NEJM</div>
         <p><span class="label">Population:</span> Older patients with cardiovascular risk after hip fracture surgery.</p>
         <p><span class="label">Comparison:</span> Liberal transfusion target &gt;100 g/L vs restrictive target &gt;80 g/L or symptoms.</p>
         <ul>
@@ -322,11 +362,210 @@
       </article>
 
       <article class="trial">
-        <div class="trial-header">
-          <h3>Villanueva Trial</h3>
-          <span class="year-badge">2013</span>
-        </div>
-        <div class="citation">Villanueva et al., NEJM, 2013</div>
+        <div class="trial-head"><h3>POISE-3</h3><span class="year-badge">2022</span></div>
+        <div class="citation">Devereaux et al., NEJM</div>
+        <p><span class="label">Population:</span> Non-cardiac surgery patients at risk for bleeding and cardiovascular complications.</p>
+        <p><span class="label">Comparison:</span> TXA at the start and end of surgery vs placebo.</p>
+        <ul>
+          <li>Reduced major bleeding.</li>
+          <li>Did not meet non-inferiority for cardiovascular outcomes.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="warn">TXA reduces bleeding in higher-risk non-cardiac surgery, but clinicians still need to weigh CV risk-benefit</span>.</div>
+      </article>
+    </div>
+
+    <div class="section">
+      <h2>Critically ill</h2>
+      <div class="section-badges"><span class="badge">2 studies</span><span class="badge">oldest → newest</span></div>
+    </div>
+    <div class="grid">
+      <article class="trial">
+        <div class="trial-head"><h3>TRICC</h3><span class="year-badge">1999</span></div>
+        <div class="citation">Hébert et al., NEJM</div>
+        <p><span class="label">Population:</span> Euvolemic critically ill ICU patients with anemia and no active bleeding.</p>
+        <p><span class="label">Comparison:</span> Restrictive threshold 70 g/L vs liberal threshold 100 g/L.</p>
+        <ul>
+          <li>Restrictive strategy was at least as effective overall.</li>
+          <li>Hospital mortality and cardiac events favored restriction in key analyses.</li>
+          <li>Used substantially fewer RBC units.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="good">A 70 g/L threshold is appropriate for many stable ICU patients</span>, with caution in active cardiac ischemia.</div>
+        <p class="trial-link"><a href="tricc_trial.html">Full trial summary →</a></p>
+      </article>
+
+      <article class="trial">
+        <div class="trial-head"><h3>TRISS</h3><span class="year-badge">2014</span></div>
+        <div class="citation">Holst et al., NEJM</div>
+        <p><span class="label">Population:</span> Septic shock with Hb ≤90 g/L.</p>
+        <p><span class="label">Comparison:</span> Threshold 70 g/L vs 90 g/L.</p>
+        <ul>
+          <li>No significant difference in 90-day mortality or ischemic events.</li>
+          <li>Restrictive arm received far fewer transfusions.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="good">Restrictive transfusion is safe in septic shock</span> unless other clinical factors override.</div>
+        <p class="trial-link"><a href="triss_trial.html">Full trial summary →</a></p>
+      </article>
+    </div>
+
+    <div class="section">
+      <h2>Acute coronary syndrome</h2>
+      <div class="section-badges"><span class="badge">2 studies</span><span class="badge">oldest → newest</span></div>
+    </div>
+    <div class="grid">
+      <article class="trial">
+        <div class="trial-head"><h3>REALITY</h3><span class="year-badge">2021</span></div>
+        <div class="citation">Ducrocq et al., JAMA</div>
+        <p><span class="label">Population:</span> Acute myocardial infarction with anemia.</p>
+        <p><span class="label">Comparison:</span> Restrictive strategy around 80 g/L vs liberal strategy around 100 g/L.</p>
+        <ul>
+          <li>Restrictive strategy was non-inferior for 30-day major cardiovascular events.</li>
+          <li>Restrictive arm used fewer RBC units.</li>
+          <li>Authors noted the confidence interval still left room for possible harm.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="warn">ACS may tolerate a moderately restrictive threshold</span>, but the area remained unsettled and called for a larger trial.</div>
+      </article>
+
+      <article class="trial">
+        <div class="trial-head"><h3>MINT</h3><span class="year-badge">2023</span></div>
+        <div class="citation">Carson et al., NEJM</div>
+        <p><span class="label">Population:</span> Adults with acute myocardial infarction and anemia (Hb &lt;100 g/L) during index hospitalization.</p>
+        <p><span class="label">Comparison:</span> Restrictive transfusion strategy vs liberal strategy targeting Hb around 100 g/L.</p>
+        <ul>
+          <li>Primary outcome numerically favored the liberal strategy.</li>
+          <li>Cardiac death was lower with liberal transfusion.</li>
+          <li>Restrictive strategy used far fewer RBC units.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="warn">In MI with anemia, a liberal transfusion strategy targeting Hb around 100 g/L may be preferable</span>, particularly in higher-risk ACS phenotypes.</div>
+        <p class="trial-link"><a href="mint_trial.html">Full trial summary →</a></p>
+      </article>
+    </div>
+
+    <div class="section">
+      <h2>Obstetrics / postpartum hemorrhage</h2>
+      <div class="section-badges"><span class="badge">3 studies</span><span class="badge">oldest → newest</span></div>
+    </div>
+    <div class="grid">
+      <article class="trial">
+        <div class="trial-head"><h3>WOMAN</h3><span class="year-badge">2017</span></div>
+        <div class="citation">Shakur et al., Lancet</div>
+        <p><span class="label">Population:</span> Established postpartum hemorrhage after vaginal birth or cesarean delivery.</p>
+        <p><span class="label">Comparison:</span> TXA 1 g IV vs placebo.</p>
+        <ul>
+          <li>Reduced death due to bleeding, especially when given within 3 hours of birth.</li>
+          <li>No clear reduction in hysterectomy.</li>
+          <li>No major safety penalty was shown.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="good">Give TXA early in established postpartum hemorrhage</span>.</div>
+      </article>
+
+      <article class="trial">
+        <div class="trial-head"><h3>TRAAP</h3><span class="year-badge">2018</span></div>
+        <div class="citation">Sentilhes et al., NEJM</div>
+        <p><span class="label">Population:</span> Vaginal delivery.</p>
+        <p><span class="label">Comparison:</span> Prophylactic TXA vs placebo postpartum.</p>
+        <ul>
+          <li>No significant reduction in the primary PPH endpoint.</li>
+          <li>Some secondary bleeding measures favored TXA.</li>
+          <li>Thrombotic events were not significantly increased.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="warn">Routine prophylactic TXA after vaginal delivery is not firmly established</span>.</div>
+      </article>
+
+      <article class="trial">
+        <div class="trial-head"><h3>TRAAP2</h3><span class="year-badge">2021</span></div>
+        <div class="citation">Sentilhes et al., NEJM</div>
+        <p><span class="label">Population:</span> Cesarean delivery.</p>
+        <p><span class="label">Comparison:</span> Prophylactic TXA vs placebo after birth.</p>
+        <ul>
+          <li>Reduced a measured composite postpartum bleeding outcome.</li>
+          <li>No clear reduction in transfusion or other major clinical endpoints.</li>
+          <li>Nausea and vomiting were more common with TXA.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="warn">TXA can reduce measured blood loss after cesarean delivery, but major clinical benefit is less clear</span>.</div>
+      </article>
+    </div>
+
+    <div class="section">
+      <h2>Menstrual bleeding</h2>
+      <div class="section-badges"><span class="badge">1 study</span><span class="badge">oldest → newest</span></div>
+    </div>
+    <div class="grid">
+      <article class="trial">
+        <div class="trial-head"><h3>Heavy Menstrual Bleeding Trial</h3><span class="year-badge">2010</span></div>
+        <div class="citation">Lukes et al., Obstetrics &amp; Gynecology</div>
+        <p><span class="label">Population:</span> Women with heavy menstrual bleeding.</p>
+        <p><span class="label">Comparison:</span> Oral TXA vs placebo.</p>
+        <ul>
+          <li>Reduced menstrual blood loss.</li>
+          <li>Improved quality of life.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> TXA remains a useful non-hormonal medical therapy for heavy menstrual bleeding.</div>
+      </article>
+    </div>
+
+    <div class="section">
+      <h2>Hematologic malignancies and transplant</h2>
+      <div class="section-badges"><span class="badge">4 studies</span><span class="badge">oldest → newest</span></div>
+    </div>
+    <div class="grid">
+      <article class="trial">
+        <div class="trial-head"><h3>TOPPS</h3><span class="year-badge">2013</span></div>
+        <div class="citation">Stanworth et al., NEJM</div>
+        <p><span class="label">Population:</span> Hematologic malignancy or stem cell transplant patients with hypoproliferative thrombocytopenia.</p>
+        <p><span class="label">Comparison:</span> No prophylactic platelets vs prophylactic transfusion at platelet count &lt;10 × 10<sup>9</sup>/L.</p>
+        <ul>
+          <li>Non-inferiority of no prophylaxis was not shown.</li>
+          <li>Withholding prophylaxis led to more bleeding and shorter time to first bleed.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="good">Continue prophylactic platelet transfusion in most hypoproliferative thrombocytopenia settings</span>.</div>
+      </article>
+
+      <article class="trial">
+        <div class="trial-head"><h3>PlaNeT-2 / MATISSE</h3><span class="year-badge">2019</span></div>
+        <div class="citation">Curley et al., NEJM</div>
+        <p><span class="label">Population:</span> Preterm neonates with severe thrombocytopenia.</p>
+        <p><span class="label">Comparison:</span> Higher prophylactic threshold 50 × 10<sup>9</sup>/L vs lower threshold 25 × 10<sup>9</sup>/L.</p>
+        <ul>
+          <li>Higher threshold increased death or major bleeding.</li>
+          <li>Major neonatal practice-changing trial.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="danger">More liberal neonatal platelet transfusion can be harmful</span>.</div>
+      </article>
+
+      <article class="trial">
+        <div class="trial-head"><h3>TRIST</h3><span class="year-badge">2020</span></div>
+        <div class="citation">Tay et al., Journal of Clinical Oncology</div>
+        <p><span class="label">Population:</span> Hematopoietic cell transplant patients.</p>
+        <p><span class="label">Comparison:</span> Restrictive Hb target 70 g/L vs liberal target 90 g/L.</p>
+        <ul>
+          <li>Restrictive strategy was non-inferior for health-related quality of life.</li>
+          <li>No major difference in clinical outcomes.</li>
+          <li>Restrictive group used fewer RBC units.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="good">Restrictive RBC transfusion is reasonable in hematopoietic cell transplant</span>.</div>
+      </article>
+
+      <article class="trial">
+        <div class="trial-head"><h3>a-TREAT</h3><span class="year-badge">2020</span></div>
+        <div class="citation">Gernsheimer et al., Blood</div>
+        <p><span class="label">Population:</span> Hematologic malignancy with hypoproliferative thrombocytopenia.</p>
+        <p><span class="label">Comparison:</span> Prophylactic TXA vs placebo.</p>
+        <ul>
+          <li>No reduction in WHO grade 2+ bleeding.</li>
+          <li>No decrease in platelet transfusion requirements.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="danger">Routine prophylactic TXA is not supported in this setting</span>.</div>
+      </article>
+    </div>
+
+    <div class="section">
+      <h2>GI bleeding</h2>
+      <div class="section-badges"><span class="badge">2 studies</span><span class="badge">oldest → newest</span></div>
+    </div>
+    <div class="grid">
+      <article class="trial">
+        <div class="trial-head"><h3>Villanueva Trial</h3><span class="year-badge">2013</span></div>
+        <div class="citation">Villanueva et al., NEJM</div>
         <p><span class="label">Population:</span> Acute upper GI bleeding.</p>
         <p><span class="label">Comparison:</span> Restrictive target 70 g/L vs liberal target 90 g/L.</p>
         <ul>
@@ -338,397 +577,224 @@
       </article>
 
       <article class="trial">
-        <div class="trial-header">
-          <h3>Robertson Head Injury Trial</h3>
-          <span class="year-badge">2014</span>
-        </div>
-        <div class="citation">Robertson et al., JAMA, 2014</div>
-        <p><span class="label">Population:</span> Severe traumatic brain injury.</p>
-        <p><span class="label">Comparison:</span> Hb target 70 g/L vs 100 g/L.</p>
+        <div class="trial-head"><h3>HALT-IT</h3><span class="year-badge">2020</span></div>
+        <div class="citation">Roberts et al., Lancet</div>
+        <p><span class="label">Population:</span> Acute GI bleeding.</p>
+        <p><span class="label">Comparison:</span> High-dose TXA vs placebo.</p>
         <ul>
-          <li>No functional recovery benefit with the liberal target.</li>
-          <li>More thromboembolic events with the 100 g/L target.</li>
+          <li>No reduction in death due to bleeding.</li>
+          <li>More thromboembolic events with TXA.</li>
         </ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="danger">Liberal transfusion to 100 g/L in TBI is not supported</span>.</div>
-      </article>
-
-      <article class="trial">
-        <div class="trial-header">
-          <h3>TRISS</h3>
-          <span class="year-badge">2014</span>
-        </div>
-        <div class="citation">Holst et al., NEJM, 2014</div>
-        <p><span class="label">Population:</span> Septic shock with Hb ≤90 g/L.</p>
-        <p><span class="label">Comparison:</span> Threshold 70 g/L vs 90 g/L.</p>
-        <ul>
-          <li>No significant difference in 90-day mortality or ischemic events.</li>
-          <li>Restrictive arm received far fewer transfusions.</li>
-        </ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="good">Restrictive transfusion is safe in septic shock</span> unless other clinical factors override.</div>
-        <p class="trial-link"><a href="triss_trial.html">Full trial summary →</a></p>
-      </article>
-      
-      <article class="trial">
-        <div class="trial-header">
-          <h3>TITRe2</h3>
-          <span class="year-badge">2015</span>
-        </div>
-        <div class="citation">Murphy et al., NEJM, 2015</div>
-        <p><span class="label">Population:</span> Post-cardiac surgery patients with postoperative anemia.</p>
-        <p><span class="label">Comparison:</span> Restrictive threshold 75 g/L vs liberal threshold 90 g/L.</p>
-        <ul>
-          <li>No superiority of restrictive strategy for major infection or ischemic events.</li>
-          <li>Restrictive arm used fewer RBC units.</li>
-          <li>Mortality signal generated discussion but did not overturn restrictive practice.</li>
-        </ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="warn">Restrictive practice remained acceptable</span>, though this trial reminded clinicians to interpret cardiac surgery data carefully.</div>
-      </article>
-
-      <article class="trial">
-        <div class="trial-header">
-          <h3>TRICS-III</h3>
-          <span class="year-badge">2017</span>
-        </div>
-        <div class="citation">Mazer et al., NEJM, 2017</div>
-        <p><span class="label">Population:</span> Moderate- to high-risk cardiac surgery patients.</p>
-        <p><span class="label">Comparison:</span> Restrictive threshold 75 g/L vs liberal threshold 95 g/L in ICU/OR and 85 g/L on ward.</p>
-        <ul>
-          <li>Restrictive strategy was non-inferior for death, MI, stroke, or dialysis.</li>
-          <li>Substantially fewer patients were transfused in the restrictive arm.</li>
-        </ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="good">This is a cornerstone trial supporting restrictive transfusion in cardiac surgery</span>.</div>
-      </article>
-
-      <article class="trial">
-        <div class="trial-header">
-          <h3>REALITY</h3>
-          <span class="year-badge">2021</span>
-        </div>
-        <div class="citation">Ducrocq et al., JAMA, 2021</div>
-        <p><span class="label">Population:</span> Acute myocardial infarction with anemia.</p>
-        <p><span class="label">Comparison:</span> Restrictive strategy around 80 g/L vs liberal strategy around 100 g/L.</p>
-        <ul>
-          <li>Restrictive strategy was non-inferior for 30-day major cardiovascular events.</li>
-          <li>Restrictive arm used fewer RBC units.</li>
-        </ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="warn">ACS may tolerate a moderately restrictive threshold</span>, but this area remains less settled than ICU/GI bleeding.</div>
-      </article>
-
-      <article class="trial">
-        <div class="trial-header">
-          <h3>MINT</h3>
-          <span class="year-badge">2023</span>
-        </div>
-        <div class="citation">Carson et al., NEJM, 2023</div>
-        <p><span class="label">Population:</span> Adults with acute myocardial infarction and anemia (Hb &lt;100 g/L) during index hospitalization.</p>
-        <p><span class="label">Comparison:</span> Restrictive transfusion strategy (transfuse for Hb &lt;80 g/L; strongly recommended if &lt;70 g/L or persistent angina) vs liberal strategy targeting Hb ≈100 g/L.</p>
-        <ul>
-          <li>Primary outcome (MI or death at 30 days) numerically favored the liberal strategy.</li>
-          <li>Cardiac death was lower with liberal transfusion.</li>
-          <li>Restrictive strategy used far fewer RBC units.</li>
-        </ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="warn">In myocardial infarction with anemia, a liberal transfusion strategy targeting Hb around 100 g/L may be preferable</span>, particularly in higher-risk ACS phenotypes.</div>
-        <p class="trial-link"><a href="mint_trial.html">Full trial summary →</a></p>
+        <div class="take-home"><strong>Take-home:</strong> <span class="danger">Do not routinely add TXA for GI bleeding</span>.</div>
       </article>
     </div>
 
-    <div class="section"><h2>Platelet transfusion trials</h2><span class="badge">5 studies · oldest → newest</span></div>
+    <div class="section">
+      <h2>Intracerebral hemorrhage / neuro</h2>
+      <div class="section-badges"><span class="badge">2 studies</span><span class="badge">oldest → newest</span></div>
+    </div>
     <div class="grid">
       <article class="trial">
-        <div class="trial-header"><h3>PLADO</h3><span class="year-badge">2010</span></div>
-        <div class="citation">Slichter et al., NEJM, 2010</div>
-        <p><span class="label">Population:</span> Hypoproliferative thrombocytopenia requiring prophylactic platelets.</p>
-        <p><span class="label">Comparison:</span> Low, medium, and high platelet doses.</p>
-        <ul>
-          <li>No meaningful difference in bleeding incidence across doses.</li>
-          <li>Lower doses used fewer platelets per transfusion but required more transfusion episodes.</li>
-        </ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="good">Higher platelet doses do not improve bleeding prevention</span>.</div>
-      </article>
-
-      <article class="trial">
-        <div class="trial-header"><h3>TOPPS</h3><span class="year-badge">2013</span></div>
-        <div class="citation">Stanworth et al., NEJM, 2013</div>
-        <p><span class="label">Population:</span> Hematologic malignancy or stem cell transplant patients with hypoproliferative thrombocytopenia.</p>
-        <p><span class="label">Comparison:</span> No prophylactic platelets vs prophylactic transfusion at platelet count &lt;10 × 10<sup>9</sup>/L.</p>
-        <ul>
-          <li>Non-inferiority of no prophylaxis was not shown.</li>
-          <li>Withholding prophylaxis led to more bleeding.</li>
-        </ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="good">Continue prophylactic platelet transfusion in most hypoproliferative thrombocytopenia settings</span>.</div>
-      </article>
-
-      <article class="trial">
-        <div class="trial-header"><h3>PATCH</h3><span class="year-badge">2016</span></div>
-        <div class="citation">Baharoglu et al., Lancet, 2016</div>
+        <div class="trial-head"><h3>PATCH</h3><span class="year-badge">2016</span></div>
+        <div class="citation">Baharoglu et al., Lancet</div>
         <p><span class="label">Population:</span> Spontaneous supratentorial ICH in patients recently on antiplatelet therapy.</p>
         <p><span class="label">Comparison:</span> Platelet transfusion vs standard care.</p>
         <ul>
           <li>Higher risk of death or dependence with platelet transfusion.</li>
+          <li>Best available trial evidence argues against routine platelet use in this setting.</li>
         </ul>
         <div class="take-home"><strong>Take-home:</strong> <span class="danger">Do not routinely transfuse platelets for antiplatelet-associated spontaneous ICH</span>.</div>
       </article>
 
       <article class="trial">
-        <div class="trial-header"><h3>PlaNeT-2 / MATISSE</h3><span class="year-badge">2019</span></div>
-        <div class="citation">Curley et al., NEJM, 2019</div>
-        <p><span class="label">Population:</span> Preterm neonates with severe thrombocytopenia.</p>
-        <p><span class="label">Comparison:</span> Higher prophylactic threshold 50 × 10<sup>9</sup>/L vs lower threshold 25 × 10<sup>9</sup>/L.</p>
+        <div class="trial-head"><h3>TICH-2</h3><span class="year-badge">2018</span></div>
+        <div class="citation">Sprigg et al., Lancet</div>
+        <p><span class="label">Population:</span> Intracerebral hemorrhage within 8 hours.</p>
+        <p><span class="label">Comparison:</span> TXA vs placebo.</p>
         <ul>
-          <li>Higher threshold increased death or major bleeding.</li>
-          <li>Major neonatal practice-changing trial.</li>
+          <li>No significant improvement in 90-day functional outcome.</li>
+          <li>Generally reassuring safety profile.</li>
+          <li>Possible signal if given very early.</li>
         </ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="danger">More liberal neonatal platelet transfusion can be harmful</span>.</div>
-      </article>
-
-      <article class="trial">
-        <div class="trial-header"><h3>Platelet dose and prophylaxis practice</h3><span class="year-badge">—</span></div>
-        <div class="citation">Teaching-point synthesis</div>
-        <p><span class="label">Clinical lesson:</span> Two major platelet themes recur across trials.</p>
-        <ul>
-          <li>When prophylaxis is indicated, more platelets are not necessarily better.</li>
-          <li>When physiology is unfavorable, such as spontaneous ICH on antiplatelets, transfusion may worsen outcome.</li>
-        </ul>
-        <div class="take-home"><strong>Take-home:</strong> Platelet transfusion should be <span class="warn">indication-specific rather than reflexive</span>.</div>
+        <div class="take-home"><strong>Take-home:</strong> <span class="warn">TXA has limited proven benefit in ICH, though early use is sometimes considered</span>.</div>
       </article>
     </div>
 
-    <div class="section"><h2>Trauma and massive transfusion</h2><span class="badge">5 studies · oldest → newest</span></div>
+    <div class="section">
+      <h2>Trauma</h2>
+      <div class="section-badges"><span class="badge">5 studies</span><span class="badge">oldest → newest</span></div>
+    </div>
     <div class="grid">
       <article class="trial">
-        <div class="trial-header"><h3>CRASH-2</h3><span class="year-badge">2010</span></div>
-        <div class="citation">Lancet, 2010</div>
+        <div class="trial-head"><h3>CRASH-2</h3><span class="year-badge">2010</span></div>
+        <div class="citation">CRASH-2 Trial Collaborators, Lancet</div>
         <p><span class="label">Population:</span> Trauma patients with significant bleeding or at risk of major hemorrhage.</p>
         <p><span class="label">Comparison:</span> TXA vs placebo.</p>
-        <ul><li>Reduced death due to bleeding and all-cause mortality when given early.</li><li>Benefit was time-sensitive.</li></ul>
+        <ul>
+          <li>Reduced death due to bleeding and all-cause mortality when given early.</li>
+          <li>Benefit was time-sensitive.</li>
+        </ul>
         <div class="take-home"><strong>Take-home:</strong> <span class="good">Give TXA early in bleeding trauma</span>.</div>
       </article>
+
       <article class="trial">
-        <div class="trial-header"><h3>PROPPR</h3><span class="year-badge">2015</span></div>
-        <div class="citation">Holcomb et al., JAMA, 2015</div>
-        <p><span class="label">Population:</span> Severe trauma predicted to require massive transfusion.</p>
-        <p><span class="label">Comparison:</span> 1:1:1 plasma:platelet:RBC ratio vs 1:1:2 ratio.</p>
-        <ul><li>No difference in overall 24-hour or 30-day mortality.</li><li>More patients achieved hemostasis in the 1:1:1 group.</li><li>Fewer deaths from exsanguination by 24 hours.</li></ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="good">Balanced early resuscitation is a foundational modern MTP principle</span>.</div>
+        <div class="trial-head"><h3>Robertson Head Injury Trial</h3><span class="year-badge">2014</span></div>
+        <div class="citation">Robertson et al., JAMA</div>
+        <p><span class="label">Population:</span> Severe traumatic brain injury / closed head injury unable to follow commands.</p>
+        <p><span class="label">Comparison:</span> Hb target 70 g/L vs 100 g/L.</p>
+        <ul>
+          <li>No functional recovery benefit with the liberal target.</li>
+          <li>More thromboembolic events with the 100 g/L target.</li>
+        </ul>
+        <div class="take-home"><strong>Take-home:</strong> <span class="danger">Liberal transfusion to 100 g/L in traumatic brain injury is not supported</span>.</div>
       </article>
+
       <article class="trial">
-        <div class="trial-header"><h3>RETIC</h3><span class="year-badge">2017</span></div>
-        <div class="citation">Innerhofer et al., Lancet Haematology, 2017</div>
+        <div class="trial-head"><h3>RETIC</h3><span class="year-badge">2017</span></div>
+        <div class="citation">Innerhofer et al., Lancet Haematology</div>
         <p><span class="label">Population:</span> Bleeding trauma patients with viscoelastic evidence of coagulopathy.</p>
         <p><span class="label">Comparison:</span> Coagulation factor concentrate strategy vs frozen plasma.</p>
-        <ul><li>Less rescue therapy and less massive transfusion in the factor-concentrate arm.</li><li>Important proof-of-concept for fibrinogen-first/goal-directed strategies.</li></ul>
+        <ul>
+          <li>Less rescue therapy and less massive transfusion in the factor-concentrate arm.</li>
+          <li>Important proof-of-concept for fibrinogen-first / goal-directed strategies.</li>
+        </ul>
         <div class="take-home"><strong>Take-home:</strong> <span class="good">Goal-directed factor concentrate strategies can outperform plasma-based correction in selected trauma settings</span>.</div>
       </article>
+
       <article class="trial">
-        <div class="trial-header"><h3>CRASH-3</h3><span class="year-badge">2019</span></div>
-        <div class="citation">Lancet, 2019</div>
+        <div class="trial-head"><h3>CRASH-3</h3><span class="year-badge">2019</span></div>
+        <div class="citation">CRASH-3 Trial Collaborators, Lancet</div>
         <p><span class="label">Population:</span> Traumatic brain injury treated within 3 hours.</p>
         <p><span class="label">Comparison:</span> TXA vs placebo.</p>
-        <ul><li>Possible mortality benefit in mild-to-moderate TBI.</li><li>No clear overall benefit in the most severe nonsurvivable injuries.</li></ul>
+        <ul>
+          <li>Possible mortality benefit in mild-to-moderate TBI.</li>
+          <li>No clear overall benefit in the most severe nonsurvivable injuries.</li>
+        </ul>
         <div class="take-home"><strong>Take-home:</strong> <span class="warn">Early TXA is reasonable in selected TBI patients</span>.</div>
       </article>
+
       <article class="trial">
-        <div class="trial-header"><h3>STAAMP</h3><span class="year-badge">2020</span></div>
-        <div class="citation">Guyette et al., JAMA Surgery, 2020</div>
+        <div class="trial-head"><h3>STAAMP</h3><span class="year-badge">2020</span></div>
+        <div class="citation">Guyette et al., JAMA Surgery</div>
         <p><span class="label">Population:</span> Trauma patients at risk for hemorrhagic shock in the prehospital setting.</p>
         <p><span class="label">Comparison:</span> Prehospital TXA vs placebo.</p>
-        <ul><li>Primary endpoint was neutral overall.</li><li>Signals of benefit were seen in more severely shocked patients and with earlier treatment.</li></ul>
+        <ul>
+          <li>Primary endpoint was neutral overall.</li>
+          <li>Signals of benefit were seen in more severely shocked patients and with earlier treatment.</li>
+        </ul>
         <div class="take-home"><strong>Take-home:</strong> <span class="warn">The earlier and sicker the trauma patient, the more compelling TXA becomes</span>.</div>
       </article>
     </div>
 
-    <div class="section"><h2>Cardiac surgery and coagulation product trials</h2><span class="badge">4 studies · oldest → newest</span></div>
-    <div class="grid">
-      <article class="trial">
-        <div class="trial-header"><h3>ATACAS</h3><span class="year-badge">2017</span></div>
-        <div class="citation">Myles et al., NEJM, 2017</div>
-        <p><span class="label">Population:</span> CABG patients at increased operative risk.</p>
-        <p><span class="label">Comparison:</span> Prophylactic TXA vs placebo.</p>
-        <ul><li>Reduced bleeding and transfusion exposure.</li><li>Reduced reoperation for bleeding.</li><li>Seizure risk remained an important concern.</li></ul>
-        <div class="take-home"><strong>Take-home:</strong> TXA is effective in cardiac surgery, but <span class="warn">dose and seizure risk matter</span>.</div>
-      </article>
-      <article class="trial">
-        <div class="trial-header"><h3>FIBRES</h3><span class="year-badge">2019</span></div>
-        <div class="citation">Callum et al., JAMA, 2019</div>
-        <p><span class="label">Population:</span> Post-CABG bleeding with hypofibrinogenemia.</p>
-        <p><span class="label">Comparison:</span> Fibrinogen concentrate vs cryoprecipitate.</p>
-        <ul><li>Fibrinogen concentrate was non-inferior for the number of blood components transfused.</li><li>No clear difference in thrombosis or death.</li></ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="good">Fibrinogen concentrate is a valid alternative to cryoprecipitate</span>.</div>
-      </article>
-      <article class="trial">
-        <div class="trial-header"><h3>PCC vs Frozen Plasma</h3><span class="year-badge">2022</span></div>
-        <div class="citation">Smith et al., JAMA Surgery, 2022</div>
-        <p><span class="label">Population:</span> Cardiac surgery with microvascular bleeding and prolonged PT/INR.</p>
-        <p><span class="label">Comparison:</span> PCC 15 IU/kg vs frozen plasma 10–15 mL/kg.</p>
-        <ul><li>Similar bleeding outcomes.</li><li>Better PT/INR correction with PCC.</li><li>No clear major safety penalty in the trial.</li></ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="warn">PCC is a reasonable plasma-sparing option for selected postoperative cardiac surgery coagulopathy</span>.</div>
-      </article>
-      <article class="trial">
-        <div class="trial-header"><h3>FARES-II</h3><span class="year-badge">2025</span></div>
-        <div class="citation">Karkouti et al., JAMA, 2025</div>
-        <p><span class="label">Population:</span> Adults undergoing cardiac surgery with cardiopulmonary bypass and coagulopathic bleeding requiring factor replacement.</p>
-        <p><span class="label">Comparison:</span> 4-factor PCC vs fresh frozen plasma.</p>
-        <ul><li>PCC achieved superior haemostatic effectiveness.</li><li>Reduced bleeding and additional blood product use.</li><li>No increase in thromboembolic events.</li></ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="good">PCC may be preferable to plasma for coagulation factor replacement in cardiac surgery bleeding</span>.</div>
-        <p class="trial-link"><a href="fares_ii_trial.html">Full trial summary →</a></p>
-      </article>
+    <div class="section">
+      <h2>RBC storage-age trials</h2>
+      <div class="section-badges"><span class="badge">3 studies</span><span class="badge">oldest → newest</span></div>
     </div>
-
-    <div class="section"><h2>TXA in obstetrics, GI bleeding, ICH, and hematology</h2><span class="badge">7 studies · oldest → newest</span></div>
     <div class="grid">
       <article class="trial">
-        <div class="trial-header"><h3>Heavy menstrual bleeding</h3><span class="year-badge">2010</span></div>
-        <div class="citation">Lukes et al., Obstetrics &amp; Gynecology, 2010</div>
-        <p><span class="label">Population:</span> Women with heavy menstrual bleeding.</p>
-        <p><span class="label">Comparison:</span> Oral TXA vs placebo.</p>
-        <ul><li>Reduced menstrual blood loss.</li><li>Improved quality of life.</li></ul>
-        <div class="take-home"><strong>Take-home:</strong> TXA remains a useful non-hormonal medical therapy for heavy menstrual bleeding.</div>
-      </article>
-      <article class="trial">
-        <div class="trial-header"><h3>WOMAN</h3><span class="year-badge">2017</span></div>
-        <div class="citation">Shakur et al., Lancet, 2017</div>
-        <p><span class="label">Population:</span> Established postpartum hemorrhage.</p>
-        <p><span class="label">Comparison:</span> TXA 1 g IV vs placebo.</p>
-        <ul><li>Reduced death due to bleeding, especially when given within 3 hours of birth.</li><li>No clear reduction in hysterectomy.</li></ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="good">Give TXA early in established PPH</span>.</div>
-      </article>
-      <article class="trial">
-        <div class="trial-header"><h3>TRAAP</h3><span class="year-badge">2018</span></div>
-        <div class="citation">Sentilhes et al., NEJM, 2018</div>
-        <p><span class="label">Population:</span> Vaginal delivery.</p>
-        <p><span class="label">Comparison:</span> Prophylactic TXA vs placebo postpartum.</p>
-        <ul><li>No significant reduction in the primary PPH endpoint.</li><li>Some secondary bleeding measures favored TXA.</li></ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="warn">Routine prophylactic TXA after vaginal delivery is not firmly established</span>.</div>
-      </article>
-      <article class="trial">
-        <div class="trial-header"><h3>TICH-2</h3><span class="year-badge">2018</span></div>
-        <div class="citation">Sprigg et al., Lancet, 2018</div>
-        <p><span class="label">Population:</span> Intracerebral hemorrhage within 8 hours.</p>
-        <p><span class="label">Comparison:</span> TXA vs placebo.</p>
-        <ul><li>No significant improvement in 90-day functional outcome.</li><li>Generally reassuring safety profile.</li></ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="warn">TXA has limited proven benefit in ICH, though early use is sometimes considered</span>.</div>
-      </article>
-      <article class="trial">
-        <div class="trial-header"><h3>HALT-IT</h3><span class="year-badge">2020</span></div>
-        <div class="citation">Roberts et al., Lancet, 2020</div>
-        <p><span class="label">Population:</span> Acute GI bleeding.</p>
-        <p><span class="label">Comparison:</span> High-dose TXA vs placebo.</p>
-        <ul><li>No reduction in death due to bleeding.</li><li>More thromboembolic events with TXA.</li></ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="danger">Do not routinely add TXA for GI bleeding</span>.</div>
-      </article>
-      <article class="trial">
-        <div class="trial-header"><h3>TRAAP2</h3><span class="year-badge">2021</span></div>
-        <div class="citation">Sentilhes et al., NEJM, 2021</div>
-        <p><span class="label">Population:</span> Cesarean delivery.</p>
-        <p><span class="label">Comparison:</span> Prophylactic TXA vs placebo after birth.</p>
-        <ul><li>Reduced a measured composite PPH outcome.</li><li>No clear reduction in transfusion or other major clinical endpoints.</li></ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="warn">Evidence supports reduced measured blood loss, but clinical benefit is less clear</span>.</div>
-      </article>
-      <article class="trial">
-        <div class="trial-header"><h3>a-TREAT</h3><span class="year-badge">2022</span></div>
-        <div class="citation">Gernsheimer et al., Blood, 2022</div>
-        <p><span class="label">Population:</span> Hematologic malignancy with hypoproliferative thrombocytopenia.</p>
-        <p><span class="label">Comparison:</span> Prophylactic TXA vs placebo.</p>
-        <ul><li>No reduction in WHO grade 2+ bleeding.</li><li>No decrease in platelet transfusion requirements.</li></ul>
-        <div class="take-home"><strong>Take-home:</strong> <span class="danger">Routine prophylactic TXA is not supported in this setting</span>.</div>
-      </article>
-    </div>
-
-    <div class="section"><h2>RBC storage-age trials</h2><span class="badge">3 studies · oldest → newest</span></div>
-    <div class="grid">
-      <article class="trial">
-        <div class="trial-header"><h3>ABLE</h3><span class="year-badge">2015</span></div>
-        <div class="citation">Lacroix et al., NEJM, 2015</div>
+        <div class="trial-head"><h3>ABLE</h3><span class="year-badge">2015</span></div>
+        <div class="citation">Lacroix et al., NEJM</div>
         <p><span class="label">Population:</span> Critically ill adults.</p>
         <p><span class="label">Comparison:</span> Fresh RBC units vs standard-issue RBC units.</p>
-        <ul><li>No reduction in 90-day mortality with fresher blood.</li></ul>
+        <ul>
+          <li>No reduction in 90-day mortality with fresher blood.</li>
+        </ul>
         <div class="take-home"><strong>Take-home:</strong> <span class="danger">“Fresh blood” does not improve outcomes in general ICU practice</span>.</div>
       </article>
+
       <article class="trial">
-        <div class="trial-header"><h3>RECESS</h3><span class="year-badge">2015</span></div>
-        <div class="citation">Steiner et al., NEJM, 2015</div>
+        <div class="trial-head"><h3>RECESS</h3><span class="year-badge">2015</span></div>
+        <div class="citation">Steiner et al., NEJM</div>
         <p><span class="label">Population:</span> Complex cardiac surgery patients.</p>
         <p><span class="label">Comparison:</span> Shorter-storage vs longer-storage RBC units.</p>
-        <ul><li>No clinically meaningful difference in outcomes.</li></ul>
+        <ul>
+          <li>No clinically meaningful difference in outcomes.</li>
+        </ul>
         <div class="take-home"><strong>Take-home:</strong> Cardiac surgery also failed to show meaningful benefit from fresher RBC inventory.</div>
       </article>
+
       <article class="trial">
-        <div class="trial-header"><h3>TRANSFUSE</h3><span class="year-badge">2017</span></div>
-        <div class="citation">Cooper et al., NEJM, 2017</div>
+        <div class="trial-head"><h3>TRANSFUSE</h3><span class="year-badge">2017</span></div>
+        <div class="citation">Cooper et al., NEJM</div>
         <p><span class="label">Population:</span> Critically ill adults.</p>
         <p><span class="label">Comparison:</span> Freshest available RBCs vs standard-issue RBCs.</p>
-        <ul><li>No difference in 90-day mortality.</li></ul>
+        <ul>
+          <li>No difference in 90-day mortality.</li>
+        </ul>
         <div class="take-home"><strong>Take-home:</strong> <span class="danger">Standard inventory issue is appropriate; routine preferential use of freshest units is not evidence-based</span>.</div>
       </article>
     </div>
 
-    <div class="section"><h2>High-yield practice summary</h2><span class="badge">Quick review</span></div>
+    <div class="section">
+      <h2>High-yield practice summary</h2>
+      <div class="section-badges"><span class="badge">Quick review</span></div>
+    </div>
     <section class="summary">
       <div class="summary-card">
-        <h2>Use restrictive RBC thresholds</h2>
-        <p>Common default thresholds are about 70 g/L in stable ICU/sepsis settings, around 70 g/L in GI bleeding, and around 75 g/L in many cardiac surgery pathways.</p>
+        <h2>Use restrictive RBC thresholds by default</h2>
+        <p>Common default thresholds are about 70 g/L in stable ICU and sepsis settings, around 70 g/L in GI bleeding, 75 g/L in many cardiac surgery pathways, and 70 g/L in hematopoietic transplant.</p>
       </div>
       <div class="summary-card">
-        <h2>Be cautious in ACS</h2>
-        <p>AMI remains the main population where clinicians may tolerate a higher threshold depending on ischemic burden and overall stability.</p>
-      </div>
-      <div class="summary-card">
-        <h2>Do not reflexively transfuse platelets</h2>
-        <p>PATCH and PlaNeT-2 show that more platelets can be harmful in the wrong setting.</p>
+        <h2>Be more cautious in ACS</h2>
+        <p>AMI remains the main population where clinicians may tolerate or prefer a higher threshold depending on ischemic burden and overall stability.</p>
       </div>
       <div class="summary-card">
         <h2>Use TXA selectively</h2>
-        <p>Good in trauma and established postpartum hemorrhage; not helpful for routine GI bleeding; mixed for prophylactic obstetrics and ICH.</p>
+        <p>Good in bleeding trauma and established postpartum hemorrhage, useful in cardiac surgery and some non-cardiac surgery, but not for routine GI bleeding or hematology prophylaxis.</p>
       </div>
       <div class="summary-card">
-        <h2>Fresh blood is not better blood</h2>
-        <p>ABLE, RECESS, and TRANSFUSE argue strongly against routine “freshest unit” practice for most patients.</p>
+        <h2>Do not reflexively transfuse platelets</h2>
+        <p>TOPPS supports prophylaxis in hypoproliferative thrombocytopenia, but PATCH and PlaNeT-2 show that platelet transfusion can be harmful in the wrong setting.</p>
       </div>
       <div class="summary-card">
         <h2>Factor concentrates are rising</h2>
         <p>FIBRES, RETIC, and PCC-based cardiac surgery trials support increasingly targeted hemostatic therapy.</p>
+      </div>
+      <div class="summary-card">
+        <h2>Fresh blood is not better blood</h2>
+        <p>ABLE, RECESS, and TRANSFUSE argue strongly against routine “freshest unit” practice for most patients.</p>
       </div>
     </section>
 
     <section class="refs">
       <h2>Selected reference list</h2>
       <ol>
-        <li>Hebert PC et al. NEJM. 1999. TRICC.</li>
-        <li>Holst LB et al. NEJM. 2014. TRISS.</li>
-        <li>Carson JL et al. NEJM. 2011. FOCUS.</li>
+        <li>Hébert PC et al. NEJM. 1999. TRICC.</li>
         <li>Hajjar LA et al. JAMA. 2010. TRACS.</li>
-        <li>Murphy GJ et al. NEJM. 2015. TITRe2.</li>
-        <li>Mazer CD et al. NEJM. 2017. TRICS-III.</li>
-        <li>Villanueva C et al. NEJM. 2013.</li>
-        <li>Ducrocq G et al. JAMA. 2021. REALITY.</li>
-        <li>Carson JL et al. NEJM. 2023. MINT.</li>
-        <li>Robertson CS et al. JAMA. 2014.</li>
-        <li>Stanworth SJ et al. NEJM. 2013. TOPPS.</li>
-        <li>Slichter SJ et al. NEJM. 2010. PLADO.</li>
-        <li>Baharoglu MI et al. Lancet. 2016. PATCH.</li>
-        <li>Curley A et al. NEJM. 2019. PlaNeT-2 / MATISSE.</li>
-        <li>Holcomb JB et al. JAMA. 2015. PROPPR.</li>
         <li>CRASH-2 Trial Collaborators. Lancet. 2010.</li>
-        <li>CRASH-3 Trial Collaborators. Lancet. 2019.</li>
-        <li>Guyette FX et al. JAMA Surgery. 2020. STAAMP.</li>
-        <li>Innerhofer P et al. Lancet Haematology. 2017. RETIC.</li>
-        <li>Smith MM et al. JAMA Surgery. 2022.</li>
-        <li>Callum JL et al. JAMA. 2019. FIBRES.</li>
-        <li>Myles PS et al. NEJM. 2017. ATACAS.</li>
-        <li>Shakur H et al. Lancet. 2017. WOMAN.</li>
-        <li>Sentilhes L et al. NEJM. 2018. TRAAP.</li>
-        <li>Sentilhes L et al. NEJM. 2021. TRAAP2.</li>
-        <li>Roberts I et al. Lancet. 2020. HALT-IT.</li>
-        <li>Sprigg N et al. Lancet. 2018. TICH-2.</li>
-        <li>Gernsheimer T et al. Blood. 2022. a-TREAT.</li>
         <li>Lukes AS et al. Obstet Gynecol. 2010.</li>
+        <li>Carson JL et al. NEJM. 2011. FOCUS.</li>
+        <li>Stanworth SJ et al. NEJM. 2013. TOPPS.</li>
+        <li>Villanueva C et al. NEJM. 2013.</li>
+        <li>Holst LB et al. NEJM. 2014. TRISS.</li>
+        <li>Robertson CS et al. JAMA. 2014.</li>
         <li>Lacroix J et al. NEJM. 2015. ABLE.</li>
         <li>Steiner ME et al. NEJM. 2015. RECESS.</li>
+        <li>Murphy GJ et al. NEJM. 2015. TITRe2.</li>
+        <li>Baharoglu MI et al. Lancet. 2016. PATCH.</li>
+        <li>Mazer CD et al. NEJM. 2017. TRICS-III.</li>
+        <li>Myles PS et al. NEJM. 2017. ATACAS.</li>
+        <li>Shakur H et al. Lancet. 2017. WOMAN.</li>
+        <li>Innerhofer P et al. Lancet Haematology. 2017. RETIC.</li>
         <li>Cooper DJ et al. NEJM. 2017. TRANSFUSE.</li>
+        <li>Sentilhes L et al. NEJM. 2018. TRAAP.</li>
+        <li>Sprigg N et al. Lancet. 2018. TICH-2.</li>
+        <li>Callum JL et al. JAMA. 2019. FIBRES.</li>
+        <li>Curley A et al. NEJM. 2019. PlaNeT-2 / MATISSE.</li>
+        <li>CRASH-3 Trial Collaborators. Lancet. 2019.</li>
+        <li>Tay J et al. J Clin Oncol. 2020. TRIST.</li>
+        <li>Gernsheimer T et al. Blood. 2020. a-TREAT.</li>
+        <li>Roberts I et al. Lancet. 2020. HALT-IT.</li>
+        <li>Guyette FX et al. JAMA Surgery. 2020. STAAMP.</li>
+        <li>Ducrocq G et al. JAMA. 2021. REALITY.</li>
+        <li>Sentilhes L et al. NEJM. 2021. TRAAP2.</li>
+        <li>Smith MM et al. JAMA Surgery. 2022. PCC vs frozen plasma after cardiac surgery.</li>
+        <li>Devereaux PJ et al. NEJM. 2022. POISE-3.</li>
+        <li>Carson JL et al. NEJM. 2023. MINT.</li>
       </ol>
     </section>
 
-    <p class="footer">Prepared as a practical transfusion medicine reference page. Trial summaries are abbreviated and should be interpreted with local protocols, guideline updates, and patient-specific context.</p>
+    <p class="footer">Prepared as a practical transfusion medicine reference page. Trial summaries are abbreviated and meant to support fast review during teaching and call. Interpret with local protocols, guideline updates, and patient-specific context.</p>
   </div>
 </body>
 </html>
