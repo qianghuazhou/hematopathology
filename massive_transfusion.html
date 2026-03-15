@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Massive Hemorrhage Protocol (MHP) | Transfusion Medicine</title>
+  <style>
+    :root{
+      --bg:#f4f7f9;
+      --panel:#ffffff;
+      --text:#22313f;
+      --muted:#5f6b76;
+      --primary:#243746;
+      --accent:#2d8cff;
+      --accent-soft:#eaf3ff;
+      --border:#dbe3ea;
+      --soft:#eef4f8;
+      --warn-bg:#fff8e8;
+      --warn-border:#f1d38a;
+      --danger-bg:#fff1f1;
+      --danger-border:#efb2b2;
+      --ok-bg:#eef9f1;
+      --ok-border:#b7e0c1;
+      --shadow:0 10px 26px rgba(25,39,52,0.08);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:"Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+
+    a{
+      color:var(--accent);
+      text-decoration:none;
+    }
+
+    a:hover{
+      text-decoration:underline;
+    }
+
+    .container{
+      max-width:1180px;
+      margin:0 auto;
+      padding:28px 20px 48px;
+    }
+
+    .back-link{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:18px;
+      color:var(--primary);
+      font-weight:600;
+    }
+
+    .hero{
+      background:linear-gradient(135deg, #243746 0%, #2f4b61 100%);
+      color:#fff;
+      border-radius:24px;
+      padding:28px 28px 24px;
+      box-shadow:var(--shadow);
+      margin-bottom:22px;
+    }
+
+    .hero h1{
+      margin:0 0 10px;
+      font-size:2rem;
+      line-height:1.2;
+      letter-spacing:.2px;
+    }
+
+    .hero p{
+      margin:0;
+      color:rgba(255,255,255,.9);
+      max-width:900px;
+    }
+
+    .quick-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .quick-links a{
+      display:inline-block;
+      background:rgba(255,255,255,.12);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.18);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:.95rem;
+      text-decoration:none;
+    }
+
+    .quick-links a:hover{
+      background:rgba(255,255,255,.2);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.3fr .9fr;
+      gap:22px;
+      align-items:start;
+    }
+
+    .main,
+    .side{
+      display:grid;
+      gap:22px;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:22px 22px 20px;
+    }
+
+    .card h2{
+      margin:0 0 14px;
+      font-size:1.35rem;
+      color:var(--primary);
+      line-height:1.25;
+    }
+
+    .card h3{
+      margin:18px 0 8px;
+      font-size:1.02rem;
+      color:var(--primary);
+    }
+
+    .card p{
+      margin:10px 0;
+    }
+
+    .card ul,
+    .card ol{
+      margin:10px 0 0 20px;
+      padding:0;
+    }
+
+    .card li{
+      margin:7px 0;
+    }
+
+    .section-note,
+    .warning-box,
+    .success-box{
+      border-radius:14px;
+      padding:14px 16px;
+      margin-top:14px;
+    }
+
+    .section-note{
+      background:var(--soft);
+      border:1px solid var(--border);
+    }
+
+    .warning-box{
+      background:var(--warn-bg);
+      border:1px solid var(--warn-border);
+    }
+
+    .success-box{
+      background:var(--ok-bg);
+      border:1px solid var(--ok-border);
+    }
+
+    .danger-box{
+      background:var(--danger-bg);
+      border:1px solid var(--danger-border);
+      border-radius:14px;
+      padding:14px 16px;
+      margin-top:14px;
+    }
+
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .pill{
+      background:var(--accent-soft);
+      color:var(--primary);
+      border:1px solid #cfe2ff;
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:.92rem;
+      font-weight:600;
+    }
+
+    .flow{
+      display:grid;
+      gap:12px;
+      margin-top:14px;
+    }
+
+    .flow-step{
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fbfdff;
+      padding:14px 16px;
+    }
+
+    .flow-step strong{
+      color:var(--primary);
+    }
+
+    .compact-table,
+    .comparison-table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:12px;
+      overflow:hidden;
+      border-radius:14px;
+    }
+
+    .compact-table th,
+    .compact-table td,
+    .comparison-table th,
+    .comparison-table td{
+      border:1px solid var(--border);
+      padding:11px 12px;
+      text-align:left;
+      vertical-align:top;
+    }
+
+    .compact-table th,
+    .comparison-table th{
+      background:var(--soft);
+      color:var(--primary);
+      font-weight:700;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .small{
+      font-size:.93rem;
+    }
+
+    .toc{
+      display:grid;
+      gap:10px;
+    }
+
+    .toc a{
+      display:block;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fbfdff;
+      color:var(--primary);
+      font-weight:600;
+      text-decoration:none;
+    }
+
+    .toc a:hover{
+      border-color:#bfd3e6;
+      background:#f7fbff;
+    }
+
+    .target-list{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .target-item{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:13px 14px;
+      background:#fcfdff;
+    }
+
+    .target-item strong{
+      display:block;
+      margin-bottom:4px;
+      color:var(--primary);
+    }
+
+    .footer-note{
+      margin-top:24px;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    code{
+      background:#eef3f7;
+      padding:2px 6px;
+      border-radius:6px;
+      font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size:.92em;
+    }
+
+    @media (max-width: 980px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 640px){
+      .hero{
+        padding:22px 18px 20px;
+      }
+      .hero h1{
+        font-size:1.7rem;
+      }
+      .card{
+        padding:18px 16px;
+      }
+      .compact-table th,
+      .compact-table td,
+      .comparison-table th,
+      .comparison-table td{
+        padding:9px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-link" href="transfusion.html">← Back to Transfusion Medicine</a>
+
+    <section class="hero">
+      <h1>Massive Hemorrhage Protocol (MHP)</h1>
+      <p>
+        Practical reference page for definition, pathophysiology, transfusion targets, initial product strategy,
+        adjunctive therapy, laboratory monitoring, and selected evidence relevant to massive hemorrhage and emergency transfusion.
+      </p>
+      <div class="quick-links">
+        <a href="#definition">Definition</a>
+        <a href="#pathophysiology">Pathophysiology</a>
+        <a href="#initial-management">Initial Management</a>
+        <a href="#targets">Targets</a>
+        <a href="#laboratory">Laboratory Monitoring</a>
+        <a href="#txa">TXA</a>
+        <a href="#evidence">Evidence</a>
+        <a href="txa_gi_bleeding.html">TXA in GI Bleeding</a>
+      </div>
+    </section>
+
+    <div class="grid">
+      <main class="main">
+        <section class="card" id="definition">
+          <h2>Definition of Massive Transfusion / Massive Hemorrhage</h2>
+
+          <h3>Retrospective definitions</h3>
+          <ul>
+            <li>Administration of <strong>10 units of RBC</strong> or replacement of <strong>more than one blood volume within 24 hours</strong>.</li>
+          </ul>
+
+          <h3>Dynamic definitions</h3>
+          <ul>
+            <li>Transfusion of <strong>3 units of RBC within 1 hour</strong> with ongoing need anticipated.</li>
+            <li><strong>UHN MHP trigger:</strong> 4 units within 1 hour.</li>
+          </ul>
+
+          <h3>Pediatric definitions</h3>
+          <ul>
+            <li>Transfusion support to replace ongoing blood loss of <strong>&gt;10% total blood volume per minute</strong>.</li>
+            <li>Transfusion of <strong>&gt;100% total blood volume in 24 hours</strong>.</li>
+            <li>Transfusion of <strong>&gt;50% total blood volume in 3 hours</strong>.</li>
+          </ul>
+
+          <div class="section-note small">
+            In practice, MHP is usually activated on the basis of <strong>clinical trajectory</strong> rather than waiting for retrospective thresholds to be met.
+          </div>
+        </section>
+
+        <section class="card" id="pathophysiology">
+          <h2>Pathophysiology of Coagulopathy in Massive Hemorrhage</h2>
+          <p>Major bleeding is sustained not only by blood loss itself, but also by rapidly evolving coagulopathy.</p>
+
+          <ol>
+            <li>Loss of clotting factors through ongoing hemorrhage.</li>
+            <li>Activation of coagulation from traumatic exposure of subendothelium.</li>
+            <li>Dilutional coagulopathy from crystalloids, colloids, and RBC-heavy resuscitation.</li>
+            <li>Some resuscitation fluids may have anticoagulant and anti-platelet effects.</li>
+            <li>Exposure of tissue plasminogen activator leading to <strong>hyperfibrinolysis</strong>.</li>
+            <li><strong>Hypothermia</strong>.</li>
+            <li><strong>Acidosis</strong>.</li>
+            <li><strong>Acute traumatic coagulopathy</strong>.</li>
+          </ol>
+
+          <h3>Acute traumatic coagulopathy</h3>
+          <p>
+            Acute traumatic coagulopathy is an impairment in hemostasis seen early after major injury that is not fully explained by dilution,
+            hypothermia, or acidosis alone. Its etiology remains incompletely understood, but proposed mechanisms include
+            <strong>protein C pathway activation</strong>, endogenous anticoagulation, and enhanced fibrinolysis.
+          </p>
+
+          <h3>Effects of hypothermia</h3>
+          <ul>
+            <li>Reduces enzymatic activity of coagulation proteins, especially serine proteases.</li>
+            <li>Impairs von Willebrand factor–platelet interactions.</li>
+            <li>Net result: worsened bleeding.</li>
+          </ul>
+
+          <h3>Effects of acidosis</h3>
+          <ul>
+            <li>Impairs formation of the tenase and prothrombinase complexes on platelet surfaces.</li>
+            <li>Decreases fibrin polymerization.</li>
+            <li>Net result: worsened bleeding.</li>
+          </ul>
+
+          <div class="danger-box small">
+            <strong>Key principle:</strong> transfusion alone will not correct MHP unless hemorrhage control, warming, calcium replacement,
+            and correction of severe acidosis are pursued simultaneously.
+          </div>
+        </section>
+
+        <section class="card" id="initial-management">
+          <h2>Initial Transfusion Management</h2>
+          <p>
+            In the rapidly bleeding patient, when laboratory-guided resuscitation is not yet possible, initial management should begin with
+            immediate RBC support followed by empiric component therapy.
+          </p>
+
+          <div class="flow">
+            <div class="flow-step">
+              <strong>1. Activate MHP early</strong><br />
+              Communicate anticipated severity, ongoing bleeding, and need for repeated product release.
+            </div>
+            <div class="flow-step">
+              <strong>2. Start emergency RBC transfusion</strong><br />
+              Use uncrossmatched product when required, then transition to group-specific components as soon as current typing is available.
+            </div>
+            <div class="flow-step">
+              <strong>3. Empiric balanced resuscitation</strong><br />
+              A practical early approach is <strong>RBC:plasma = 2:1</strong> until laboratory or viscoelastic guidance becomes available.
+            </div>
+            <div class="flow-step">
+              <strong>4. Add platelets and fibrinogen support promptly</strong><br />
+              Avoid isolated RBC-heavy resuscitation, which worsens dilutional coagulopathy.
+            </div>
+            <div class="flow-step">
+              <strong>5. Correct contributors to coagulopathy</strong><br />
+              Warm the patient, monitor ionized calcium, limit severe acidemia, and control the source of bleeding.
+            </div>
+          </div>
+
+          <div class="warning-box small">
+            <strong>ABO issue:</strong> historical ABO/Rh type alone should not be used for current group-specific emergency release.
+            If a current type is not yet available, issue emergency-compatible product and switch to group-specific product once current typing is confirmed.
+          </div>
+        </section>
+
+        <section class="card" id="targets">
+          <h2>Laboratory-Guided Resuscitation Targets</h2>
+          <p>Minimal target thresholds during MHP include the following:</p>
+
+          <div class="target-list">
+            <div class="target-item">
+              <strong>Hemoglobin</strong>
+              Maintain <strong>&gt;80 g/L</strong>.
+            </div>
+            <div class="target-item">
+              <strong>INR</strong>
+              Maintain <strong>&lt;1.8</strong>, using plasma or PCC where appropriate.
+            </div>
+            <div class="target-item">
+              <strong>Fibrinogen</strong>
+              Maintain <strong>&gt;1.5 g/L</strong>, using cryoprecipitate or fibrinogen concentrate.
+            </div>
+            <div class="target-item">
+              <strong>Platelets</strong>
+              Maintain <strong>&gt;50 × 10<sup>9</sup>/L</strong>.<br />
+              <span class="muted">UHN practice: target <strong>&gt;100 × 10<sup>9</sup>/L</strong> in CNS injury or on ECLS.</span>
+            </div>
+            <div class="target-item">
+              <strong>Ionized calcium</strong>
+              Maintain <strong>&gt;1.15 mmol/L</strong>.
+            </div>
+          </div>
+
+          <div class="section-note small">
+            Where available, viscoelastic testing may be used to guide therapy, but these standard component targets remain practical bedside anchors.
+          </div>
+
+          <h3>Fibrinogen replacement</h3>
+          <ul>
+            <li><strong>Cryoprecipitate</strong> remains a common source of fibrinogen replacement.</li>
+            <li><strong>Fibrinogen concentrate 4 g</strong> is a reasonable alternative and is approximately equivalent to <strong>10 units of cryoprecipitate</strong>.</li>
+          </ul>
+
+          <h3>PCC substitution when plasma is not readily available</h3>
+          <p>
+            At institutions lacking sufficient resources to issue plasma rapidly, <strong>PCC 2000 IU</strong> may be used for factor replacement.
+            Unless fibrinogen is already known to be <strong>&gt;1.5 g/L</strong>, this should be accompanied by
+            <strong>fibrinogen replacement</strong>, preferably fibrinogen concentrate.
+          </p>
+        </section>
+
+        <section class="card" id="laboratory">
+          <h2>Laboratory Monitoring in MHP</h2>
+          <p>The recommended minimum laboratory testing at each draw includes:</p>
+
+          <ul>
+            <li>CBC</li>
+            <li>INR</li>
+            <li>aPTT <span class="muted">(baseline only in some protocols)</span></li>
+            <li>Fibrinogen</li>
+            <li>Electrolytes</li>
+            <li>Ionized calcium</li>
+            <li>Blood gas, including pH and base excess</li>
+            <li>Lactate</li>
+          </ul>
+
+          <h3>Suggested frequency</h3>
+          <ul>
+            <li>Core hemostatic testing approximately <strong>every 60 minutes</strong> during active MHP.</li>
+          </ul>
+
+          <h3>UHN minimum monitoring framework</h3>
+          <table class="compact-table">
+            <thead>
+              <tr>
+                <th>Test group</th>
+                <th>Suggested interval</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CBC, INR, fibrinogen, ABG, aPTT (baseline only)</td>
+                <td>Every 60 minutes at minimum</td>
+              </tr>
+              <tr>
+                <td>Electrolytes, creatinine, ALT, ionized calcium, magnesium, lactate</td>
+                <td>Every 4 hours or after every 20 blood components administered, at minimum</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="warning-box small">
+            Traditional coagulation assays may lag behind the clinical state. Laboratory testing should <strong>support</strong>, not delay, hemorrhage control and empiric resuscitation.
+          </div>
+        </section>
+
+        <section class="card" id="txa">
+          <h2>Tranexamic Acid (TXA)</h2>
+          <p>
+            TXA should be administered as soon as intravenous or intraosseous access is achieved, ideally
+            <strong>within 3 hours of injury</strong> or <strong>within 3 hours of MHP activation</strong> in other hemorrhaging patients.
+          </p>
+
+          <h3>Adult dosing example</h3>
+          <ul>
+            <li><strong>Standard simplified adult protocol:</strong> 1 g over 10 minutes, followed by 1 g over 8 hours.</li>
+            <li><strong>UHN weight-based protocol:</strong> 10 mg/kg bolus over 15 minutes, followed by 1 mg/kg/h infusion for up to 10 hours.</li>
+          </ul>
+
+          <div class="success-box small">
+            Separate reference page: <a href="txa_gi_bleeding.html">TXA in GI Bleeding</a>
+          </div>
+        </section>
+
+        <section class="card" id="evidence">
+          <h2>Selected Evidence: Balanced Ratios and Restrictive RBC Practice</h2>
+
+          <h3>PROPPR trial</h3>
+          <p>
+            The <strong>PROPPR trial</strong> compared <strong>1:1:1</strong> versus <strong>1:1:2</strong> ratios of plasma:platelets:RBCs in severe trauma resuscitation.
+          </p>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Arm</th>
+                <th>Component packs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1:1:1</strong></td>
+                <td>6 units plasma + 1 dose platelets + 6 units RBC</td>
+              </tr>
+              <tr>
+                <td><strong>1:1:2</strong></td>
+                <td>Alternating packs containing 3 units plasma + 0 dose platelets + 6 units RBC, then 3 units plasma + 1 dose platelets + 6 units RBC</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <ul>
+            <li>At <strong>3 hours</strong>, 1:1:1 reduced <strong>hemorrhagic death</strong> compared with 1:1:2.</li>
+            <li>No clear difference in <strong>overall mortality</strong> at 24 hours or 30 days.</li>
+          </ul>
+
+          <div class="section-note small">
+            <strong>Canadian practical equivalence:</strong> a commonly used bedside approximation of 1:1:1 is often described as
+            <strong>4 RBC : 4 plasma : 1 adult platelet dose</strong>. Exact local packaging and release patterns vary by institution.
+          </div>
+
+          <h3>General RBC transfusion evidence outside active MHP</h3>
+          <p>
+            Jeannie Callum teaching points strongly support a <strong>restrictive transfusion approach</strong> for most non-massively bleeding settings.
+            These principles are important, but they should not be misapplied to an actively exsanguinating patient under MHP.
+          </p>
+
+          <ul>
+            <li>Restrictive triggers are generally favored over liberal ones in stable patients.</li>
+            <li>Typical thresholds are around <strong>70 g/L</strong> for many stable inpatients and <strong>80 g/L</strong> in selected cardiac or orthopedic settings.</li>
+            <li>In active hemorrhage, transfusion should be driven by clinical bleeding severity, hemodynamics, and MHP targets rather than single-unit restrictive logic.</li>
+          </ul>
+        </section>
+
+        <section class="card" id="complications">
+          <h2>Important Metabolic Issues in Massive Transfusion</h2>
+
+          <h3>Citrate load</h3>
+          <p>
+            Blood components contain citrate anticoagulant. During massive transfusion, citrate delivery may exceed the patient’s metabolic clearance,
+            especially in shock or liver dysfunction.
+          </p>
+
+          <h3>Complications of citrate infusion</h3>
+          <ul>
+            <li><strong>Hypocalcemia</strong> due to citrate binding of ionized calcium.</li>
+            <li><strong>Metabolic alkalosis</strong> due to citrate metabolism.</li>
+          </ul>
+
+          <h3>Why hypocalcemia matters</h3>
+          <ul>
+            <li>Reduces effective coagulation.</li>
+            <li>May cause paresthesias, hypotension, or cardiac arrhythmias.</li>
+            <li>Supports the need for serial monitoring and calcium replacement during MHP.</li>
+          </ul>
+
+          <div class="pill-row">
+            <span class="pill">Warm the patient</span>
+            <span class="pill">Check ionized calcium</span>
+            <span class="pill">Monitor pH</span>
+            <span class="pill">Replace fibrinogen early</span>
+            <span class="pill">Control bleeding source</span>
+          </div>
+        </section>
+      </main>
+
+      <aside class="side">
+        <section class="card">
+          <h2>On This Page</h2>
+          <div class="toc">
+            <a href="#definition">Massive transfusion definitions</a>
+            <a href="#pathophysiology">Why coagulopathy develops</a>
+            <a href="#initial-management">Initial component strategy</a>
+            <a href="#targets">Resuscitation targets</a>
+            <a href="#laboratory">Laboratory monitoring</a>
+            <a href="#txa">Tranexamic acid</a>
+            <a href="#evidence">PROPPR and related evidence</a>
+            <a href="#complications">Citrate and calcium issues</a>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>MHP Quick Reference</h2>
+          <div class="target-list">
+            <div class="target-item">
+              <strong>Hb</strong>
+              &gt;80 g/L
+            </div>
+            <div class="target-item">
+              <strong>INR</strong>
+              &lt;1.8
+            </div>
+            <div class="target-item">
+              <strong>Fibrinogen</strong>
+              &gt;1.5 g/L
+            </div>
+            <div class="target-item">
+              <strong>Platelets</strong>
+              &gt;50 × 10<sup>9</sup>/L
+            </div>
+            <div class="target-item">
+              <strong>Ionized Ca</strong>
+              &gt;1.15 mmol/L
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Emergency Release / Compatibility Notes</h2>
+          <ul>
+            <li>Do not rely solely on historical ABO/Rh typing for current group-specific emergency release.</li>
+            <li>Use emergency-compatible product if current typing is unavailable.</li>
+            <li>Transition to current group-specific product as soon as confirmed typing is available.</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <h2>RBC Storage Solutions</h2>
+          <table class="compact-table">
+            <thead>
+              <tr>
+                <th>Solution</th>
+                <th>Typical storage duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CPD</td>
+                <td>21 days</td>
+              </tr>
+              <tr>
+                <td>CPDA</td>
+                <td>35 days</td>
+              </tr>
+              <tr>
+                <td>CPDA + additive solution (e.g., SAGM)</td>
+                <td>42 days</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="card">
+          <h2>General RBC Practice Pearls</h2>
+          <ul>
+            <li>Outside active bleeding, transfuse one unit at a time and reassess.</li>
+            <li>Consider iron, B12, folate, or erythropoietin when appropriate.</li>
+            <li>In females of childbearing potential, consider antigen-selection strategies that reduce alloimmunization risk.</li>
+            <li>At high TACO risk, consider slower infusion and closer volume assessment.</li>
+          </ul>
+
+          <div class="warning-box small">
+            These principles apply mainly to <strong>non-massive, non-exsanguinating</strong> settings and should not delay MHP treatment in active hemorrhage.
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <div class="footer-note">
+      This page is intended as a concise educational and operational reference. Local MHP workflows, component packaging, emergency release policy,
+      and laboratory availability should always be aligned with institutional protocol.
+    </div>
+  </div>
+</body>
+</html>
