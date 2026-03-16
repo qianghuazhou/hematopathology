@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intravenous Immune Globulin (IVIG) | Transfusion Medicine</title>
+  <style>
+    :root{
+      --bg:#f4f7f9;
+      --panel:#ffffff;
+      --text:#22313f;
+      --muted:#5f6b76;
+      --primary:#243746;
+      --accent:#2d8cff;
+      --accent-soft:#eaf3ff;
+      --border:#dbe3ea;
+      --soft:#eef4f8;
+      --tag:#e9eef3;
+      --warn:#fff8e8;
+      --warn-border:#ecd9a3;
+      --danger:#fff1f1;
+      --danger-border:#e8b6b6;
+      --success:#eef8f1;
+      --success-border:#bdd9c6;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Segoe UI", system-ui, -apple-system, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px;
+    }
+    .hero{
+      background:linear-gradient(135deg, #243746 0%, #30495d 100%);
+      color:#fff;
+      border-radius:24px;
+      padding:34px 32px;
+      box-shadow:0 18px 40px rgba(36,55,70,.16);
+      margin-bottom:24px;
+    }
+    .eyebrow{
+      display:inline-block;
+      font-size:.82rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:999px;
+      padding:6px 12px;
+      margin-bottom:14px;
+      font-weight:700;
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size:2.2rem;
+      line-height:1.15;
+      letter-spacing:-0.02em;
+    }
+    .hero p{
+      margin:0;
+      max-width:860px;
+      color:rgba(255,255,255,.9);
+      font-size:1.03rem;
+    }
+    .top-grid{
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:24px;
+      align-items:start;
+    }
+    .toc, .card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow:0 8px 24px rgba(28,45,64,.06);
+    }
+    .toc{
+      position:sticky;
+      top:20px;
+      padding:18px;
+    }
+    .toc h2{
+      margin:0 0 12px;
+      font-size:1rem;
+      color:var(--primary);
+    }
+    .toc a{
+      display:block;
+      padding:9px 10px;
+      margin:4px 0;
+      border-radius:12px;
+      text-decoration:none;
+      color:var(--text);
+      font-size:.95rem;
+    }
+    .toc a:hover{
+      background:var(--soft);
+      color:var(--primary);
+    }
+    .content{
+      display:grid;
+      gap:18px;
+    }
+    section.card{
+      padding:24px;
+    }
+    section.card h2{
+      margin:0 0 14px;
+      font-size:1.3rem;
+      color:var(--primary);
+      letter-spacing:-0.01em;
+    }
+    h3{
+      margin:18px 0 8px;
+      font-size:1.02rem;
+      color:var(--primary);
+    }
+    p{margin:10px 0}
+    ul{
+      margin:8px 0 0 0;
+      padding-left:20px;
+    }
+    li{margin:6px 0}
+    .grid-2{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:16px;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:16px;
+    }
+    .mini{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:16px;
+      background:#fff;
+    }
+    .mini h3{margin-top:0}
+    .note, .warn, .danger, .success{
+      border-radius:16px;
+      padding:14px 16px;
+      border:1px solid var(--border);
+      margin-top:14px;
+    }
+    .note{background:var(--soft)}
+    .warn{background:var(--warn); border-color:var(--warn-border)}
+    .danger{background:var(--danger); border-color:var(--danger-border)}
+    .success{background:var(--success); border-color:var(--success-border)}
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .pill{
+      background:var(--tag);
+      color:var(--primary);
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:7px 12px;
+      font-size:.9rem;
+      font-weight:600;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:12px;
+      font-size:.95rem;
+      overflow:hidden;
+      border-radius:14px;
+    }
+    th, td{
+      text-align:left;
+      padding:12px 13px;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+    }
+    th{
+      background:var(--soft);
+      color:var(--primary);
+      font-weight:700;
+    }
+    tr:last-child td{border-bottom:none}
+    .formula{
+      background:var(--accent-soft);
+      border:1px solid #cfe1ff;
+      color:var(--primary);
+      border-radius:16px;
+      padding:16px;
+      font-weight:700;
+      margin-top:12px;
+    }
+    .footer{
+      margin:28px 0 10px;
+      color:var(--muted);
+      font-size:.92rem;
+      text-align:center;
+    }
+    .small{
+      color:var(--muted);
+      font-size:.92rem;
+    }
+    .section-anchor{
+      position:relative;
+      top:-8px;
+    }
+    @media (max-width: 920px){
+      .top-grid{
+        grid-template-columns:1fr;
+      }
+      .toc{position:static}
+      .grid-2, .grid-3{
+        grid-template-columns:1fr;
+      }
+      .hero h1{font-size:1.85rem}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <div class="eyebrow">Transfusion Medicine Reference</div>
+      <h1>Intravenous Immune Globulin (IVIG)</h1>
+      <p>
+        Practical reference page for indications, dose calculation, infusion principles,
+        monitoring, adverse effects, and key blood bank precautions. Adapted from the
+        ORBCoN presentation <em>IVIG: What’s So Unique?</em> (March 22, 2023) for site-ready use.
+      </p>
+      <div class="pill-row">
+        <span class="pill">Plasma-derived</span>
+        <span class="pill">&gt;90% IgG</span>
+        <span class="pill">Replacement therapy</span>
+        <span class="pill">Immunomodulatory therapy</span>
+      </div>
+    </header>
+
+    <div class="top-grid">
+      <nav class="toc">
+        <h2>On this page</h2>
+        <a href="#overview">Overview</a>
+        <a href="#indications">Indications</a>
+        <a href="#dosing">Dose calculation</a>
+        <a href="#administration">Administration</a>
+        <a href="#monitoring">Monitoring</a>
+        <a href="#adverse-effects">Adverse effects</a>
+        <a href="#risk-reduction">Risk reduction</a>
+        <a href="#practical-points">Practical blood bank points</a>
+        <a href="#references">References</a>
+      </nav>
+
+      <main class="content">
+        <section class="card" id="overview">
+          <div class="section-anchor"></div>
+          <h2>Overview</h2>
+          <p>
+            Intravenous immune globulin (IVIG) is a manufactured blood product prepared from pooled
+            human plasma obtained from several thousand donors. It contains immunoglobulin proteins,
+            predominantly IgG, and undergoes multiple viral inactivation and purification steps.
+          </p>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>What IVIG does</h3>
+              <ul>
+                <li>Provides passive antibody replacement in immune deficiency states.</li>
+                <li>Acts as an immunomodulatory therapy in selected inflammatory and autoimmune disorders.</li>
+              </ul>
+            </div>
+            <div class="mini">
+              <h3>Proposed mechanisms</h3>
+              <ul>
+                <li>Fc receptor blockade</li>
+                <li>Cytokine suppression</li>
+                <li>Complement modulation</li>
+                <li>Neutralization of toxins</li>
+                <li>Effects on regulatory T cells and immune cell maturation</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="note">
+            The dominant mechanism likely varies by disease, and it remains unclear whether all IgG molecules
+            or only a subset are responsible for the clinical benefit.
+          </div>
+        </section>
+
+        <section class="card" id="indications">
+          <h2>Indications</h2>
+          <p>
+            IVIG should be prescribed for diagnoses supported by institutional approval pathways and provincial or
+            national utilization guidelines rather than by serum IgG level alone or by broad disease category alone.
+          </p>
+
+          <div class="success">
+            <strong>Use guideline-based approval.</strong> In Ontario practice, this may be based on the Ontario
+            Immune Globulin Utilization Management Guidelines or the Prairie Collaborative Criteria for the Clinical Use of Immune Globulin.
+          </div>
+
+          <h3>Example: Toxic shock syndrome</h3>
+          <p>
+            For suspected or confirmed toxic shock syndrome, IVIG is recommended as an adjunct to source control,
+            antibiotic therapy, and other supportive measures.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Clinical setting</th>
+                <th>Recommendation</th>
+                <th>Example dose options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Toxic shock syndrome</td>
+                <td>Use in addition to surgery, antibiotics, and supportive care; infectious diseases consultation is strongly recommended.</td>
+                <td>2 g/kg as a single dose, or 1 g/kg on day 1 and 0.5 g/kg on days 2 and 3</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="card" id="dosing">
+          <h2>Dose calculation</h2>
+          <p>
+            IVIG dosing varies by indication. Typical dose ranges are <strong>0.3 g/kg to 2 g/kg</strong>,
+            with some exceptions such as up to <strong>3 g/kg</strong> for toxic epidermal necrolysis /
+            Stevens–Johnson syndrome.
+          </p>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Adult dosing weight</h3>
+              <p>
+                For adults with height at least 152.4 cm and BMI at least 30 kg/m², dosing may be based on
+                ideal body weight or adjusted body weight, depending on local policy.
+              </p>
+            </div>
+            <div class="mini">
+              <h3>Why adjusted dosing matters</h3>
+              <ul>
+                <li>Reduces risk of toxicity from unnecessarily high doses</li>
+                <li>Supports stewardship of a limited blood product</li>
+                <li>May reduce cost and waste</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="formula">
+            Infusion rate formula: <br />
+            Rate (mL/kg/hr) × Weight (kg) = Hourly infusion rate (mL/hr)
+          </div>
+
+          <h3>Case example</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Height</td><td>175 cm</td></tr>
+              <tr><td>Actual weight</td><td>100 kg</td></tr>
+              <tr><td>Calculated dosing weight</td><td>Approximately 82.3 kg</td></tr>
+              <tr><td>Ordered dose</td><td>1 g/kg</td></tr>
+              <tr><td>Calculated IVIG dose</td><td>Approximately 82.3 g</td></tr>
+              <tr><td>Rounded issued dose</td><td>80 g</td></tr>
+            </tbody>
+          </table>
+
+          <div class="note">
+            In chronic IVIG-treated disease, once the patient is stable, the dose and/or treatment interval should
+            be titrated to the lowest effective dose and greatest effective interval where appropriate.
+          </div>
+        </section>
+
+        <section class="card" id="administration">
+          <h2>Administration</h2>
+          <p>
+            Although IVIG brands are considered clinically equivalent in effectiveness, each brand has
+            its own monograph-defined infusion rates, cautions, and maximum recommended rates.
+          </p>
+
+          <div class="warn">
+            <strong>Brand-specific infusion rates matter.</strong> Start at the manufacturer-recommended initial rate
+            and escalate only if the patient tolerates the infusion.
+          </div>
+
+          <div class="grid-3">
+            <div class="mini">
+              <h3>Before starting</h3>
+              <ul>
+                <li>Confirm informed consent</li>
+                <li>Verify indication and dose</li>
+                <li>Use aseptic technique</li>
+                <li>Ensure prescriber support is available</li>
+              </ul>
+            </div>
+            <div class="mini">
+              <h3>Line and tubing</h3>
+              <ul>
+                <li>Use a dedicated IV line</li>
+                <li>Peripheral or central access is acceptable</li>
+                <li>Do not mix with other medications</li>
+                <li>Use standard vented tubing</li>
+              </ul>
+            </div>
+            <div class="mini">
+              <h3>Product checks</h3>
+              <ul>
+                <li>Seal must be intact</li>
+                <li>Solution should be clear or slightly opalescent</li>
+                <li>Colour should be colourless to pale yellow</li>
+                <li>Do not infuse if appearance is concerning</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Handling points</h3>
+          <ul>
+            <li>Complete each bottle within <strong>4 hours</strong> of puncturing the seal.</li>
+            <li>Do <strong>not</strong> shake the bottle.</li>
+            <li>Allow product to reach room temperature to reduce bubbling.</li>
+            <li>Start with the <strong>smallest bottle</strong> and finish with the largest to minimize wastage if a reaction occurs.</li>
+            <li>Use an approved infusion pump for precise rate control and patient mobility.</li>
+          </ul>
+
+          <h3>Flush compatibility</h3>
+          <ul>
+            <li>Most brands: <strong>D5W</strong> or <strong>0.9% NaCl</strong></li>
+            <li><strong>Exception:</strong> Gammagard S/D should be flushed with <strong>D5W only</strong></li>
+          </ul>
+
+          <div class="danger">
+            Different IVIG brands should not be infused in the same infusion. The presentation notes an exception
+            for <strong>Gamunex</strong> and <strong>IGIVnex</strong>.
+          </div>
+        </section>
+
+        <section class="card" id="monitoring">
+          <h2>Monitoring</h2>
+          <p>
+            Monitor patients closely during infusion, especially at initiation and after each rate increase.
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Time point</th>
+                <th>Recommended assessment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>30 minutes before infusion</td>
+                <td>Baseline patient assessment and vital signs</td>
+              </tr>
+              <tr>
+                <td>15 minutes after start</td>
+                <td>Reassess vital signs and tolerance</td>
+              </tr>
+              <tr>
+                <td>After each rate increase</td>
+                <td>Assess symptoms and vital signs</td>
+              </tr>
+              <tr>
+                <td>Hourly until completion</td>
+                <td>Ongoing monitoring</td>
+              </tr>
+              <tr>
+                <td>After completion</td>
+                <td>Inpatients: 1-hour post-infusion; outpatients: reassess before discharge</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="note">
+            If a reaction is suspected, stop the infusion, maintain IV access, check vital signs, notify the prescriber,
+            provide care as ordered, and report the event to the transfusion medicine laboratory, even if minor.
+          </div>
+        </section>
+
+        <section class="card" id="adverse-effects">
+          <h2>Adverse effects and cautions</h2>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Common / usually minor</h3>
+              <ul>
+                <li>Headache</li>
+                <li>Fever or chills</li>
+                <li>Flushing</li>
+                <li>Nausea or vomiting</li>
+                <li>Rash, hives, pruritus</li>
+                <li>Myalgias</li>
+              </ul>
+            </div>
+            <div class="mini">
+              <h3>Moderate to severe</h3>
+              <ul>
+                <li>Anaphylaxis / anaphylactoid reaction</li>
+                <li>Aseptic meningitis</li>
+                <li>Hemolysis / hemolytic anemia</li>
+                <li>Renal dysfunction or acute renal failure</li>
+                <li>TACO</li>
+                <li>TRALI (rare)</li>
+                <li>Thromboembolic events</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Risk factors for adverse reactions</h3>
+          <ul>
+            <li>First IVIG exposure</li>
+            <li>Change to another brand</li>
+            <li>More than 8 weeks since previous infusion</li>
+            <li>High dose</li>
+            <li>Rapid infusion rate</li>
+            <li>Poor hydration</li>
+          </ul>
+
+          <h3>Delayed symptoms to report</h3>
+          <p class="small">
+            Some reactions can occur up to 72 hours after infusion, and signs of hemolysis may occur up to 10 days later.
+          </p>
+          <ul>
+            <li>Shortness of breath</li>
+            <li>Chest, back, or abdominal pain</li>
+            <li>Palpitations</li>
+            <li>Severe headache or neck stiffness</li>
+            <li>Dark red, brown, or tea-coloured urine</li>
+            <li>Jaundice or scleral icterus</li>
+          </ul>
+
+          <div class="warn">
+            IVIG can interfere with the effectiveness of live attenuated vaccines such as measles, mumps, rubella,
+            and varicella for approximately <strong>6 to 12 weeks</strong>.
+          </div>
+        </section>
+
+        <section class="card" id="risk-reduction">
+          <h2>Strategies to reduce toxicity</h2>
+          <ul>
+            <li>Use the <strong>slowest feasible infusion rate</strong>.</li>
+            <li>Ensure the patient is well hydrated before and after treatment.</li>
+            <li>Consider dividing high doses, especially doses greater than 1 g/kg, over more than one day.</li>
+            <li>Assess for risk factors for renal dysfunction, thrombosis, and circulatory overload before infusion.</li>
+            <li>Obtain baseline laboratory studies when hemolysis risk is relevant and monitor clinically afterward.</li>
+          </ul>
+        </section>
+
+        <section class="card" id="practical-points">
+          <h2>Practical blood bank points</h2>
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Stewardship</h3>
+              <ul>
+                <li>IVIG is a limited blood product and should be guideline-supported.</li>
+                <li>Adjusted or ideal body weight dosing may reduce overuse.</li>
+                <li>Maintenance regimens should be titrated to the lowest effective dose where possible.</li>
+              </ul>
+            </div>
+            <div class="mini">
+              <h3>Operational details</h3>
+              <ul>
+                <li>Standard vented tubing is usually sufficient.</li>
+                <li>Inline filter generally not required, except brand-specific situations such as Gammagard S/D.</li>
+                <li>Subsequent bottles in the same treatment do not require returning to the initial starting rate.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" id="references">
+          <h2>References</h2>
+          <ul>
+            <li>Berta D. <em>Intravenous Immune Globulin (IVIG): What’s So Unique?</em> Ontario Regional Blood Coordinating Network. March 22, 2023.</li>
+            <li>ORBCoN. <em>Infusion Guide and Adverse Events</em>, version 3. 2022.</li>
+            <li>ORBCoN. <em>Ontario Immune Globulin (IG) Utilization Management Guidelines</em>, version 4. 2018.</li>
+            <li>Prairie Collaborative Immune Globulin Utilization Management Framework Project. <em>Criteria for the Clinical Use of Immune Globulin</em>, 2nd edition. 2022.</li>
+            <li><em>Bloody Easy 5: Blood Transfusions, Blood Alternatives and Transfusion Reactions</em>. ORBCoN. 2022.</li>
+          </ul>
+          <p class="small">
+            This page is intended as a practical summary for a transfusion medicine reference site and should be aligned with local policy,
+            product monographs, and current provincial guidance before clinical deployment.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <div class="footer">
+      Prepared for GitHub deployment as a single self-contained HTML page.
+    </div>
+  </div>
+</body>
+</html>
