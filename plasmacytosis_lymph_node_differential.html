@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Differential Diagnosis of Plasmacytosis in Lymph Node</title>
+  <style>
+    :root{
+      --bg:#f4f7f9;
+      --panel:#ffffff;
+      --text:#22313f;
+      --muted:#5f6b76;
+      --primary:#243746;
+      --accent:#2d8cff;
+      --border:#dbe3ea;
+      --soft:#eef4f8;
+      --tag:#e9eef3;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:28px 22px 60px;
+    }
+    .back-link{
+      display:inline-block;
+      margin-bottom:18px;
+      color:var(--primary);
+      text-decoration:none;
+      font-weight:600;
+    }
+    .hero{
+      background:linear-gradient(135deg,var(--primary),#35516a);
+      color:#fff;
+      border-radius:22px;
+      padding:28px 30px;
+      box-shadow:0 10px 28px rgba(36,55,70,.16);
+      margin-bottom:24px;
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-size:2rem;
+      line-height:1.2;
+      letter-spacing:.2px;
+    }
+    .hero p{
+      margin:0;
+      max-width:860px;
+      color:rgba(255,255,255,.92);
+      font-size:1.02rem;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:22px;
+      align-items:start;
+    }
+    .card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:22px 24px;
+      box-shadow:0 6px 18px rgba(30,45,62,.05);
+      margin-bottom:20px;
+    }
+    h2{
+      margin:0 0 14px;
+      font-size:1.25rem;
+      color:var(--primary);
+    }
+    h3{
+      margin:18px 0 8px;
+      font-size:1rem;
+      color:var(--primary);
+    }
+    p{margin:0 0 12px}
+    ul{
+      margin:8px 0 14px 20px;
+      padding:0;
+    }
+    li{margin:5px 0}
+    .section-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .tag{
+      display:inline-block;
+      font-size:.78rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      color:var(--primary);
+      background:var(--tag);
+      border-radius:999px;
+      padding:5px 10px;
+    }
+    .callout{
+      background:var(--soft);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px 16px;
+      margin:12px 0;
+    }
+    .callout strong{
+      color:var(--primary);
+    }
+    .dx-block{
+      border-top:1px solid var(--border);
+      padding-top:14px;
+      margin-top:14px;
+    }
+    .small{
+      color:var(--muted);
+      font-size:.94rem;
+    }
+    .algorithm-step{
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+      margin:10px 0;
+    }
+    .footer{
+      color:var(--muted);
+      font-size:.9rem;
+      margin-top:8px;
+    }
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+      .hero h1{font-size:1.7rem}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-link" href="index.html">← Back</a>
+
+    <section class="hero">
+      <h1>Differential Diagnosis of Plasmacytosis in Lymph Node</h1>
+      <p>
+        Practical pathology reference organized around the core sign-out questions:
+        preserved versus effaced architecture, reactive versus clonal plasma cell proliferation,
+        and the major benign and neoplastic entities that enter the differential diagnosis.
+      </p>
+    </section>
+
+    <div class="grid">
+      <main>
+        <section class="card">
+          <div class="section-title">
+            <span class="tag">Core Differential</span>
+            <h2>Major diagnostic categories</h2>
+          </div>
+
+          <div class="dx-block" style="border-top:none; padding-top:0; margin-top:0;">
+            <h3>1. Reactive / polyclonal plasmacytosis</h3>
+            <ul>
+              <li>Autoimmune and inflammatory disorders, including systemic lupus erythematosus, rheumatoid arthritis-associated lymphadenopathy, Sjögren syndrome, and idiopathic plasmacytic lymphadenopathy.</li>
+              <li>Infectious lymphadenitis, including Epstein-Barr virus, cytomegalovirus, HIV, syphilis, toxoplasmosis, and other infectious granulomatous processes.</li>
+              <li>Castleman disease, especially the plasma cell variant.</li>
+              <li>IgG4-related disease.</li>
+              <li>Rosai-Dorfman disease.</li>
+              <li>Inflammatory pseudotumor and other uncommon reactive conditions.</li>
+            </ul>
+            <div class="callout">
+              <strong>Typical clues:</strong> preserved or only partially distorted nodal architecture, polymorphous cellular background, and polytypic plasma cells.
+            </div>
+          </div>
+
+          <div class="dx-block">
+            <h3>2. Small B-cell lymphomas with plasmacytic differentiation</h3>
+            <ul>
+              <li>Nodal marginal zone lymphoma.</li>
+              <li>Lymphoplasmacytic lymphoma / Waldenström macroglobulinemia.</li>
+              <li>Less commonly, chronic lymphocytic leukemia / small lymphocytic lymphoma, follicular lymphoma, or mantle cell lymphoma with plasmacytic differentiation.</li>
+            </ul>
+            <div class="callout">
+              <strong>Typical clues:</strong> monotypic B-cell and plasma cell populations, partial or complete architectural effacement, and correlation with flow cytometry, immunophenotype, and molecular studies such as MYD88 in appropriate cases.
+            </div>
+          </div>
+
+          <div class="dx-block">
+            <h3>3. Plasma cell neoplasms involving lymph node</h3>
+            <ul>
+              <li>Extramedullary plasmacytoma.</li>
+              <li>Secondary nodal involvement by plasma cell myeloma.</li>
+            </ul>
+            <div class="callout">
+              <strong>Typical clues:</strong> diffuse infiltration by monomorphic plasma cells, light chain restriction, and supportive systemic clinical findings such as a monoclonal paraprotein, lytic bone lesions, hypercalcemia, renal dysfunction, or marrow myeloma.
+            </div>
+          </div>
+
+          <div class="dx-block">
+            <h3>4. Large B-cell lymphomas with plasmablastic differentiation</h3>
+            <ul>
+              <li>Plasmablastic lymphoma.</li>
+              <li>Primary effusion lymphoma / extracavitary primary effusion lymphoma.</li>
+              <li>ALK-positive large B-cell lymphoma.</li>
+              <li>Other aggressive B-cell lymphomas with plasmacytic or plasmablastic features.</li>
+            </ul>
+            <div class="callout">
+              <strong>Typical clues:</strong> large atypical cells, high-grade cytology, frequent loss of mature B-cell markers, and expression of plasma cell-associated markers such as CD138, CD38, and MUM1.
+            </div>
+          </div>
+
+          <div class="dx-block">
+            <h3>5. T-cell lymphoma with secondary plasma cell proliferation</h3>
+            <ul>
+              <li>Angioimmunoblastic T-cell lymphoma is the classic pitfall.</li>
+            </ul>
+            <div class="callout">
+              <strong>Typical clues:</strong> plasma cells may be very prominent and can obscure the underlying T-cell lymphoma; look for a TFH phenotype, expanded follicular dendritic cell meshworks, vascular proliferation, and EBV-positive B immunoblasts.
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="section-title">
+            <span class="tag">Reactive entities</span>
+            <h2>Important benign mimics</h2>
+          </div>
+
+          <h3>Autoimmune lymphadenopathy</h3>
+          <p>Usually shows preserved architecture with reactive follicular hyperplasia and prominent interfollicular polytypic plasmacytosis. Clinical history is often decisive.</p>
+
+          <h3>Infectious mononucleosis and other viral lymphadenitides</h3>
+          <p>A polymorphous paracortical expansion with plasma cells, immunoblasts, histiocytes, and sometimes necrosis. Reed-Sternberg-like cells and marked atypia can create concern for lymphoma.</p>
+
+          <h3>Castleman disease</h3>
+          <p>Plasma cell variant may show striking interfollicular plasmacytosis. Interpretation requires clinicopathologic correlation. HHV-8 and IL-6 context matters.</p>
+
+          <h3>IgG4-related disease</h3>
+          <p>Consider when there is increased IgG4-positive plasma cells and an elevated IgG4/IgG ratio, keeping in mind that increased IgG4-positive plasma cells are not specific in lymph node.</p>
+
+          <h3>Rosai-Dorfman disease</h3>
+          <p>Look for sinus/paracortical histiocytes with emperipolesis and an S100-positive histiocytic population accompanying the plasma cells.</p>
+        </section>
+
+        <section class="card">
+          <div class="section-title">
+            <span class="tag">Neoplastic entities</span>
+            <h2>Important malignant considerations</h2>
+          </div>
+
+          <h3>Nodal marginal zone lymphoma</h3>
+          <p>Often shows a heterogeneous infiltrate including monocytoid B cells, plasmacytoid cells, and plasma cells, sometimes with Dutcher or Russell bodies.</p>
+
+          <h3>Lymphoplasmacytic lymphoma</h3>
+          <p>Usually a relatively monotonous lymphoplasmacytic infiltrate, often associated with an IgM paraprotein and marrow disease. MYD88 mutation testing can be very helpful in difficult cases.</p>
+
+          <h3>Plasmacytoma / myeloma involving lymph node</h3>
+          <p>More monomorphic than reactive plasmacytosis and usually supported by light chain restriction and systemic plasma cell neoplasm findings.</p>
+
+          <h3>Plasmablastic lymphoma</h3>
+          <p>High-grade morphology, plasma cell phenotype, frequent EBV association, and loss of usual pan-B-cell markers should raise this possibility.</p>
+        </section>
+      </main>
+
+      <aside>
+        <section class="card">
+          <div class="section-title">
+            <span class="tag">Approach</span>
+            <h2>Practical sign-out algorithm</h2>
+          </div>
+
+          <div class="algorithm-step">
+            <strong>Step 1: Assess architecture</strong><br>
+            Preserved architecture favors a reactive process. Diffuse or near-complete effacement raises concern for lymphoma or plasma cell neoplasm.
+          </div>
+
+          <div class="algorithm-step">
+            <strong>Step 2: Assess cytology</strong><br>
+            Polymorphous populations favor reactive conditions. Monomorphic lymphoplasmacytic or plasma cell populations favor neoplasia.
+          </div>
+
+          <div class="algorithm-step">
+            <strong>Step 3: Assess clonality</strong><br>
+            Use kappa/lambda studies, flow cytometry, and correlation with serum findings. Polytypic plasma cells support reactive plasmacytosis.
+          </div>
+
+          <div class="algorithm-step">
+            <strong>Step 4: Correlate clinically</strong><br>
+            Autoimmune symptoms, viral syndrome, elevated inflammatory markers, monoclonal paraprotein, marrow findings, and imaging all matter.
+          </div>
+
+          <div class="algorithm-step">
+            <strong>Step 5: Order targeted ancillary studies</strong><br>
+            Common studies include CD20, CD3, CD138, MUM1, kappa, lambda, EBER, HHV-8, IgG4, flow cytometry, and selected molecular tests.
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="section-title">
+            <span class="tag">Pearls</span>
+            <h2>High-yield pitfalls</h2>
+          </div>
+          <ul>
+            <li>Reactive plasmacytosis can be extensive.</li>
+            <li>Russell bodies and binucleation do not by themselves prove neoplasia.</li>
+            <li>Light chain skewing or even restricted patterns can rarely occur in reactive settings; interpret with caution.</li>
+            <li>Castleman disease and AITL are major mimics.</li>
+            <li>Always integrate morphology, clonality, and clinical context before diagnosing lymphoma or plasma cell neoplasm.</li>
+          </ul>
+        </section>
+
+        <section class="card">
+          <div class="section-title">
+            <span class="tag">Suggested wording</span>
+            <h2>Descriptive fallback diagnosis</h2>
+          </div>
+          <p class="small">
+            When the findings are not fully classifiable on morphology alone, a practical descriptive line may be:
+          </p>
+          <div class="callout">
+            <strong>Lymph node with prominent plasmacytosis / lymphoplasmacytic infiltrate;</strong> see comment.
+          </div>
+          <p class="small">
+            The comment can then address architecture, clonality, key differential diagnoses, and recommend clinicopathologic correlation and ancillary studies.
+          </p>
+        </section>
+
+        <section class="footer">
+          Reference basis: diagnostic approach to plasmacytic or lymphoplasmacytic infiltrates in lymph nodes, including reactive conditions, small B-cell lymphomas, plasma cell neoplasms, and large B-cell lymphomas with plasmacytic differentiation.
+        </section>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
