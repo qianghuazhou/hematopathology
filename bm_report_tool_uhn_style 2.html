@@ -193,7 +193,7 @@ button.secondary { border-color:#2b3448; background: rgba(96,165,250,0.10); }
 </head>
 <body>
   <header>
-    <h1>Bone Marrow Report Tool (HTML) — v12 refined</h1>
+    <h1>Bone Marrow Report Tool — UHN style</h1>
     <div class="footer-note">Enter findings on the right and click Generate to build the formatted report.</div>
   </header>
 
@@ -1380,29 +1380,11 @@ button.secondary { border-color:#2b3448; background: rgba(96,165,250,0.10); }
 <div class="section">
   <h3>Immunohistochemistry</h3>
   <div class="hint" style="color: var(--muted); font-size:12px; margin: 2px 0 10px;">
-    Hematopathology-style descriptive output. Select only stains performed or clinically relevant.
+    Free text
   </div>
-
-  <div class="row" style="grid-template-columns:140px 1fr; margin-bottom:10px;">
-    <label>Ki-67 preset</label>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-      <select id="ki67Context" onchange="applyKi67Preset()" style="min-width:260px;">
-        <option value="">(optional smart preset)</option>
-        <option value="normal">General / normal marrow</option>
-        <option value="mds">MDS / dysplasia workup</option>
-        <option value="aml">AML / excess blasts</option>
-        <option value="pcm">Plasma cell neoplasm</option>
-        <option value="lymphoid">Lymphoid infiltrate / lymphoma</option>
-        <option value="custom">Custom / manual</option>
-      </select>
-      <div id="ki67PresetHint" style="color: var(--muted); font-size:12px;"></div>
-    </div>
-  </div>
-
-  <div id="bmIhcCategories" class="ihc-grid-v10"></div>
 
   <div class="row" style="grid-template-columns:140px 1fr; margin-top:10px;">
-    <label>Additional IHC</label>
+    <label>IHC</label>
     <textarea id="bmIhcExtra" placeholder="Optional extra line(s), one per line..." style="min-height:80px;"></textarea>
   </div>
 
@@ -1412,10 +1394,6 @@ button.secondary { border-color:#2b3448; background: rgba(96,165,250,0.10); }
     <button type="button" class="secondary" onclick="clearBmIhc()">Clear IHC</button>
   </div>
 
-  <div class="row" style="grid-template-columns:140px 1fr; margin-top:10px;">
-    <label>IHC preview</label>
-    <textarea id="bmIhcPreview" style="min-height:180px;" placeholder="Click Generate IHC..."></textarea>
-  </div>
 </div>
 
 <div class="section">
