@@ -1380,15 +1380,17 @@ button.secondary { border-color:#2b3448; background: rgba(96,165,250,0.10); }
 <div class="section">
   <h3>Immunohistochemistry</h3>
   <div class="hint" style="color: var(--muted); font-size:12px; margin: 2px 0 10px;">
-    Free text entry. Content is inserted directly into the final output.
+    Free text
   </div>
 
   <div class="row" style="grid-template-columns:140px 1fr; margin-top:10px;">
     <label>IHC</label>
-    <textarea id="bmIhcExtra" placeholder="Enter immunohistochemistry findings..." style="min-height:110px;"></textarea>
+    <textarea id="bmIhcExtra" placeholder="Optional extra line(s), one per line..." style="min-height:80px;"></textarea>
   </div>
 
   <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+    <button type="button" class="secondary" onclick="generateIhcPreview()">Generate IHC</button>
+    <button type="button" class="secondary" onclick="copyIhcPreview()">Copy IHC</button>
     <button type="button" class="secondary" onclick="clearBmIhc()">Clear IHC</button>
   </div>
 
@@ -1422,8 +1424,169 @@ button.secondary { border-color:#2b3448; background: rgba(96,165,250,0.10); }
    Immunohistochemistry (BM IHC generator v10)
    ========================= */
 
+const BM_IHC_CATEGORIES = [
+  {
+    id:"blasts",
+    title:"Blasts / immaturity",
+    note:"Pattern-based marrow IHC wording.",
+    markers:[
+      {id:"cd34", label:"CD34", options:["","highlights blasts (<5%)","highlights increased blasts (~5–9%)","highlights increased blasts (~10–19%)","highlights increased blasts (≥20%)","negative"]},
+      {id:"cd117", label:"CD117", options:["","is strongly positive in mast cells and dim positive in early erythroid cells and blasts (all within normal limits)","highlights increased blasts","highlights scattered mast cells","highlights atypical mast cell aggregates","negative"]},
+      {id:"tdt", label:"TdT", options:["","highlights blasts","highlights a subset of blasts","negative"]},
+      {id:"p53", label:"p53", options:["","shows a wild-type pattern","shows increased expression in a subset of cells","shows strong overexpression in a significant subset of cells","shows a null pattern / essentially negative"]},
+      {id:"ki67", label:"Ki-67", options:["","highlights proliferating hematopoietic cells within expected limits","proliferation index: low (<5%)","proliferation index: approximately","proliferation index: approximately range","proliferation index overall with focal hot spot","proliferation index in plasma cells approximately"], needsPercent:true, percentPlaceholders:["%","second % / hot spot"]}
+    ]
+  },
+  {
+    id:"megas",
+    title:"Megakaryocytes",
+    note:"Useful in MDS/MPN and fibrosis workup.",
+    markers:[
+      {id:"cd61", label:"CD61", options:["","highlights unremarkable megakaryocytes","highlights increased megakaryocytes","highlights atypical megakaryocytes with loose clustering","highlights markedly atypical megakaryocytes with tight clustering"]},
+      {id:"cd42b", label:"CD42b", options:["","highlights unremarkable megakaryocytes","highlights increased megakaryocytes","highlights atypical megakaryocytes with loose clustering","highlights markedly atypical megakaryocytes with tight clustering"]}
+    ]
+  },
+  {
+    id:"lineage",
+    title:"Lineage / background hematopoiesis",
+    note:"Select only stains that answer the case-specific question.",
+    markers:[
+      {id:"mpo", label:"MPO", options:["","highlights myeloid precursors","highlights maturing myeloid elements","negative in blasts"]},
+      {id:"lysozyme", label:"Lysozyme", options:["","highlights maturing myeloid/monocytic elements","highlights increased monocytes / monocytoid cells","negative in blasts"]},
+      {id:"ecad", label:"E-cadherin", options:["","highlights early erythroid precursors","highlights increased early erythroid precursors","negative"]},
+      {id:"glya", label:"Glycophorin A", options:["","highlights erythroid precursors","highlights increased erythroid precursors","negative"]}
+    ]
+  },
+  {
+    id:"lymphoid",
+    title:"Lymphoid / plasma cells",
+    note:"Background lymphoid cells or clinically significant infiltrates.",
+    markers:[
+      {id:"cd3", label:"CD3", options:["","highlights scattered background T cells","highlights interstitial T cells","highlights small T-cell aggregates","highlights an atypical T-cell infiltrate"]},
+      {id:"cd20", label:"CD20", options:["","highlights rare B cells","highlights scattered small B cells","highlights small B-cell aggregates","highlights an atypical B-cell infiltrate"]},
+      {id:"pax5", label:"PAX5", options:["","highlights rare B cells","highlights scattered small B cells","highlights small B-cell aggregates","highlights an atypical B-cell infiltrate"]},
+      {id:"cd138", label:"CD138", options:["","highlights scattered plasma cells (<5%)","highlights increased plasma cells (~5–10%)","highlights increased plasma cells (~10–20%)","highlights markedly increased plasma cells (>20%)"]},
+      {id:"kappa", label:"Kappa", options:["","shows polytypic plasma cells","shows kappa light-chain restriction"]},
+      {id:"lambda", label:"Lambda", options:["","shows polytypic plasma cells","shows lambda light-chain restriction"]}
+    ]
+  },
+  {
+    id:"mast_other",
+    title:"Mast cells / other",
+    note:"Particularly useful in mastocytosis and selected infiltrates.",
+    markers:[
+      {id:"tryptase", label:"Tryptase", options:["","highlights scattered mast cells","highlights increased mast cells without dense aggregates","highlights dense mast cell aggregates"]},
+      {id:"cd25", label:"CD25", options:["","negative in mast cells","positive in mast cells"]},
+      {id:"cd30", label:"CD30", options:["","highlights scattered immunoblasts","highlights atypical large cells","negative"]},
+      {id:"alk", label:"ALK", options:["","positive in atypical cells","negative"]},
+      {id:"cd1a", label:"CD1a", options:["","highlights dendritic cells","positive in atypical cells","negative"]},
+      {id:"langerin", label:"Langerin", options:["","highlights dendritic cells","positive in atypical cells","negative"]},
+      {id:"cd68", label:"CD68", options:["","highlights histiocytes","highlights increased histiocytes","positive in atypical cells"]}
+    ]
+  }
+];
+
 function renderBmIhc(){
-  return;
+  const root = document.getElementById("bmIhcCategories");
+  if (!root) return;
+  root.innerHTML = BM_IHC_CATEGORIES.map(cat => `
+    <div class="ihc-cat">
+      <div class="ihc-cat-title">${cat.title}</div>
+      <div class="ihc-cat-note">${cat.note}</div>
+      ${cat.markers.map(m => `
+        <div class="ihc-row-v10">
+          <div class="ihc-marker">${m.label}</div>
+          <select data-bm-ihc="${m.id}">
+            ${m.options.map(opt => `<option value="${opt}">${opt || "— not selected —"}</option>`).join("")}
+          </select>
+          ${m.needsPercent ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <input type="text" data-bm-ihc-pct="${m.id}" placeholder="${(m.percentPlaceholders && m.percentPlaceholders[0]) || '% / note'}">
+            <input type="text" data-bm-ihc-pct2="${m.id}" placeholder="${(m.percentPlaceholders && m.percentPlaceholders[1]) || 'optional second value'}">
+          </div>` : `<div></div>`}
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+}
+
+function bmIhcLine(marker){
+  const sel = document.querySelector(`select[data-bm-ihc="${marker.id}"]`);
+  const val = (sel?.value || "").trim();
+  if (!val) return "";
+  if (marker.needsPercent){
+    const pct1 = (document.querySelector(`input[data-bm-ihc-pct="${marker.id}"]`)?.value || "").trim();
+    const pct2 = (document.querySelector(`input[data-bm-ihc-pct2="${marker.id}"]`)?.value || "").trim();
+    if (marker.id === "ki67"){
+      if (val === "highlights proliferating hematopoietic cells within expected limits") return "Ki-67 highlights proliferating hematopoietic cells within expected limits.";
+      if (val === "proliferation index: low (<5%)") return "Ki-67 proliferation index: low (<5%).";
+      if (val === "proliferation index: approximately") return pct1 ? `Ki-67 proliferation index: approximately ${pct1}%.` : "";
+      if (val === "proliferation index: approximately range") return (pct1 && pct2) ? `Ki-67 proliferation index: approximately ${pct1}–${pct2}%.` : "";
+      if (val === "proliferation index overall with focal hot spot") return (pct1 && pct2) ? `Ki-67 proliferation index is approximately ${pct1}% overall with focal areas approaching ${pct2}%.` : "";
+      if (val === "proliferation index in plasma cells approximately") return pct1 ? `Ki-67 proliferation index in plasma cells is approximately ${pct1}%.` : "";
+    }
+    if (val === "proliferation index approximately"){
+      return pct1 ? `${marker.label} proliferation index is approximately ${pct1}.` : "";
+    }
+  }
+  return `${marker.label} ${val}.`;
+}
+
+function applyKi67Preset(){
+  const context = document.getElementById("ki67Context")?.value || "";
+  const sel = document.querySelector('select[data-bm-ihc="ki67"]');
+  const pct1 = document.querySelector('input[data-bm-ihc-pct="ki67"]');
+  const pct2 = document.querySelector('input[data-bm-ihc-pct2="ki67"]');
+  const hint = document.getElementById("ki67PresetHint");
+  if (!sel || !pct1 || !pct2) return;
+
+  const presets = {
+    normal: {
+      value: 'highlights proliferating hematopoietic cells within expected limits',
+      pct1: '',
+      pct2: '',
+      hint: 'Suggested for routine non-neoplastic marrow.'
+    },
+    mds: {
+      value: 'proliferation index: approximately',
+      pct1: '10',
+      pct2: '',
+      hint: 'Suggested wording for dysplasia / MDS workup; adjust to case.'
+    },
+    aml: {
+      value: 'proliferation index overall with focal hot spot',
+      pct1: '20',
+      pct2: '40',
+      hint: 'Useful when proliferation is heterogeneous or increased.'
+    },
+    pcm: {
+      value: 'proliferation index in plasma cells approximately',
+      pct1: '10',
+      pct2: '',
+      hint: 'Suggested for plasma cell neoplasms; edit percentage as needed.'
+    },
+    lymphoid: {
+      value: 'proliferation index: approximately range',
+      pct1: '20',
+      pct2: '30',
+      hint: 'Helpful for lymphoid infiltrates or patchy aggregates.'
+    },
+    custom: {
+      value: '',
+      pct1: '',
+      pct2: '',
+      hint: 'Manual Ki-67 entry.'
+    }
+  };
+
+  const preset = presets[context];
+  if (!preset) {
+    if (hint) hint.textContent = '';
+    return;
+  }
+  sel.value = preset.value;
+  pct1.value = preset.pct1;
+  pct2.value = preset.pct2;
+  if (hint) hint.textContent = preset.hint;
 }
 
 function buildIhcNarrative(){
@@ -1435,11 +1598,28 @@ function buildIhcNarrative(){
 }
 
 function generateIhcPreview(){
-  return;
+  const text = buildIhcNarrative();
+  if (!text) return;
+  const payload = "IMMUNOHISTOCHEMISTRY\n" + text.replace(/\s+/g, " ").replace(/\.\s+/g, ".\n");
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(payload).catch(() => {});
+  }
 }
 
 function copyIhcPreview(){
-  return;
+  const text = buildIhcNarrative();
+  if (!text) return;
+  const payload = "IMMUNOHISTOCHEMISTRY\n" + text.replace(/\s+/g, " ").replace(/\.\s+/g, ".\n");
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(payload).catch(() => {});
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = payload;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
 }
 
 function clearBmIhc(){
@@ -1448,7 +1628,8 @@ function clearBmIhc(){
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  renderBmIhc();
+  try { renderBmIhc(); } catch (e) {}
+  try { applyKi67Preset(); } catch (e) {}
 });
 
 function v(id) { const hv = document.getElementById(id + "__val"); if (hv) return hv.value || ""; const el = document.getElementById(id); return el ? (el.value || "") : ""; }
@@ -1613,37 +1794,73 @@ function categorizeMERatioValue(ratio) {
 }
 
 function generateReport() {
+  collectCheckboxGroups();
+  calcMERatioAuto();
+
   const lines = [];
   const sep = '--------------------------------------------------';
 
+  const fmtNum = (id) => {
+    const raw = v(id);
+    return raw && String(raw).trim() ? String(raw).trim() : '';
+  };
+
   const cbcLines = [];
-  if (v('hgb')) cbcLines.push(`Hb (g/L): ${v('hgb')}`);
-  if (v('lkc')) cbcLines.push(`WBC (x10e9/L): ${v('lkc')}`);
-  if (v('plt')) cbcLines.push(`Plt (x10e9/L): ${v('plt')}`);
-  if (v('mcv')) cbcLines.push(`MCV (fL): ${v('mcv')}`);
-  if (v('rdw')) cbcLines.push(`RDW (%): ${v('rdw')}`);
-  if (v('erc')) cbcLines.push(`Reticulocytes (x10e9/L): ${v('erc')}`);
-  if (v('anc')) cbcLines.push(`Neutrophils (x10e9/L): ${v('anc')}`);
-  if (v('alc')) cbcLines.push(`Lymphocytes (x10e9/L): ${v('alc')}`);
-  if (v('amc')) cbcLines.push(`Monocytes (x10e9/L): ${v('amc')}`);
-  if (v('eos')) cbcLines.push(`Eosinophils (x10e9/L): ${v('eos')}`);
-  if (v('baso')) cbcLines.push(`Basophils (x10e9/L): ${v('baso')}`);
+  const addCbc = (label, value) => {
+    if (value && String(value).trim()) cbcLines.push(`${label}: ${String(value).trim()}`);
+  };
+  addCbc('Hb (g/L)', fmtNum('hgb'));
+  addCbc('WBC (x10e9/L)', fmtNum('lkc'));
+  addCbc('Plt (x10e9/L)', fmtNum('plt'));
+  addCbc('MCV (fL)', fmtNum('mcv'));
+  addCbc('RDW (%)', fmtNum('rdw'));
+  addCbc('Reticulocytes (x10e9/L)', fmtNum('erc'));
+  addCbc('Neutrophils (x10e9/L)', fmtNum('anc'));
+  addCbc('Lymphocytes (x10e9/L)', fmtNum('alc'));
+  addCbc('Monocytes (x10e9/L)', fmtNum('amc'));
+  addCbc('Eosinophils (x10e9/L)', fmtNum('eos'));
+  addCbc('Basophils (x10e9/L)', fmtNum('baso'));
 
-  const commentLines = [];
-  if (v('rbc_morph')) commentLines.push(`RBC: ${v('rbc_morph')}`);
-  if (v('wbc_morph')) commentLines.push(`WBC: ${v('wbc_morph')}`);
-  if (v('plt_morph')) commentLines.push(`PLT: ${v('plt_morph')}`);
+  const smearLines = [];
+  if (v('rbc_morph')) smearLines.push(`RBC: ${v('rbc_morph')}`);
+  if (v('wbc_morph')) smearLines.push(`WBC: ${v('wbc_morph')}`);
+  if (v('plt_morph')) smearLines.push(`PLT: ${v('plt_morph')}`);
 
-  if (cbcLines.length || commentLines.length || v('cbc_date')) {
+  if (cbcLines.length || smearLines.length) {
     lines.push('Synoptic Data');
     lines.push('');
-    if (v('cbc_date')) lines.push(`CBC date: ${v('cbc_date')}`);
-    lines.push('- CBC -');
-    cbcLines.forEach(x => lines.push(x));
-    if (commentLines.length) {
-      lines.push('COMMENT');
-      commentLines.forEach(x => lines.push(x));
+    if (cbcLines.length) {
+      lines.push('- CBC -');
+      cbcLines.forEach(x => lines.push(x));
     }
+    if (smearLines.length) {
+      lines.push('COMMENT');
+      smearLines.forEach(x => lines.push(x));
+    }
+    lines.push('');
+  }
+
+  const diffEntries = [
+    ['Blasts', v('diff_blast')],
+    ['Promyelocytes', v('diff_promy')],
+    ['Myelocytes', v('diff_myelo')],
+    ['Metamyelocytes', v('diff_meta')],
+    ['Neutrophils', v('diff_segs')],
+    ['Erythroblasts', v('diff_ery')],
+    ['Lymphocytes', v('diff_lymph')],
+    ['Monocytes', v('diff_mono')],
+    ['Eosinophils', v('diff_eos')],
+    ['Basophils', v('diff_baso')],
+    ['Plasma cells', v('diff_plasma')]
+  ].filter(([,val]) => val && String(val).trim());
+
+  if (diffEntries.length) {
+    lines.push(sep);
+    lines.push(`DIFFERENTIAL COUNT${v('diff_total') ? ` (${v('diff_total')} cells)` : ''}`);
+    lines.push('');
+    diffEntries.forEach(([label,val]) => lines.push(`${label}: ${val}%`));
+    lines.push('');
+    if (v('diff_me')) lines.push(`M:E ratio: ${v('diff_me')}`);
     lines.push('');
   }
 
@@ -1659,12 +1876,13 @@ function generateReport() {
   addLabeled(lines, 'Aspirate fragments', v('asp_spicules'));
   addLabeled(lines, 'Aspirate Cellularity', mapAspirateCellularity(v('asp_cellularity')));
   addLabeled(lines, 'Clot Section', v('asp_clot'));
+  if (v('bx_touch')) addLabeled(lines, 'Touch prep', v('bx_touch'));
 
   lines.push('DESCRIPTION');
   buildAspirateLineageBlock('Erythropoiesis', 'asp_ery').forEach(x => lines.push(x));
   buildAspirateLineageBlock('Granulopoiesis', 'asp_gran').forEach(x => lines.push(x));
   buildAspirateLineageBlock('Megakaryopoiesis', 'asp_megas').forEach(x => lines.push(x));
-  addLabeled(lines, 'Monocytes', v('asp_mono') || v('diff_mono') ? (v('asp_mono') || (v('diff_mono') ? `${v('diff_mono')}% by differential count` : '')) : '');
+  addLabeled(lines, 'Monocytes', v('asp_mono') || '');
   addLabeled(lines, 'Mast Cells', v('asp_mast'));
   addLabeled(lines, 'Lymphocytes', v('asp_lymphs'));
   addLabeled(lines, 'Plasma cells', v('asp_plasma'));
@@ -1677,17 +1895,7 @@ function generateReport() {
   if (fibrosis) addLabeled(lines, 'Fibrosis', fibrosis);
   if (v('other_findings')) addLabeled(lines, 'Other Findings', v('other_findings').replace(/\n+/g, ' '));
 
-  const diffParts = [
-    ['Blasts', v('diff_blast')], ['promyelocytes', v('diff_promy')], ['myelocytes', v('diff_myelo')],
-    ['metamyelocytes', v('diff_meta')], ['segs/bands', v('diff_segs')], ['erythroids', v('diff_ery')],
-    ['lymphs', v('diff_lymph')], ['monos', v('diff_mono')], ['eos', v('diff_eos')],
-    ['basos', v('diff_baso')], ['plasma cells', v('diff_plasma')]
-  ].filter(([, val]) => val && String(val).trim()).map(([lab, val]) => `${lab} ${val}%`);
-  if (diffParts.length) addLabeled(lines, 'Differential count', diffParts.join(', '));
-  if (v('diff_me')) addLabeled(lines, 'M:E ratio', v('diff_me'));
-  if (v('bx_touch')) addLabeled(lines, 'Touch prep', v('bx_touch'));
   lines.push(sep);
-
   document.getElementById('output').textContent = lines.join('\n');
 }
 
@@ -1721,34 +1929,32 @@ function calcMERatioAuto() {
   const mono   = toNum("diff_mono");
   const plasma = toNum("diff_plasma");
 
-  // M:E ratio category
   const M = blasts + promy + myelo + meta + segs + eos + baso;
   const E = ery;
   const ratio = E > 0 ? (M / E) : NaN;
   const meEl = document.getElementById("diff_me");
   if (meEl) {
-    meEl.value = categorizeMERatioValue(ratio);
+    meEl.value = Number.isFinite(ratio) ? `${ratio.toFixed(1)}:1` : '';
   }
 
-  // Total sum
   const total = blasts + promy + myelo + meta + segs + ery + lymph + mono + eos + baso + plasma;
   const sumEl = document.getElementById("diff_sum");
   const warnEl = document.getElementById("diff_warn");
-  if (sumEl) sumEl.value = total.toFixed(1) + "%";
+  if (sumEl) sumEl.value = total ? (Number.isInteger(total) ? `${total}%` : `${total.toFixed(1)}%`) : "";
 
-  // Warn if not ~100% (tolerance 98-102)
   if (warnEl) {
-    if (total < 98 || total > 102) {
-      warnEl.textContent = "Warning: Diff percentages sum to " + total.toFixed(1) + "% (should be ~100%).";
-      warnEl.style.color = "#fca5a5"; // red-ish
+    if (!total) {
+      warnEl.textContent = '';
+    } else if (total < 98 || total > 102) {
+      warnEl.textContent = "Warning: Diff percentages sum to " + (Number.isInteger(total) ? total : total.toFixed(1)) + "% (should be ~100%).";
+      warnEl.style.color = "#fca5a5";
     } else {
       warnEl.textContent = "OK: Diff percentages sum to ~100%.";
-      warnEl.style.color = "#86efac"; // green-ish
+      warnEl.style.color = "#86efac";
     }
   }
 }
 
-// Attach listeners on load
 document.addEventListener("DOMContentLoaded", function() {
   const ids = ["diff_blast","diff_promy","diff_myelo","diff_meta","diff_segs","diff_ery","diff_lymph","diff_mono","diff_eos","diff_baso","diff_plasma"];
   ids.forEach(id => {
@@ -1757,7 +1963,14 @@ document.addEventListener("DOMContentLoaded", function() {
       ["input","change"].forEach(evt => el.addEventListener(evt, calcMERatioAuto));
     }
   });
-  // Initial compute in case values are pre-filled
+  const form = document.getElementById('reportForm');
+  if (form) {
+    form.addEventListener('reset', () => setTimeout(() => {
+      const out = document.getElementById('output');
+      if (out) out.textContent = '';
+      calcMERatioAuto();
+    }, 0));
+  }
   calcMERatioAuto();
 });
 </script>
