@@ -1856,7 +1856,7 @@ function generateReport() {
 
   if (diffEntries.length) {
     lines.push(sep);
-    lines.push(`DIFFERENTIAL COUNT${v('diff_total') ? ` (${v('diff_total')} cells)` : ''}`);
+    lines.push(`- Differential count -{v('diff_total') ? ` (${v('diff_total')} cells)` : ''}`);
     lines.push('');
     diffEntries.forEach(([label,val]) => lines.push(`${label}: ${val}%`));
     lines.push('');
