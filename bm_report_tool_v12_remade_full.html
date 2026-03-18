@@ -1208,15 +1208,15 @@ button.secondary { border-color:#2b3448; background: rgba(96,165,250,0.10); }
           <input type="checkbox" id="bx_blasts__opt1" data-group="bx_blasts" value="Increased">
           <span>Increased</span>
         </label>
-
+        
+        <label class="cb-item">
+          <input type="checkbox" data-group="bx_blasts" value="Sheets">
+          <span>Sheets</span>
+        </label>
+        
         <label class="cb-item">
           <input type="checkbox" data-group="bx_blasts" value="ALIP">
           <span>ALIP</span>
-        </label>
-
-        <label class="cb-item">
-          <input type="checkbox" data-group="bx_blasts" value="Clusters">
-          <span>Clusters</span>
         </label>
         
       </div>
@@ -1260,7 +1260,7 @@ button.secondary { border-color:#2b3448; background: rgba(96,165,250,0.10); }
         
         <label class="cb-item">
           <input type="checkbox" id="bx_plasma__opt0" data-group="bx_plasma" value="Not increased">
-          <span>Not increased</span>
+          <span>Scattered</span>
         </label>
         
         <label class="cb-item">
@@ -1269,8 +1269,8 @@ button.secondary { border-color:#2b3448; background: rgba(96,165,250,0.10); }
         </label>
         
         <label class="cb-item">
-          <input type="checkbox" id="bx_plasma__opt2" data-group="bx_plasma" value="Atypical">
-          <span>Atypical</span>
+          <input type="checkbox" id="bx_plasma__opt2" data-group="bx_plasma" value="Sheets">
+          <span>Sheets</span>
         </label>
         
       </div>
@@ -1297,8 +1297,8 @@ button.secondary { border-color:#2b3448; background: rgba(96,165,250,0.10); }
         </label>
         
         <label class="cb-item">
-          <input type="checkbox" id="bx_bone__opt2" data-group="bx_bone" value="Sclerotic">
-          <span>Sclerotic</span>
+          <input type="checkbox" id="bx_bone__opt2" data-group="bx_bone" value="Osteosclerotic">
+          <span>Osteosclerotic</span>
         </label>
 
         <label class="cb-item">
@@ -1789,9 +1789,9 @@ function generateReport() {
   pushIf("Sample quality", v("asp_quality"));
   pushIf("Spicules", v("asp_spicules"));
   pushIf("Cellularity", v("asp_cellularity"));
+  add(buildAspirateLineage("asp_megas", "Megakaryopoiesis"));
   add(buildAspirateLineage("asp_ery", "Erythropoiesis"));
   add(buildAspirateLineage("asp_gran", "Granulopoiesis"));
-  add(buildAspirateLineage("asp_megas", "Megakaryopoiesis"));
   pushIf("Blasts", v("asp_blasts"));
   pushIf("Lymphocytes", v("asp_lymphs"));
   pushIf("Plasma cells", v("asp_plasma"));
@@ -1819,9 +1819,9 @@ function generateReport() {
   pushIf("Sample quality", v("bx_quality"));
   if (v("bx_length")) add(`${padLabel("Length")}${v("bx_length")} cm.`);
   pushIf("Cellularity", v("bx_cellularity"));
+  add(buildBiopsyLineage("bx_megas", "Megakaryopoiesis"));
   add(buildBiopsyLineage("bx_ery", "Erythropoiesis"));
   add(buildBiopsyLineage("bx_gran", "Granulopoiesis"));
-  add(buildBiopsyLineage("bx_megas", "Megakaryopoiesis"));
   pushIf("Blasts", v("bx_blasts"));
   pushIf("Lymphoid cells", v("bx_lymph"));
   pushIf("Plasma cells", v("bx_plasma"));
