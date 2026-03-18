@@ -53,10 +53,11 @@
     font-size: 16px;
     color: #dbe7f5;
   }
-  .grid-2, .grid-3, .grid-4 {
+  .grid-1, .grid-2, .grid-3, .grid-4 {
     display: grid;
     gap: 10px;
   }
+  .grid-1 { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
   .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
   .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
@@ -85,6 +86,18 @@
     background: rgba(255,255,255,0.02);
   }
   .lineage h3 { margin: 0 0 8px 0; font-size: 14px; }
+  fieldset.subgroup {
+    margin: 0;
+    padding: 10px;
+    border: 1px solid #203040;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.02);
+  }
+  fieldset.subgroup legend {
+    padding: 0 6px;
+    color: #dbe7f5;
+    font-size: 13px;
+  }
   .actions { display: flex; gap: 10px; flex-wrap: wrap; }
   button {
     padding: 10px 14px;
@@ -274,9 +287,17 @@
           <div><label>Plasma cells</label><input id="plasma_desc" type="text" value="Not increased"></div>
           <div><label>Iron stores</label><input id="iron_desc" type="text" value="Adequate"></div>
           <div><label>Neoplasia</label><input id="neoplasia_desc" type="text" placeholder="see diagnosis"></div>
-          <div><label>Immunohistochemistry</label><textarea id="ihc_desc" placeholder="e.g. Performed on the trephine biopsy"></textarea></div>
-          <div><label>Fibrosis</label><input id="fibrosis_desc" type="text" placeholder="e.t. MF0 of 3, No morphologic evidence of fibrosis"></div>
-          <div><label>Other findings</label><textarea id="ihc_desc" placeholder="e.g. Hemophagocytosis, granulomas, focal necrosis..."></textarea></div>
+
+          <fieldset class="subgroup">
+            <legend>Immunohistochemistry</legend>
+            <div class="grid-1">
+              <div><label>Performed on</label><input id="ihc_site" type="text" placeholder="e.g. the trephine biopsy"></div>
+              <div><label>Results</label><textarea id="ihc_results" placeholder="e.g. CD138 and light chain stains highlight polytypic plasma cells."></textarea></div>
+            </div>
+          </fieldset>
+
+          <div><label>Fibrosis</label><input id="fibrosis_desc" type="text" placeholder="e.g. MF-0 of 3; no morphologic evidence of fibrosis"></div>
+          <div><label>Other findings</label><textarea id="other_desc" placeholder="e.g. Hemophagocytosis, granulomas, focal necrosis..."></textarea></div>
         </div>
       </div>
 
@@ -461,7 +482,14 @@ function generateReport() {
   addLine(lines, 'Plasma cells', v('plasma_desc'));
   addLine(lines, 'Iron stores', v('iron_desc'));
   addLine(lines, 'Neoplasia', v('neoplasia_desc'));
-  addLine(lines, 'Immunohistochemistry', v('ihc_desc').replace(/\n+/g, ' '));
+
+  const ihcSite = v('ihc_site');
+  const ihcResults = v('ihc_results').replace(/\n+/g, ' ');
+  if (ihcSite || ihcResults) {
+    addLine(lines, 'Immunohistochemistry', ihcSite ? 'Performed on ' + ihcSite : '');
+    if (ihcResults) addIndented(lines, 'Results: ' + ihcResults);
+  }
+
   addLine(lines, 'Fibrosis', v('fibrosis_desc'));
   addLine(lines, 'Other findings', v('other_desc').replace(/\n+/g, ' '));
 
