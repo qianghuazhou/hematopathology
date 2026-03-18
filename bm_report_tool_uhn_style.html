@@ -510,7 +510,7 @@ function generateReport() {
   addLine(lines, 'M:E ratio', v('diff_me'));
   lines.push('');
   lines.push(sep);
-  lines.push('- Flow Cytometry');
+  lines.push('- Flow Cytometry -');
   if (v('flow_text')) lines.push(v('flow_text'));
 
   document.getElementById('output').textContent = lines.join('\n');
