@@ -3,270 +3,525 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bone Marrow Report Tool — UHN Style</title>
+<title>Bone Marrow Report Tool — Classic Combined v12</title>
 <style>
   :root {
     --bg: #0b1220;
     --panel: #111827;
-    --panel-2: #0f172a;
+    --panel2: #0f172a;
     --text: #e5e7eb;
     --muted: #9ca3af;
     --accent: #60a5fa;
+    --border: #243244;
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     background: radial-gradient(1000px 600px at 10% -10%, #1f2937, var(--bg));
     color: var(--text);
   }
   header {
-    padding: 20px 24px; border-bottom: 1px solid #1f2937; backdrop-filter: blur(6px);
-    background: linear-gradient(180deg, rgba(15,23,42,0.75), rgba(15,23,42,0.35));
+    padding: 18px 24px;
+    border-bottom: 1px solid #1f2937;
+    background: linear-gradient(180deg, rgba(15,23,42,0.8), rgba(15,23,42,0.45));
   }
-  h1 { margin: 0; font-weight: 700; letter-spacing: 0.2px; }
-  .container { padding: 20px; display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
-  .panel { background: var(--panel); border: 1px solid #1f2937; border-radius: 14px; padding: 14px; }
-  .form { display: grid; gap: 16px; }
-  .section { background: var(--panel-2); border-radius: 12px; padding: 12px; border: 1px solid #1f2937; margin-bottom: 10px; }
-  .section h3 { margin: 0 0 8px 0; font-size: 15px; color: #cbd5e1; letter-spacing: .2px; border-bottom: 1px solid #1f2937; padding-bottom: 5px; }
-  .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; }
-  .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
-  label { font-size: 12px; color: var(--muted); display: block; margin-bottom: 4px; }
-  input[type="text"], input[type="number"], input[type="date"], textarea, select {
-    width: 100%; padding: 8px 10px; background: #0b1220; color: var(--text);
-    border: 1px solid #293042; border-radius: 8px; outline: none;
+  h1 { margin: 0; font-size: 28px; }
+  .subtitle { color: var(--muted); margin-top: 4px; font-size: 13px; }
+  .container {
+    display: grid;
+    grid-template-columns: minmax(520px, 1.1fr) minmax(420px, 0.9fr);
+    gap: 18px;
+    padding: 18px;
+    align-items: start;
   }
-  .checkbox-group { margin-top: 5px; }
-  .cb-item { display: flex; align-items: flex-start; gap: 8px; font-size: 11px; margin-bottom: 4px; color: var(--text); cursor: pointer; }
-  .cb-other { margin-top: 8px; display: flex; align-items: center; gap: 5px; }
-  .actions { display: flex; gap: 10px; margin: 20px 0; }
+  .panel {
+    background: var(--panel);
+    border: 1px solid #1f2937;
+    border-radius: 14px;
+    padding: 14px;
+  }
+  .section {
+    background: var(--panel2);
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+  .section h2 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #dbe7f5;
+  }
+  .grid-2, .grid-3, .grid-4 {
+    display: grid;
+    gap: 10px;
+  }
+  .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .row {
+    display: grid;
+    grid-template-columns: 148px 1fr;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  label { color: var(--muted); font-size: 12px; }
+  input[type="text"], input[type="number"], textarea, select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: #0b1220;
+    color: var(--text);
+    outline: none;
+  }
+  textarea { resize: vertical; min-height: 62px; }
+  .lineage {
+    padding: 10px;
+    border: 1px solid #203040;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.02);
+  }
+  .lineage h3 { margin: 0 0 8px 0; font-size: 14px; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; }
   button {
-    border: 1px solid #2b3448; background: linear-gradient(180deg, #1f2937, #101826);
-    color: #e5e7eb; border-radius: 10px; padding: 10px 18px; cursor: pointer; font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #2b3448;
+    cursor: pointer;
+    color: #e5e7eb;
+    background: linear-gradient(180deg, #1f2937, #101826);
   }
-  button.primary { border-color:#2a4365; background: linear-gradient(180deg, #2563eb, #1e40af); }
-  .output { 
-    white-space: pre-wrap; background:#0b1220; border:1px dashed #334155; 
-    padding:15px; border-radius:10px; min-height:300px; 
-    font-family: 'Courier New', Courier, monospace; font-size: 13px; line-height: 1.4;
+  button.primary { background: linear-gradient(180deg, #2563eb, #1d4ed8); }
+  .output {
+    white-space: pre-wrap;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: #f7f7f7;
+    color: #000;
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    padding: 14px;
+    min-height: 820px;
+    overflow: auto;
   }
-  @media (max-width: 700px) {
-    .grid-4, .grid-3 { grid-template-columns: 1fr; }
+  .small-note { color: var(--muted); font-size: 12px; margin-top: 6px; }
+  @media (max-width: 1100px) {
+    .container { grid-template-columns: 1fr; }
+    .output { min-height: 500px; }
+  }
+  @media (max-width: 720px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 1fr; align-items: start; }
   }
 </style>
 </head>
 <body>
-  <header>
-    <h1>Bone Marrow Report Tool — UHN Style</h1>
-  </header>
+<header>
+  <h1>Bone Marrow Report Tool — Classic Combined v12</h1>
+  <div class="subtitle">Input sections now follow the report output structure: Synoptic Data, Materials Received, Description, Differential Count, and Flow Cytometry.</div>
+</header>
+<div class="container">
+  <main class="panel">
+    <form id="reportForm" onsubmit="event.preventDefault(); generateReport();">
 
-  <div class="container">
-    <main class="panel">
-      <form id="reportForm">
-        
-        <div class="section">
-          <h3>Peripheral Blood Count (CBC)</h3>
-          <div class="grid-4">
-            <div><label>Hb (g/L)</label><input type="number" id="hgb" step="any"></div>
-            <div><label>WBC (x10e9/L)</label><input type="number" id="lkc" step="any"></div>
-            <div><label>Plt (x10e9/L)</label><input type="number" id="plt" step="any"></div>
-            <div><label>MCV (fL)</label><input type="number" id="mcv" step="any"></div>
-            <div><label>RDW (%)</label><input type="number" id="rdw" step="any"></div>
-            <div><label>RBC (x10e9/L)</label><input type="number" id="erc" step="any"></div>
-            <div><label>Neutrophils (x10e9/L)</label><input type="number" id="anc" step="any"></div>
-            <div><label>Lymphocytes (x10e9/L)</label><input type="number" id="alc" step="any"></div>
-            <div><label>Monocytes (x10e9/L)</label><input type="number" id="amc" step="any"></div>
-            <div><label>Eosinophils (x10e9/L)</label><input type="number" id="eos" step="any"></div>
-            <div><label>Basophils (x10e9/L)</label><input type="number" id="baso" step="any"></div>
+      <div class="section">
+        <h2>Synoptic Data</h2>
+        <div class="grid-4">
+          <div><label>Hb (g/L)</label><input id="hgb" type="text"></div>
+          <div><label>WBC (x10e9/L)</label><input id="wbc" type="text"></div>
+          <div><label>Plt (x10e9/L)</label><input id="plt" type="text"></div>
+          <div><label>MCV (fL)</label><input id="mcv" type="text"></div>
+          <div><label>RDW (%)</label><input id="rdw" type="text"></div>
+          <div><label>RBC (x10e12/L)</label><input id="rbc" type="text"></div>
+          <div><label>Neutrophils (x10e9/L)</label><input id="anc" type="text"></div>
+          <div><label>Lymphocytes (x10e9/L)</label><input id="alc" type="text"></div>
+          <div><label>Monocytes (x10e9/L)</label><input id="amc" type="text"></div>
+          <div><label>Eosinophils (x10e9/L)</label><input id="eos" type="text"></div>
+          <div><label>Basophils (x10e9/L)</label><input id="baso" type="text"></div>
+        </div>
+        <div class="grid-3" style="margin-top:10px;">
+          <div><label>RBC comment</label><input id="rbc_comment" type="text" value="No significant abnormality"></div>
+          <div><label>WBC comment</label><input id="wbc_comment" type="text" value="No significant abnormality"></div>
+          <div><label>PLT comment</label><input id="plt_comment" type="text" value="No significant abnormality"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Materials Received</h2>
+        <div class="grid-2">
+          <div>
+            <h3 style="margin:0 0 8px 0; font-size:14px;">Bone Marrow Trephine Biopsy</h3>
+            <div class="row"><label>Biopsy status</label><select id="bx_status">
+              <option value=""></option>
+              <option>Satisfactory</option>
+              <option>Adequate</option>
+              <option>Suboptimal</option>
+              <option>Inadequate</option>
+              <option>Not received</option>
+            </select></div>
+            <div class="row"><label>Cellularity (%)</label><input id="bx_cellularity" type="text" placeholder="e.g. 50"></div>
+            <div class="row"><label>Biopsy length</label><input id="bx_length" type="text" placeholder="0.9 cm in total length"></div>
+            <div class="row"><label>Bony trabeculae</label><select id="bx_bony">
+              <option value=""></option>
+              <option selected>Unremarkable</option>
+              <option>Osteosclerosis</option>
+              <option>Thickened</option>
+              <option>Thinned</option>
+              <option>Remodeling changes</option>
+              <option>Not assessable</option>
+            </select></div>
+            <div class="row"><label>Clot section</label><select id="asp_clot">
+              <option value=""></option>
+              <option selected>Marrow particles present with trilineage hematopoiesis, overall similar to aspirate findings.</option>
+              <option>The clot section contains marrow fragments.</option>
+              <option>The clot section contains a very small marrow fragment with significant crush artifact.</option>
+              <option>Not representative, only blood clot.</option>
+              <option>Not available.</option>
+            </select></div>
+            <div class="row"><label>Touch prep</label><select id="touch_prep">
+              <option value=""></option>
+              <option selected>Adequate marrow elements present with findings similar to those seen in the aspirate smears.</option>
+              <option>Touch preparation is hemodilute and not adequate for evaluation.</option>
+              <option>Touch preparation is not available.</option>
+              <option>Touch preparation shows findings similar to those seen in the biopsy.</option>
+            </select></div>
+          </div>
+          <div>
+            <h3 style="margin:0 0 8px 0; font-size:14px;">Bone Marrow Aspirate</h3>
+            <div class="row"><label>Aspirate quality</label><select id="asp_quality">
+              <option value=""></option>
+              <option>Adequate</option>
+              <option>Suboptimal</option>
+              <option>Hemodilute</option>
+              <option>Dry tap</option>
+              <option>Not available</option>
+            </select></div>
+            <div class="row"><label>Fragments</label><select id="asp_fragments">
+              <option value=""></option>
+              <option>Adequate</option>
+              <option>Rare fragments</option>
+              <option>Aspiculate</option>
+              <option>Absent</option>
+              <option>Present</option>
+            </select></div>
+            <div class="row"><label>Aspirate cellularity</label><select id="asp_cellularity">
+              <option value=""></option>
+              <option>Normocellular</option>
+              <option>Hypocellular</option>
+              <option>Hypercellular</option>
+              <option>Hemodiluted</option>
+              <option>Unable to assess</option>
+            </select></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Description</h2>
+        <div class="lineage-stack">
+          <div class="lineage">
+            <h3>Erythropoiesis</h3>
+            <div class="row"><label>Cellularity</label><select id="ery_cell">
+              <option value=""></option>
+              <option>Normocellular</option>
+              <option>Relatively hypocellular</option>
+              <option>Relatively hypercellular</option>
+              <option>Rare to absent</option>
+              <option>Cannot be assessed</option>
+            </select></div>
+            <div class="row"><label>Morphology</label><textarea id="ery_morph">normoblastic, orderly maturation</textarea></div>
+            <div class="row"><label>Ring sideroblasts</label><select id="ery_ring">
+              <option value=""></option>
+              <option>Absent</option>
+              <option>Present</option>
+              <option>Less than 5% of all erythroblasts</option>
+              <option>Cannot be assessed</option>
+            </select></div>
+          </div>
+          <div class="lineage">
+            <h3>Granulopoiesis</h3>
+            <div class="row"><label>Cellularity</label><select id="gran_cell">
+              <option value=""></option>
+              <option>Normocellular</option>
+              <option>Relatively hypocellular</option>
+              <option>Relatively hypercellular</option>
+              <option>Rare to absent</option>
+              <option>Cannot be assessed</option>
+            </select></div>
+            <div class="row"><label>Morphology</label><textarea id="gran_morph">complete, orderly maturation</textarea></div>
+          </div>
+          <div class="lineage">
+            <h3>Megakaryopoiesis</h3>
+            <div class="row"><label>Cellularity</label><select id="mega_cell">
+              <option value=""></option>
+              <option>Normocellular</option>
+              <option>Relatively hypocellular</option>
+              <option>Relatively hypercellular</option>
+              <option>Rare to absent</option>
+              <option>Cannot be assessed</option>
+            </select></div>
+            <div class="row"><label>Morphology</label><textarea id="mega_morph">normal morphology</textarea></div>
           </div>
         </div>
 
-        <div class="section">
-          <h3>Blood Smear Morphology</h3>
-          <div class="grid-3">
-            <div>
-              <label>RBC Morphology</label>
-              <div class="checkbox-group" data-group="rbc_morph">
-                <label class="cb-item"><input type="checkbox" value="No significant abnormality" checked> No abnormality</label>
-                <label class="cb-item"><input type="checkbox" value="Anisopoikilocytosis"> Anisopoikilo</label>
-                <input type="text" id="rbc_other" placeholder="Other...">
-              </div>
-            </div>
-            <div>
-              <label>WBC Morphology</label>
-              <div class="checkbox-group" data-group="wbc_morph">
-                <label class="cb-item"><input type="checkbox" value="No significant abnormality" checked> No abnormality</label>
-                <label class="cb-item"><input type="checkbox" value="Left shift"> Left shift</label>
-                <input type="text" id="wbc_other" placeholder="Other...">
-              </div>
-            </div>
-            <div>
-              <label>Platelet Morphology</label>
-              <div class="checkbox-group" data-group="plt_morph">
-                <label class="cb-item"><input type="checkbox" value="No significant abnormality" checked> No abnormality</label>
-                <label class="cb-item"><input type="checkbox" value="Giant platelets"> Giant Plt</label>
-                <input type="text" id="plt_other" placeholder="Other...">
-              </div>
-            </div>
-          </div>
+        <div class="grid-2" style="margin-top:10px;">
+          <div><label>Blasts</label><input id="blasts_desc" type="text" value="Not increased"></div>
+          <div><label>Monocytes</label><input id="monocytes_desc" type="text" placeholder="9% by differential count"></div>
+          <div><label>Mast cells</label><input id="mast_desc" type="text" value="Not increased"></div>
+          <div><label>Lymphocytes</label><input id="lymph_desc" type="text" value="Mature"></div>
+          <div><label>Plasma cells</label><input id="plasma_desc" type="text" value="Not increased"></div>
+          <div><label>Iron stores</label><input id="iron_desc" type="text" value="Adequate"></div>
+          <div><label>Immunohistochemistry</label><textarea id="ihc_desc"></textarea></div>
+          <div><label>Fibrosis</label><input id="fibrosis_desc" type="text"></div>
         </div>
+      </div>
 
-        <div class="section">
-          <h3>Bone Marrow Aspirate Description</h3>
-          <div class="grid-3">
-            <div><label>Aspirate Quality</label><input type="text" id="asp_quality" value="Adequate"></div>
-            <div><label>Aspirate Fragments</label><input type="text" id="asp_fragments" value="Adequate"></div>
-            <div><label>Aspirate Cellularity</label><input type="text" id="asp_cellularity" value="Normocellular"></div>
-          </div>
-          <div class="grid-3" style="margin-top:15px;">
-            <div>
-              <label>Erythropoiesis</label>
-              <select id="ery_status"><option>Normocellular</option><option>Increased</option><option>Decreased</option></select>
-              <input type="text" id="ery_morph" value="normoblastic, orderly maturation" style="margin-top:5px;">
-            </div>
-            <div>
-              <label>Granulopoiesis</label>
-              <select id="gran_status"><option>Normocellular</option><option>Increased</option><option>Decreased</option></select>
-              <input type="text" id="gran_morph" value="complete, orderly maturation" style="margin-top:5px;">
-            </div>
-            <div>
-              <label>Megakaryopoiesis</label>
-              <select id="mega_status"><option>Relatively hypocellular</option><option>Normal</option><option>Increased</option></select>
-              <input type="text" id="mega_morph" value="normal morphology" style="margin-top:5px;">
-            </div>
-          </div>
+      <div class="section">
+        <h2>Differential Count</h2>
+        <div class="grid-4">
+          <div><label>Cells counted</label><input id="diff_total" type="text" value="200"></div>
+          <div><label>Blasts %</label><input id="diff_blasts" type="number" step="any"></div>
+          <div><label>Promyelocytes %</label><input id="diff_promy" type="number" step="any"></div>
+          <div><label>Myelocytes %</label><input id="diff_myelo" type="number" step="any"></div>
+          <div><label>Metamyelocytes %</label><input id="diff_meta" type="number" step="any"></div>
+          <div><label>Neutrophils %</label><input id="diff_neut" type="number" step="any"></div>
+          <div><label>Erythroblasts %</label><input id="diff_ery" type="number" step="any"></div>
+          <div><label>Lymphocytes %</label><input id="diff_lymph" type="number" step="any"></div>
+          <div><label>Monocytes %</label><input id="diff_mono" type="number" step="any"></div>
+          <div><label>Eosinophils %</label><input id="diff_eos" type="number" step="any"></div>
+          <div><label>Basophils %</label><input id="diff_baso" type="number" step="any"></div>
+          <div><label>Plasma cells %</label><input id="diff_plasma" type="number" step="any"></div>
         </div>
-
-        <div class="section">
-          <h3>Differential Count (%)</h3>
-          <div class="grid-4">
-            <div><label>Cells Counted</label><input type="number" id="diff_total" value="500"></div>
-            <div><label>Blasts</label><input type="number" id="d_blasts"></div>
-            <div><label>Promyelo</label><input type="number" id="d_pro"></div>
-            <div><label>Myelo</label><input type="number" id="d_myelo"></div>
-            <div><label>Meta</label><input type="number" id="d_meta"></div>
-            <div><label>Neutro</label><input type="number" id="d_neut"></div>
-            <div><label>Erythro</label><input type="number" id="d_ery"></div>
-            <div><label>Lymph</label><input type="number" id="d_lym"></div>
-            <div><label>Plasma</label><input type="number" id="d_plasma"></div>
-            <div><label>M:E Ratio</label><input type="text" id="me_ratio"></div>
-          </div>
+        <div class="grid-3" style="margin-top:10px;">
+          <div><label>M:E ratio</label><input id="diff_me" type="text" readonly></div>
+          <div><label>Total differential</label><input id="diff_sum" type="text" readonly></div>
+          <div><label>Status</label><input id="diff_warn" type="text" readonly></div>
         </div>
+      </div>
 
-        <div class="section">
-          <h3>Other</h3>
-          <div class="grid-4">
-            <div><label>Mast Cells</label><input type="text" id="mast_cells" value="Not increased"></div>
-            <div><label>Ring Sideroblasts</label><input type="text" id="rs_status" value="Absent"></div>
-            <div><label>Iron Stores</label><input type="text" id="iron_stores" value="Adequate"></div>
-            <div><label>Blasts (Asp)</label><input type="text" id="asp_blasts_desc" value="Not increased"></div>
-          </div>
-          <div style="margin-top:10px;">
-            <label>Flow Cytometry / Summary</label>
-            <textarea id="flow_summary" placeholder="Enter flow results here..."></textarea>
-          </div>
-        </div>
+      <div class="section">
+        <h2>Flow Cytometry</h2>
+        <div class="row"><label>Flow text</label><textarea id="flow_text" placeholder="Paste or type flow cytometry summary here."></textarea></div>
+      </div>
 
-        <div class="actions">
-          <button type="button" class="primary" onclick="generateReport()">Generate Report</button>
-          <button type="button" onclick="copyReport()">Copy to Clipboard</button>
-          <button type="button" onclick="resetForm()">Reset</button>
-        </div>
+      <div class="actions">
+        <button class="primary" type="submit">Generate Report</button>
+        <button type="button" onclick="copyOutput()">Copy Output</button>
+        <button type="button" onclick="clearForm()">Clear Form</button>
+      </div>
+      <div class="small-note">Buttons are wired directly to the form. Differential count auto-calculates M:E ratio and total.</div>
+    </form>
+  </main>
 
-        <div id="reportOutput" class="output">The generated report will appear here...</div>
-      </form>
-    </main>
-  </div>
+  <aside class="panel">
+    <h2 style="margin-top:0;">Output Preview</h2>
+    <div id="output" class="output"></div>
+  </aside>
+</div>
 
-  <script>
-    function getGroupValues(groupName, otherId) {
-      const checked = Array.from(document.querySelectorAll(`.checkbox-group[data-group="${groupName}"] input:checked`))
-                           .map(cb => cb.value);
-      const other = document.getElementById(otherId).value.trim();
-      if (other) checked.push(other);
-      return checked.length > 0 ? checked.join(", ") : "None";
-    }
+<script>
+const LABEL_WIDTH = 24;
+const INDENT = '    ';
+const DESC_INDENT = '    ';
 
-    function generateReport() {
-      const val = (id) => document.getElementById(id).value || "";
-      
-      let report = "Synoptic Data\n\n";
+function v(id) {
+  const el = document.getElementById(id);
+  return el ? String(el.value || '').trim() : '';
+}
 
-      // CBC
-      report += "- CBC -\n";
-      report += `Hb (g/L): ${val("hgb")}\n`;
-      report += `WBC (x10e9/L): ${val("lkc")}\n`;
-      report += `Plt (x10e9/L): ${val("plt")}\n`;
-      report += `MCV (fL): ${val("mcv")}\n`;
-      report += `RDW (%): ${val("rdw")}\n`;
-      report += `RBC (x10e9/L): ${val("erc")}\n`;
-      report += `Neutrophils (x10e9/L): ${val("anc")}\n`;
-      report += `Lymphocytes (x10e9/L): ${val("alc")}\n`;
-      report += `Monocytes (x10e9/L): ${val("amc")}\n`;
-      report += `Eosinophils (x10e9/L): ${val("eos")}\n`;
-      report += `Basophils (x10e9/L): ${val("baso")}\n`;
-      report += "COMMENT\n";
-      report += `RBC: ${getGroupValues("rbc_morph", "rbc_other")}\n`;
-      report += `WBC: ${getGroupValues("wbc_morph", "wbc_other")}\n`;
-      report += `PLT: ${getGroupValues("plt_morph", "plt_other")}\n`;
-      report += "\n" + "-".repeat(50) + "\n";
+function toNum(id) {
+  const n = parseFloat(v(id));
+  return Number.isFinite(n) ? n : 0;
+}
 
-      // Materials
-      report += "MATERIALS RECEIVED\n";
-      report += "    --Bone marrow trephine biopsy\n";
-      report += "    --Bone marrow aspirate\n";
-      report += `Bone marrow aspirate:    ${val("asp_quality")}\n`;
-      report += `Aspirate fragments:      ${val("asp_fragments")}\n`;
-      report += `Aspirate Cellularity:    ${val("asp_cellularity")}\n`;
-      report += `Clot Section:            Marrow particles present with trilineage hematopoiesis, overall similar to aspirate findings.\n`;
+function padLabel(label) {
+  return (label + ':').padEnd(LABEL_WIDTH, ' ');
+}
 
-      // Description
-      report += "DESCRIPTION\n";
-      report += `Erythropoiesis:         ${val("ery_status")}\n`;
-      report += `    Morphology: ${val("ery_morph")}\n`;
-      report += `    Ring sideroblasts: ${val("rs_status")}\n`;
-      report += `Granulopoiesis:         ${val("gran_status")}\n`;
-      report += `    Morphology: ${val("gran_morph")}\n`;
-      report += `Megakaryopoiesis:       ${val("mega_status")}\n`;
-      report += `    Morphology: ${val("mega_morph")}\n`;
-      report += `Mast Cells:             ${val("mast_cells")}\n`;
-      report += `Lymphocytes:            Not increased\n`;
-      report += `Plasma cells:           Not increased\n`;
-      report += `Iron stores:            ${val("iron_stores")}\n`;
-      report += `Blasts:                 ${val("asp_blasts_desc")}\n`;
-      report += "\n" + "-".repeat(50) + "\n";
+function addLine(arr, label, value) {
+  if (!value) return;
+  arr.push(padLabel(label) + value);
+}
 
-      // Differential
-      report += "- Differential count -\n";
-      report += `Number of Cells Counted: ${val("diff_total")}\n`;
-      report += `Blasts: ${val("d_blasts")}%\n`;
-      report += `Promyelocytes: ${val("d_pro")}% \n`;
-      report += `Myelocytes: ${val("d_myelo")}% \n`;
-      report += `Metamyelocytes: ${val("d_meta")}% \n`;
-      report += `Neutrophils: ${val("d_neut")}% \n`;
-      report += `Erythroblasts: ${val("d_ery")}% \n`;
-      report += `Lymphocytes: ${val("d_lym")}% \n`;
-      report += `Plasma cells: ${val("d_plasma")}% \n\n`;
-      report += `M:E ratio: ${val("me_ratio")}\n`;
-      report += "\n" + "-".repeat(50) + "\n";
+function addIndented(arr, text) {
+  if (!text) return;
+  arr.push(DESC_INDENT + text);
+}
 
-      report += "- Flow cytometry -\n";
-      report += val("flow_summary");
+function mapAspirateCellularity(val) {
+  if (!val) return '';
+  if (/hemodil|unable/i.test(val)) return 'Hemodiluted; not adequate for evaluation';
+  if (/normo/i.test(val)) return 'Normocellular';
+  if (/hypo/i.test(val)) return 'Hypocellular';
+  if (/hyper/i.test(val)) return 'Hypercellular';
+  return val;
+}
 
-      document.getElementById("reportOutput").textContent = report;
-    }
+function normalizeCannotAssess(label, value) {
+  if (!value) return '';
+  if (/cannot be assessed/i.test(value)) {
+    if (label === 'Megakaryopoiesis') return 'Megakaryocytes cannot be assessed';
+    return label + ' cannot be assessed';
+  }
+  return value;
+}
 
-    function copyReport() {
-      const text = document.getElementById("reportOutput").textContent;
-      navigator.clipboard.writeText(text).then(() => alert("Copied to clipboard!"));
-    }
+function categoryMERatio(ratio) {
+  if (!Number.isFinite(ratio) || ratio <= 0) return '';
+  if (ratio < 2) return 'Decreased';
+  if (ratio <= 4) return 'Within normal limits';
+  return 'Increased';
+}
 
-    function resetForm() {
-      if(confirm("Clear all entries?")) {
-        document.getElementById("reportForm").reset();
-        document.getElementById("reportOutput").textContent = "The generated report will appear here...";
-      }
-    }
-  </script>
+function buildDifferentialSummary() {
+  const parts = [
+    ['Blasts', v('diff_blasts')],
+    ['promyelocytes', v('diff_promy')],
+    ['myelocytes', v('diff_myelo')],
+    ['metamyelocytes', v('diff_meta')],
+    ['segs/bands', v('diff_neut')],
+    ['erythroids', v('diff_ery')],
+    ['lymphs', v('diff_lymph')],
+    ['monos', v('diff_mono')],
+    ['eos', v('diff_eos')],
+    ['basos', v('diff_baso')],
+    ['plasma cells', v('diff_plasma')]
+  ].filter(([, val]) => val !== '').map(([lab, val]) => `${lab} ${val}%`);
+  return parts.join(', ');
+}
+
+function autoCalcDiff() {
+  const M = toNum('diff_blasts') + toNum('diff_promy') + toNum('diff_myelo') + toNum('diff_meta') + toNum('diff_neut') + toNum('diff_eos') + toNum('diff_baso');
+  const E = toNum('diff_ery');
+  const total = M + E + toNum('diff_lymph') + toNum('diff_mono') + toNum('diff_plasma');
+  document.getElementById('diff_me').value = categoryMERatio(E > 0 ? M / E : NaN);
+  document.getElementById('diff_sum').value = total ? total.toFixed(1) + '%' : '';
+  document.getElementById('diff_warn').value = total ? ((total >= 98 && total <= 102) ? 'OK' : 'Check total') : '';
+}
+
+function generateReport() {
+  autoCalcDiff();
+  const lines = [];
+  const sep = '--------------------------------------------------';
+
+  lines.push('Synoptic Data');
+  lines.push('');
+  lines.push('- CBC -');
+  addLine(lines, 'Hb (g/L)', v('hgb'));
+  addLine(lines, 'WBC (x10e9/L)', v('wbc'));
+  addLine(lines, 'Plt (x10e9/L)', v('plt'));
+  addLine(lines, 'MCV (fL)', v('mcv'));
+  addLine(lines, 'RDW (%)', v('rdw'));
+  addLine(lines, 'RBC (x10e9/L)', v('rbc'));
+  addLine(lines, 'Neutrophils (x10e9/L)', v('anc'));
+  addLine(lines, 'Lymphocytes (x10e9/L)', v('alc'));
+  addLine(lines, 'Monocytes (x10e9/L)', v('amc'));
+  addLine(lines, 'Eosinophils (x10e9/L)', v('eos'));
+  addLine(lines, 'Basophils (x10e9/L)', v('baso'));
+  lines.push('COMMENT');
+  addLine(lines, 'RBC', v('rbc_comment'));
+  addLine(lines, 'WBC', v('wbc_comment'));
+  addLine(lines, 'PLT', v('plt_comment'));
+  lines.push('');
+  lines.push(sep);
+  lines.push('MATERIALS RECEIVED');
+  lines.push(INDENT + '--Bone marrow trephine biopsy');
+  addLine(lines, 'Bone marrow biopsy', v('bx_status'));
+  addLine(lines, 'Cellularity', v('bx_cellularity') ? 'Percent of intertrabecular surface area: ' + v('bx_cellularity') + '%' : '');
+  addLine(lines, 'Biopsy Length', v('bx_length') ? 'Length (specify in cm): ' + v('bx_length') : '');
+  addLine(lines, 'Bony Trabeculae', v('bx_bony'));
+  lines.push(INDENT + '--Bone marrow aspirate');
+  addLine(lines, 'Bone marrow aspirate', v('asp_quality'));
+  addLine(lines, 'Aspirate fragments', v('asp_fragments'));
+  addLine(lines, 'Aspirate Cellularity', mapAspirateCellularity(v('asp_cellularity')));
+  addLine(lines, 'Clot Section', v('asp_clot'));
+  addLine(lines, 'Touch prep', v('touch_prep'));
+  lines.push('DESCRIPTION');
+
+  const lineages = [
+    ['Erythropoiesis', v('ery_cell'), v('ery_morph'), v('ery_ring')],
+    ['Granulopoiesis', v('gran_cell'), v('gran_morph'), ''],
+    ['Megakaryopoiesis', v('mega_cell'), v('mega_morph'), '']
+  ];
+  lineages.forEach(([label, cell, morph, extra]) => {
+    const cellText = normalizeCannotAssess(label, cell);
+    if (cellText) addLine(lines, label, cellText);
+    if (morph && !/cannot be assessed/i.test(cellText)) addIndented(lines, 'Morphology: ' + morph);
+    if (label === 'Erythropoiesis' && extra) addIndented(lines, 'Ring sideroblasts: ' + extra);
+  });
+
+  addLine(lines, 'Blasts', v('blasts_desc'));
+  addLine(lines, 'Monocytes', v('monocytes_desc'));
+  addLine(lines, 'Mast Cells', v('mast_desc'));
+  addLine(lines, 'Lymphocytes', v('lymph_desc'));
+  addLine(lines, 'Plasma cells', v('plasma_desc'));
+  addLine(lines, 'Iron stores', v('iron_desc'));
+  addLine(lines, 'M:E ratio', v('diff_me'));
+  addLine(lines, 'Immunohistochemistry', v('ihc_desc').replace(/\n+/g, ' '));
+  addLine(lines, 'Fibrosis', v('fibrosis_desc'));
+
+  lines.push(sep);
+  lines.push('- Differential count -');
+  addLine(lines, 'Number of Cells Counted', v('diff_total') ? ' ' + v('diff_total') : '');
+  addLine(lines, 'Blasts', v('diff_blasts') ? v('diff_blasts') + '%' : '');
+  addLine(lines, 'Promyelocytes', v('diff_promy') ? v('diff_promy') + '%' : '');
+  addLine(lines, 'Myelocytes', v('diff_myelo') ? v('diff_myelo') + '%' : '');
+  addLine(lines, 'Metamyelocytes', v('diff_meta') ? v('diff_meta') + '%' : '');
+  addLine(lines, 'Neutrophils', v('diff_neut') ? v('diff_neut') + '%' : '');
+  addLine(lines, 'Erythroblasts', v('diff_ery') ? v('diff_ery') + '%' : '');
+  addLine(lines, 'Lymphocytes', v('diff_lymph') ? v('diff_lymph') + '%' : '');
+  addLine(lines, 'Monocytes', v('diff_mono') ? v('diff_mono') + '%' : '');
+  addLine(lines, 'Eosinophils', v('diff_eos') ? v('diff_eos') + '%' : '');
+  addLine(lines, 'Basophils', v('diff_baso') ? v('diff_baso') + '%' : '');
+  addLine(lines, 'Plasma cells', v('diff_plasma') ? v('diff_plasma') + '%' : '');
+  addLine(lines, 'M:E ratio', v('diff_me'));
+  lines.push('');
+  lines.push(sep);
+  lines.push('FLOW CYTOMETRY');
+  if (v('flow_text')) lines.push(v('flow_text'));
+
+  document.getElementById('output').textContent = lines.join('\n');
+}
+
+function copyOutput() {
+  const txt = document.getElementById('output').textContent;
+  navigator.clipboard.writeText(txt).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = txt;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+  });
+}
+
+function clearForm() {
+  document.getElementById('reportForm').reset();
+  document.getElementById('output').textContent = '';
+  document.getElementById('asp_clot').value = 'Marrow particles present with trilineage hematopoiesis, overall similar to aspirate findings.';
+  document.getElementById('ery_morph').value = 'normoblastic, orderly maturation';
+  document.getElementById('gran_morph').value = 'complete, orderly maturation';
+  document.getElementById('mega_morph').value = 'normal morphology';
+  document.getElementById('rbc_comment').value = 'No significant abnormality';
+  document.getElementById('wbc_comment').value = 'No significant abnormality';
+  document.getElementById('plt_comment').value = 'No significant abnormality';
+  document.getElementById('touch_prep').value = 'Adequate marrow elements present with findings similar to those seen in the aspirate smears.';
+  document.getElementById('mast_desc').value = 'Not increased';
+  document.getElementById('lymph_desc').value = 'Mature';
+  document.getElementById('plasma_desc').value = 'Not increased';
+  document.getElementById('iron_desc').value = 'Adequate';
+  document.getElementById('blasts_desc').value = 'Not increased';
+  document.getElementById('diff_total').value = '200';
+  autoCalcDiff();
+}
+
+['diff_blasts','diff_promy','diff_myelo','diff_meta','diff_neut','diff_ery','diff_lymph','diff_mono','diff_eos','diff_baso','diff_plasma']
+  .forEach(id => document.getElementById(id).addEventListener('input', autoCalcDiff));
+
+autoCalcDiff();
+generateReport();
+</script>
 </body>
 </html>
