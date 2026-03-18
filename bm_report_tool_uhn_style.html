@@ -1794,111 +1794,90 @@ function categorizeMERatioValue(ratio) {
 }
 
 function generateReport() {
+  // Collect checkbox data first
   collectCheckboxGroups();
-  calcMERatioAuto();
 
-  const lines = [];
-  const sep = '--------------------------------------------------';
-
-  const fmtNum = (id) => {
-    const raw = v(id);
-    return raw && String(raw).trim() ? String(raw).trim() : '';
+  const getValue = (id) => document.getElementById(id)?.value || "";
+  const getDate = (id) => {
+    const d = document.getElementById(id)?.value;
+    return d ? d : "";
   };
 
-  const cbcLines = [];
-  const addCbc = (label, value) => {
-    if (value && String(value).trim()) cbcLines.push(`${label}: ${String(value).trim()}`);
-  };
-  addCbc('Hb (g/L)', fmtNum('hgb'));
-  addCbc('WBC (x10e9/L)', fmtNum('lkc'));
-  addCbc('Plt (x10e9/L)', fmtNum('plt'));
-  addCbc('MCV (fL)', fmtNum('mcv'));
-  addCbc('RDW (%)', fmtNum('rdw'));
-  addCbc('RBC (x10e9/L)', fmtNum('erc'));
-  addCbc('Neutrophils (x10e9/L)', fmtNum('anc'));
-  addCbc('Lymphocytes (x10e9/L)', fmtNum('alc'));
-  addCbc('Monocytes (x10e9/L)', fmtNum('amc'));
-  addCbc('Eosinophils (x10e9/L)', fmtNum('eos'));
-  addCbc('Basophils (x10e9/L)', fmtNum('baso'));
+  let report = "Synoptic Data\n\n";
 
-  const smearLines = [];
-  if (v('rbc_morph')) smearLines.push(`RBC: ${v('rbc_morph')}`);
-  if (v('wbc_morph')) smearLines.push(`WBC: ${v('wbc_morph')}`);
-  if (v('plt_morph')) smearLines.push(`PLT: ${v('plt_morph')}`);
+  // --- CBC SECTION ---
+  report += "- CBC -\n";
+  report += `Hb (g/L): ${getValue("hgb")}\n`;
+  report += `WBC (x10e9/L): ${getValue("lkc")}\n`;
+  report += `Plt (x10e9/L): ${getValue("plt")}\n`;
+  report += `MCV (fL): ${getValue("mcv")}\n`;
+  report += `RDW (%): ${getValue("rdw")}\n`;
+  report += `RBC (x10e9/L): ${getValue("erc")}\n`;
+  report += `Neutrophils (x10e9/L): ${getValue("anc")}\n`;
+  report += `Lymphocytes (x10e9/L): ${getValue("alc")}\n`;
+  report += `Monocytes (x10e9/L): ${getValue("amc")}\n`;
+  report += `Eosinophils (x10e9/L): ${getValue("eos")}\n`;
+  report += `Basophils (x10e9/L): ${getValue("baso")}\n`;
+  
+  report += "COMMENT\n";
+  report += `RBC: ${getValue("rbc_morph__val") || "No significant abnormality"}\n`;
+  report += `WBC: ${getValue("wbc_morph__val") || "No significant abnormality"}\n`;
+  report += `PLT: ${getValue("plt_morph__val") || "No significant abnormality"}\n`;
+  report += "\n" + "-".repeat(50) + "\n";
 
-  if (cbcLines.length || smearLines.length) {
-    lines.push('Synoptic Data');
-    lines.push('');
-    if (cbcLines.length) {
-      lines.push('- CBC -');
-      cbcLines.forEach(x => lines.push(x));
-    }
-    if (smearLines.length) {
-      lines.push('COMMENT');
-      smearLines.forEach(x => lines.push(x));
-    }
-    lines.push('');
-  }
+  // --- MATERIALS & ASPIRATE SECTION ---
+  report += "MATERIALS RECEIVED\n";
+  report += "    --Bone marrow trephine biopsy\n";
+  report += "    --Bone marrow aspirate\n";
+  report += `Bone marrow aspirate:    ${getValue("asp_quality__val")}\n`;
+  report += `Aspirate fragments:      ${getValue("asp_spicules__val")}\n`;
+  report += `Aspirate Cellularity:    ${getValue("asp_cellularity__val")}\n`;
+  report += `Clot Section:            Marrow particles present with trilineage hematopoiesis, overall similar to aspirate findings.\n`;
 
-  const diffEntries = [
-    ['Blasts', v('diff_blast')],
-    ['Promyelocytes', v('diff_promy')],
-    ['Myelocytes', v('diff_myelo')],
-    ['Metamyelocytes', v('diff_meta')],
-    ['Neutrophils', v('diff_segs')],
-    ['Erythroblasts', v('diff_ery')],
-    ['Lymphocytes', v('diff_lymph')],
-    ['Monocytes', v('diff_mono')],
-    ['Eosinophils', v('diff_eos')],
-    ['Basophils', v('diff_baso')],
-    ['Plasma cells', v('diff_plasma')]
-  ].filter(([,val]) => val && String(val).trim());
+  // --- DESCRIPTION SECTION ---
+  report += "DESCRIPTION\n";
+  report += `Erythropoiesis:         ${getValue("asp_ery__val")}\n`;
+  report += `    Morphology: ${getValue("asp_ery_dys__val") ? "Dysplastic (" + getValue("asp_ery_dys__val") + ")" : "normoblastic, orderly maturation"}\n`;
+  report += `    Ring sideroblasts: ${getValue("asp_rs__val") || "Absent"}\n`;
+  
+  report += `Granulopoiesis:         ${getValue("asp_gran__val")}\n`;
+  report += `    Morphology: ${getValue("asp_gran_dys__val") ? "Dysplastic (" + getValue("asp_gran_dys__val") + ")" : "complete, orderly maturation"}\n`;
+  
+  report += `Megakaryopoiesis:       ${getValue("asp_megas__val")}\n`;
+  report += `    Morphology: ${getValue("asp_megas_dys__val") ? "Dysplastic (" + getValue("asp_megas_dys__val") + ")" : "normal morphology"}\n`;
+  
+  report += `Mast Cells:             ${getValue("asp_mast__val")}\n`;
+  report += `Lymphocytes:            ${getValue("asp_lymphs__val")}\n`;
+  report += `Plasma cells:           ${getValue("asp_plasma__val")}\n`;
+  report += `Iron stores:            ${getValue("asp_iron__val")}\n`;
+  report += `Blasts:                 ${getValue("asp_blasts__val")}\n`;
+  report += "\n" + "-".repeat(50) + "\n";
 
-  if (diffEntries.length) {
-    lines.push(sep);
-    lines.push(`- Differential count -{v('diff_total') ? ` (${v('diff_total')} cells)` : ''}`);
-    lines.push('');
-    diffEntries.forEach(([label,val]) => lines.push(`${label}: ${val}%`));
-    lines.push('');
-    if (v('diff_me')) lines.push(`M:E ratio: ${v('diff_me')}`);
-    lines.push('');
-  }
+  // --- DIFFERENTIAL COUNT SECTION ---
+  report += "- Differential count -\n";
+  report += `Number of Cells Counted: ${getValue("diff_total")}\n`;
+  report += `Blasts: ${getValue("diff_blasts")}%\n`;
+  report += `Promyelocytes: ${getValue("diff_pro") || "0"}%\n`;
+  report += `Myelocytes: ${getValue("diff_myelo") || "0"}%\n`;
+  report += `Metamyelocytes: ${getValue("diff_meta") || "0"}%\n`;
+  report += `Neutrophils: ${getValue("diff_neut") || "0"}%\n`;
+  report += `Erythroblasts: ${getValue("diff_ery") || "0"}%\n`;
+  report += `Lymphocytes: ${getValue("diff_lym") || "0"}%\n`;
+  report += `Monocytes: ${getValue("diff_mono") || "0"}%\n`;
+  report += `Eosinophils: ${getValue("diff_eos") || "0"}%\n`;
+  report += `Basophils: ${getValue("diff_baso") || "0"}%\n`;
+  report += `Plasma cells: ${getValue("diff_plasma") || "0"}%\n\n`;
+  report += `M:E ratio: ${getValue("me_ratio")}\n`;
+  report += "\n" + "-".repeat(50) + "\n";
 
-  lines.push(sep);
-  lines.push('MATERIALS RECEIVED');
-  lines.push(`${INDENT}--Bone marrow trephine biopsy`);
-  addLabeled(lines, 'Bone marrow biopsy', v('bx_quality'));
-  if (v('bx_length')) addLabeled(lines, 'Biopsy Length', `Length (specify in cm): ${v('bx_length')}`);
-  addLabeled(lines, 'Cellularity', v('bx_cellularity') ? `Percent of intertrabecular surface area: ${v('bx_cellularity')}` : '');
-  addLabeled(lines, 'Bony Trabeculae', v('bx_bone'));
-  lines.push(`${INDENT}--Bone marrow aspirate`);
-  addLabeled(lines, 'Bone marrow aspirate', v('asp_quality'));
-  addLabeled(lines, 'Aspirate fragments', v('asp_spicules'));
-  addLabeled(lines, 'Aspirate Cellularity', mapAspirateCellularity(v('asp_cellularity')));
-  addLabeled(lines, 'Clot Section', v('asp_clot'));
-  if (v('bx_touch')) addLabeled(lines, 'Touch prep', v('bx_touch'));
+  // --- FLOW CYTOMETRY ---
+  report += "FLOW CYTOMETRY\n";
+  report += getValue("flow_summary");
 
-  lines.push('DESCRIPTION');
-  buildAspirateLineageBlock('Erythropoiesis', 'asp_ery').forEach(x => lines.push(x));
-  buildAspirateLineageBlock('Granulopoiesis', 'asp_gran').forEach(x => lines.push(x));
-  buildAspirateLineageBlock('Megakaryopoiesis', 'asp_megas').forEach(x => lines.push(x));
-  addLabeled(lines, 'Monocytes', v('asp_mono') || '');
-  addLabeled(lines, 'Mast Cells', v('asp_mast'));
-  addLabeled(lines, 'Lymphocytes', v('asp_lymphs'));
-  addLabeled(lines, 'Plasma cells', v('asp_plasma'));
-  addLabeled(lines, 'Iron stores', v('asp_iron'));
-  if (v('asp_blasts')) addLabeled(lines, 'Blasts', v('asp_blasts'));
-
-  const ihcText = buildIhcNarrative();
-  if (ihcText) addLabeled(lines, 'Immunohistochemistry', ihcText.replace(/\n+/g, ' '));
-  const fibrosis = buildFibrosisLine();
-  if (fibrosis) addLabeled(lines, 'Fibrosis', fibrosis);
-  if (v('other_findings')) addLabeled(lines, 'Other Findings', v('other_findings').replace(/\n+/g, ' '));
-
-  lines.push(sep);
-  document.getElementById('output').textContent = lines.join('\n');
+  // Output to the display box
+  document.getElementById("reportOutput").textContent = report;
 }
-
+  
 function copyOutput() {
   const el = document.createElement('textarea');
   el.value = document.getElementById("output").textContent;
