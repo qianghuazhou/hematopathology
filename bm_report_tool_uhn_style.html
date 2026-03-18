@@ -275,6 +275,10 @@
           <div><label>Iron stores</label><input id="iron_desc" type="text" value="Adequate"></div>
           <div><label>Immunohistochemistry</label><textarea id="ihc_desc"></textarea></div>
           <div><label>Fibrosis</label><input id="fibrosis_desc" type="text"></div>
+          <div class="row">
+  <label>Other findings</label>
+  <textarea id="other_desc" placeholder="e.g. Hemophagocytosis, granulomas, focal necrosis..."></textarea>
+</div>
         </div>
       </div>
 
@@ -458,8 +462,9 @@ function generateReport() {
   addLine(lines, 'Lymphocytes', v('lymph_desc'));
   addLine(lines, 'Plasma cells', v('plasma_desc'));
   addLine(lines, 'Iron stores', v('iron_desc'));
-  addLine(lines, 'Immunohistochemistry', v('ihc_desc').replace(/\n+/g, ' '));
   addLine(lines, 'Fibrosis', v('fibrosis_desc'));
+  addLine(lines, 'Other findings', v('other_desc').replace(/\n+/g, ' '));
+  addLine(lines, 'Immunohistochemistry', v('ihc_desc').replace(/\n+/g, ' '));
 
   lines.push(sep);
   lines.push('- Differential count -');
