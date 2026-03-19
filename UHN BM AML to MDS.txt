@@ -1,0 +1,70 @@
+Specimen(s) Received
+1. Rt Il Crest: Iliac crest, Right Aspirate
+2. Rt Il Crest: Iliac crest, Right Flow Cytometry
+Diagnosis
+AML (follow up):
+This bone marrow demonstrates multilineage dysplasia. Blasts are seen 4-5%. CD34 IHC confirms this on clot section. Flow cytometry demonstrates an ongoing population of CD34+ myeloid precursors (3.2%) with a mildly aberrant immunophenotype that is different than seen on the original leukemia sample. Consideration that this current sample represents MDS with borderline increased blasts (that is different from the original AML) should be given. Cytogenetic and molecular correlation may be required.
+Synoptic Data
+- CBC -
+Hb (g/L): 81
+WBC (x10e9/L): 1.9
+Plt (x10e9/L): 101
+MCV (fL): 94.0
+Neutrophils (x10e9/L): 1.2
+Lymphocytes (x10e9/L): 0.4
+Monocytes (x10e9/L): 0.3
+Eosinophils (x10e9/L): 0.0
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: Pencil and teardrop cells
+WBC: Mild neutropenia with hypgranular changes
+PLT: Mild-moderate thrombocytopenia with giant forms and bare megakaryocyte nuclei
+Others: No circulating blasts
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Not received
+--Bone marrow aspirate
+Bone marrow aspirate: Adequate quality
+Aspirate fragments: Present
+Aspirate Cellularity: Normocellular
+Clot Section: : CD34 blasts 4-5%
+DESCRIPTION
+Erythropoiesis: Normocellular
+Morphology: dysplastic
+Ring sideroblasts are absent
+Granulopoiesis: Normocellular
+Morphology: dysplastic with hypogranular forms
+Megakaryopoiesis: Normocellular
+Morphology: dysplastic with separate and hypolobulated forms
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma cells: Not increased
+Iron stores: Increased
+Neoplasia: : see diagnosis
+Other Findings: : Blasts 5%.
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: RUNX1 AML on clinical trial
+Purpose of Test: Follow-up of Known Diagnosis
+Diagnosis: Acute myeloid leukemia
+Reason for Marrow: Remission status
+Number of Specimens: 2
+Flow Cytometry Status: Signed Out
+Interpretation
+CD34+ and CD117+/CD34- myeloid precursors account for 3.2% and 4.7% total cells respectively.
+The CD34+ myeloid precursors do not demonstrate the originally seen leukemic immunophenotypic changes, however they do have some mild aberrancy (slight dim CD117 expression vs CD13 and heterogenous weak CD33 expression). The CD117+/CD34- myeloid precursors are comprised of the normal subsets.
+The following distribution of the major cell populations is as shown: 60.5% granulocytes, 16.7% lymphocytes, 4.8% monocytes, 4.8% erythroid precursors.
+Granulocytic maturation pattern is abnormal.
+In conclusion, CD34+ leukemic cells with the originally seen immunophenotype are not detected. However, the CD34+ myeloid precursors are showing immunophenotypic aberrancy which may suggest a new population of blasts.(the lower level of detection is ~0.1% of total cells).
+Specimen Number: B23-12367
+Specimen Type: Bone Marrow
+Viability: 97%
+Distribution of the major leukocyte populations of total cells:
+CD45+/Low SS 4%
+Granulocytes 60%
+Monocytes 5%
+Lymphocytes 17%
+The following antigens are analyzed: CD10, CD11b, CD13, CD16, CD33, CD34, CD36, CD45, CD71, CD105, CD117, HLA-DR

@@ -1,0 +1,129 @@
+Diagnosis
+Bone marrow, left iliac crest, core biopsy, clot section, aspirate and peripheral blood smears:
+Consistent with persistent lymphoplasmacytic lymphoma (~80% involvement), focal increase in large cells but not yet transformed in this biopsy (see comment)
+Comment
+The history is noted. Pending repeat MYD88 as previous samples may have been suboptimal (although it is not strictly necessary for a diagnosis of LPL). Focal areas show increased numbers of large cells, but there are no sheets of large cells to indicate transformation in this biopsy.
+Reviewed with Dr Tierens and Dr Delabie who concur with the interpretation.
+Synoptic Data
+- CBC -
+Hb (g/L): 120
+WBC (x10e9/L): 7.7
+Plt (x10e9/L): 81
+MCV (fL): 98.6
+Neutrophils (x10e9/L): 4.0
+Lymphocytes (x10e9/L): 2.4
+Monocytes (x10e9/L): 0.7
+Eosinophils (x10e9/L): 0.0
+Basophils (x10e9/L): 0.1
+Other Findings: : Immature granulocytes 0.5
+COMMENT
+RBC: macrocytic anemia, polychromasia, few target cells and ovalocytes, rare nRBC
+WBC: left shifted with toxic changes, mostly small lymphocytes with occasional plasmacytoid forms
+PLT: moderate thrombocytopenia
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Adequate
+Biopsy Length: Length (specify in cm): 2.0
+Cellularity: Percent of intertrabecular surface area: 90
+Bony Trabeculae: Unremarkable
+--Bone marrow aspirate
+Bone marrow aspirate: Hemodilute
+Aspirate fragments: Absent
+Aspirate Cellularity: Unable to assess
+Clot Section: Not representative, only blood clot
+DESCRIPTION
+Erythropoiesis: Hypocellular
+Morphology: mainly normoblastic
+Ring sideroblasts are absent
+Granulopoiesis: Morphology: complete maturation, not dysplastic
+: Hypocellular
+Megakaryopoiesis: Normocellular
+Morphology: unremarkable
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Increased
+Iron stores: Iron stores cannot be assessed since particles are absent
+Neoplasia: Type: consistent with lymphoplasmacytic lymphoma
+Cytological detail: diffuse sheets of small lymphocytes, focal nodular areas reminiscent of germinal centres (centrocyte-like cells, centroblast-like cells and FDC); spectrum from plasmacytoid lymphocytes to plasma cells, focal area with increased large lymphocytes
+Immunophenotype: see flow cytometry report. By IHC: CD20(+), PAX5(+), TdT(-), c-MYC(few cells), Kappa(+), lambda(-), IgM(+) ; CD138 stains plasma cells and few plasmacytoid cells
+Percent infiltration as percentage of all nucleated cells: 80
+Immunohistochemistry: Performed on the trephine biopsy
+Results: see above; CD3 stains background T-cells. CD117 stains scattered mast cells
+Fibrosis: : Mostly MF1, with focal MF2 by reticulin and trichrome staining
+--------------------------------------------------------
+- Differential Count -
+Number of Cells Counted: 400
+Blasts (%): 0
+Promyelocytes (%): 1
+Myelocytes (%): 1
+Metamyelocytes (%): 2
+Neutrophils (%): 8
+Erythroblasts (%): 5
+Lymphocytes (%): 80
+Monocytes (%): 2
+Eosinophils (%): 0
+Basophils (%): 0
+Plasma cells (%): 1
+--------------------------------------------------------
+Electronically verified by:
+Qianghua Zhou, MD
+qz/11/30/22
+Rosemarie Tremblay-Le May, MD
+Clinical History
+Clinical History: DLBCL, pre CART
+Purpose of Test: Initial Diagnosis at UHN
+Reason for Marrow: Staging bone marrow for know process (enter process type in Comments)
+Number of Specimens: 5
+Flow Cytometry Status: Signed Out
+Rosemarie Tremblay-Le May, MD Date Reported: Dec-04-2022
+Interpretation
+Flow cytometry analysis of the sample provided shows 67% lymphocytes with the following distribution: T-cells (20%), B-cells (78%) and NK-cells (~2%) (of total lymphocytes analyzed).
+The B-cells (52% of total cells) are monotypic for surface kappa light chain immunoglobulin and express the following aberrant immunophenotype:
+Positive: CD19, CD20(+/dim), CD23(partial dim), CD45, CD79b(dim), CD81(dim), CD200(partial dim), IgM
+Negative: CD5, CD10, CD11c, CD31, CD43, CD38, CD305
+This is overall consistent with the previously described phenotype (B21-5760, S22-42969).
+SPECIMEN TYPE: BONE MARROW
+Viable cells w/o doublets 93,745 cells
+Viable cells w/o doublets 94 %
+Distribution of the major leukocyte populations of total cells
+Granulocytes 28 %
+Monocytes 3 %
+Lymphocytes 67 %
+CD19+ cells 52 %
+CD3+ cells 13 %
+CD5+ cells 13 %
+Distribution of T, B & NK cells of total lymphocytes
+B-cells 78 %
+T-cells 20 %
+Non CD3 (T)/ Non CD19 (B) 2 %
+T-cell subsets
+CD4+ 72 %
+CD4+/CD8+ 0 %
+CD4-CD8- 4 %
+CD8+ 23 %
+CD4/CD8= 3.13
+B-cell Subsets
+Ig Kappa+ 100 %
+Ig Lambda+ 0 %
+CD5+/CD20+ B-cells 0 %
+Values are reported at the unit level of 1%.
+Technologist: RP/LV
+The following antigens are analyzed:
+CD3, CD4, CD5, CD8, CD10, CD11c, CD19, CD20, CD23, CD31, CD38, CD43, CD45, CD56, CD79b, CD81, CD200, CD305, TCRg/d, IgM, IGK, IGL.
+Molecular Diagnostics Status: Signed Out
+Ian King, PhD, FACMG Date Reported: Dec-09-2022
+Interpretation
+Molecular Number: M#: 22.24035
+METHODOLOGY
+Test Method: Qiagen qBiomarker kit
+RESULT
+MYD88 p.Leu265Pro Result: Undetectable
+Specimen tested: Bone marrow
+Interpretation
+Fixed cells are available for cytogenetic testing (karyotyping and/or FISH), if required.
+Addendum Status: Signed Out
+Date Reported: Dec-15-2022
+Addendum Diagnosis
+Additional IHC: CD21 stains focal follicular dendritic cell meshworks. CD23 stains subset of cells, without clear meshworks. Proliferation index by Ki67 is variable, higher in follicles and <10% in rest of infiltrate.
+Final diagnosis remains unchanged.

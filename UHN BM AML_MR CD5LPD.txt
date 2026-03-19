@@ -1,0 +1,150 @@
+Amendments
+Amended: 07/17/23
+Reason: Final classification to be entered
+Diagnosis
+Final WHO diagnosis (5th WHO classification); Acute myeloid leukemia, myelodysplasia-related.
+Preliminary diagnosis
+Right iliac crest bone marrow trephine biopsy, aspirate and peripheral blood smears (MDS and LPD follow up):
+1. Progression to AML-MR.
+2. Persistent CD5+ lymphoproliferative disorder
+Comment
+Results of the ancillary cytogenetic and molecular analyses will be reported as soon as available.
+Synoptic Data
+- CBC -
+Hb (g/L): 79
+WBC (x10e9/L): 3.1
+Plt (x10e9/L): 29
+MCV (fL): 91.9
+Neutrophils (x10e9/L): 0.2
+Lymphocytes (x10e9/L): 2.0
+Monocytes (x10e9/L): 0.9
+Eosinophils (x10e9/L): 0.0
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: anemia with hypochromasia, teardrops, some targets and ovalocytes.
+PLT: severe thrombocytopenia with large, giant and hypogranular platelets
+WBC: neutropenia with occasional pelgeroid nuclei, and relative lymphocytosis and monocytosis. Lymphocytes are predominantly small with round nuclei and clumped chromatin. Rare blast is noted.
+--------------------------------------------------------
+- Differential Count -
+Number of Cells Counted: 200
+Blasts (%): 9
+Promyelocytes (%): 4
+Myelocytes (%): 4
+Metamyelocytes (%): 6
+Neutrophils (%): 10
+Erythroblasts (%): 14
+Lymphocytes (%): 35
+Monocytes (%): 16
+Eosinophils (%): 1
+Basophils (%): 0
+Plasma cells (%): 1
+COMMENT
+Note challenging differential count due to dysplasia, increased blasts, monocytosis and lymphocytosis.
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Inadequate because: cortical bone with minimal area of marrow for assessment
+--Bone marrow aspirate
+Bone marrow aspirate: Adequate quality
+Aspirate fragments: Present
+Aspirate Cellularity: Hypercellular
+Clot Section: The clot section contains marrow fragments
+DESCRIPTION
+Erythropoiesis: Relatively hypocellular
+Morphology: normoblastic, few dysplastic late erythroblasts
+Ring sideroblasts are less than 5% of all erythroblasts
+Granulopoiesis: Normocellular
+Morphology: left shifted with ~9% blasts, asynchronous maturation and marked dysplastia with hyposegmented and hypogranular granulocytes
+Megakaryopoiesis: Markedly hypercellular
+Morphology: dysplastic with many small, micro and hypolobulated megakaryocytes
+Monocytes: : Increased and left shifted
+Mast Cells: Not increased
+Lymphocytes: : Increased small lymphocytes with round nuclei and clumped chromatin
+Plasma cells: Not increased
+Iron stores: Increased
+Neoplasia: Type: Progression to AML - AML-MR
+Immunohistochemistry: Performed on the clot section
+Results: CD3 highlights few small T-cells. CD20 stains an increased numbers of small B-cells scattered and in aggregates. CD34+ cells are increased (~10%). CD117 highlights numerous cells (~20%). CD61 highlgiht numerous smal and micro megakaryocytes. CD68 highlig
+Fibrosis: : Unable to assess
+--------------------------------------------------------
+Clinical History
+Clinical History: diagnosed with mds and lpd in 2020; concern for progression due to prolonged thrombocytopenia
+Purpose of Test: Follow-up of Known Diagnosis
+Diagnosis: Myelodysplastic syndrome
+Reason for Marrow: Other (specify in Comment)
+Comment: *** progression of MDS; repeat BMA to run NGS; investigate LPD
+Number of Specimens: 6
+Flow Cytometry Status: Signed Out
+Interpretation
+Flow cytometric analysis shows abnormal distribution of bone marrow cell subsets.
+1. Myeloid markers combinations:
+CD34+ immature cells are ~3% of total, comprised mostly of non-lineage committed precursors.
+The CD34-/CD117+ immature cells are ~3.5% of total and are predominantly monocytic precursors.
+Monocytes are ~26% of total. ~25% of these monocytes have immature immunophenotype: CD11b reduced, CD14-, CD35-, IREM2-.
+Granulocytes show unremarkable maturation patterns of CD11b/CD13/CD16
+Erythroid series are ~15% of total with abnormally bimodal expression of CD36 and CD71.
+2. Lymphoid screening combination:
+B-cells with aberrant immunophenotype are ~5% of total cells: CD5+, CD19+, CD20+, CD38-, CD45+, IGK-, IGL+
+SPECIMEN TYPE: Bone Marrow (B23-10831)
+Viability: 98%
+Viable cells w/o doublets 89,773 cells
+Viable cells w/o doublets 90 %
+Distribution of the major leukocyte populations of total cells
+Granulocytes 36 %
+Monocytes 17 %
+Lymphocytes 18 %
+CD45 Low SSC Low 7 %
+CD19+ cells 5 %
+CD3+ cells 11 %
+CD5+ cells 16 %
+Distribution of T, B & NK cells of total lymphocytes
+B-cells 27 %
+T-cells 56 %
+Non CD3 (T)/ Non CD19 (B) 16 %
+T-cell subsets
+CD4+ 61 %
+CD4+/CD8+ 1 %
+CD4-CD8- 2 %
+CD8+ 36 %
+CD4/CD8= 1.69
+B-cell Subsets
+Ig Kappa+ 1 %
+Ig Lambda+ 99 %
+K:L= 0.01
+CD5+/CD20+ B-cells 99 %
+Values are reported at the unit level of 1%.
+Technologist: MBT-RP
+The following antigens are analyzed: CD3, CD4, CD5, CD7, CD8, CD10, CD11b, CD13, CD14, CD15, CD16, CD19, CD20, CD25, CD33, CD34, CD36, CD38, CD45, CD56, CD64, CD71, CD105, CD117, CD123, HLA-DR, TCRg/d, IGK, IGL, IREM2
+Fatimeh M. H. Algawahmed, MD
+Cancer Cytogenetics Status: Signed Out
+Shamini Selvarajah, PhD, FCCMG, FACMGG Date Reported: Jul-04-2023
+* Amended *
+Interpretation
+This sample was previously banked; this report has been amended to add the results of the testing that was performed subsequently.
+Result by G-banding: Loss of Y chromosome.
+ISCN: 45,X,-Y[20]
+Molecular Diagnostics Status: Signed Out
+Interpretation
+Disease Status: Diagnostic
+FLT3-ITD Result: Undetectable
+FLT3-TKD Result: Undetectable
+NPM1 Result: Undetectable
+Comment(s): Next Generation Sequencing UHN Hematological Malignancies Panel has been activated. Results are pending.
+Specimen tested: Bone marrow
+Molecular Diagnostics Status: Signed Out
+Interpretation
+METHODOLOGY
+Test Method: Next Generation Sequencing
+RESULT
+Results: Variant(s) detected
+Pathogenic/Likely Pathogenic Variants
+Variant 1: CUX1 (NM_001202543.1) c.3203_3204delCT (p.Pro1068Argfs*8) AF: 51%
+Variant 2: PHF6 (NM_032458.2) c.557delG (p.Gly186Glufs*32) AF: 50%
+Variant 3: TET2 (NM_001127208.2) c.762_765delTCAG (p.Ser254Argfs*38) AF: 35%
+Variant 4: TET2 (NM_001127208.2) c.1930C>T (p.Gln644*) AF: 28%
+Variant 5: ZRSR2 (NM_005089.3) c.121+1G>A (p.?) AF: 37%
+Variants of Uncertain Significance
+Variant 1: ETV6 (NM_001987.4) c.1151A>C (p.Lys384Thr) AF: 25%
+Variant 2: KIT (NM_000222.2) c.1542G>A (p.?) AF: 4%
+COMMENT
+The KIT variant c.1542G>A (p.?) was detected at a low variant allele fraction by the UHN-HM panel.

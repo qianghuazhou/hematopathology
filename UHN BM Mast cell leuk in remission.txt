@@ -1,0 +1,84 @@
+Specimen(s) Received
+1. Rt Il Crest: Iliac crest, Right Aspirate
+2. Rt Il Crest: Iliac crest, Right Biopsy
+3. Rt Il Crest: Iliac crest, Right Cytogenetics
+4. Rt Il Crest: Iliac crest, Right Flow Cytometry
+5. Rt Il Crest: Iliac crest, Right Molecular
+Other Case Numbers
+B233163,
+M23-18405
+Diagnosis
+Mast cell leukemia (follow up post BMT):
+1. Mast cells with normal appearance less than 5%. Flow cytometry for MRD is negative.
+2. Normocellular bone marrow with trilineage hematopoiesis. Residual osteosclerotic changes noted.
+Synoptic Data
+- CBC -
+Hb (g/L): 83
+WBC (x10e9/L): 5.3
+Plt (x10e9/L): 138
+MCV (fL): 101.7
+Neutrophils (x10e9/L): 3.7
+Lymphocytes (x10e9/L): 0.6
+Monocytes (x10e9/L): 0.6
+Eosinophils (x10e9/L): 0.4
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: Nonspecific RBC changes
+WBC: Neutrophils normal in number and morphology
+PLT: Borderline thrombocytopenia
+Others: No circulating mast cells
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Adequate
+Biopsy Length: Length (specify in cm): 2.0 cm in total length
+GRANIC, DALIBOR J. Blood and Bone Marrow Consultation Report B23-12459
+GRANIC, DALIBOR J. PM-4 BMT - Allogeneic Clinic Page 2 of 3
+Bony Trabeculae: Marked osteosclerosis
+--Bone marrow aspirate
+Bone marrow aspirate: Adequate quality
+Aspirate fragments: Present
+Aspirate Cellularity: Normocellular
+Clot Section: The clot section contains marrow fragments
+DESCRIPTION
+Erythropoiesis: Normocellular
+Morphology: mainly normoblastic morphology
+Ring sideroblasts are absent
+Granulopoiesis: Normocellular
+Morphology: mainly normoblastic morphology
+Megakaryopoiesis: Normocellular
+Morphology: mainly normoblastic morphology
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma cells: Not increased
+Iron stores: Normal
+Neoplasia: : see diagnosis
+Other Findings: : Aspirate: No increase in mast cells. Biopsy: Osteosclerosis. Normocelluar bone marrow with trilineage hematopoiesis. Tryptase/CD117 mast cells scattered and less than 5%. CD25 is negative.
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: D+62 post allo BMT for mast cell leukemia
+Purpose of Test: Follow-up of Known Diagnosis Post Allo BMT
+Diagnosis: Acute myeloid leukemia
+Comment: *** mast cell
+Time Point Post BMT: 60 days post BMT
+Reason for Marrow: Other (specify in Comments)
+Number of Specimens: 5
+Flow Cytometry Status: Signed Out
+David Barth, MD Date Reported: Jul-10-2023
+Interpretation
+CD34+ and CD117+/CD34- myeloid precursors account for 0.36% and 0.9% total cells respectively. CD34+ hematogones are present 1.47%.
+Mast cells (CD117+) with previously seen aberrant leukemic immunophenotypic changes are not detected. The CD117+/CD34- myeloid precursors are comprised of the normal subsets.
+The following distribution of the major cell populations is as shown: 78.4% granulocytes, 4.2% lymphocytes, 4.9% monocytes, 2.4% erythroid precursors.
+Granulocyte and erythroid maturation patterns are within normal limits.
+In conclusion, residual CD117+ aberrant mast cells are not detected. (the lower level of detection is ~0.1% of total cells).
+The following antigens are analyzed: CD10, CD11b, CD13, CD15, CD16, CD25, CD33, CD34, CD36, CD38, CD45, CD71, CD105, CD117, CD123, HLA-DR
+Molecular Diagnostics Status: Signed Out
+Interpretation
+Molecular Identifier(s): M#: 23.18405
+Sample Banked: RNA lysate
+Reason for Banking: Further information required to activate testing
+Cancer Cytogenetics Status: Signed Out
+Interpretation
+Fixed cells are available for cytogenetic testing (karyotyping and/or FISH), if required.

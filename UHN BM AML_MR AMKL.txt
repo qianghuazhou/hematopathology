@@ -1,0 +1,86 @@
+Amendments
+Amended: 01/20/23
+Reason: Final classification to be entered
+Diagnosis
+Final WHO diagnosis: AML, myelodysplasia-related
+Comment to final diagnosis
+This AML shows a megakaryoblastic differentiation as indicated in the preliminary diagnosis.
+Additional FISH assays for del(5q)/5, del(7q), KMT2A rearrangement and TP53 loss, showed extra signals for chromosome 7 and 17 and KMT2A indicating triploidy/tetraploidy. MECOM rearrangement was not detected.
+A del(5q) is suspected based on the discordant signals between 5p and 5q: 4 signals for 5p and 2 for 5q.
+Unequivocal evidence for a deletion of TP53 is lacking (twoTP53 signals are observed), although it is difficult to determine in a triploid/tetraploid setting. Please refer to separate report (B22-17870). Note that one TP53 mutation at VAF 31% was detected by NGS.
+Based on the additional results, the diagnosis is most consistent with AML, myelodysplasia-related (previously AML with MRC).
+Preliminary diagnosis
+Left Iliac Crest biopsy: Acute megakaryoblastic leukemia.
+aspirate: Hemodilute
+Aspirate fragments: Absent
+Aspirate Cellularity: Unable to assess
+Clot Section: Not representative, only blood clot
+DESCRIPTION
+Erythropoiesis: Morphology: dyspalstic erythroblasts are seen on the imprint
+The presence of ring sideroblasts cannot be assessed
+Granulopoiesis: Relatively hypocellular
+Morphology: maturing granulocytes seen on the imprint
+Megakaryopoiesis: Markedly hypercellular
+Morphology: marked increase of megakaryoblasts and small monolobated megakaryocytes (CD117+/CD61+/Factor 8-)
+Monocytes: Monocytes cannot be assessed
+Mast Cells: Mast cells cannot be assessed
+Lymphocytes: Lymphocytes cannot be assessed
+Plasma cells: Plasma cells cannot be assessed
+Iron stores: Iron stores cannot be assessed since particles are absent
+Neoplasia: Type: Acute megakaryoblastic leukemia
+Immunohistochemistry: Results: CD34+cells are not increased
+--------------------------------------------------------
+- CBC -
+Hb (g/L): 78
+WBC (x10e9/L): 2.6
+Plt (x10e9/L): 21
+MCV (fL): 87.5
+Neutrophils (x10e9/L): 1.6
+Lymphocytes (x10e9/L): 0.9
+Monocytes (x10e9/L): 0.1
+Eosinophils (x10e9/L): 0.0
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: mild anisopoikilocytosis, a few elliptocytes seen
+WBC: rare circulating blasts seen
+PLT: a few large platelets
+--------------------------------------------------------
+Electronically verified by:
+Qianghua Zhou, MD
+qz/11/17/22
+Anne M.M. Tierens, MD
+Clinical History
+Clinical History: 62M with cytopenias, AML vs. MDS
+Purpose of Test: Initial Diagnosis at UHN
+Reason for Marrow: Suspicion of specific disease (specify in Comments)
+Comment: *** MDS vs AML
+Number of Specimens: 6
+Flow Cytometry Status: Signed Out
+Anne M.M. Tierens, MD Date Reported: Nov-15-2022
+Interpretation
+In adequate bone marrow aspirate, predominantly blood. Granulocytes are predominantly neutrophils.
+CD117+ myeloid cells with aberrant immunophenotype are demonstrated: they represent 2.6% of total cells.
+They have the following antigen expression profile:
+Strong: CD33, CD36, CD45, CD71, CD105, CD117
+Weak: CD11b, CD13
+Negative: cytoplasmic CD3, surface CD3, CD7, CD10, CD16, CD19, CD34, CD56, cytoplasmic CD79a, cytoplasmic MPO, HLA-DR, TdT
+Specimen type: BONE MARROW
+Distribution of the major leukocyte populations of total cells
+CD45+/Low SS 3 %
+Granulocytes 47 %
+Monocytes 5 %
+Lymphocytes 39 %
+Technologist:SD/LV
+The following antigens are analyzed: CD3, CyCD3, CD7, CD10, CD11b, CD13, CD16, CD19, CD33, CD34, CD36, CD45, CD56, CD71, CyCD79a, CD105, CD117, CyMPO, HLA-DR,TdT.
+Interpretation
+Result by G-banding: FAILURE
+Interpretation
+Molecular Number: M#: 22.22832
+Disease Status: Diagnostic
+FLT3-ITD Result: Inconclusive
+FLT3-TKD Result: Inconclusive
+NPM1 Result: Inconclusive
+Comment(s): Next Generation Sequencing UHN Hematological Malignancies Panel has been activated. Results are pending.
+Comments
+Poor or no amplification, due to dilute, degraded nucleic acid or the presence of an inhibitor. At the discretion of the referring physician, an additional specimen may be submitted for testing.
+FLT3/NPM1 testing has been activated on PB 11/10/2022 (B22-17756).

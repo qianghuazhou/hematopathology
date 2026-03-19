@@ -1,0 +1,134 @@
+Amendments
+Amended: 08/01/18
+Reason: Final classification to be entered
+Diagnosis
+Final WHO classification
+Acute myeloid leukemia with myelodysplasia-related changes
+Comment
+The leukemia shows a myelomonocytic differentiation. See flow cytometry report.
+The results of the Heme mutation panel will be reported as soon as they are available.
+A preliminary diagnosis is communicated to Dr. A. Schimmer on July 24 by E-mail
+Synoptic Data
+Bone marrow
+SPECIMEN
+Specimen: Peripheral blood smear
+Bone marrow aspiration
+Bone marrow aspirate clot (cell block)
+Bone marrow core (trephine) biopsy
+Specify Method(s) and Results: Flow cytometry analysis showed ~ 36% CD34+ cells positive for CD13, CD15, CD33, CD34, CD38, CD45, CD56, CD71, CD117, CD123, HLA-DR and MPO.
+Cytogenetic Studies: Performed
+Specify Method(s) and Results: A complex karyotype was demonstrated. See separate report
+Fluorescence in situ Hybridization: Not performed
+Molecular Genetic Studies: Performed
+Specify Method(s) and Results: NPM1 and FLT mutations are not detected
+--------------------------------------------------------
+- Bone Marrow Aspirate -
+Sample Quality: Adequate
+Fragments: Present
+Cellularity: Hypercellular
+Erythropoiesis: Hypocellular
+Morphology: scattered late erythroblasts, unremarkable morphology
+Ring sideroblasts absent
+Granulopoiesis: Hypercellular
+Morphology: markedly left shifted with myeloblasts (including many type 3 myeloblasts with dense granulation), monoblasts and promyelocytres, very limited maturation to end stage neutrophils showing aberrant segmentation and granulation
+Megakaryopoiesis: Hypocellular
+Morphology: unremarkable
+Monocytes: Increased
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma Cells: Increased
+: Slight increase, unremarkable morphology
+Iron Stores: Normal
+Clot Section: Confirms findings in smears
+Neoplasia: Type: AML (myelomonocytic)
+Immunophenotype: see flow cytometry
+--------------------------------------------------------
+- Differential Count -
+Number of Cells Counted: 300
+Blasts (%): 64
+Promyelocytes (%): 3
+Myelocytes (%): 2
+Metamyelocytes (%): 0
+Neutrophils (%): 2
+Erythroblasts (%): 2
+Lymphocytes (%): 8
+Monocytes (%): 14
+Eosinophils (%): 1
+Basophils (%): 0
+Plasma cells (%): 4
+--------------------------------------------------------
+- Bone Marrow Biopsy -
+Biopsy Length: 0.5-1.0cm
+: 2 fragments
+Sample Quality: Adequate
+Cellularity: Percent of surface area: 80
+Bony Trabeculae: Unremarkable
+Erythropoiesis: Hypocellular
+Morphology: normoblastic maturation
+Granulopoiesis: Hypercellular
+Morphology: markedly left shifted with increase of blastoid mononuclear cells with round nuclei and prominent nucleolus and monuclear cells with irregular nuclear contours and somewhat clefted (likely corresponding to monocytes), absence of late stage granulocytes
+Megakaryopoiesis: Hypocellular
+Morphology: unremarkable
+Lymphoid Cell Infiltrates: Absent
+Plasma Cell Infiltrates: Absent
+: IHC stainings for CD138, IGK and IGL are pending (slight increase of plasma cells in the smears)
+Neoplasia: Type: Acute myeloid leukemia
+Immunohistochemical Analysis: Not performed, see flow cytometry
+Fibrosis: No morphologic evidence of fibrosis
+--------------------------------------------------------
+- CBC -
+Hb (g/L): 73
+WBC (x10e9/L): 0.5
+Plt (x10e9/L): 355
+MCV (fL): 97.5
+Neutrophils (x10e9/L): 0.1
+Lymphocytes (x10e9/L): 0.3
+Monocytes (x10e9/L): 0.1
+Eosinophils (x10e9/L): 0.0
+Basophils (x10e9/L): 0.0
+Blasts (x10e9/L): 0.1
+Other Findings: : RBC: slight rouleaux formation; slight macrocytosis; WBC: few blasts, rare neutrophils and monocytes; Platelets: unremarkable
+--------------------------------------------------------
+Clinical History
+Purpose of Test: ? Acute Leukemia/Myelodysplastic Syndrome, New Diagnosis: new acute leukemia
+Interpretation
+Specimen type: bone marrow
+Immature CD34+ myeloid precursors are detected at ~ 36% of total cells.
+In addition, there is a marked increase of monocytes which account for ~ 37% of total cells and are markedly left shifted. Monocytes with immature immunophenotype account for ~ 28% of total cells.
+The CD34+ myeloid precursors and immature monocytes show the following aberrant antigen expression profiles:
+CD34+ myeloid precursors
+Strong: CD13, CD15, CD33, CD34, CD38, CD45, CD56, CD71, CD117, CD123, HLA-DR, MPO
+Weak: none
+Negative: cyCD3, sCD3, CD7, CD10, CD11b, CD14, CD16, CD19, CD25, CD35, CD36, CD64, CD79a, CD105, CD300e, Tdt
+Monocytic cells
+Strong: CD13, CD33, CD38, CD45, CD64, CD71, CD117, HLA-DR
+Weak: CD11b, CD14, CD35, CD36, MPO
+Negative: cyCD3, sCD3, CD7, CD10, CD15, CD16, CD19, CD25, CD34, CD56, CD79a, CD105, CD123, CD300e, Tdt
+Distribution of the major leukocyte populations of total cells
+CD45+/Low SS 43 %
+Granulocytes 9 %
+Monocytes 37 %
+Lymphocytes 12 %
+Erythroid precursors 3%
+Technologist: JN+Jm
+Antigens analyzed: sCD3, cyCD3, CD7, CD10, CD11b, CD13, CD14, CD15, CD16, CD19, CD25, CD33, CD34, CD35, CD36, CD38, CD45, CD56, CD64, CD71, CD123, CD79a, CD105, CD117, CD300e, MPO, HLA-DR, TdT
+Definitions: Strong expression: positive on > 50% of the blasts; Weak expression: positive on > 10% < 50% of the blasts; Negative expression: positive on < 10% of the blasts
+Interpretation
+Molecular Number: M18.12145
+FLT3 ITD Result: Undetectable
+FLT3 TKD Result: Undetectable
+NPM1 Result: Undetectable
+Comments: Next Generation Sequencing UHN Hematological Malignancies Panel has been activated. Results are pending.
+Interpretation
+Molecular Number: M#: 18.12146
+METHODOLOGY
+Test Method: Next Generation Sequencing
+RESULT
+Results: Variant(s) detected
+Pathogenic/Likely Pathogenic Variants
+Variant 1: TP53 (NM_000546.5) c.102delC (p.Leu35Cysfs*9) AF: 50%
+PATHOGENIC/LIKELY PATHOGENIC VARIANTS
+TP53 (NM_000546.5) c.102delC (p.Leu35Cysfs*9) AF: 50%
+Interpretation
+Result by G-banding: abnormal complex karyotype.
+ISCN: 44~46,X,-X,+1,der(1;22)(p10;q10),add(5)(q13),?der(9)ins(9;?)(q13;?),add(13)(p11.2),add(15)(p11.2),+16, add(16)(q12-13),add(16)(q22),-17,-18,+21,-22,add(22)(p11.2),+mar[cp20]

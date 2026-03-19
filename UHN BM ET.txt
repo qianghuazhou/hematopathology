@@ -1,0 +1,79 @@
+Diagnosis
+Bone marrow aspirate, clot section, trephine biopsy and peripheral blood (diagnostic test):
+Suspicious for a myeloproliferative neoplasm, best fitting Essential Thrombocythemia (ET)
+Comments:
+Thank you for sharing this very interesting case of a patient with mild thrombocytosis, few large and rare giant platelets. No information found regarding spleen and liver size.
+NGS data show a pathogenic/likely pathogenic SH2B3 variant (Glu395Lys), with an AF 0f 53%, in addition to a second SH2B3 variant of uncertain significance (Glu400Lys), AF 45%. SH2B3 mutations have been described in triple negative MPNs, and in association with the usual driving mutations in MPN. SH2B3 products are a negative regulator of cytokine-receptor mediated JAK2/STAT5 signalling and its mutations with loss of function may produce cytosis, MPN or familial MPN.
+In this patient’s case, the association of SH2B3 variant with thrombocytosis, bone marrow hypercellularity, moderate megakaryocytic hyperplasia and mild morphological atypia, even in the absence of overt features of MPN, is likely relevant and may indicate early morphologic stages of ET. A family history of thrombocytosis should be sought. Of note, the NGS methodology used at UHN does not allow the distinction between germline and somatic mutations of the genes in the HEME panel.
+Paz DC et al, Blood (2023) 141 (16): 1909-1921
+Synoptic Data
+- CBC -
+Hb (g/L): 126
+WBC (x10e9/L): 7.94
+Plt (x10e9/L): 532
+MCV (fL): 96
+Neutrophils (x10e9/L): 5.12
+Lymphocytes (x10e9/L): 2.06
+Monocytes (x10e9/L): 0.62
+Eosinophils (x10e9/L): 0.09
+Basophils (x10e9/L): 0.03
+COMMENT
+RBC: normochromic; few ovalocytes
+WBC: normal leukocyte differential and morphology
+Platelets: mild thrombocytosis with a few large and rare giant platelets
+--------------------------------------------------------
+- Differential Count -
+Number of Cells Counted: 300
+Blasts (%): 1
+Promyelocytes (%): 3
+Myelocytes (%): 9
+Metamyelocytes (%): 10
+Neutrophils (%): 29
+Erythroblasts (%): 26
+Lymphocytes (%): 12
+Monocytes (%): 4
+Eosinophils (%): 4
+Basophils (%): 1
+Plasma cells (%): 1
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Adequate
+Biopsy Length: Length (specify in cm): 0.6, 0.5 and 0.3 cm fragments
+Cellularity: Percent of intertrabecular surface area: 560
+Bony Trabeculae: Unremarkable
+--Bone marrow aspirate
+Bone marrow aspirate: Adequate quality
+Aspirate fragments: Present
+Aspirate Cellularity: Hypercellular
+Clot Section: The clot section contains marrow fragments
+DESCRIPTION
+Erythropoiesis: Normocellular
+Morphology: normoblastic
+Ring sideroblasts are absent
+Granulopoiesis: Relatively hypercellular
+Morphology: all stages of maturation without dysplasia
+Megakaryopoiesis: Relatively hypercellular
+Morphology: variable morphology and sizes, including large cells with nuclear hypolobation. Whereas no clusters are present, there is grouping of megakaryocyte, and some are near trabeculae
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Not increased
+: Small collections in the clot section, interpreted as reactive
+Plasma cells: Not increased
+Iron stores: Normal
+Neoplasia: Type: Suspicious for MPN (please see comments)
+Immunohistochemistry: Performed on the trephine biopsy
+Results: CD34 stains <3% hematopoietic cells; CD117 highlights mast cells, granulocytic and erythroid precursors; CD20 and CD3 show scattered B-cells and T-cells, respectively; CD138 shows <5% polyclonal plasma cells
+Fibrosis: No morphologic evidence of fibrosis
+Other Findings: : No granulomata or metastatic cells seen
+--------------------------------------------------------
+Slide/Block Description
+Received from Thunder Bay Regional Health Sciences Centre, S23-, 22 stained slides and report./cf
+July 5, 2023, Additional material received from Thunder Bay Regional Health Sciences Centre, S23-8007, 1 block (B1)/zr
+Clinical History
+Hospital: THUNDER BAY REGIONAL HLTH SCIENCES CTR-PA
+Specimen #: see report
+Specimen Procedure Date: see report
+Specimen Type: see report
+Reason for Request: Personal Consult
+Order Comments: Are you Lab Medicine Program staff?=Yes

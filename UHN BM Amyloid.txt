@@ -1,0 +1,57 @@
+Diagnosis
+AL Amyloid (follow up):
+1. Large deposits of amyloid both in vessels and in marrow tissue (congo red positive).
+2. Normocellular bone marrow with trilineage hematopoiesis.
+3. No increase in plasma cells and flow cytometry demonstrates plasma cells are polytypic.
+4. Peripheral blood demonstrates mild increase in large granular lymphocytes, the bone marrow does not demonstrate a significant infiltration of T cell.
+Synoptic Data
+- CBC -
+Hb (g/L): 154
+WBC (x10e9/L): 10.0
+Plt (x10e9/L): 356
+MCV (fL): 92.5
+Neutrophils (x10e9/L): 4.9
+Lymphocytes (x10e9/L): 4.2
+Monocytes (x10e9/L): 0.8
+Eosinophils (x10e9/L): 0.1
+Basophils (x10e9/L): 0.1
+COMMENT
+RBC: Occasional target and acanthocytes
+WBC: Neutrophils normal in number and morphology. Granular lymphocytes 22%.
+PLT: Small platelet clumps seen
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Adequate
+Biopsy Length: Length (specify in cm): 1.8 cm in total length
+Bony Trabeculae: Unremarkable
+--Bone marrow aspirate
+Bone marrow aspirate: Adequate quality
+Aspirate fragments: Present
+status
+Number of Specimens: 3
+Flow Cytometry Status: Signed Out
+Interpretation
+A polytypic population of plasma cells is detected 0.07% of all cells expressing CD19/27/38/81/138 with no cytoplasmic light chain restriction. CD56/117 are negative.
+No monotypic plasma cell population is detected.
+No monotypic B cell population is detected.
+Specimen Type: Bone Marrow (B23-12208)
+Viability: 96%
+Viable cells w/o doublets 462127 cells
+Viable cells w/o doublets 95 %
+Distribution of the major leukocyte populations of total cells
+Granulocytes: 66 %
+Lymphocytes: 21 %
+Monocytes: 3 %
+CD19+: 1 %
+Plasma cells (CD38++CD138+): <1 %
+B-cell Subsets
+Ig Kappa+ 63 %
+Ig Lambda+ 37 %
+Kappa:Lambda= 1.7
+Plasma Cells (CD38++CD138+)
+cyKappa+: 45 %
+cyLambda+: 55 %
+cKappa:cLambda= 0.8
+Technologist: KC-RP
+The following antigens are analyzed: CD19, CD27, CD38, CD45, CD56, CD81, CD117, CD138, cIgK, cIgL

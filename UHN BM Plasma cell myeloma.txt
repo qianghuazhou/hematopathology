@@ -1,0 +1,90 @@
+Specimen(s) Received
+1. Rt Il Crest: Iliac crest, Right Aspirate
+2. Rt Il Crest: Iliac crest, Right Biopsy
+3. Rt Il Crest: Iliac crest, Right Flow Cytometry
+4. Rt Il Crest: Iliac crest, Right FISH-Aspirate
+5. Rt Il Crest: Iliac crest, Right Cytogenetics
+Other Case Numbers
+Diagnosis
+Plasma cell neoplasm.
+Bone marrow biopsy demonstrates 80-85% plasma cells and flow cytometry phenotype is monotypic. This would be consistent with myeloma.
+FISH has been sent. IHC for congo red, CD138 and reticulin is pending.
+Synoptic Data
+- CBC -
+Hb (g/L): 115
+WBC (x10e9/L): 8.0
+Plt (x10e9/L): 162
+MCV (fL): 107.4
+Neutrophils (x10e9/L): 5.2
+Lymphocytes (x10e9/L): 1.6
+Monocytes (x10e9/L): 1.0
+Eosinophils (x10e9/L): 0.1
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: Severe rouleaux
+WBC: Neutrophils normal in number and morphology
+PLT: Normal
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Adequate
+Biopsy Length: Length (specify in cm): 0.7cm
+Bony Trabeculae: Osteosclerosis
+SOTIROPOULOS, VASILIOS Blood and Bone Marrow Consultation Report B23-12413
+SOTIROPOULOS, VASILIOS PM-Procedure Clinic Page 2 of 3
+--Bone marrow aspirate
+Bone marrow aspirate: Adequate quality
+Aspirate fragments: Present
+Aspirate Cellularity: Markedly hypercellular
+Clot Section: Not representative, only blood clot
+DESCRIPTION
+Erythropoiesis: Relatively hypocellular
+Morphology: mainly normoblastic
+Granulopoiesis: Normocellular
+Morphology: mainly normoblastic
+Megakaryopoiesis: Relatively hypocellular
+Morphology: mainly normoblastic
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma cells: Increased
+: Plasma cells variably seen up to 35% on aspirate slides
+Iron stores: Normal
+Neoplasia: : see diagnosis
+Other Findings: : Biopsy: Hypercellular. Plasma cells 80-85%.
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: r/o myeloma
+Purpose of Test: Initial Diagnosis at UHN
+Reason for Marrow: Other (specify in Comments)
+Comment: *** r.o myeloma- new diagnosis
+On Current Therapy: No therapy
+Number of Specimens: 5
+Flow Cytometry Status: Signed Out
+Interpretation
+A monotypic population of plasma cells is present 2% of total cells with the following immunophenotype:
+Positive: CD27/38/56/117/138/cytoplasmic kappa light chain restriction.
+Negative: CD19/81
+Consistent with a plasma cell neoplasm. Correlation with bone marrow for accurate plasma cell enumeration is required.
+No monotypic B cell population is detected on this flow cytometric sample.
+Specimen Type: Bone Marrow (B23-12413)
+Viability: 100%
+Viable cells w/o doublets 73896 cells
+Viable cells w/o doublets 74 %
+Distribution of the major leukocyte populations of total cells
+Granulocytes: 46 %
+Lymphocytes: 33 %
+Monocytes: 12 %
+CD19+: 1 %
+Plasma cells (CD38++CD138+): 2 %
+B-cell Subsets
+Ig Kappa+ 57 %
+Ig Lambda+ 43 %
+Kappa:Lambda= 1.3
+Plasma Cells (CD38++CD138+)
+cyKappa+: 100 %
+cyLambda+: 0 %
+cKappa:cLambda= N/A
+The following antigens are analyzed: CD19, CD27, CD38, CD45, CD56, CD81, CD117, CD138, cIgK, cIgL
+Cancer Cytogenetics Status: Complete

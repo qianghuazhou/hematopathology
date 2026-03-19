@@ -1,0 +1,55 @@
+Diagnosis
+AML (follow up post BMT):
+1. In remission with <3% blasts. Flow cytometry for MRD is negative. NPM1 molecular studies are pending. Suggest correlation with chimerism studies.
+2. Normocellular bone marrow aspirate with trilineage hematopoiesis and no overt dysplasia. No CBC or peripheral blood film supplied. Biopsy is suboptimal for assessment.
+Synoptic Data
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Inadequate because: 0.4cm of which 0.2 cm represents periosteal tissue and cortical bone and the remaining 0.2 cm is severely hypocellular subcortical marrow.
+Biopsy Length: < 0.5cm
+Bony Trabeculae: Unremarkable
+--Bone marrow aspirate
+Bone marrow aspirate: Adequate quality
+Aspirate fragments: Present
+Aspirate Cellularity: Normocellular
+Clot Section: The clot section contains marrow fragments
+DESCRIPTION
+Erythropoiesis: Normocellular
+Morphology: mainly normoblastic
+Ring sideroblasts are absent
+Granulopoiesis: Normocellular
+Morphology: mainly normoblastic
+Megakaryopoiesis: Normocellular
+Morphology: mainly normoblastic
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma cells: Not increased
+Iron stores: Normal
+Neoplasia: : see diagnosis
+Other Findings: : Aspirate: Blasts <3%. Biopsy: Cortical bone and periosteal tissue. Small areas of severe hypocellular subcortical marrow with scattered granulopoieis and erythropoiesis and no large clusters of blasts.
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: AML FLT3+ NPM1+ D+205; rpt BM for MRD assessment
+Purpose of Test: Follow-up of Known Diagnosis
+Diagnosis: Acute myeloid leukemia
+Reason for Marrow: Remission status
+Specific Request: Molecular follow up needed
+Comment: *** NPM1 qPCR pls
+Number of Specimens: 5
+Flow Cytometry Status: Signed Out
+Interpretation
+CD34+ and CD117+/CD34- myeloid precursors account for 0.34% and 0.9% total cells respectively.
+The CD34-/CD117+ myeloid precursors do not demonstrate the previously seen leukemic immunophenotypic changes. The CD117+/CD34- myeloid precursors are comprised of the normal subsets.
+The following distribution of the major cell populations is as shown: 81% granulocytes, 4.7% lymphocytes, 2.7% monocytes, 6% erythroid precursors.
+Granulocytic and monocytic maturation patterns within normal limits.
+In conclusion, residual CD34-/CD117+ leukemic cells are not detected. (the lower level of detection is ~0.1% of total cells).
+The following antigens are analyzed: CD7, CD10, CD11b, CD13, CD16, CD19, CD33, CD34, CD36, CD45, CD56, CD71, CD105, CD117, HLA-DR
+Molecular Diagnostics Status: Signed Out
+Interpretation
+Results: Undetectable
+Specimen tested: Bone marrow
+Cancer Cytogenetics Status: Signed Out
+Interpretation
+Fixed cells are available for cytogenetic testing (karyotyping and/or FISH), if required.

@@ -1,0 +1,63 @@
+Diagnosis
+Dilute aspirate. However, the trails present demonstrate 70-75% of cells are abnormal monocytes with approximately 25% of total cells are blasts and promonocytes. Flow cytometry confirms this finding. This sample is suggestive of Acute Myeloid Leukemia with monocytic origin.
+Synoptic Data
+- CBC -
+Hb (g/L): 88
+WBC (x10e9/L): 1.8
+Plt (x10e9/L): 8
+MCV (fL): 84.6
+Neutrophils (x10e9/L): 0.1
+Lymphocytes (x10e9/L): 1.0
+Monocytes (x10e9/L): 0.6
+Eosinophils (x10e9/L): 0.0
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: Nonspecific RBC changes
+WBC: Severe neutropenia with hypogranular dysplastic changes and abnormal nuclear segmentation
+PLT: Severe thromobocytopenia
+Others: No circulating blasts
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Not received
+--Bone marrow aspirate
+Bone marrow aspirate: Hemodilute
+Aspirate fragments: Rare fragments
+Aspirate Cellularity: Hypocellular
+Clot Section: Not representative, only blood clot
+DESCRIPTION
+Erythropoiesis: Rare to absent
+The presence of ring sideroblasts cannot be assessed
+Erythropoiesis cannot be assessed
+Granulopoiesis: Rare to absent
+Morphology: Scattered myelocytes and promyelocytes and rare hypogranular neutrophil seen
+Megakaryopoiesis: Rare to absent
+Megakaryocytes cannot be assessed
+Monocytes: Increased
+: significant increase in abnormal monocytes 70-75%.
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma cells: Not increased
+Iron stores: Increased
+Neoplasia: : see diagnosis
+Other Findings: : Blasts and promonocytes estimated 25%. While few hypocellular fragments, large clusters of abnormal monocytes and blasts/promonocytes seen on squash preparation and trails.
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: 82 y.o. MDS/MPN, progression after azacitidine single-agent, now low-dose cytarabine + venetoclax, post-cycle 1
+Purpose of Test: Follow-up of Known Diagnosis
+Diagnosis: Myelodysplastic/Myeloproliferative neoplasm
+Reason for Marrow: Remission status
+Number of Specimens: 2
+Flow Cytometry Status: Signed Out
+David Barth, MD Date Reported: Jul-05-2023
+Interpretation
+A population of CD34+ blasts present 2% of total cells with the following immunophenotype:
+Strong: CD13/33/34/117/HLA-DR
+Weak: CD64
+Negative: CD10/11b/14/16/35/36
+A population of monocytes is present 67% of total cells with aberrant features including variable CD13 expression, mainly CD16- and positive for CD56.
+An immature population of monocytes is present 24% expressing CD56/64/HLA-DR and negative for CD14/35/117/IREM.
+Overall, this flow cytometry pattern is suggestive of acute myeloid leukemia with monocytic origin.
+Technologist: KC-RP
+The following antigens are analyzed: CD7, CD10, CD11b, CD13, CD14, CD16, CD19, CD33, CD34, CD35, CD36, CD45, CD56, CD64, CD71, CD105, CD117, HLA-DR, IREM2

@@ -1,0 +1,125 @@
+Diagnosis
+Bone marrow aspirate, trephine biopsy; peripheral blood (diagnostic test):
+CD5+ B cell lymphoma of small cells, query mantle cell lymphoma. See comment.
+Comment
+The bone marrow biopsy shows 50-60% involvement by clonal CD5+ B-cells by flow cytometry and IHC, with a profile most likely consistent with mantle cell lymphoma. Definitive classification may require assessment of lymphoid tissue
+Reported by Dr. Ingrid Tam (General Pathology resident) and Dr. M. Reis
+Synoptic Data
+- CBC -
+Hb (g/L): 119
+WBC (x10e9/L): 2.4
+Plt (x10e9/L): 76
+MCV (fL): 89.9
+Neutrophils (x10e9/L): 1.1
+Lymphocytes (x10e9/L): 1.2
+Monocytes (x10e9/L): 0.0
+Eosinophils (x10e9/L): 0.0
+Basophils (x10e9/L): 0.0
+COMMENT
+Pancytopenia.
+RBC: normochromic anemia with some ovalocytes
+WBC: neutropenia with rare hyposegmented neutrophils, some reactive lymphocytes, very rare abnormal lymphocytes
+Platelets: thrombocytopenia, rare large well-granulated forms
+--------------------------------------------------------
+- Differential Count -
+Number of Cells Counted: 200
+Blasts (%): 1
+Promyelocytes (%): 1
+Myelocytes (%): 3
+Metamyelocytes (%): 6
+Neutrophils (%): 11
+Erythroblasts (%): 52
+Lymphocytes (%): 22
+Monocytes (%): 2
+Eosinophils (%): 2
+COMMENT
+Abnormal lymphocytes present
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Adequate
+Biopsy Length: 1.0-2.0cm
+Cellularity: Percent of intertrabecular surface area: 60
+Bony Trabeculae: Unremarkable
+--Bone marrow aspirate
+Bone marrow aspirate: Adequate quality
+Aspirate fragments: Rare fragements
+Aspirate Cellularity: Normocellular
+Clot Section: : The clot section contains a very small marrow fragment with significant crush artifact
+DESCRIPTION
+Erythropoiesis: Relatively hypercellular
+Morphology: erythroid predominant; maturing erythropoiesis with normal forms
+Ring sideroblasts are absent
+Granulopoiesis: Relatively hypocellular
+Morphology: slightly diminished granulopoiesis with normal, maturing forms
+Megakaryopoiesis: Relatively hypocellular
+Morphology: decreased on aspirate smears; rare hypolobated forms
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Increased
+: Aspirate squash prep shows increased lymphocytes
+Plasma cells: Not increased
+Iron stores: Normal
+Neoplasia: Type: CD5+ B cell lymphoproliferative neoplasm
+Immunohistochemistry: Performed on the trephine biopsy
+Results: Diffuse interstitial infiltration by small lymphocytes expressing CD20, CD5, Cyclin D1 and BCL2, negative for CD10 and BCL6; scattered CD3+ T cells
+Fibrosis: No morphologic evidence of fibrosis
+Other Findings: : Iron stores appear decreased, but cannot be adequately evaluated (scant particles)
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: thrombocytopenia
+Purpose of Test: Initial Diagnosis at UHN
+Reason for Marrow: Thrombocytopenia
+Number of Specimens: 5
+Flow Cytometry Status: Signed Out
+Marciano D. D. O. Reis, MD Date Reported: Mar-10-2023
+Interpretation
+Lymphocytes represent 36% of the viable cells. 12% of the lymphocytes are B cells, 29% of which are clonal expressing CD5, CD19, CD20 (bright), CD45, CD79b, CD200 (moderate) and IgL, negative for CD10 and CD23 (no CD11c available for testing). The 85% T cells show a predominance of CD4+ cells.
+This profile may represent mantle cell lymphoma. Correlation with cytomorphological, IHC and clinical data required. A definitive diagnosis may require assessment of lymphoid tissue.
+SPECIMEN TYPE: BONE MARROW
+Viable cells w/o doublets 98,730 cells
+Viable cells w/o doublets 99 %
+Distribution of the major leukocyte populations of total cells
+CD45+/Low SS 1 %
+Granulocytes 45 %
+Monocytes 0 %
+Lymphocytes 36 %
+CD19+ cells 6 %
+CD3+ cells 31 %
+CD5+ cells 33 %
+Distribution of T, B & NK cells of total lymphocytes
+B-cells 12 %
+T-cells 85 %
+Non CD3 (T)/ Non CD19 (B) 2 %
+T-cell subsets
+CD4+ 70 %
+CD4+/CD8+ 1 %
+CD4-CD8- 2 %
+CD8+ 28 %
+CD4/CD8= 2.50
+B-cell Subsets
+Ig Kappa+ 11 %
+Ig Lambda+ 89 %
+K:L= 0.12
+CD5+/CD20+ B-cells 29 %
+Values are reported at the unit level of 1%.
+Technologist MBT/ML
+The following antigens are analyzed:
+CD3, CD4, CD5, CD8, CD10, CD11b, CD13, CD16, CD19, CD20, CD23, CD31, CD33, CD34, CD36, CD38, CD43, CD45, CD56, CD71, CD79b, CD81, CD105, CD117, CD200, CD305, TCRg/d, IgM, IGK, IGL, HLA-DR
+Cancer Cytogenetics Status: Signed Out
+Barbara A. Morash, PhD FCCMG Date Reported: Mar-31-2023
+* Amended *
+Interpretation
+This sample was previously banked; this report has been amended to add the results of the testing that was performed subsequently.
+Result by interphase FISH: negative for IGH/CCND1 rearrangement.
+ISCN: nuc ish(CCND1,IGH)x2[200]
+Molecular Diagnostics Status: Signed Out
+Interpretation
+Sample Banked: RNA lysate
+Reason for Banking: Further information required to activate testing
+Cancer Cytogenetics Status: Signed Out
+Interpretation
+Result by interphase FISH: negative for IGH/CCND1 rearrangement.
+ISCN: nuc ish(CCND1,IGH)x2[98]
+All signal configurations were within normal limits. This test requires approximately 2-5% abnormal cells within the sample to detect an IGH/CCND1 rearrangement.

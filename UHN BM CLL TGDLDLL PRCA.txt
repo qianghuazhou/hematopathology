@@ -1,0 +1,131 @@
+Diagnosis
+Right iliac crest bone marrow trephine biopsy, aspirate and peripheral blood smears (CLL follow up):
+1. CLL involvement (~ 60%)
+2. TCR gamma/delta large granular lymphocytic leukemia
+3. Pure red cell aplasia (likely secondary to the TCR g/d LGL)
+4. Granulocytic and megakaryocytic hypoplasia with few dysplastic megakaryocytes.
+Comment
+Karyotype and molecular analysis for NGS heme panel as well as a TCR clonality analysis by PCR have been activated. Results will be reported ass as available.
+Few additional IHC stains are still pending. Results will be reported in an addendum.
+Synoptic Data
+- CBC -
+Hb (g/L): 97
+WBC (x10e9/L): 36.6
+Plt (x10e9/L): 10
+MCV (fL): 96.5
+Neutrophils (x10e9/L): 1.3
+Lymphocytes (x10e9/L): 34.0
+Monocytes (x10e9/L): 1.2
+Eosinophils (x10e9/L): 0.1
+Basophils (x10e9/L): 0.1
+COMMENT
+Pripheral blood smear review show marked lymphocytosis with small lymphocytes with clumped chromatin. No increase in prolymphocytes and no large cells seen.
+--------------------------------------------------------
+- Differential Count -
+Number of Cells Counted: 200
+Blasts (%): 0
+Promyelocytes (%): 1
+Myelocytes (%): 3
+Metamyelocytes (%): 1
+Neutrophils (%): 8
+Erythroblasts (%): 0
+Lymphocytes (%): 79
+Monocytes (%): 7
+Eosinophils (%): 1
+Basophils (%): 0
+Plasma cells (%): 0
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Adequate
+Biopsy Length: 1.0-2.0cm
+Cellularity: Percent of intertrabecular surface area: 50
+Bony Trabeculae: Unremarkable
+--Bone marrow aspirate
+Bone marrow aspirate: Adequate quality
+Aspirate fragments: Present
+Aspirate Cellularity: Hypercellular
+Clot Section: The clot section contains marrow fragments
+DESCRIPTION
+Erythropoiesis: Rare to absent
+The presence of ring sideroblasts cannot be assessed
+Granulopoiesis: Relatively hypocellular
+Morphology: all stages present, sustained maturation, no dysplasia
+Megakaryopoiesis: Normocellular
+Morphology: few megakaryocytes with seperated nuclei, occasional small monolobated megakaryocyte
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: : Markedly increased and consist of small cells corresponding to CLL cells and small T-cells (please refer to separate flow cytometry report)
+Plasma cells: Not increased
+Iron stores: Increased
+Neoplasia: Type: See final diagnosis
+Immunohistochemistry: Performed on the trephine biopsy
+Results: CD34+ cells are <1%. MPO highlights reduced granulopoiesis. CD61 highlights few scattered megakaryocytes. E-cadherin and /or Glycophorin C positive cells. are absent
+Fibrosis: No morphologic evidence of fibrosis
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: CLL - not responding to treatment
+Purpose of Test: Initial Diagnosis at UHN
+Reason for Marrow: Lymphocytosis
+Comment: *** CLL not responding to treatment
+On Current Therapy: Specified in comment
+Comment: *** zanubrutinib
+Number of Specimens: 5
+Order Comments: Please keep molecular for further testing
+Flow Cytometry Status: Signed Out
+Anne M.M. Tierens, MD Date Reported: Jun-22-2023
+Interpretation
+Flow cytometric analysis show aberrant B-cells (~100% of B-cells) with CLL- immunophenotype:
+CD5+, CD10-, CD19+, CD20+, CD23-/dim, CD38-, CD43+, CD45+, CD79b-/dim, CD200+, IGK+, IGL-.
+In addition, a large population of TCR gamma/delta positive T-cells is demonstrated. It accounts 65% of total T-cells and 18% of total leukocytes.
+They have the following immunophenotype: CD2+, CD3+, CD4-, CD5 bimodal (+/-), CD7+, CD8-, CD16+, CD38+, CD45+, CD56-, CD57+, CD94+. These findings are consistent with a TCR gamma/delta+ T-large granular lymphocytic leukemia. A TCR clonality analysis by PCR is activated.
+SPECIMEN TYPE: Bone Marrow (B23-11042)
+Viability: 99%
+Viable cells w/o doublets 92,054 cells
+Viable cells w/o doublets 92 %
+Distribution of the major leukocyte populations of total cells
+Granulocytes 25 %
+Monocytes 7 %
+Lymphocytes 66 %
+CD19+ cells 37 %
+CD3+ cells 28 %
+CD5+ cells 63 %
+Distribution of T, B & NK cells of total lymphocytes
+B-cells 55 %
+T-cells 42 %
+Non CD3 (T)/ Non CD19 (B) 3 %
+T-cell subsets
+CD4+ 20 %
+CD4+/CD8+ 0 %
+CD4-CD8- 58 %
+CD8+ 21 %
+CD4/CD8= 0.43
+B-cell Subsets
+Ig Kappa+ 100 %
+Ig Lambda+ 0 %
+K:L= N/A
+CD5+/CD20+ B-cells 100 %
+Values are reported at the unit level of 1%.
+The following antigens are analyzed:
+CD2, CD3, CD4, CD5, CD7, CD8, CD10, CD16, CD19, CD20, CD23, CD38, CD43, CD45, CD56, CD57, CD79b, CD94, CD200, TCRg/d, IGK, IGL
+Cancer Cytogenetics Status: Signed Out
+Interpretation
+Result by G-banding: suboptimal study, normal karyotype, with loss of Y.
+ISCN: 45,X,-Y[7]/46,XY[11]
+Molecular Diagnostics Status: Signed Out
+Interpretation
+METHODOLOGY
+Test Method: Next Generation Sequencing
+RESULT
+Results: No clinically relevant variants detected
+COMMENT
+T cell clonality testing has been activated.
+Molecular Diagnostics Status: Signed Out
+Interpretation
+T-CELL CLONALITY PCR
+Interpretation: Positive
+TCRB Result: One PCR reaction with a clonal peak
+TCRG Result: One PCR reaction with a clonal peak
+Specimen: Bone marrow
+

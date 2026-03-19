@@ -1,0 +1,71 @@
+Diagnosis
+AML (follow up post BMT):
+1. In remission with blasts <3%. Flow for MRD is negative.
+2. Normocellular bone marrow with trilineage hematopoiesis and hypersegmented neutrophils (? Medication/therapy effect). Suggest correlation with chimerism studies.
+Synoptic Data
+- CBC -
+Hb (g/L): 107
+WBC (x10e9/L): 15.1
+Plt (x10e9/L): 189
+MCV (fL): 100.9
+Neutrophils (x10e9/L): 11.4
+Lymphocytes (x10e9/L): 1.9
+Monocytes (x10e9/L): 0.9
+Eosinophils (x10e9/L): 0.0
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: Round macrocytes, teardrop and pencil cells
+WBC: Neutrophilia with left shift and hypersegmented forms
+PLT: Normal in number with occasional giant forms
+Others: No circulating blasts
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Inadequate because: mainly muscle, periosteal tissue and cortical bone
+Biopsy Length: Length (specify in cm): 0.5 cm of which mainly muscle, periosteal tissue and cortical bone. Very small area of hematopoietic tissue.
+Bony Trabeculae: Unremarkable
+--Bone marrow aspirate
+Bone marrow aspirate: Adequate quality
+Aspirate fragments: Present
+Aspirate Cellularity: Normocellular
+Clot Section: The clot section contains marrow fragments
+DESCRIPTION
+Erythropoiesis: Normocellular
+Morphology: mainly normoblastic
+Ring sideroblasts are absent
+Granulopoiesis: Normocellular
+Morphology: hypersegmented forms
+Megakaryopoiesis: Normocellular
+Morphology: mainly normoblastic
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma cells: Not increased
+Iron stores: Normal
+Neoplasia: : see diagnosis
+Other Findings: : Aspirate: Blasts<3%. Biopsy: Scant amount of hematopoietic tissue, not assessable.
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: Post sibling alloBMT, D+63, reassessment post transplant. Pls assess for MRD if possible.
+Purpose of Test: Follow-up of Known Diagnosis
+Diagnosis: Acute myeloid leukemia
+Reason for Marrow: Remission status
+Number of Specimens: 5
+Flow Cytometry Status: Signed Out
+David Barth, MD Date Reported: Jul-05-2023
+Interpretation
+CD34+ and CD117+/CD34- myeloid precursors account for 0.17% and 0.41% total cells respectively.
+The CD34+ myeloid precursors do not demonstrate the previously seen leukemic immunophenotypic changes. The CD117+/CD34- myeloid precursors are comprised of the normal subsets.
+The following distribution of the major cell populations is as shown: 83.8% granulocytes, 9.6% lymphocytes, 4% monocytes, 1% erythroid precursors.
+Granulocyte and erythroid maturation patterns are within normal limits.
+In conclusion, residual CD34+ leukemic cells are not detected. (the lower level of detection is ~0.1% of total cells).
+The following antigens are analyzed: CD10, CD11b, CD13, CD16, CD33, CD34, CD36, CD45, CD71, CD105, CD117, HLA-DR
+Molecular Diagnostics Status: Signed Out
+Interpretation
+Molecular Identifier(s): M23.17858
+Sample Banked: RNA lysate
+Reason for Banking: Further information required to activate testing
+Cancer Cytogenetics Status: Signed Out
+Interpretation
+Fixed cells are available for cytogenetic testing (karyotyping and/or FISH), if required.

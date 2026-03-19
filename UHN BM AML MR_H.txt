@@ -1,0 +1,92 @@
+Diagnosis
+Known MDS: Consistent with acute myeloid leukemia transformed from MDS.
+Synoptic Data
+- CBC -
+Hb (g/L): 96
+WBC (x10e9/L): 1.4
+Plt (x10e9/L): 43
+MCV (fL): 102.1
+Neutrophils (x10e9/L): 0.2
+Lymphocytes (x10e9/L): 1.1
+Eosinophils (x10e9/L): 0.0
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: macrocytic anemia
+WBC: severe neutropenia
+PLT: severe thrombocytopenia
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Adequate
+Biopsy Length: Length (specify in cm): ~ 1 cm
+Cellularity: Percent of intertrabecular surface area: 40
+Bony Trabeculae: Unremarkable
+--Bone marrow aspirate
+Bone marrow aspirate: Hemodilute
+Aspirate fragments: Present
+Aspirate Cellularity: : moderate
+Clot Section: The clot section contains marrow fragments
+DESCRIPTION
+Erythropoiesis: Normocellular
+Morphology: rare dysplastic form seen
+Ring sideroblasts are less than 5% of all erythroblasts
+Granulopoiesis: Normocellular
+Morphology: left shifted, few neutrophils with hypo or bilobation
+Megakaryopoiesis: Relatively hypocellular
+Morphology: few hypolobated
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma cells: Not increased
+Iron stores: Increased
+Immunohistochemistry: Performed on the trephine biopsy
+Other Findings: : Blasts are ~30%
+COMMENT
+Biopsy Moderate cellularity with left shifted granulopoiesis and significantly increased primitive cells.
+CD34 shows blasts are at least 30%;
+--------------------------------------------------------
+Electronically verified by:
+Qianghua Zhou, MD
+qz/09/08/22
+Hong Chang, MD
+Clinical History
+Clinical History: mds, received 8 cycles aza, cytopenias, lost response
+Purpose of Test: Follow-up of Known Diagnosis
+Diagnosis: Myelodysplastic syndrome
+Reason for Marrow: Transformation to active leukemia
+Comment: *** FLT3 inconclusive from last sample, query % of blasts as well
+Specific Request: Other (specify in Comments)
+Comment: *** FLT3, flow to quantify if progressed to AML
+Number of Specimens: 6
+Flow Cytometry Status: Signed Out
+Yening (Daniel) Xia, MD Date Reported: Sep-02-2022
+Interpretation
+Leukemic blasts (myeloid): 12% of events
+Strong: CD13, CD33, CD34, CD117, HLA-DR
+Weak: CD45, CD56, CD71, CD105
+Negative: CD3, CyCD3, CD7, CD10, CD11b, CD14, CD16, CD19, CD35, CD36, CD64, CyCD79a, IREM2, CyMPO, TdT
+Conclusions: Myeloid blasts are increased. Correlation with concurrent bone marrow pathology is required.
+Specimen type: Bone marrow
+Distribution of the major leukocyte populations of total cells
+CD45+/Low SS 15 %
+Granulocytes 15 %
+Monocytes 2 %
+Lymphocytes 52 %
+Erythroid precursors 10%
+Other events/debris 6%
+Technologist: ML/SD
+The following antigens are analyzed: CD3, CyCD3, CD7, CD10, CD11b, CD13, CD14, CD16, CD19, CD33, CD34, CD35, CD36, CD45, CD56, CD64, CD71, CyCD79a, CD105, CD117, CyMPO, HLA-DR, IREM2, TdT
+Molecular Diagnostics Status: Signed Out
+Hong Chang, MD Date Reported: Sep-07-2022
+Interpretation
+Molecular Number: M#: 22.16944
+Sample Banked: DNA
+Reason for Banking: Further information required to activate testing
+Molecular Diagnostics Status: Signed Out
+Jose-Mario Capo-Chichi, PhD, FACMG Date Reported: Sep-13-2022
+Interpretation
+Molecular Number: M#: 22.16945
+Disease Status: Relapse / Refractory
+FLT3-ITD Result: Undetectable
+FLT3-TKD Result: Undetectable
+Specimen tested: Bone marrow

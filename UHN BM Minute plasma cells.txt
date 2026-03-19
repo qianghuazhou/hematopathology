@@ -1,0 +1,92 @@
+Specimen(s) Received
+1. Rt Il Crest: Iliac crest, Right Aspirate
+2. Rt Il Crest: Iliac crest, Right Biopsy
+3. Rt Il Crest: Iliac crest, Right Cytogenetics
+4. Rt Il Crest: Iliac crest, Right FISH-Aspirate
+5. Rt Il Crest: Iliac crest, Right Flow Cytometry
+Other Case Numbers
+Diagnosis
+Dilute bone marrow aspirate.
+A monotypic population of plasma cells is detected by flow cytometry (0.36%). Bone marrow aspirate demonstrates 3% plasma cells and mainly small lymphocytes with scattered granulopoiesis, megakaryopoiesis and increase in hemosiderin laden macrophages. Clot section dilute and biopsy is only cortical bone and periosteum with no marrow tissue and therefore no IHC can be performed.
+Given the diluteness of this sample, it may not represent the true underlying process.
+Synoptic Data
+- CBC -
+Hb (g/L): 132
+WBC (x10e9/L): 6.5
+Plt (x10e9/L): 480
+MCV (fL): 92.2
+Neutrophils (x10e9/L): 4.1
+Lymphocytes (x10e9/L): 1.4
+Monocytes (x10e9/L): 0.7
+Eosinophils (x10e9/L): 0.2
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: No rouleaux. Mild increase in echinocytes.
+WBC: Neutrophils normal in number with hypersegmented forms.
+PLT: Mild thromobocytosis.
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Inadequate because: 0.2cm of periosteal tissue and cortical bone with no hematopoietic marrow
+Biopsy Length: < 0.5cm
+Bony Trabeculae: : not assessable.
+--Bone marrow aspirate
+Bone marrow aspirate: Hemodilute
+Aspirate fragments: Absent
+Aspirate Cellularity: Unable to assess
+Clot Section: Not representative, only blood clot
+DESCRIPTION
+Erythropoiesis: Rare to absent
+The presence of ring sideroblasts cannot be assessed
+Erythropoiesis cannot be assessed
+Granulopoiesis: Relatively hypocellular
+Morphology: scattered segmented neutrophils with some myelocytes and promyelocytes
+Megakaryopoiesis: Normocellular
+Morphology: mainly normoblastic
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Increased
+: small lymphocytes 70-80%
+Plasma cells: Not increased
+: plasma cells 3%
+Iron stores: Increased
+Neoplasia: : see diagnosis
+Immunohistochemistry: Not performed
+Other Findings: : Aspirate: Increased hemosiderin laden macrophages. Biopsy: Not assessable as no hematopoietic marrow.
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: kappa myeloma
+Purpose of Test: Initial Diagnosis at UHN
+Reason for Marrow: Suspicion of specific disease (specify in Comments)
+On Current Therapy: No therapy
+Number of Specimens: 5
+Flow Cytometry Status: Signed Out
+Interpretation
+A monotypic population of plasma cell is detected 0.36% of total cells with the following immunophenotype:
+Positive: CD38/138/cytoplasmic kappa light chain restriction
+Negative: CD19/27/56/81/117
+No monotypic B cell population is detected on this flow cytometric sample.
+Suggest correlation with bone marrow for accurate plasma cell enumeration.
+Specimen Type: Bone Marrow (B23-12520)
+Viability: 100%
+Viable cells w/o doublets 208761 cells
+Viable cells w/o doublets 77 %
+Distribution of the major leukocyte populations of total cells
+Granulocytes: 54 %
+Lymphocytes: 21 %
+Monocytes: 8 %
+CD19+: 2 %
+Plasma cells (CD38++CD138+): <1 %
+B-cell Subsets
+Ig Kappa+ 57 %
+Ig Lambda+ 43 %
+Kappa:Lambda= 1.3
+Plasma Cells (CD38++CD138+)
+cyKappa+: 97 %
+cyLambda+: 3 %
+cKappa:cLambda= 32.3
+The following antigens are analyzed: CD19, CD27, CD38, CD45, CD56, CD81, CD117, CD138, cIgK, cIgL
+Cancer Cytogenetics Status: Signed Out
+Interpretation
+Fixed cells are available for cytogenetic testing (karyotyping and/or FISH), if required.

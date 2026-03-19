@@ -1,0 +1,73 @@
+Specimen(s) Received
+1. Rt Il Crest: Iliac crest, Right Aspirate
+2. Rt Il Crest: Iliac crest, Right Flow Cytometry
+3. Rt Il Crest: Iliac crest, Right Molecular
+Other Case Numbers
+Diagnosis
+B-lymphoblastic leukemia (follow up):
+1. In morphologic remission. Blasts <3%. Flow cytometry is negative for MRD. Molecular studies for BCR-ABL are pending.
+2. Normocellular bone marrow with granulocytic hyperplasia.
+Synoptic Data
+- CBC -
+Hb (g/L): 106
+WBC (x10e9/L): 4.8
+Plt (x10e9/L): 99
+MCV (fL): 105.8
+Neutrophils (x10e9/L): 1.7
+Lymphocytes (x10e9/L): 1.7
+Monocytes (x10e9/L): 0.7
+Eosinophils (x10e9/L): 0.0
+Basophils (x10e9/L): 0.1
+COMMENT
+RBC: Nonspecific RBC changes
+WBC: Mild neutropenia with toxic left shift
+PLT: Mild-moderate thrombocytopenia
+Others: No circulating blasts
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Not received
+--Bone marrow aspirate
+Bone marrow aspirate: Adequate quality
+Aspirate fragments: Present
+Aspirate Cellularity: Normocellular
+CHRISTIDIS, CAROL A. Blood and Bone Marrow Consultation Report B23-12442
+CHRISTIDIS, CAROL A. PM-4 Leukemia Clinic Page 2 of 3
+Clot Section: The clot section contains marrow fragments
+DESCRIPTION
+Erythropoiesis: Relatively hypocellular
+Morphology: mainly normoblastic
+Ring sideroblasts are absent
+Granulopoiesis: Relatively hypercellular
+Morphology: toxic granulation
+Megakaryopoiesis: Normocellular
+Morphology: large and hypersegmented forms
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma cells: Not increased
+Iron stores: Normal
+Neoplasia: : see diagnosis
+Other Findings: : Blasts <3%.
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: Ph+ B-ALL post-cycle 5 DFCI maintenance
+Purpose of Test: Follow-up of Known Diagnosis
+Diagnosis: B lymphoblastic leukemia
+Reason for Marrow: Remission status
+Specific Request: Molecular follow up needed
+Comment: *** BCR-ABL quantitative PCR
+Number of Specimens: 3
+Flow Cytometry Status: Signed Out
+Interpretation
+Sample quality: Satisfactory
+LLOQ: 2.2x10-5.
+CD19 B cell precursors with aberrant immunophenotype are not detected. CD19+ cells, 0.39% of total cells, are comprised of stage 1,2, transitional and mature B cells, and plasma cells.
+The distribution of the major subsets is as follows: 78% granulocytes, 2.7% monocytes, 3.3% lymphocytes and 8% nucleated RBC.
+In conclusion, residual leukemic B cell precursors are not detected.
+Technologist: MBT-PR
+The following antigens are analyzed: CD10, CD19, CD20, CD34, CD38, CD45, CD66c, CD73, CD81, CD123, CD304
+Molecular Diagnostics Status: Ordered
+Molecular Scientist Date Reported:
+* Preliminary *

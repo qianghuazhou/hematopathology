@@ -1,0 +1,97 @@
+Specimen(s) Received
+1. Rt Il Crest: Iliac crest, Right Aspirate
+2. Rt Il Crest: Iliac crest, Right Biopsy
+3. Rt Il Crest: Iliac crest, Right Cytogenetics
+4. Rt Il Crest: Iliac crest, Right Flow Cytometry
+5. Rt Il Crest: Iliac crest, Right Molecular
+Other Case Numbers
+Diagnosis
+Peripheral blood demonstrates mild rouleaux.
+Bone marrow aspirate is dilute and flow cytometry demonstrates a tiny monotypic plasma cell population within a larger polytypic plasma cell population. No monotypic B cell population detected.
+The biopsy is 0.6cm and demonstrates no normal hematopoiesis. Half of the biopsy demonstrates fibrous scar tissue with possible previous necrosis. The other half demonstrates severe collagen fibrosis with scattered small lymphocytes, macrophages, histiocytes and endothelial cells. There are scattered mononuclear cells of which many are degenerated and not clearly morphologically interpretable. IHC for plasma cells markers (CD138/kappa/lambda and CD117) and B cell marker (CD20) are compromised by severe back ground staining which renders them not interpretable. No increase in CD34 blasts, tryptase mast cells, CD30 cells, keratin solid tumor cells and congo red is negative.
+Given isolated mild-moderate anemia on the peripheral blood sample, and the fact that no hematopoietic marrow is seen on the sample supplied, this biopsy likely represents a local phenomenon (ie, unlikely that the entire marrow would have no hematopoietic tissue and demonstrate severe collagen fibrosis).
+No further diagnosis can be made on this sample. It is recommended to repeat bone marrow with flow cytometry and biopsy in a different location from this biopsy sample to determine the underlying process.
+Synoptic Data
+- CBC -
+Hb (g/L): 99
+WBC (x10e9/L): 6.4
+Plt (x10e9/L): 228
+MCV (fL): 97.5
+Neutrophils (x10e9/L): 4.1
+Lymphocytes (x10e9/L): 1.7
+Monocytes (x10e9/L): 0.4
+Eosinophils (x10e9/L): 0.0
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: Mild rouleaux
+WBC: Neutrophils normal in number with hypersegmented forms. No absolute lymphocytosis.
+PLT: Normal
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Adequate
+Biopsy Length: Length (specify in cm): 0.6cm in total length
+Bony Trabeculae: Unremarkable
+--Bone marrow aspirate
+Bone marrow aspirate: Hemodilute
+Aspirate fragments: Absent
+Aspirate Cellularity: Unable to assess
+Clot Section: Not representative, only blood clot
+DESCRIPTION
+Erythropoiesis: Rare to absent
+The presence of ring sideroblasts cannot be assessed
+Erythropoiesis cannot be assessed
+Granulopoiesis: Morphology: mainly segmented froms with a rare myelocyte seen
+Megakaryopoiesis: Rare to absent
+Megakaryocytes cannot be assessed
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma cells: Not increased
+Iron stores: Iron stores cannot be assessed since proper sample not available
+Neoplasia: : see diagnosis
+Immunohistochemistry: Results: CD20/117/138/kappa/lambda is picking up singificant background staining and is not interpretable. CD30/34/Keratin negative. Congo red is negative.
+Other Findings: : Biopsy: Half represents fibrous scar tissue with possible previous necrosis (cortical bone appears necrotic). The half represents diffuse severe collagen fibrosis. Hypocellular. Histiocytes, macrophages (CD68),endothelial cells (CD34) and T lymphocytes
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: 84M with anemia and ?plasma cell neoplasm, ?WM
+Purpose of Test: Initial Diagnosis at UHN
+Reason for Marrow: Suspicion of specific disease (specify in Comments)
+Comment: *** WM
+Number of Specimens: 5
+Flow Cytometry Status: Signed Out
+David Barth, MD Date Reported: Jul-19-2023
+Interpretation
+Plasma cells 0.08% of total cells.
+A subpopulation of the plasma cells (0.02% of total cells) are monotypic and express CD38/81/117(partial)/138 with cytoplasmic lambda light chain restriction. CD19/27/56 are negative.
+No monotypic B cell population is detected.
+KARDASH, SIDNEY Blood and Bone Marrow Consultation Report B23-12364
+KARDASH, SIDNEY PM-4 Lymphoma Clinic Page 3 of 3
+This is consistent with a very small monotypic plasma cell population that is a subpopulation of a larger polytypic plasma cell population. Correlation with bone marrow is required for accurate plasma cell enumeration.
+Specimen Type: Bone Marrow (B23-12364)
+Viability: 99%
+Viable cells w/o doublets 257841 cells
+Viable cells w/o doublets 94 %
+Distribution of the major leukocyte populations of total cells
+Granulocytes: 50 %
+Lymphocytes: 47 %
+Monocytes: 1 %
+CD19+: 1 %
+Plasma cells (CD38++CD138+): <1 %
+B-cell Subsets
+Ig Kappa+ 57 %
+Ig Lambda+ 43 %
+Kappa:Lambda= 1.3
+Plasma Cells (CD38++CD138+)
+cyKappa+: 44 %
+cyLambda+: 56 %
+cKappa:cLambda= 0.8
+The following antigens are analyzed: CD19, CD27, CD38, CD45, CD56, CD81, CD117, CD138, cIgK, cIgL
+Molecular Diagnostics Status: Signed Out
+Interpretation
+Molecular Identifier(s): M23-18277
+Sample Banked: RNA lysate
+Reason for Banking: Further information required to activate testing
+Cancer Cytogenetics Status: Amended
+*Preliminary/Amended *

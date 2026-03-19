@@ -1,0 +1,64 @@
+Specimen(s) Received
+1. Lt Il Crest: Iliac crest, Left Aspirate
+2. Lt Il Crest: Iliac crest, Left Flow Cytometry
+Diagnosis
+Myeloma (follow up):
+CD138+ plasma cells (by IHC on limited clot section) seen 2-3%.
+Dilute bone marrow aspirate.
+Flow cytometry for MRD is pending.
+Synoptic Data
+- CBC -
+Hb (g/L): 126
+WBC (x10e9/L): 5.3
+Plt (x10e9/L): 155
+MCV (fL): 90.9
+Neutrophils (x10e9/L): 3.4
+Lymphocytes (x10e9/L): 1.3
+Monocytes (x10e9/L): 0.4
+Eosinophils (x10e9/L): 0.2
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: Nonspecific RBC changes. No rouleaux.
+WBC: Neutrophils normal in number and morphology
+PLT: Normal
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Not received
+--Bone marrow aspirate
+Bone marrow aspirate: Hemodilute
+Aspirate fragments: Absent
+Aspirate Cellularity: Unable to assess
+Clot Section: : CD138 plasma cells 2-3% on limited clot section
+DESCRIPTION
+Erythropoiesis: Morphology: scattered nRBC with mainly normoblastic morphology
+Ring sideroblasts are absent
+KATZ, AVI R. Blood and Bone Marrow Consultation Report B23-12282
+KATZ, AVI R. PM-PACU Page 2 of 2
+Granulopoiesis: Morphology: all stages of maturation with mainly normoblastic morphology
+Megakaryopoiesis: Morphology: very rare megakaryocyte seen
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma cells: Not increased
+: No plasma cells seen
+Iron stores: Iron stores cannot be assessed since particles are absent
+Neoplasia: : see diagnosis
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: Multiple myeloma, post auto SCT
+Purpose of Test: Follow-up of Known Diagnosis
+Diagnosis: Plasma cell neoplasm
+Reason for Marrow: Remission status
+Number of Specimens: 2
+Flow Cytometry Status: Signed Out
+Interpretation
+Antigens analyzed: CD19, CD27, CD38, CD45, CD56, CD81, CD117, CD138, Cytoplasmic IG Kappa, Cytoplasmic IG Lambda
+Quality of the sample: Hemodilute
+Distribution of the major cell subsets: 1.6 % nucleated erythroid cells, 81% granulocytes, 0.58 % myeloid precursors, 3.4% monocytes, 2.5 % Eosinophils, 3.8 % B-cells, 6.3 T/NK- cells- Basophils, 0.0033 % mast cells
+LLOQ: 0.0011
+LOD: 0.00043
+Plasma cells represent 0.0056 % of total cells.
+Plasma cells with aberrant antigen expression are not detected.
+In conclusion, residual myeloma cells are not detected

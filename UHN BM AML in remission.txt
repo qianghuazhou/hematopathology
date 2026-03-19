@@ -1,0 +1,74 @@
+Specimen(s) Received
+1. Rt Il Crest: Iliac crest, Right Molecular
+2. Rt Il Crest: Iliac crest, Right Flow Cytometry
+3. Rt Il Crest: Iliac crest, Right Aspirate
+Other Case Numbers
+Amendments
+Amended: 07/10/23
+Reason: Gross Description Added
+Diagnosis
+AML (Follow up):
+1. In remission with <3% blasts. Flow cytometry for MRD is negative. NPM1 molecular studies pending.
+2. Dilute aspirate. Mainly granulopoiesis with no megakaryocytes seen, and scattered erythroid cells. Given the diluteness of this sample, this may not represent the true underlying process.
+Synoptic Data
+- CBC -
+Hb (g/L): 102
+WBC (x10e9/L): 5.8
+Plt (x10e9/L): 179
+MCV (fL): 95.2
+Neutrophils (x10e9/L): 4.4
+Lymphocytes (x10e9/L): 0.7
+Monocytes (x10e9/L): 0.5
+Eosinophils (x10e9/L): 0.1
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: Nonspecific RBC changes
+WBC: Neutrophils normal in number and morphology
+PLT: Normal
+Others: No circulating blasts
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Not received
+--Bone marrow aspirate
+Bone marrow aspirate: Hemodilute
+Aspirate fragments: Absent
+Aspirate Cellularity: Unable to assess
+Clot Section: Not representative, only blood clot
+DESCRIPTION
+Erythropoiesis: Morphology: rare scattred nRBC
+Ring sideroblasts are absent
+Granulopoiesis: Morphology: all stages of maturation present with mainly normoblastic morphology
+Megakaryopoiesis: Rare to absent
+Megakaryocytes cannot be assessed
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma cells: Not increased
+Iron stores: Iron stores cannot be assessed since particles are absent
+Neoplasia: : see diagnosis
+Other Findings: : Blasts less than 3%.
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: AML post consolidation, to assess for NPM1 MRD
+Purpose of Test: Follow-up of Known Diagnosis
+Diagnosis: Acute myeloid leukemia
+Reason for Marrow: Other (specify in Comment)
+Comment: *** MRD
+Specific Request: Molecular follow up needed
+Comment: *** NPM1 MRD
+Number of Specimens: 3
+Flow Cytometry Status: Signed Out
+Interpretation
+Sample is hemodilute.
+CD34+ and CD117+/CD34- myeloid precursors account for 0.42% and 0.6% total cells respectively. CD34+ hematogones 0.28%.
+The CD34-/CD117+ myeloid precursors do not demonstrate the previously seen leukemic immunophenotypic changes. The CD117+/CD34- myeloid precursors are comprised of the normal subsets.
+The following distribution of the major cell populations is as shown: 82.2% granulocytes, 5% lymphocytes, 2.1% monocytes, 1.2% erythroid precursors.
+In conclusion, residual CD34+ leukemic cells are not detected. (the lower level of detection is ~0.1% of total cells).
+Molecular Diagnostics Status: Signed Out
+Interpretation
+NPM1 Results: Undetectable
+Specimen tested: Bone marrow
+Methodology: RNA was extracted and reverse transcribed into cDNA then amplified by real-time quantitative PCR for 4 base pair insertions between nucleotides 863 and 864 of the NPM1 gene (NM_002520.6). This test will not detect other NPM1 variants. The amount of NPM1 variants are reported as NPM1 copies/104 ABL1 copies.
+Interpretation: This analysis is based on current knowledge of the NPM1 insertion variants and its association with monitoring treatments in AML (PMIDs:16541144, 28525762). The lower limit of detection for this assay is 1 NPM1 copy/104 ABL1 copies.
+The performance characteristics of this test were determined and verified by the Genome Diagnostics Laboratory at the University Health Network. This test has not been cleared or approved by the US FDA. FDA does not require this test to go through premarket FDA review. This test is used for clinical purposes; it should not be regarded as investigational or for research. This laboratory is certified under the Clinical Laboratory Improvement Amendments (CLIA) as qualified to perform high complexity clinical laboratory testing.

@@ -1,0 +1,58 @@
+Specimen(s) Received
+1. Rt Il Crest: Iliac crest, Right Aspirate
+2. Rt Il Crest: Iliac crest, Right Biopsy
+Diagnosis
+Myeloma (follow up):
+1. CD138 plasma cells (kappa restricted) approximately 7% on biopsy by IHC.
+2. Normocellular bone marrow with trilineage hematopoiesis.
+Synoptic Data
+- CBC -
+Hb (g/L): 129
+WBC (x10e9/L): 4.3
+Plt (x10e9/L): 152
+MCV (fL): 98.7
+Neutrophils (x10e9/L): 2.3
+Lymphocytes (x10e9/L): 1.5
+Monocytes (x10e9/L): 0.4
+Eosinophils (x10e9/L): 0.0
+Basophils (x10e9/L): 0.0
+COMMENT
+RBC: Echinocytes and acanthocytes. No rouleaux.
+WBC: Neutrophils normal in number with occasional hypersegmented forms
+PLT: Normal
+--------------------------------------------------------
+MATERIALS RECEIVED
+--Bone marrow trephine biopsy
+Bone marrow biopsy: Suboptimal because: 0.9cm of which 0.2 represents hematopoietic marrow and the remainder is muscle, cartilage, periosteal tissue and cortical bone
+Biopsy Length: < 0.5cm
+Bony Trabeculae: Unremarkable
+--Bone marrow aspirate
+Bone marrow aspirate: Adequate quality
+Aspirate fragments: Present
+Aspirate Cellularity: Normocellular
+Clot Section: The clot section contains marrow fragments
+DESCRIPTION
+Erythropoiesis: Normocellular
+Morphology: mainly normoblastic
+Ring sideroblasts are absent
+Granulopoiesis: Normocellular
+Morphology: mainly normoblastic
+Megakaryopoiesis: Normocellular
+Morphology: mildly dysplastic
+Monocytes: Not increased
+Mast Cells: Not increased
+Lymphocytes: Not increased
+Plasma cells: Not increased
+: Plasma cells <5%
+Iron stores: Normal
+Neoplasia: : see diagnosis
+Immunohistochemistry: Results: see report
+Other Findings: : Biopsy: Limited. Normocellular with trilineage hematopoiesis. CD138 plasma cells 7% with kappa light chain restriction by IHC.
+--------------------------------------------------------
+Electronically verified by:
+Clinical History
+Clinical History: Myeloma on trial
+Purpose of Test: Follow-up of Known Diagnosis
+Diagnosis: Plasma cell neoplasm
+Reason for Marrow: Remission status
+Number of Specimens: 2
