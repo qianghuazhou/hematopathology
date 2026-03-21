@@ -1,0 +1,32 @@
+Final Diagnosis ::
+Sinonasal mass, biopsy:
+
+B-cell lymphoma, not classifiable
+
+See Comment
+
+Intradepartmental consultation: Dr. Brian Skinnider
+
+HZR
+
+Electronically signed by [redacted]
+July 26, 2024 10:55:19
+
+Final Diagnosis Comment ::
+Sections demonstrate sheets of lymphoid population with significant crush artefact infiltrating in the sampled tissue. Immunohistochemical stains show the neoplastic cells are positive for CD20 and BCL6 and negative for CD3, CD5, BCL2, MUM1, and c-myc. Cyclin D1 is negative. EBER CISH is also negative. CD21 does not show any follicular dendritic meshwork. Ki67 shows a proliferative index of up to 95%.
+
+Due to the crush artefact, the B-cell lymphoma could not be definitive classified. The immunoprofile suggests a diffuse large B-cell lymphoma, germinal center phenotype, by the Hans algorithm.
+
+Re-biopsy is recommended for definitive diagnosis and addition cytogenetic studies for MYC, BCL2 and BCL6 gene rearrangements.
+
+Clinical History as Provided by Submitting Physician ::
+? aggressive malignancy
+Sinonasal mass, ? resection previously in China
+
+Specimen(s) Received ::
+A: Sinonasal mass
+
+Gross Description ::
+Received is a single container labelled [redacted] demographics and RIGHT MAXILLA (please note that the site on the requisition is “sinonasal mass”). It contains multiple tan tissue fragments aggregating to 0.5 cm in diameter. The specimen is submitted in toto in cassette A1.
+
+TT/sf
