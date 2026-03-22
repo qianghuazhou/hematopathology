@@ -768,7 +768,7 @@ Sections show lymph node architecture effaced by a diffuse proliferation of larg
       const t = clean(s);
       if (!t) return "See comment.";
       if (/see comment\.?$/i.test(t)) return t;
-      return ensureTerminalPeriod(t) + " See comment.";
+    return ensureTerminalPeriod(t) + "\n– See comment.";
     }
 
     function buildDxExtraLines(){
