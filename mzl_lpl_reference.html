@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MZL and LPL Diagnostic Reference</title>
+  <style>
+    :root{
+      --bg:#f4f7f9;
+      --panel:#ffffff;
+      --text:#22313f;
+      --muted:#5f6b76;
+      --primary:#243746;
+      --accent:#2d8cff;
+      --border:#dbe3ea;
+      --soft:#eef4f8;
+      --tag:#e9eef3;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:"Segoe UI", system-ui, -apple-system, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+
+    .container{
+      max-width:1120px;
+      margin:0 auto;
+      padding:24px;
+    }
+
+    .back-link{
+      display:inline-block;
+      margin-bottom:18px;
+      color:var(--primary);
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .back-link:hover{ text-decoration:underline; }
+
+    .hero{
+      background:linear-gradient(135deg, #243746 0%, #35556d 100%);
+      color:#fff;
+      padding:34px 28px;
+      border-radius:16px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.08);
+      margin-bottom:28px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      font-size:0.78rem;
+      font-weight:700;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.82);
+      margin-bottom:10px;
+    }
+
+    .hero h1{
+      margin:0 0 10px 0;
+      font-size:2rem;
+      letter-spacing:0.3px;
+      line-height:1.15;
+    }
+
+    .hero p{
+      margin:0;
+      max-width:920px;
+      color:rgba(255,255,255,0.92);
+    }
+
+    .toc{
+      margin-top:18px;
+      padding:16px 18px;
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:14px;
+    }
+
+    .toc strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:0.9rem;
+    }
+
+    .toc-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:8px 14px;
+    }
+
+    .toc a{
+      color:#fff;
+      text-decoration:none;
+      font-size:0.94rem;
+    }
+
+    .toc a:hover{ text-decoration:underline; }
+
+    .intro-grid{
+      display:grid;
+      grid-template-columns:1.1fr 0.9fr;
+      gap:18px;
+      margin-bottom:28px;
+    }
+
+    .panel, .card, .content-card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:18px 20px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.04);
+    }
+
+    .panel h2, .section h2{
+      margin:0 0 10px 0;
+      color:var(--primary);
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+    }
+
+    .panel h2{
+      font-size:1rem;
+    }
+
+    .panel p, .card p, .content-card p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    .quick-list{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+    }
+
+    .quick-list li{ margin:6px 0; }
+
+    .section{ margin-top:34px; }
+
+    .section h2{
+      font-size:1.15rem;
+      border-bottom:2px solid var(--border);
+      padding-bottom:10px;
+      margin-bottom:14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+      gap:16px;
+    }
+
+    .card h3, .content-card h3{
+      margin:0 0 8px 0;
+      color:var(--primary);
+      font-size:1.03rem;
+    }
+
+    .badge{
+      display:inline-block;
+      margin-bottom:10px;
+      font-size:0.74rem;
+      font-weight:700;
+      letter-spacing:0.03em;
+      color:var(--primary);
+      background:var(--tag);
+      border-radius:999px;
+      padding:5px 9px;
+    }
+
+    .callout{
+      margin-top:16px;
+      background:var(--soft);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:16px 18px;
+      color:var(--text);
+    }
+
+    .table-wrap{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.04);
+      overflow:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:760px;
+    }
+
+    th, td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      text-align:left;
+      font-size:0.95rem;
+    }
+
+    th{
+      background:#f8fbfd;
+      color:var(--primary);
+      font-size:0.86rem;
+      text-transform:uppercase;
+      letter-spacing:0.04em;
+    }
+
+    tr:last-child td{ border-bottom:none; }
+
+    ul, ol{
+      margin:0;
+      padding-left:20px;
+    }
+
+    li{ margin:6px 0; }
+
+    pre{
+      margin:0;
+      white-space:pre-wrap;
+      word-break:break-word;
+      background:#0f172a;
+      color:#e5edf8;
+      border-radius:14px;
+      padding:20px;
+      font-size:0.95rem;
+      line-height:1.65;
+      overflow-x:auto;
+      border:1px solid #1e293b;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .copy-row{
+      margin-top:12px;
+    }
+
+    .copy-btn{
+      background:var(--primary);
+      color:#fff;
+      border:none;
+      border-radius:10px;
+      padding:9px 13px;
+      font-weight:600;
+      cursor:pointer;
+    }
+
+    .copy-btn:hover{ filter:brightness(1.08); }
+
+    .footer{
+      margin-top:36px;
+      padding:18px 0 8px;
+      text-align:center;
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+
+    @media (max-width: 900px){
+      .intro-grid, .two-col{ grid-template-columns:1fr; }
+    }
+
+    @media (max-width: 800px){
+      .container{ padding:16px; }
+      .hero{ padding:26px 20px; }
+      .hero h1{ font-size:1.7rem; }
+      .toc-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+  <script>
+    function copyBlock(id){
+      const txt = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(txt).then(() => {
+        const btn = document.querySelector('[data-copy="'+id+'"]');
+        const old = btn.innerText;
+        btn.innerText = 'Copied';
+        setTimeout(()=>btn.innerText = old, 1200);
+      });
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <section class="hero">
+      <div class="eyebrow">Hematopathology Reference</div>
+      <h1>MZL and LPL Diagnostic Reference</h1>
+      <p>A practical quick-reference page comparing <strong>marginal zone lymphoma (MZL)</strong> and <strong>lymphoplasmacytic lymphoma (LPL)</strong>, with emphasis on marrow and nodal pathology, clinicopathologic correlation, ancillary testing, and ready-to-use pathology templates.</p>
+
+      <div class="toc">
+        <strong>Contents</strong>
+        <div class="toc-grid">
+          <a href="#overview">Overview</a>
+          <a href="#comparison">Side-by-Side Comparison</a>
+          <a href="#marrow">Bone Marrow Features</a>
+          <a href="#node">Lymph Node Features</a>
+          <a href="#ancillary">Ancillary Testing</a>
+          <a href="#algorithm">Diagnostic Algorithm</a>
+          <a href="#sitebias">Site-Based Interpretation</a>
+          <a href="#conjunctiva">Conjunctival / MALT Pitfall</a>
+          <a href="#phrasing">Immunophenotype Phrase Bank</a>
+          <a href="#templates">Pathology Templates</a>
+          <a href="#pearls">Key Diagnostic Pearls</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="intro-grid">
+      <div class="panel">
+        <h2>Overview</h2>
+        <p>The main day-to-day diagnostic problem is distinguishing <strong>MZL</strong> from <strong>LPL</strong> when a small B-cell lymphoma involves bone marrow and/or shows plasmacytic differentiation. The most useful practical anchors are <strong>marrow pattern</strong>, <strong>clinical setting</strong>, <strong>IgM paraprotein</strong>, and <strong>MYD88 p.L265P</strong>.</p>
+      </div>
+      <div class="panel">
+        <h2>High-Yield Points</h2>
+        <ul class="quick-list">
+          <li>Paratrabecular and interstitial marrow pattern favors LPL</li>
+          <li>Nodular and intrasinusoidal pattern favors MZL</li>
+          <li>High IgM paraprotein and MYD88 positivity strongly support LPL</li>
+          <li>Follicular colonization and monocytoid cytology support MZL</li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="section" id="overview">
+      <h2>Overview</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="badge">MZL</div>
+          <h3>When to favor MZL</h3>
+          <ul>
+            <li>Nodular and/or intrasinusoidal marrow involvement</li>
+            <li>Splenomegaly and peripheral blood lymphocytosis</li>
+            <li>Monocytoid cytology</li>
+            <li>Follicular colonization in nodal tissue</li>
+            <li>MYD88 usually negative</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="badge">LPL</div>
+          <h3>When to favor LPL</h3>
+          <ul>
+            <li>Paratrabecular and interstitial marrow involvement</li>
+            <li>IgM paraproteinemia / Waldenström setting</li>
+            <li>Plasmacytoid lymphocytes and plasma cells with shared light chain restriction</li>
+            <li>MYD88 p.L265P detected</li>
+            <li>Marrow-centered disease with compatible clinical context</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="badge">Overlap</div>
+          <h3>Common pitfall</h3>
+          <ul>
+            <li>Both can involve marrow and lymph node</li>
+            <li>Both can show plasmacytic differentiation</li>
+            <li>Both are usually CD5 negative and CD10 negative</li>
+            <li>No single histologic feature is absolutely specific</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Practical framing:</strong> first decide whether the pattern and clinical setting are more compatible with a marrow-centered IgM-associated lymphoma (<strong>LPL</strong>) or a marginal zone process with nodal, splenic, or extranodal features (<strong>MZL</strong>).
+      </div>
+    </section>
+
+    <section class="section" id="comparison">
+      <h2>Side-by-Side Comparison</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>MZL</th>
+              <th>LPL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Typical clinical setting</strong></td>
+              <td>Splenomegaly, lymphocytosis, nodal or extranodal disease</td>
+              <td>Waldenström macroglobulinemia / IgM paraproteinemia; marrow is usually central</td>
+            </tr>
+            <tr>
+              <td><strong>Bone marrow pattern</strong></td>
+              <td>Nodular and/or intrasinusoidal; often mixed</td>
+              <td>Paratrabecular and interstitial; often mixed</td>
+            </tr>
+            <tr>
+              <td><strong>Cytology</strong></td>
+              <td>Small to intermediate cells, often monocytoid; variable plasmacytic differentiation</td>
+              <td>Small lymphocytes with plasmacytoid lymphocytes and plasma cells</td>
+            </tr>
+            <tr>
+              <td><strong>Follicular colonization</strong></td>
+              <td>Supportive, especially in nodal disease</td>
+              <td>Not a classic defining feature</td>
+            </tr>
+            <tr>
+              <td><strong>IgM paraprotein</strong></td>
+              <td>May occur</td>
+              <td>Strongly supportive, especially if higher level</td>
+            </tr>
+            <tr>
+              <td><strong>MYD88 p.L265P</strong></td>
+              <td>Usually negative; uncommon positives reported</td>
+              <td>Usually positive</td>
+            </tr>
+            <tr>
+              <td><strong>Light chain restriction</strong></td>
+              <td>May be present</td>
+              <td>Often present and supportive</td>
+            </tr>
+            <tr>
+              <td><strong>Typical practical differential</strong></td>
+              <td>FL, SMZL, LPL, reactive follicular hyperplasia</td>
+              <td>MZL, plasma cell neoplasm, IgM MGUS / WM spectrum</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="marrow">
+      <h2>Bone Marrow Features</h2>
+      <div class="two-col">
+        <div class="content-card">
+          <h3>Marrow features favoring MZL</h3>
+          <ul>
+            <li>Nodular and/or intrasinusoidal infiltrates</li>
+            <li>Often focal, sometimes mixed with interstitial areas</li>
+            <li>Small to intermediate lymphocytes with more monocytoid appearance</li>
+            <li>Correlation with splenomegaly and lymphocytosis is useful</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>Marrow features favoring LPL</h3>
+          <ul>
+            <li>Paratrabecular and interstitial infiltrates</li>
+            <li>Spectrum from small lymphocytes to plasmacytoid lymphocytes and plasma cells</li>
+            <li>Shared light chain restriction in B cells and plasma cells is very supportive</li>
+            <li>IgM paraprotein and MYD88 positivity materially strengthen the diagnosis</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>High-yield marrow shortcut:</strong><br>
+        Nodular / intrasinusoidal → think <strong>MZL</strong><br>
+        Paratrabecular / interstitial + IgM / MYD88 → think <strong>LPL</strong>
+      </div>
+    </section>
+
+    <section class="section" id="node">
+      <h2>Lymph Node Features</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>MZL in node</h3>
+          <ul>
+            <li>Diffuse to vaguely nodular growth</li>
+            <li>Follicular colonization</li>
+            <li>Expanded and disrupted FDC meshworks</li>
+            <li>Small to intermediate atypical lymphocytes with monocytoid cytoplasm</li>
+            <li>Large cells scant, without sheets</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>LPL in node</h3>
+          <ul>
+            <li>Nodal disease can occur but is not the main defining pattern</li>
+            <li>Usually requires convincing plasmacytoid / plasma cell component</li>
+            <li>Interpret in the setting of marrow disease, IgM paraprotein, and MYD88</li>
+            <li>Without that context, nodal material alone may be difficult to classify confidently</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ancillary">
+      <h2>Ancillary Testing</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Study</th>
+              <th>Most useful role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Flow cytometry</strong></td>
+              <td>Defines clonality and phenotype; particularly useful in minimally involved marrow</td>
+            </tr>
+            <tr>
+              <td><strong>Light chain studies</strong></td>
+              <td>Support clonality; shared restriction in plasma cells is especially helpful for LPL</td>
+            </tr>
+            <tr>
+              <td><strong>CD21 / CD23</strong></td>
+              <td>Highlight follicular dendritic cell meshworks and follicular colonization in MZL</td>
+            </tr>
+            <tr>
+              <td><strong>MYD88 p.L265P</strong></td>
+              <td>Major discriminator favoring LPL in the appropriate context</td>
+            </tr>
+            <tr>
+              <td><strong>Serum protein studies</strong></td>
+              <td>IgM paraprotein strongly supports LPL / Waldenström spectrum</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="algorithm">
+      <h2>Diagnostic Algorithm</h2>
+      <div class="content-card">
+        <ol>
+          <li><strong>Assess the specimen type and pattern:</strong> marrow pattern is often the most useful initial discriminator.</li>
+          <li><strong>Look at cytology:</strong> monocytoid versus plasmacytoid / plasma cell-rich.</li>
+          <li><strong>Review the immunophenotype:</strong> both are often CD5- / CD10-, so do not overinterpret a generic small B-cell phenotype.</li>
+          <li><strong>Check for follicular colonization:</strong> supportive for MZL.</li>
+          <li><strong>Check serum IgM and MYD88:</strong> these are among the strongest practical features favoring LPL.</li>
+          <li><strong>Integrate the whole picture:</strong> when overlap remains substantial, sign out conservatively and recommend clinicopathologic correlation.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="sitebias">
+      <h2>Site-Based Interpretation</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Do not start with MYD88</h3>
+          <p>In day-to-day practice, the first question is usually not “is MYD88 positive?” but rather <strong>where is the disease and what is the architectural pattern?</strong> Site and growth pattern often provide the strongest initial diagnostic framework.</p>
+        </div>
+        <div class="card">
+          <h3>Extranodal site strongly matters</h3>
+          <p>Classical extranodal mucosal sites such as conjunctiva, ocular adnexa, salivary gland, stomach, thyroid, and lung strongly bias the differential toward <strong>extranodal marginal zone lymphoma (MALT lymphoma)</strong>. In such sites, plasmacytic differentiation alone should not push the diagnosis toward LPL.</p>
+        </div>
+        <div class="card">
+          <h3>Practical hierarchy</h3>
+          <ol>
+            <li>Site and architecture</li>
+            <li>Cytology and distribution of plasma cells</li>
+            <li>Flow cytometry and light chain studies</li>
+            <li>Serum protein studies</li>
+            <li>MYD88 and other molecular data</li>
+          </ol>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Working rule:</strong> extranodal mucosal disease usually defaults toward <strong>MZL/MALT</strong>, while marrow-centered disease with IgM paraproteinemia and compatible mutation data favors <strong>LPL</strong>.
+      </div>
+    </section>
+
+    <section class="section" id="conjunctiva">
+      <h2>Conjunctival / MALT Pitfall</h2>
+      <div class="two-col">
+        <div class="content-card">
+          <h3>Why conjunctiva usually favors MZL</h3>
+          <ul>
+            <li>Conjunctiva is a classic site for extranodal marginal zone lymphoma of MALT type</li>
+            <li>Monocytoid morphology is helpful when present, but is <strong>not required</strong></li>
+            <li>Plasmacytic differentiation can be seen in MALT lymphoma and is not specific for LPL</li>
+            <li>In this site, many pathologists are comfortable diagnosing MALT lymphoma even if the cytology is not perfectly classic</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>How to hedge when needed</h3>
+          <ul>
+            <li>If morphology and phenotype are limited, sign out as a low-grade B-cell lymphoma with plasmacytic differentiation favoring extranodal MZL</li>
+            <li>Reserve broader MZL versus LPL differential language for unusually plasmacytic cases or when systemic clinical data are strongly suggestive of LPL/WM</li>
+            <li>MYD88 and serum studies may help, but lack of either should not prevent a favored diagnosis in the right site</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Important correction:</strong> absence of monocytoid cells does <strong>not</strong> exclude MALT lymphoma, and a positive MYD88 result would be supportive of LPL but would still require clinicopathologic interpretation rather than automatic reclassification.
+      </div>
+    </section>
+
+    <section class="section" id="phrasing">
+      <h2>Immunophenotype Phrase Bank</h2>
+      <div class="two-col">
+        <div class="content-card">
+          <h3>MZL phrasing</h3>
+          <pre id="mzl_phrase">The atypical lymphoid cells are CD20+ and PAX5+ B-cells that express BCL2 and are negative for CD5, CD10, and cyclin D1. BCL6 is negative in the neoplastic cells, with staining confined to residual or colonized follicles. CD21 and/or CD23 highlight expanded and disrupted follicular dendritic cell meshworks. Kappa and lambda studies show [light chain restriction / no definite plasmacytic light chain restriction]. Ki-67 is [low / low overall with accentuation in colonized follicles].</pre>
+          <div class="copy-row"><button class="copy-btn" data-copy="mzl_phrase" onclick="copyBlock('mzl_phrase')">Copy text</button></div>
+        </div>
+
+        <div class="content-card">
+          <h3>LPL phrasing</h3>
+          <pre id="lpl_phrase">The infiltrate is composed of small B-lymphocytes with admixed plasmacytoid lymphocytes and plasma cells. The atypical cells are CD20+ and PAX5+ B-cells with [kappa/lambda] light chain restriction. CD138 highlights plasma cells, which show the same light chain restriction. The neoplastic cells are negative for CD5, CD10, and cyclin D1. IgM is [positive / not assessed]. MYD88 p.L265P is [detected / not detected / pending].</pre>
+          <div class="copy-row"><button class="copy-btn" data-copy="lpl_phrase" onclick="copyBlock('lpl_phrase')">Copy text</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="templates">
+      <h2>Pathology Templates</h2>
+
+      <div class="content-card" style="margin-bottom:16px;">
+        <h3>Bone marrow template favoring MZL</h3>
+        <pre id="bm_mzl">BONE MARROW, [SITE], ASPIRATE, CLOT SECTION, AND CORE BIOPSY:
+– Involvement by low-grade B-cell lymphoma, favor marginal zone lymphoma (see comment).
+
+Comment:
+The biopsy shows a predominantly [nodular / nodular and intrasinusoidal / mixed] small B-cell infiltrate composed of [small to intermediate-sized lymphocytes with monocytoid features / small lymphocytes with focal plasmacytic differentiation]. The atypical cells are CD20+ / PAX5+ and are negative for CD5, CD10, and cyclin D1. [CD21 / CD23] highlights [follicular dendritic cell meshworks / follicular colonization / no definite meshworks]. Flow cytometry demonstrates a [kappa / lambda]-restricted B-cell population. In the current clinicopathologic context, the findings favor marginal zone lymphoma. Correlation with clinical findings, imaging, serum protein studies, and prior tissue biopsies is recommended.
+
+Peripheral blood:
+– [No morphologic evidence of lymphoma involvement / Small atypical lymphocytes identified; correlate with flow cytometry].</pre>
+        <div class="copy-row"><button class="copy-btn" data-copy="bm_mzl" onclick="copyBlock('bm_mzl')">Copy text</button></div>
+      </div>
+
+      <div class="content-card" style="margin-bottom:16px;">
+        <h3>Bone marrow template favoring LPL</h3>
+        <pre id="bm_lpl">BONE MARROW, [SITE], ASPIRATE, CLOT SECTION, AND CORE BIOPSY:
+– Involvement by lymphoplasmacytic lymphoma, approximately [x]% of marrow cellularity (see comment).
+
+Comment:
+The marrow shows a [paratrabecular / interstitial / mixed paratrabecular and interstitial] infiltrate composed of small lymphocytes with admixed plasmacytoid lymphocytes and plasma cells. Immunohistochemical studies show CD20+ / PAX5+ B-cells with [kappa / lambda] light chain restriction. CD138 highlights plasma cells with the same light chain restriction. [IgM is positive.] [MYD88 p.L265P is detected.] In the appropriate clinicopathologic setting, including [IgM paraproteinemia / Waldenström macroglobulinemia], the findings support lymphoplasmacytic lymphoma. There is [no evidence / focal increase] of large cell transformation in this biopsy.
+
+Peripheral blood:
+– [No morphologic evidence of lymphoma involvement / Lymphocytosis with occasional plasmacytoid lymphocytes].</pre>
+        <div class="copy-row"><button class="copy-btn" data-copy="bm_lpl" onclick="copyBlock('bm_lpl')">Copy text</button></div>
+      </div>
+
+      <div class="content-card" style="margin-bottom:16px;">
+        <h3>Lymph node template favoring nodal MZL</h3>
+        <pre id="ln_mzl">LYMPH NODE, [SITE], EXCISIONAL BIOPSY:
+– Low-grade B-cell lymphoma, consistent with nodal marginal zone lymphoma (see comment).
+
+Comment:
+The lymph node architecture is [partially / completely] effaced by a small B-cell infiltrate showing [vague nodularity / follicular colonization / a diffuse to vaguely nodular pattern]. The atypical lymphocytes are predominantly small to intermediate in size with [monocytoid pale cytoplasm / irregular nuclear contours / condensed chromatin]. Large transformed cells are [rare / scant / not increased], without sheets of large cells. The neoplastic cells are CD20+ and PAX5+ B-cells that express BCL2 and are negative for CD5, CD10, [BCL6], and cyclin D1. CD21 and/or CD23 highlight expanded and disrupted follicular dendritic cell meshworks. [Kappa-restricted clonality is demonstrated by flow cytometry / light chain studies.] Overall, the features support nodal marginal zone lymphoma. There is no evidence of transformation to an aggressive B-cell lymphoma in this material.</pre>
+        <div class="copy-row"><button class="copy-btn" data-copy="ln_mzl" onclick="copyBlock('ln_mzl')">Copy text</button></div>
+      </div>
+
+
+      <div class="content-card" style="margin-bottom:16px;">
+        <h3>Extranodal conjunctival template favoring MALT lymphoma</h3>
+        <pre id="conj_malt">CONJUNCTIVA, BIOPSY:
+– Low-grade B-cell lymphoma with plasmacytic differentiation, most consistent with extranodal marginal zone lymphoma (MALT lymphoma) (see comment).
+
+Comment:
+The biopsy shows a small B-cell infiltrate with plasmacytic differentiation. In this extranodal mucosal site, the overall findings favor extranodal marginal zone lymphoma (MALT lymphoma). Monocytoid cytology is not prominent in this material; however, its absence does not exclude MALT lymphoma. Lymphoplasmacytic lymphoma is less likely in this setting but cannot be entirely excluded on morphology alone. Correlation with serum protein studies and MYD88 mutation analysis may be considered if clinically indicated.</pre>
+        <div class="copy-row"><button class="copy-btn" data-copy="conj_malt" onclick="copyBlock('conj_malt')">Copy text</button></div>
+      </div>
+
+      <div class="content-card">
+        <h3>Overlap template where MZL and LPL remain in the differential</h3>
+        <pre id="overlap">[SPECIMEN], [PROCEDURE]:
+– Low-grade small B-cell lymphoma with plasmacytic differentiation (see comment).
+
+Comment:
+The specimen shows a small B-cell lymphoid infiltrate with associated plasmacytoid lymphocytes / plasma cells. The differential diagnosis includes marginal zone lymphoma and lymphoplasmacytic lymphoma. Features favoring [MZL / LPL] include [follicular colonization / nodular or intrasinusoidal marrow pattern / monocytoid cytology / paratrabecular and interstitial marrow involvement / IgM paraproteinemia / MYD88 p.L265P mutation]. Correlation with serum protein studies, MYD88 testing, clinical findings including splenomegaly or lymphocytosis, and any prior nodal or marrow biopsies is recommended for final disease classification.</pre>
+        <div class="copy-row"><button class="copy-btn" data-copy="overlap" onclick="copyBlock('overlap')">Copy text</button></div>
+      </div>
+    </section>
+
+    <section class="section" id="pearls">
+      <h2>Key Diagnostic Pearls</h2>
+      <div class="content-card">
+        <ul>
+          <li>In marrow, <strong>pattern is often the most useful morphologic discriminator</strong>.</li>
+          <li><strong>Follicular colonization</strong> is a highly practical clue in favor of MZL in nodal tissue.</li>
+          <li><strong>MYD88 p.L265P</strong> is one of the strongest practical ancillary studies favoring LPL, but it is <strong>not perfectly specific</strong>.</li>
+          <li>High-level <strong>IgM paraprotein</strong> strongly supports LPL but does not entirely exclude MZL.</li>
+          <li><strong>Plasmacytic differentiation is non-specific</strong>; it can be seen in both MZL and LPL.</li>
+          <li><strong>Monocytoid morphology is helpful for MZL but is not required</strong>, especially at classic extranodal MALT sites.</li>
+          <li><strong>Site matters:</strong> conjunctiva and other classic mucosal sites strongly bias toward extranodal MZL/MALT lymphoma.</li>
+          <li>Some cases remain best classified conservatively on limited material, with final classification deferred to integrated clinicopathologic review.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="footer">
+      <p>Single-file HTML page styled to match your mediastinal lymphoma reference format.</p>
+    </div>
+  </div>
+</body>
+</html>
