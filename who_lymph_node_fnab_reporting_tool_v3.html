@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WHO Lymph Node FNAB Reporting Tool</title>
+<style>
+:root{
+  --bg:#f5f7fb;--card:#ffffff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;
+  --accent:#2563eb;--accent2:#eff6ff;--warn:#fff7ed;--danger:#fef2f2;--ok:#f0fdf4;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+header{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:white;padding:28px 22px}
+header h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+header p{margin:0;color:#dbeafe;font-size:14px}
+main{max-width:1180px;margin:24px auto;padding:0 16px 40px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+.card h2{font-size:18px;margin:0 0 14px;color:#0f172a}
+label{display:block;font-weight:700;font-size:13px;margin:12px 0 6px;color:#374151}
+input,select,textarea{width:100%;border:1px solid #d1d5db;border-radius:10px;padding:10px 11px;font-size:14px;background:white;color:var(--ink)}
+textarea{min-height:80px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.checkbox-row{display:flex;align-items:center;gap:9px;margin:8px 0 0;font-weight:600;color:#374151}
+.checkbox-row input{width:auto}
+.small{font-size:12px;color:var(--muted);margin-top:6px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+button{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;font-size:14px}
+.primary{background:var(--accent);color:white}.secondary{background:#e5e7eb;color:#111827}.ghost{background:#fff;border:1px solid #d1d5db;color:#111827}.danger{background:#fee2e2;color:#991b1b}
+.output{white-space:pre-wrap;background:#0b1220;color:#e5e7eb;border-radius:14px;padding:16px;min-height:360px;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.5}
+.badge{display:inline-block;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;margin-left:6px}
+.benign{background:var(--ok);color:#166534}.atypical{background:var(--warn);color:#9a3412}.suspicious{background:#fff1f2;color:#be123c}.malignant{background:var(--danger);color:#991b1b}.nd{background:#f3f4f6;color:#374151}
+.refbox,.dxbox{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:12px;color:#334155;font-size:13px;margin-top:12px}
+.dxbox{border-style:solid;background:#ffffff}
+.dxbox h3{margin:0 0 8px;font-size:14px;color:#0f172a}
+.dxbox ul{margin:6px 0 0 18px;padding:0}
+.dxbox li{margin:3px 0}
+.hr{border-top:1px solid var(--line);margin:16px 0}
+@media(max-width:900px){.grid,.row,.row3{grid-template-columns:1fr}}
+@media print{body{background:white}header,.btns,.no-print{display:none}.grid{display:block}.card{box-shadow:none;border:0}.output{color:black;background:white;border:0;padding:0}}
+</style>
+</head>
+<body>
+<header>
+  <h1>WHO Lymph Node FNAB Reporting Tool</h1>
+  <p>Structured reporting helper for lymph node cytopathology categories, comments, ROM, and management language.</p>
+</header>
+<main>
+  <div class="grid">
+    <section class="card">
+      <h2>Case Inputs</h2>
+      <div class="row">
+        <div><label>Site</label><input id="site" placeholder="e.g., cervical lymph node" /></div>
+        <div><label>Procedure</label><select id="procedure"><option>FNAB</option><option>EBUS-FNA</option><option>FNA with cell block</option><option>Core biopsy touch preparation</option><option>Other</option></select></div>
+      </div>
+      <div class="row">
+        <div><label>Adequacy</label><select id="adequacy"><option>Adequate</option><option>Limited</option><option>Nondiagnostic</option></select></div>
+        <div><label>WHO Category</label><select id="category" onchange="updateCategoryHelp()"><option value="nondiagnostic">Nondiagnostic / inadequate</option><option value="benign" selected>Benign</option><option value="atypical">Atypical</option><option value="suspicious">Suspicious for malignancy</option><option value="malignant">Malignant</option></select></div>
+      </div>
+      <div id="catHelp" class="small"></div>
+      <div id="dxHelp" class="dxbox"></div>
+
+      <div class="hr"></div>
+      <h2>Morphology</h2>
+      <div class="row3">
+        <div><label>Cell population</label><select id="population"><option>Polymorphous lymphoid population</option><option>Monomorphic lymphoid population</option><option>Mixed lymphoid population</option><option>Scant lymphoid population</option><option>Atypical epithelioid cells</option><option>Other</option></select></div>
+        <div><label>Cell size</label><select id="size"><option>Small</option><option>Small to intermediate</option><option>Intermediate to large</option><option>Large</option><option>Variable</option></select></div>
+        <div><label>Background</label><select id="background"><option>Tingible body macrophages present</option><option>Necrosis present</option><option>Granulomatous inflammation present</option><option>Plasma cells increased</option><option>No specific background features</option></select></div>
+      </div>
+      <label>Additional morphology</label><textarea id="morphExtra" placeholder="Optional free text: nuclear features, chromatin, nucleoli, cytoplasm, necrosis, granulomas, plasma cells, etc."></textarea>
+
+      <div class="hr"></div>
+      <h2>Ancillary Studies</h2>
+      <div class="row">
+        <div><label>Flow cytometry</label><textarea id="flow" placeholder="e.g., No abnormal B-cell population identified / Pending / Monoclonal B-cell population..."></textarea></div>
+        <div><label>IHC / cell block / special stains</label><textarea id="ihc" placeholder="e.g., CD20, CD3, CD30, cytokeratin, AFB, GMS, Congo red..."></textarea></div>
+      </div>
+      <label>Molecular / microbiology</label><textarea id="molecular" placeholder="Optional: MYD88, clonality, FISH, culture/PCR, etc."></textarea>
+
+      <div class="hr"></div>
+      <h2>Reference Settings</h2>
+      <label class="checkbox-row"><input type="checkbox" id="includeRef" checked /> Keep reference in comment for teaching / QA / tumor board</label>
+      <label class="checkbox-row"><input type="checkbox" id="includeROM" checked /> Include ROM and suggested management</label>
+      <label class="checkbox-row"><input type="checkbox" id="includeDX" checked /> Include differential diagnosis and key entities</label>
+      <label class="checkbox-row"><input type="checkbox" id="washu" checked /> WashU-style diagnosis format</label>
+      <div class="refbox"><strong>Reference inserted when enabled:</strong><br>WHO Reporting System for Lymph Node Cytopathology; Gao et al., Journal of Clinical and Translational Pathology, 2024.</div>
+
+      <div class="btns no-print">
+        <button class="primary" onclick="generateReport()">Generate Report</button>
+        <button class="secondary" onclick="copyReport()">Copy Report</button>
+        <button class="ghost" onclick="window.print()">Print</button>
+        <button class="danger" onclick="clearForm()">Clear</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Generated Report <span id="badge" class="badge benign">Benign</span></h2>
+      <div id="output" class="output"></div>
+      <div class="small no-print">Tip: keep the reference toggle ON for teaching, QA, and tumor board; turn it OFF for final LIS sign-out if a cleaner clinical report is preferred.</div>
+    </section>
+  </div>
+</main>
+<script>
+const data = {
+  nondiagnostic:{
+    label:'Nondiagnostic / inadequate', badge:'nd', rom:'~9.1–66.7%',
+    management:'Repeat FNAB with ROSE for adequacy assessment and triage is recommended. Core needle biopsy with touch preparation or excisional biopsy may be considered depending on clinical context.',
+    comment:'The specimen is insufficient for definitive cytologic evaluation due to limited cellularity, sampling, or technical factors. Correlation with clinical and radiologic findings is required, as the material may not represent the targeted lesion.',
+    dx:'Sampling error; necrotic node; cystic metastasis; fibrotic or treated lymphoma; infectious lymphadenitis.',
+    entities:['Tuberculous or atypical mycobacterial lymphadenitis','Necrotic metastatic carcinoma, including cystic HPV-related squamous cell carcinoma','High-grade lymphoma with necrosis','Fibrotic or treated lymphoma','Poorly sampled deep or mediastinal lesion']
+  },
+  benign:{
+    label:'Benign', badge:'benign', rom:'~0.7–11.5%',
+    management:'Clinical and radiologic correlation is recommended. If lymphadenopathy persists or findings are clinically/radiologically discordant, repeat sampling with ancillary studies may be considered.',
+    comment:'The cytologic findings show benign/reactive features with a polymorphous lymphoid population. No cytologic evidence of malignancy is identified in the material examined.',
+    dx:'Reactive follicular hyperplasia; paracortical/immunoblastic hyperplasia; sinus histiocytosis; plasmacytosis; infectious or granulomatous lymphadenitis. Important mimics include follicular lymphoma, Hodgkin lymphoma, and early/partial lymphoma.',
+    entities:['Follicular hyperplasia','Paracortical or immunoblastic hyperplasia, including viral/EBV-type reaction','Sinus histiocytosis','Prominent plasmacytosis','Suppurative lymphadenitis','Granulomatous lymphadenitis, including TB, atypical mycobacteria, fungal infection, or sarcoidosis']
+  },
+  atypical:{
+    label:'Atypical', badge:'atypical', rom:'~28.6–88.8%',
+    management:'Repeat sampling with flow cytometry, cell block, cytogenetic/molecular studies, core needle biopsy, or excisional biopsy is recommended as clinically indicated.',
+    comment:'The specimen shows predominantly benign lymphoid features with focal atypia. A lymphoproliferative disorder cannot be excluded on the current material.',
+    dx:'Reactive hyperplasia versus early or partial lymphoma; follicular lymphoma; marginal zone lymphoma; lymphoplasmacytic lymphoma; TFH-type T-cell lymphoma; Hodgkin lymphoma with scant diagnostic cells.',
+    entities:['Early or partial follicular lymphoma','Marginal zone lymphoma','Lymphoplasmacytic lymphoma, especially with IgM paraprotein','TFH-type T-cell lymphoma / angioimmunoblastic T-cell lymphoma','Classical Hodgkin lymphoma with rare HRS-like cells','Atypical epithelial or histiocytic proliferation']
+  },
+  suspicious:{
+    label:'Suspicious for malignancy', badge:'suspicious', rom:'~88–100%',
+    management:'Tissue biopsy with ancillary studies, including flow cytometry, immunohistochemistry, and molecular studies as appropriate, is recommended for definitive classification.',
+    comment:'The cytologic features are suspicious for malignancy, but the findings are insufficient in quantity or quality for a definitive diagnosis on the current material.',
+    dx:'Lymphoma, including low-grade B-cell lymphoma, classical Hodgkin lymphoma, or high-grade lymphoma with limited material; metastatic carcinoma; melanoma; germ cell tumor.',
+    entities:['Low-grade B-cell lymphoma with monomorphic small lymphoid cells','Follicular lymphoma','Diffuse large B-cell lymphoma or high-grade B-cell lymphoma with scant cellularity','Burkitt lymphoma','Classical Hodgkin lymphoma with rare HRS-like cells','Metastatic squamous cell carcinoma or adenocarcinoma','Metastatic melanoma']
+  },
+  malignant:{
+    label:'Malignant', badge:'malignant', rom:'~98.2–100%',
+    management:'Further subclassification should be based on correlation with morphology, flow cytometry, immunohistochemistry, molecular studies, and clinical/radiologic findings.',
+    comment:'The cytologic findings are diagnostic of malignancy. Further classification requires correlation with ancillary studies and clinical/radiologic findings.',
+    dx:'Specific classification depends on ancillary studies. Consider small B-cell lymphoma, aggressive B-cell lymphoma, T/NK-cell lymphoma, Hodgkin lymphoma, plasma cell neoplasm, myeloid sarcoma, histiocytic/dendritic cell neoplasm, or metastatic malignancy.',
+    entities:['CLL/SLL, mantle cell lymphoma, follicular lymphoma, marginal zone lymphoma, lymphoplasmacytic lymphoma','Diffuse large B-cell lymphoma, high-grade B-cell lymphoma, Burkitt lymphoma, lymphoblastic lymphoma','Peripheral T-cell lymphoma, NOS; TFH-type lymphoma; anaplastic large cell lymphoma','Classical Hodgkin lymphoma or nodular lymphocyte-predominant Hodgkin lymphoma','Plasma cell neoplasm or mastocytosis','Myeloid sarcoma','Histiocytic or dendritic cell neoplasm','Metastatic carcinoma, melanoma, sarcoma, or germ cell tumor']
+  }
+};
+function val(id){return document.getElementById(id).value.trim()}
+function checked(id){return document.getElementById(id).checked}
+function sentence(text){return text ? text.trim().replace(/\s+$/,'') : ''}
+function updateCategoryHelp(){
+  const c=val('category'); const d=data[c];
+  const badge=document.getElementById('badge'); badge.textContent=d.label; badge.className='badge '+d.badge;
+  document.getElementById('catHelp').innerHTML = '<strong>ROM:</strong> '+d.rom+' &nbsp; <strong>Typical next step:</strong> '+d.management;
+  document.getElementById('dxHelp').innerHTML = '<h3>Differential diagnosis / entities</h3><div><strong>Differential:</strong> '+d.dx+'</div><ul>'+d.entities.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
+}
+function generateReport(){
+  const c=val('category'), d=data[c];
+  updateCategoryHelp();
+  let site=val('site') || 'lymph node, site not specified';
+  let proc=val('procedure'), adequacy=val('adequacy');
+  let lines=[];
+  if(checked('washu')){
+    lines.push(site.charAt(0).toUpperCase()+site.slice(1)+', '+proc+':');
+    lines.push('– '+d.label+'. See comment.');
+  } else {
+    lines.push('SPECIMEN: '+site+', '+proc);
+    lines.push('DIAGNOSIS: '+d.label);
+  }
+  lines.push('');
+  lines.push('ADEQUACY');
+  lines.push(adequacy+'.');
+  lines.push('');
+  lines.push('MICROSCOPIC DESCRIPTION');
+  let morph = sentence(val('population'))+'. '+sentence(val('size'))+' cells are present. '+sentence(val('background'))+'.';
+  if(val('morphExtra')) morph += ' '+sentence(val('morphExtra'));
+  lines.push(morph);
+  let ancillary=[];
+  if(val('flow')) ancillary.push('Flow cytometry: '+sentence(val('flow')));
+  if(val('ihc')) ancillary.push('IHC/cell block/special stains: '+sentence(val('ihc')));
+  if(val('molecular')) ancillary.push('Molecular/microbiology: '+sentence(val('molecular')));
+  if(checked('includeDX')){
+    lines.push('');
+    lines.push('DIFFERENTIAL DIAGNOSIS / KEY ENTITIES');
+    lines.push('Differential: '+d.dx);
+    lines.push('Entities: '+d.entities.join('; ')+'.');
+  }
+  if(ancillary.length){lines.push('');lines.push('ANCILLARY STUDIES');lines.push(ancillary.join('\n'));}
+  lines.push('');
+  lines.push('COMMENT');
+  let comment=d.comment;
+  if(checked('includeROM')) comment += ' The reported risk of malignancy for this WHO category is '+d.rom+'. '+d.management;
+  if(checked('includeDX')) comment += ' The differential diagnosis/entities to consider include: '+d.dx;
+  if(checked('includeRef')) comment += ' Reference: WHO Reporting System for Lymph Node Cytopathology; Gao et al., Journal of Clinical and Translational Pathology, 2024.';
+  lines.push(comment);
+  document.getElementById('output').textContent=lines.join('\n');
+}
+function copyReport(){
+  const text=document.getElementById('output').textContent;
+  navigator.clipboard.writeText(text).then(()=>alert('Report copied to clipboard.'));
+}
+function clearForm(){
+  ['site','morphExtra','flow','ihc','molecular'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('category').value='benign';document.getElementById('adequacy').value='Adequate';
+  document.getElementById('population').value='Polymorphous lymphoid population';document.getElementById('size').value='Small';document.getElementById('background').value='Tingible body macrophages present';
+  document.getElementById('includeRef').checked=true;document.getElementById('includeROM').checked=true;document.getElementById('includeDX').checked=true;document.getElementById('washu').checked=true;
+  generateReport();
+}
+updateCategoryHelp();generateReport();
+</script>
+</body>
+</html>
