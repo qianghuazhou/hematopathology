@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Automated Ki-67 Bracket Estimator</title>
+<style>
+  :root {
+    --bg: #f5f5f3;
+    --card: #ffffff;
+    --ink: #1f2933;
+    --muted: #6b7280;
+    --line: #d1d5db;
+    --accent: #7c2d12;
+    --accent2: #2563eb;
+    --good: #166534;
+    --warn: #b45309;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  header {
+    padding: 22px 28px;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+  }
+  h1 { margin: 0; font-size: 24px; }
+  .subtitle { margin-top: 6px; color: var(--muted); font-size: 14px; }
+  main {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 18px;
+    padding: 18px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 14px;
+  }
+  h2 { margin: 0 0 12px 0; font-size: 17px; }
+  label { display: block; font-size: 13px; font-weight: bold; margin: 12px 0 5px; }
+  input[type="text"], textarea, select {
+    width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); font-size: 14px;
+  }
+  input[type="range"] { width: 100%; }
+  button {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 8px;
+    padding: 8px 11px;
+    cursor: pointer;
+    font-size: 13px;
+    margin: 4px 3px 4px 0;
+  }
+  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button.blue { background: var(--accent2); color: #fff; border-color: var(--accent2); }
+  button.green { background: var(--good); color: #fff; border-color: var(--good); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .stat {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #e5e7eb;
+    font-size: 14px;
+  }
+  .stat b { font-size: 15px; }
+  .value { font-weight: bold; }
+  .big {
+    font-size: 28px;
+    color: var(--accent);
+    font-weight: bold;
+  }
+  .canvases {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .canvasBox {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .canvasBox h3 { margin: 0 0 8px 0; font-size: 14px; }
+  canvas { width: 100%; max-height: 72vh; object-fit: contain; border-radius: 8px; background: #eee; border: 1px solid #ddd; }
+  .small { font-size: 12px; color: var(--muted); line-height: 1.35; }
+  .pill {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: #f3f4f6;
+    font-size: 12px;
+    margin-right: 4px;
+  }
+  .legendDot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:5px; }
+  .brown { background:#7c2d12; } .blueDot { background:#2563eb; } .grayDot { background:#9ca3af; }
+  .warning {
+    background: #fffbeb;
+    border: 1px solid #f59e0b;
+    color: #78350f;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+  @media (max-width: 980px) {
+    main { grid-template-columns: 1fr; }
+    .canvases { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Automated Ki-67 Bracket Estimator</h1>
+  <div class="subtitle">Browser-only color-threshold tool for DAB-positive Ki-67 IHC estimation. No image is uploaded to a server.</div>
+</header>
+
+<main>
+  <section>
+    <div class="card">
+      <h2>1. Case / Image</h2>
+      <label>Case ID</label>
+      <input type="text" id="caseId" placeholder="Optional" oninput="updateReport()" />
+      <label>Block / stain</label>
+      <input type="text" id="blockId" placeholder="e.g. A1 Ki-67" oninput="updateReport()" />
+      <label>Region assessed</label>
+      <select id="region" onchange="updateReport()">
+        <option>hotspot region</option>
+        <option>representative tumor area</option>
+        <option>selected tumor-rich area</option>
+        <option>user-defined ROI</option>
+      </select>
+      <label>Upload IHC image</label>
+      <input type="file" id="upload" accept="image/*" />
+      <div class="small" style="margin-top:8px;">Tip: crop to tumor-rich hotspot before upload for best approximation.</div>
+    </div>
+
+    <div class="card">
+      <h2>2. Segmentation settings</h2>
+      <label>DAB/brown sensitivity: <span id="brownVal">35</span></label>
+      <input type="range" id="brownThreshold" min="5" max="100" value="35" oninput="syncLabels(); analyzeImage();" />
+      <label>Nuclear/dark sensitivity: <span id="darkVal">70</span></label>
+      <input type="range" id="darkThreshold" min="20" max="150" value="70" oninput="syncLabels(); analyzeImage();" />
+      <label>Background exclusion brightness: <span id="bgVal">220</span></label>
+      <input type="range" id="bgThreshold" min="150" max="250" value="220" oninput="syncLabels(); analyzeImage();" />
+      <label>Minimum saturation: <span id="satVal">20</span></label>
+      <input type="range" id="satThreshold" min="0" max="100" value="20" oninput="syncLabels(); analyzeImage();" />
+      <button class="primary" onclick="analyzeImage()">Analyze</button>
+      <button onclick="resetThresholds()">Reset thresholds</button>
+      <button onclick="toggleOverlayMode()">Toggle overlay</button>
+      <div class="small" style="margin-top:8px;">
+        <span class="legendDot brown"></span>DAB-positive pixels
+        <span class="legendDot blueDot"></span>hematoxylin/nuclear pixels
+        <span class="legendDot grayDot"></span>excluded/background
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>3. Results</h2>
+      <div class="stat"><span>Raw automated estimate</span><span class="value" id="rawPercent">0%</span></div>
+      <div class="stat"><span>Bracket estimate</span><span class="value" id="bracket">Not analyzed</span></div>
+      <div class="stat"><span>DAB-positive pixels</span><span class="value" id="posPix">0</span></div>
+      <div class="stat"><span>Total nuclear pixels</span><span class="value" id="totalPix">0</span></div>
+      <div style="margin-top:12px;">Ki-67 bracket</div>
+      <div class="big" id="bigBracket">—</div>
+      <button class="green" onclick="copyReport()">Copy report</button>
+      <button class="blue" onclick="downloadOverlay()">Download overlay image</button>
+      <button onclick="downloadCSV()">Export CSV</button>
+    </div>
+
+    <div class="card">
+      <h2>Report text</h2>
+      <textarea id="report" rows="6"></textarea>
+    </div>
+
+    <div class="warning">
+      <b>Use note:</b> This is an estimation/support tool based on color thresholding, not validated diagnostic AI. It does not distinguish tumor cells from benign cells unless the uploaded/selected image is tumor-rich. Final reporting requires pathologist review.
+    </div>
+  </section>
+
+  <section>
+    <div class="canvases">
+      <div class="canvasBox">
+        <h3>Original image</h3>
+        <canvas id="originalCanvas"></canvas>
+      </div>
+      <div class="canvasBox">
+        <h3>Automated segmentation overlay</h3>
+        <canvas id="overlayCanvas"></canvas>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+let img = new Image();
+let originalCanvas = document.getElementById('originalCanvas');
+let overlayCanvas = document.getElementById('overlayCanvas');
+let octx = originalCanvas.getContext('2d');
+let vctx = overlayCanvas.getContext('2d');
+let lastResult = null;
+let overlayMode = true;
+
+function syncLabels(){
+  document.getElementById('brownVal').innerText = document.getElementById('brownThreshold').value;
+  document.getElementById('darkVal').innerText = document.getElementById('darkThreshold').value;
+  document.getElementById('bgVal').innerText = document.getElementById('bgThreshold').value;
+  document.getElementById('satVal').innerText = document.getElementById('satThreshold').value;
+}
+
+function resetThresholds(){
+  document.getElementById('brownThreshold').value = 35;
+  document.getElementById('darkThreshold').value = 70;
+  document.getElementById('bgThreshold').value = 220;
+  document.getElementById('satThreshold').value = 20;
+  syncLabels(); analyzeImage();
+}
+
+function toggleOverlayMode(){ overlayMode = !overlayMode; drawOverlayFromLast(); }
+
+document.getElementById('upload').addEventListener('change', function(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(evt){
+    img.onload = function(){
+      const maxDim = 1800;
+      let w = img.width, h = img.height;
+      if(Math.max(w,h) > maxDim){
+        const scale = maxDim / Math.max(w,h);
+        w = Math.round(w * scale); h = Math.round(h * scale);
+      }
+      originalCanvas.width = overlayCanvas.width = w;
+      originalCanvas.height = overlayCanvas.height = h;
+      octx.clearRect(0,0,w,h); vctx.clearRect(0,0,w,h);
+      octx.drawImage(img,0,0,w,h);
+      analyzeImage();
+    };
+    img.src = evt.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+function rgbToHsv(r,g,b){
+  r/=255; g/=255; b/=255;
+  const max = Math.max(r,g,b), min = Math.min(r,g,b);
+  let h, s, v = max;
+  const d = max - min;
+  s = max === 0 ? 0 : d / max;
+  if(max === min) h = 0;
+  else {
+    switch(max){
+      case r: h = (g-b)/d + (g < b ? 6 : 0); break;
+      case g: h = (b-r)/d + 2; break;
+      case b: h = (r-g)/d + 4; break;
+    }
+    h /= 6;
+  }
+  return [h*360, s*100, v*255];
+}
+
+function bracketize(p){
+  if(p < 5) return '<5%';
+  if(p >= 95) return '>95%';
+  const lower = Math.floor(p/5)*5;
+  const upper = lower + 5;
+  return lower + '–' + upper + '%';
+}
+
+function analyzeImage(){
+  if(!originalCanvas.width) return;
+  const w = originalCanvas.width, h = originalCanvas.height;
+  const imgData = octx.getImageData(0,0,w,h);
+  const data = imgData.data;
+  const out = vctx.createImageData(w,h);
+  const od = out.data;
+  const brownT = Number(document.getElementById('brownThreshold').value);
+  const darkT = Number(document.getElementById('darkThreshold').value);
+  const bgT = Number(document.getElementById('bgThreshold').value);
+  const satT = Number(document.getElementById('satThreshold').value);
+  let pos = 0, totalNuclear = 0, excluded = 0;
+
+  for(let i=0; i<data.length; i+=4){
+    const r=data[i], g=data[i+1], b=data[i+2];
+    const [hue, sat, val] = rgbToHsv(r,g,b);
+    const brightness = (r+g+b)/3;
+    const darkness = 255 - brightness;
+
+    // DAB brown heuristic: red > green > blue, moderate saturation, orange-brown hue, not too bright.
+    const brownScore = (r - b) + 0.5*(r - g) + darkness*0.35;
+    const isBrownHue = (hue >= 10 && hue <= 55) || (r > g && g > b);
+    const isPositive = isBrownHue && sat >= satT && brownScore > brownT && brightness < bgT;
+
+    // Nuclear/dark heuristic: dark enough and not background. Captures positive and negative nuclei.
+    const isNuclear = darkness > darkT && brightness < bgT && sat >= Math.max(5, satT - 10);
+
+    if(isNuclear) totalNuclear++;
+    if(isPositive && isNuclear) pos++;
+    if(!isNuclear) excluded++;
+
+    if(overlayMode){
+      if(isPositive && isNuclear){ od[i]=124; od[i+1]=45; od[i+2]=18; od[i+3]=210; }
+      else if(isNuclear){ od[i]=37; od[i+1]=99; od[i+2]=235; od[i+3]=180; }
+      else { od[i]=r; od[i+1]=g; od[i+2]=b; od[i+3]=70; }
+    } else {
+      od[i]=r; od[i+1]=g; od[i+2]=b; od[i+3]=255;
+    }
+  }
+
+  const raw = totalNuclear > 0 ? (pos / totalNuclear * 100) : 0;
+  const bracket = bracketize(raw);
+  lastResult = {pos, totalNuclear, excluded, raw, bracket, out};
+  drawOverlayFromLast();
+  updateResultFields();
+  updateReport();
+}
+
+function drawOverlayFromLast(){
+  if(!lastResult) return;
+  const w = overlayCanvas.width, h = overlayCanvas.height;
+  vctx.clearRect(0,0,w,h);
+  if(overlayMode){
+    vctx.drawImage(originalCanvas,0,0);
+    const maskCanvas = document.createElement('canvas');
+    maskCanvas.width = w; maskCanvas.height = h;
+    const mctx = maskCanvas.getContext('2d');
+    mctx.putImageData(lastResult.out,0,0);
+    vctx.globalAlpha = 0.72;
+    vctx.drawImage(maskCanvas,0,0);
+    vctx.globalAlpha = 1;
+  } else {
+    vctx.putImageData(lastResult.out,0,0);
+  }
+}
+
+function updateResultFields(){
+  if(!lastResult) return;
+  document.getElementById('rawPercent').innerText = lastResult.raw.toFixed(1) + '%';
+  document.getElementById('bracket').innerText = lastResult.bracket;
+  document.getElementById('bigBracket').innerText = lastResult.bracket;
+  document.getElementById('posPix').innerText = lastResult.pos.toLocaleString();
+  document.getElementById('totalPix').innerText = lastResult.totalNuclear.toLocaleString();
+}
+
+function updateReport(){
+  const caseId = document.getElementById('caseId').value.trim();
+  const blockId = document.getElementById('blockId').value.trim();
+  const region = document.getElementById('region').value;
+  const bracket = lastResult ? lastResult.bracket : 'not analyzed';
+  const raw = lastResult ? lastResult.raw.toFixed(1) + '%' : 'not analyzed';
+  let prefix = '';
+  if(caseId) prefix += 'Case ID: ' + caseId + '\n';
+  if(blockId) prefix += 'Block/stain: ' + blockId + '\n';
+  const text = prefix + 'Ki-67 proliferation index is estimated at approximately ' + bracket + ' in the selected ' + region + ' by automated color-threshold analysis. Raw pixel-based estimate: ' + raw + '. Final interpretation requires pathologist review.';
+  document.getElementById('report').value = text;
+}
+
+function copyReport(){
+  const t = document.getElementById('report');
+  t.select(); document.execCommand('copy');
+}
+
+function downloadOverlay(){
+  if(!overlayCanvas.width) return;
+  const a = document.createElement('a');
+  a.download = 'ki67_overlay.png';
+  a.href = overlayCanvas.toDataURL('image/png');
+  a.click();
+}
+
+function downloadCSV(){
+  if(!lastResult) return;
+  const rows = [
+    ['case_id','block_stain','region','raw_percent','bracket','positive_pixels','total_nuclear_pixels','brown_threshold','dark_threshold','background_threshold','saturation_threshold'],
+    [
+      document.getElementById('caseId').value,
+      document.getElementById('blockId').value,
+      document.getElementById('region').value,
+      lastResult.raw.toFixed(1),
+      lastResult.bracket,
+      lastResult.pos,
+      lastResult.totalNuclear,
+      document.getElementById('brownThreshold').value,
+      document.getElementById('darkThreshold').value,
+      document.getElementById('bgThreshold').value,
+      document.getElementById('satThreshold').value
+    ]
+  ];
+  const csv = rows.map(r => r.map(x => '"' + String(x).replaceAll('"','""') + '"').join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'ki67_estimate.csv'; a.click(); URL.revokeObjectURL(url);
+}
+
+syncLabels();
+updateReport();
+</script>
+</body>
+</html>
