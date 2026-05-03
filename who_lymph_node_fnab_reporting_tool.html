@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WHO Lymph Node FNAB Reporting Tool</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--text:#1f2937;--muted:#6b7280;--line:#dbe3ef;--accent:#2563eb;--accent2:#1e40af;--soft:#eaf1ff;--warn:#fff7ed;--bad:#fef2f2;--good:#ecfdf5;}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.45}.wrap{max-width:1180px;margin:0 auto;padding:24px}.hero{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:white;border-radius:20px;padding:26px 30px;margin-bottom:20px;box-shadow:0 10px 30px rgba(37,99,235,.25)}.hero h1{margin:0 0 8px;font-size:28px}.hero p{margin:0;color:#dbeafe}.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 4px 18px rgba(15,23,42,.06);margin-bottom:18px}.card h2{font-size:18px;margin:0 0 14px;border-bottom:1px solid var(--line);padding-bottom:10px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin-bottom:13px}label{display:block;font-weight:700;font-size:13px;margin-bottom:6px;color:#374151}input,select,textarea{width:100%;border:1px solid #cbd5e1;border-radius:10px;padding:10px 11px;font-size:14px;background:white;color:var(--text)}textarea{min-height:78px;resize:vertical}.small{font-size:12px;color:var(--muted)}.category{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.catBtn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 7px;cursor:pointer;font-weight:700;font-size:12px;text-align:center}.catBtn.active{background:var(--accent);color:white;border-color:var(--accent)}.pill{display:inline-block;padding:4px 9px;border-radius:999px;font-size:12px;font-weight:700;background:var(--soft);color:var(--accent2);margin:2px}.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check{display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px;background:#fff}.check input{width:auto}.btns{display:flex;gap:10px;flex-wrap:wrap}.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:700;cursor:pointer;background:var(--accent);color:#fff}.btn.secondary{background:#334155}.btn.light{background:#e5e7eb;color:#111827}.output{white-space:pre-wrap;background:#0f172a;color:#e5e7eb;border-radius:16px;padding:18px;min-height:400px;font-family:Consolas,Menlo,monospace;font-size:13.5px}.hint{border-radius:14px;padding:12px 14px;margin-top:10px;font-size:13px}.hint.good{background:var(--good)}.hint.warn{background:var(--warn)}.hint.bad{background:var(--bad)}.footer{font-size:12px;color:var(--muted);margin-top:10px}@media(max-width:900px){.grid,.row{grid-template-columns:1fr}.category{grid-template-columns:1fr 1fr}.checks{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>WHO Lymph Node FNAB Reporting Tool</h1>
+    <p>Interactive cytology report generator using WHO five-category framework, with concise sign-out comments and ancillary-study guidance.</p>
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="card">
+        <h2>Specimen</h2>
+        <div class="row">
+          <div class="field"><label>Site</label><input id="site" placeholder="e.g., left cervical lymph node"></div>
+          <div class="field"><label>Procedure</label><select id="procedure"><option>Fine needle aspiration biopsy</option><option>EBUS-guided FNA</option><option>Ultrasound-guided FNA</option><option>FNA with cell block</option><option>Other</option></select></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Adequacy</label><select id="adequacy"><option>Adequate for evaluation</option><option>Limited cellularity</option><option>Suboptimal preparation</option><option>Nondiagnostic</option></select></div>
+          <div class="field"><label>ROSE</label><select id="rose"><option>Not performed</option><option>Performed; adequate material obtained</option><option>Performed; limited material obtained</option><option>Performed; additional passes triaged for ancillary studies</option></select></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>WHO Category</h2>
+        <div class="category" id="catBox">
+          <button class="catBtn" data-cat="Nondiagnostic">Nondiagnostic</button>
+          <button class="catBtn" data-cat="Benign">Benign</button>
+          <button class="catBtn active" data-cat="Atypical">Atypical</button>
+          <button class="catBtn" data-cat="Suspicious for malignancy">Suspicious</button>
+          <button class="catBtn" data-cat="Malignant">Malignant</button>
+        </div>
+        <div id="romHint" class="hint warn"></div>
+      </div>
+
+      <div class="card">
+        <h2>Morphology</h2>
+        <div class="row">
+          <div class="field"><label>Cell population</label><select id="population"><option>Polymorphous lymphoid population</option><option>Monomorphic lymphoid population</option><option>Mixed lymphoid population with focal atypia</option><option>Scant lymphoid material</option><option>Atypical epithelioid cells</option><option>Large atypical lymphoid cells</option></select></div>
+          <div class="field"><label>Predominant cell size</label><select id="size"><option>Small</option><option>Small to intermediate</option><option>Intermediate</option><option>Large</option><option>Mixed</option></select></div>
+        </div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" id="tingible"> Tingible body macrophages</label>
+          <label class="check"><input type="checkbox" id="necrosis"> Necrosis</label>
+          <label class="check"><input type="checkbox" id="granulomas"> Granulomas</label>
+          <label class="check"><input type="checkbox" id="plasma"> Increased plasma cells</label>
+          <label class="check"><input type="checkbox" id="hrs"> HRS-like cells</label>
+          <label class="check"><input type="checkbox" id="epithelioid"> Epithelioid/metastatic cells</label>
+        </div>
+        <div class="field" style="margin-top:12px"><label>Additional morphology</label><textarea id="morphExtra" placeholder="Optional free text..."></textarea></div>
+      </div>
+
+      <div class="card">
+        <h2>Ancillary Studies</h2>
+        <div class="row">
+          <div class="field"><label>Flow cytometry</label><textarea id="flow" placeholder="e.g., no abnormal B-cell population identified; pending; lambda-restricted CD5-CD10- B-cell population..."></textarea></div>
+          <div class="field"><label>IHC / Cell block</label><textarea id="ihc" placeholder="e.g., CD20, CD3, CD30, cytokeratin, SOX10..."></textarea></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Molecular / FISH</label><textarea id="mol" placeholder="Optional"></textarea></div>
+          <div class="field"><label>Microbiology / Special stains</label><textarea id="micro" placeholder="Optional"></textarea></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <h2>Generated Report</h2>
+        <div class="btns" style="margin-bottom:12px">
+          <button class="btn" onclick="generateReport()">Generate</button>
+          <button class="btn secondary" onclick="copyReport()">Copy</button>
+          <button class="btn light" onclick="clearForm()">Clear</button>
+        </div>
+        <div id="output" class="output"></div>
+        <div class="footer">Risk-of-malignancy ranges are approximate from published WHO/Sydney-system validation studies and should be interpreted with clinical/radiologic correlation.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let category = 'Atypical';
+const rom = {
+  'Nondiagnostic':'ROM approximately 9–67%. Recommended: repeat FNAB with ROSE, or core/excisional biopsy if clinically indicated.',
+  'Benign':'ROM approximately 0.7–11.5%. Recommended: clinical/radiologic correlation; repeat sampling if persistent or discordant.',
+  'Atypical':'ROM approximately 28.6–88.8%. Recommended: repeat sampling with flow cytometry and/or core biopsy.',
+  'Suspicious for malignancy':'ROM approximately 88–100%. Recommended: tissue biopsy and full ancillary workup.',
+  'Malignant':'ROM approximately 98.2–100%. Recommended: subclassification with IHC, flow cytometry, FISH/molecular studies as appropriate.'
+};
+
+document.querySelectorAll('.catBtn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.catBtn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    category = btn.dataset.cat;
+    updateRom();
+    generateReport();
+  });
+});
+
+function val(id){return document.getElementById(id).value.trim();}
+function checked(id){return document.getElementById(id).checked;}
+function updateRom(){
+  const box=document.getElementById('romHint');
+  box.textContent=rom[category];
+  box.className='hint ' + (category==='Benign'?'good':(category==='Nondiagnostic'||category==='Atypical'?'warn':'bad'));
+}
+function autoComment(){
+  if(category==='Nondiagnostic') return 'The specimen is insufficient for definitive evaluation due to limited cellularity and/or technical factors. Repeat FNAB with rapid on-site evaluation or core/excisional biopsy is recommended if clinically indicated.';
+  if(category==='Benign') return 'The cytologic findings show a polymorphous lymphoid population, favoring a reactive process. No cytologic evidence of malignancy is identified. Correlation with clinical and radiologic findings is recommended. If lymphadenopathy persists or is clinically discordant, repeat sampling with ancillary studies may be considered.';
+  if(category==='Atypical') return 'The specimen shows predominantly benign lymphoid features with focal atypia. A lymphoproliferative disorder cannot be excluded. Repeat sampling with flow cytometry and/or core biopsy is recommended for further evaluation.';
+  if(category==='Suspicious for malignancy') return 'The cytologic features are suspicious for malignancy but are insufficient for a definitive diagnosis. Tissue biopsy with ancillary studies, including flow cytometry, immunohistochemistry, and molecular testing as appropriate, is recommended.';
+  return 'The cytologic findings are diagnostic of malignancy. Further classification requires correlation with ancillary studies, including immunophenotyping and molecular/cytogenetic testing as appropriate.';
+}
+function generateReport(){
+  let features=[];
+  if(checked('tingible')) features.push('tingible body macrophages are present');
+  if(checked('necrosis')) features.push('necrosis is present');
+  if(checked('granulomas')) features.push('granulomatous inflammation is present');
+  if(checked('plasma')) features.push('plasma cells are increased');
+  if(checked('hrs')) features.push('rare Hodgkin/Reed-Sternberg-like cells are present');
+  if(checked('epithelioid')) features.push('atypical epithelioid cells are present');
+
+  let morph = `${val('population')}, predominantly ${val('size').toLowerCase()} cells`;
+  if(features.length) morph += ', with ' + features.join('; ') + '.'; else morph += '.';
+  if(val('morphExtra')) morph += '\n' + val('morphExtra');
+
+  let anc=[];
+  if(val('flow')) anc.push('Flow cytometry: ' + val('flow'));
+  if(val('ihc')) anc.push('Immunohistochemistry/cell block: ' + val('ihc'));
+  if(val('mol')) anc.push('Molecular/FISH: ' + val('mol'));
+  if(val('micro')) anc.push('Microbiology/special stains: ' + val('micro'));
+
+  let report = `DIAGNOSIS\n${val('site') || 'Lymph node'}, ${val('procedure').toLowerCase()}:\n– ${category}. See comment.\n\nADEQUACY\n${val('adequacy')}. ${val('rose')}.\n\nMICROSCOPIC DESCRIPTION\n${morph}\n\n`;
+  if(anc.length) report += `ANCILLARY STUDIES\n${anc.join('\n')}\n\n`;
+  report += `COMMENT\n${autoComment()}\n\nWHO CATEGORY / RISK CONTEXT\n${rom[category]}`;
+  document.getElementById('output').textContent=report;
+}
+async function copyReport(){
+  await navigator.clipboard.writeText(document.getElementById('output').textContent);
+  alert('Report copied.');
+}
+function clearForm(){
+  document.querySelectorAll('input[type=text], textarea').forEach(e=>e.value='');
+  document.querySelectorAll('input[type=checkbox]').forEach(e=>e.checked=false);
+  generateReport();
+}
+updateRom(); generateReport();
+</script>
+</body>
+</html>
