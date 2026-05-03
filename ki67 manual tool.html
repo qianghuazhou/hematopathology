@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ki-67 Estimation Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f7f7f7;
+    }
+    .panel {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      background: white;
+      max-width: 100%;
+    }
+    button {
+      margin: 4px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    .active {
+      background: #222;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>Ki-67 Estimation Tool</h2>
+
+<div class="panel">
+  <input type="file" id="upload" accept="image/*">
+  <br><br>
+
+  <button id="positiveBtn" class="active">Positive nucleus</button>
+  <button id="negativeBtn">Negative nucleus</button>
+  <button onclick="undo()">Undo</button>
+  <button onclick="clearCounts()">Clear</button>
+</div>
+
+<div class="panel">
+  <p><b>Positive nuclei:</b> <span id="posCount">0</span></p>
+  <p><b>Negative nuclei:</b> <span id="negCount">0</span></p>
+  <p><b>Total nuclei:</b> <span id="totalCount">0</span></p>
+  <p><b>Ki-67 index:</b> <span id="ki67">0%</span></p>
+</div>
+
+<div class="panel">
+  <textarea id="report" rows="4" style="width:100%;"></textarea>
+  <br>
+  <button onclick="copyReport()">Copy report text</button>
+</div>
+
+<canvas id="canvas"></canvas>
+
+<script>
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+let image = new Image();
+let points = [];
+let mode = "positive";
+
+document.getElementById("positiveBtn").onclick = function() {
+  mode = "positive";
+  this.classList.add("active");
+  document.getElementById("negativeBtn").classList.remove("active");
+};
+
+document.getElementById("negativeBtn").onclick = function() {
+  mode = "negative";
+  this.classList.add("active");
+  document.getElementById("positiveBtn").classList.remove("active");
+};
+
+document.getElementById("upload").onchange = function(e) {
+  let file = e.target.files[0];
+  let reader = new FileReader();
+
+  reader.onload = function(event) {
+    image.onload = function() {
+      canvas.width = image.width;
+      canvas.height = image.height;
+      draw();
+    };
+    image.src = event.target.result;
+  };
+
+  reader.readAsDataURL(file);
+};
+
+canvas.addEventListener("click", function(e) {
+  let rect = canvas.getBoundingClientRect();
+  let scaleX = canvas.width / rect.width;
+  let scaleY = canvas.height / rect.height;
+
+  let x = (e.clientX - rect.left) * scaleX;
+  let y = (e.clientY - rect.top) * scaleY;
+
+  points.push({x, y, type: mode});
+  draw();
+  updateCounts();
+});
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (image.src) ctx.drawImage(image, 0, 0);
+
+  points.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 8, 0, 2 * Math.PI);
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = p.type === "positive" ? "red" : "blue";
+    ctx.stroke();
+  });
+}
+
+function updateCounts() {
+  let pos = points.filter(p => p.type === "positive").length;
+  let neg = points.filter(p => p.type === "negative").length;
+  let total = pos + neg;
+  let ki67 = total > 0 ? ((pos / total) * 100).toFixed(1) : 0;
+
+  document.getElementById("posCount").innerText = pos;
+  document.getElementById("negCount").innerText = neg;
+  document.getElementById("totalCount").innerText = total;
+  document.getElementById("ki67").innerText = ki67 + "%";
+
+  document.getElementById("report").value =
+    "Ki-67 proliferation index is approximately " + ki67 +
+    "% in the selected area, based on manual counting of " +
+    total + " tumor nuclei.";
+}
+
+function undo() {
+  points.pop();
+  draw();
+  updateCounts();
+}
+
+function clearCounts() {
+  points = [];
+  draw();
+  updateCounts();
+}
+
+function copyReport() {
+  let report = document.getElementById("report");
+  report.select();
+  document.execCommand("copy");
+}
+</script>
+
+</body>
+</html>
