@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tumor ROI + Smart Assist Layer</title>
+<style>
+  :root{
+    --bg:#f5f7fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280; --line:#d1d5db;
+    --accent:#2563eb; --green:#16a34a; --red:#dc2626; --orange:#f59e0b; --purple:#7c3aed;
+  }
+  body{font-family:Arial, Helvetica, sans-serif;background:var(--bg);color:var(--ink);margin:0;padding:18px;}
+  h1{font-size:24px;margin:0 0 6px;} h2{font-size:17px;margin:0 0 10px;} h3{font-size:14px;margin:10px 0 6px;}
+  .sub{color:var(--muted);margin-bottom:14px;line-height:1.4;}
+  .layout{display:grid;grid-template-columns:360px 1fr;gap:16px;align-items:start;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.04);margin-bottom:14px;}
+  label{font-size:13px;color:#374151;display:block;margin:8px 0 4px;}
+  input[type=file], input[type=text], input[type=number], select, textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;padding:8px;background:white;color:var(--ink);}
+  input[type=range]{width:100%;}
+  button{border:1px solid var(--line);background:white;border-radius:8px;padding:8px 10px;margin:3px;cursor:pointer;color:var(--ink);font-weight:600;}
+  button:hover{border-color:var(--accent);} button.active{background:var(--accent);color:white;border-color:var(--accent);}
+  .btn-red.active{background:var(--red);border-color:var(--red);} .btn-green.active{background:var(--green);border-color:var(--green);} .btn-orange.active{background:var(--orange);border-color:var(--orange);} .btn-purple.active{background:var(--purple);border-color:var(--purple);}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .small{font-size:12px;color:var(--muted);line-height:1.35;}
+  .stat{display:grid;grid-template-columns:1fr auto;gap:6px;padding:6px 0;border-bottom:1px solid #eef2f7;font-size:13px;}
+  .stat:last-child{border-bottom:0;}
+  .pill{display:inline-block;padding:2px 8px;border-radius:999px;background:#eef2ff;color:#3730a3;font-size:12px;font-weight:700;}
+  .canvasWrap{background:#111827;border-radius:14px;padding:10px;overflow:auto;max-height:78vh;}
+  canvas{background:white;display:block;max-width:none;cursor:crosshair;}
+  .legend span{display:inline-flex;align-items:center;margin-right:10px;font-size:12px;color:#374151;}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:4px;}
+  .warn{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;border-radius:10px;padding:9px;font-size:13px;line-height:1.4;}
+  textarea{min-height:94px;}
+</style>
+</head>
+<body>
+<h1>Tumor ROI + Smart Assist Layer</h1>
+<div class="sub">Draw tumor regions first, exclude artifact/non-tumor areas, then run a simple browser-based staining assist within the selected tumor ROI. Final interpretation remains pathologist-controlled.</div>
+
+<div class="layout">
+  <div>
+    <div class="card">
+      <h2>1. Case / image</h2>
+      <input type="file" id="upload" accept="image/*" />
+      <label>Case / block / stain</label>
+      <input type="text" id="caseInfo" placeholder="e.g. S26-12345 A1 p53" oninput="updateReport()" />
+      <label>Assay type</label>
+      <select id="assay" onchange="updateReport()">
+        <option value="p53">p53 pattern support</option>
+        <option value="ki67">Ki-67 positivity support</option>
+        <option value="generic">Generic nuclear IHC support</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <h2>2. Region tools</h2>
+      <div class="row">
+        <button id="toolTumor" class="active btn-green" onclick="setTool('tumor')">Draw tumor ROI</button>
+        <button id="toolExclude" class="btn-orange" onclick="setTool('exclude')">Draw exclude ROI</button>
+      </div>
+      <div class="row">
+        <button onclick="finishPolygon()">Finish polygon</button>
+        <button onclick="undoLastPoint()">Undo point</button>
+        <button onclick="clearCurrentPolygon()">Clear current</button>
+      </div>
+      <div class="row">
+        <button onclick="clearTumorRois()">Clear tumor ROIs</button>
+        <button onclick="clearExcludeRois()">Clear excludes</button>
+      </div>
+      <p class="small">Click around the desired area, then click <b>Finish polygon</b>. Exclude ROIs are subtracted from tumor ROI during analysis.</p>
+      <div class="legend">
+        <span><i class="dot" style="background:rgba(22,163,74,.75)"></i>Tumor ROI</span>
+        <span><i class="dot" style="background:rgba(245,158,11,.75)"></i>Exclude</span>
+        <span><i class="dot" style="background:rgba(220,38,38,.85)"></i>Positive assist</span>
+        <span><i class="dot" style="background:rgba(37,99,235,.85)"></i>Negative assist</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>3. Smart assist settings</h2>
+      <label>Analysis resolution</label>
+      <select id="step" onchange="runAssist()">
+        <option value="8">Faster</option>
+        <option value="5" selected>Balanced</option>
+        <option value="3">Finer</option>
+      </select>
+      <label>Brown / DAB sensitivity: <span id="brownVal">1.10</span></label>
+      <input type="range" id="brownSensitivity" min="0.6" max="1.8" step="0.05" value="1.10" oninput="brownVal.textContent=this.value; runAssist();" />
+      <label>Blue / hematoxylin sensitivity: <span id="blueVal">1.05</span></label>
+      <input type="range" id="blueSensitivity" min="0.6" max="1.8" step="0.05" value="1.05" oninput="blueVal.textContent=this.value; runAssist();" />
+      <label>Minimum nuclear darkness: <span id="darkVal">135</span></label>
+      <input type="range" id="darkness" min="80" max="210" step="5" value="135" oninput="darkVal.textContent=this.value; runAssist();" />
+      <div class="row">
+        <button onclick="runAssist()" class="btn-purple">Run assist</button>
+        <button onclick="toggleOverlay()">Toggle overlay</button>
+      </div>
+      <p class="small">This is heuristic RGB analysis, not true tumor detection or validated nuclear segmentation.</p>
+    </div>
+
+    <div class="card">
+      <h2>4. Results</h2>
+      <div class="stat"><span>Tumor ROI area analyzed</span><b id="roiArea">0 px</b></div>
+      <div class="stat"><span>Excluded area</span><b id="excludeArea">0 px</b></div>
+      <div class="stat"><span>Positive-like pixels</span><b id="posPix">0</b></div>
+      <div class="stat"><span>Negative-like nuclear pixels</span><b id="negPix">0</b></div>
+      <div class="stat"><span>Assist positivity</span><b id="pct">0%</b></div>
+      <div class="stat"><span>Bracket</span><b id="bracket"><span class="pill">Not run</span></b></div>
+      <label>Pathologist final estimate / override</label>
+      <select id="override" onchange="updateReport()">
+        <option value="Use assist estimate">Use assist estimate</option>
+        <option value="<5%">&lt;5%</option><option value="5–10%">5–10%</option><option value="10–15%">10–15%</option><option value="15–20%">15–20%</option>
+        <option value="20–25%">20–25%</option><option value="25–30%">25–30%</option><option value="30–40%">30–40%</option><option value="40–50%">40–50%</option>
+        <option value="50–60%">50–60%</option><option value="60–70%">60–70%</option><option value="70–80%">70–80%</option><option value="80–90%">80–90%</option><option value=">90%">&gt;90%</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <h2>5. Report</h2>
+      <textarea id="report"></textarea>
+      <div class="row">
+        <button onclick="copyReport()">Copy report</button>
+        <button onclick="downloadOverlay()">Download overlay image</button>
+        <button onclick="exportCSV()">Export CSV</button>
+      </div>
+      <div class="warn">Use as a visual support tool only. The user-defined tumor ROI is the key step; the algorithm cannot independently identify tumor cells.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Image workspace</h2>
+    <div class="canvasWrap"><canvas id="canvas"></canvas></div>
+  </div>
+</div>
+
+<script>
+let canvas=document.getElementById('canvas');
+let ctx=canvas.getContext('2d');
+let img=new Image();
+let imgLoaded=false;
+let tool='tumor';
+let current=[];
+let tumorRois=[];
+let excludeRois=[];
+let overlayPoints=[];
+let overlayOn=true;
+let lastStats={roiArea:0, excludeArea:0, pos:0, neg:0, pct:0, bracket:'Not run'};
+
+function setTool(t){tool=t; document.querySelectorAll('#toolTumor,#toolExclude').forEach(b=>b.classList.remove('active')); document.getElementById(t==='tumor'?'toolTumor':'toolExclude').classList.add('active'); current=[]; draw();}
+
+document.getElementById('upload').addEventListener('change', e=>{
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=ev=>{ img.onload=()=>{ canvas.width=img.width; canvas.height=img.height; imgLoaded=true; current=[]; tumorRois=[]; excludeRois=[]; overlayPoints=[]; draw(); updateReport(); }; img.src=ev.target.result; };
+  r.readAsDataURL(f);
+});
+
+canvas.addEventListener('click', e=>{
+  if(!imgLoaded) return;
+  const rect=canvas.getBoundingClientRect();
+  const x=(e.clientX-rect.left)*(canvas.width/rect.width);
+  const y=(e.clientY-rect.top)*(canvas.height/rect.height);
+  current.push({x,y}); draw();
+});
+
+function finishPolygon(){ if(current.length<3) return; if(tool==='tumor') tumorRois.push([...current]); else excludeRois.push([...current]); current=[]; draw(); runAssist(); }
+function undoLastPoint(){ current.pop(); draw(); }
+function clearCurrentPolygon(){ current=[]; draw(); }
+function clearTumorRois(){ tumorRois=[]; overlayPoints=[]; draw(); runAssist(); }
+function clearExcludeRois(){ excludeRois=[]; overlayPoints=[]; draw(); runAssist(); }
+function toggleOverlay(){ overlayOn=!overlayOn; draw(); }
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  if(imgLoaded) ctx.drawImage(img,0,0);
+  drawPolygons(tumorRois,'rgba(22,163,74,.18)','rgba(22,163,74,.9)');
+  drawPolygons(excludeRois,'rgba(245,158,11,.22)','rgba(245,158,11,.95)');
+  if(current.length){ drawPoly(current, tool==='tumor'?'rgba(22,163,74,.10)':'rgba(245,158,11,.12)', tool==='tumor'?'#16a34a':'#f59e0b', false); current.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,4,0,Math.PI*2);ctx.fillStyle=tool==='tumor'?'#16a34a':'#f59e0b';ctx.fill();}); }
+  if(overlayOn){ overlayPoints.forEach(p=>{ ctx.fillStyle=p.type==='pos'?'rgba(220,38,38,.75)':'rgba(37,99,235,.65)'; ctx.fillRect(p.x,p.y,p.s,p.s); }); }
+}
+function drawPolygons(arr,fill,stroke){ arr.forEach(poly=>drawPoly(poly,fill,stroke,true)); }
+function drawPoly(poly,fill,stroke,closed){ if(!poly.length) return; ctx.beginPath(); ctx.moveTo(poly[0].x,poly[0].y); for(let i=1;i<poly.length;i++) ctx.lineTo(poly[i].x,poly[i].y); if(closed) ctx.closePath(); ctx.fillStyle=fill; if(closed) ctx.fill(); ctx.strokeStyle=stroke; ctx.lineWidth=3; ctx.stroke(); }
+function inPoly(x,y,poly){ let inside=false; for(let i=0,j=poly.length-1;i<poly.length;j=i++){ let xi=poly[i].x, yi=poly[i].y, xj=poly[j].x, yj=poly[j].y; let intersect=((yi>y)!=(yj>y)) && (x < (xj-xi)*(y-yi)/(yj-yi)+xi); if(intersect) inside=!inside; } return inside; }
+function inAny(x,y,polys){ return polys.some(poly=>inPoly(x,y,poly)); }
+function bracket(v){ if(v<5)return'<5%'; if(v>90)return'>90%'; const lo=Math.floor(v/5)*5; const hi=lo+5; return lo+'–'+hi+'%'; }
+
+function runAssist(){
+  if(!imgLoaded || tumorRois.length===0){ lastStats={roiArea:0,excludeArea:0,pos:0,neg:0,pct:0,bracket:'Not run'}; updateStats(); draw(); return; }
+  const step=parseInt(document.getElementById('step').value);
+  const brown=parseFloat(document.getElementById('brownSensitivity').value);
+  const blue=parseFloat(document.getElementById('blueSensitivity').value);
+  const dark=parseInt(document.getElementById('darkness').value);
+  const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+  let roi=0, excl=0, pos=0, neg=0; overlayPoints=[];
+  for(let y=0;y<canvas.height;y+=step){ for(let x=0;x<canvas.width;x+=step){
+    if(!inAny(x,y,tumorRois)) continue;
+    roi++;
+    if(inAny(x,y,excludeRois)){excl++; continue;}
+    const idx=(Math.floor(y)*canvas.width+Math.floor(x))*4;
+    const r=data[idx], g=data[idx+1], b=data[idx+2];
+    const brightness=(r+g+b)/3;
+    // Simple heuristics: DAB tends to R/G dominant with low blue; hematoxylin tends blue/purple and dark.
+    const brownScore=((r+g)/2 - b) + (r-g)*0.15;
+    const blueScore=(b - (r+g)/2) + (255-brightness)*0.18;
+    const isBrown = brightness < 230 && brownScore > (28*brown);
+    const isBlueNuclear = brightness < dark && blueScore > (12*blue);
+    if(isBrown){pos++; overlayPoints.push({x,y,s:step,type:'pos'});} else if(isBlueNuclear){neg++; overlayPoints.push({x,y,s:step,type:'neg'});} 
+  }}
+  const total=pos+neg; const pct=total?pos/total*100:0;
+  lastStats={roiArea:roi*step*step, excludeArea:excl*step*step, pos, neg, pct, bracket:bracket(pct)};
+  updateStats(); draw(); updateReport();
+}
+function updateStats(){
+  roiArea.textContent=lastStats.roiArea.toLocaleString()+' px'; excludeArea.textContent=lastStats.excludeArea.toLocaleString()+' px';
+  posPix.textContent=lastStats.pos.toLocaleString(); negPix.textContent=lastStats.neg.toLocaleString(); pct.textContent=lastStats.pct.toFixed(1)+'%';
+  bracket.innerHTML='<span class="pill">'+lastStats.bracket+'</span>';
+}
+function finalEstimate(){ const o=document.getElementById('override').value; return o==='Use assist estimate'?lastStats.bracket:o; }
+function updateReport(){
+  const assay=document.getElementById('assay').value; const info=document.getElementById('caseInfo').value.trim(); const est=finalEstimate();
+  let text='';
+  if(info) text+=info+'\n';
+  if(assay==='ki67') text+='Ki-67 proliferation index is estimated at approximately '+est+' within the user-defined tumor ROI. ';
+  else if(assay==='p53') text+='p53 staining shows an estimated positive nuclear staining fraction of approximately '+est+' within the user-defined tumor ROI. Pattern interpretation requires assessment of staining intensity, distribution, cytoplasmic staining, and internal controls. ';
+  else text+='Nuclear IHC staining is estimated at approximately '+est+' within the user-defined tumor ROI. ';
+  text+='Automated analysis was used as an adjunct only; tumor ROI selection and final interpretation are pathologist-controlled.';
+  document.getElementById('report').value=text;
+}
+function copyReport(){ const r=document.getElementById('report'); r.select(); document.execCommand('copy'); }
+function downloadOverlay(){ if(!imgLoaded) return; const a=document.createElement('a'); a.href=canvas.toDataURL('image/png'); a.download='tumor_roi_smart_assist_overlay.png'; a.click(); }
+function exportCSV(){
+  const rows=[['metric','value'],['assay',document.getElementById('assay').value],['roi_area_px',lastStats.roiArea],['excluded_area_px',lastStats.excludeArea],['positive_like_pixels',lastStats.pos],['negative_like_nuclear_pixels',lastStats.neg],['assist_percent',lastStats.pct.toFixed(1)],['assist_bracket',lastStats.bracket],['final_estimate',finalEstimate()],['tumor_roi_count',tumorRois.length],['exclude_roi_count',excludeRois.length]];
+  const csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='tumor_roi_smart_assist_results.csv'; a.click(); URL.revokeObjectURL(a.href);
+}
+updateStats(); updateReport();
+</script>
+</body>
+</html>
