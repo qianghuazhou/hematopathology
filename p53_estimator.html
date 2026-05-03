@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>p53 IHC Image Pattern Estimator</title>
+<style>
+  :root{
+    --bg:#f6f7fb; --card:#ffffff; --ink:#1f2937; --muted:#6b7280; --line:#d1d5db;
+    --accent:#334155; --good:#166534; --warn:#92400e; --bad:#991b1b; --blue:#1d4ed8;
+  }
+  body{font-family:Arial, Helvetica, sans-serif;margin:0;background:var(--bg);color:var(--ink)}
+  header{background:#111827;color:white;padding:18px 22px}
+  header h1{margin:0;font-size:22px} header p{margin:6px 0 0;color:#d1d5db;font-size:14px}
+  main{padding:18px;max-width:1300px;margin:auto}
+  .grid{display:grid;grid-template-columns:360px 1fr;gap:16px;align-items:start}
+  .card{background:var(--card);border:1px solid #e5e7eb;border-radius:14px;padding:15px;box-shadow:0 1px 6px rgba(0,0,0,.05);margin-bottom:14px}
+  h2{font-size:17px;margin:0 0 10px} h3{font-size:14px;margin:12px 0 8px;color:#374151}
+  label{display:block;font-size:13px;color:#374151;margin:8px 0 4px}
+  input[type="file"], input[type="text"], input[type="number"], select, textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:8px;padding:8px;background:white;color:var(--ink)}
+  input[type="range"]{width:100%}
+  button{border:1px solid var(--line);background:white;border-radius:9px;padding:8px 10px;margin:3px;cursor:pointer;font-size:13px}
+  button.primary{background:#111827;color:white;border-color:#111827}
+  button.active{background:#334155;color:white;border-color:#334155}
+  button.danger{background:#fee2e2;border-color:#fecaca;color:#7f1d1d}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .small{font-size:12px;color:var(--muted);line-height:1.35}
+  .metric{display:grid;grid-template-columns:1fr auto;gap:8px;border-bottom:1px solid #f3f4f6;padding:7px 0;font-size:14px}
+  .badge{display:inline-block;padding:4px 8px;border-radius:999px;background:#e5e7eb;font-size:12px;margin:2px}
+  .badge.good{background:#dcfce7;color:#166534}.badge.warn{background:#fef3c7;color:#92400e}.badge.bad{background:#fee2e2;color:#991b1b}.badge.blue{background:#dbeafe;color:#1d4ed8}
+  #canvasWrap{position:relative;overflow:auto;max-height:78vh;border:1px solid var(--line);border-radius:12px;background:#fff}
+  canvas{display:block;max-width:none;cursor:crosshair}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .patternGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .patternGrid button{text-align:left;min-height:60px}
+  .patternGrid b{display:block;margin-bottom:3px}
+  textarea{height:120px;font-family:Arial, Helvetica, sans-serif}
+  .note{background:#fffbeb;border:1px solid #fde68a;color:#78350f;border-radius:10px;padding:10px;font-size:13px;line-height:1.4}
+  .help{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;border-radius:10px;padding:10px;font-size:13px;line-height:1.4}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}.patternGrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>p53 IHC Image Pattern Estimator</h1>
+  <p>Browser-only visual assistant for p53 nuclear/cytoplasmic staining pattern estimation. Not for standalone diagnostic use.</p>
+</header>
+<main>
+<div class="grid">
+  <section>
+    <div class="card">
+      <h2>1. Case / image</h2>
+      <label>Case / block</label><input id="caseId" type="text" placeholder="e.g. 24-12345 A1">
+      <label>Specimen/site</label><input id="site" type="text" placeholder="e.g. endometrial biopsy, lymph node, colon biopsy">
+      <label>Upload p53 IHC image</label><input id="upload" type="file" accept="image/*">
+      <div class="row" style="margin-top:8px">
+        <button class="primary" onclick="analyzeImage()">Analyze image</button>
+        <button onclick="resetAll()">Reset</button>
+      </div>
+      <p class="small">Best input: representative tumor-rich field or hotspot. Avoid necrosis, folds, crushed tissue, edge artifact, and non-tumor-rich areas.</p>
+    </div>
+
+    <div class="card">
+      <h2>2. Thresholds</h2>
+      <label>Nuclear/dark detection threshold <span id="darkVal">105</span></label>
+      <input id="darkThr" type="range" min="40" max="180" value="105" oninput="syncSliders()">
+      <label>Brown/DAB sensitivity <span id="brownVal">18</span></label>
+      <input id="brownThr" type="range" min="0" max="70" value="18" oninput="syncSliders()">
+      <label>Strong positive intensity threshold <span id="strongVal">0.45</span></label>
+      <input id="strongThr" type="range" min="0.10" max="0.90" step="0.01" value="0.45" oninput="syncSliders()">
+      <label>Overlay</label>
+      <select id="overlayMode" onchange="draw()">
+        <option value="none">None</option>
+        <option value="positive">Estimated positive nuclei/cell-dense pixels</option>
+        <option value="strong">Estimated strong positive pixels</option>
+        <option value="cyto">Estimated cytoplasmic/brown non-nuclear signal</option>
+      </select>
+      <p class="small">This is a heuristic estimator. p53 interpretation still requires visual review of tumor nuclei, internal controls, and tissue context.</p>
+    </div>
+
+    <div class="card">
+      <h2>3. Manual final pattern</h2>
+      <div class="patternGrid">
+        <button onclick="setPattern('Wild-type / heterogeneous')"><b>Wild-type / heterogeneous</b><span class="small">Variable weak–moderate nuclear staining with negative cells</span></button>
+        <button onclick="setPattern('Overexpression / aberrant')"><b>Overexpression</b><span class="small">Diffuse strong nuclear staining, usually most tumor cells</span></button>
+        <button onclick="setPattern('Null / aberrant')"><b>Null</b><span class="small">Absent tumor nuclear staining with intact internal control</span></button>
+        <button onclick="setPattern('Cytoplasmic / aberrant')"><b>Cytoplasmic</b><span class="small">Predominant cytoplasmic staining pattern</span></button>
+        <button onclick="setPattern('Equivocal / suboptimal')"><b>Equivocal</b><span class="small">Poor controls, low tumor, artifact, or ambiguous pattern</span></button>
+        <button onclick="setPattern('Manual descriptive only')"><b>Descriptive only</b><span class="small">No automated interpretation</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <h2>Image viewer</h2>
+      <div id="canvasWrap"><canvas id="canvas"></canvas></div>
+    </div>
+
+    <div class="two">
+      <div class="card">
+        <h2>Automated estimate</h2>
+        <div class="metric"><span>Estimated analyzable nuclear/cell-dense area</span><b id="nucArea">0</b></div>
+        <div class="metric"><span>Estimated p53-positive nuclear pixels</span><b id="posPct">0%</b></div>
+        <div class="metric"><span>Estimated strong-positive fraction</span><b id="strongPct">0%</b></div>
+        <div class="metric"><span>Estimated cytoplasmic/non-nuclear brown signal</span><b id="cytoPct">0%</b></div>
+        <div class="metric"><span>Suggested pattern</span><b id="suggestion">Not analyzed</b></div>
+        <div id="badges"></div>
+        <p class="small">Suggested rules: diffuse strong nuclear staining supports overexpression; absent tumor nuclear staining with internal controls supports null; heterogeneous mixed staining supports wild-type pattern.</p>
+      </div>
+
+      <div class="card">
+        <h2>Report text</h2>
+        <textarea id="report"></textarea>
+        <div class="row">
+          <button onclick="copyReport()">Copy report</button>
+          <button onclick="downloadCSV()">Export CSV</button>
+          <button onclick="downloadOverlay()">Download overlay PNG</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>Important limitation:</b> This tool estimates staining distribution from RGB image features. It does not reliably separate tumor from benign epithelium, lymphocytes, stroma, necrosis, melanin, hemosiderin, crush artifact, or poor fixation. Final classification should be based on pathologist review and internal controls.
+    </div>
+  </section>
+</div>
+</main>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d', { willReadFrequently:true });
+let img = new Image();
+let imgLoaded = false;
+let analysis = null;
+let finalPattern = '';
+
+function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
+function fmt(x){return (isFinite(x)?x:0).toFixed(1)+'%';}
+
+function syncSliders(){
+  document.getElementById('darkVal').innerText = document.getElementById('darkThr').value;
+  document.getElementById('brownVal').innerText = document.getElementById('brownThr').value;
+  document.getElementById('strongVal').innerText = document.getElementById('strongThr').value;
+  if(imgLoaded) analyzeImage(false);
+}
+
+syncSliders();
+
+document.getElementById('upload').addEventListener('change', e=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev=>{
+    img.onload = ()=>{
+      const maxDim = 1800;
+      let w = img.width, h = img.height;
+      if(Math.max(w,h)>maxDim){ const s = maxDim/Math.max(w,h); w=Math.round(w*s); h=Math.round(h*s); }
+      canvas.width=w; canvas.height=h;
+      imgLoaded=true; analysis=null; finalPattern='';
+      draw(); updateReport();
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  if(!imgLoaded){
+    ctx.fillStyle='#f9fafb'; ctx.fillRect(0,0,900,520);
+    canvas.width=900; canvas.height=520;
+    ctx.fillStyle='#6b7280'; ctx.font='18px Arial'; ctx.fillText('Upload a p53 IHC image to begin.', 28, 50);
+    return;
+  }
+  ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  if(!analysis) return;
+  const mode = document.getElementById('overlayMode').value;
+  if(mode==='none') return;
+  const overlay = ctx.createImageData(canvas.width, canvas.height);
+  const od = overlay.data;
+  for(let i=0;i<analysis.mask.length;i++){
+    let flag=false, color=[0,0,0,0];
+    if(mode==='positive' && analysis.mask[i]===1){ flag=true; color=[255,0,0,85]; }
+    if(mode==='strong' && analysis.strongMask[i]===1){ flag=true; color=[255,165,0,100]; }
+    if(mode==='cyto' && analysis.cytoMask[i]===1){ flag=true; color=[0,90,255,70]; }
+    if(flag){ const j=i*4; od[j]=color[0]; od[j+1]=color[1]; od[j+2]=color[2]; od[j+3]=color[3]; }
+  }
+  ctx.putImageData(overlay,0,0);
+}
+
+function analyzeImage(manual=true){
+  if(!imgLoaded){ alert('Upload an image first.'); return; }
+  ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  const data = ctx.getImageData(0,0,canvas.width,canvas.height).data;
+  const n = canvas.width*canvas.height;
+  const darkThr = parseFloat(document.getElementById('darkThr').value);
+  const brownThr = parseFloat(document.getElementById('brownThr').value);
+  const strongThr = parseFloat(document.getElementById('strongThr').value);
+  let nuclear=0, positive=0, strong=0, cyto=0, tissue=0;
+  const mask = new Uint8Array(n), strongMask = new Uint8Array(n), cytoMask = new Uint8Array(n);
+  for(let i=0;i<n;i++){
+    const r=data[i*4], g=data[i*4+1], b=data[i*4+2];
+    const brightness=(r+g+b)/3;
+    const sat = Math.max(r,g,b)-Math.min(r,g,b);
+    const brownScore = (r - b) + 0.55*(r-g);
+    const blueScore = b - r + 0.4*(b-g);
+    const isWhite = brightness>232 && sat<24;
+    const isTissue = !isWhite && brightness<245;
+    if(isTissue) tissue++;
+    // approximate dark cellular/nuclear pixels: dark blue/purple/brown structures
+    const isNuclearDense = isTissue && brightness < darkThr && (sat>10 || blueScore>0 || brownScore>brownThr);
+    if(isNuclearDense){
+      nuclear++;
+      const brownIntensity = clamp((brownScore-brownThr)/120,0,1);
+      const isBrownNuclear = brownScore > brownThr && r>g*0.82 && g>b*0.75;
+      if(isBrownNuclear){ positive++; mask[i]=1; }
+      if(isBrownNuclear && brownIntensity>=strongThr){ strong++; strongMask[i]=1; }
+    }
+    // brown signal outside nuclear dense areas: possible cytoplasm/background DAB
+    const isBrownNonNuclear = isTissue && !isNuclearDense && brownScore > (brownThr+18) && r>g*0.9 && g>b*0.75 && brightness<210;
+    if(isBrownNonNuclear){ cyto++; cytoMask[i]=1; }
+  }
+  const posPct = nuclear ? positive/nuclear*100 : 0;
+  const strongPct = nuclear ? strong/nuclear*100 : 0;
+  const cytoPct = tissue ? cyto/tissue*100 : 0;
+  const nucAreaPct = tissue ? nuclear/tissue*100 : 0;
+  const suggestion = suggestPattern(posPct, strongPct, cytoPct, nuclear);
+  analysis = {nuclear, positive, strong, cyto, tissue, posPct, strongPct, cytoPct, nucAreaPct, suggestion, mask, strongMask, cytoMask};
+  updateMetrics(); draw(); updateReport();
+}
+
+function suggestPattern(pos, strong, cyto, nuclear){
+  if(nuclear < 500) return 'Equivocal / low analyzable cellularity';
+  if(cyto > 6 && pos < 30) return 'Possible cytoplasmic / aberrant pattern';
+  if(pos < 3 && strong < 1) return 'Possible null pattern — confirm internal control';
+  if(pos > 75 && strong > 45) return 'Possible overexpression / aberrant pattern';
+  if(pos > 10 && pos < 75) return 'Wild-type / heterogeneous pattern favored';
+  return 'Equivocal / review manually';
+}
+
+function updateMetrics(){
+  if(!analysis) return;
+  document.getElementById('nucArea').innerText = analysis.nuclear.toLocaleString() + ' px (' + fmt(analysis.nucAreaPct) + ' of tissue)';
+  document.getElementById('posPct').innerText = fmt(analysis.posPct);
+  document.getElementById('strongPct').innerText = fmt(analysis.strongPct);
+  document.getElementById('cytoPct').innerText = fmt(analysis.cytoPct);
+  document.getElementById('suggestion').innerText = analysis.suggestion;
+  let html='';
+  if(analysis.suggestion.includes('overexpression')) html += '<span class="badge bad">aberrant-like</span><span class="badge bad">diffuse strong nuclear</span>';
+  else if(analysis.suggestion.includes('null')) html += '<span class="badge bad">aberrant-like</span><span class="badge warn">requires internal control</span>';
+  else if(analysis.suggestion.includes('cytoplasmic')) html += '<span class="badge bad">aberrant-like</span><span class="badge blue">cytoplasmic signal</span>';
+  else if(analysis.suggestion.includes('Wild-type')) html += '<span class="badge good">wild-type-like</span><span class="badge good">heterogeneous</span>';
+  else html += '<span class="badge warn">equivocal</span><span class="badge warn">manual review needed</span>';
+  document.getElementById('badges').innerHTML = html;
+}
+
+function setPattern(p){ finalPattern = p; updateReport(); }
+
+function updateReport(){
+  const caseId = document.getElementById('caseId').value.trim();
+  const site = document.getElementById('site').value.trim();
+  const selected = finalPattern || (analysis ? analysis.suggestion : 'Not selected');
+  let patternLine = selected;
+  if(selected.includes('Overexpression')) patternLine = 'aberrant overexpression pattern';
+  if(selected.includes('Null')) patternLine = 'aberrant null pattern';
+  if(selected.includes('Cytoplasmic')) patternLine = 'aberrant cytoplasmic pattern';
+  if(selected.includes('Wild-type')) patternLine = 'wild-type/heterogeneous pattern';
+  if(selected.includes('Equivocal')) patternLine = 'equivocal/suboptimal pattern';
+  let text = '';
+  if(caseId || site) text += (caseId ? 'Case/block: '+caseId+'\n' : '') + (site ? 'Specimen/site: '+site+'\n' : '') + '\n';
+  text += 'p53 immunohistochemistry shows a ' + patternLine + '.';
+  if(analysis){
+    text += '\n\nAutomated image estimate: nuclear p53-positive signal ' + fmt(analysis.posPct) + ', strong-positive signal ' + fmt(analysis.strongPct) + ', cytoplasmic/non-nuclear brown signal ' + fmt(analysis.cytoPct) + '.';
+  }
+  text += '\n\nInterpretation should be confirmed by pathologist review, including assessment of tumor-rich areas and internal positive controls.';
+  document.getElementById('report').value = text;
+}
+
+document.getElementById('caseId').addEventListener('input', updateReport);
+document.getElementById('site').addEventListener('input', updateReport);
+
+function copyReport(){
+  const r=document.getElementById('report'); r.select(); document.execCommand('copy');
+}
+function downloadOverlay(){
+  if(!imgLoaded){alert('Upload an image first.');return;}
+  draw(); const a=document.createElement('a'); a.href=canvas.toDataURL('image/png'); a.download='p53_overlay.png'; a.click();
+}
+function downloadCSV(){
+  const rows=[['case_id','site','suggested_pattern','final_pattern','nuclear_pixels','positive_pct','strong_pct','cytoplasmic_pct']];
+  rows.push([
+    document.getElementById('caseId').value, document.getElementById('site').value,
+    analysis?analysis.suggestion:'', finalPattern,
+    analysis?analysis.nuclear:'', analysis?analysis.posPct.toFixed(2):'', analysis?analysis.strongPct.toFixed(2):'', analysis?analysis.cytoPct.toFixed(2):''
+  ]);
+  const csv=rows.map(r=>r.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='p53_image_estimate.csv'; a.click(); URL.revokeObjectURL(a.href);
+}
+function resetAll(){
+  imgLoaded=false; analysis=null; finalPattern=''; document.getElementById('upload').value=''; document.getElementById('overlayMode').value='none'; draw(); updateMetrics(); updateReport();
+}
+
+draw(); updateReport();
+</script>
+</body>
+</html>
