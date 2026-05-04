@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CPB Post-operative Bleeding Risk Calculator</title>
+<style>
+:root{
+  --bg:#f7f8fb; --card:#fff; --text:#1f2937; --muted:#667085; --border:#d0d5dd;
+  --blue:#2563eb; --blue2:#1d4ed8; --green:#067647; --amber:#b54708; --red:#b42318;
+  --soft-blue:#eff6ff; --soft-green:#ecfdf3; --soft-amber:#fffaeb; --soft-red:#fef3f2;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--text);line-height:1.45}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.header{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:white;border-radius:18px;padding:28px;margin-bottom:18px;box-shadow:0 10px 24px rgba(15,23,42,.15)}
+.header h1{margin:0 0 8px;font-size:28px}.header p{margin:0;color:#dbeafe;max-width:900px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 3px 12px rgba(16,24,40,.06)}
+.card h2{font-size:18px;margin:0 0 14px}.row{display:grid;grid-template-columns:1fr 160px;gap:12px;align-items:end;margin-bottom:12px}
+label{font-weight:700;font-size:14px;display:block;margin-bottom:5px}.hint{font-size:12px;color:var(--muted);font-weight:400}.unit{font-size:12px;color:var(--muted)}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:#fff;font-size:14px;color:var(--text)}
+input:focus,select:focus,textarea:focus{outline:2px solid #bfdbfe;border-color:#60a5fa}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+button{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;background:var(--blue);color:#fff}button:hover{background:var(--blue2)}button.secondary{background:#eef2ff;color:#1e3a8a}button.secondary:hover{background:#dbeafe}
+.result{border-radius:16px;padding:18px;margin-bottom:14px;border:1px solid var(--border)}.result.low{background:var(--soft-green);border-color:#abefc6}.result.intermediate{background:var(--soft-amber);border-color:#fedf89}.result.high{background:var(--soft-red);border-color:#fecdca}.result.unknown{background:var(--soft-blue);border-color:#bfdbfe}
+.risk-title{font-size:22px;font-weight:800;margin:0 0 6px}.risk-sub{color:var(--muted);margin:0}.pill{display:inline-block;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800;margin-left:8px}.pill.low{background:#d1fadf;color:var(--green)}.pill.intermediate{background:#fef0c7;color:var(--amber)}.pill.high{background:#fee4e2;color:var(--red)}
+.bar{height:12px;background:#eaecf0;border-radius:999px;overflow:hidden;margin:12px 0}.bar-inner{height:100%;width:0;background:#2563eb;transition:.2s}.scoreline{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.checklist{padding-left:18px;margin:10px 0}.checklist li{margin:6px 0}.small{font-size:12px;color:var(--muted)}.output{white-space:pre-wrap;background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:14px;font-family:Arial,Helvetica,sans-serif;font-size:14px;min-height:160px}
+.note{background:#fffbeb;border:1px solid #fedf89;border-radius:12px;padding:12px;margin-top:12px;color:#7a2e0e}.ref{font-size:12px;color:#475467;border-top:1px solid var(--border);margin-top:18px;padding-top:12px}
+.toggle{display:flex;gap:8px;align-items:center;margin:9px 0}.toggle input{width:auto}.full{grid-column:1/-1}@media(max-width:850px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+  <section class="header">
+    <h1>CPB Post-operative Bleeding Risk Calculator</h1>
+    <p>Educational decision-support prototype based on the 5 key parameters reported for ANN-based bleeding risk stratification after cardiopulmonary bypass: platelet count, TEG-R, PT, D-dimer, and TEG coagulation index.</p>
+  </section>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Inputs</h2>
+      <div class="row"><div><label>Platelet count <span class="hint">lower = higher bleeding tendency</span></label><input id="plt" type="number" step="1" placeholder="e.g., 85"></div><div class="unit">×10⁹/L</div></div>
+      <div class="row"><div><label>TEG reaction time, R <span class="hint">higher = delayed clot initiation</span></label><input id="tegR" type="number" step="0.1" placeholder="e.g., 9.5"></div><div class="unit">minutes</div></div>
+      <div class="row"><div><label>Prothrombin time, PT <span class="hint">higher = factor deficiency/anticoagulation</span></label><input id="pt" type="number" step="0.1" placeholder="e.g., 18.2"></div><div class="unit">seconds</div></div>
+      <div class="row"><div><label>D-dimer <span class="hint">higher = fibrinolysis/consumption signal</span></label><input id="ddimer" type="number" step="0.01" placeholder="e.g., 4.5"></div><div class="unit">local units</div></div>
+      <div class="row"><div><label>TEG coagulation index, CI <span class="hint">lower = hypocoagulability</span></label><input id="ci" type="number" step="0.1" placeholder="e.g., -3.2"></div><div class="unit">index</div></div>
+      <div class="btns"><button onclick="calculate()">Calculate risk</button><button class="secondary" onclick="resetForm()">Reset</button><button class="secondary" onclick="copyReport()">Copy report</button></div>
+      <div class="note"><b>Important:</b> The original ANN weights and training data are not published in the paper. This tool is therefore a transparent rule-based approximation for teaching/QA, not the original validated ANN.</div>
+    </section>
+
+    <section class="card">
+      <h2>Risk estimate</h2>
+      <div id="resultBox" class="result unknown">
+        <p class="risk-title">Awaiting input</p>
+        <p class="risk-sub">Enter values and click calculate.</p>
+      </div>
+      <div class="bar"><div id="barInner" class="bar-inner"></div></div>
+      <div class="scoreline"><span>Lower risk</span><span id="scoreText">Score: — / 10</span><span>Higher risk</span></div>
+      <h2 style="margin-top:18px">Drivers</h2>
+      <ul id="drivers" class="checklist"><li>No calculation yet.</li></ul>
+    </section>
+
+    <section class="card full">
+      <h2>Generated comment</h2>
+      <label class="toggle"><input type="checkbox" id="washu" checked> WashU-style diagnostic/comment format</label>
+      <label class="toggle"><input type="checkbox" id="includeRef" checked> Keep reference note for teaching / QA / tumor board</label>
+      <label class="toggle"><input type="checkbox" id="includeCaveat" checked> Include clinical caveat</label>
+      <div id="report" class="output">Report will appear here.</div>
+    </section>
+
+    <section class="card full">
+      <h2>Method notes</h2>
+      <ul class="checklist">
+        <li>The paper defined bleeding risk by total blood component use within 48 hours from start of surgery.</li>
+        <li>Original study categories: low ≤13.5 units, intermediate 13.5–22.5 units, high ≥22.5 units.</li>
+        <li>Final 5-input model: platelet count, TEG-R, PT, D-dimer, and TEG-CI.</li>
+        <li>This implementation assigns points to abnormality severity and maps the total score to low, intermediate, or high predicted bleeding/transfusion risk.</li>
+      </ul>
+      <div class="ref">Reference: Huang RSP et al. Post-Operative Bleeding Risk Stratification in Cardiac Pulmonary Bypass Patients Using Artificial Neural Network. Ann Clin Lab Sci. 2015;45(2):181-186.</div>
+    </section>
+  </div>
+</div>
+<script>
+function val(id){ const x=parseFloat(document.getElementById(id).value); return Number.isFinite(x)?x:null; }
+function pointsFor(){
+  const plt=val('plt'), r=val('tegR'), pt=val('pt'), d=val('ddimer'), ci=val('ci');
+  let score=0, drivers=[];
+  if(plt!==null){ if(plt<50){score+=3;drivers.push('Severe thrombocytopenia: platelet count <50 ×10⁹/L.');} else if(plt<100){score+=2;drivers.push('Moderate thrombocytopenia: platelet count 50–99 ×10⁹/L.');} else if(plt<150){score+=1;drivers.push('Mild thrombocytopenia: platelet count 100–149 ×10⁹/L.');} }
+  if(r!==null){ if(r>12){score+=2;drivers.push('Markedly prolonged TEG-R >12 min.');} else if(r>8){score+=1;drivers.push('Prolonged TEG-R >8 min.');} }
+  if(pt!==null){ if(pt>20){score+=2;drivers.push('Marked PT prolongation >20 sec.');} else if(pt>16){score+=1;drivers.push('PT prolongation >16 sec.');} }
+  if(d!==null){ if(d>5){score+=2;drivers.push('Marked D-dimer elevation >5 local units.');} else if(d>2){score+=1;drivers.push('D-dimer elevation >2 local units.');} }
+  if(ci!==null){ if(ci<-5){score+=2;drivers.push('Markedly low TEG-CI <-5.');} else if(ci<-3){score+=1;drivers.push('Low TEG-CI <-3.');} }
+  return {score:Math.min(score,10), drivers};
+}
+function calculate(){
+  const entered=['plt','tegR','pt','ddimer','ci'].filter(id=>val(id)!==null).length;
+  if(entered<5){alert('Please enter all five parameters.');return;}
+  const p=pointsFor(); let risk='low', label='Low predicted bleeding/transfusion risk', units='≤13.5 total blood component units';
+  if(p.score>=7){risk='high';label='High predicted bleeding/transfusion risk';units='≥22.5 total blood component units';}
+  else if(p.score>=4){risk='intermediate';label='Intermediate predicted bleeding/transfusion risk';units='13.5–22.5 total blood component units';}
+  const box=document.getElementById('resultBox'); box.className='result '+risk;
+  box.innerHTML='<p class="risk-title">'+label+' <span class="pill '+risk+'">'+risk.toUpperCase()+'</span></p><p class="risk-sub">Estimated category corresponding to '+units+' within 48 hours from start of surgery.</p>';
+  document.getElementById('barInner').style.width=(p.score*10)+'%';
+  document.getElementById('scoreText').textContent='Score: '+p.score+' / 10';
+  document.getElementById('drivers').innerHTML=(p.drivers.length?p.drivers:['No major abnormal driver identified by this rule set.']).map(x=>'<li>'+x+'</li>').join('');
+  makeReport(label, risk, units, p);
+}
+function makeReport(label,risk,units,p){
+  const washu=document.getElementById('washu').checked, ref=document.getElementById('includeRef').checked, caveat=document.getElementById('includeCaveat').checked;
+  const inputs='Platelet count '+val('plt')+' ×10⁹/L; TEG-R '+val('tegR')+' min; PT '+val('pt')+' sec; D-dimer '+val('ddimer')+' local units; TEG-CI '+val('ci')+'.';
+  let text='';
+  if(washu){ text+='HEMOTHERAPY / CPB BLEEDING RISK ASSESSMENT\n– '+label+'. See comment.\n\nCOMMENT\n'; }
+  text+='Using the five reported input parameters for ANN-based post-CPB bleeding risk stratification, the current rule-based estimate is '+risk.toUpperCase()+' risk, corresponding to '+units+' within 48 hours from start of surgery.\n\nInputs: '+inputs+'\n';
+  if(p.drivers.length) text+='\nMain drivers: '+p.drivers.join(' ')+'\n';
+  if(caveat) text+='\nThis result should be interpreted with operative findings and clinical assessment, as surgical bleeding/anatomic sources may not be captured by coagulation laboratory data. The tool estimates overall blood product requirement and does not specify individual components.\n';
+  if(ref) text+='\nReference note: Huang et al. described a five-parameter ANN model using platelet count, TEG-R, PT, D-dimer, and TEG-CI for post-operative bleeding risk stratification in CPB patients. The original ANN weights were not published; this calculator is a transparent educational approximation rather than the original ANN.\n';
+  document.getElementById('report').textContent=text;
+}
+function resetForm(){['plt','tegR','pt','ddimer','ci'].forEach(id=>document.getElementById(id).value='');document.getElementById('resultBox').className='result unknown';document.getElementById('resultBox').innerHTML='<p class="risk-title">Awaiting input</p><p class="risk-sub">Enter values and click calculate.</p>';document.getElementById('barInner').style.width='0';document.getElementById('scoreText').textContent='Score: — / 10';document.getElementById('drivers').innerHTML='<li>No calculation yet.</li>';document.getElementById('report').textContent='Report will appear here.';}
+function copyReport(){ const t=document.getElementById('report').textContent; navigator.clipboard.writeText(t).then(()=>alert('Report copied.')); }
+['washu','includeRef','includeCaveat'].forEach(id=>document.getElementById(id).addEventListener('change',()=>{if(val('plt')!==null&&val('tegR')!==null&&val('pt')!==null&&val('ddimer')!==null&&val('ci')!==null)calculate();}));
+</script>
+</body>
+</html>
