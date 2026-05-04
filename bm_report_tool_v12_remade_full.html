@@ -1759,9 +1759,6 @@ function generateReport() {
     if (value && String(value).trim()) add(`${padLabel(label)}${capitalizeFirst(String(value).trim())}${suffix}`);
   };
 
-  add("MICROSCOPIC DESCRIPTION");
-  add("");
-
   // CBC
   add(`PERIPHERAL BLOOD COUNT${v("cbc_date") ? ` (Date: ${v("cbc_date")})` : ""}`);
   pushIf("HGB", v("hgb"), " g/L");
