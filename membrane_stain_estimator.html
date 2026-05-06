@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CD138 / Membrane Stain Estimator</title>
+<style>
+    :root {
+        --bg: #f6f7f9;
+        --panel: #ffffff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --border: #d1d5db;
+        --accent: #111827;
+        --soft: #eef2f7;
+        --good: #0f766e;
+        --warn: #b45309;
+        --bad: #b91c1c;
+        --roi: #22c55e;
+        --exclude: #ef4444;
+        --dab: #f59e0b;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+    }
+    header {
+        background: var(--accent);
+        color: white;
+        padding: 18px 22px;
+    }
+    header h1 { margin: 0; font-size: 22px; }
+    header p { margin: 6px 0 0; color: #d1d5db; font-size: 14px; }
+    main {
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        gap: 16px;
+        padding: 16px;
+    }
+    .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 14px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        margin-bottom: 14px;
+    }
+    .panel h2 {
+        font-size: 16px;
+        margin: 0 0 10px;
+    }
+    .row { margin: 10px 0; }
+    label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    input[type="text"], input[type="number"], select, textarea {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
+        background: white;
+    }
+    textarea { min-height: 95px; resize: vertical; }
+    input[type="range"] { width: 100%; }
+    button {
+        border: 1px solid var(--border);
+        background: white;
+        color: var(--text);
+        padding: 8px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        margin: 3px 2px;
+    }
+    button:hover { background: var(--soft); }
+    button.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+    }
+    .btn-primary {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+    }
+    .btn-danger {
+        background: #fee2e2;
+        color: #991b1b;
+        border-color: #fecaca;
+    }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 4px; }
+    .metric-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    .metric {
+        background: var(--soft);
+        border-radius: 10px;
+        padding: 10px;
+    }
+    .metric .label { font-size: 12px; color: var(--muted); }
+    .metric .value { font-size: 20px; font-weight: 700; margin-top: 3px; }
+    .canvas-wrap {
+        position: relative;
+        background: #111;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        min-height: 560px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    canvas {
+        max-width: 100%;
+        max-height: calc(100vh - 120px);
+        display: block;
+        cursor: crosshair;
+    }
+    .small { font-size: 12px; color: var(--muted); line-height: 1.35; }
+    .legend { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+    .chip { display: inline-flex; align-items: center; gap: 5px; }
+    .swatch { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+    .bracket-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+    }
+    .bracket-grid button { width: 100%; margin: 0; }
+    .status {
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: #ecfeff;
+        border: 1px solid #a5f3fc;
+        color: #155e75;
+        font-size: 13px;
+    }
+    @media (max-width: 900px) {
+        main { grid-template-columns: 1fr; }
+        .canvas-wrap { min-height: 360px; }
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>CD138 / Membrane-Cytoplasmic DAB Estimator</h1>
+    <p>ROI-based visual assistant for CD138-positive plasma cell burden or other membrane/cytoplasmic IHC stains.</p>
+</header>
+
+<main>
+    <aside>
+        <div class="panel">
+            <h2>Case / stain</h2>
+            <div class="row">
+                <label>Image upload</label>
+                <input type="file" id="upload" accept="image/*" />
+            </div>
+            <div class="row">
+                <label>Case / block</label>
+                <input type="text" id="caseId" placeholder="Optional" oninput="updateReport()" />
+            </div>
+            <div class="row">
+                <label>Stain</label>
+                <select id="stainName" onchange="updateReport()">
+                    <option value="CD138">CD138</option>
+                    <option value="CD38">CD38</option>
+                    <option value="kappa ISH/IHC">Kappa ISH/IHC</option>
+                    <option value="lambda ISH/IHC">Lambda ISH/IHC</option>
+                    <option value="CD20">CD20</option>
+                    <option value="CD3">CD3</option>
+                    <option value="Other membrane/cytoplasmic stain">Other membrane/cytoplasmic stain</option>
+                </select>
+            </div>
+            <div class="row">
+                <label>Output context</label>
+                <select id="context" onchange="updateReport()">
+                    <option value="marrow">Bone marrow plasma cell burden</option>
+                    <option value="tissue">Tissue inflammatory infiltrate</option>
+                    <option value="generic">Generic positive cell estimate</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>ROI / exclusion tools</h2>
+            <div class="btn-row">
+                <button id="modeRoi" class="active" onclick="setMode('roi')">Draw ROI</button>
+                <button id="modeExclude" onclick="setMode('exclude')">Draw exclude</button>
+                <button id="modePan" onclick="setMode('pan')">Inspect</button>
+            </div>
+            <div class="row small">
+                Drag to draw rectangle. ROI defines representative tissue/tumor area. Exclude removes bone, artifact, crush, empty edge, necrosis, or non-representative regions.
+            </div>
+            <div class="btn-row">
+                <button onclick="clearRoi()">Clear ROI</button>
+                <button onclick="clearExclusions()">Clear exclusions</button>
+                <button class="btn-danger" onclick="clearAll()">Reset all</button>
+            </div>
+            <div class="legend row">
+                <span class="chip"><span class="swatch" style="background:rgba(34,197,94,.65)"></span>ROI</span>
+                <span class="chip"><span class="swatch" style="background:rgba(239,68,68,.65)"></span>Exclude</span>
+                <span class="chip"><span class="swatch" style="background:rgba(245,158,11,.85)"></span>DAB-positive overlay</span>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Detection settings</h2>
+            <div class="row">
+                <label>DAB/brown sensitivity: <span id="brownVal">45</span></label>
+                <input type="range" min="10" max="100" step="1" id="brownSensitivity" value="45" oninput="analyze()" />
+            </div>
+            <div class="row">
+                <label>Minimum stain strength: <span id="strengthVal">30</span></label>
+                <input type="range" min="5" max="120" step="1" id="minStrength" value="30" oninput="analyze()" />
+            </div>
+            <div class="row">
+                <label>Tissue/background threshold: <span id="tissueVal">215</span></label>
+                <input type="range" min="150" max="245" step="1" id="tissueThreshold" value="215" oninput="analyze()" />
+            </div>
+            <div class="row">
+                <label>Overlay opacity: <span id="opacityVal">45</span>%</label>
+                <input type="range" min="0" max="90" step="5" id="overlayOpacity" value="45" oninput="drawAll()" />
+            </div>
+            <div class="btn-row">
+                <button class="btn-primary" onclick="analyze()">Run analysis</button>
+                <button onclick="toggleOverlay()" id="overlayBtn" class="active">Overlay on</button>
+            </div>
+            <p class="small">This uses color heuristics for DAB-positive membrane/cytoplasmic staining. It estimates positive area fraction, not true cell-by-cell segmentation.</p>
+        </div>
+
+        <div class="panel">
+            <h2>Manual final estimate</h2>
+            <div class="bracket-grid" id="bracketGrid"></div>
+            <div class="row">
+                <label>Final estimate slider: <span id="manualVal">Not set</span></label>
+                <input type="range" min="0" max="100" step="5" id="manualSlider" value="0" oninput="setManualEstimate(this.value + '%')" />
+            </div>
+        </div>
+    </aside>
+
+    <section>
+        <div class="panel">
+            <div class="metric-grid">
+                <div class="metric"><div class="label">Algorithm positive area</div><div class="value" id="areaPct">0%</div></div>
+                <div class="metric"><div class="label">Algorithm bracket</div><div class="value" id="algoBracket">Not run</div></div>
+                <div class="metric"><div class="label">Final estimate</div><div class="value" id="finalEstimate">Not set</div></div>
+                <div class="metric"><div class="label">Analyzed pixels</div><div class="value" id="analyzedPixels">0</div></div>
+            </div>
+            <div class="row status" id="statusBox">Upload an image, draw a representative ROI, then run analysis.</div>
+        </div>
+
+        <div class="canvas-wrap">
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="panel">
+            <h2>Report text</h2>
+            <textarea id="report"></textarea>
+            <div class="btn-row">
+                <button class="btn-primary" onclick="copyReport()">Copy report</button>
+                <button onclick="downloadCSV()">Export CSV</button>
+                <button onclick="downloadAnnotatedImage()">Download annotated image</button>
+            </div>
+            <p class="small">Suggested wording uses the final estimate when selected; otherwise it uses the algorithm bracket. Final interpretation should be adjusted by the pathologist.</p>
+        </div>
+    </section>
+</main>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d', { willReadFrequently: true });
+let img = new Image();
+let imageLoaded = false;
+let roi = null;
+let exclusions = [];
+let mode = 'roi';
+let dragging = false;
+let startX = 0, startY = 0;
+let tempRect = null;
+let overlayOn = true;
+let analysisMask = null;
+let stats = {
+    positiveAreaPct: 0,
+    bracket: 'Not run',
+    positivePixels: 0,
+    tissuePixels: 0,
+    roiPixels: 0
+};
+let finalEstimate = '';
+const brackets = ['<5%', '5-10%', '10-20%', '20-30%', '30-40%', '40-50%', '50-60%', '60-70%', '70-80%', '80-90%', '>90%'];
+
+function initBrackets() {
+    const grid = document.getElementById('bracketGrid');
+    grid.innerHTML = '';
+    brackets.forEach(b => {
+        const btn = document.createElement('button');
+        btn.textContent = b;
+        btn.onclick = () => setManualEstimate(b);
+        grid.appendChild(btn);
+    });
+}
+initBrackets();
+
+function setMode(m) {
+    mode = m;
+    ['Roi','Exclude','Pan'].forEach(name => document.getElementById('mode' + name).classList.remove('active'));
+    if (m === 'roi') document.getElementById('modeRoi').classList.add('active');
+    if (m === 'exclude') document.getElementById('modeExclude').classList.add('active');
+    if (m === 'pan') document.getElementById('modePan').classList.add('active');
+}
+
+function canvasPoint(e) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    return {
+        x: Math.max(0, Math.min(canvas.width, (e.clientX - rect.left) * scaleX)),
+        y: Math.max(0, Math.min(canvas.height, (e.clientY - rect.top) * scaleY))
+    };
+}
+
+canvas.addEventListener('mousedown', e => {
+    if (!imageLoaded || mode === 'pan') return;
+    dragging = true;
+    const p = canvasPoint(e);
+    startX = p.x; startY = p.y;
+    tempRect = { x: startX, y: startY, w: 0, h: 0 };
+});
+
+canvas.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    const p = canvasPoint(e);
+    tempRect = normalizeRect(startX, startY, p.x - startX, p.y - startY);
+    drawAll();
+});
+
+canvas.addEventListener('mouseup', e => {
+    if (!dragging) return;
+    dragging = false;
+    const p = canvasPoint(e);
+    const r = normalizeRect(startX, startY, p.x - startX, p.y - startY);
+    if (r.w < 5 || r.h < 5) { tempRect = null; drawAll(); return; }
+    if (mode === 'roi') roi = r;
+    if (mode === 'exclude') exclusions.push(r);
+    tempRect = null;
+    analyze();
+});
+
+function normalizeRect(x, y, w, h) {
+    if (w < 0) { x += w; w = -w; }
+    if (h < 0) { y += h; h = -h; }
+    return { x: Math.round(x), y: Math.round(y), w: Math.round(w), h: Math.round(h) };
+}
+
+function isInRect(x, y, r) {
+    return r && x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h;
+}
+
+function isExcluded(x, y) {
+    return exclusions.some(r => isInRect(x, y, r));
+}
+
+document.getElementById('upload').addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+        img.onload = () => {
+            const maxDim = 1800;
+            let w = img.width, h = img.height;
+            if (Math.max(w, h) > maxDim) {
+                const scale = maxDim / Math.max(w, h);
+                w = Math.round(w * scale);
+                h = Math.round(h * scale);
+            }
+            canvas.width = w;
+            canvas.height = h;
+            imageLoaded = true;
+            roi = { x: Math.round(w * 0.08), y: Math.round(h * 0.08), w: Math.round(w * 0.84), h: Math.round(h * 0.84) };
+            exclusions = [];
+            analysisMask = null;
+            finalEstimate = '';
+            document.getElementById('finalEstimate').textContent = 'Not set';
+            document.getElementById('manualVal').textContent = 'Not set';
+            analyze();
+        };
+        img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+});
+
+function analyze() {
+    if (!imageLoaded) return;
+    document.getElementById('brownVal').textContent = document.getElementById('brownSensitivity').value;
+    document.getElementById('strengthVal').textContent = document.getElementById('minStrength').value;
+    document.getElementById('tissueVal').textContent = document.getElementById('tissueThreshold').value;
+    document.getElementById('opacityVal').textContent = document.getElementById('overlayOpacity').value;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    const mask = new Uint8ClampedArray(canvas.width * canvas.height);
+
+    const brownSensitivity = parseInt(document.getElementById('brownSensitivity').value);
+    const minStrength = parseInt(document.getElementById('minStrength').value);
+    const tissueThreshold = parseInt(document.getElementById('tissueThreshold').value);
+
+    let positive = 0, tissue = 0, roiCount = 0;
+    const step = 1;
+    const activeRoi = roi || { x: 0, y: 0, w: canvas.width, h: canvas.height };
+
+    for (let y = activeRoi.y; y < activeRoi.y + activeRoi.h; y += step) {
+        for (let x = activeRoi.x; x < activeRoi.x + activeRoi.w; x += step) {
+            if (x < 0 || y < 0 || x >= canvas.width || y >= canvas.height) continue;
+            if (isExcluded(x, y)) continue;
+            const idx = (y * canvas.width + x) * 4;
+            const r = data[idx], g = data[idx + 1], b = data[idx + 2];
+            const brightness = (r + g + b) / 3;
+            const saturation = Math.max(r, g, b) - Math.min(r, g, b);
+            const isTissue = brightness < tissueThreshold && saturation > 8;
+            if (!isTissue) continue;
+            tissue++;
+            roiCount++;
+
+            // Heuristic for DAB: brown/orange pixels tend to have R > G > B, low blue, and sufficient chroma.
+            const brownScore = (r - b) + 0.6 * (g - b) - Math.abs(r - g) * 0.25;
+            const brownHueLike = r > g * 0.82 && g > b * 0.88 && r > b + brownSensitivity;
+            const strongEnough = brownScore > minStrength && saturation > 15 && b < 190;
+
+            if (brownHueLike && strongEnough) {
+                positive++;
+                mask[y * canvas.width + x] = 255;
+            }
+        }
+    }
+
+    const pct = tissue > 0 ? positive / tissue * 100 : 0;
+    stats.positiveAreaPct = pct;
+    stats.bracket = bracketFromPercent(pct);
+    stats.positivePixels = positive;
+    stats.tissuePixels = tissue;
+    stats.roiPixels = roiCount;
+    analysisMask = mask;
+
+    document.getElementById('areaPct').textContent = pct.toFixed(1) + '%';
+    document.getElementById('algoBracket').textContent = stats.bracket;
+    document.getElementById('analyzedPixels').textContent = tissue.toLocaleString();
+    document.getElementById('statusBox').textContent = tissue > 0
+        ? 'Analysis complete. Review overlay and set the final pathologist estimate if needed.'
+        : 'No analyzable tissue detected. Adjust ROI or tissue/background threshold.';
+
+    updateReport();
+    drawAll();
+}
+
+function bracketFromPercent(p) {
+    if (p < 5) return '<5%';
+    if (p < 10) return '5-10%';
+    if (p < 20) return '10-20%';
+    if (p < 30) return '20-30%';
+    if (p < 40) return '30-40%';
+    if (p < 50) return '40-50%';
+    if (p < 60) return '50-60%';
+    if (p < 70) return '60-70%';
+    if (p < 80) return '70-80%';
+    if (p < 90) return '80-90%';
+    return '>90%';
+}
+
+function drawAll() {
+    if (!imageLoaded) return;
+    document.getElementById('opacityVal').textContent = document.getElementById('overlayOpacity').value;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    if (overlayOn && analysisMask) {
+        const opacity = parseInt(document.getElementById('overlayOpacity').value) / 100;
+        const base = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const d = base.data;
+        for (let i = 0; i < analysisMask.length; i++) {
+            if (analysisMask[i]) {
+                const j = i * 4;
+                d[j] = Math.round(d[j] * (1 - opacity) + 245 * opacity);
+                d[j + 1] = Math.round(d[j + 1] * (1 - opacity) + 158 * opacity);
+                d[j + 2] = Math.round(d[j + 2] * (1 - opacity) + 11 * opacity);
+                d[j + 3] = 255;
+            }
+        }
+        ctx.putImageData(base, 0, 0);
+    }
+
+    drawRect(roi, 'rgba(34,197,94,0.18)', 'rgba(34,197,94,0.95)', 3);
+    exclusions.forEach(r => drawRect(r, 'rgba(239,68,68,0.18)', 'rgba(239,68,68,0.95)', 3));
+    if (tempRect) {
+        const fill = mode === 'exclude' ? 'rgba(239,68,68,0.12)' : 'rgba(34,197,94,0.12)';
+        const stroke = mode === 'exclude' ? 'rgba(239,68,68,0.95)' : 'rgba(34,197,94,0.95)';
+        drawRect(tempRect, fill, stroke, 2);
+    }
+}
+
+function drawRect(r, fill, stroke, width) {
+    if (!r) return;
+    ctx.save();
+    ctx.fillStyle = fill;
+    ctx.strokeStyle = stroke;
+    ctx.lineWidth = width;
+    ctx.fillRect(r.x, r.y, r.w, r.h);
+    ctx.strokeRect(r.x, r.y, r.w, r.h);
+    ctx.restore();
+}
+
+function toggleOverlay() {
+    overlayOn = !overlayOn;
+    const btn = document.getElementById('overlayBtn');
+    btn.textContent = overlayOn ? 'Overlay on' : 'Overlay off';
+    btn.classList.toggle('active', overlayOn);
+    drawAll();
+}
+
+function clearRoi() { roi = null; analyze(); }
+function clearExclusions() { exclusions = []; analyze(); }
+function clearAll() {
+    roi = imageLoaded ? { x: 0, y: 0, w: canvas.width, h: canvas.height } : null;
+    exclusions = [];
+    analysisMask = null;
+    finalEstimate = '';
+    document.getElementById('finalEstimate').textContent = 'Not set';
+    document.getElementById('manualVal').textContent = 'Not set';
+    if (imageLoaded) analyze();
+}
+
+function setManualEstimate(value) {
+    finalEstimate = value;
+    document.getElementById('finalEstimate').textContent = value;
+    document.getElementById('manualVal').textContent = value;
+    const numeric = parseInt(value.replace(/[^0-9]/g, ''));
+    if (!Number.isNaN(numeric)) document.getElementById('manualSlider').value = Math.min(numeric, 100);
+    updateReport();
+}
+
+function updateReport() {
+    const stain = document.getElementById('stainName').value;
+    const context = document.getElementById('context').value;
+    const caseId = document.getElementById('caseId').value.trim();
+    const estimate = finalEstimate || stats.bracket || 'not determined';
+    const algoText = stats.bracket && stats.bracket !== 'Not run' ? ` Algorithm-assisted positive area estimate: ${stats.positiveAreaPct.toFixed(1)}% (${stats.bracket}).` : '';
+    let text = '';
+
+    if (context === 'marrow') {
+        text = `${stain} highlights plasma cells comprising approximately ${estimate} of marrow cellularity in the selected representative area.`;
+    } else if (context === 'tissue') {
+        text = `${stain} highlights positive cells comprising approximately ${estimate} of the selected inflammatory/tumor infiltrate.`;
+    } else {
+        text = `${stain} shows approximately ${estimate} positive staining in the selected region of interest.`;
+    }
+
+    text += algoText;
+    text += ' Final interpretation should be correlated with morphology and adjusted by pathologist review.';
+    if (caseId) text = `Case/block: ${caseId}\n` + text;
+    document.getElementById('report').value = text;
+}
+
+function copyReport() {
+    const report = document.getElementById('report');
+    report.select();
+    document.execCommand('copy');
+}
+
+function downloadCSV() {
+    const stain = document.getElementById('stainName').value;
+    const caseId = document.getElementById('caseId').value.trim();
+    const rows = [
+        ['case_block','stain','algorithm_positive_area_pct','algorithm_bracket','final_estimate','positive_pixels','tissue_pixels','roi','exclusions'],
+        [
+            caseId,
+            stain,
+            stats.positiveAreaPct.toFixed(2),
+            stats.bracket,
+            finalEstimate,
+            stats.positivePixels,
+            stats.tissuePixels,
+            roi ? JSON.stringify(roi) : '',
+            JSON.stringify(exclusions)
+        ]
+    ];
+    const csv = rows.map(r => r.map(v => '"' + String(v).replace(/"/g, '""') + '"').join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'cd138_membrane_stain_estimate.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function downloadAnnotatedImage() {
+    if (!imageLoaded) return;
+    drawAll();
+    const a = document.createElement('a');
+    a.href = canvas.toDataURL('image/png');
+    a.download = 'cd138_membrane_stain_annotated.png';
+    a.click();
+}
+</script>
+</body>
+</html>
