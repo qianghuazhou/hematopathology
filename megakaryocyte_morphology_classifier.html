@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Megakaryocyte Morphology Classification Tool</title>
+<style>
+:root{
+  --bg:#f6f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#d9dee8;--accent:#2454a6;--soft:#eaf0ff;--warn:#fff4e5;--good:#e9f8ef;--bad:#fdeeee;
+}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+header{background:linear-gradient(135deg,#15233f,#2d62b7);color:#fff;padding:28px 22px}
+header h1{margin:0 0 6px;font-size:28px} header p{margin:0;opacity:.9;max-width:1100px}
+main{max-width:1180px;margin:0 auto;padding:22px}.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(20,32,55,.06);padding:18px;margin-bottom:18px}
+h2{font-size:20px;margin:0 0 14px}.sub{color:var(--muted);font-size:14px;margin-top:-8px;margin-bottom:14px}.section-title{font-weight:700;margin:18px 0 8px;color:#22345a}
+label{font-weight:700;font-size:14px;display:block;margin:10px 0 5px}.row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14px} textarea{min-height:72px}
+button{border:0;border-radius:10px;background:var(--accent);color:#fff;padding:10px 14px;font-weight:700;cursor:pointer}button.secondary{background:#eef2f7;color:#24324a}button.danger{background:#b42318}.btnbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.result{border-radius:14px;padding:14px;border:1px solid var(--line);background:#f9fbff}.dx{font-size:21px;font-weight:800;color:#102a56}.score{font-size:13px;color:var(--muted);margin-top:4px}.pill{display:inline-block;border-radius:999px;padding:4px 9px;background:var(--soft);color:#1d4f9a;font-weight:700;font-size:12px;margin:3px 4px 3px 0}.warn{background:var(--warn);border-color:#ffd49a}.good{background:var(--good);border-color:#b7e4c7}.bad{background:var(--bad);border-color:#f1b5b5}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:#f1f4f9;color:#24324a}.small{font-size:12px;color:var(--muted)}
+.counter{display:grid;grid-template-columns:1fr 80px 34px 34px;gap:8px;align-items:center;margin:7px 0}.counter b{font-size:14px}.counter button{padding:7px 0}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;background:#0f172a;color:#e5e7eb;padding:14px;border-radius:12px;font-size:13px;max-height:420px;overflow:auto}.ref{font-size:12px;color:#475467}.hidden{display:none}
+@media(max-width:900px){.grid,.row,.row3{grid-template-columns:1fr}.counter{grid-template-columns:1fr 70px 34px 34px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Megakaryocyte Morphology Classification Tool</h1>
+  <p>Educational decision-support tool for marrow megakaryocyte pattern recognition in MPN, CML, and ITP morphology studies. Not a standalone diagnostic system.</p>
+</header>
+<main>
+<div class="grid">
+  <section>
+    <div class="card">
+      <h2>1. Core Morphology Inputs</h2>
+      <p class="sub">Select the dominant marrow pattern. The output prioritizes morphology and then adds supportive classification clues.</p>
+      <div class="row">
+        <div><label>Megakaryocyte size</label><select id="size"><option value="">Not specified</option><option>large/giant mature</option><option>variable</option><option>small/dwarf</option><option>small atypical</option></select></div>
+        <div><label>Predominant nuclear morphology</label><select id="nuclei"><option value="">Not specified</option><option>staghorn / hyperlobulated</option><option>bulbous / cloud-like</option><option>hypolobated</option><option>hyperchromatic irregular</option><option>pleomorphic mature</option><option>dwarf hyposegmented</option></select></div>
+      </div>
+      <div class="row">
+        <div><label>Cluster pattern</label><select id="cluster"><option value="">Not specified</option><option>loose clusters</option><option>dense tight syncytial clusters</option><option>sheets</option><option>fewer/smaller clusters</option><option>scattered/small clusters</option></select></div>
+        <div><label>Marrow cellularity</label><select id="cellularity"><option value="">Not specified</option><option>normocellular</option><option>hypercellular</option><option>hypocellular/fibrotic</option><option>panmyelosis</option></select></div>
+      </div>
+      <div class="row3">
+        <div><label>Granulocytic proliferation / increased M:E</label><select id="gran"><option value="">Not specified</option><option value="yes">Present</option><option value="no">Absent</option></select></div>
+        <div><label>Erythroid proliferation</label><select id="ery"><option value="">Not specified</option><option value="yes">Present</option><option value="no">Absent/decreased</option></select></div>
+        <div><label>Fibrosis</label><select id="fibrosis"><option value="0">MF-0 / none</option><option value="1">MF-1</option><option value="2">MF-2</option><option value="3">MF-3</option></select></div>
+      </div>
+      <div class="row3">
+        <div><label>Osteosclerosis</label><select id="osteo"><option value="">Not specified</option><option value="yes">Present</option><option value="no">Absent</option></select></div>
+        <div><label>Intrasinusoidal hematopoiesis / megakaryocytes</label><select id="intra"><option value="">Not specified</option><option value="yes">Present</option><option value="no">Absent</option></select></div>
+        <div><label>Vascularity</label><select id="vascular"><option value="">Not specified</option><option>decreased</option><option>normal</option><option>increased/tortuous</option></select></div>
+      </div>
+      <div class="btnbar"><button onclick="classify()">Classify morphology</button><button class="secondary" onclick="resetForm()">Reset</button></div>
+    </div>
+
+    <div class="card">
+      <h2>2. Optional ITP Megakaryocyte Subtype Counter</h2>
+      <p class="sub">Based on the published ITP steroid-sensitivity model: female sex, thrombocytogenic megakaryocytes ≤6/50, and granular/total megakaryocyte ratio ≥70% each score 1 point.</p>
+      <div class="row">
+        <div><label>Sex</label><select id="sex"><option value="">Not used</option><option value="female">Female</option><option value="male">Male</option></select></div>
+        <div><label>Total megakaryocytes assessed</label><input id="itpTotal" type="number" value="50" min="1" /></div>
+      </div>
+      <div class="counter"><b>Naïve megakaryocytes</b><input id="naive" type="number" value="0" min="0" oninput="updateITP()"><button onclick="bump('naive',1)">+</button><button onclick="bump('naive',-1)">−</button></div>
+      <div class="counter"><b>Granular megakaryocytes</b><input id="granular" type="number" value="0" min="0" oninput="updateITP()"><button onclick="bump('granular',1)">+</button><button onclick="bump('granular',-1)">−</button></div>
+      <div class="counter"><b>Thrombocytogenic megakaryocytes</b><input id="thrombo" type="number" value="0" min="0" oninput="updateITP()"><button onclick="bump('thrombo',1)">+</button><button onclick="bump('thrombo',-1)">−</button></div>
+      <div class="counter"><b>Naked-nucleus megakaryocytes</b><input id="naked" type="number" value="0" min="0" oninput="updateITP()"><button onclick="bump('naked',1)">+</button><button onclick="bump('naked',-1)">−</button></div>
+      <div id="itpBox" class="result"></div>
+    </div>
+  </section>
+
+  <aside>
+    <div class="card">
+      <h2>Result</h2>
+      <div id="result" class="result"><div class="dx">Awaiting input</div><div class="score">Enter morphology and click classify.</div></div>
+      <div class="btnbar"><button class="secondary" onclick="copyReport()">Copy report text</button></div>
+    </div>
+    <div class="card">
+      <h2>Reference Morphology Cheat Sheet</h2>
+      <table>
+        <thead><tr><th>Pattern</th><th>Favours</th></tr></thead>
+        <tbody>
+          <tr><td>Large/giant mature megakaryocytes, staghorn hyperlobulated nuclei, loose clusters</td><td>ET</td></tr>
+          <tr><td>Bulbous/cloud-like or hypolobated atypical nuclei, dense syncytial clusters, increased M:E</td><td>Pre-fibrotic PMF</td></tr>
+          <tr><td>Hyperchromatic/hypolobated atypical megakaryocytes with MF-2/3, osteosclerosis, intrasinusoidal hematopoiesis</td><td>Overt fibrotic PMF / post-ET or post-PV MF</td></tr>
+          <tr><td>Pleomorphic mature megakaryocytes with panmyelosis</td><td>PV</td></tr>
+          <tr><td>Small dwarf hyposegmented megakaryocytes with granulocytic hyperplasia</td><td>CML</td></tr>
+          <tr><td>Small atypical hyperchromatic megakaryocytes, fewer/smaller clusters, advanced fibrosis obscuring subtype</td><td>MPN-U</td></tr>
+        </tbody>
+      </table>
+      <p class="ref">Use with CBC, clinical findings, marrow cellularity, fibrosis grade, BCR::ABL1, JAK2/CALR/MPL, cytogenetics, and NGS.</p>
+    </div>
+    <div class="card">
+      <h2>Generated Report Text</h2>
+      <div id="report" class="mono">Report text will appear here.</div>
+    </div>
+  </aside>
+</div>
+</main>
+<script>
+function v(id){return document.getElementById(id).value}
+function add(scores,key,pts,why){scores[key]=(scores[key]||0)+pts; reasons[key].push(why)}
+let reasons={ET:[],prePMF:[],fibPMF:[],PV:[],CML:[],MPNU:[]};
+function classify(){
+  reasons={ET:[],prePMF:[],fibPMF:[],PV:[],CML:[],MPNU:[]};
+  const scores={ET:0,prePMF:0,fibPMF:0,PV:0,CML:0,MPNU:0};
+  const size=v('size'), nuclei=v('nuclei'), cluster=v('cluster'), cellularity=v('cellularity');
+  const gran=v('gran'), ery=v('ery'), fibrosis=parseInt(v('fibrosis')), osteo=v('osteo'), intra=v('intra'), vascular=v('vascular');
+
+  if(size==='large/giant mature'){add(scores,'ET',2,'large/giant mature megakaryocytes');}
+  if(size==='variable'){add(scores,'prePMF',1,'variable megakaryocyte size');add(scores,'PV',1,'pleomorphic/variable size possible');}
+  if(size==='small/dwarf'){add(scores,'CML',3,'small dwarf megakaryocytes');}
+  if(size==='small atypical'){add(scores,'MPNU',2,'small atypical megakaryocytes');add(scores,'fibPMF',1,'small atypical forms may be seen in fibrotic PMF');}
+
+  if(nuclei==='staghorn / hyperlobulated'){add(scores,'ET',3,'staghorn/hyperlobulated nuclei');}
+  if(nuclei==='bulbous / cloud-like'){add(scores,'prePMF',3,'bulbous/cloud-like nuclei');add(scores,'fibPMF',1,'cloud-like atypia can persist in PMF');}
+  if(nuclei==='hypolobated'){add(scores,'prePMF',2,'hypolobated atypical nuclei');add(scores,'fibPMF',2,'hypolobated nuclei in fibrotic-stage disease');}
+  if(nuclei==='hyperchromatic irregular'){add(scores,'fibPMF',3,'hyperchromatic irregular nuclei');add(scores,'MPNU',2,'hyperchromatic atypical nuclei');}
+  if(nuclei==='pleomorphic mature'){add(scores,'PV',3,'pleomorphic mature megakaryocytes');}
+  if(nuclei==='dwarf hyposegmented'){add(scores,'CML',3,'dwarf hyposegmented nuclei');}
+
+  if(cluster==='loose clusters'){add(scores,'ET',2,'loose clusters');}
+  if(cluster==='dense tight syncytial clusters'){add(scores,'prePMF',3,'dense tight syncytial clusters');add(scores,'fibPMF',1,'persistent dense clusters can be seen in PMF');}
+  if(cluster==='sheets'){add(scores,'fibPMF',2,'large clusters/sheets in fibrotic PMF');}
+  if(cluster==='fewer/smaller clusters'){add(scores,'MPNU',2,'fewer and smaller clusters');}
+  if(cluster==='scattered/small clusters'){add(scores,'CML',1,'scattered/small megakaryocyte clusters');}
+
+  if(cellularity==='normocellular'){add(scores,'ET',1,'normocellular marrow supports ET');}
+  if(cellularity==='hypercellular'){add(scores,'prePMF',1,'hypercellularity supports pre-PMF if granulocytic');add(scores,'CML',1,'hypercellularity supports CML if granulocytic');}
+  if(cellularity==='hypocellular/fibrotic'){add(scores,'fibPMF',2,'hypocellular/fibrotic marrow');add(scores,'MPNU',1,'advanced fibrotic marrow may be MPN-U');}
+  if(cellularity==='panmyelosis'){add(scores,'PV',3,'panmyelosis');}
+  if(gran==='yes'){add(scores,'prePMF',2,'granulocytic proliferation/increased M:E');add(scores,'CML',2,'granulocytic proliferation');}
+  if(gran==='no'){add(scores,'ET',1,'no significant granulocytic proliferation');}
+  if(ery==='yes'){add(scores,'PV',2,'erythroid proliferation');}
+  if(ery==='no'){add(scores,'prePMF',1,'decreased erythropoiesis supports pre-PMF');}
+  if(fibrosis>=2){add(scores,'fibPMF',3,'MF-2/3 fibrosis');add(scores,'MPNU',1,'advanced fibrosis may obscure subtype');}
+  if(fibrosis===1){add(scores,'prePMF',1,'minor MF-1 fibrosis can support pre-PMF');}
+  if(fibrosis===0){add(scores,'ET',1,'no fibrosis supports ET');}
+  if(osteo==='yes'){add(scores,'fibPMF',2,'osteosclerosis');}
+  if(intra==='yes'){add(scores,'fibPMF',2,'intrasinusoidal hematopoiesis/megakaryocytes');}
+  if(vascular==='increased/tortuous'){add(scores,'fibPMF',1,'increased/tortuous vascularity');add(scores,'MPNU',1,'increased vascularity described in some MPN-U/triple-negative cases');}
+
+  const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+  const top=sorted[0], second=sorted[1];
+  const labels={ET:'Essential thrombocythemia-like megakaryocyte pattern',prePMF:'Pre-fibrotic primary myelofibrosis-like megakaryocyte pattern',fibPMF:'Fibrotic-stage PMF / post-MPN myelofibrosis-like pattern',PV:'Polycythemia vera-like megakaryocyte pattern',CML:'CML-like dwarf megakaryocyte pattern',MPNU:'MPN-unclassifiable / advanced atypical pattern'};
+  let confidence='Low'; if(top[1]>=7 && top[1]-second[1]>=3) confidence='High'; else if(top[1]>=5) confidence='Moderate';
+  const reasonText=reasons[top[0]].map(x=>`<span class="pill">${x}</span>`).join('');
+  const cls=confidence==='High'?'good':confidence==='Moderate'?'warn':'';
+  document.getElementById('result').className='result '+cls;
+  document.getElementById('result').innerHTML=`<div class="dx">${labels[top[0]]}</div><div class="score">Confidence: ${confidence} | Scores: ${sorted.map(x=>x[0]+': '+x[1]).join(' · ')}</div><div style="margin-top:10px">${reasonText || '<span class="small">No strong morphology pattern selected.</span>'}</div>`;
+  const report=`MEGAKARYOCYTE MORPHOLOGY CLASSIFICATION\n\nPredicted pattern: ${labels[top[0]]}\nConfidence: ${confidence}\n\nKey supportive features:\n${reasons[top[0]].map(x=>'– '+x).join('\n') || '– No dominant feature selected.'}\n\nScore summary: ${sorted.map(x=>x[0]+': '+x[1]).join('; ')}\n\nInterpretive note: This tool supports morphology pattern recognition only. Final classification requires integration with CBC, clinical findings, marrow cellularity, fibrosis grade, BCR::ABL1 testing, JAK2/CALR/MPL status, cytogenetics, and/or NGS as clinically indicated.`;
+  document.getElementById('report').textContent=report;
+}
+function updateITP(){
+  const total=Number(v('itpTotal'))||50, g=Number(v('granular'))||0, t=Number(v('thrombo'))||0, n=Number(v('naked'))||0, naive=Number(v('naive'))||0;
+  const counted=g+t+n+naive; const gRatio=counted?g/counted:0; const nRatio=counted?n/counted:0;
+  let score=0, bits=[]; if(v('sex')==='female'){score++;bits.push('female sex')}; if(t<=6){score++;bits.push('thrombocytogenic MK ≤6')}; if(gRatio>=0.70){score++;bits.push('granular/total MK ratio ≥70%')};
+  const pred=score>=2?'Predictive index ≥2: supports steroid-sensitive ITP in the study model':'Predictive index <2: does not support steroid-sensitive ITP in the study model';
+  document.getElementById('itpBox').innerHTML=`<b>${pred}</b><br><span class="small">Score ${score}/3. Counted ${counted}; granular ratio ${(gRatio*100).toFixed(1)}%; naked nucleus ratio ${(nRatio*100).toFixed(1)}%. ${bits.length?'Positive items: '+bits.join(', '):''}</span>`;
+}
+function bump(id,delta){const el=document.getElementById(id); el.value=Math.max(0,(Number(el.value)||0)+delta); updateITP()}
+function resetForm(){document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);document.getElementById('fibrosis').value='0';['naive','granular','thrombo','naked'].forEach(id=>document.getElementById(id).value=0);document.getElementById('itpTotal').value=50;document.getElementById('result').className='result';document.getElementById('result').innerHTML='<div class="dx">Awaiting input</div><div class="score">Enter morphology and click classify.</div>';document.getElementById('report').textContent='Report text will appear here.';updateITP()}
+function copyReport(){navigator.clipboard.writeText(document.getElementById('report').textContent)}
+updateITP();
+</script>
+</body>
+</html>
