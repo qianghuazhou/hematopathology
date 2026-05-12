@@ -27,3 +27,50 @@ Comment:  _
 
 Flow Cytometry report Accession No.:  _ from Dr. _ at Sunnybrook Health Sciences Centre, 2075 Bayview Ave., Toronto, ON, M4N 3M5.
 
+SPECIMEN(S)
+A	Left Cervical Lymph Node Core Biopsy
+
+
+CLINICAL HISTORY
+Enlarged lymph glands initially in neck, now very large in both axilla and abdominal pelvic nodes. Query lymphoma.
+Time into Formalin: 09:00
+
+DIAGNOSIS
+Lymph node, left cervical, core biopsy:
+– Small lymphocytic lymphoma / chronic lymphocytic leukemia.
+
+COMMENT
+Relatively small biopsy with crush artefacts shows a diffuse infiltrate of atypical small lymphoid cells with round nuclei and scant cytoplasm. Limited panel of immunohistochemistry was ordered and shows the atypical infiltrate is composed of CD20 weak B cells and CD3 strong T cells. B cells are negative for CD10 and BCL6. BCL2 highlights strong positive T cells and relatively weak B cells. Ki67 proliferation index is low (10 to 15%). Flow cytometry demonstrated a kappa-restricted CD5+ B cell population of 39% of CLL/SLL immunophenotype. 
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Left Cervical Lymph Node". It consists of 2 fragments of soft white-tan tissue each measuring 0.1 cm in greatest dimension
+Sections: 2/1 EIT
+
+
+DS/23-APR-2026
+
+MICROSCOPIC DESCRIPTION
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low cellularity
+Specimen Viability: Suboptimal specimen viability (19% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Lymph node flow cytometry shows a kappa-restricted CD5+ B-cell population,
+
+Comment:  The immunophenotype is most consistent with a chronic lymphocytic leukemia/small lymphocytic lymphoma (CLL/SLL) phenotype. Correlation with peripheral lymphocyte count and peripheral blood flow cytometry is recommended to differentiate between CLL and SLL.
+
+
+SPECIMEN(S)
+A	Duodenum Stricture Biopsy
+B	Duodenum Mass Biopsy
+
+
+ADDENDUM COMMENT
+Duodenum, stricture, biopsy: involvement by small lymphocytic lymphoma / chronic lymphocytic leukemia
+
+COMMENT
+The biopsy shows a small infiltrate of monotonous small lymphocytes with round nuclei, clumped chromatin, inconspicuous nucleoli, and scant cytoplasm, with scattered prolymphocytes. Immunohistochemistry demonstrates a CD19+ PAX5+ B-cell population coexpressing BCL2, CD23, and weak LEF1, and negative for CD5, CD10, BCL6, Cyclin D1, and CD20. Ki-67 proliferation index is low (<5%). CD3 and CD5 highlight scattered background T cells.
+
+Note is made of known CLL. The atypical B cell infiltrate shows CD23 and LEF1 positivity, supporting CLL/SLL. Loss of CD5 expression is an uncommon but recognized immunophenotypic variation, particularly in previously treated or evolving disease.
+
