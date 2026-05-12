@@ -82,3 +82,51 @@ CYTOGENETICS
 FISH studies for MYC, BCL2 and BCL6 have been ordered and will be reported as an addendum.
 
 
+SPECIMEN(S)
+A	Left Axillary Lymph Node Core Biopsy
+B	Left  Axillary  Lymph Node Core Biopsy
+
+
+CLINICAL HISTORY
+History of diffuse large B cell lymphoma.
+Time into Formalin: 09:40
+
+DIAGNOSIS
+Lymph nodes, left axillary, core biopsies:
+– Diffuse large B-cell lymphoma, NOS, GCB subtype.  See comment.
+
+COMMENT
+History of primary refractory to advanced diffuse large B-cell lymphoma of GCB subtype with MYC and BCL2 expression is noted.  According to the previous FISH results there was BCL2 rearrangement with negative BCL6 and MYC rearrangement.  The current biopsy shows features consistent with DLBCL, NOS of GCB cell of origin and is positive for Bcl-2 and MYC expression.  It appears to have weak CD5 expression that is different from previous biopsy, query tumor evolvement.  Clinical correlation is advised. Case was reviewed by Dr. I. Brain who concurs with the diagnosis.
+
+GROSS DESCRIPTION
+A.  The specimen is received in formalin in a container labelled with the patient's demographic details and as " Left Axillary Node Biopsy". It consists of 4 cores and many fragments of soft white-tan tissue measuring from less than 0.1 cm to 1.3 cm in length and up to 0.1 cm in diameter.
+Sections: 1-3 many/3 EIT
+ 
+B.  The specimen is received in saline in a container labelled with the patient's demographic details and as " Left Axillary Node Biopsy". It consists of 2 cores and many fragments of soft white-tan tissue measuring from less than 0.1 cm to 1.9 cm in length and up to 0.1 cm in diameter.  1 core is sent to Sunnybrook Hospital for flow cytometry study, the remaining tissue is subsequently fixed in 10% NBF and submitted for histology study.
+Sections: 1,2 -many/2 EIT
+
+
+JC/30-APR-2026
+
+MICROSCOPIC DESCRIPTION
+Sections of the biopsy show effaced lymph node architecture with atypical lymphoid infiltrates and necrosis.  The atypical lymphoid cells are composed of intermediate to large cells with irregular nuclei, vesicular chromatin, variably distinct nucleoli, and clear cytoplasm.  Frequent mitosis and karyorrhectic debris is seen.
+
+IMMUNOHISTOCHEMISTRY
+The atypical cells are positive for CD20, PAX5, CD19 with coexpression of CD5 (weak/partial), CD10, Bcl-2, c-Myc, and they are negative for CD43, cyclin D1, BCL6, LEF1,
+EBER-ish is negative.
+CD3 and CD43 highlights scattered interspersed T cells.
+CD21 shows no follicular dendritic cell meshworks.
+Ki-67 proliferation index is approximately 70 to 95%.
+AE1/AE3 is negative.
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Optimal
+Specimen Viability: Suboptimal specimen viability (46% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Lymph node flow cytometry shows a lambda-restricted CD10+ B-cell population
+
+Comment:  
+
