@@ -18,4 +18,95 @@ In-situ hybridization for EBV-encoded RNA (EBER) is negative.
 
 
 
+SPECIMEN(S)
+A	Left Neck Mass Core Biopsy
 
+CLINICAL HISTORY
+History Ankylosing spondylitis on biologics. Query lymphoma.
+Time into Formalin: 09:15
+
+DIAGNOSIS
+Left neck mass, core biopsy:
+- CLASSIC HODGKIN LYMPHOMA, NODULAR SCLEROSIS SUBTYPE (see comment).
+- EBER-ish is pending.
+
+COMMENT
+The findings are consistent with a diagnosis of classic Hodgkin lymphoma, nodular sclerosis subtype. Correlation with clinical and imaging findings is recommended for staging and management. EBER-ish is pending due to inventory issue and will be reported in an addendum.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Left Neck Mass Core Biopsy". It consists of 3 cores of soft white-tan tissue measuring from 1.2 cm to 1.4 cm in length and up to less than 0.1 cm in diameter.
+Sections: 1-3 -3/3 EIT
+
+
+ME/05-JAN-2026
+
+MICROSCOPIC DESCRIPTION
+Sections show core biopsies of lymphoid tissue with complete effacement of the normal nodal architecture by a nodular infiltrate with broad collagen bands. The infiltrate is composed of a polymorphous inflammatory background including small lymphocytes, histiocytes, neutrophils, and moderately increased eosinophils. Scattered throughout the sections and forming focal confluent aggregates are intermediate to large atypical cells with vesicular chromatin and prominent nucleoli, including Hodgkin/Reed–Sternberg cells and variants. No sheets of large B cells are identified. Necrosis and granulomas are not seen.
+
+IMMUNOHISTOCHEMISTRY
+The atypical large cells show the following immunophenotype: CD30+(strong, Golgi pattern), CD15+(subset), PAX5+(weak/dim), MUM1+, CD45-, CD20-, CD79a-, CD3-, ALK1-.
+Ki-67 Proliferation index is high in the HRS cells, with a reactive pattern in the background lymphoid population.
+CD3 and CD5 highlight numerous background T cells.
+CD21 shows no FDC meshworks in involved areas.
+EBER-ish: Pending.
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Insufficient cells for flow cytometric analysis
+
+Interpretation:  
+Insufficient cellularity for flow cytometry. Refer to tissue investigations.
+
+Comment:  
+Cytospin shows only debris and stain deposit
+
+
+SPECIMEN(S)
+A	Right Neck Mass
+
+CLINICAL HISTORY
+Rule out lymphoma
+Time into Formalin: 09:00
+
+DIAGNOSIS
+Right Neck Mass, Excisional Biopsy;
+- CLASSIC HODGKIN LYMPHOMA, NODULAR SCLEROSIS SUBTYPE (see comment)
+
+COMMENT
+According to a scanned consultation report (appointment date Dec 17, 2025), this patient was treated for Hodgkin's lymphoma with chemoradiation in 1998/2000 in Honduras. Previous core biopsy shows suspicious for CHL. The overall findings within this excisional biopsy are consistent with a diagnosis of classic Hodgkin lymphoma, nodular sclerosis subtype. Correlate with clinical and imaging findings and the results of additional laboratory studies for full evaluation.
+
+GROSS DESCRIPTION
+The specimen is received in a container labelled with this patient's demographic details and as "Right Neck Mass".  It consists of 2 lymph nodes each measuring 1.3 cm in maximal dimension.  1 lymph node contains a biopsy site.  Both lymph nodes are bisected.  Tissue for flow cytometry was sent to Sunnybrook Hospital for further examination.
+Sections:
+1–1 lymph node 2/1
+2–1 lymph node 2/1 EIT
+
+
+AB/20-JAN-2026
+
+MICROSCOPIC DESCRIPTION
+Sections from the excisional biopsy show architectural effacement with broad, irregular collagen bands compartmentalizing nodules. Scattered Hodgkin/Reed–Sternberg (HRS) cells including lacunar type cells are found within a polymorphous background of small lymphocytes, histiocytes, plasma cells, and variable eosinophils. Sheets of large lymphocytes are not seen. Necrosis is absent.
+
+IMMUNOHISTOCHEMISTRY
+The HRS cells are CD30 strong+, CD15 focal+, PAX5 very weak+ to negative (repeated on another block), MUM1/IRF4+, CD45–, CD20–, CD79a–, ALK1–, EBER-ISH-.
+CD20, PAX5, CD79a highlight the background B cells that are negative for CD10, BCL2, LEF1, and CyclinD1. BCL6 only highlights a small focus of germinal center.
+CD3, CD5, and CD43 highlight abundant T cells. LEF1 highlights subset of T cells. BCL6 highlights scattered follicular helper T cells.
+CD21 shows no FDC meshworks in involved areas. 
+CD138 and MUM1 highlight abundant plasma cells mostly surrounding the nodules and are polytypic by kappa and lambda light chain stains.
+Ki-67 labels a majority of HRS cells with reactive background pattern.
+
+FLOW CYTROMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Insufficient cells for full flow cytometric analysis
+Specimen Viability: Suboptimal specimen viability (46% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Flow Cytometry, Tissue (Neck Mass, Right):
+
+	Flow cytometry was attempted, however, the hematolymphoid cellularity was insufficient for 	meaningful analysis. Refer to the surgical pathology report for final diagnosis.
+
+
+INTERNAL CONSULTATION
+This case was reviewed in consultation with another hematopathologist for quality assurance, and diagnostic consensus was obtained.
