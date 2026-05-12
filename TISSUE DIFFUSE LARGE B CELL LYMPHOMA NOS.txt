@@ -130,3 +130,67 @@ Lymph node flow cytometry shows a lambda-restricted CD10+ B-cell population
 
 Comment:  
 
+
+SPECIMEN(S)
+A	Ileum Mass  Biopsy
+B	Ileum Mass  Biopsy
+A	Ileum Mass  Biopsy
+B	Ileum Mass  Biopsy
+C	Ileum Biopsy
+D	Right Colon Biopsy, Polyp
+
+
+CLINICAL HISTORY
+Abnormal CT suspected lymphoma.
+Time into Formalin: 12:00
+
+DIAGNOSIS
+D. Right colon, polyp, excisional biopsy:
+– EBV+ large B-cell lymphoma. See comment.
+
+COMMENT
+The differential diagnosis include EBV+ DLBCL, high-grade B-cell lymphoma, and Burkitt lymphoma. Correlation with FISH studies for MYC, BCL2, and BCL6 rearrangements is recommended to assess for high-grade B-cell lymphoma. These studies are ordered and currently pending; results will be provided separately.
+
+Preliminary results were communicated to Drs. Jacobson and Magony by emails on April 27 and Dr. S. Ingber verbally on April 30, 2026. Case was reviewed by Dr. I. Brain who concurs with the diagnosis.
+
+GROSS DESCRIPTION
+A. The specimen is received in a container labelled with this patient's demographic details and as "Ileum Mass Biopsy in Formalin".  It consists of 3 fragments of soft tan tissue measuring 0.1 to 0.3 cm in greatest dimension.
+Sections: 3/1 EIT
+
+B. The specimen is received in a container labelled with this patient's demographic details and as "Ileum Mass Biopsy and Normal Saline".  It consists of 2 pieces of soft tan tissue measuring 0.2 and 0.4 cm in greatest dimension.  The soft tissue is received in normal saline solution and is submitted entirely for flow cytometry.
+
+C. The specimen is received in formalin in a container labelled with this patient's demographic details and as "Ileum Biopsy".  It consists of two pieces of soft tan mucosal tissue measuring 0.3 cm each in greatest dimension.
+Sections:  2/1 EIT
+
+D. The specimen is received in formalin in a container labelled with this patient's demographic details and as " Right Colon Biopsy, Polyp".  It consists of 3 pieces of soft tan mucosal tissue measuring from 0.8 to 1.1 cm in greatest dimension.
+Sections:  3/1 EIT   
+
+
+ME/17-APR-2026
+
+MICROSCOPIC DESCRIPTION
+Sections show a diffuse infiltrate of large atypical lymphoid cells within the colonic mucosa, composed of sheets of pleomorphic cells with irregular nuclear contours, pale chromatin, prominent nucleoli, and scant cytoplasm. Mitotic activity and karyorrhectic debris are readily identified. No follicular architecture or low-grade component is seen.
+
+IMMUNOHISTOCHEMISTRY
+The atypical cells are CD20+, PAX5+, CD10+, CMYC+ (90%), BCL6+, and BCL2+, and negative for CD5, CD30, CD43, MUM1, and CCND1. LEF1 is positive. EBER-ISH is positive.
+CD3 and CD5 highlight background T cells. 
+CD138 and kappa lambda highlight the scattered polytypic plasma cells. 
+CD21 and CD23 shows no residual FDC meshworks. 
+The proliferation index (Ki-67) is approximately 90%. 
+By Hans algorithm, this is classified as germinal center B-cell (GCB) type.
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low Cellularity
+Specimen Viability: Suboptimal specimen viability (63% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Tissue (Ileum Mass), flow cytometric analysis:
+- Paucicellular specimen
+- A minute population of CD10+/CD19+ cells of B cell origin lacks surface and cytoplasmic light chain expression
+- See comment
+
+Comment:  
+The cytospin is markedly paucicellular and highlights rare atypical mononuclear cells. The significance of the flow cytometric analysis is unclear given the paucicellularity and relatively low viability. The analysis reveals an aberrant CD19+ population, however, final determination of a hematolymphoid neoplasm (lymphoma/leukemia) requires independent confirmation of these findings via histology and immunohistochemical studies. Stochastic non-specific binding of antibodies is not excluded. 
+
