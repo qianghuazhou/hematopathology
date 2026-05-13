@@ -1,0 +1,73 @@
+DIAGNOSIS
+
+Stomach Fundus, Biopsy:
+- Suspicious for low-grade B cell non-Hodgkin lymphoma, please see comment.  
+
+SYNOPTIC REPORT
+_
+
+COMMENT
+
+The findings in this limited sample are suspicious for involvement by a low-grade B cell non-Hodgkin lymphoma, most in keeping with an extranodal marginal zone lymphoma of mucosa-associated lymphoid tissue (MALT lymphoma) based on the available studies although involvement by other low grade B cell lymphomas are in the differential. Clinical correlation is advised for further evaluation
+
+
+MICROSCOPIC DESCRIPTION
+
+The sections from the small, superficial gastric biopsy (part C) biopsy show a dense monomorphic lymphoid proliferation in the lamina propria and submucosa with a diffuse growth pattern.  The lymphocytes are small to intermediate sized with slightly irregular nuclear contours, condensed chromatin, inconspicuous nucleoli, and scant amount of cytoplasm. Scattered plasma cells are present and focal lymphoepithelial lesions are seen. Giemsa stain is negative for H. Pylori like organisms.
+
+IMMUNOHISTOCHEMISTRY
+
+The cells are positive for CD20 and BCL2, stains for kappa and lambda light chain are negative in the lymphocytes. They are negative for CD3, CD5, CD10, CD21, CD43, BCL6 and AE1/AE3. 
+MUM1 highlights the scattered plasma cells which are polytypic for kappa and lambda light chains.
+CD21 highlights expanded and disrupted follicular dendritic cell meshworks.
+CD3, CD5 and CD43 highlight scattered T cells.
+AE1/AE3 highlights the epithelial cells.
+The Ki67 proliferation index is <5%.
+
+
+SPECIMEN(S)
+A	Left Inguinal Mass Core Biopsy
+
+
+CLINICAL HISTORY
+Left inguinal mass, rule out lymphoma, breast cancer 2023, re-biopsy recommended
+1 core sent for flow cytometry
+Time into Formalin: 09:10
+
+DIAGNOSIS
+Left inguinal mass, core biopsy:
+- B cell lymphoma, most consistent with marginal zone lymphoma. See comment.
+
+
+COMMENT
+Note is made of history of breast cancer. The findings of a CD5 and CD10 negative small B cell lymphoma are most consistent with marginal zone lymphoma, which could be primary to the lymph nodes or represent spread from a mucosal site. The differential diagnosis includes lymphoplasmacytic lymphoma and SPEP studies could be helpful if clinically warranted. Correlation with other clinical and laboratory studies is suggested. There is no evidence of a higher grade lesion present, however, undersampling cannot be completely excluded in this biopsy. Correlation with clinical, radiological and other laboratory studies is advised.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Left Inguinal Mass". It consists of 2 cores of soft white-tan tissue measuring from 1.6 cm to 1.7 cm in length and up to 0.1 cm in diameter.
+Sections: 1,2 - 2/2 EIT
+
+
+DS/24-APR-2026
+
+MICROSCOPIC DESCRIPTION
+Sections show lymph node tissue with architectural effacement by an atypical lymphoid infiltrate arranged in a diffuse to vaguely nodular pattern. The infiltrate is composed predominantly of small to intermediate-sized lymphocytes with irregular nuclear contours, condensed to focally vesicular chromatin, and variable amounts of pale cytoplasm, imparting a monocytoid appearance in areas. Scattered larger transformed/immunoblast-like cells are present but do not form sheets. Plasma cells are not prominent. Mitotic activity is low. Necrosis and granulomas are not identified.
+
+IMMUNOHISTOCHEMISTRY
+The atypical lymphocytic infiltrate is positive for CD20, PAX5 and BCL2, and are negative for CD3, CD5, CD10, BCL6, CD30, CD43, CMYC, LEF1 and MUM1. CD19 appears to be very weak to negative in B cells.
+CD3, CD5, and CD43 highlight scattered T cells.
+CD21 highlights only a few small residual follicular dendritic cell meshworks.
+The Ki67 proliferation index is approximately 10-20%.
+EBER-ish is negative.
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low cellularity
+Specimen Viability: Suboptimal specimen viability (63% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Lymph node flow cytometry shows a kappa-restricted CD5- CD10- B-cell population,
+
+Comment:  The differential for a CD5-CD10- small B-cell population is predominately between marginal zone lymphoma vs. lymphoplasmacytic lymphoma. Correlation with morphology, histology, immunohistochemistry, cytogenetic investigations, molecular studies, and other ancillary testing is required for final diagnosis.
+
+
