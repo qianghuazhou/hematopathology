@@ -242,3 +242,25 @@ Comment:
 
 INTERNAL CONSULTATION
 The case was reviewed by another hematopathologist for quality assurance, and a consensus diagnosis was reached.
+
+####################################
+Typical DLBCL wording:
+
+Diffuse infiltrate of large atypical lymphoid cells with vesicular chromatin, irregular nuclear contours, prominent nucleoli, and moderate cytoplasm.
+
+or
+
+The neoplastic cells are predominantly centroblastic with scattered immunoblastic forms.
+
+Typical HGBL wording
+Burkitt-like pattern
+
+Diffuse infiltrate of monomorphic medium-sized atypical lymphoid cells with finely clumped chromatin, multiple nucleoli, brisk mitotic activity, and abundant apoptotic debris imparting a starry-sky appearance.
+
+Blastoid pattern
+
+Sheets of blastoid lymphoid cells with high nuclear-to-cytoplasmic ratios, finely dispersed chromatin, inconspicuous nucleoli, and frequent mitotic figures.
+
+Intermediate DLBCL/BL pattern
+
+The neoplasm is composed of intermediate-to-large atypical lymphoid cells with features intermediate between diffuse large B-cell lymphoma and Burkitt lymphoma.
