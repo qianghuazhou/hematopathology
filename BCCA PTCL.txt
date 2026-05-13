@@ -18,3 +18,78 @@ Flow cytometry performed on the fresh lymph node tissue immunophenotypically abn
 By immunchistochemistry done at ARH and BCCA the atypical cells express strong CD2, CD3, CD and CD5 and are negative for CD7, CD, CD10, CD25, CD30, BCL2, BCL6, CXCL13, PD1, TIA1, perforin and granzyme B. CD20+ B cells are rare and confined to the capsule. Frequent reactive-looking small CD8+/TIA1+ cells are also noted. CD21 does highlight focal and rare residual EDC meshwork underlying the B cells areas. The plasma cells are polytypic. The CD68 highlights the variable but focally very abundant histiocytic infiltrate. EBV EBER ISH is negative on the atypical cells. In the skin sections the majority of the lymphoid cells are CD3+ T cells which significant show 1039 of CD7 and BCL2 in the atypical cells. The proliferations rate (Ki67) of the atypical cells in the lymph node is very high, approximately 80%. 
 
 In summary, the nodal biopsy shows a T cell Lymphoma with abundant reactive histiocytes with morphology and phenotypic features consistent with peripheral T cell lymphoma, NOS. The skin infiltrate is consistent with involvement by same disease. The abundant histiocytic cell content in the lymph node suggests a lymphoepithelioid variant of PTCL, NOS (Lennert's Lymphoma). 
+
+
+SPECIMEN(S)
+A	Retroperitoneal Lymph Node Core Biopsy
+
+ADDENDUM COMMENT
+External Consult (second opinion) to University Health Network
+2026-Feb-09 09:31:01
+
+A consultation report has been received and can be viewed as a scanned report.
+
+Consultation Accession No.:  S26-5841 from Dr. Jiong Yan at University Health Network, 200 Elizabeth St., Toronto, ON, M5G 2C4.
+
+FINAL DIANGOSIS UPDATE:
+Most consistent with peripheral T-cell lymphoma, NOS.
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  23-FEB-2026
+
+DM/QZ
+
+SPECIMEN(S)
+A	Retroperitoneal Lymph Node Core Biopsy
+
+CLINICAL HISTORY
+Lymphadenopathy NYD.
+Time into Formalin: 10:43
+
+DIAGNOSIS
+RETROPERITONEAL LYMPH NODE, CORE BIOPSY:
+
+CD4+ T-CELL LYMPHOMA, pending external hematopathology consultation (see comment).
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  06-FEB-2026
+
+QZ/QZ
+
+COMMENT
+The findings are consistent with a CD4+ T-cell lymphoma, most favoring nodal TFH cell lymphoma, NOS (nTFHL-NOS) with aberrant TCL1 expression. Aberrant TCL1 subset positivity is noted; T-prolymphocytic leukemia (T-PLL) is not supported based on morphology, immunophenotype, and available clinical data. TFH markers are positive for PD1, BCL6 (by IHC) and ICOS (by flow cytometry). There is no expansion of follicular dendritic cell meshworks or high endothelial venules, arguing against angioimmunoblastic (nTFHL-AI) or follicular-type (nTFHL-F) nodal TFH lymphomas. However, diagnosis of this entity is ideally made on an excisional biopsy. Case will be referred for UHN hematopathology consultation for diagnostic confirmation. Correlation with imaging and laboratory studies is recommended. T-cell receptor gene rearrangement studies may be performed for clonality confirmation if clinically indicated. Preliminary results were communicated with Dr. L. Liontos (SHSC, Jan 23), S. Ingber (Jan 28) by emails.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Retroperitoneal Node". It consists of many cores and fragments of soft white-tan tissue measuring from less than 0.1 cm to 1.1 cm in length and up to less than 0.1 cm in diameter.  A separate core was sent for flow cytometry.
+Sections: 1-3 - 3/3 EIT
+COLD ISCHEMIC TIME TO BE ENTERED
+
+
+ML/22-JAN-2026
+
+MICROSCOPIC DESCRIPTION
+Sections of the core biopsy show complete effacement of the nodal architecture by an atypical lymphoid infiltrate with a diffuse pattern. The atypical infiltrate is composed of pleomorphic intermediate to large sized lymphoid cells with vesicular nuclei, inconspicuous nucleoli, scant cytoplasm. Apoptosis is frequent. These cells are admixed with small lymphocytes and scattered histiocytes. HRS cells, granulomata, necrosis are not present. 
+
+IMMUNOHISTOCHEMISTRY
+The atypical lymphoid cells are T cells expressing CD3, CD2, CD4, CD5, CD43, BCL2, LEF1, and PD1, with subset positivity for TCL1 (5-10%) and BCL6. The atypical cells are negative for CD8 (scattered), CD7 (scattered), CD10, CD56, CD57, and ALK1. CD30 highlights scattered immunoblasts. EBER ISH is negative. CD1a, CD34, TdT, Granzyme B, TIA1 are negative.
+Background B cells are highlighted by CD20 and PAX5 and show subset positivity for BCL6 and MUM1; they are negative for CD5, CD10, CD23, CD30, CD43, CMYC, and CyclinD1. 
+No residual follicular dendritic cell meshworks are identified by CD21/CD23. 
+Ki-67 proliferation index is approximately 80%.
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low Cellularity
+Specimen Viability: Suboptimal specimen viability (65% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Flow Cytometry, Tissue Core Biopsy (Retroperitoneal LN):
+
+An Aberrant CD4+ T-cell population is detected (44% of total leukocytes). Interpret with caution, low cellularity and suboptimal specimen viability.
+
+Comment:  
+
+INTERNAL CONSULTATION
+Reviewed in consultation with another hematopathologist for QA; diagnostic consensus obtained.
