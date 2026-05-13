@@ -122,3 +122,499 @@ Comment:  _
 Flow Cytometry report Accession No.:  _ from Dr. _ at .
 
 
+SPECIMEN(S)
+A	Left Submandibular Lymph Node Core Biopsy
+
+CLINICAL HISTORY
+Enlarged left submandibular node.
+Time into Formalin: 09:35
+
+DIAGNOSIS
+Lymph node, left submandibular, core biopsy:
+- Reactive lymph node tissue (see comment)
+
+COMMENT
+The findings show a lymph node with nonspecific reactive features. The differential diagnosis is broad and includes infectious, inflammatory, autoimmune, and other reactive etiologies. There is no morphologic or immunophenotypic evidence of lymphoma or other malignancy. Correlation with clinical, serologic, and imaging findings is recommended.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Left Submandibular Node". It consists of many cores and fragments of soft white-tan tissue measuring from 0.1 cm to 1 cm in length and up to 0.1 cm in diameter.
+Sections: 1-3: many/3 EIT
+
+
+DS/06-JAN-2026
+
+MICROSCOPIC DESCRIPTION
+Sections of the core biopsy show lymph node tissue with preserved architecture. Varying sized follicles are present, with reactive germinal centers showing polarization, tingible-body macrophages, and intact mantle zones. The interfollicular/paracortical areas show a polymorphous lymphoid population composed predominantly of small lymphocytes with variable immunoblasts, histiocytes, and plasma cells. Sinuses are patent and may show histiocytosis. Sheets of large atypical lymphoid cells, diagnostic HRS cells, necrosis, granulomata, and metastatic malignancy are not identified.
+
+IMMUNOHISTOCHEMISTRY
+The germinal centers have a reactive staining pattern; they are positive for CD20, PAX5, CD10 (weak), BCL6, and are negative for BCL2, CD43, CD5.
+CyclinD1 and LEF1 are negative in B cells.
+CD3, CD5, BCL2, and CD43 highlight T cells, predominately in the interfollicular areas.
+CD21 highlights intact follicular dendritic cell meshworks within follicles.
+Ki-67 is appropriately increased and polarized within germinal centers (~80%), and low elsewhere (~5%).
+
+FLOW CYTOMETRY 
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low Cellularity
+Specimen Viability: 82% (by 7-AAD)
+
+Interpretation:  
+Definitive immunophenotypic evidence of an aberrant lymphoid population is not detected. Integrate with tissue investigations. 
+
+
+
+
+SPECIMEN(S)
+A	Right Axillary Sentinel Lymph Node With Seed X 1
+
+CLINICAL HISTORY
+Rule out lymph node.
+Time into Formalin: 00:00
+
+DIAGNOSIS
+Right axillary lymph node, excisional biopsy:
+- Reactive lymphoid hyperplasia, negative for lymphoma or metastatic carcinoma (see comment).
+
+COMMENT
+The findings are most consistent with a reactive lymphoid process with follicular and paracortical hyperplasia and a relative expansion of CD4-positive T cells. There is no definitive morphologic, immunophenotypic, or architectural evidence of a lymphoproliferative disorder, including TFH-type T-cell lymphoma. The lymph node is also negative for metastatic carcinoma. Such a pattern may be seen in viral infection, autoimmune disease, drug reaction, or other immune stimulation. Correlation with clinical and radiologic findings is recommended.
+
+GROSS DESCRIPTION
+The specimen is received in a container labelled with this patient's demographic details and as "Right Axillary Sentinel Lymph Node with Seed x 1".  It consists of a a piece of adipose tissue measuring 2.2 x 1.5 x 1.2 cm, received fresh for lymphoma protocol.  Within the adipose tissue, a lymph node with a radioactive seed is identified measuring 1.4 cm in greatest dimension.  A piece of the lymph node is sent for flow cytometry.
+Sections:
+1-2 -remainder of lymph node trisected 3/2
+
+
+ME/16-JAN-2026
+
+MICROSCOPIC DESCRIPTION
+Sections of the excisional biopsy show lymph node tissue with preserved architecture. Cortical follicles are present, many with reactive germinal centers showing polarization, tingible-body macrophages, and intact mantle zones. The interfollicular/paracortical areas show a polymorphous lymphoid population composed predominantly of small lymphocytes with variable immunoblasts, histiocytes, and plasma cells. Sinuses are patent and may show histiocytosis. Sheets of large atypical lymphoid cells, diagnostic Hodgkin/Reed–Sternberg cells, necrosis, granulomata, and metastatic malignancy are not identified.
+
+IMMUNOHISTOCHEMISTRY
+CD20 and PAX5 highlight B cells predominantly within follicles. Germinal centers show CD10 and BCL6 positive; BCL2 negative. B cells are negative for CD5 and Cyclind1.
+CD3 and CD5 show appropriate distribution in interfollicular areas; no aberrant loss of CD2, CD7. CD4 positive T cells are more predominant than CD8 positive T cells. PD1 positive THF cells are normally distributed within germinal centers and around follicular dendritic cell networks.
+CD21 and CD23 highlight intact follicular dendritic cell networks.
+CD138 highlights plasma cells that are polytypic for kappa and lambda.
+CD30 highlights scattered immunoblasts (reactive pattern). 
+Ki-67 is appropriately increased and polarized within germinal centers and low elsewhere.
+EBER ISH: negative.
+ALK1: negative.
+Pankeratin (AE1/AE3): negative.
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low Cellularity
+Specimen Viability: Suboptimal specimen viability (61% by 7-AAD) - Interpret results with caution
+
+Interpretation:  
+Lymph node, right axilla, SN flow cytometry analysis (2503960, S-26-000820):
+
+	No definitive immunophenotypic support for a lymphoproliferative disorder within this 		specimen (see comment and flow cytometric analysis below for further details).
+
+Comment:  
+Flow cytometry immunophenotyping shows a relative increase in CD4-positive T-cells without definitive immunophenotypic aberrancies. Increased CD4:CD8 ratios may be due to a number of factors including infectious/inflammatory conditions, autoimmune disorders, medication effects or malignant processes not readily detectable by flow cytometry immunophenotyping. Suggest correlation with concurrent histologic findings, as well as clinical, radiologic and ancillary laboratory findings for definitive diagnosis.  
+
+INTERNAL CONSULTATION
+The case was reviewed by another hematopathologist for quality assurance, and a consensus diagnosis was reached.
+
+
+
+SPECIMEN(S)
+A.	Left Axilla Lymph Node Core Biopsy
+
+CLINICAL HISTORY
+1.6 cm mass, indeterminate. Eccentrically ? cortically ? lymph node in axilla, Query sign of malignancy.
+Time into Formalin: 09:11
+
+DIAGNOSIS
+Lymph Node, Left Axilla, Core Biopsy: 
+– Limited tissue sample showing benign reactive lymph node tissue (see comment).
+
+COMMENT
+The core biopsies are small and relatively inadequate, showing lymph node tissue with a nonspecific reactive pattern. There is no morphologic or immunophenotypic evidence of lymphoma or metastatic carcinoma. Correlation with clinical and imaging findings is recommended if suspicion for lymphoma remains.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Left Axilla Ultrasound-Guided Biopsy". It consists of many cores and fragments of soft white-tan tissue measuring from less than 0.1 cm to 0.4 cm in length and up to less than 0.1 cm in diameter.
+Sections: 1,2 -many/2 EIT 
+
+Cold Ischemic Time:  00:00 
+Total Fixation Time:   54:49
+
+
+ML/29-JAN-2026
+
+MICROSCOPIC DESCRIPTION
+Sections show a small biopsy with predominantly interfollicular areas and focally preserved reactive follicles containing scattered centroblasts and tingible body macrophages. Admixed histiocytes, plasma cells, and reactive neutrophils are seen within the interfollicular areas. Sheets of large atypical cells, Reed–Sternberg cells, granulomas, or necrosis are not identified. Immunohistochemistry demonstrates normal distribution of B and T cells by CD20 and CD3. The few B cells are BCL6-positive and BCL2-negative, with Ki67 and CD21 highlighting focally present follicular dendritic cell networks, consistent with secondary follicles. Pankeratin (AE1/AE3) is negative.
+
+
+SPECIMEN(S)
+B	Right Axilla Lymph Node Core Biopsy
+
+ADDENDUM COMMENT
+B. Right Axilla Lymph Node Core Biopsy
+
+	Reactive lymphoid tissue (see comment).
+
+COMMENT:
+The core biopsies show soft tissue and a small fragment of lymph node with a nonspecific reactive pattern. Lymph node architecture is partially effaced, with areas of sinus histiocytosis. The cellular population is composed predominantly of small lymphoid cells. Capsular thickening and focal brown pigment deposition are present. No Reed–Sternberg cells are identified.
+
+Immunohistochemical studies performed on block B2 demonstrate a normal distribution of B and T cells by CD20 and CD3, respectively. CD5 staining parallels the CD3 pattern. CD21 and CD23 highlight small residual follicular dendritic cell networks, consistent with residual follicular architecture. CD10 and BCL6 are negative in follicles and highlight only scattered positive cells. BCL2 highlights interfollicular T cells and follicular cells, supporting the presence of primary follicles. The Ki-67 proliferation index is low throughout the biopsy. Pankeratin (AE1/AE3) is negative.
+
+Flow cytometry was not performed. Overall, there is no morphologic or immunophenotypic evidence of lymphoma or other malignancy.
+
+
+
+SPECIMEN(S)
+A	Right Parotid Lymph Node Core Biopsy
+
+CLINICAL HISTORY
+Right parotid lymph node.
+Time into Formalin: 09:30
+
+DIAGNOSIS
+Right Parotid Lymph Node, Core Biopsy:
+Reactive lymph node, see comment.
+
+COMMENT
+Relatively small biopsy, interpretation with caution. The morphologic and immunophenotypic findings are most in keeping with reactive lymphadenopathy which has a broad differential and includes autoimmune, infectious and neoplastic causes. The biopsies evaluated were relatively small but are negative for evidence of involvement by a lymphoproliferative disorder. Should the clinical concern for a neoplastic process continue after other causes are ruled out an excisional biopsy could be considered. Correlation with clinical, serologic, and other laboratory information is advised.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Right Parotid Node Biopsy". It consists of a single core and fragments of soft white-tan tissue measuring from 0.1 cm to 0.5 cm in length and up to 0.1 cm in diameter.
+Sections: 1,2 -many/2 EIT
+
+
+DS/03-FEB-2026
+
+MICROSCOPIC DESCRIPTION
+Sections show a relatively small lymphoid tissue with expanded paracortical areas and residual small sized follicles including germinal centers and tingible body macrophages. Scattered histiocytes are present throughout the node. Sinuses are patent. Sheets of large atypical lymphocytes, H/RS cells, granulomata, and necrosis are absent. A few benign parotid gland cells are seen.
+
+IMMUNOHISTOCHEMISTRY
+The germinal centers have a reactive staining pattern; they are positive for CD20, PAX5, CD10, and BCL6. They are negative for BCL2, CD43, CD5, and CD3.
+CD21 highlights the follicular dendritic cell meshworks. 
+CD3, CD5, BCL2, and CD43 highlight T cells, predominately in the interfollicular areas.
+CyclinD1 highlights the endothelial cells only.
+LEF1 highlights the T cells only.
+The Ki67 proliferation index is high (approximately 80%) in the germinal centers and lower (approximately 5%) in the interfollicular cells. 
+
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Optimal
+Specimen Viability: Suboptimal specimen viability (49% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Lymph node, right parotid, flow cytometric analysis (2237224, S-26-001848):
+
+	Suboptimal specimen showing no definitive immunophenotypic support for a 			lymphoproliferative disorder (see comment and flow cytometric analysis below for further 		details).
+
+Comment:  
+Given the suboptimal nature of the specimen, the results should be interpreted with caution. Flow cytometry immunophenotyping shows a relative increase in CD4-positive T-cells. Increased CD4:CD8 ratios may be due to a number of factors including infectious/inflammatory conditions, autoimmune disorders, medication effects or malignant processes not readily detectable by
+flow cytometry immunophenotyping. Suggest correlation with concurrent histologic findings, as well as clinical, radiologic and ancillary laboratory findings for definitive diagnosis. 
+
+
+
+SPECIMEN(S)
+A	Total Abdominal Colectomy
+
+ADDENDUM COMMENT
+LYMPH NODE, EXCISIONAL BIOPSY (from Total Abdominal Colectomy):
+– Reactive lymph node with sinus histiocytosis and sinus erythrocytosis
+– No morphologic or immunophenotypic evidence of lymphoma (see descriptions below)
+
+The nodal architecture is preserved. The paracortical and sinusoidal compartments are expanded by a mixed population of small lymphocytes, immunoblasts, histiocytes, and scattered plasma cells. Germinal centers are reactive and polarized, with intact mantle zones. Lymphatic sinuses are patent and contain erythrocytes. No definitive erythrophagocytosis is identified. No sheets of large atypical cells, Reed–Sternberg cells, granulomas, or necrosis are identified.
+
+Immunostains show the majority of the lymphoid cells are CD3+ T cells which are also positive for BCL2. CD20 highlights B cells confined to reactive follicles, BCL6 positive and BCL2 negative. Ki67 proliferation index is appropriately elevated within germinal centers and polarized, and is low elsewhere. CD21 demonstrates intact follicular dendritic cell networks.
+
+In summary, the lymph node shows reactive changes, including sinus histiocytosis and sinus erythrocytosis, consistent with chronic inflammation from Crohn’s disease. No evidence of lymphoma or vascular neoplasia is identified.
+
+
+
+SPECIMEN(S)
+A	Skin Excision, Left Lower Eyelid
+
+ADDENDUM COMMENT
+2 slides sent to William Osler Brampton for staining
+stained slides returned
+2026-Feb-23 16:37:13
+
+DIAGNOSIS:
+Skin, left lower eyelid, excisional biopsy:
+– Reactive T-cell–predominant inflammatory infiltrate. See comment.
+
+COMMENT
+Sections show a lichenoid, perivascular, and focal intraepidermal lymphoid infiltrate composed predominantly of small mature-appearing lymphocytes. The lymphoid cells demonstrate condensed chromatin and scant to moderate cytoplasm without cytologic atypia. No destructive growth or clustering of large atypical cells is identified. Lymphatic spaces contain intraluminal histiocytes/inflammatory cells without cytologic atypia. No intravascular large atypical lymphoid cells are seen.
+
+Immunohistochemical studies show the infiltrate is composed predominantly of CD3-positive T-cells coexpressing CD2, CD5, CD7, and TCR?F1, with a physiologic CD4:CD8 ratio (approximately 3:1). CD30 highlights mildly increased scattered immunoblasts without clustering. PD-1 highlights an increased population of epidermotropic T-cells without clustering or sheet-like expansion. CD10, BCL6, and EBER-ISH are negative. The Ki-67 proliferative index is low within the T-cell population. CD138 highlights rare plasma cells. CD68 highlights histiocytes within the superficial dermis and lymphatic spaces.
+
+Overall, the findings support a reactive T-cell–predominant inflammatory infiltrate in the setting of lichenoid dermatitis. There is no morphologic or immunophenotypic evidence of cutaneous T-cell lymphoma in this specimen. Clinical correlation is recommended. If a persistent or progressive lesion raises concern for a lymphoproliferative disorder, repeat biopsy with ancillary studies (including flow cytometry and T-cell receptor gene rearrangement) may be considered.
+
+This case was reviewed in consultation with a second hematopathologist, who concurs with the above interpretation.
+
+
+
+SPECIMEN(S)
+A	Skin Excision, Left Lower Eyelid
+
+CLINICAL HISTORY
+Left lower eyelid lesion, rule out BCC
+Time into Formalin: 10:42
+
+DIAGNOSIS
+Skin, excision (left lower eyelid):
+– Focal small intradermal nevus
+– Lichenoid, perivascular and intraepidermal inflammatory infiltrate, hematopathology consultation pending, see comment
+
+COMMENT
+There is no evidence of basal cell carcinoma.  Hematopathology findings to follow in an addendum report
+
+GROSS DESCRIPTION
+The specimen is received in a container labelled with this patient's demographic details and as "Left Lower Eyelid Lesion".  It consists of a piece of skin measuring 1.9 x 0.7 cm on surface and 0.2 cm in thickness.  On skin surface, there is a 0.8 cm slightly raised area.  Resection margins are inked. The specimen is serially sectioned.
+Sections:
+1- two ends of the specimen- 2/1
+2,3- remainder of specimen- 5/2 EIT
+
+
+DS/02-FEB-2026
+
+SPECIMEN(S)
+A	Lymph Nodes Excision, Left Groin
+
+CLINICAL HISTORY
+Query adenopathy
+Time into Formalin: 15:00
+
+DIAGNOSIS
+Lymph node, left groin, excisional biopsy:
+- Reactive follicular and paracortical hyperplasia with reactive immunoblasts.
+- No evidence of lymphoma, microorganisms, granuloma or necrosis.
+- See comment.
+
+COMMENT
+History was reviewed. The morphologic and immunophenotypic findings are consistent with reactive follicular and paracortical hyperplasia with reactive immunoblasts, which is similar to previous right groin lymph node excisional biopsy. This pattern is most commonly associated with viral infection, drug reaction, or other immune stimulation. There is no morphologic or immunophenotypic evidence of lymphoma, and negative for microorganisms by special stains. Clinical correlation for infectious, autoimmune, or inflammatory etiologies is recommended.
+
+GROSS DESCRIPTION
+The specimen is received in a container labelled with this patient's demographic details and as "Left Groin Lymph Node".  It consists of a tan-red lymph node measuring 4.5 x 2.5 x 2.0 cm and weighing 21.2 g, received fresh for lymphoma protocol.  A touch prep is done and a piece is sent for flow cytometry.
+Sections:
+1-5 -representative face of lymph node 5/5
+
+
+ME/06-FEB-2026
+
+MICROSCOPIC DESCRIPTION
+H&E-stained sections show preserved lymph node architecture with intact capsule. There are numerous enlarged follicles increased in number and size, exhibiting variation in size and shape.
+The germinal centers are reactive and polarized, containing frequent mitotic figures and numerous tingible-body macrophages. Mantle zones are well formed and sharply demarcated.
+The interfollicular/paracortical areas are only mildly expanded. Sinuses are patent.
+Scattered eosinophils are present.
+Reactive high endothelial venules are prominent in focal areas.
+Occasional large nodules with features of PTGC are noted.
+No sheets of atypical large lymphoid cells, diagnostic Hodgkin/Reed–Sternberg cells, granulomata, or necrosis are identified.
+
+IMMUNOHISTOCHEMISTRY
+CD20 and PAX5 highlight follicular B cells. CD10 and BCL6 are positive in germinal centers. BCL2 is negative in germinal centers and positive in mantle zones and interfollicular T cells.
+CD3, CD5 and CD43 highlight appropriately distributed interfollicular T cells. LEF1 highlights T cells only.
+CD30 is positive in scattered immunoblasts, not forming sheets. CD15 is negative in immunoblasts and positive in background granulocytes.
+PAX5(weaker)/CD20(strong) are variably positive in B-lineage immunoblasts. CD3 is negative in B-lineage immunoblasts.
+Cyclin D1 is negative in B cells and only highlights endothelial cells.
+CD21 highlights intact FDC meshworks.
+Ki-67 shows high proliferative activity within germinal centers with a polarized pattern.
+S100 highlights scattered interdigitating dendritic cell in T cell zones.
+CD1a highlights scattered Langerhans cells in focal areas.
+EBER ISH: negative.
+Special stains: ZN and GMS are negative.
+
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Optimal
+Specimen Viability: Suboptimal specimen viability (73% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Tissue - Large (Left groin lymph node), flow cytometric analysis:
+Definitive immunophenotypic evidence of an aberrant lymphoid population is not detected.
+
+Comment:  
+
+INTERNAL CONSULTATION
+Reviewed by another hematopathologist for quality assurance; consensus reached.
+
+SPECIMEN(S)
+B	Sentinel Lymph Node, Right Palpable
+
+ADDENDUM COMMENT
+SENTINAL LYMPH NODE, EXCISIONAL BIOPSY:
+Reactive lymph node with sinus histiocytosis, see comment.
+
+COMMENT
+The lymph node shows preserved overall architecture with expanded sinuses distended by histiocytes. The follicles are enlarged and architecturally distorted. No sheets of atypical large lymphoid cells are identified. There are no morphologic features of Hodgkin lymphoma, anaplastic large cell lymphoma, or metastatic malignancy. Hemophagocytosis is not identified.
+
+Histiocytes are positive for CD68 and negative for S100. CD1a technically suboptimal and will be repeated. Pancytokeratin is negative. EBER ISH is negative. CD20, CD79a, and PAX5 highlight B-cell follicles. BCL6 is positive in germinal centers. BCL2 is negative in germinal centers and positive in mantle zones and interfollicular lymphocytes. Ki-67 shows high proliferative activity within germinal centers with a polarized pattern. CD21 and CD23 highlight distorted follicular dendritic cell meshworks. CD3 highlights appropriately distributed interfollicular T cells. PD-1 highlights follicular helper T cells within germinal centers. CD30 highlights scattered immunoblasts. CD15 highlights activated lymphoid cells. MUM1 highlights plasma cells.
+
+Sinus histiocytosis represents a common benign reactive pattern characterized by increased macrophages within nodal sinuses, reflecting an immune response to lymphatic drainage from sites of tissue injury, repair, or antigenic stimulation. This pattern is frequently encountered in sentinel or staging lymph nodes, including those draining malignancies, as well as in nodes associated with recent procedures, trauma, skin disease, implants, or localized infection. There is no morphologic or immunophenotypic evidence of metastatic carcinoma or lymphoma identified in this specimen. Correlation with clinical and radiologic findings is recommended.
+
+
+
+
+SPECIMEN(S)
+A	Nasal Biopsy, Right Turbinate
+
+ADDENDUM COMMENT
+Nasal mucosa, right turbinate, biopsy:
+– Reactive fibro-inflammatory process, see comment.
+
+COMMENT
+Sections show a fibro-inflammatory lesion with mixed inflammation including numerous plasma cells, lymphocytes and eosinophils, with focal fibrosis. However, storiform fibrosis and obliterative phlebitis are not identified.
+
+Immunohistochemical studies show increased plasma cells highlighted by CD138, which are polytypic for kappa and lambda light chains. CD20 and PAX5 highlight only rare B cells.
+
+Overall, there is no morphologic or immunophenotypic evidence of lymphoma. If IgG4-RD is clinically suspected, serum IgG4 level may be performed first, and additional evaluation including IgG4 IHC and expert consultation may be considered. A second hematopathologist was reviewed for quality assurance and concurs with the interpretation.
+
+
+
+
+SPECIMEN(S)
+A	Right Axilla Lymph Node Core Biopsy
+
+CLINICAL HISTORY
+History of DLBCL post chemo with probable recurrence. New Right axillary lymph node. Sent out for Flow Cytometry.
+Time into Formalin: 11:10
+
+DIAGNOSIS
+LYMPH NODE, RIGHT AXILLA, CORE BIOPSY:
+– Small, borderline insufficient biopsies with findings favoring a reactive lymph node.
+– No evidence of lymphoma.
+– See comment.
+
+COMMENT
+The morphologic and immunophenotypic findings are most in keeping with reactive lymphadenopathy, no evidence of involvement by a lymphoproliferative disorder. The biopsies evaluated were relatively small and borderline insufficient, and flow cytometry was not attempted due to low cellularity. Should the clinical concern for a neoplastic process continue after other causes are ruled out, an excisional biopsy with flow cytometry could be considered. 
+
+Case reviewed internally by another hematopathologist as part of routine quality assurance; consensus diagnosis rendered.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Right Axilla Lymph Node". It consists of 2 cores and multiple fragments of soft white-tan tissue measuring from 0.1 cm to 0.6 cm in length and up to 0.1 cm in diameter.
+Sections: 
+1-2 cores 2/2
+3 -fragments many/1 EIT 
+
+COLD ISCHEMIC TIME TO BE ENTERED
+
+
+ME/04-MAR-2026
+
+MICROSCOPIC DESCRIPTION
+Sections from the core biopsies show lymph node tissue with paracortical expansion and scattered primary follicles, with possible residual secondary follicles. Scattered histiocytes and reactive neutrophils are present. No sheets of large atypical lymphoid cells, necrosis, or granulomas are identified.
+
+IMMUNOHISTOCHEMISTRY
+Primary follicles are positive for CD20 and BCL2 and negative for CD10, BCL6, and CD5. Focally residual germinal centers are positive for CD20, CD10, and BCL6 and negative for BCL2. CD21 highlights intact follicular dendritic cell meshworks. CD3 and CD5 highlight interfollicular T cells. BCL2 highlights primary follicles and interfollicular T cells. The Ki-67 proliferation index is approximately 5%.
+
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low cellularity
+Specimen Viability: Viability not required
+
+Interpretation:  
+Flow cytometry was not performed due to insufficient cellularity of the specimen. Refer to the surgical pathology report for final diagnosis.
+
+
+SPECIMEN(S)
+A	Lymph Node Core Biopsy, Left Cervical
+
+
+CLINICAL HISTORY
+Chronic bilateral cervical lymphadenopathy, query lymphoproliferative disorder, 1 core sent for flow cytometry
+Time into Formalin: 09:10
+
+DIAGNOSIS
+Lymph node, Left Cervical, core biopsy:
+– Reactive lymph node, see comment.
+
+COMMENT
+The findings show a lymph node with nonspecific reactive features. There is no morphologic or immunophenotypic evidence of lymphoma or other malignancy. Correlation with clinical and imaging findings is recommended for full evaluation.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as " Left Cervical Lymph Node". It consists of 3 cores of soft white-tan tissue measuring from 1.2 cm to 1.3 cm in length and up to 0.1 cm in diameter.
+Sections: 1,2 -3/2 EIT
+
+
+JC/22-APR-2026
+
+MICROSCOPIC DESCRIPTION
+Sections from the core biopsies show a lymph node with expanded paracortical areas and varying sized follicles including primary and secondary follicles. There are foci of preserved germinal center reactions. Scattered histiocytes are present throughout the node. Sheets of large lymphocytes, diagnostic Hodgkin/Reed-Sternberg cells, necrosis, granulomata or evidence of metastatic malignancy are not present.
+
+IMMUNOHISTOCHEMISTRY
+Immunostains show CD20+ PAX5+ B-cells primarily located within cortical follicles, while paracortical and interfollicular areas are dominated by CD3+ CD5+ T-cells.
+BCL6 highlights germinal center reactions which are appropriately negative for BCL2. CD10 did not show positive cells.
+B cells are negative for CD5 and Cyclin D1. 
+T cells are positive for BCL2, CD43 and LEF1. 
+CD21 highlights follicular dendritic cell meshworks within follicles.
+The Ki67 proliferative index is appropriately elevated within polarized germinal centers, and is elsewhere low.
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low cellularity
+Specimen Viability: Suboptimal specimen viability (72% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Tissue Core Biopsy (Left Cervical Lymph Node), flow cytometric analysis:
+Definitive immunophenotypic evidence of an aberrant lymphoid population is not detected.
+
+Comment:  
+
+
+SPECIMEN(S)
+A	Right Inguinal Lymph Node Core Biopsy
+
+
+CLINICAL HISTORY
+Enlarged bilateral groin lymph nodes. Query lymphoproliferative disorder.
+Time into Formalin: 12:00
+
+DIAGNOSIS
+Right Inguinal Lymph Node, Core Biopsy:
+- Reactive lymph node. See comment.
+
+COMMENT
+The morphologic and immunophenotypic findings are most consistent with reactive lymphadenopathy. The differential diagnosis is broad and includes autoimmune, infectious, and less likely neoplastic etiologies. The biopsies are relatively small but show no evidence of involvement by a lymphoproliferative disorder or metastatic disease. If clinical concern for an underlying neoplastic process persists following exclusion of other causes, excisional biopsy may be considered for more definitive evaluation. Correlation with clinical, serologic, microbiologic, and other laboratory findings is recommended.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Right Inguinal Lymph Node". It consists of 2 cores of soft white-tan tissue measuring from 0.4 cm to 0.7 cm in length and up to 0.1 cm in diameter.
+Sections: 1,2 - 2/2 EIT
+
+
+DS/23-APR-2026
+
+MICROSCOPIC DESCRIPTION
+Sections from the core biopsies show lymph node tissue with a nonspecific nodular architecture and dense fibrotic bands. The infiltrate is composed predominantly of small lymphocytes admixed with scattered immunoblasts and histiocytes. No definitive morphologic evidence of lymphoma is identified.
+
+IMMUNOHISTOCHEMISTRY
+CD20, PAX5, and CD19 highlight B cells predominantly confined to cortical follicles, while the paracortical and interfollicular areas are populated mainly by CD3+ CD5+ T cells. B cells are negative for CD5 and Cyclin D1. BCL2 highlights T cells and primary follicles. CD43 and LEF1 are positive in T cells. CD21 highlights intact follicular dendritic cell meshworks within follicles. The Ki67 proliferative index is appropriately increased within polarized germinal centers and is otherwise low. AE1/AE3 is negative. 
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low cellularity
+Specimen Viability: Suboptimal specimen viability (44% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Tissue Core Biopsy (Right inguinal lymph node), flow cytometric analysis:
+Definitive immunophenotypic evidence of an aberrant lymphoid population is not detected.
+
+Comment:  
+
+
+
+
+SPECIMEN(S)
+C	Colon Biopsy, Cecum, Mass
+
+
+ADDENDUM COMMENT
+Colon Biopsy, Cecum, Mass:
+– Reactive lymphoid hyperplasia. See comment.
+
+COMMENT
+Sections show colonic mucosa with a dense, polymorphous lymphoid infiltrate composed predominantly of small lymphocytes with admixed plasma cells, eosinophils, neutrophils, and histiocytes. No large atypical lymphoid cells or destructive growth pattern is identified.
+
+Immunohistochemistry demonstrates a mixed B- and T-cell population with preserved architecture. B cells (CD20, CD19, PAX5 positive) are negative for CD5, CD10, CD43, BCL2, BCL6, Cyclin D1, and LEF1. CD3 highlights T cells with expression of CD5, CD43, BCL2, and LEF1. CD21 highlights the follicular dendritic cell meshworks. The Ki67 proliferative index is appropriately elevated within polarized germinal centers, and is elsewhere low.
+
+Overall findings support reactive lymphoid hyperplasia with no evidence of lymphoma.
+
