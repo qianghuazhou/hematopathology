@@ -217,7 +217,7 @@ Sections: 1-3 - 3/3 EIT
 ML/21-JAN-2026
 
 MICROSCOPIC DESCRIPTION
-Sections show core biopsies of lymphoid tissue with a diffuse infiltrate of pleomorphic intermediate-to-large atypical lymphoid cells with irregular nuclear contours, moderately condensed chromatin with conspicuous nucleoli, and a moderate amount of pale amphophilic cytoplasm. Scattered mitotic figures and karyorrhectic debris are present. No follicular architecture or low-grade component is identified.
+Sections show diffuse involvement by a high-grade B-cell lymphoma composed of pleomorphic intermediate-to-large atypical lymphoid cells with irregular nuclear contours, conspicuous nucleoli, and moderate amphophilic cytoplasm. Numerous mitotic figures and apoptotic bodies are present. Focal starry-sky appearance is identified. No low-grade component is seen.
 
 IMMUNOHISTOCHEMISTRY
 The neoplastic cells are positive for CD20 and PAX5, with diffuse expression of BCL2 (>95%) and c-MYC (~90%), and show aberrant weak, subset expression of CD5. They are negative for CD10, BCL6, Cyclin D1, CD23, CD30, MUM1, and LEF1. 
