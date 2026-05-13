@@ -1,0 +1,367 @@
+SPECIMEN(S)
+A	Left Inguinal Lymph Node Core Biopsy
+
+CLINICAL HISTORY
+Bilateral inguinal lymphadenopathy. History of burns. Query lymphoma.
+Time into Formalin: 11:10
+
+DIAGNOSIS
+Lymph node, left inguinal, core biopsy:
+- Borderline insufficient specimen; atypical lymphoid infiltrate (see comment).
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  11-FEB-2026
+
+QZ/QZ
+
+COMMENT
+Of note, flow cytometric analysis of the lymph node demonstrated a small kappa skewed B cell population of 3%; however, reactive changes cannot be entirely excluded. The lymph node is relatively small and fragmented, limiting the morphologic and immunophenotypic evaluation. Therefore, a definitive diagnosis cannot be made on this material. Correlation with clinical, laboratory, and imaging findings is recommended. Excisional biopsy with flow cytometry is recommended if clinical concern persists.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Left Inguinal Node Biopsy". It consists of 2 cores and some fragments of soft white-tan tissue measuring from 0.1 cm to 0.3 cm in length and up to 0.1 cm in diameter.
+Sections: 1,2 - many/2 EIT
+
+
+DS/03-FEB-2026
+
+MICROSCOPIC DESCRIPTION
+Sections show small and fragmented cores of lymphoid tissue with partially preserved nodal architecture. There is a polymorphous lymphoid population composed predominantly of small lymphocytes, admixed with immunoblasts, histiocytes, scattered granulocytes, and plasma cells. Sheets of large atypical cells are not identified. Reed–Sternberg cells, granulomas, and necrosis are not seen.
+
+IMMUNOHISTOCHEMISTRY
+CD20 and PAX5 highlight B cells, which are predominantly localized to follicular areas. Germinal centers express CD10 and BCL6, lack BCL2 expression.
+CD3 highlights interfollicular T cells with preserved CD5 and CD43 expression; LEF1 is mostly positive in T cells.
+Cyclin D1 stains endothelial cells.
+CD21 demonstrates intact follicular dendritic cell networks.
+CD138 highlights the scattered plasma cells, polytypic distribution by kappa and lambda light chain stains. 
+The Ki67 proliferation index is high (approximately 80%) in the germinal centers and lower (approximately 5%) in the interfollicular cells. 
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low Cellularity
+Specimen Viability: 75% (by 7-AAD)
+
+Interpretation:  
+Lymph node, left inguinal, flow cytometric analysis (2519718, S-26-001857):
+	
+	A small CD10(+) B-cell population (3% of total leukocytes analyzed) shows skewed kappa 		light chain immunoglobulin expression (see comment and flow cytometric analysis below 		for further details) 
+
+Comment:  
+The kappa light chain expression seen within the CD10(+) B-cell population within the current specimen does not exclude the possibility of a reactive process. In addition, the possibility that these findings are secondary to stochastic clustering du e to the small size of the population cannot be excluded. As flow cytometric immunophenotyping is an adjunct to histologic analysis, correlation with concurrent histologic findings, clinical and radiologic findings +/- ancillary laboratory testing is recommended for
+definitive diagnosis.
+
+Flow Cytometry report Accession No.:  H26-884 from Dr. Rashmi S. Goswami at Sunnybrook Health Sciences Centre, 2075 Bayview Ave., Toronto, ON, M4N 3M5.
+
+INTERNAL CONSULTATION
+Reviewed in consultation with a second hematopathologist; diagnostic consensus achieved.
+
+
+SPECIMEN(S)
+A	Left Posterior Neck Lymph Node Core Biopsy
+
+CLINICAL HISTORY
+Query abnormal lymph node.
+Time into Formalin: 10:30
+
+DIAGNOSIS
+A. Left Posterior Neck Lymph Node, Core Biopsy:
+- Borderline insufficient specimen with atypical lymphoid infiltrate (see comment).
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  13-FEB-2026
+
+QZ/QZ
+
+COMMENT
+Flow cytometry identifies a small clonal B-cell population of germinal centre origin. However, the biopsy is small and fragmented, and is borderline insufficient for definitive diagnosis of lymphoma. Correlation with clinical and radiologic findings is recommended. An excisional biopsy should be considered if clinically indicated.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Left Posterior Neck Node Biopsy". It consists of many cores and fragments of soft white-tan tissue measuring from less than 0.1 cm to 2 cm in length and up to 0.1 cm in diameter.
+Sections: 
+1- one core bisected 2/1
+2-1/1
+3-4-fragments many / 2 EIT
+
+
+JC/04-FEB-2026
+
+MICROSCOPIC DESCRIPTION
+Sections show core biopsies of lymphoid tissue with small, fragmented lymphoid aggregates admixed with fibrotic tissue. Due to the limited and fragmented nature of the specimen, nodal architecture cannot be adequately assessed. The infiltrate is composed predominantly of small lymphocytes with irregular nuclear contours, resembling centrocytes. Centroblasts are rare. No sheets of large atypical cells, necrosis, or granulomata are identified.
+
+A limited immunohistochemical panel was performed on block A1. CD20 and CD3 highlight a mixed population of B and T cells. CD21 demonstrates a few small, disrupted follicular dendritic cell meshworks. These follicles show BCL2 positivity and are negative for CD10 and BCL6, consistent with primary follicles. Scattered CD10- and BCL6-positive B cells are present; however, interpretation of BCL2 expression in these cells is limited by background T-cell staining. The overall Ki-67 proliferation index is low (<10%).
+
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low Cellularity
+Specimen Viability: Suboptimal specimen viability (71% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Lymph node, left posterior neck, flow cytometric analysis (2532587, S-26-002025):
+
+	A small CD10(+) B-cell population (6% of total leukocytes analyzed) with monotypic kappa 	light chain immunoglobulin expression identified (see comment and flow cytometric 		analysis below for further details)
+
+Comment:  
+The flow cytometric findings may be in keeping with minimal involvement by a B-cell lymphoproliferative disorder of germinal centre origin, but does not exclude the possibility of a reactive process. As flow cytometric immunophenotyping is an adjunct to histologic analysis, correlation with concurrent histologic findings, clinical and radiologic findings +/- ancillary laboratory testing is recommended for definitive diagnosis.
+
+
+Flow Cytometry report Accession No.: H26-978 from Dr. Rashmi Goswami at Sunnybrook Health Sciences Centre, 2075 Bayview Ave., Toronto, ON, M4N 3M5.
+
+
+SPECIMEN(S)
+A	Stomach Biopsy, Random
+
+ADDENDUM COMMENT
+Stomach Biopsy, Random (lymphoid infiltrate):
+- Suspicious for low-grade B-cell non-Hodgkin lymphoma (see comment).
+
+COMMENT
+Sections show a dense monomorphic lymphoid proliferation in the lamina propria / submucosa with a focally nodular growth pattern. The lymphocytes are small to intermediate-sized with slightly irregular nuclear contours, condensed chromatin, inconspicuous nucleoli, and scant cytoplasm. Scattered plasma cells are present. Focal lymphoepithelial lesions are identified. 
+
+Immunohistochemical stains performed on block A1 shows the atypical infiltrating cells are B cells positive for CD20, PAX5 and BCL2. They are negative for CD3, CD5, CD10, CD21, CD43, BCL6, cyclinD1, and LEF1. CD21 highlights disrupted FDC meshworks. CD3, CD5 and CD43 highlight scattered background T cells. Ki-67 proliferation index is low (<5% overall). CD138, kappa and lambda highlight abundant polytypic plasma cells. H. pylori is positive by Giemsa and IHC.
+
+The findings are suspicious for extranodal marginal zone lymphoma (MALT lymphoma). No histologic evidence of transformation is identified. H. pylori eradication may result in lymphoma regression. Rebiopsy is recommended if clinically indicated or with disease progression. Reviewed in consultation with a second hematopathologist; diagnostic consensus achieved.
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  11-FEB-2026
+
+QZ/QZ
+
+
+SPECIMEN(S)
+A	Mediastinal Mass Biopsy
+
+CLINICAL HISTORY
+History of chest pain, CT shows IRG mediastinal mass concerning for malignancy. Query lymphoma. Sent out Flow Cytometry. 
+Time into Formalin: 09:55
+
+DIAGNOSIS
+MEDIASTINAL MASS, CORE BIOPSY:
+– Suspicious for classic Hodgkin lymphoma (see comment).
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  12-MAR-2026
+
+QZ/QZ
+
+COMMENT
+Overall findings are suspicious for classic Hodgkin lymphoma. However, the biopsy is limited in size, and definitive Reed–Sternberg morphology is not well developed. Evaluation of CD20 expression in the atypical cells is also difficult in this specimen. Additional immunostains are ordered and will be reported in an addendum. 
+
+Case was reviewed by Dr. I. Brain who concurs with the diagnosis. Preliminary result was communicated to Drs. W. Silverstein, B. Goldman, R. Philip, J. Silverman by emails on March 11. Following the recommendation I will send this case to Sunnybrook HSC for hematopathology consultation. A repeat biopsy will also be arranged as per discussion.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Mediastinal Mass". It consists of many cores and fragments of soft white-tan tissue measuring from 0.2 cm to 0.4 cm in length and up to 0.1 cm in diameter.
+Sections: 1-3: Many/3 EIT
+
+
+DS/03-MAR-2026
+
+MICROSCOPIC DESCRIPTION
+Sections show lymphoid tissue with fibrous bands and a polymorphous inflammatory infiltrate composed predominantly of small lymphocytes and histiocytes. Scattered and small clusters of atypical mononuclear cells resembling Hodgkin-like cells are present.
+
+IMMUNOHISTOCHEMISTRY
+Immunohistochemical studies show that the atypical cells are CD30 positive, weakly positive for PAX5, and positive for MUM1; CD45, CD15, CD79a, and CD3 are negative. CD20 highlights background small B-cells and shows weak/partial staining in the atypical cells. CD3 highlights background T-cells and is negative in the atypical cells. EBER in situ hybridization is negative.
+BOB.1 and OCT.2 have been ordered and are being performed at WOHS.
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Optimal
+Specimen Viability: Viability Not Required
+
+Interpretation:  
+Flow cytometry was not performed due to insufficient cellularity of the specimen. Refer to the surgical pathology report for final diagnosis.
+
+
+Flow Cytometry report Accession No.:  H26-1835 from Dr. Larissa Liontos at Sunnybrook Health Sciences Centre, 2075 Bayview Ave., Toronto, ON, M4N 3M5.
+
+
+SPECIMEN(S)
+A	Retroperitoneal Mass, biopsy
+
+CLINICAL HISTORY
+Soft tissue thickening 
+Time into Formalin: 08:50
+
+DIAGNOSIS
+RETROPERITONEAL MASS, CORE BIOPSY:
+– Suspicious for high-grade B-cell lymphoma (see comment).
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  13-MAR-2026
+
+QZ/QZ
+
+COMMENT
+The specimen is crushed and fragmented, limiting morphologic and immunophenotypic evaluation. Within these limitations, the findings are most suggestive of a high-grade B-cell lymphoma. FISH studies for MYC, BCL2, and BCL6 rearrangements will be attempted and report to follow. An excisional biopsy is recommended for definitive classification.
+
+Case was reviewed by Dr. I. Brain, who concurs with the diagnosis.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Retroperitoneal Mass". It consists of many cores and fragments of soft white-tan tissue measuring from 0.2 cm to 2 cm in length and up to 0.1 cm in diameter.
+Sections: 1-3 - many/3 EIT
+
+
+DS/06-MAR-2026
+
+MICROSCOPIC DESCRIPTION
+The biopsies contain fragments of pancreatic epithelium and lymphoid tissue focally involved by an atypical lymphoid proliferation. The atypical cells are predominantly large with irregular nuclear contours and multiple prominent nucleoli. The infiltrate appears diffuse without well-formed follicular architecture.
+
+IMMUNOHISTOCHEMISTRY
+The atypical lymphoid cells are positive for CD20, PAX5, CD10, and BCL6, and are negative for MUM1/IRF4, MYC, BCL2, CCND1, and CD5.
+CD3 and CD5 highlight background interfollicular T cells.
+The Ki-67 proliferation index is approximately 80% in the atypical cells.
+CD21 does not highlight a definite follicular dendritic cell meshwork. 
+CD138 highlights scattered plasma cells polytypic for IGL and IGK.
+EBER(ish) is negative.
+Pankeratin: negative in the atypical cells.
+
+Flow cytometry
+Not performed.
+
+Genetics
+FISH: MYC / BCL2 / BCL6 pending.
+
+
+SPECIMEN(S)
+A	Left Sacral Mass Core Biopsy
+
+CLINICAL HISTORY
+History of lymphoma new left pre sacral soft tissue mass- biopsy done in February and insufficient specimen.
+
+Time into Formalin: 09:19
+
+DIAGNOSIS
+SACRAL MASS, LEFT, CORE BIOPSY:
+– Borderline insufficient biopsy suspicious for B-cell lymphoma.
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  13-MAR-2026
+
+QZ/QZ
+
+COMMENT
+Overall the specimen is very small and fragmented, and flow cytometric immunophenotyping is non-contributory. This is the second core biopsy with borderline insufficient sample quality. The current biopsy shows features favoring a low grade B cell lymphoma, however cautions should be taken when interpreting the results, and an excisional biopsy with flow cytometry is strongly recommended for definitive diagnosis and classification.
+
+Case was reviewed by Dr. I. Brain, who concurs with the diagnosis.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Left Sacral Mass". It consists of many fragments and cores of soft white-tan tissue measuring from 0.2 cm to 0.6 cm in length and up to 0.1 cm in diameter.
+Sections: 1-3: many/3 EIT
+
+
+DS/06-MAR-2026
+
+MICROSCOPIC DESCRIPTION
+Sections show involvement by a small lymphoid cell infiltrate composed of small lymphocytes with irregular nuclear contours. The cells have abundant cytoplasm. No sheets of large cells seen.
+
+IMMUNOHISTOCHEMISTRY
+The atypical cells are CD20+, PAX5+, BCL6 (dim), CD10 (very dim); CD5-, CD43-, BCL2. CD21 is appearing positive in the atypical cells. Light chain stains show possibly very dim kappa expression, no lambda expression. CD3 and CD5 highlight interfollicular T cells. Ki67 proliferation index: ~10%.
+
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low cellularity
+Specimen Viability: Viability not required
+
+Interpretation:  
+Soft tissue mass, left sacrum, flow cytometric analysis (1140254, S-26-003943):
+
+Specimen cellularity too low for adequate immunophenotypic analysis; flow cytometry deferred by Dr. Rashmi Goswami.
+
+Comment:  
+
+Flow Cytometry report Accession No.:  H26-1992 from Dr. Rashmi Goswami at Sunnybrook Health Sciences Centre, 2075 Bayview Ave., Toronto, ON, M4N 3M5.
+
+
+SPECIMEN(S)
+A	RIght Inguinal Lymph Node Core Biopsy
+
+
+CLINICAL HISTORY
+Enlarged right inguinal node abnormal lymphadenopathy.
+Time into Formalin: 11:11
+
+
+DIAGNOSIS
+Lymph node, right inguinal, core biopsy:
+– Fibroinflammatory process with atypical lymphoplasmacytic infiltration.
+– No evidence of a lymphoproliferative disorder or plasma cell neoplasm.
+– Pending external consultation (see comment).
+
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  26-MAR-2026
+
+QZ/QZ
+
+COMMENT
+Biopsy shows a fibroinflammatory process with dense lymphoplasmacytic inflammation. There is no evidence of a lymphoproliferative disorder or plasma cell neoplasm by flow cytometry or immunohistochemistry. Overall, the findings are suspicious for IgG4-related disease. Clinicopathologic correlation, including serum IgG4 levels and radiologic findings, is recommended. The differential diagnosis includes multicentric Castleman disease, inflammatory myofibroblastic tumor, Rosai-Dorfman disease, and infectious processes. Findings were discussed with Dr. R. Goswami at Sunnybrook on March 17th by email. Preliminary results were communicated to Dr. Teklemari at NYGH on March 17th by phone.
+
+Case was reviewed with Dr. I. Brain. Case has been sent for external hematopathology consultation at University Health Network. A final report will follow in an addendum. 
+
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Right Inguinal Node Biopsy". It consists of a 6 cores of soft white-tan tissue measuring from 1.0 cm to 1.5 cm in length and up to less than 0.1 cm in diameter.
+Sections: 1-5 - 6/5 EIT
+
+
+
+ML/10-MAR-2026
+
+MICROSCOPIC DESCRIPTION
+The lymph node architecture is effaced by a dense lymphoplasmacytic infiltrate associated with irregular fibrosis, focally exhibiting storiform features. Eosinophils are present without significant increase. Foci of marked sclerosis are identified. Phlebitis is present. No granulomas or necrosis are identified. No sheets of atypical large cells or evidence of carcinoma are seen.
+
+IMMUNOHISTOCHEMISTRY
+The following immunostains are performed on block A1 in house.
+CD138 highlights increased plasma cells. The plasma cells are positive for MUM1 and CD79a, and negative for CD56, CD117, and cyclin D1. Kappa and lambda light chain stains show polytypic expression (approximately 2:1).
+CD3 highlights scattered background T cells.
+CD20 and PAX5 highlight focally preserved B cells.
+Cyclin D1 highlights weak staining in endothelial cells and rare scattered strongly positive cells, suggestive of reactive immunoblasts/activated B cells.
+CD56 highlights scattered positive cells, suggestive of NK cells and activated T cells.
+EBER (ISH): negative.
+Ki-67 proliferation index: low (~5%).
+
+The following immunostains are performed at WOHS Brampton site.
+IgG4: 10 /HPF
+IgG: 150 /HPF
+IgG4/IgG ratio: <10%
+
+FLOW CYTOMETRY (see separate report)
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low Cellularity
+Specimen Viability: Suboptimal specimen viability (61% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Lymph node, right inguinal, flow cytometric analysis (7261242, S-26-004149):
+
+No definitive immunophenotypic support for a lymphoproliferative disorder within this specimen
+
+Comment:  
+
+Flow Cytometry report Accession No.:  H26-2081 from Dr. Rashmi Goswami at Sunnybrook Health Sciences Centre, 2075 Bayview Ave., Toronto, ON, M4N 3M5.
+
+
+
+SPECIMEN(S)
+A	Breast Ultrasound Guided Biopsy, Left 9:00 SA
+
+ADDENDUM COMMENT
+DIAGNOSIS
+Left breast, core biopsy:
+– Atypical small B-cell lymphoid infiltrate, suspicious for a low-grade B-cell lymphoproliferative disorder (see comment).
+
+COMMENT
+The biopsy is composed of fibromuscular tissue with multiple lymphocytic infiltrates arranged in nodular and perivascular patterns, with focal perilobular distribution. The infiltrates are mostly small lymphocytes with round to mildly irregular nuclei, condensed chromatin, and scant cytoplasm. No sheets of large cells seen. By immunohistochemistry, the lymphoid population shows PAX5 positivity and is largely negative for CD20. The cells show possible co-expression of BCL2 and CD5. CD3 highlights scattered background T cells. However, the tissue was exhausted during processing; therefore, additional markers could not be performed and the immunophenotypic assessment is limited. Overall, the findings are suspicious for a low-grade B-cell lymphoproliferative disorder, such as Chronic lymphocytic leukemia/Small lymphocytic lymphoma. Definitive diagnosis requires a repeat biopsy with flow cytometry. Clinical correlation is advised.
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  16-MAR-2026
+
+QZ/QZ
