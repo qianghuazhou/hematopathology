@@ -1,0 +1,79 @@
+DIAGNOSIS
+
+Inguinal Lymph Node Core Biopsy, Right
+- FOLLICULAR LYMPHOMA, FOLLICULAR GROWTH PATTERN, PRELIMINARY GRADE 1-2 OF 3. Please see comment.
+
+COMMENT
+
+The overall histologic and immunophenotypic findings support a diagnosis of follicular lymphoma, predominantly present in a follicular pattern. Based on the paucity of large cells (less than 15/hpf), the process is classified as low-grade (W.H.O. Grade 1-2 of 3) per the current W.H.O. classification (revised 4th edition, 2017). However, this is a preliminary grading to help inform clinical decision making, definitive grading would require an excisional biopsy. Diagnostic histologic features of involvement by a high-grade or large cell lymphoma are not seen in the sections examined. Correlation with clinical and laboratory findings is advised.
+
+MICROSCOPIC DESCRIPTION
+
+Sections from the core biopsies reveal the lymph node architecture is diffusely effaced by a predominantly nodular atypical lymphoid proliferation composed primarily of small to intermediate sized lymphoid cells with round to irregular, cleaved nuclei, condensed chromatin, indistinct nucleoli, and a small amount of eosinophilic cytoplasm. Admixed are larger cells with oval to irregular nuclei, vesicular chromatin, prominent nucleoli, and a moderate amount of eosinophilic cytoplasm, consistent with centroblasts (less than 15 per HPF).
+
+IMMUNOHISTOCHEMISTRY 
+
+The lymphocytes are positive for CD20, CD10, BCL6, and BCL2.  They are negative for CD5, CD21, CD43, MUM1 and Cyclin D1.
+CD3 and CD5 highlight interspersed small T cells predominantly in interfollicular zones. 
+CD21 highlights expanded, but intact, follicular dendritic cell meshwork. 
+The Ki67 proliferation index is overall 30% with focally higher areas (__).
+
+FLOW CYTOMETRY
+
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity:  
+Specimen Cellularity:  
+Specimen Viability:  
+
+Interpretation:  Bone marrow aspirate, flow cytometric analysis:
+
+Flow cytometric immunophenotyping shows 
+
+Please see scanned Flow Cytometry Report for detailed flow cytometric analysis.
+
+Flow Cytometry Report Accession No
+
+
+SPECIMEN(S)
+A	Lymph Node Core Biopsy, Left Femoral
+
+
+CLINICAL HISTORY
+New enlarged left femoral lymph node, query reactive lymph node Vs lymphoproliferative disease
+1 core sent for flow cytometry
+Time into Formalin: 11:25
+
+DIAGNOSIS
+Lymph node, left femoral, core biopsy:
+– Classic follicular lymphoma, low grade.
+
+COMMENT
+The overall histologic and immunophenotypic findings support a diagnosis of follicular lymphoma, predominantly present in a follicular pattern. Based on the paucity of large cells (less than 15/hpf), the process is classified as low-grade (Grade 1-2 of 3) per the current WHO classification. However, this is a preliminary grading to help inform clinical decision making, definitive grading would require an excisional biopsy. Diagnostic histologic features of involvement by a high-grade or large cell lymphoma are not seen in the sections examined. Correlation with clinical and laboratory findings is advised.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as " Left Femoral Lymph Node". It consists of many fragments of soft white-tan tissue measuring from less than 0.1 cm to 0.4 cm in length and 0.1 cm in diameter.
+Sections: 1-3 many / 3 EIT
+
+
+JC/21-APR-2026
+
+MICROSCOPIC DESCRIPTION
+Sections of the biopsy show lymph node involved by an atypical lymphoid infiltrate in a vaguely nodular pattern. The infiltrate is composed primarily of small to intermediate sized lymphoid cells with round to irregular/cleaved nuclei, condensed chromatin, indistinct nucleoli, and scant cytoplasm. Admixed are scattered larger centroblastic cells which average less than 15/HPF. No sheets of large cells, necrosis or granulomata are seen.
+
+IMMUNOHISTOCHEMISTRY
+The atypical cells are CD20+, PAX5+, BCL2+, BCL6+ (weak/subset); CD19+/-; CCND1-, CD5-, CD43-, LEF1-. 
+CD21 highlight follicular dendritic cell meshworks. 
+CD3, CD5 and CD43 highlight interfollicular T cells.
+Ki67 proliferation index: 5%.
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low cellularity
+Specimen Viability: 87% (by 7-AAD)
+
+Interpretation:  
+Tissue Core Biopsy (Left Femoral Lymph Node) flow cytometric analysis:
+A KAPPA-RESTRICTED CD10 POSITIVE MONOCLONAL B CELL POPULATION IS IDENTIFIED.
+
+Comment:  The cytospin shows small lymphocytes with condensed chromatin. The immunophenotypic findings are compatible with a low grade B cell lymphoproliferative disorder such as follicular lymphoma. Final classification and grading require integration with tissue histology and ancillary studies.
