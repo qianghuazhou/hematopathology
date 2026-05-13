@@ -77,3 +77,52 @@ Tissue Core Biopsy (Left Femoral Lymph Node) flow cytometric analysis:
 A KAPPA-RESTRICTED CD10 POSITIVE MONOCLONAL B CELL POPULATION IS IDENTIFIED.
 
 Comment:  The cytospin shows small lymphocytes with condensed chromatin. The immunophenotypic findings are compatible with a low grade B cell lymphoproliferative disorder such as follicular lymphoma. Final classification and grading require integration with tissue histology and ancillary studies.
+
+
+SPECIMEN(S)
+A	Retroperitoneal Lymp Node
+
+CLINICAL HISTORY
+Retroperitoneal lymphadenopathy, NYD. Rule out malignancy, mesenteric lymphadenopathy 
+Time into Formalin: 09:21
+
+DIAGNOSIS
+Lymph node, retroperitoneal, core biopsy:
+- LOW-GRADE CD10-POSITIVE B-CELL LYMPHOMA, see comment.
+- Negative for metastasis.
+
+COMMENT
+Overall features support a low-grade B-cell lymphoma, most consistent with follicular lymphoma (grade 1–2). The lymphoma cells express CD10 and BCL6 but lack BCL2 expression, which may occur in a subset of cases or reflect epitope-related false-negative immunohistochemistry. FISH for BCL2 rearrangement is pending. No morphologic evidence of transformation is identified.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Retroperitoneal Lymph Node". It consists of 4 cores of soft white-tan tissue measuring from 0.6 cm to 1.3 cm in length and up to less than 0.1 cm in diameter.
+Sections: 1-3 - 4/3 EIT
+
+
+ML/27-FEB-2026
+
+MICROSCOPIC DESCRIPTION
+Sections of core biopsy shows effacement of the nodal architecture by poorly defined follicles of varying size. The follicles lack mantle zones and are composed predominantly of centrocytes with only rare centroblasts (<15/HPF). No sheets of large atypical cells, necrosis, or granulomas are identified.
+
+Immunophenotype
+By immunohistochemistry
+Lymphoma immunophenotype: CD5-, CD10+, CD20+, BCL2-, BCL6+, CCND1-, PAX5+, MKI67+(10%), CD43+, CD23-, LEF1-, AE1/AE3-.
+CD21 and CD23 highlight follicular dendritic cell networks.
+CD3 and CD5 highlight interfollicular T cells.
+By flow cytometry
+Performed (see below and separate report for detailed description)
+
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low Cellularity
+Specimen Viability: 77% (by 7-AAD)
+
+Interpretation:  
+Flow Cytometry, Tissue Core Biopsy (Retroperitoneal LN):
+
+A Kappa-restricted CD10+ monoclonal B-cell population is detected (14% of total leukocytes).
+
+Comment:  
+
+INTERNAL CONSULTATION
+Reviewed by another hematopathologist for quality assurance; consensus reached.
