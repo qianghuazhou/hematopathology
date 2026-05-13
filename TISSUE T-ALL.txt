@@ -1,0 +1,91 @@
+SPECIMEN(S)
+A	Right Cervical Mass Core Biopsy
+
+ADDENDUM COMMENT
+A consultation report has been received and can be viewed as a scanned report.
+
+Consultation Accession No.:  S26-2945 from Dr. Zeina Ghorab at Sunnybrook Health Sciences Centre, 2075 Bayview Ave., Toronto, ON, M4N 3M5.
+
+FINAL DIANGOSIS UPDATE:
+T-cell lymphoblastic Leukemia/Lymphoma.
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  23-FEB-2026
+
+DM/QZ
+
+SPECIMEN(S)
+A	Right Cervical Mass Core Biopsy
+
+CLINICAL HISTORY
+Enlarged cervical LN, query cause, lymphoma, others
+1 core sent for flow cytometry
+Time into Formalin: 10:30
+
+DIAGNOSIS
+A. Right Cervical Mass Core Biopsy;
+- PRELIMINARY DIAGNOSIS ONLY
+- HIGH-GRADE T-CELL NEOPLASM, pending external consultation (see comment).
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  13-FEB-2026
+
+QZ/QZ
+
+COMMENT
+Please note this is a preliminary report. As per discussion, case will be referred to Sunnybrook Health Sciences Centre for further workup and final classification. Preliminary results and discussion were communicated to Drs. S. Ingber, R. Peerani, L. Mozessohn, and Z. Ghorab by emails on Feb 13, 2026.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Right Cervical Mass". It consists of 5 cores and many fragments of soft white-tan tissue measuring from less than 0.1 cm to 2.3 cm in length and up to 0.1 cm in diameter.
+Sections: 1-4 many / 4 EIT 
+
+
+JC/11-FEB-2026
+
+MICROSCOPIC DESCRIPTION
+Sections show diffuse effacement of nodal architecture by a monotonous population of intermediate-sized lymphoid cells with high nuclear-to-cytoplasmic ratios, fine chromatin, and scant cytoplasm. Stat immunohistochemical stains performed on block A1 demonstrate tumor cells positive for TdT and negative for CD34 and CD1a.
+
+FLOW CYTOMETRY at Sunnybrook Health Sciences Centre (H26-1203)
+Specimen Received
+A: Tissue Core Biopsy (Right cervical mass in saline)
+
+Specimen Quality
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low Cellularity
+Specimen Viability: 93% (by 7-AAD)
+
+
+Clinical History
+Clinical Indications: Enlarged lymph node; query cause - lymphoma vs. other. 
+
+
+Interpretation
+Tissue Core Biopsy (Right cervical mass), flow cytometric analysis:
+- T-lymphoblasts are identified
+- See comment
+ 
+ 
+Comment
+The cytospin show numerous intermediate sized blasts with fine chromatin, scant cytoplasm, and nucleoli. The morphological and  immunophenotypic findings are compatible with T-acute lymphoblastic leukemia/lymphoma (T-ALL). Integrate with tissue histology and ancillary studies for final diagnosis and classification.
+
+
+
+Flow Cytometric Analysis
+Flow cytometric analysis of Tissue Core Biopsy (Right cervical mass in saline) shows 4% of total leukocytes in the lymphocyte region (CD45 vs. side scatter).  
+
+An abnormal population of T cells representing approximately 95% of the total leukocyte count is seen with the immunophenotype: CD1a+, CD2-, cytoplasmic CD3+, surface CD3+ (dim/partial), CD4+ (dim), CD5+ (dim), CD7+, CD8+ (dim), CD10-, CD19-, CD25-, CD26+ (bright), CD30-, CD33-, CD34-, CD45+ (dim), cCD79a+, cCD22-, MPO-, nTdT+, and TCR gamma/delta+ (dim/partial/equivocal).  The immunophenotype is compatible with T lymphoblasts.
+
+CD19+ B cells are 1% of total leukocytes with a normal kappa/lambda ratio and heterogeneous CD38 pattern.  No monotypic CD5+ or CD10+ B-cell population is identified.  
+
+Mature CD3+ T cells (3% of total leukocytes) show a CD4/CD8 ratio of 1.8 and no aberrant immunophenotypic features (i.e. normal expression pattern of CD2, CD3, CD4, CD5, CD7, CD8, CD10, CD25, CD26, CD30, CD56, CD57 and TRBC1). T large granular lymphocytes (CD3+, CD57+) are <1% of total leukocytes with a CD4/CD8 ratio of 1.1 and polytypic TRBC1 pattern. Gamma delta T cells are 2% of gated CD3+ cells. NK cells (CD3-, CD56+) are <1% of total leukocytes.  
+
+Monocytes (CD33+, CD14+) are <1% of total leukocytes. 
+
+Markers assessed: CD1a, CD2, sCD3, cCD3, CD4, CD5, CD7, CD8, CD10, CD14, CD19, CD20, cCD22, CD23, CD25, CD26, CD30, CD33, CD34, CD38, CD45, CD56, CD57, cCD79a, Kappa, Lambda, TCR gamma/delta, TRBC1, 7-AAD, cMPO, nTdT (31 total)
+
+
+	Raheem Peerani MD, PhD, FRCPC
+	Report Electronically Signed
+	2/12/2026 15:03
