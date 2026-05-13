@@ -110,3 +110,49 @@ Flow Cytometry, Tissue (Neck Mass, Right):
 
 INTERNAL CONSULTATION
 This case was reviewed in consultation with another hematopathologist for quality assurance, and diagnostic consensus was obtained.
+
+
+PRIMARY MEDIASTINAL LARGE B CELL LYMPHOMA
+SPECIMEN(S)
+A	Mediastinal Mass Core Biopsy
+
+CLINICAL HISTORY
+Large mediastinal mass and left cervical lymphadenopathy. Rule out lymphoma.
+Time into Formalin: 08:40
+
+DIAGNOSIS
+Mediastinal Mass, Core Biopsy:
+- LARGE B-CELL LYMPHOMA, pending external consultation (see comment)
+- Genetic studies pending.
+
+COMMENT
+The overall findings of this core biopsy support a diagnosis of large B cell lymphoma, with differential diagnosis including primary mediastinal large B-cell lymphoma, mediastinal grey zone lymphoma, CD30-positive DLBCL. FISH studies for MYC, BCL2, and BCL6 rearrangements will be performed and result will be updated in an addendum. Preliminary findings were communicated to Drs. L. Liontos, L Mozessohn, Z Ghorab at SHSC, I. Gong at PMH by email on Jan 23 and Jan 27, 2026. Case will be sent to University Health Network for external review and definitive diagnosis.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Mediastinal Mass". It consists of 2 cores of soft white-tan tissue measuring f0.5 and 0.7 cm in length and up to less than 0.1 cm in diameter.  A separate core was sent for flow cytometry.
+Sections: 1,2 -2/2 EIT
+
+Cold Ischemic Time:  00:00 
+Total Fixation Time:   31:20
+
+
+ML/21-JAN-2026
+
+MICROSCOPIC DESCRIPTION
+Sections of the small biopsy show diffuse infiltrate of intermediate-to-large atypical lymphoid cells with irregular nuclei, vesicular chromatin, inconspicuous nucleoli, scant-moderate pale cytoplasm. A subset of tumor cells are large and mononuclear and show Hodgkin–like morphology. There are frequent mitosis and apoptosis, compartmentalizing sclerosis and fibrosis. No definite follicular architecture or low-grade component is seen. 
+
+IMMUNOHISTOCHEMISTRY
+The atypical lymphoid cells are positive for CD20 (strong), PAX5 (strong), CD79a, CD45, CD30 (strong), MUM1 (subset), BCL2 (weak), and CD23, and are negative for CD5, CD10, CD15, BCL6, CyclinD1, and c-MYC. The Ki-67 proliferation index is approximately 60%. EBER in situ hybridization is negative. CD3 and CD5 highlight a background population of reactive T lymphocytes. CD21 shows no follicular dendritic cell meshworks within the tumor.
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low cellularity
+Specimen Viability: Viability not required
+
+Interpretation:  
+Flow cytometry was not performed due to insufficient cellularity of the specimen. Refer to the surgical pathology report for final diagnosis.
+
+
+INTERNAL CONSULTATION
+This case was reviewed in consultation with another hematopathologist for quality assurance, and diagnostic consensus was obtained.
