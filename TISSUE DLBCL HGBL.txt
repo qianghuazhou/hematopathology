@@ -194,3 +194,51 @@ Tissue (Ileum Mass), flow cytometric analysis:
 Comment:  
 The cytospin is markedly paucicellular and highlights rare atypical mononuclear cells. The significance of the flow cytometric analysis is unclear given the paucicellularity and relatively low viability. The analysis reveals an aberrant CD19+ population, however, final determination of a hematolymphoid neoplasm (lymphoma/leukemia) requires independent confirmation of these findings via histology and immunohistochemical studies. Stochastic non-specific binding of antibodies is not excluded. 
 
+
+SPECIMEN(S)
+A	Right Inguinal Mass Core Biopsy
+
+CLINICAL HISTORY
+History of lymphoma.
+Time into Formalin: 11:55
+
+DIAGNOSIS
+Right Inguinal Mass, Core Biopsy:
+- HIGH-GRADE B-CELL LYMPHOMA with diffuse MYC expression; FISH for MYC, BCL2, and BCL6 rearrangements pending (see Comment).
+
+COMMENT
+The findings support an aggressive B-cell lymphoma composed of pleomorphic intermediate-to-large cells with diffuse MYC protein overexpression and aberrant weak, subset CD5 expression. FISH studies for MYC, BCL2, and BCL6 rearrangements are in progress to evaluate for high-grade B-cell lymphoma with double-hit or triple-hit cytogenetics. The final classification according to WHO-HAEM5 and ICC criteria will be rendered upon receipt of these results and reported in an addendum.
+
+GROSS DESCRIPTION
+The specimen is received in formalin in a container labelled with the patient's demographic details and as "Right Inguinal Mass Biopsy". It consists of 3 cores of soft white-tan tissue measuring from 0.9 cm to 1.3 cm in length and up to less than 0.1 cm in diameter.
+Sections: 1-3 - 3/3 EIT
+
+
+ML/21-JAN-2026
+
+MICROSCOPIC DESCRIPTION
+Sections show core biopsies of lymphoid tissue with a diffuse infiltrate of pleomorphic intermediate-to-large atypical lymphoid cells with irregular nuclear contours, moderately condensed chromatin with conspicuous nucleoli, and a moderate amount of pale amphophilic cytoplasm. Scattered mitotic figures and karyorrhectic debris are present. No follicular architecture or low-grade component is identified.
+
+IMMUNOHISTOCHEMISTRY
+The neoplastic cells are positive for CD20 and PAX5, with diffuse expression of BCL2 (>95%) and c-MYC (~90%), and show aberrant weak, subset expression of CD5. They are negative for CD10, BCL6, Cyclin D1, CD23, CD30, MUM1, and LEF1. 
+The Ki-67 proliferation index is approximately 50%.
+CD3, CD5 (strong), and CD43 highlight a background population of reactive T lymphocytes. 
+CD21 and CD23 show only very small focal residual follicular dendritic cell meshworks. 
+EBER in situ hybridization is negative (nonspecific background staining only).
+
+FLOW CYTOMETRY
+Flow cytometry performed at Sunnybrook Health Sciences Centre:
+Specimen Integrity: Acceptable
+Specimen Cellularity: Suboptimal – Low Cellularity
+Specimen Viability: Suboptimal specimen viability (22% by 7-AAD) – Interpret results with caution
+
+Interpretation:  
+Flow Cytometry, Tissue Core Biopsy (Inguinal Mass, Right):
+
+Interpret with caution, low cellularity and viability specimen. A Kappa-restricted CD5+ monoclonal B-cell population is detected (80% of total leukocytes).
+
+Comment:  
+
+
+INTERNAL CONSULTATION
+The case was reviewed by another hematopathologist for quality assurance, and a consensus diagnosis was reached.
