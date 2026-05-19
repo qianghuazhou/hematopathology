@@ -74,3 +74,37 @@ The biopsy shows a small infiltrate of monotonous small lymphocytes with round n
 
 Note is made of known CLL. The atypical B cell infiltrate shows CD23 and LEF1 positivity, supporting CLL/SLL. Loss of CD5 expression is an uncommon but recognized immunophenotypic variation, particularly in previously treated or evolving disease.
 
+
+SPECIMEN(S)
+A	Right Hamicolectomy
+
+
+ADDENDUM COMMENT
+A23. Lymph node, excisional:
+- Small lymphocytic lymphoma / chronic lymphocytic leukemia.
+
+Clinical History
+Known CLL
+
+Specimen type
+Excisional biopsy
+
+Specimen quality
+Adequate
+
+Tissue type
+Lymph node
+
+Morphological description
+The sections of the lymph node show a diffuse infiltrate of monotonous small lymphocytes with round nuclei, clumped chromatin, inconspicuous nucleoli, and scant cytoplasm, with scattered prolymphocytes.
+
+Immunophenotype
+By immunohistochemistry
+Lymphoma immunophenotype: CD5+, CD10-, CD20±, BCL2+, BCL6-, CCND1-, PAX5+, CD19+, CD43+, LEF1+.
+Follicular dendritic cells: CD21 highlights small residual follicular dendritic cell networks.
+Interfollicular area: CD3 highlights interfollicular T cells.
+Proliferation index
+Ki67 staining: 5% (overall)
+By flow cytometry
+Not performed
+
