@@ -618,3 +618,28 @@ Immunohistochemistry demonstrates a mixed B- and T-cell population with preserve
 
 Overall findings support reactive lymphoid hyperplasia with no evidence of lymphoma.
 
+
+SPECIMEN(S)
+C	Stomach Biopsy, Antrum
+
+DIAGNOSIS
+Stomach, antrum, biopsy:
+– Reactive lymphoid hyperplasia. No evidence of lymphoproliferative disorder.
+
+COMMENT
+Sections show a dense predominantly submucosal lymphoplasmacytic infiltrate with a reactive secondary lymphoid follicle. The infiltrate is composed predominantly of small CD3 positive T cells with fewer CD20/PAX5/CD19 positive B cells. T cells express CD5 and CD43. B cells are negative for CD5, CD10, CD43, CyclinD1, LEF1. The follicle is positive for CD10 and BCL6 and negative for BCL2, consistent with a reactive secondary follicle. Ki67 shows appropriately increased proliferation within the germinal center and low proliferation elsewhere. CD138 and MUM1 highlight numerous plasma cells with polytypic light chain expression and only a slight lambda predominance within physiologic limits. Overall findings support reactive lymphoid hyperplasia without evidence of lymphoma.
+
+
+SPECIMEN(S)
+A	Terminal Ileum Biopsy
+
+
+ADDENDUM COMMENT
+DIAGNOSIS
+Terminal Ileum Biopsy:
+– Reactive lymphoid hyperplasia. See comment.
+
+COMMENT
+Sections show terminal ileal mucosa with prominent lymphoid infiltrates displaying predominantly follicular architecture. The infiltrate is composed predominantly of small mature lymphocytes without significant cytologic atypia. By immunohistochemistry, CD20, PAX5, and CD19 highlight B cells predominantly within follicles with scattered interfollicular B cells. The B cells are negative for CD5, CD10, and Cyclin D1. CD3 and CD5 highlight interfollicular T cells. CD43 and LEF1 are positive in T cells. The follicles are positive for BCL2 and negative for CD10 and BCL6, consistent with primary follicles. Ki67 proliferation index is low (<5%). Overall findings support reactive lymphoid hyperplasia without evidence of lymphoma.
+
+
