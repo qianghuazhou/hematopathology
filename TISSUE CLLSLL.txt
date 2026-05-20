@@ -108,3 +108,81 @@ Ki67 staining: 5% (overall)
 By flow cytometry
 Not performed
 
+
+
+SPECIMEN(S)
+A	Breast Ultrasound Guided Biopsy, Left 01:00 N + 10
+B	Breast Ultrasound Guided Biopsy, Left 11:30 N + 10
+
+ADDENDUM COMMENT
+External Consult (second opinion) to University Health Network
+2019-Oct-15 11:26 EDT
+
+Breast masses, 01:00 and 11:30, left, biopsies
+- Small lymphocytic lymphoma. See comment.
+
+A consultation report has been received and can be viewed as a scanned report.
+
+Consultation Accession No.:  S19- from Dr. R. Musani at University Health Network, 200 Elizabeth St., Toronto, ON, M5G 2C4.
+
+
+Electronically signed by Peerani, Raheem         MD, FRCPC - Pathologist
+Verified:  30-OCT-2019
+
+FT/RP
+
+SPECIMEN(S)
+A	Breast Ultrasound Guided Biopsy, Left 01:00 N + 10
+B	Breast Ultrasound Guided Biopsy, Left 11:30 N + 10
+
+CLINICAL HISTORY
+A. Mass 0.4 cm, indeterminate
+B. Mass 0.3 cm, indeterminate
+Rule out carcinoma.
+Time into Formalin: 15:03
+
+DIAGNOSIS
+A. Breast Ultrasound Guided Biopsy, Left 01:00 N + 10
+- ATYPICAL B-CELL LYMPHOID INFILTRATE (see Comment)
+- Pending consultation to UHN Hematopathology
+
+B. Breast Ultrasound Guided Biopsy, Left 11:30 N + 10
+- ATYPICAL B-CELL LYMPHOID INFILTRATE (see Comment)
+- Pending consultation to UHN Hematopathology
+
+
+Electronically signed by Peerani, Raheem         MD, FRCPC - Pathologist
+Verified:  11-OCT-2019
+
+RP/RP
+
+COMMENT
+This case is being sent to UHN Hematopathology for an expert opinion and further work up to determine whether the morphological and immunohistochemical findings are sufficient to diagnose and subtype a low grade B cell lymphoma.
+
+Correlation with peripheral blood examination with flow cytometry and radiological imaging is suggested. If there are additional sites of lymphadenopathy and/or masses, a tissue biopsy may assist in clarifying the diagnosis. 
+
+GROSS DESCRIPTION
+A. The specimen is received in formalin in a container labelled with the patient's demographic details and as "Breast Ultrasound Guided Biopsy Left 1:00 N + 10". It consists of 4 cores of soft white-tan tissue measuring from 0.2 cm to 0.8 cm in length and up to 0.1 cm in diameter.
+Sections: 1,2 - 4/2 EIT 
+
+Cold Ischemic Time:  :00 
+Total Fixation Time: 25:05
+
+
+B. The specimen is received in formalin in a container labelled with the patient's demographic details and as "Breast Ultrasound Guided Biopsy Left 11:30 N + 10". It consists of 3 cores of soft white-tan tissue measuring from 1 cm to 1.1 cm in length and up to 0.2 cm in diameter.
+Sections: 1,2 - 3/2 EIT 3
+
+Cold Ischemic Time:  0:00 
+Total Fixation Time: 24:57
+
+
+DS/08-OCT-2019
+
+MICROSCOPIC DESCRIPTION
+The morphology of both specimens are similar and will be described together. Sections show lymphoid tissue intercalated between adipose tissue without evidence of breast ductal epithelium or lymph node capsule. The site of the biopsy cannot be confirmed either as within the breast parenchyma or within a lymph node. The lymphoid tissue is composed of small monotonous lymphocytes with round to ovoid nuclear contours and condensed chromatin. There are scattered foci of small to intermediate sized cells with pale cytoplasm and angulated nuclear contours.  Mitotic activity is inconspicuous. Necrosis is absent.
+
+IMMUNOHISTOCHEMISTRY
+In block B1, CD20 highlights an expansion of small B cells that co-express CD5, BCL2, CD21, and CD43. BCL6 and CD10 (very weak) highlights focal germinal centres. CD3 highlights T cells. CD21 highlights expanded follicular dendritic cell meshworks. AE1/AE3 demonstrates an absence of epithelium. Cyclin D1 is negative. Ki-67 is focally increased in the pale zones. Selected stains were repeated on block A1 with similar findings. CD23 appears partially expressed on the B cells in block A1. 
+
+INTERNAL CONSULTATION
+Selected slides from this case were shown to another pathologist as part of quality assurance activities at NYGH.
