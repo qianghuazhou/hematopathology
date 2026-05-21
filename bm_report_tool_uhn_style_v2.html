@@ -279,19 +279,82 @@
         </div>
 
         <div class="grid-1" style="margin-top:10px;">
-          <div><label>Blasts</label><input id="blasts_desc" type="text" value="Not increased"></div>
-          <div><label>Monocytes</label><input id="monocytes_desc" type="text" value="Not increased"></div>
-          <div><label>Mast cells</label><input id="mast_desc" type="text" value="Not increased"></div>
-          <div><label>Lymphocytes</label><input id="lymph_desc" type="text" value="Not increased"></div>
-          <div><label>Plasma cells</label><input id="plasma_desc" type="text" value="Not increased"></div>
-          <div><label>Iron stores</label><select id="iron_desc">
-              <option value=""></option>
-              <option selected>Adequate</option>
-              <option>Decreased</option>
-              <option>Absent</option>
-              <option>Increased</option>
-              <option>Cannot be assessed</option>
-            </select></div>
+          <div class="grid-2">
+            <div class="lineage">
+              <h3>Blasts</h3>
+              <div class="row"><label>Status</label><select id="blasts_desc">
+                <option value=""></option>
+                <option selected>Not increased</option>
+                <option>Increased</option>
+                <option>Rare</option>
+                <option>Cannot be assessed</option>
+              </select></div>
+              <div class="row"><label>Comment</label><input id="blasts_comment" type="text" placeholder="optional"></div>
+            </div>
+
+            <div class="lineage">
+              <h3>Monocytes</h3>
+              <div class="row"><label>Status</label><select id="monocytes_desc">
+                <option value=""></option>
+                <option selected>Not increased</option>
+                <option>Increased</option>
+                <option>Decreased</option>
+                <option>Cannot be assessed</option>
+              </select></div>
+              <div class="row"><label>Comment</label><input id="monocytes_comment" type="text" placeholder="optional"></div>
+            </div>
+
+            <div class="lineage">
+              <h3>Mast Cells</h3>
+              <div class="row"><label>Status</label><select id="mast_desc">
+                <option value=""></option>
+                <option selected>Not increased</option>
+                <option>Increased</option>
+                <option>Atypical</option>
+                <option>Cannot be assessed</option>
+              </select></div>
+              <div class="row"><label>Comment</label><input id="mast_comment" type="text" placeholder="optional"></div>
+            </div>
+
+            <div class="lineage">
+              <h3>Lymphocytes</h3>
+              <div class="row"><label>Status</label><select id="lymph_desc">
+                <option value=""></option>
+                <option selected>Not increased</option>
+                <option>Increased</option>
+                <option>Mature</option>
+                <option>Atypical</option>
+                <option>Cannot be assessed</option>
+              </select></div>
+              <div class="row"><label>Comment</label><input id="lymph_comment" type="text" placeholder="optional"></div>
+            </div>
+
+            <div class="lineage">
+              <h3>Plasma Cells</h3>
+              <div class="row"><label>Status</label><select id="plasma_desc">
+                <option value=""></option>
+                <option selected>Not increased</option>
+                <option>Increased</option>
+                <option>Polytypic</option>
+                <option>Monotypic</option>
+                <option>Cannot be assessed</option>
+              </select></div>
+              <div class="row"><label>Comment</label><input id="plasma_comment" type="text" placeholder="optional"></div>
+            </div>
+
+            <div class="lineage">
+              <h3>Iron Stores</h3>
+              <div class="row"><label>Status</label><select id="iron_desc">
+                <option value=""></option>
+                <option>Absent</option>
+                <option>Decreased</option>
+                <option selected>Adequate</option>
+                <option>Increased</option>
+                <option>Cannot be assessed</option>
+              </select></div>
+              <div class="row"><label>Comment</label><input id="iron_comment" type="text" placeholder="optional"></div>
+            </div>
+          </div>
           <div><label>Neoplasia</label><input id="neoplasia_desc" type="text" placeholder="see diagnosis"></div>
 
           <fieldset class="subgroup">
@@ -376,6 +439,14 @@ function addLine(arr, label, value) {
 function addIndented(arr, text) {
   if (!text) return;
   arr.push(DESC_INDENT + text);
+}
+
+function combineStatusComment(statusId, commentId) {
+  const status = v(statusId);
+  const comment = v(commentId);
+  if (!status) return '';
+  if (!comment) return status;
+  return status + '; ' + comment;
 }
 
 function mapAspirateCellularity(val) {
@@ -478,12 +549,12 @@ function generateReport() {
     if (label === 'Erythropoiesis' && extra) addIndented(lines, 'Ring sideroblasts: ' + extra);
   });
 
-  addLine(lines, 'Blasts', v('blasts_desc'));
-  addLine(lines, 'Monocytes', v('monocytes_desc'));
-  addLine(lines, 'Mast Cells', v('mast_desc'));
-  addLine(lines, 'Lymphocytes', v('lymph_desc'));
-  addLine(lines, 'Plasma cells', v('plasma_desc'));
-  addLine(lines, 'Iron stores', v('iron_desc'));
+  addLine(lines, 'Blasts', combineStatusComment('blasts_desc', 'blasts_comment'));
+  addLine(lines, 'Monocytes', combineStatusComment('monocytes_desc', 'monocytes_comment'));
+  addLine(lines, 'Mast Cells', combineStatusComment('mast_desc', 'mast_comment'));
+  addLine(lines, 'Lymphocytes', combineStatusComment('lymph_desc', 'lymph_comment'));
+  addLine(lines, 'Plasma cells', combineStatusComment('plasma_desc', 'plasma_comment'));
+  addLine(lines, 'Iron stores', combineStatusComment('iron_desc', 'iron_comment'));
   addLine(lines, 'Neoplasia', v('neoplasia_desc'));
 
   const ihcSite = v('ihc_site');
@@ -542,11 +613,18 @@ function clearForm() {
   document.getElementById('wbc_comment').value = 'No significant abnormality';
   document.getElementById('plt_comment').value = 'No significant abnormality';
   document.getElementById('touch_prep').value = 'Adequate marrow elements present with findings similar to those seen in the aspirate smears.';
-  document.getElementById('mast_desc').value = 'Not increased';
-  document.getElementById('lymph_desc').value = 'Mature';
-  document.getElementById('plasma_desc').value = 'Not increased';
-  document.getElementById('iron_desc').value = 'Adequate';
   document.getElementById('blasts_desc').value = 'Not increased';
+  document.getElementById('blasts_comment').value = '';
+  document.getElementById('monocytes_desc').value = 'Not increased';
+  document.getElementById('monocytes_comment').value = '';
+  document.getElementById('mast_desc').value = 'Not increased';
+  document.getElementById('mast_comment').value = '';
+  document.getElementById('lymph_desc').value = 'Not increased';
+  document.getElementById('lymph_comment').value = '';
+  document.getElementById('plasma_desc').value = 'Not increased';
+  document.getElementById('plasma_comment').value = '';
+  document.getElementById('iron_desc').value = 'Adequate';
+  document.getElementById('iron_comment').value = '';
   document.getElementById('diff_total').value = '500';
   autoCalcDiff();
 }
