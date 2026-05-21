@@ -768,7 +768,7 @@ img, table, pre, code, textarea, select, input, button{
         
         <label class="cb-item">
           <input type="checkbox" id="asp_megas__opt0" data-group="asp_megas" value="Normal">
-          <span>Normal, orderly maturation</span>
+          <span>Normal number and morphology</span>
         </label>
         
         <label class="cb-item">
@@ -1964,7 +1964,7 @@ function buildAspirateLineage(id, label) {
     } else if (other) {
       secondary.push(other);
     }
-    if (!secondary.length) secondary.push("normoblastic, orderly maturation");
+    if (!secondary.length) secondary.push("normoblastic morphology, orderly maturation");
   } else if (label === "Granulopoiesis") {
     if (vals.some(x => /left-shifted/i.test(x))) secondary.push("left-shifted maturation");
     const dysDetails = splitVals("asp_gran_dys").concat(splitVals("asp_gran_dys_extent"));
@@ -1975,7 +1975,7 @@ function buildAspirateLineage(id, label) {
     } else if (other) {
       secondary.push(other);
     }
-    if (!secondary.length) secondary.push("complete, orderly maturation");
+    if (!secondary.length) secondary.push("present in normal numbers with proper maturation.");
   } else if (label === "Megakaryopoiesis") {
     const dysDetails = splitVals("asp_megas_dys").concat(splitVals("asp_megas_dys_extent"));
     if (vals.some(x => /dysplastic/i.test(x)) || dysDetails.length) {
