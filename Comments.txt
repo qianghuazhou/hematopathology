@@ -1,14 +1,18 @@
+--------------------------------------------------
 MICROSCOPIC DESCRIPTION
+--------------------------------------------------
+
 A and B. Both specimens show similar morphologic findings and are described together.
 
 --------------------------------------------------
 QUALITY ASSURANCE / CONSULTATION
 --------------------------------------------------
-Selected slides from this case were shown to another pathologist as part of quality assurance activities at NYGH.
 
-This case was reviewed in NYGH Hematology Pathology rounds on [date], with consensus agreement.
+Selected slides from this case were reviewed by another pathologist as part of quality assurance activities at NYGH.
 
-This case was reviewed at the Sunnybrook HSC multicenter hematopathology weekly rounds on [date], with consensus agreement.
+This case was reviewed in NYGH Hematopathology rounds on [date], with consensus agreement.
+
+This case was reviewed at the Sunnybrook HSC multicenter hematopathology rounds on [date], with consensus agreement.
 
 --------------------------------------------------
 EXTERNAL CONSULTATION
@@ -21,43 +25,125 @@ This interpretation is provisional. The case has been referred for hematopatholo
 The final diagnosis reflects integration of morphology, immunophenotype, ancillary studies, and external hematopathology consultation.
 
 --------------------------------------------------
+FLOW CYTOMETRY CORRELATION
+--------------------------------------------------
+
+Concurrent flow cytometry findings have been reviewed and correlated.
+
+Flow cytometry results are integrated into the final interpretation.
+
+--------------------------------------------------
 ANCILLARY STUDIES UPDATE
 --------------------------------------------------
 
-Ancillary studies including cytogenetics and molecular testing have been reviewed. The findings are concordant with the above interpretation and do not alter the diagnosis.
+Ancillary studies including cytogenetics and molecular testing have been reviewed.
 
-OR
-
-Ancillary studies have been reviewed and support the above diagnosis.
-
-OR
-
-Ancillary studies have been reviewed and allow further classification of the neoplasm, as reflected above.
-
-OR
+Ancillary studies including cytogenetics and molecular testing have been reviewed. The findings are concordant with the original interpretation and do not alter the diagnosis.
 
 Ancillary testing results are not concordant with the preliminary interpretation; the diagnosis has been revised accordingly.
+
+Molecular genetic studies are pending and will be reported in an addendum.
+
+Final classification may be subject to revision upon completion of pending ancillary studies.
+
+--------------------------------------------------
+FINAL DIAGNOSIS UPDATE
+--------------------------------------------------
+
+Ancillary studies have been reviewed and allow further classification of the neoplasm, see below.
+
+The final diagnosis reflects integration of morphology, immunophenotype, ancillary studies, and clinical information.
+
+--------------------------------------------------
+LIMITATIONS / TECHNICAL DISCLAIMER
+--------------------------------------------------
+
+Evaluation is limited by scant tissue.
+
+Interpretation is limited by crush artifact.
+
+Interpretation is limited by decalcification artifact.
+
+Immunohistochemical interpretation is limited by tissue exhaustion.
+
+Flow cytometric studies were limited by low specimen viability / paucicellular specimen.
+
+Correlation with additional tissue sampling may be considered if clinically indicated.
+
+--------------------------------------------------
+DECALCIFIED SPECIMEN DISCLAIMER
+--------------------------------------------------
+
+Decalcification may reduce antigen preservation and sensitivity of immunohistochemical and in situ hybridization studies.
+
+Immunohistochemical staining intensity may be reduced in decalcified specimens.
 
 --------------------------------------------------
 SPECIAL STAINS / IHC DISCLAIMER
 --------------------------------------------------
 
-The positive and internal negative controls for the special stains have been reviewed and are appropriate.
+Immunohistochemical stains were performed and interpreted in conjunction with appropriate controls.
 
-Immunohistochemical assays in this panel were developed and validated by the performing laboratory. These tests have not been cleared or approved by the U.S. Food and Drug Administration; however, such approval is not required. The laboratory is certified under the Clinical Laboratory Improvement Amendments of 1988 (CLIA) to perform high-complexity testing.
+Appropriate positive and negative controls for immunohistochemical and special stains were reviewed and are satisfactory.
 
---------------------------------------------------
 EBER ISH (DECALCIFIED SPECIMEN) DISCLAIMER
---------------------------------------------------
 
 EBER in situ hybridization has not been validated on decalcified specimens. Results should be interpreted with caution, as false-negative results may occur.
 
+--------------------------------------------------
+CYTOGENETIC DISCLAIMER
+--------------------------------------------------
+
+Cytogenetic analysis was unsuccessful due to insufficient metaphases.
+
+Conventional cytogenetic analysis failed secondary to inadequate specimen growth.
 
 --------------------------------------------------
-Teaching comment
+INTERPRETIVE / BORDERLINE LANGUAGE
 --------------------------------------------------
+
+The findings are suggestive of but not entirely specific for [entity].
+
+The overall findings favor [entity].
+
+Definitive classification is limited by [factor].
+
+Correlation with clinical, laboratory, radiologic, and genetic findings is required for definitive subclassification.
+
+--------------------------------------------------
+ADDENDUM
+--------------------------------------------------
+
+An addendum will follow upon completion of pending ancillary studies.
+
+--------------------------------------------------
+INTEGRATED FINAL DIAGNOSIS
+--------------------------------------------------
+
+The final diagnosis reflects integration of morphology, immunophenotype, ancillary studies, molecular/cytogenetic findings, and clinical information.
+
+--------------------------------------------------
+CLINICAL CORRELATION
+--------------------------------------------------
+
+Clinical correlation is recommended.
+
+Correlation with radiologic and laboratory findings is advised.
+
+Clinicopathologic correlation is essential.
+
+--------------------------------------------------
+DIGITAL PATHOLOGY
+--------------------------------------------------
+
+Digital whole slide imaging was used for selected portions of case review.
+
+--------------------------------------------------
+TEACHING / EDUCATIONAL COMMENT
+--------------------------------------------------
+
 I have personally reviewed all specimen preparations and concur with the resident's interpretation.
 
 I have personally reviewed the resident's preliminary interpretation and all specimen preparations and have personally issued this report.
 
-
+This case was reviewed with the resident/fellow as part of academic teaching activities.
