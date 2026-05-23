@@ -243,6 +243,34 @@ Comment:
 INTERNAL CONSULTATION
 The case was reviewed by another hematopathologist for quality assurance, and a consensus diagnosis was reached.
 
+
+
+DIAGNOSIS
+Lymph node, biopsy:
+– Diffuse large B-cell lymphoma arising in association with chronic lymphocytic leukemia / small lymphocytic lymphoma (Richter transformation). See comment.
+
+COMMENT
+The biopsy shows transformation of CLL/SLL to an aggressive large B-cell lymphoma. Correlation with clinical findings and pending ancillary studies is recommended.
+
+MICROSCOPIC DESCRIPTION
+Sections show lymph node tissue with diffuse architectural effacement by a predominantly large atypical lymphoid infiltrate composed of medium to large cells with vesicular chromatin, irregular nuclear contours, prominent nucleoli, and moderate amounts of cytoplasm. Frequent mitotic figures and apoptotic bodies are identified. Areas of necrosis may be present. Background low-grade small lymphocytes consistent with underlying CLL/SLL are identified focally.
+
+IMMUNOHISTOCHEMISTRY
+The large atypical cells express CD20, PAX5, CD19, and BCL2. Variable expression of CD5 and CD23 may be present. The cells are negative for CyclinD1 and SOX11. CD3 highlights background T cells. Ki67 proliferation index is markedly increased (approximately [x]%). MYC, BCL6, and MUM1 are [positive/variable]. EBER ISH is [positive/negative].
+
+FLOW CYTOMETRY
+Flow cytometry performed at [institution]:
+
+Specimen Integrity: _
+Specimen Cellularity: _
+Specimen Viability: _
+
+Interpretation:
+Monotypic [kappa/lambda]-restricted B-cell population identified.
+
+Comment:
+Findings support involvement by a B-cell lymphoproliferative disorder. Correlation with morphology and immunohistochemistry is required for assessment of transformation.
+
 ####################################
 Typical DLBCL wording:
 
