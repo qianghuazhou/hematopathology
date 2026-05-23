@@ -188,39 +188,62 @@ INTERNAL CONSULTATION
 Selected slides from this case were shown to another pathologist as part of quality assurance activities at NYGH.
 
 
+GENERIC
 DIAGNOSIS
 Lymph node, biopsy:
-– Small B-cell lymphoma most consistent with chronic lymphocytic leukemia / small lymphocytic lymphoma (CLL/SLL) with atypical morphologic and immunophenotypic features (atypical CLL/SLL). See comment.
+– Small lymphocytic lymphoma / chronic lymphocytic leukemia (CLL/SLL). See comment.
 
 COMMENT
-Sections show diffuse/nodular infiltrates of predominantly small mature lymphocytes with scattered larger atypical forms and focal prolymphocytoid morphology. 
-“Diffuse proliferation centers are inconspicuous.”
-“Scattered paraimmunoblasts are present.”
-“The infiltrate contains increased prolymphocytoid cells.”
-“Focal areas show larger atypical lymphoid cells without overt Richter transformation.”
-“The lymphocytes show irregular nuclear contours and mildly dispersed chromatin.”
-“Residual follicular architecture is partially preserved.”
+Overall morphologic, immunophenotypic, and flow cytometric findings support involvement by CLL/SLL. No evidence of Richter transformation is identified.
 
-The neoplastic cells express CD20, PAX5, CD19, CD5 [weak/subset/negative], CD23 [weak/negative], LEF1, and BCL2, with monotypic [kappa/lambda] light chain restriction. The cells are negative for CyclinD1 and SOX11. CD21/CD23 highlight residual follicular dendritic cell meshworks. Ki67 proliferation index is approximately [x]%.
+MICROSCOPIC DESCRIPTION
+Sections show lymph node tissue with partial to complete architectural effacement by a diffuse to vaguely nodular infiltrate of small mature lymphocytes with round to mildly irregular nuclei, condensed chromatin, inconspicuous nucleoli, and scant cytoplasm. Scattered larger cells consistent with prolymphocytes and paraimmunoblasts are present within focal proliferation centers. Sheets of large atypical cells, necrosis, and granulomata are not identified.
 
-The overall morphologic and immunophenotypic findings support CLL/SLL with atypical features. The differential diagnosis includes mantle cell lymphoma and other small B-cell lymphoproliferative disorders; however, the immunophenotype and [negative CyclinD1/SOX11 and/or absence of t(11;14)] argue against mantle cell lymphoma.
+IMMUNOHISTOCHEMISTRY
+The atypical lymphoid infiltrate is composed of CD20 (weak to variable) and PAX5 positive B cells coexpressing CD5, CD23, CD43, LEF1, and BCL2. The cells are negative for CD10, BCL6, CyclinD1, and SOX11. CD3 highlights scattered background T cells. CD21/CD23 highlight residual follicular dendritic cell meshworks. Ki67 proliferation index is approximately [x]%, with focal accentuation within proliferation centers.
 
-Correlation with flow cytometry, cytogenetic, and molecular studies is recommended.
+FLOW CYTOMETRY
+Flow cytometry performed at [institution]:
 
-If CD5-negative
+Specimen Integrity: _
+Specimen Cellularity: _
+Specimen Viability: _
+
+Interpretation:
+Monotypic [kappa/lambda]-restricted CD5-positive B-cell population identified.
+
+Comment:
+The immunophenotype is consistent with CLL/SLL.
+
+ATYPICAL CLL/SLL TEMPLATE
 
 DIAGNOSIS
 Lymph node, biopsy:
-– Small B-cell lymphoma consistent with CD5-negative atypical CLL/SLL. See comment.
+– Small B-cell lymphoma most consistent with atypical CLL/SLL. See comment.
 
 COMMENT
-The neoplastic cells express CD20, PAX5, CD23, LEF1, and monotypic surface light chain restriction without CD5 expression. CyclinD1 and SOX11 are negative. Morphology and immunophenotype support atypical CLL/SLL.
+Sections show diffuse to vaguely nodular infiltrates of predominantly small mature lymphocytes with scattered larger atypical forms and focal prolymphocytoid morphology. Proliferation centers are [inconspicuous/prominent]. Residual follicular architecture is [present/partially preserved].
 
-If CD23-negative
+The neoplastic cells express CD20, PAX5, CD19, and BCL2 with monotypic [kappa/lambda] light chain restriction. Expression of CD5 and/or CD23 is [weak/subset/negative]. LEF1 is [positive/weak/negative]. The cells are negative for CyclinD1 and SOX11. Ki67 proliferation index is approximately [x]%.
+
+Overall findings support atypical CLL/SLL. Correlation with flow cytometry, cytogenetic, and molecular studies is recommended to exclude other small B-cell lymphoproliferative disorders, particularly mantle cell lymphoma.
+
+CD5-NEGATIVE CLL/SLL TEMPLATE
 
 DIAGNOSIS
 Lymph node, biopsy:
-– Small B-cell lymphoma consistent with CD23-negative atypical CLL/SLL. See comment.
+– Small B-cell lymphoma consistent with CD5-negative CLL/SLL. See comment.
 
 COMMENT
-The neoplastic lymphoid population expresses CD20, PAX5, CD5, LEF1, and monotypic light chain restriction without CD23 expression. CyclinD1 and SOX11 are negative. Overall findings support atypical CLL/SLL.
+The neoplastic cells express CD20, PAX5, CD23, LEF1, and monotypic light chain restriction without CD5 expression. CyclinD1 and SOX11 are negative. Morphologic and immunophenotypic findings support CD5-negative CLL/SLL.
+
+CD23-NEGATIVE CLL/SLL TEMPLATE
+
+DIAGNOSIS
+Lymph node, biopsy:
+– Small B-cell lymphoma consistent with CD23-negative CLL/SLL. See comment.
+
+COMMENT
+The neoplastic lymphoid population expresses CD20, PAX5, CD5, LEF1, and monotypic light chain restriction without CD23 expression. CyclinD1 and SOX11 are negative. Overall findings support CD23-negative atypical CLL/SLL.
+
+Based on uploaded reference material.
