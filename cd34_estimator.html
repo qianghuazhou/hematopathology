@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CD34 Blast / Membrane Stain Estimator</title>
+<style>
+:root{
+  --bg:#f5f6f8; --card:#fff; --ink:#111827; --muted:#6b7280; --line:#d1d5db;
+  --accent:#1f2937; --blue:#2563eb; --amber:#f59e0b; --green:#22c55e; --red:#ef4444;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--accent);color:#fff;padding:18px 24px}
+header h1{margin:0;font-size:22px} header p{margin:6px 0 0;color:#d1d5db;font-size:14px}
+main{display:grid;grid-template-columns:360px 1fr;gap:16px;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:14px;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+h2{font-size:16px;margin:0 0 10px} h3{font-size:14px;margin:0 0 8px}
+label{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px}
+input[type=text],select,textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:14px;background:#fff}
+input[type=range]{width:100%} textarea{min-height:110px;resize:vertical}
+button{border:1px solid var(--line);background:#fff;color:var(--ink);padding:8px 10px;border-radius:8px;cursor:pointer;font-size:13px;margin:3px 2px}
+button:hover{background:#eef2f7}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.active{background:var(--accent);color:#fff;border-color:var(--accent)}.danger{background:#fee2e2;color:#991b1b;border-color:#fecaca}
+.btnrow{display:flex;flex-wrap:wrap;gap:4px}.small{font-size:12px;color:var(--muted);line-height:1.35}.warn{background:#fffbeb;border:1px solid #f59e0b;color:#78350f;border-radius:10px;padding:10px;font-size:13px;line-height:1.35}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.metric{background:#eef2f7;border-radius:10px;padding:10px}.metric .lab{font-size:12px;color:var(--muted)}.metric .val{font-size:20px;font-weight:700;margin-top:3px}
+.canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px}.box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}canvas{width:100%;max-height:72vh;object-fit:contain;background:#eee;border:1px solid #ddd;border-radius:8px;cursor:crosshair}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px}.amber{background:var(--amber)}.blue{background:var(--blue)}.green{background:var(--green)}.red{background:var(--red)}
+.brackets{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.brackets button{width:100%;margin:0}
+@media(max-width:1050px){main{grid-template-columns:1fr}.canvases{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>CD34 Blast / Membrane Stain Estimator</h1>
+  <p>Two-panel ROI tool. Amber marks CD34/DAB-positive pixels; blue marks hematoxylin-rich negative cellular/nuclear pixels. Empty fat/background is left transparent.</p>
+</header>
+<main>
+<aside>
+  <div class="card">
+    <h2>Case / image</h2>
+    <label>Upload IHC image</label><input type="file" id="upload" accept="image/*">
+    <label>Case / block</label><input type="text" id="caseId" placeholder="Optional" oninput="updateReport()">
+    <label>Stain</label><select id="stainName" onchange="updateReport()"><option>CD34</option><option>CD117</option><option>Other DAB membrane/cytoplasmic stain</option></select>
+    <label>Report context</label><select id="context" onchange="updateReport()"><option value="blast">Bone marrow CD34 blast estimate</option><option value="generic">Generic positive-cell estimate</option></select>
+  </div>
+
+  <div class="card">
+    <h2>ROI / exclusion</h2>
+    <div class="btnrow"><button id="modeRoi" class="active" onclick="setMode('roi')">Draw ROI</button><button id="modeExclude" onclick="setMode('exclude')">Draw exclude</button><button id="modeInspect" onclick="setMode('inspect')">Inspect</button></div>
+    <p class="small">Drag rectangles on the image. Exclude bone, crush, vessels if desired, edge artifact, and non-representative areas. The default ROI is the central image.</p>
+    <div class="btnrow"><button onclick="clearRoi()">Clear ROI</button><button onclick="clearExclusions()">Clear exclusions</button><button class="danger" onclick="resetAll()">Reset all</button></div>
+    <div class="legend"><span><i class="dot green"></i>ROI</span><span><i class="dot red"></i>Exclude</span><span><i class="dot amber"></i>CD34/DAB+</span><span><i class="dot blue"></i>negative cellular/nuclear</span></div>
+  </div>
+
+  <div class="card">
+    <h2>Detection settings</h2>
+    <label>DAB sensitivity: <span id="dabVal">34</span></label><input type="range" id="dabT" min="5" max="100" value="34" oninput="sync(); analyze()">
+    <label>Minimum DAB strength: <span id="strengthVal">38</span></label><input type="range" id="strengthT" min="5" max="130" value="38" oninput="sync(); analyze()">
+    <label>Nuclear/cellular darkness: <span id="darkVal">58</span></label><input type="range" id="darkT" min="15" max="140" value="58" oninput="sync(); analyze()">
+    <label>Minimum cellular saturation: <span id="satVal">18</span></label><input type="range" id="satT" min="0" max="80" value="18" oninput="sync(); analyze()">
+    <label>Background exclusion brightness: <span id="bgVal">218</span></label><input type="range" id="bgT" min="160" max="250" value="218" oninput="sync(); analyze()">
+    <label>Overlay opacity: <span id="opVal">65</span>%</label><input type="range" id="opT" min="0" max="90" step="5" value="65" oninput="sync(); drawOverlay()">
+    <div class="btnrow"><button class="primary" onclick="analyze()">Analyze</button><button onclick="toggleOverlay()" id="overlayBtn" class="active">Overlay on</button><button onclick="resetThresholds()">Reset thresholds</button></div>
+    <p class="small">Important: negative denominator is restricted to hematoxylin-rich cellular/nuclear pixels. Pale empty marrow/fat spaces should not be counted.</p>
+  </div>
+
+  <div class="card">
+    <h2>Manual final estimate</h2>
+    <div class="brackets" id="bracketGrid"></div>
+    <label>Final estimate slider: <span id="manualVal">Not set</span></label><input type="range" min="0" max="100" step="1" id="manualSlider" value="0" oninput="setManual(this.value + '%')">
+  </div>
+</aside>
+
+<section>
+  <div class="card">
+    <div class="metrics">
+      <div class="metric"><div class="lab">CD34/DAB positive</div><div class="val" id="rawPct">0%</div></div>
+      <div class="metric"><div class="lab">Algorithm bracket</div><div class="val" id="algoBracket">Not run</div></div>
+      <div class="metric"><div class="lab">Final estimate</div><div class="val" id="finalEstimate">Not set</div></div>
+      <div class="metric"><div class="lab">Cellular pixels</div><div class="val" id="cellPix">0</div></div>
+    </div>
+  </div>
+  <div class="canvases">
+    <div class="box"><h3>Original image</h3><canvas id="origCanvas"></canvas></div>
+    <div class="box"><h3>Annotated image: CD34/DAB-positive vs negative cells</h3><canvas id="annCanvas"></canvas></div>
+  </div>
+  <div class="card">
+    <h2>Report text</h2><textarea id="report"></textarea>
+    <div class="btnrow"><button class="primary" onclick="copyReport()">Copy report</button><button onclick="downloadCSV()">Export CSV</button><button onclick="downloadAnnotated()">Download annotated image</button></div>
+  </div>
+  <div class="warn"><b>Use note:</b> This is a browser-only color-threshold support tool, not validated diagnostic AI. CD34 highlights blasts but also endothelial cells and some progenitors; final blast estimate requires morphologic correlation and pathologist adjustment.</div>
+</section>
+</main>
+<script>
+const orig=document.getElementById('origCanvas'), ann=document.getElementById('annCanvas');
+const octx=orig.getContext('2d',{willReadFrequently:true}), actx=ann.getContext('2d',{willReadFrequently:true});
+let img=new Image(), loaded=false, roi=null, exclusions=[], mode='roi', dragging=false, sx=0, sy=0, temp=null, overlay=true, mask=null;
+let stats={raw:0, bracket:'Not run', pos:0, neg:0, cellular:0, excluded:0}; let finalEstimate='';
+const brackets=['<1%','1-2%','2-5%','5-10%','10-20%','20-30%','30-40%','40-50%','50-60%','60-70%','70-80%','80-90%','>90%'];
+(function init(){const g=document.getElementById('bracketGrid');brackets.forEach(b=>{const bt=document.createElement('button');bt.textContent=b;bt.onclick=()=>setManual(b);g.appendChild(bt)});sync();updateReport();})();
+function sync(){['dab','strength','dark','sat','bg','op'].forEach(k=>{const id=k+'T', val=document.getElementById(id).value; document.getElementById(k+'Val').textContent=val;});}
+function setMode(m){mode=m;['Roi','Exclude','Inspect'].forEach(n=>document.getElementById('mode'+n).classList.remove('active'));document.getElementById('mode'+(m==='roi'?'Roi':m==='exclude'?'Exclude':'Inspect')).classList.add('active');}
+function point(e){const r=ann.getBoundingClientRect();return{x:Math.max(0,Math.min(ann.width,(e.clientX-r.left)*ann.width/r.width)),y:Math.max(0,Math.min(ann.height,(e.clientY-r.top)*ann.height/r.height))};}
+function norm(x,y,w,h){if(w<0){x+=w;w=-w} if(h<0){y+=h;h=-h} return{x:Math.round(x),y:Math.round(y),w:Math.round(w),h:Math.round(h)}}
+function inRect(x,y,r){return r&&x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h} function isExc(x,y){return exclusions.some(r=>inRect(x,y,r))}
+[orig,ann].forEach(c=>{c.addEventListener('mousedown',e=>{if(!loaded||mode==='inspect')return;dragging=true;const p=point(e);sx=p.x;sy=p.y;temp={x:sx,y:sy,w:0,h:0}});c.addEventListener('mousemove',e=>{if(!dragging)return;const p=point(e);temp=norm(sx,sy,p.x-sx,p.y-sy);drawOverlay()});c.addEventListener('mouseup',e=>{if(!dragging)return;dragging=false;const p=point(e);const r=norm(sx,sy,p.x-sx,p.y-sy);if(r.w<5||r.h<5){temp=null;drawOverlay();return} if(mode==='roi')roi=r; else if(mode==='exclude')exclusions.push(r);temp=null;analyze()})});
+document.getElementById('upload').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=ev=>{img.onload=()=>{let w=img.width,h=img.height,max=1800;if(Math.max(w,h)>max){const s=max/Math.max(w,h);w=Math.round(w*s);h=Math.round(h*s)}orig.width=ann.width=w;orig.height=ann.height=h;octx.clearRect(0,0,w,h);octx.drawImage(img,0,0,w,h);loaded=true;roi={x:Math.round(w*.08),y:Math.round(h*.08),w:Math.round(w*.84),h:Math.round(h*.84)};exclusions=[];finalEstimate='';document.getElementById('finalEstimate').textContent='Not set';document.getElementById('manualVal').textContent='Not set';analyze()};img.src=ev.target.result};rd.readAsDataURL(f)});
+function rgbToHsv(r,g,b){r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn;let h=0;if(d){if(mx===r)h=(g-b)/d+(g<b?6:0);else if(mx===g)h=(b-r)/d+2;else h=(r-g)/d+4;h*=60}return[h,d/(mx||1)*100,mx*255]}
+function analyze(){if(!loaded)return;sync();octx.drawImage(img,0,0,orig.width,orig.height);const w=orig.width,h=orig.height,dat=octx.getImageData(0,0,w,h).data;const cls=new Uint8ClampedArray(w*h);const dabT=+document.getElementById('dabT').value,strT=+document.getElementById('strengthT').value,darkT=+document.getElementById('darkT').value,satT=+document.getElementById('satT').value,bgT=+document.getElementById('bgT').value;let pos=0,neg=0,cell=0,excluded=0;const ar=roi||{x:0,y:0,w,h};
+ for(let y=ar.y;y<ar.y+ar.h;y++){for(let x=ar.x;x<ar.x+ar.w;x++){if(x<0||y<0||x>=w||y>=h)continue;if(isExc(x,y)){excluded++;continue}const i=(y*w+x)*4,r=dat[i],g=dat[i+1],b=dat[i+2];const br=(r+g+b)/3,dark=255-br,sat=Math.max(r,g,b)-Math.min(r,g,b);const [hue,sv]=rgbToHsv(r,g,b);const paleEmpty=br>bgT||sat<6; if(paleEmpty){excluded++;continue}
+  const brownScore=(r-b)+0.55*(g-b)-0.20*Math.abs(r-g)+dark*0.18; const isBrownHue=((hue>=8&&hue<=60)||(r>g*0.86&&g>b*0.86)); const isDab=isBrownHue&&brownScore>strT&&r>b+dabT&&b<205&&br<bgT;
+  const bluePurple=((hue>=190&&hue<=285)||(b>r+8&&b>=g-5)); const isNuclear=(dark>darkT&&br<bgT&&sv>=satT&&bluePurple);
+  const isCellular=isDab||isNuclear; if(!isCellular){excluded++;continue} cell++; if(isDab){pos++;cls[y*w+x]=2}else{neg++;cls[y*w+x]=1}
+ }}
+ stats.pos=pos;stats.neg=neg;stats.cellular=cell;stats.excluded=excluded;stats.raw=cell?pos/cell*100:0;stats.bracket=bracket(stats.raw);mask=cls;updateFields();updateReport();drawOverlay();}
+function bracket(p){if(p<1)return'<1%';if(p<2)return'1-2%';if(p<5)return'2-5%';if(p<10)return'5-10%';if(p<20)return'10-20%';if(p<30)return'20-30%';if(p<40)return'30-40%';if(p<50)return'40-50%';if(p<60)return'50-60%';if(p<70)return'60-70%';if(p<80)return'70-80%';if(p<90)return'80-90%';return'>90%'}
+function drawOverlay(){if(!loaded)return;const w=ann.width,h=ann.height;actx.clearRect(0,0,w,h);actx.drawImage(orig,0,0);if(overlay&&mask){const im=actx.getImageData(0,0,w,h),d=im.data,op=+document.getElementById('opT').value/100;for(let i=0;i<mask.length;i++){if(!mask[i])continue;const j=i*4;if(mask[i]===2){d[j]=Math.round(d[j]*(1-op)+245*op);d[j+1]=Math.round(d[j+1]*(1-op)+158*op);d[j+2]=Math.round(d[j+2]*(1-op)+11*op)}else{d[j]=Math.round(d[j]*(1-op)+37*op);d[j+1]=Math.round(d[j+1]*(1-op)+99*op);d[j+2]=Math.round(d[j+2]*(1-op)+235*op)}d[j+3]=255}actx.putImageData(im,0,0)}drawRect(actx,roi,'rgba(34,197,94,.12)','rgba(34,197,94,.95)',3);exclusions.forEach(r=>drawRect(actx,r,'rgba(239,68,68,.14)','rgba(239,68,68,.95)',3));if(temp){drawRect(actx,temp,mode==='exclude'?'rgba(239,68,68,.12)':'rgba(34,197,94,.12)',mode==='exclude'?'rgba(239,68,68,.95)':'rgba(34,197,94,.95)',2)}}
+function drawRect(c,r,fill,stroke,lw){if(!r)return;c.save();c.fillStyle=fill;c.strokeStyle=stroke;c.lineWidth=lw;c.fillRect(r.x,r.y,r.w,r.h);c.strokeRect(r.x,r.y,r.w,r.h);c.restore()}
+function updateFields(){document.getElementById('rawPct').textContent=stats.raw.toFixed(1)+'%';document.getElementById('algoBracket').textContent=stats.bracket;document.getElementById('cellPix').textContent=stats.cellular.toLocaleString();}
+function setManual(v){finalEstimate=v;document.getElementById('finalEstimate').textContent=v;document.getElementById('manualVal').textContent=v;const n=parseInt(v.replace(/[^0-9]/g,''));if(!Number.isNaN(n))document.getElementById('manualSlider').value=Math.min(n,100);updateReport()}
+function updateReport(){const stain=document.getElementById('stainName').value, ctxv=document.getElementById('context').value, caseId=document.getElementById('caseId').value.trim();const est=finalEstimate||stats.bracket||'not determined';const raw=stats.bracket==='Not run'?'':` Algorithm-assisted cellular pixel estimate: ${stats.raw.toFixed(1)}% (${stats.bracket}); CD34/DAB-positive pixels ${stats.pos.toLocaleString()}, negative cellular/nuclear pixels ${stats.neg.toLocaleString()}.`;let text=ctxv==='blast'?`${stain} highlights scattered positive cells comprising approximately ${est} of cellular elements in the selected representative marrow area.`:`${stain} shows approximately ${est} positive staining among analyzable cellular elements in the selected region of interest.`;text+=raw+' Empty marrow/fat spaces and pale background are excluded from the automated denominator. Endothelial/vessel staining should be excluded or discounted by pathologist review.';if(caseId)text='Case/block: '+caseId+'\n'+text;document.getElementById('report').value=text}
+function toggleOverlay(){overlay=!overlay;const b=document.getElementById('overlayBtn');b.textContent=overlay?'Overlay on':'Overlay off';b.classList.toggle('active',overlay);drawOverlay()}
+function resetThresholds(){document.getElementById('dabT').value=34;document.getElementById('strengthT').value=38;document.getElementById('darkT').value=58;document.getElementById('satT').value=18;document.getElementById('bgT').value=218;document.getElementById('opT').value=65;sync();analyze()}
+function clearRoi(){roi=null;analyze()} function clearExclusions(){exclusions=[];analyze()} function resetAll(){if(loaded)roi={x:Math.round(orig.width*.08),y:Math.round(orig.height*.08),w:Math.round(orig.width*.84),h:Math.round(orig.height*.84)};exclusions=[];finalEstimate='';document.getElementById('finalEstimate').textContent='Not set';document.getElementById('manualVal').textContent='Not set';analyze()}
+function copyReport(){const t=document.getElementById('report');t.select();document.execCommand('copy')}
+function downloadAnnotated(){if(!ann.width)return;drawOverlay();const a=document.createElement('a');a.download='cd34_annotated.png';a.href=ann.toDataURL('image/png');a.click()}
+function downloadCSV(){const rows=[['case_block','stain','algorithm_pct','algorithm_bracket','final_estimate','positive_pixels','negative_cellular_pixels','cellular_denominator_pixels','excluded_pixels','roi','exclusions'],[document.getElementById('caseId').value,document.getElementById('stainName').value,stats.raw.toFixed(2),stats.bracket,finalEstimate,stats.pos,stats.neg,stats.cellular,stats.excluded,roi?JSON.stringify(roi):'',JSON.stringify(exclusions)]];const csv=rows.map(r=>r.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='cd34_estimate.csv';a.click();URL.revokeObjectURL(url)}
+</script>
+</body>
+</html>
