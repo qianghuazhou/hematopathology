@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Peripheral Blood Smear Schistocyte Estimator</title>
+<style>
+:root{--bg:#f5f5f3;--card:#fff;--ink:#1f2937;--muted:#6b7280;--line:#d1d5db;--accent:#7c2d12;--blue:#2563eb;--red:#dc2626;--green:#166534;--amber:#d97706}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:20px 26px}h1{margin:0;font-size:23px}.subtitle{margin-top:6px;color:var(--muted);font-size:14px;line-height:1.35}
+main{display:grid;grid-template-columns:360px 1fr;gap:16px;padding:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+h2{font-size:16px;margin:0 0 10px}label{display:block;font-size:13px;font-weight:bold;margin:10px 0 5px}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:14px;background:#fff}input[type=range]{padding:0}textarea{min-height:115px;resize:vertical}
+button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 10px;font-size:13px;cursor:pointer;margin:3px 2px}button:hover{background:#f3f4f6}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.blue{background:var(--blue);color:#fff;border-color:var(--blue)}.green{background:var(--green);color:#fff;border-color:var(--green)}.danger{background:#fee2e2;color:#991b1b;border-color:#fecaca}button.active{background:#111827;color:#fff;border-color:#111827}
+.canvases{display:grid;grid-template-columns:1fr 1fr;gap:14px}.canvasBox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}.canvasBox h3{font-size:14px;margin:0 0 8px}canvas{width:100%;max-height:72vh;object-fit:contain;border:1px solid #ddd;border-radius:8px;background:#eee;cursor:crosshair}.small{font-size:12px;color:var(--muted);line-height:1.35}.stat{display:grid;grid-template-columns:1fr auto;gap:10px;padding:7px 0;border-bottom:1px dashed #e5e7eb}.value{font-weight:bold}.big{font-size:28px;color:var(--accent);font-weight:bold}.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted)}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:4px}.red{background:#dc2626}.blueDot{background:#2563eb}.amberDot{background:#d97706}.greenDot{background:#22c55e}.warn{background:#fffbeb;border:1px solid #f59e0b;color:#78350f;padding:10px;border-radius:10px;font-size:13px;line-height:1.35}.modeRow{display:flex;flex-wrap:wrap;gap:4px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:980px){main{grid-template-columns:1fr}.canvases{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+<h1>Peripheral Blood Smear Schistocyte Estimator</h1>
+<div class="subtitle">Browser-only visual assistant for estimating fragmented red cells on Wright-Giemsa/peripheral blood smear images. Designed for ROI review with manual correction, not validated diagnostic AI.</div>
+</header>
+<main>
+<section>
+<div class="card">
+<h2>1. Case / image</h2>
+<label>Image upload</label><input type="file" id="upload" accept="image/*">
+<label>Case / slide</label><input type="text" id="caseId" placeholder="Optional" oninput="updateReport()">
+<label>Region assessed</label><select id="region" onchange="updateReport()"><option>representative monolayer field</option><option>selected high-power field</option><option>user-defined ROI</option><option>several representative fields</option></select>
+</div>
+<div class="card">
+<h2>2. ROI tools</h2>
+<div class="modeRow"><button id="modeRoi" class="active" onclick="setMode('roi')">Draw ROI</button><button id="modeExclude" onclick="setMode('exclude')">Draw exclude</button><button id="modeInspect" onclick="setMode('inspect')">Inspect</button></div>
+<p class="small">Drag on the image to draw a representative monolayer ROI. Exclude stain precipitate, platelet clumps, thick smear, edge artifact, WBC-rich areas, or obvious non-RBC debris.</p>
+<div><button onclick="clearRoi()">Clear ROI</button><button onclick="clearExclusions()">Clear exclusions</button><button class="danger" onclick="resetAll()">Reset all</button></div>
+<div class="legend"><span><i class="dot greenDot"></i>ROI</span><span><i class="dot red"></i>Schistocyte candidate</span><span><i class="dot blueDot"></i>Other RBC candidate</span><span><i class="dot amberDot"></i>Exclude</span></div>
+</div>
+<div class="card">
+<h2>3. Detection settings</h2>
+<label>RBC color sensitivity: <span id="rbcVal">36</span></label><input type="range" id="rbcSensitivity" min="10" max="90" value="36" oninput="syncLabels(); analyze()">
+<label>Minimum RBC darkness: <span id="darkVal">28</span></label><input type="range" id="darkness" min="5" max="90" value="28" oninput="syncLabels(); analyze()">
+<label>Fragment emphasis: <span id="fragVal">62</span></label><input type="range" id="fragmentBias" min="20" max="120" value="62" oninput="syncLabels(); analyze()">
+<label>Minimum object size: <span id="minVal">18</span> px</label><input type="range" id="minSize" min="5" max="80" value="18" oninput="syncLabels(); analyze()">
+<label>Maximum schistocyte size: <span id="maxVal">420</span> px</label><input type="range" id="maxFragSize" min="80" max="1200" value="420" oninput="syncLabels(); analyze()">
+<div><button class="primary" onclick="analyze()">Analyze</button><button onclick="resetThresholds()">Reset thresholds</button><button onclick="toggleOverlay()" id="overlayBtn" class="active">Overlay on</button></div>
+<p class="small">Algorithm flags small, irregular, angular RBC-colored objects as schistocyte candidates. Confirm manually; automated object detection is imperfect on smear photos.</p>
+</div>
+<div class="card">
+<h2>4. Manual final estimate</h2>
+<div class="grid2"><button onclick="setManual('<0.5%')">&lt;0.5%</button><button onclick="setManual('0.5–1%')">0.5–1%</button><button onclick="setManual('1–2%')">1–2%</button><button onclick="setManual('2–5%')">2–5%</button><button onclick="setManual('5–10%')">5–10%</button><button onclick="setManual('>10%')">&gt;10%</button></div>
+<label>Manual numerator</label><input type="number" id="manualSch" min="0" placeholder="Schistocytes counted" oninput="manualCountUpdate()">
+<label>Manual denominator</label><input type="number" id="manualRbc" min="1" placeholder="RBCs counted" oninput="manualCountUpdate()">
+</div>
+</section>
+<section>
+<div class="card">
+<h2>Results</h2>
+<div class="stat"><span>Automated schistocyte candidates</span><span class="value" id="schCount">0</span></div>
+<div class="stat"><span>Automated total RBC candidates</span><span class="value" id="rbcCount">0</span></div>
+<div class="stat"><span>Automated percent</span><span class="value" id="rawPct">0%</span></div>
+<div class="stat"><span>Automated bracket</span><span class="value" id="bracket">Not analyzed</span></div>
+<div class="stat"><span>Manual final estimate</span><span class="value" id="manualFinal">Not set</span></div>
+<div class="big" id="bigResult">—</div>
+</div>
+<div class="canvases">
+<div class="canvasBox"><h3>Original image</h3><canvas id="originalCanvas"></canvas></div>
+<div class="canvasBox"><h3>Annotated image: schistocyte candidates vs other RBCs</h3><canvas id="overlayCanvas"></canvas></div>
+</div>
+<div class="card">
+<h2>Report text</h2><textarea id="report"></textarea>
+<button class="green" onclick="copyReport()">Copy report</button><button class="blue" onclick="downloadOverlay()">Download annotated image</button><button onclick="downloadCSV()">Export CSV</button>
+</div>
+<div class="warn"><b>Use note:</b> ICSH-style schistocyte assessment is ideally performed by manual review of well-spread monolayer fields, excluding platelet clumps, echinocytes, microspherocytes, keratocytes not meeting criteria, and artifacts. Use this as a screening/teaching aid only.</div>
+</section>
+</main>
+<script>
+const originalCanvas=document.getElementById('originalCanvas'), overlayCanvas=document.getElementById('overlayCanvas');
+const octx=originalCanvas.getContext('2d',{willReadFrequently:true}), vctx=overlayCanvas.getContext('2d',{willReadFrequently:true});
+let img=new Image(), loaded=false, roi=null, exclusions=[], mode='roi', dragging=false, startX=0,startY=0,tempRect=null, overlayOn=true, last=null, manualEstimate='';
+function syncLabels(){rbcVal.innerText=rbcSensitivity.value;darkVal.innerText=darkness.value;fragVal.innerText=fragmentBias.value;minVal.innerText=minSize.value;maxVal.innerText=maxFragSize.value}
+function setMode(m){mode=m;['Roi','Exclude','Inspect'].forEach(x=>document.getElementById('mode'+x).classList.remove('active'));document.getElementById('mode'+(m==='roi'?'Roi':m==='exclude'?'Exclude':'Inspect')).classList.add('active')}
+function pt(e){const r=overlayCanvas.getBoundingClientRect();return{x:Math.max(0,Math.min(overlayCanvas.width,(e.clientX-r.left)*overlayCanvas.width/r.width)),y:Math.max(0,Math.min(overlayCanvas.height,(e.clientY-r.top)*overlayCanvas.height/r.height))}}
+function norm(x,y,w,h){if(w<0){x+=w;w=-w}if(h<0){y+=h;h=-h}return{x:Math.round(x),y:Math.round(y),w:Math.round(w),h:Math.round(h)}}
+function inRect(x,y,r){return r&&x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h}function isEx(x,y){return exclusions.some(r=>inRect(x,y,r))}
+overlayCanvas.addEventListener('mousedown',e=>{if(!loaded||mode==='inspect')return;dragging=true;const p=pt(e);startX=p.x;startY=p.y;tempRect={x:p.x,y:p.y,w:0,h:0}});
+overlayCanvas.addEventListener('mousemove',e=>{if(!dragging)return;const p=pt(e);tempRect=norm(startX,startY,p.x-startX,p.y-startY);drawOverlay()});
+overlayCanvas.addEventListener('mouseup',e=>{if(!dragging)return;dragging=false;const p=pt(e),r=norm(startX,startY,p.x-startX,p.y-startY);if(r.w<5||r.h<5){tempRect=null;drawOverlay();return}if(mode==='roi')roi=r;else if(mode==='exclude')exclusions.push(r);tempRect=null;analyze()});
+upload.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const reader=new FileReader();reader.onload=ev=>{img.onload=()=>{let w=img.width,h=img.height,max=1800;if(Math.max(w,h)>max){const s=max/Math.max(w,h);w=Math.round(w*s);h=Math.round(h*s)}originalCanvas.width=overlayCanvas.width=w;originalCanvas.height=overlayCanvas.height=h;octx.drawImage(img,0,0,w,h);loaded=true;roi={x:Math.round(w*.05),y:Math.round(h*.05),w:Math.round(w*.9),h:Math.round(h*.9)};exclusions=[];manualEstimate='';manualFinal.innerText='Not set';analyze()};img.src=ev.target.result};reader.readAsDataURL(f)});
+function analyze(){if(!loaded)return;syncLabels();octx.drawImage(img,0,0,originalCanvas.width,originalCanvas.height);const w=originalCanvas.width,h=originalCanvas.height,d=octx.getImageData(0,0,w,h).data;const rbcMask=new Uint8Array(w*h), fragMask=new Uint8Array(w*h);const rbcT=+rbcSensitivity.value,darkT=+darkness.value,fragT=+fragmentBias.value,minObj=+minSize.value,maxFrag=+maxFragSize.value;const ar=roi||{x:0,y:0,w,h};
+for(let y=ar.y;y<ar.y+ar.h;y++){for(let x=ar.x;x<ar.x+ar.w;x++){if(x<0||y<0||x>=w||y>=h||isEx(x,y))continue;const i=(y*w+x)*4,r=d[i],g=d[i+1],b=d[i+2];const bright=(r+g+b)/3, sat=Math.max(r,g,b)-Math.min(r,g,b);const purple=(b-r)>-10&&b>g*.75&&sat>12;const pink=(r>g*0.9&&r>b*0.9&&sat>rbcT&&bright<245);const cell=(pink||purple)&&bright<235&&(255-bright)>darkT;if(cell)rbcMask[y*w+x]=1}}
+const seen=new Uint8Array(w*h);let rbcObjects=0,fragObjects=0;const qx=[],qy=[];
+for(let y=0;y<h;y++){for(let x=0;x<w;x++){const id=y*w+x;if(!rbcMask[id]||seen[id])continue;let n=0,minx=x,maxx=x,miny=y,maxy=y,sumx=0,sumy=0;qx.length=0;qy.length=0;qx.push(x);qy.push(y);seen[id]=1;while(qx.length){const cx=qx.pop(),cy=qy.pop();n++;sumx+=cx;sumy+=cy;if(cx<minx)minx=cx;if(cx>maxx)maxx=cx;if(cy<miny)miny=cy;if(cy>maxy)maxy=cy;for(let yy=cy-1;yy<=cy+1;yy++)for(let xx=cx-1;xx<=cx+1;xx++){if(xx<0||yy<0||xx>=w||yy>=h)continue;const nid=yy*w+xx;if(rbcMask[nid]&&!seen[nid]){seen[nid]=1;qx.push(xx);qy.push(yy)}}}
+if(n<minObj)continue;const bw=maxx-minx+1,bh=maxy-miny+1,box=bw*bh,fill=n/box,aspect=Math.max(bw,bh)/Math.max(1,Math.min(bw,bh));const small=n<maxFrag,irregular=fill<0.62||aspect>1.8;const score=(small?45:0)+(irregular?35:0)+(aspect>2.2?25:0)+(fill<0.45?20:0);const isFrag=score>=fragT;rbcObjects++;if(isFrag)fragObjects++;for(let yy=miny;yy<=maxy;yy++)for(let xx=minx;xx<=maxx;xx++){const nid=yy*w+xx;if(rbcMask[nid]&&seen[nid])fragMask[nid]=isFrag?2:1;}}
+}
+const pct=rbcObjects?fragObjects/rbcObjects*100:0;last={rbcObjects,fragObjects,pct,bracket:bracket(pct),fragMask};updateFields();updateReport();drawOverlay()}
+function bracket(p){if(p<0.5)return'<0.5%';if(p<1)return'0.5–1%';if(p<2)return'1–2%';if(p<5)return'2–5%';if(p<10)return'5–10%';return'>10%'}
+function drawOverlay(){if(!loaded)return;const w=overlayCanvas.width,h=overlayCanvas.height;vctx.clearRect(0,0,w,h);vctx.drawImage(originalCanvas,0,0);if(overlayOn&&last){const base=vctx.getImageData(0,0,w,h),od=base.data;for(let i=0;i<last.fragMask.length;i++){const m=last.fragMask[i];if(!m)continue;const j=i*4;if(m===2){od[j]=220;od[j+1]=38;od[j+2]=38;od[j+3]=255}else{od[j]=37;od[j+1]=99;od[j+2]=235;od[j+3]=225}}vctx.globalAlpha=.55;const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').putImageData(base,0,0);vctx.drawImage(c,0,0);vctx.globalAlpha=1}drawRect(roi,'rgba(34,197,94,.12)','rgba(34,197,94,.95)',3);exclusions.forEach(r=>drawRect(r,'rgba(217,119,6,.18)','rgba(217,119,6,.95)',3));if(tempRect)drawRect(tempRect,mode==='exclude'?'rgba(217,119,6,.18)':'rgba(34,197,94,.12)',mode==='exclude'?'rgba(217,119,6,.95)':'rgba(34,197,94,.95)',2)}
+function drawRect(r,f,s,l){if(!r)return;vctx.save();vctx.fillStyle=f;vctx.strokeStyle=s;vctx.lineWidth=l;vctx.fillRect(r.x,r.y,r.w,r.h);vctx.strokeRect(r.x,r.y,r.w,r.h);vctx.restore()}
+function updateFields(){schCount.innerText=last.fragObjects.toLocaleString();rbcCount.innerText=last.rbcObjects.toLocaleString();rawPct.innerText=last.pct.toFixed(2)+'%';bracket.innerText=last.bracket;bigResult.innerText=manualEstimate||last.bracket}
+function setManual(v){manualEstimate=v;manualFinal.innerText=v;bigResult.innerText=v;updateReport()}function manualCountUpdate(){const s=+manualSch.value,r=+manualRbc.value;if(r>0&&s>=0){const p=s/r*100;setManual(p.toFixed(2)+'% ('+s+'/'+r+')')}}
+function updateReport(){const est=manualEstimate||(last?last.bracket:'not analyzed'),raw=last?last.pct.toFixed(2)+'%':'not analyzed';let pre='';if(caseId.value.trim())pre+='Case/slide: '+caseId.value.trim()+'\n';report.value=pre+'Schistocytes are estimated at approximately '+est+' in the '+region.value+'. Automated candidate estimate: '+raw+' ('+(last?last.fragObjects:0)+' schistocyte candidates / '+(last?last.rbcObjects:0)+' RBC candidates). Final interpretation requires manual pathologist review of representative monolayer fields.'}
+function copyReport(){report.select();document.execCommand('copy')}function toggleOverlay(){overlayOn=!overlayOn;overlayBtn.innerText=overlayOn?'Overlay on':'Overlay off';overlayBtn.classList.toggle('active',overlayOn);drawOverlay()}
+function resetThresholds(){rbcSensitivity.value=36;darkness.value=28;fragmentBias.value=62;minSize.value=18;maxFragSize.value=420;syncLabels();analyze()}function clearRoi(){roi=null;analyze()}function clearExclusions(){exclusions=[];analyze()}function resetAll(){roi=loaded?{x:0,y:0,w:overlayCanvas.width,h:overlayCanvas.height}:null;exclusions=[];manualEstimate='';manualFinal.innerText='Not set';analyze()}function downloadOverlay(){if(!loaded)return;drawOverlay();const a=document.createElement('a');a.download='schistocyte_estimator_overlay.png';a.href=overlayCanvas.toDataURL('image/png');a.click()}function downloadCSV(){if(!last)return;const rows=[['case_slide','region','automated_percent','automated_bracket','manual_final','schistocyte_candidates','rbc_candidates'],[caseId.value,region.value,last.pct.toFixed(2),last.bracket,manualEstimate,last.fragObjects,last.rbcObjects]];const csv=rows.map(r=>r.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\n');const blob=new Blob([csv],{type:'text/csv'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='schistocyte_estimate.csv';a.click();URL.revokeObjectURL(url)}
+syncLabels();updateReport();
+</script>
+</body>
+</html>
