@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Manual-Assisted Schistocyte Counter</title>
+<style>
+:root{
+  --bg:#f6f7f9; --card:#fff; --ink:#111827; --muted:#6b7280; --line:#d1d5db;
+  --accent:#7f1d1d; --blue:#2563eb; --red:#dc2626; --green:#16a34a; --orange:#f59e0b;
+}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:white;border-bottom:1px solid var(--line);padding:16px 22px} h1{margin:0;font-size:23px}.subtitle{font-size:13px;color:var(--muted);margin-top:5px}
+main{display:grid;grid-template-columns:330px 1fr;gap:14px;padding:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+h2{font-size:16px;margin:0 0 10px}label{display:block;font-size:13px;font-weight:bold;margin:9px 0 4px}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:13px;background:white}textarea{min-height:80px}
+button{border:1px solid var(--line);background:white;border-radius:8px;padding:8px 10px;margin:3px 2px;cursor:pointer;font-size:13px}button.active,button.primary{background:var(--accent);color:white;border-color:var(--accent)}button.blue{background:var(--blue);color:white;border-color:var(--blue)}button.green{background:var(--green);color:white;border-color:var(--green)}button.red{background:#fee2e2;color:#991b1b;border-color:#fecaca}.small{font-size:12px;color:var(--muted);line-height:1.35}.btnrow{display:flex;flex-wrap:wrap;gap:4px}
+.viewer{background:white;border:1px solid var(--line);border-radius:12px;padding:12px}.canvasWrap{position:relative;background:#222;border-radius:10px;overflow:auto;max-height:72vh;text-align:center}canvas{max-width:100%;height:auto;cursor:crosshair;background:#eee}.results{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.metric{background:#f3f4f6;border-radius:10px;padding:10px}.metric .lab{font-size:12px;color:var(--muted)}.metric .val{font-size:22px;font-weight:bold;margin-top:3px}.legend{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px}.redDot{background:var(--red)}.blueDot{background:var(--blue)}.orangeDot{background:var(--orange)}.greenDot{background:var(--green)}
+.table{width:100%;border-collapse:collapse;font-size:13px}.table td,.table th{border-bottom:1px solid #e5e7eb;padding:6px;text-align:left}.dangerText{color:#991b1b;font-weight:bold}.note{background:#fffbeb;border:1px solid #f59e0b;color:#78350f;border-radius:10px;padding:9px;font-size:12px;line-height:1.35}.brackets{display:grid;grid-template-columns:1fr 1fr;gap:5px}.brackets button{margin:0}.brackets button.active{background:#111827;color:white}
+@media(max-width:950px){main{grid-template-columns:1fr}.results{grid-template-columns:1fr 1fr}.canvasWrap{max-height:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Manual-Assisted Schistocyte Counter</h1>
+  <div class="subtitle">Human-in-the-loop peripheral blood smear tool. Click RBCs and schistocytes manually; optional field notes and ICSH-style reporting. No server upload.</div>
+</header>
+<main>
+<aside>
+  <div class="card">
+    <h2>1. Case / image</h2>
+    <label>Image upload</label><input type="file" id="upload" accept="image/*">
+    <label>Case / slide</label><input type="text" id="caseId" placeholder="Optional" oninput="updateReport()">
+    <label>Region assessed</label>
+    <select id="region" onchange="updateReport()">
+      <option>representative monolayer field</option><option>high-power monolayer fields</option><option>area of optimal RBC separation</option><option>user-selected field</option>
+    </select>
+  </div>
+  <div class="card">
+    <h2>2. Counting mode</h2>
+    <div class="btnrow">
+      <button id="modeRbc" class="active" onclick="setMode('rbc')">Click RBC</button>
+      <button id="modeSch" onclick="setMode('sch')">Click schistocyte</button>
+      <button id="modeUnc" onclick="setMode('uncertain')">Uncertain</button>
+      <button id="modeErase" onclick="setMode('erase')">Erase</button>
+    </div>
+    <p class="small">Recommended: count approximately 1000 RBCs across representative monolayer fields when clinically important. Mark only definite fragments as schistocytes.</p>
+    <div class="legend">
+      <span><span class="dot blueDot"></span>RBC</span>
+      <span><span class="dot redDot"></span>Schistocyte</span>
+      <span><span class="dot orangeDot"></span>Uncertain</span>
+    </div>
+    <label>Marker size: <span id="markerSizeVal">10</span></label>
+    <input type="range" min="4" max="24" value="10" id="markerSize" oninput="markerSizeVal.innerText=this.value;draw()">
+  </div>
+  <div class="card">
+    <h2>3. Field controls</h2>
+    <button onclick="newField()" class="primary">Start new field</button>
+    <button onclick="undoLast()">Undo last</button>
+    <button onclick="clearCurrentField()" class="red">Clear field</button>
+    <button onclick="resetAll()" class="red">Reset all</button>
+    <p class="small">Each click is stored by field. Use new field after moving to another microscope/screenshot field.</p>
+  </div>
+  <div class="card">
+    <h2>4. Manual final bracket</h2>
+    <div class="brackets" id="bracketButtons"></div>
+  </div>
+  <div class="note">
+    This tool intentionally avoids automated schistocyte detection. Schistocyte assessment is morphology-based; automated contour methods are unreliable in overlapping smear images.
+  </div>
+</aside>
+<section>
+  <div class="card results">
+    <div class="metric"><div class="lab">Total RBC counted</div><div class="val" id="rbcCount">0</div></div>
+    <div class="metric"><div class="lab">Schistocytes</div><div class="val" id="schCount">0</div></div>
+    <div class="metric"><div class="lab">Uncertain</div><div class="val" id="uncCount">0</div></div>
+    <div class="metric"><div class="lab">Schistocyte %</div><div class="val" id="pct">0%</div></div>
+    <div class="metric"><div class="lab">Fields</div><div class="val" id="fieldCount">1</div></div>
+  </div>
+  <div class="viewer">
+    <h2>Image annotation</h2>
+    <div class="canvasWrap"><canvas id="canvas"></canvas></div>
+  </div>
+  <div class="card">
+    <h2>Field summary</h2>
+    <table class="table" id="fieldTable"></table>
+  </div>
+  <div class="card">
+    <h2>Report text</h2>
+    <textarea id="report"></textarea>
+    <div class="btnrow">
+      <button class="green" onclick="copyReport()">Copy report</button>
+      <button class="blue" onclick="downloadAnnotated()">Download annotated image</button>
+      <button onclick="downloadCSV()">Export CSV</button>
+    </div>
+  </div>
+</section>
+</main>
+<script>
+const canvas=document.getElementById('canvas'), ctx=canvas.getContext('2d');
+let img=new Image(), imageLoaded=false, mode='rbc', currentField=0, manualBracket='';
+let fields=[{name:'Field 1', marks:[]}];
+const brackets=['<0.5%','0.5–1%','1–2%','2–5%','5–10%','>10%'];
+function initBrackets(){const d=document.getElementById('bracketButtons');d.innerHTML='';brackets.forEach(b=>{let bt=document.createElement('button');bt.textContent=b;bt.onclick=()=>{manualBracket=b;[...d.children].forEach(x=>x.classList.remove('active'));bt.classList.add('active');updateAll();};d.appendChild(bt);});}
+initBrackets();
+function setMode(m){mode=m;['Rbc','Sch','Unc','Erase'].forEach(x=>document.getElementById('mode'+x).classList.remove('active')); if(m==='rbc')modeRbc.classList.add('active'); if(m==='sch')modeSch.classList.add('active'); if(m==='uncertain')modeUnc.classList.add('active'); if(m==='erase')modeErase.classList.add('active');}
+function point(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height};}
+document.getElementById('upload').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=ev=>{img.onload=()=>{let w=img.width,h=img.height,max=1800;if(Math.max(w,h)>max){let s=max/Math.max(w,h);w=Math.round(w*s);h=Math.round(h*s);}canvas.width=w;canvas.height=h;imageLoaded=true;draw();};img.src=ev.target.result;};rd.readAsDataURL(f);});
+canvas.addEventListener('click',e=>{if(!imageLoaded)return;const p=point(e); if(mode==='erase'){eraseNear(p.x,p.y);}else{fields[currentField].marks.push({x:p.x,y:p.y,type:mode});} updateAll();});
+function eraseNear(x,y){let best=null,bi=-1,bf=-1,bd=999999;fields.forEach((f,fi)=>f.marks.forEach((m,mi)=>{let d=(m.x-x)**2+(m.y-y)**2;if(d<bd){bd=d;bi=mi;bf=fi;}}));let radius=Number(markerSize.value)*2.5;if(bi>=0&&bd<radius*radius)fields[bf].marks.splice(bi,1);}
+function counts(){let rbc=0,sch=0,unc=0;fields.forEach(f=>f.marks.forEach(m=>{if(m.type==='rbc')rbc++; if(m.type==='sch')sch++; if(m.type==='uncertain')unc++;}));return{rbc,sch,unc,total:rbc+sch};}
+function newField(){fields.push({name:'Field '+(fields.length+1),marks:[]});currentField=fields.length-1;updateAll();}
+function undoLast(){for(let i=fields.length-1;i>=0;i--){if(fields[i].marks.length){fields[i].marks.pop();break;}}updateAll();}
+function clearCurrentField(){fields[currentField].marks=[];updateAll();}
+function resetAll(){fields=[{name:'Field 1',marks:[]}];currentField=0;manualBracket='';initBrackets();updateAll();}
+function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);if(imageLoaded)ctx.drawImage(img,0,0,canvas.width,canvas.height);const size=Number(markerSize.value);fields.forEach((f,fi)=>f.marks.forEach((m,idx)=>{ctx.save();ctx.lineWidth=2;ctx.fillStyle=m.type==='sch'?'rgba(220,38,38,.35)':m.type==='uncertain'?'rgba(245,158,11,.35)':'rgba(37,99,235,.25)';ctx.strokeStyle=m.type==='sch'?'#dc2626':m.type==='uncertain'?'#f59e0b':'#2563eb';ctx.beginPath();ctx.arc(m.x,m.y,size,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle='#111';ctx.font=Math.max(9,size)+'px Arial';if(m.type==='sch')ctx.fillText('S',m.x+size+2,m.y); if(m.type==='uncertain')ctx.fillText('?',m.x+size+2,m.y);ctx.restore();}));}
+function updateAll(){draw();const c=counts();const pct=c.total?c.sch/c.total*100:0;rbcCount.innerText=c.total;schCount.innerText=c.sch;uncCount.innerText=c.unc;pct.innerText=pct.toFixed(2)+'%';fieldCount.innerText=fields.length;updateTable();updateReport();}
+function autoBracket(p){if(p<0.5)return '<0.5%';if(p<1)return '0.5–1%';if(p<2)return '1–2%';if(p<5)return '2–5%';if(p<10)return '5–10%';return '>10%';}
+function updateTable(){let html='<tr><th>Field</th><th>RBC + schistocytes</th><th>Schistocytes</th><th>Uncertain</th><th>%</th></tr>';fields.forEach((f,i)=>{let r=0,s=0,u=0;f.marks.forEach(m=>{if(m.type==='rbc')r++;if(m.type==='sch')s++;if(m.type==='uncertain')u++;});let t=r+s;html+=`<tr><td>${f.name}${i===currentField?' *':''}</td><td>${t}</td><td>${s}</td><td>${u}</td><td>${t?(s/t*100).toFixed(2):'0.00'}%</td></tr>`;});fieldTable.innerHTML=html;}
+function updateReport(){const c=counts();const p=c.total?c.sch/c.total*100:0;const b=manualBracket||autoBracket(p);const caseId=document.getElementById('caseId').value.trim();const region=document.getElementById('region').value;let txt='';if(caseId)txt+='Case/slide: '+caseId+'\n';txt+=`Schistocytes are estimated at approximately ${b} in the ${region}. Manual count: ${c.sch} schistocytes / ${c.total} RBCs counted (${p.toFixed(2)}%).`; if(c.unc)txt+=` ${c.unc} uncertain fragmented/irregular red cells were marked separately and not included in the numerator.`; txt+=' Correlate with smear quality and clinical context; final interpretation requires pathologist review.';report.value=txt;}
+function copyReport(){report.select();document.execCommand('copy');}
+function downloadAnnotated(){if(!canvas.width)return;draw();let a=document.createElement('a');a.download='schistocyte_manual_annotated.png';a.href=canvas.toDataURL('image/png');a.click();}
+function downloadCSV(){const rows=[['field','type','x','y']];fields.forEach(f=>f.marks.forEach(m=>rows.push([f.name,m.type,Math.round(m.x),Math.round(m.y)])));let csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');let blob=new Blob([csv],{type:'text/csv'});let url=URL.createObjectURL(blob);let a=document.createElement('a');a.href=url;a.download='schistocyte_manual_count.csv';a.click();URL.revokeObjectURL(url);}
+updateAll();
+</script>
+</body>
+</html>
