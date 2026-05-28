@@ -256,10 +256,10 @@
 
         
 
-        <!-- Interfollicular area -->
+        <!-- Stroma -->
         <div class="group">
-          <div class="ghead"><div class="gtitle">Interfollicular area</div><div class="gtag">T cells</div></div>
-          <div class="markers" id="grp_interfollicular"></div>
+          <div class="ghead"><div class="gtitle">Stroma</div><div class="gtag">T cells</div></div>
+          <div class="markers" id="grp_stroma"></div>
         </div>
 <!-- Infectious/Epithelial -->
         <div class="group">
@@ -460,7 +460,7 @@
         ]
       },
       {
-        id: "grp_interfollicular",
+        id: "grp_stroma",
         markers: [
           { key:"CD3IF", label:"CD3", type:"status", default:"", note:"Interfollicular T cells" },
           { key:"CD5IF", label:"CD5", type:"status", default:"", note:"Interfollicular T cells" }
@@ -896,7 +896,7 @@ function fishSummaryLine(myc, bcl2, bcl6){
             "By immunohistochemistry",
             ...(ihcSummary ? ["Lymphoma immunophenotype: " + ihcSummary + "."] : []),
             (fdcLine ? ("Follicular dendritic cells: " + fdcLine) : null),
-            (interfollicularLine ? ("Interfollicular area: " + interfollicularLine) : null)
+            (interfollicularLine ? ("Stroma: " + interfollicularLine) : null)
           ].filter(Boolean);
           const ki67Pct = markerPct("KI67");
           const ki67State = markerState("KI67");
