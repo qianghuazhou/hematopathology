@@ -11,7 +11,19 @@ Plasma cells: polytypic for IGK and IGL
 T cells: CD3+
 EBER(ISH) positive cells are not seen.
 
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Microscopic Description
+The lymph node demonstrates preserved architecture. The cortex is hypoplastic and contains one small secondary follicle and several primary follicles. The paracortex is likewise hypoplastic and is composed predominantly of small mature lymphocytes without cytologic atypia. The medullary cords contain scattered plasma cells and occasional hemosiderin-laden macrophages. No atypical lymphoid infiltrate, metastatic malignancy, granulomas, or other significant pathologic abnormality is identified.
+Immunohistochemistry:
+Germinal centre cells: CD20+, CD10+, BCL6+, BCL2−
+Mantle cells: CD20+, IgD+, BCL2+, CD10−, BCL6−
+B cells: negative for CD5, Cyclin D1, and LEF1
+Follicular dendritic cell meshworks: CD21+ and CD23+, preserved
+Plasma cells: CD138+, polytypic by IGK and IGL expression
+T cells: CD3+, predominantly within interfollicular/paracortical areas
+Ki67: appropriately increased within germinal centres and low elsewhere
+EBER (ISH): negative
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Diagnosis
 Needle biopsy of left leg lymph node: fibrous tissue with hematoma, see comment
