@@ -5,6 +5,26 @@ MICROSCOPIC DESCRIPTION
 A and B. Both specimens show similar morphologic findings and are described together.
 
 --------------------------------------------------
+BODY FLUID CYTOLOGY CORRELATION
+--------------------------------------------------
+
+Correlation with concurrent tissue biopsy findings is recommended for definitive diagnosis and classification.
+
+Correlation with concurrent flow cytometry findings is recommended.
+
+The final interpretation should be based on integration of cytomorphology, flow cytometry, tissue biopsy findings, and clinical information.
+
+Definitive subclassification may require correlation with concurrent tissue biopsy and ancillary studies.
+
+No definitive evidence of hematolymphoid malignancy is identified in this specimen; however, correlation with tissue biopsy findings is recommended if clinical suspicion persists.
+
+The significance of the atypical lymphoid population is uncertain. Correlation with concurrent flow cytometry and tissue biopsy findings is recommended.
+
+The cytologic findings are suspicious for involvement by a hematolymphoid neoplasm. Correlation with concurrent flow cytometry and tissue biopsy findings is required for definitive classification.
+
+Flow cytometry findings have been reviewed and correlated.
+
+--------------------------------------------------
 QUALITY ASSURANCE / CONSULTATION
 --------------------------------------------------
 
@@ -22,15 +42,11 @@ Provisional diagnosis; case submitted for external hematopathology consultation.
 
 This interpretation is provisional. The case has been referred for hematopathology consultation at University Health Network. A final integrated report will follow upon receipt of the consultant’s findings.
 
-The final diagnosis reflects integration of morphology, immunophenotype, ancillary studies, and external hematopathology consultation.
-
 --------------------------------------------------
 FLOW CYTOMETRY CORRELATION
 --------------------------------------------------
 
 Concurrent flow cytometry findings have been reviewed and correlated.
-
-Flow cytometry results are integrated into the final interpretation.
 
 --------------------------------------------------
 ANCILLARY STUDIES UPDATE
@@ -51,8 +67,6 @@ FINAL DIAGNOSIS UPDATE
 --------------------------------------------------
 
 Ancillary studies have been reviewed and allow further classification of the neoplasm, see below.
-
-The final diagnosis reflects integration of morphology, immunophenotype, ancillary studies, and clinical information.
 
 --------------------------------------------------
 LIMITATIONS / TECHNICAL DISCLAIMER
@@ -82,11 +96,11 @@ Immunohistochemical staining intensity may be reduced in decalcified specimens.
 SPECIAL STAINS / IHC DISCLAIMER
 --------------------------------------------------
 
-Immunohistochemical stains were performed and interpreted in conjunction with appropriate controls.
-
 Appropriate positive and negative controls for immunohistochemical and special stains were reviewed and are satisfactory.
 
+--------------------------------------------------
 EBER ISH (DECALCIFIED SPECIMEN) DISCLAIMER
+--------------------------------------------------
 
 EBER in situ hybridization has not been validated on decalcified specimens. Results should be interpreted with caution, as false-negative results may occur.
 
@@ -129,8 +143,6 @@ CLINICAL CORRELATION
 Clinical correlation is recommended.
 
 Correlation with radiologic and laboratory findings is advised.
-
-Clinicopathologic correlation is essential.
 
 --------------------------------------------------
 DIGITAL PATHOLOGY
