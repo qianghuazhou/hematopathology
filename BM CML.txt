@@ -11,9 +11,6 @@ _
 COMMENT
 The overall morphologic and molecular findings are consistent with CML, blasts are not increased. Correlation with clinical findings is advised.
 
-COMMENT
-The overall morphologic and molecular findings are consistent with CML, blasts are not increased. Correlation with clinical findings is advised.
-
 PERIPHERAL BLOOD
 CBC Date: 
 Hb: g/L
