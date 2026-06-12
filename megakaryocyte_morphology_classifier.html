@@ -3,164 +3,260 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Megakaryocyte Morphology Classification Tool</title>
+<title>Megakaryocyte Morphology: Describe First Classifier</title>
 <style>
-:root{
-  --bg:#f6f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#d9dee8;--accent:#2454a6;--soft:#eaf0ff;--warn:#fff4e5;--good:#e9f8ef;--bad:#fdeeee;
-}
+:root{--bg:#f6f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#d9dee8;--accent:#2454a6;--soft:#eaf0ff;--warn:#fff4e5;--good:#e9f8ef;--bad:#fdeeee;--purple:#f2eaff}
 *{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
-header{background:linear-gradient(135deg,#15233f,#2d62b7);color:#fff;padding:28px 22px}
-header h1{margin:0 0 6px;font-size:28px} header p{margin:0;opacity:.9;max-width:1100px}
-main{max-width:1180px;margin:0 auto;padding:22px}.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(20,32,55,.06);padding:18px;margin-bottom:18px}
-h2{font-size:20px;margin:0 0 14px}.sub{color:var(--muted);font-size:14px;margin-top:-8px;margin-bottom:14px}.section-title{font-weight:700;margin:18px 0 8px;color:#22345a}
-label{font-weight:700;font-size:14px;display:block;margin:10px 0 5px}.row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14px} textarea{min-height:72px}
+header{background:linear-gradient(135deg,#15233f,#2d62b7);color:#fff;padding:28px 22px} header h1{margin:0 0 6px;font-size:28px} header p{margin:0;opacity:.9;max-width:1120px}
+main{max-width:1240px;margin:0 auto;padding:22px}.grid{display:grid;grid-template-columns:1.08fr .92fr;gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(20,32,55,.06);padding:18px;margin-bottom:18px}
+h2{font-size:20px;margin:0 0 14px}.sub{color:var(--muted);font-size:14px;margin-top:-8px;margin-bottom:14px}.section-title{font-weight:800;margin:18px 0 8px;color:#22345a}
+label{font-weight:700;font-size:14px;display:block;margin:10px 0 5px}.row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14px} textarea{min-height:92px}
 button{border:0;border-radius:10px;background:var(--accent);color:#fff;padding:10px 14px;font-weight:700;cursor:pointer}button.secondary{background:#eef2f7;color:#24324a}button.danger{background:#b42318}.btnbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.result{border-radius:14px;padding:14px;border:1px solid var(--line);background:#f9fbff}.dx{font-size:21px;font-weight:800;color:#102a56}.score{font-size:13px;color:var(--muted);margin-top:4px}.pill{display:inline-block;border-radius:999px;padding:4px 9px;background:var(--soft);color:#1d4f9a;font-weight:700;font-size:12px;margin:3px 4px 3px 0}.warn{background:var(--warn);border-color:#ffd49a}.good{background:var(--good);border-color:#b7e4c7}.bad{background:var(--bad);border-color:#f1b5b5}
-table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:#f1f4f9;color:#24324a}.small{font-size:12px;color:var(--muted)}
-.counter{display:grid;grid-template-columns:1fr 80px 34px 34px;gap:8px;align-items:center;margin:7px 0}.counter b{font-size:14px}.counter button{padding:7px 0}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;background:#0f172a;color:#e5e7eb;padding:14px;border-radius:12px;font-size:13px;max-height:420px;overflow:auto}.ref{font-size:12px;color:#475467}.hidden{display:none}
-@media(max-width:900px){.grid,.row,.row3{grid-template-columns:1fr}.counter{grid-template-columns:1fr 70px 34px 34px}}
+.result{border-radius:14px;padding:14px;border:1px solid var(--line);background:#f9fbff}.dx{font-size:21px;font-weight:800;color:#102a56}.score{font-size:13px;color:var(--muted);margin-top:4px}.pill{display:inline-block;border-radius:999px;padding:4px 9px;background:var(--soft);color:#1d4f9a;font-weight:700;font-size:12px;margin:3px 4px 3px 0}.warn{background:var(--warn);border-color:#ffd49a}.good{background:var(--good);border-color:#b7e4c7}.bad{background:var(--bad);border-color:#f1b5b5}.purple{background:var(--purple);border-color:#d7c6ff}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:#f1f4f9;color:#24324a}.small{font-size:12px;color:#muted}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;background:#0f172a;color:#e5e7eb;padding:14px;border-radius:12px;font-size:13px;max-height:520px;overflow:auto}.ref{font-size:12px;color:#475467}.hr{height:1px;background:var(--line);margin:16px 0}.counter{display:grid;grid-template-columns:1fr 80px 34px 34px;gap:8px;align-items:center;margin:7px 0}.counter button{padding:7px 0}.muted{color:var(--muted)}
+@media(max-width:950px){.grid,.row,.row3,.row4{grid-template-columns:1fr}.counter{grid-template-columns:1fr 70px 34px 34px}}
 </style>
 </head>
 <body>
 <header>
-  <h1>Megakaryocyte Morphology Classification Tool</h1>
-  <p>Educational decision-support tool for marrow megakaryocyte pattern recognition in MPN, CML, and ITP morphology studies. Not a standalone diagnostic system.</p>
+  <h1>Megakaryocyte Morphology Classifier</h1>
+  <p>Describe morphology first, then classify as normal/reactive versus abnormal and, if abnormal, the most likely myeloid disorder pattern. Educational decision support only.</p>
 </header>
 <main>
 <div class="grid">
-  <section>
-    <div class="card">
-      <h2>1. Core Morphology Inputs</h2>
-      <p class="sub">Select the dominant marrow pattern. The output prioritizes morphology and then adds supportive classification clues.</p>
-      <div class="row">
-        <div><label>Megakaryocyte size</label><select id="size"><option value="">Not specified</option><option>large/giant mature</option><option>variable</option><option>small/dwarf</option><option>small atypical</option></select></div>
-        <div><label>Predominant nuclear morphology</label><select id="nuclei"><option value="">Not specified</option><option>staghorn / hyperlobulated</option><option>bulbous / cloud-like</option><option>hypolobated</option><option>hyperchromatic irregular</option><option>pleomorphic mature</option><option>dwarf hyposegmented</option></select></div>
-      </div>
-      <div class="row">
-        <div><label>Cluster pattern</label><select id="cluster"><option value="">Not specified</option><option>loose clusters</option><option>dense tight syncytial clusters</option><option>sheets</option><option>fewer/smaller clusters</option><option>scattered/small clusters</option></select></div>
-        <div><label>Marrow cellularity</label><select id="cellularity"><option value="">Not specified</option><option>normocellular</option><option>hypercellular</option><option>hypocellular/fibrotic</option><option>panmyelosis</option></select></div>
-      </div>
-      <div class="row3">
-        <div><label>Granulocytic proliferation / increased M:E</label><select id="gran"><option value="">Not specified</option><option value="yes">Present</option><option value="no">Absent</option></select></div>
-        <div><label>Erythroid proliferation</label><select id="ery"><option value="">Not specified</option><option value="yes">Present</option><option value="no">Absent/decreased</option></select></div>
-        <div><label>Fibrosis</label><select id="fibrosis"><option value="0">MF-0 / none</option><option value="1">MF-1</option><option value="2">MF-2</option><option value="3">MF-3</option></select></div>
-      </div>
-      <div class="row3">
-        <div><label>Osteosclerosis</label><select id="osteo"><option value="">Not specified</option><option value="yes">Present</option><option value="no">Absent</option></select></div>
-        <div><label>Intrasinusoidal hematopoiesis / megakaryocytes</label><select id="intra"><option value="">Not specified</option><option value="yes">Present</option><option value="no">Absent</option></select></div>
-        <div><label>Vascularity</label><select id="vascular"><option value="">Not specified</option><option>decreased</option><option>normal</option><option>increased/tortuous</option></select></div>
-      </div>
-      <div class="btnbar"><button onclick="classify()">Classify morphology</button><button class="secondary" onclick="resetForm()">Reset</button></div>
-    </div>
+<section>
+  <div class="card">
+    <h2>1. Free-text morphology description</h2>
+    <p class="sub">Write or paste the marrow megakaryocyte description first. The structured fields below can then standardize the classification.</p>
+    <label>Megakaryocyte morphology description</label>
+    <textarea id="freeText" placeholder="Example: Megakaryocytes are normal in number and show predominantly mature multilobated forms, scattered singly without significant clustering. No micromegakaryocytes, hypolobated forms, separated nuclear lobes or hyperchromatic atypia are identified."></textarea>
+    <div class="btnbar"><button class="secondary" onclick="suggestFromText()">Auto-suggest fields from text</button><button class="secondary" onclick="normalTemplate()">Insert normal template</button><button class="secondary" onclick="clearDescription()">Clear description</button></div>
+  </div>
 
-    <div class="card">
-      <h2>2. Optional ITP Megakaryocyte Subtype Counter</h2>
-      <p class="sub">Based on the published ITP steroid-sensitivity model: female sex, thrombocytogenic megakaryocytes ≤6/50, and granular/total megakaryocyte ratio ≥70% each score 1 point.</p>
-      <div class="row">
-        <div><label>Sex</label><select id="sex"><option value="">Not used</option><option value="female">Female</option><option value="male">Male</option></select></div>
-        <div><label>Total megakaryocytes assessed</label><input id="itpTotal" type="number" value="50" min="1" /></div>
-      </div>
-      <div class="counter"><b>Naïve megakaryocytes</b><input id="naive" type="number" value="0" min="0" oninput="updateITP()"><button onclick="bump('naive',1)">+</button><button onclick="bump('naive',-1)">−</button></div>
-      <div class="counter"><b>Granular megakaryocytes</b><input id="granular" type="number" value="0" min="0" oninput="updateITP()"><button onclick="bump('granular',1)">+</button><button onclick="bump('granular',-1)">−</button></div>
-      <div class="counter"><b>Thrombocytogenic megakaryocytes</b><input id="thrombo" type="number" value="0" min="0" oninput="updateITP()"><button onclick="bump('thrombo',1)">+</button><button onclick="bump('thrombo',-1)">−</button></div>
-      <div class="counter"><b>Naked-nucleus megakaryocytes</b><input id="naked" type="number" value="0" min="0" oninput="updateITP()"><button onclick="bump('naked',1)">+</button><button onclick="bump('naked',-1)">−</button></div>
-      <div id="itpBox" class="result"></div>
+  <div class="card">
+    <h2>2. Structured morphology</h2>
+    <p class="sub">Describe number, maturation, cytology, clustering and marrow context. Classification is based on these features.</p>
+    <div class="row3">
+      <div><label>Megakaryocyte number</label><select id="mkcount"><option value="">Not specified</option><option>normal</option><option>increased</option><option>markedly increased</option><option>decreased</option></select></div>
+      <div><label>Maturation pattern</label><select id="maturation"><option value="">Not specified</option><option>predominantly mature</option><option>full maturation spectrum</option><option>left shifted / immature</option><option>dysplastic</option></select></div>
+      <div><label>Distribution / clustering</label><select id="distribution"><option value="">Not specified</option><option>scattered singly</option><option>small loose groups</option><option>loose clusters</option><option>dense tight clusters</option><option>sheets</option></select></div>
     </div>
-  </section>
+    <div class="row3">
+      <div><label>Size</label><select id="size"><option value="">Not specified</option><option>normal size</option><option>large / giant mature</option><option>variable</option><option>small / dwarf</option><option>micromegakaryocytes</option></select></div>
+      <div><label>Nuclear morphology</label><select id="nuclei"><option value="">Not specified</option><option>multilobated mature</option><option>staghorn / hyperlobulated</option><option>pleomorphic mature</option><option>bulbous / cloud-like</option><option>hypolobated</option><option>dwarf hyposegmented</option><option>separated nuclear lobes</option><option>hyperchromatic irregular</option></select></div>
+      <div><label>Cytoplasm</label><select id="cyto"><option value="">Not specified</option><option>abundant granular platelet-like</option><option>hypogranular</option><option>basophilic immature</option><option>scant</option></select></div>
+    </div>
+    <div class="row4">
+      <div><label>Micromegakaryocytes</label><select id="micro"><option value="">Not specified</option><option value="no">Absent</option><option value="yes">Present</option></select></div>
+      <div><label>Separated nuclear lobes</label><select id="seplobes"><option value="">Not specified</option><option value="no">Absent</option><option value="yes">Present</option></select></div>
+      <div><label>Hyperchromatic atypia</label><select id="hyperchrom"><option value="">Not specified</option><option value="no">Absent</option><option value="yes">Present</option></select></div>
+      <div><label>Emperipolesis</label><select id="emper"><option value="">Not specified</option><option value="no">Absent/rare</option><option value="yes">Present/increased</option></select></div>
+    </div>
+    <div class="row3">
+      <div><label>Marrow cellularity</label><select id="cellularity"><option value="">Not specified</option><option>normocellular</option><option>hypercellular</option><option>hypocellular / fibrotic</option><option>panmyelosis</option></select></div>
+      <div><label>Granulocytic proliferation / increased M:E</label><select id="gran"><option value="">Not specified</option><option value="yes">Present</option><option value="no">Absent</option></select></div>
+      <div><label>Erythroid proliferation</label><select id="ery"><option value="">Not specified</option><option value="yes">Present</option><option value="no">Absent/decreased</option></select></div>
+    </div>
+    <div class="row3">
+      <div><label>Reticulin fibrosis</label><select id="fibrosis"><option value="0">MF-0 / none</option><option value="1">MF-1</option><option value="2">MF-2</option><option value="3">MF-3</option></select></div>
+      <div><label>Osteosclerosis</label><select id="osteo"><option value="">Not specified</option><option value="no">Absent</option><option value="yes">Present</option></select></div>
+      <div><label>Intrasinusoidal hematopoiesis / MKs</label><select id="intra"><option value="">Not specified</option><option value="no">Absent</option><option value="yes">Present</option></select></div>
+    </div>
+    <div class="row3">
+      <div><label>Vascularity</label><select id="vascular"><option value="">Not specified</option><option>normal</option><option>increased / tortuous</option></select></div>
+      <div><label>Thrombocytogenic forms</label><select id="thromboforms"><option value="">Not specified</option><option>appropriate</option><option>increased</option><option>decreased</option></select></div>
+      <div><label>Clinical trigger</label><select id="trigger"><option value="">Not specified</option><option>thrombocytopenia</option><option>thrombocytosis</option><option>erythrocytosis</option><option>leukocytosis</option><option>pancytopenia / cytopenia</option></select></div>
+    </div>
+    <div class="btnbar"><button onclick="classify()">Classify normal/abnormal and myeloid pattern</button><button class="secondary" onclick="resetForm()">Reset</button><button class="secondary" onclick="copyReport()">Copy report text</button></div>
+  </div>
 
-  <aside>
-    <div class="card">
-      <h2>Result</h2>
-      <div id="result" class="result"><div class="dx">Awaiting input</div><div class="score">Enter morphology and click classify.</div></div>
-      <div class="btnbar"><button class="secondary" onclick="copyReport()">Copy report text</button></div>
-    </div>
-    <div class="card">
-      <h2>Reference Morphology Cheat Sheet</h2>
-      <table>
-        <thead><tr><th>Pattern</th><th>Favours</th></tr></thead>
-        <tbody>
-          <tr><td>Large/giant mature megakaryocytes, staghorn hyperlobulated nuclei, loose clusters</td><td>ET</td></tr>
-          <tr><td>Bulbous/cloud-like or hypolobated atypical nuclei, dense syncytial clusters, increased M:E</td><td>Pre-fibrotic PMF</td></tr>
-          <tr><td>Hyperchromatic/hypolobated atypical megakaryocytes with MF-2/3, osteosclerosis, intrasinusoidal hematopoiesis</td><td>Overt fibrotic PMF / post-ET or post-PV MF</td></tr>
-          <tr><td>Pleomorphic mature megakaryocytes with panmyelosis</td><td>PV</td></tr>
-          <tr><td>Small dwarf hyposegmented megakaryocytes with granulocytic hyperplasia</td><td>CML</td></tr>
-          <tr><td>Small atypical hyperchromatic megakaryocytes, fewer/smaller clusters, advanced fibrosis obscuring subtype</td><td>MPN-U</td></tr>
-        </tbody>
-      </table>
-      <p class="ref">Use with CBC, clinical findings, marrow cellularity, fibrosis grade, BCR::ABL1, JAK2/CALR/MPL, cytogenetics, and NGS.</p>
-    </div>
-    <div class="card">
-      <h2>Generated Report Text</h2>
-      <div id="report" class="mono">Report text will appear here.</div>
-    </div>
-  </aside>
+  <div class="card">
+    <h2>3. Optional ITP subtype counter</h2>
+    <p class="sub">Optional supportive model only; not required for normal/abnormal/myeloid classification.</p>
+    <div class="row"><div><label>Sex</label><select id="sex"><option value="">Not used</option><option value="female">Female</option><option value="male">Male</option></select></div><div><label>Total megakaryocytes assessed</label><input id="itpTotal" type="number" value="50" min="1" /></div></div>
+    <div class="counter"><b>Naïve megakaryocytes</b><input id="naive" type="number" value="0" min="0" oninput="updateITP()"><button onclick="bump('naive',1)">+</button><button onclick="bump('naive',-1)">−</button></div>
+    <div class="counter"><b>Granular megakaryocytes</b><input id="granular" type="number" value="0" min="0" oninput="updateITP()"><button onclick="bump('granular',1)">+</button><button onclick="bump('granular',-1)">−</button></div>
+    <div class="counter"><b>Thrombocytogenic megakaryocytes</b><input id="thrombo" type="number" value="0" min="0" oninput="updateITP()"><button onclick="bump('thrombo',1)">+</button><button onclick="bump('thrombo',-1)">−</button></div>
+    <div class="counter"><b>Naked-nucleus megakaryocytes</b><input id="naked" type="number" value="0" min="0" oninput="updateITP()"><button onclick="bump('naked',1)">+</button><button onclick="bump('naked',-1)">−</button></div>
+    <div id="itpBox" class="result"></div>
+  </div>
+</section>
+
+<aside>
+  <div class="card"><h2>Classification Result</h2><div id="result" class="result"><div class="dx">Awaiting input</div><div class="score">Describe morphology, select structured features, then classify.</div></div></div>
+  <div class="card"><h2>Generated Report Text</h2><div id="report" class="mono">Report text will appear here.</div></div>
+  <div class="card"><h2>Decision Categories</h2>
+    <table><thead><tr><th>First decision</th><th>Second decision if abnormal</th></tr></thead><tbody>
+      <tr><td>Normal morphology</td><td>No specific myeloid disorder pattern identified</td></tr>
+      <tr><td>Reactive / compensatory change</td><td>Correlate with platelet count, bleeding, inflammation, infection, splenomegaly, ITP</td></tr>
+      <tr><td>Abnormal megakaryocytic dysplasia</td><td>MDS / MDS-MPN pattern</td></tr>
+      <tr><td>Abnormal MPN-like morphology</td><td>ET, pre-PMF, fibrotic PMF/post-MPN MF, PV, CML, MPN-U</td></tr>
+    </tbody></table>
+    <p class="ref">Final diagnosis requires CBC, smear, marrow cellularity, fibrosis grade, iron stain as relevant, BCR::ABL1, JAK2/CALR/MPL, cytogenetics, NGS and clinical context.</p>
+  </div>
+  <div class="card"><h2>Quick Pattern Cheat Sheet</h2>
+    <table><thead><tr><th>Pattern</th><th>Favours</th></tr></thead><tbody>
+      <tr><td>Normal number; mature multilobated forms; scattered singly; abundant granular cytoplasm; no atypia</td><td>Normal</td></tr>
+      <tr><td>Increased mature MKs without significant atypia; appropriate/increased thrombocytogenic forms; no tight clusters</td><td>Reactive thrombopoiesis / ITP-type response</td></tr>
+      <tr><td>Micromegakaryocytes; hypolobated forms; separated nuclear lobes; hypogranular cytoplasm</td><td>MDS-type dysplasia</td></tr>
+      <tr><td>Large/giant mature MKs; staghorn hyperlobulated nuclei; loose clusters</td><td>ET-like</td></tr>
+      <tr><td>Bulbous/cloud-like or hypolobated atypia; dense tight clusters; granulocytic hyperplasia; MF-0/1</td><td>Pre-PMF-like</td></tr>
+      <tr><td>Marked atypia with MF-2/3, osteosclerosis, intrasinusoidal hematopoiesis</td><td>Fibrotic PMF / post-MPN MF-like</td></tr>
+      <tr><td>Panmyelosis with pleomorphic mature MKs</td><td>PV-like</td></tr>
+      <tr><td>Small dwarf hyposegmented MKs with granulocytic hyperplasia</td><td>CML-like</td></tr>
+    </tbody></table>
+  </div>
+</aside>
 </div>
 </main>
 <script>
-function v(id){return document.getElementById(id).value}
-function add(scores,key,pts,why){scores[key]=(scores[key]||0)+pts; reasons[key].push(why)}
-let reasons={ET:[],prePMF:[],fibPMF:[],PV:[],CML:[],MPNU:[]};
+function el(id){return document.getElementById(id)}
+function v(id){return el(id).value}
+function setv(id,val){el(id).value=val}
+let reasons={};
+function resetReasons(){reasons={Normal:[],Reactive:[],MDS:[],ET:[],prePMF:[],fibPMF:[],PV:[],CML:[],MPNU:[]};}
+function add(scores,key,pts,why){scores[key]=(scores[key]||0)+pts; if(reasons[key]) reasons[key].push(why)}
+function has(text, arr){return arr.some(x=>text.includes(x))}
+function suggestFromText(){
+  const t=v('freeText').toLowerCase();
+  if(!t.trim()) return;
+  if(has(t,['normal in number','adequate in number','present in normal number'])) setv('mkcount','normal');
+  if(has(t,['increased megakaryocytes','megakaryocytes are increased','increased in number'])) setv('mkcount','increased');
+  if(has(t,['markedly increased'])) setv('mkcount','markedly increased');
+  if(has(t,['decreased megakaryocytes','decreased in number','reduced megakaryocytes'])) setv('mkcount','decreased');
+  if(has(t,['predominantly mature','mature forms predominate'])) setv('maturation','predominantly mature');
+  if(has(t,['full maturation','normal maturation spectrum'])) setv('maturation','full maturation spectrum');
+  if(has(t,['dysplastic','dysplasia'])) setv('maturation','dysplastic');
+  if(has(t,['scattered singly','singly distributed','scattered distribution'])) setv('distribution','scattered singly');
+  if(has(t,['loose clusters','loose grouping'])) setv('distribution','loose clusters');
+  if(has(t,['tight clusters','dense clusters','syncytial'])) setv('distribution','dense tight clusters');
+  if(has(t,['sheets'])) setv('distribution','sheets');
+  if(has(t,['large','giant'])) setv('size','large / giant mature');
+  if(has(t,['small dwarf','dwarf'])) setv('size','small / dwarf');
+  if(has(t,['micromegakaryocyte','micromegakaryocytes'])) {setv('size','micromegakaryocytes'); setv('micro','yes');}
+  if(has(t,['multilobated'])) setv('nuclei','multilobated mature');
+  if(has(t,['staghorn','hyperlobulated'])) setv('nuclei','staghorn / hyperlobulated');
+  if(has(t,['cloud-like','cloud like','bulbous'])) setv('nuclei','bulbous / cloud-like');
+  if(has(t,['hypolobated','hypolobation'])) setv('nuclei','hypolobated');
+  if(has(t,['separated nuclear lobes','widely separated lobes'])) {setv('nuclei','separated nuclear lobes'); setv('seplobes','yes');}
+  if(has(t,['hyperchromatic'])) {setv('nuclei','hyperchromatic irregular'); setv('hyperchrom','yes');}
+  if(has(t,['abundant granular','platelet-like cytoplasm','platelet like cytoplasm'])) setv('cyto','abundant granular platelet-like');
+  if(has(t,['hypogranular'])) setv('cyto','hypogranular');
+  if(has(t,['no micromegakaryocytes','without micromegakaryocytes'])) setv('micro','no');
+  if(has(t,['no separated nuclear lobes','without separated nuclear lobes'])) setv('seplobes','no');
+  if(has(t,['no hyperchromatic','without hyperchromatic'])) setv('hyperchrom','no');
+  if(has(t,['normocellular'])) setv('cellularity','normocellular');
+  if(has(t,['hypercellular'])) setv('cellularity','hypercellular');
+  if(has(t,['panmyelosis'])) setv('cellularity','panmyelosis');
+  if(has(t,['granulocytic hyperplasia','granulocytic proliferation','increased m:e'])) setv('gran','yes');
+  if(has(t,['erythroid proliferation','erythroid hyperplasia'])) setv('ery','yes');
+  if(has(t,['mf-1'])) setv('fibrosis','1'); if(has(t,['mf-2'])) setv('fibrosis','2'); if(has(t,['mf-3'])) setv('fibrosis','3');
+  classify();
+}
+function normalTemplate(){
+  el('freeText').value='Megakaryocytes are present in normal numbers and show appropriate maturation, with predominantly mature multilobated forms and abundant granular platelet-like cytoplasm. They are scattered singly without significant clustering. No micromegakaryocytes, hypolobated forms, separated nuclear lobes, hyperchromatic atypia or other overt dysplastic features are identified.';
+  setv('mkcount','normal'); setv('maturation','predominantly mature'); setv('distribution','scattered singly'); setv('size','normal size'); setv('nuclei','multilobated mature'); setv('cyto','abundant granular platelet-like'); setv('micro','no'); setv('seplobes','no'); setv('hyperchrom','no'); setv('cellularity','normocellular'); setv('fibrosis','0'); classify();
+}
+function clearDescription(){el('freeText').value=''}
 function classify(){
-  reasons={ET:[],prePMF:[],fibPMF:[],PV:[],CML:[],MPNU:[]};
-  const scores={ET:0,prePMF:0,fibPMF:0,PV:0,CML:0,MPNU:0};
-  const size=v('size'), nuclei=v('nuclei'), cluster=v('cluster'), cellularity=v('cellularity');
-  const gran=v('gran'), ery=v('ery'), fibrosis=parseInt(v('fibrosis')), osteo=v('osteo'), intra=v('intra'), vascular=v('vascular');
+  resetReasons();
+  const scores={Normal:0,Reactive:0,MDS:0,ET:0,prePMF:0,fibPMF:0,PV:0,CML:0,MPNU:0};
+  const mkcount=v('mkcount'), maturation=v('maturation'), distribution=v('distribution'), size=v('size'), nuclei=v('nuclei'), cyto=v('cyto');
+  const micro=v('micro'), seplobes=v('seplobes'), hyperchrom=v('hyperchrom'), emper=v('emper'), thromboforms=v('thromboforms'), trigger=v('trigger');
+  const cellularity=v('cellularity'), gran=v('gran'), ery=v('ery'), fibrosis=parseInt(v('fibrosis')), osteo=v('osteo'), intra=v('intra'), vascular=v('vascular');
 
-  if(size==='large/giant mature'){add(scores,'ET',2,'large/giant mature megakaryocytes');}
-  if(size==='variable'){add(scores,'prePMF',1,'variable megakaryocyte size');add(scores,'PV',1,'pleomorphic/variable size possible');}
-  if(size==='small/dwarf'){add(scores,'CML',3,'small dwarf megakaryocytes');}
-  if(size==='small atypical'){add(scores,'MPNU',2,'small atypical megakaryocytes');add(scores,'fibPMF',1,'small atypical forms may be seen in fibrotic PMF');}
+  // Normal/reactive/dysplastic gate
+  if(mkcount==='normal') add(scores,'Normal',2,'normal megakaryocyte number');
+  if(maturation==='predominantly mature') add(scores,'Normal',2,'predominantly mature forms');
+  if(maturation==='full maturation spectrum') add(scores,'Normal',2,'full maturation spectrum');
+  if(distribution==='scattered singly') add(scores,'Normal',2,'scattered single-cell distribution');
+  if(size==='normal size') add(scores,'Normal',1,'normal megakaryocyte size');
+  if(nuclei==='multilobated mature') add(scores,'Normal',3,'mature multilobated nuclei');
+  if(cyto==='abundant granular platelet-like') add(scores,'Normal',1,'abundant granular platelet-like cytoplasm');
+  if(micro==='no') add(scores,'Normal',1,'no micromegakaryocytes');
+  if(seplobes==='no') add(scores,'Normal',1,'no separated nuclear lobes');
+  if(hyperchrom==='no') add(scores,'Normal',1,'no hyperchromatic atypia');
+  if(cellularity==='normocellular') add(scores,'Normal',1,'normocellular marrow');
+  if(fibrosis===0) add(scores,'Normal',1,'no reticulin fibrosis');
 
-  if(nuclei==='staghorn / hyperlobulated'){add(scores,'ET',3,'staghorn/hyperlobulated nuclei');}
-  if(nuclei==='bulbous / cloud-like'){add(scores,'prePMF',3,'bulbous/cloud-like nuclei');add(scores,'fibPMF',1,'cloud-like atypia can persist in PMF');}
-  if(nuclei==='hypolobated'){add(scores,'prePMF',2,'hypolobated atypical nuclei');add(scores,'fibPMF',2,'hypolobated nuclei in fibrotic-stage disease');}
-  if(nuclei==='hyperchromatic irregular'){add(scores,'fibPMF',3,'hyperchromatic irregular nuclei');add(scores,'MPNU',2,'hyperchromatic atypical nuclei');}
-  if(nuclei==='pleomorphic mature'){add(scores,'PV',3,'pleomorphic mature megakaryocytes');}
-  if(nuclei==='dwarf hyposegmented'){add(scores,'CML',3,'dwarf hyposegmented nuclei');}
+  if((mkcount==='increased'||mkcount==='markedly increased') && (nuclei==='multilobated mature'||nuclei==='pleomorphic mature'||nuclei==='') && (distribution==='scattered singly'||distribution==='small loose groups'||distribution==='loose clusters')) add(scores,'Reactive',3,'increased mature megakaryocytes without specific atypical clustering');
+  if(trigger==='thrombocytopenia') add(scores,'Reactive',2,'thrombocytopenia trigger supports compensatory/ITP-type thrombopoiesis');
+  if(thromboforms==='increased') add(scores,'Reactive',2,'increased thrombocytogenic forms');
+  if(emper==='yes') {add(scores,'Reactive',1,'emperipolesis can be reactive or PMF-associated'); add(scores,'fibPMF',1,'emperipolesis may be increased in PMF');}
 
-  if(cluster==='loose clusters'){add(scores,'ET',2,'loose clusters');}
-  if(cluster==='dense tight syncytial clusters'){add(scores,'prePMF',3,'dense tight syncytial clusters');add(scores,'fibPMF',1,'persistent dense clusters can be seen in PMF');}
-  if(cluster==='sheets'){add(scores,'fibPMF',2,'large clusters/sheets in fibrotic PMF');}
-  if(cluster==='fewer/smaller clusters'){add(scores,'MPNU',2,'fewer and smaller clusters');}
-  if(cluster==='scattered/small clusters'){add(scores,'CML',1,'scattered/small megakaryocyte clusters');}
+  if(maturation==='dysplastic') add(scores,'MDS',3,'dysplastic megakaryocyte maturation');
+  if(size==='micromegakaryocytes'||micro==='yes') add(scores,'MDS',4,'micromegakaryocytes');
+  if(nuclei==='separated nuclear lobes'||seplobes==='yes') add(scores,'MDS',3,'separated nuclear lobes');
+  if(nuclei==='hypolobated') {add(scores,'MDS',2,'hypolobated megakaryocytes'); add(scores,'prePMF',1,'hypolobated atypia can support pre-PMF'); add(scores,'fibPMF',1,'hypolobated atypia can be seen in fibrotic PMF');}
+  if(cyto==='hypogranular') add(scores,'MDS',2,'hypogranular cytoplasm');
+  if(trigger==='pancytopenia / cytopenia') add(scores,'MDS',1,'cytopenia context supports MDS-type consideration');
 
-  if(cellularity==='normocellular'){add(scores,'ET',1,'normocellular marrow supports ET');}
-  if(cellularity==='hypercellular'){add(scores,'prePMF',1,'hypercellularity supports pre-PMF if granulocytic');add(scores,'CML',1,'hypercellularity supports CML if granulocytic');}
-  if(cellularity==='hypocellular/fibrotic'){add(scores,'fibPMF',2,'hypocellular/fibrotic marrow');add(scores,'MPNU',1,'advanced fibrotic marrow may be MPN-U');}
-  if(cellularity==='panmyelosis'){add(scores,'PV',3,'panmyelosis');}
-  if(gran==='yes'){add(scores,'prePMF',2,'granulocytic proliferation/increased M:E');add(scores,'CML',2,'granulocytic proliferation');}
-  if(gran==='no'){add(scores,'ET',1,'no significant granulocytic proliferation');}
-  if(ery==='yes'){add(scores,'PV',2,'erythroid proliferation');}
-  if(ery==='no'){add(scores,'prePMF',1,'decreased erythropoiesis supports pre-PMF');}
-  if(fibrosis>=2){add(scores,'fibPMF',3,'MF-2/3 fibrosis');add(scores,'MPNU',1,'advanced fibrosis may obscure subtype');}
-  if(fibrosis===1){add(scores,'prePMF',1,'minor MF-1 fibrosis can support pre-PMF');}
-  if(fibrosis===0){add(scores,'ET',1,'no fibrosis supports ET');}
-  if(osteo==='yes'){add(scores,'fibPMF',2,'osteosclerosis');}
-  if(intra==='yes'){add(scores,'fibPMF',2,'intrasinusoidal hematopoiesis/megakaryocytes');}
-  if(vascular==='increased/tortuous'){add(scores,'fibPMF',1,'increased/tortuous vascularity');add(scores,'MPNU',1,'increased vascularity described in some MPN-U/triple-negative cases');}
+  // Myeloid disorder patterns
+  if(size==='large / giant mature') {add(scores,'ET',2,'large/giant mature megakaryocytes');}
+  if(size==='variable') {add(scores,'prePMF',1,'variable megakaryocyte size'); add(scores,'PV',1,'variable mature forms can be seen in PV');}
+  if(size==='small / dwarf') add(scores,'CML',3,'small/dwarf megakaryocytes');
+  if(nuclei==='staghorn / hyperlobulated') add(scores,'ET',3,'staghorn/hyperlobulated nuclei');
+  if(nuclei==='bulbous / cloud-like') {add(scores,'prePMF',4,'bulbous/cloud-like nuclei'); add(scores,'fibPMF',1,'cloud-like atypia can persist in PMF');}
+  if(nuclei==='pleomorphic mature') add(scores,'PV',3,'pleomorphic mature megakaryocytes');
+  if(nuclei==='dwarf hyposegmented') add(scores,'CML',4,'dwarf hyposegmented nuclei');
+  if(nuclei==='hyperchromatic irregular'||hyperchrom==='yes') {add(scores,'fibPMF',3,'hyperchromatic irregular nuclei'); add(scores,'MPNU',2,'hyperchromatic atypia');}
+  if(distribution==='loose clusters') add(scores,'ET',2,'loose megakaryocyte clusters');
+  if(distribution==='dense tight clusters') {add(scores,'prePMF',3,'dense tight clusters'); add(scores,'fibPMF',2,'dense clusters in fibrotic-stage disease');}
+  if(distribution==='sheets') {add(scores,'fibPMF',2,'sheets/large aggregates'); add(scores,'MPNU',1,'sheets may indicate advanced atypical MPN pattern');}
+  if(cellularity==='hypercellular') {add(scores,'prePMF',1,'hypercellular marrow'); add(scores,'CML',1,'hypercellularity can support CML with granulocytic proliferation');}
+  if(cellularity==='panmyelosis') add(scores,'PV',4,'panmyelosis');
+  if(cellularity==='hypocellular / fibrotic') {add(scores,'fibPMF',2,'fibrotic marrow'); add(scores,'MPNU',1,'advanced fibrosis may obscure subtype');}
+  if(gran==='yes') {add(scores,'prePMF',2,'granulocytic proliferation / increased M:E'); add(scores,'CML',2,'granulocytic proliferation');}
+  if(gran==='no' && fibrosis===0) add(scores,'ET',1,'absence of granulocytic proliferation');
+  if(ery==='yes') add(scores,'PV',2,'erythroid proliferation');
+  if(ery==='no') add(scores,'prePMF',1,'decreased erythropoiesis');
+  if(fibrosis>=2) {add(scores,'fibPMF',4,'MF-2/3 fibrosis'); add(scores,'MPNU',1,'advanced fibrosis may obscure precise MPN subtype');}
+  if(fibrosis===1) add(scores,'prePMF',1,'MF-1 fibrosis supports pre-PMF if other features fit');
+  if(osteo==='yes') add(scores,'fibPMF',2,'osteosclerosis');
+  if(intra==='yes') add(scores,'fibPMF',2,'intrasinusoidal hematopoiesis/megakaryocytes');
+  if(vascular==='increased / tortuous') add(scores,'fibPMF',1,'increased/tortuous vascularity');
+  if(trigger==='erythrocytosis') add(scores,'PV',2,'erythrocytosis context');
+  if(trigger==='leukocytosis') add(scores,'CML',1,'leukocytosis context');
+  if(trigger==='thrombocytosis') {add(scores,'ET',1,'thrombocytosis context'); add(scores,'prePMF',1,'thrombocytosis may occur in pre-PMF');}
 
+  const labels={Normal:'Normal megakaryocyte morphology',Reactive:'Reactive / compensatory megakaryocytic change',MDS:'Abnormal: MDS-type megakaryocytic dysplasia',ET:'Abnormal: essential thrombocythemia-like megakaryocyte pattern',prePMF:'Abnormal: pre-fibrotic primary myelofibrosis-like pattern',fibPMF:'Abnormal: fibrotic-stage PMF / post-MPN myelofibrosis-like pattern',PV:'Abnormal: polycythemia vera-like megakaryocyte pattern',CML:'Abnormal: CML-like dwarf megakaryocyte pattern',MPNU:'Abnormal: MPN-unclassifiable / advanced atypical pattern'};
   const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);
   const top=sorted[0], second=sorted[1];
-  const labels={ET:'Essential thrombocythemia-like megakaryocyte pattern',prePMF:'Pre-fibrotic primary myelofibrosis-like megakaryocyte pattern',fibPMF:'Fibrotic-stage PMF / post-MPN myelofibrosis-like pattern',PV:'Polycythemia vera-like megakaryocyte pattern',CML:'CML-like dwarf megakaryocyte pattern',MPNU:'MPN-unclassifiable / advanced atypical pattern'};
-  let confidence='Low'; if(top[1]>=7 && top[1]-second[1]>=3) confidence='High'; else if(top[1]>=5) confidence='Moderate';
-  const reasonText=reasons[top[0]].map(x=>`<span class="pill">${x}</span>`).join('');
-  const cls=confidence==='High'?'good':confidence==='Moderate'?'warn':'';
-  document.getElementById('result').className='result '+cls;
-  document.getElementById('result').innerHTML=`<div class="dx">${labels[top[0]]}</div><div class="score">Confidence: ${confidence} | Scores: ${sorted.map(x=>x[0]+': '+x[1]).join(' · ')}</div><div style="margin-top:10px">${reasonText || '<span class="small">No strong morphology pattern selected.</span>'}</div>`;
-  const report=`MEGAKARYOCYTE MORPHOLOGY CLASSIFICATION\n\nPredicted pattern: ${labels[top[0]]}\nConfidence: ${confidence}\n\nKey supportive features:\n${reasons[top[0]].map(x=>'– '+x).join('\n') || '– No dominant feature selected.'}\n\nScore summary: ${sorted.map(x=>x[0]+': '+x[1]).join('; ')}\n\nInterpretive note: This tool supports morphology pattern recognition only. Final classification requires integration with CBC, clinical findings, marrow cellularity, fibrosis grade, BCR::ABL1 testing, JAK2/CALR/MPL status, cytogenetics, and/or NGS as clinically indicated.`;
-  document.getElementById('report').textContent=report;
+  let confidence='Low'; if(top[1]>=8 && top[1]-second[1]>=3) confidence='High'; else if(top[1]>=5) confidence='Moderate';
+  let gate='Indeterminate';
+  if(top[0]==='Normal') gate='Normal'; else if(top[0]==='Reactive') gate='Probably reactive / non-neoplastic'; else gate='Abnormal myeloid-pattern morphology';
+  const cls=top[0]==='Normal'?'good':top[0]==='Reactive'?'warn':'bad';
+  const reasonText=(reasons[top[0]]||[]).map(x=>`<span class="pill">${x}</span>`).join('');
+  el('result').className='result '+cls;
+  el('result').innerHTML=`<div class="dx">${labels[top[0]]}</div><div class="score">First decision: ${gate} | Confidence: ${confidence}</div><div class="score">Scores: ${sorted.map(x=>x[0]+': '+x[1]).join(' · ')}</div><div style="margin-top:10px">${reasonText || '<span class="small">No strong morphology pattern selected.</span>'}</div>`;
+  const abnormalLine=(top[0]==='Normal')?'No specific myeloid neoplasm-type megakaryocyte pattern is identified by the selected morphology.':(top[0]==='Reactive')?'Findings are more suggestive of reactive/compensatory thrombopoiesis than a specific myeloid neoplasm pattern by morphology alone.':'The abnormal megakaryocyte morphology most closely matches: '+labels[top[0]].replace('Abnormal: ','')+'.';
+  const report=`MEGAKARYOCYTE MORPHOLOGY ASSESSMENT\n\nFree-text description:\n${v('freeText').trim() || '[No free-text description entered.]'}\n\nClassification:\n${labels[top[0]]}\nFirst decision: ${gate}\nConfidence: ${confidence}\n\nInterpretation:\n${abnormalLine}\n\nKey supportive features:\n${(reasons[top[0]]||[]).map(x=>'– '+x).join('\n') || '– No dominant feature selected.'}\n\nScore summary:\n${sorted.map(x=>x[0]+': '+x[1]).join('; ')}\n\nSuggested report wording:\n${suggestedWording(top[0])}\n\nNote: This tool supports morphology pattern recognition only. Final classification requires integration with CBC, peripheral smear, marrow cellularity, fibrosis grade, iron stain as relevant, BCR::ABL1, JAK2/CALR/MPL, cytogenetics, NGS and clinical context.`;
+  el('report').textContent=report;
+}
+function suggestedWording(key){
+  const map={
+    Normal:'Megakaryocytes are present in normal numbers and show appropriate maturation with predominantly mature multilobated forms. No significant clustering, micromegakaryocytes, hypolobated forms, separated nuclear lobes, hyperchromatic atypia or overt dysplastic features are identified.',
+    Reactive:'Megakaryocytes are increased and show predominantly mature morphology without significant cytologic atypia or abnormal tight clustering. The findings favour reactive/compensatory thrombopoiesis in the appropriate clinical context.',
+    MDS:'Megakaryocytes show dysplastic features, including micromegakaryocytic and/or hypolobated forms and/or separated nuclear lobes. Correlation with other lineage dysplasia, cytopenias, cytogenetic and molecular findings is required for classification.',
+    ET:'Megakaryocytes are increased and include large to giant mature forms with hyperlobulated/staghorn nuclei, occurring predominantly singly and in loose clusters. The morphology is ET-like in the appropriate clinical and molecular context.',
+    prePMF:'Megakaryocytes show atypical bulbous/cloud-like or hypolobated nuclei with abnormal dense clustering, in a hypercellular marrow with granulocytic proliferation. The morphology is pre-fibrotic PMF-like in the appropriate clinical and molecular context.',
+    fibPMF:'Megakaryocytes are atypical with hyperchromatic irregular/hypolobated nuclei in a fibrotic marrow, with supportive features such as osteosclerosis and/or intrasinusoidal hematopoiesis when present. The morphology is fibrotic-stage PMF/post-MPN myelofibrosis-like.',
+    PV:'Megakaryocytes are pleomorphic mature forms in a marrow with panmyelosis/erythroid proliferation. The morphology is PV-like in the appropriate clinical and molecular context.',
+    CML:'Megakaryocytes are small/dwarf and hyposegmented in association with granulocytic proliferation. The morphology is CML-like; correlation with BCR::ABL1 testing is required.',
+    MPNU:'Megakaryocytes show atypical features that suggest an MPN-like process but are not specific for a defined subtype, particularly if advanced fibrosis or limited sampling obscures classification.'
+  };
+  return map[key]||'';
 }
 function updateITP(){
-  const total=Number(v('itpTotal'))||50, g=Number(v('granular'))||0, t=Number(v('thrombo'))||0, n=Number(v('naked'))||0, naive=Number(v('naive'))||0;
-  const counted=g+t+n+naive; const gRatio=counted?g/counted:0; const nRatio=counted?n/counted:0;
-  let score=0, bits=[]; if(v('sex')==='female'){score++;bits.push('female sex')}; if(t<=6){score++;bits.push('thrombocytogenic MK ≤6')}; if(gRatio>=0.70){score++;bits.push('granular/total MK ratio ≥70%')};
+  const g=Number(v('granular'))||0, t=Number(v('thrombo'))||0, n=Number(v('naked'))||0, naive=Number(v('naive'))||0; const counted=g+t+n+naive; const gRatio=counted?g/counted:0, nRatio=counted?n/counted:0;
+  let score=0,bits=[]; if(v('sex')==='female'){score++;bits.push('female sex')} if(t<=6){score++;bits.push('thrombocytogenic MK ≤6')} if(gRatio>=0.70){score++;bits.push('granular/total MK ratio ≥70%')}
   const pred=score>=2?'Predictive index ≥2: supports steroid-sensitive ITP in the study model':'Predictive index <2: does not support steroid-sensitive ITP in the study model';
-  document.getElementById('itpBox').innerHTML=`<b>${pred}</b><br><span class="small">Score ${score}/3. Counted ${counted}; granular ratio ${(gRatio*100).toFixed(1)}%; naked nucleus ratio ${(nRatio*100).toFixed(1)}%. ${bits.length?'Positive items: '+bits.join(', '):''}</span>`;
+  el('itpBox').innerHTML=`<b>${pred}</b><br><span class="small">Score ${score}/3. Counted ${counted}; granular ratio ${(gRatio*100).toFixed(1)}%; naked nucleus ratio ${(nRatio*100).toFixed(1)}%. ${bits.length?'Positive items: '+bits.join(', '):''}</span>`;
 }
-function bump(id,delta){const el=document.getElementById(id); el.value=Math.max(0,(Number(el.value)||0)+delta); updateITP()}
-function resetForm(){document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);document.getElementById('fibrosis').value='0';['naive','granular','thrombo','naked'].forEach(id=>document.getElementById(id).value=0);document.getElementById('itpTotal').value=50;document.getElementById('result').className='result';document.getElementById('result').innerHTML='<div class="dx">Awaiting input</div><div class="score">Enter morphology and click classify.</div>';document.getElementById('report').textContent='Report text will appear here.';updateITP()}
-function copyReport(){navigator.clipboard.writeText(document.getElementById('report').textContent)}
+function bump(id,delta){const x=el(id); x.value=Math.max(0,(Number(x.value)||0)+delta); updateITP()}
+function resetForm(){document.querySelectorAll('select').forEach(s=>s.selectedIndex=0); setv('fibrosis','0'); ['naive','granular','thrombo','naked'].forEach(id=>el(id).value=0); el('itpTotal').value=50; el('freeText').value=''; el('result').className='result'; el('result').innerHTML='<div class="dx">Awaiting input</div><div class="score">Describe morphology, select structured features, then classify.</div>'; el('report').textContent='Report text will appear here.'; updateITP()}
+function copyReport(){navigator.clipboard.writeText(el('report').textContent)}
 updateITP();
 </script>
 </body>
