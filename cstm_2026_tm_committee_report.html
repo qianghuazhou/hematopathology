@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSTM 2026 Report Back to Transfusion Medicine Committee</title>
+  <style>
+    :root {
+      --navy: #17365d;
+      --blue: #2f75b5;
+      --light-blue: #eaf3fb;
+      --teal: #0f766e;
+      --orange: #c55a11;
+      --red: #9e2a2b;
+      --gray-1: #f7f9fb;
+      --gray-2: #e6ebf1;
+      --gray-3: #687385;
+      --text: #1f2933;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Aptos, Calibri, Arial, sans-serif;
+      background: #eef2f6;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .page {
+      max-width: 1120px;
+      margin: 24px auto;
+      background: #fff;
+      box-shadow: 0 8px 30px rgba(31, 41, 51, 0.12);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--navy), #244f7f);
+      color: white;
+      padding: 34px 42px 28px;
+    }
+
+    header .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 13px;
+      opacity: 0.85;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 32px;
+      line-height: 1.15;
+      font-weight: 750;
+    }
+
+    .meta {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .pill {
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.12);
+      padding: 6px 11px;
+      border-radius: 999px;
+    }
+
+    .content { padding: 30px 42px 42px; }
+
+    .executive-summary {
+      border-left: 6px solid var(--blue);
+      background: var(--light-blue);
+      padding: 18px 22px;
+      border-radius: 10px;
+      margin-bottom: 26px;
+    }
+
+    .executive-summary h2, .section h2, .priority-board h2 {
+      margin-top: 0;
+      color: var(--navy);
+    }
+
+    .executive-summary p { margin: 8px 0 0; }
+
+    .priority-board {
+      margin: 26px 0 28px;
+      padding: 18px 20px;
+      border: 1px solid var(--gray-2);
+      border-radius: 12px;
+      background: var(--gray-1);
+    }
+
+    .priority-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .priority-card {
+      background: #fff;
+      border: 1px solid var(--gray-2);
+      border-radius: 10px;
+      padding: 14px 15px;
+      min-height: 140px;
+    }
+
+    .priority-card h3 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+
+    .priority-card ul { margin: 0; padding-left: 18px; }
+    .priority-card li { margin: 4px 0; }
+
+    .badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 4px 9px;
+      margin-bottom: 8px;
+      color: white;
+      background: var(--blue);
+    }
+
+    .badge.high { background: var(--red); }
+    .badge.medium { background: var(--orange); }
+    .badge.watch { background: var(--teal); }
+
+    .section {
+      border: 1px solid var(--gray-2);
+      border-radius: 12px;
+      margin: 18px 0;
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 16px 20px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--gray-2);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 21px;
+    }
+
+    .section-body {
+      padding: 18px 20px 20px;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 18px;
+    }
+
+    .box {
+      border-radius: 10px;
+      padding: 14px 16px;
+      background: #fff;
+      border: 1px solid var(--gray-2);
+    }
+
+    .box h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    ul { padding-left: 20px; margin: 8px 0 0; }
+    li { margin: 6px 0; }
+
+    .action {
+      background: #fff8ed;
+      border-color: #f2d3a7;
+    }
+
+    .action h3 { color: var(--orange); }
+
+    .metric-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .metric-table th, .metric-table td {
+      border: 1px solid var(--gray-2);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .metric-table th {
+      background: #f1f5f9;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .footer-note {
+      margin-top: 30px;
+      color: var(--gray-3);
+      font-size: 13px;
+      border-top: 1px solid var(--gray-2);
+      padding-top: 16px;
+    }
+
+    .print-button {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      background: var(--navy);
+      color: white;
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.22);
+    }
+
+    @media (max-width: 850px) {
+      .page { margin: 0; border-radius: 0; }
+      header, .content { padding-left: 22px; padding-right: 22px; }
+      .priority-grid, .section-body { grid-template-columns: 1fr; }
+      .section-header { grid-template-columns: 1fr; }
+      .print-button { display: none; }
+    }
+
+    @media print {
+      body { background: white; }
+      .page { box-shadow: none; margin: 0; border-radius: 0; max-width: none; }
+      header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section { break-inside: avoid; }
+      .print-button { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="kicker">CSTM 2026 Report Back</div>
+      <h1>Practical Implications for the Transfusion Medicine Committee</h1>
+      <div class="meta">
+        <span class="pill">Steven Zhou, Medical Director</span>
+        <span class="pill">Transfusion Medicine Committee</span>
+        <span class="pill">June 7, 2026</span>
+      </div>
+    </header>
+
+    <div class="content">
+      <section class="executive-summary">
+        <h2>Executive Summary</h2>
+        <p>The most actionable themes from CSTM 2026 were transfusion stewardship, objective documentation of transfusion medicine medical-director workload, competency documentation, data-driven guideline implementation, and prevention of red-cell alloimmunization. Several topics could be translated into local quality improvement projects or committee work within the next year.</p>
+      </section>
+
+      <section class="priority-board">
+        <h2>Suggested Local Priority Ranking</h2>
+        <div class="priority-grid">
+          <div class="priority-card">
+            <span class="badge high">High local impact</span>
+            <h3>Start or strengthen locally</h3>
+            <ul>
+              <li>Medical director workload documentation</li>
+              <li>Albumin and platelet utilization review</li>
+              <li>Competency documentation using eLearning</li>
+              <li>c/E/K matching discussion for females of child-bearing potential</li>
+            </ul>
+          </div>
+          <div class="priority-card">
+            <span class="badge medium">Targeted review</span>
+            <h3>Review current practice</h3>
+            <ul>
+              <li>FMH testing in Rh-negative pregnancies</li>
+              <li>Obstetrical low-value testing</li>
+              <li>IgG utilization and adjudication workflow</li>
+            </ul>
+          </div>
+          <div class="priority-card">
+            <span class="badge watch">Monitor evidence</span>
+            <h3>Watch for future change</h3>
+            <ul>
+              <li>Cold-stored platelets</li>
+              <li>SCD HSCT/gene therapy support</li>
+              <li>ALTER-AKI and albumin after AKI</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2>1. Medical Director Workload Documentation and Business Case Development</h2>
+          <span class="badge high">Immediate QI / resource planning</span>
+        </div>
+        <div class="section-body">
+          <div class="box">
+            <h3>Key message</h3>
+            <ul>
+              <li>A structured workload document can quantify transfusion medicine medical-director activities that are often invisible.</li>
+              <li>Track consultation, utilization review, policy work, QA, accreditation, education, committee work, incident review, and urgent blood-bank support.</li>
+              <li>Objective workload data can support business cases for protected medical-director time, administrative support, and laboratory resources.</li>
+            </ul>
+          </div>
+          <div class="box action">
+            <h3>Potential local action</h3>
+            <ul>
+              <li>Create a simple local workload tracker for 3–6 months.</li>
+              <li>Separate routine work from urgent/unplanned work.</li>
+              <li>Use data to support future discussion of protected medical-director time and service expansion.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2>2. Bloody Easy Lite eLearning for Competency Assessment</h2>
+          <span class="badge high">Regulatory / accreditation relevance</span>
+        </div>
+        <div class="section-body">
+          <div class="box">
+            <h3>Key message</h3>
+            <ul>
+              <li>Bloody Easy Lite can support standardized transfusion medicine education and competency assessment.</li>
+              <li>Electronic tracking may simplify documentation for audits and accreditation.</li>
+              <li>The tool can help identify staff knowledge gaps and guide ongoing education.</li>
+            </ul>
+          </div>
+          <div class="box action">
+            <h3>Potential local action</h3>
+            <ul>
+              <li>Compare current competency documentation with regulatory and accreditation expectations.</li>
+              <li>Consider pilot use for new staff, annual competency, or focused retraining after incidents.</li>
+              <li>Use completion reports as part of quality documentation.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2>3. Albumin and Platelet Guideline Implementation</h2>
+          <span class="badge high">Stewardship / informatics</span>
+        </div>
+        <div class="section-body">
+          <div class="box">
+            <h3>Key message</h3>
+            <ul>
+              <li>Guideline implementation requires more than education: it needs utilization monitoring, clinician engagement, feedback, and repeat audit.</li>
+              <li>Data dashboards and informatics can identify outlier ordering patterns and opportunities for stewardship.</li>
+              <li>Albumin and platelet use are practical targets for local transfusion stewardship.</li>
+            </ul>
+          </div>
+          <div class="box action">
+            <h3>Potential local action</h3>
+            <ul>
+              <li>Review albumin orders by indication, service, dose, and repeat use.</li>
+              <li>Review platelet transfusions for threshold, indication, bleeding status, and procedural use.</li>
+              <li>Develop a small dashboard for TM Committee review every 3–6 months.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2>4. c- and E-Matched RBCs for Women of Child-Bearing Potential</h2>
+          <span class="badge high">Alloimmunization prevention</span>
+        </div>
+        <div class="section-body">
+          <div class="box">
+            <h3>Key message</h3>
+            <ul>
+              <li>Anti-c and anti-E can cause hemolytic disease of the fetus and newborn.</li>
+              <li>A Mount Sinai Hospital pilot implemented Rh/K matching for females &lt;45 years and maintained c−E−K− inventory.</li>
+              <li>In the reported pilot, 494 patients and 760 crossmatch requests were evaluated; 83% underwent Rh/K phenotyping, 95.3% received matched units, and 4.7% received unmatched units because of time or inventory limitations.</li>
+              <li>Mean phenotyping turnaround time was reported as 15 minutes.</li>
+            </ul>
+          </div>
+          <div class="box action">
+            <h3>Potential local action</h3>
+            <ul>
+              <li>Estimate local transfusion volume for females of child-bearing potential.</li>
+              <li>Review local inventory feasibility for c−E−K− or phenotype-matched units.</li>
+              <li>Discuss whether a targeted policy is feasible for non-urgent transfusions.</li>
+              <li>Track exceptions: urgent release, phenotype unavailable, and inventory limitation.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2>5. IgG Utilization Management</h2>
+          <span class="badge medium">Demand growth / stewardship</span>
+        </div>
+        <div class="section-body">
+          <div class="box">
+            <h3>Key message</h3>
+            <ul>
+              <li>IgG demand continues to grow in Canada, especially for secondary immunodeficiency.</li>
+              <li>A national shortage-management framework and Ontario-wide IT system are being developed to support standardized adjudication and reporting.</li>
+              <li>Distribution modernization, SCIG pathways, and pharmacist integration may improve stewardship and reduce cost.</li>
+            </ul>
+          </div>
+          <div class="box action">
+            <h3>Potential local action</h3>
+            <ul>
+              <li>Review local IgG request, approval, and renewal workflow.</li>
+              <li>Identify high-volume indications and repeat users.</li>
+              <li>Align local process with provincial adjudication and reporting systems as they become available.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2>6. Transfusion Stewardship and Reducing Low-Value Obstetrical Testing</h2>
+          <span class="badge medium">Practice review</span>
+        </div>
+        <div class="section-body">
+          <div class="box">
+            <h3>Key message</h3>
+            <ul>
+              <li>Routine maternal group-and-screen testing at delivery may not be required in many pregnancies if appropriate antenatal testing is already completed.</li>
+              <li>Routine cord blood testing should be targeted to specific clinical indications rather than performed universally.</li>
+              <li>RhIG use in very early pregnancy loss is being re-evaluated, with movement toward more selective use.</li>
+              <li>Antenatal FMH testing appears to have limited value in uncomplicated Rh-negative pregnancies, particularly before 25 weeks.</li>
+            </ul>
+          </div>
+          <div class="box action">
+            <h3>Potential local action</h3>
+            <ul>
+              <li>Map current obstetrical testing patterns.</li>
+              <li>Review cord blood testing indications with obstetrics and laboratory leadership.</li>
+              <li>Assess whether local FMH testing practices match current evidence and provincial guidance.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2>7. Sickle Cell Disease: HSCT and Gene Therapy Support</h2>
+          <span class="badge watch">Specialized referral pathway</span>
+        </div>
+        <div class="section-body">
+          <div class="box">
+            <h3>Key message</h3>
+            <ul>
+              <li>Curative therapies for sickle cell disease create unique transfusion support challenges.</li>
+              <li>Extended antigen matching, prolonged transfusion support, and alloimmunization prevention are central issues.</li>
+              <li>Blood bank communication with transplant/gene therapy centres is essential.</li>
+            </ul>
+          </div>
+          <div class="box action">
+            <h3>Potential local action</h3>
+            <ul>
+              <li>Ensure patients referred for curative therapy have clear transfusion history and antibody documentation.</li>
+              <li>Confirm availability of extended phenotype/genotype information.</li>
+              <li>Coordinate early with referral centres if transfusion support is expected locally.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2>8. Cold-Stored Platelets in Cardiac Surgery</h2>
+          <span class="badge watch">Emerging evidence</span>
+        </div>
+        <div class="section-body">
+          <div class="box">
+            <h3>Key message</h3>
+            <ul>
+              <li>Cold-stored platelets may have improved hemostatic function for actively bleeding patients.</li>
+              <li>Canadian trials are evaluating efficacy, safety, and operational feasibility compared with room-temperature platelets.</li>
+              <li>This remains investigational and may affect future platelet inventory strategy.</li>
+            </ul>
+          </div>
+          <div class="box action">
+            <h3>Potential local action</h3>
+            <ul>
+              <li>Monitor trial results and future guideline recommendations.</li>
+              <li>Consider potential relevance to cardiac surgery, trauma, and massive hemorrhage protocols if evidence supports adoption.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="priority-board">
+        <h2>Possible TM Committee Deliverables for 2026–2027</h2>
+        <table class="metric-table">
+          <thead>
+            <tr>
+              <th>Deliverable</th>
+              <th>Suggested measure</th>
+              <th>Committee value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Medical-director workload tracker</td>
+              <td>Hours/month by activity category; number of urgent consultations; QA/accreditation tasks</td>
+              <td>Supports resource planning and business case development</td>
+            </tr>
+            <tr>
+              <td>Albumin utilization audit</td>
+              <td>Orders by indication, service, dose, repeat use, guideline concordance</td>
+              <td>Supports stewardship and cost containment</td>
+            </tr>
+            <tr>
+              <td>Platelet utilization audit</td>
+              <td>Pre-transfusion platelet count, bleeding/procedure indication, dose, repeat transfusion</td>
+              <td>Aligns local practice with updated guidelines</td>
+            </tr>
+            <tr>
+              <td>c/E/K matching feasibility review</td>
+              <td>Eligible female patients transfused, unit availability, unmatched exceptions</td>
+              <td>Prevents alloimmunization and future HDFN risk</td>
+            </tr>
+            <tr>
+              <td>Competency documentation review</td>
+              <td>Completion rate, knowledge gaps, retraining needs, audit readiness</td>
+              <td>Supports regulatory compliance and staff education</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="footer-note">
+        Prepared as a practical report-back summary from selected CSTM 2026 sessions relevant to transfusion medicine service planning, quality improvement, stewardship, and accreditation readiness.
+      </div>
+    </div>
+  </main>
+
+  <button class="print-button" onclick="window.print()">Print / Save PDF</button>
+</body>
+</html>
