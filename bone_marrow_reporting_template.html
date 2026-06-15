@@ -197,8 +197,21 @@
       <div class="row"><label>Additional IHC</label><textarea id="ihcExtra" style="min-height:70px"></textarea></div>
       <div class="sectionTitle">Reticulin / Trichrome</div>
       <div class="grid2">
-        <div><label>Reticulin</label><select id="retic"><option></option><option>Reticulin: no significant reticulin fibrosis (MF-0 of 3).</option><option>Reticulin: patchy increases in reticulin fibers (MF-0 to 1 of 3).</option><option>Reticulin: mildly increased (MF-1 of 3).</option><option>Reticulin: moderately increased (MF-2 of 3).</option><option>Reticulin: markedly increased (MF-3 of 3).</option></select></div>
-        <div><label>Trichrome</label><select id="retic"><option></option><option>Trichrome: perivascular collagen only.</option><option>Trichrome: focal collagen deposition</option><option>Trichrome: paratrebecular/central collagen deposition.</option><option>Trichrome: diffuse collagen >30%.</option></select></div>
+        <div><label>Reticulin</label><select id="retic">
+          <option></option>
+          <option>A reticulin stain performed on the bone marrow core biopsy shows scattered linear reticulin fibers without significant intersections (MF-0 of 3).</option>
+          <option>A reticulin stain performed on the bone marrow core biopsy shows a loose network of reticulin fibers with numerous intersections, particularly in perivascular areas (MF-1 of 3).</option>
+          <option>A reticulin stain performed on the bone marrow core biopsy shows diffuse and dense increase in reticulin fibers with extensive intersections and focal bundles of thick fibers (MF-2 of 3).</option>
+          <option>A reticulin stain performed on the bone marrow core biopsy shows diffuse and dense increase in reticulin fibers with extensive intersections and coarse bundles of thick fibers (MF-3 of 3).</option>
+        </select></div>
+        <div><label>Trichrome</label><select id="trichrome">
+          <option></option>
+          <option>Not performed.</option>
+          <option>A trichrome stain shows perivascular collagen only.</option>
+          <option>A trichrome stain shows focal paratrabecular or central collagen deposition without a connecting meshwork.</option>
+          <option>A trichrome stain shows paratrabecular and/or central collagen deposition with focal connecting meshwork.</option>
+          <option>A trichrome stain shows diffuse connecting meshwork of collagen involving more than 30% of marrow spaces.</option>
+        </select></div>
       </div>
       <div class="sectionTitle">Flow / Cytogenetics / Molecular</div>
       <div class="row"><label>Flow cytometry</label><textarea id="flow" placeholder="See separate report. / Not performed."></textarea></div>
@@ -467,8 +480,8 @@ function loadNormal(){
   set('ihcKappaLambda','shows no definite light chain restriction');
   set('ihcCd3','stains scattered small T cells');
   set('ihcCd20','labels scattered small B cells');
-  set('retic','A reticulin stain performed on the bone marrow core biopsy shows no significant reticulin fibrosis (MF-0 of 3).');
-  set('trichrome','No significant collagen fibrosis is identified.');
+  set('retic','A reticulin stain performed on the bone marrow core biopsy shows scattered linear reticulin fibers without significant intersections (MF-0 of 3).');
+  set('trichrome','');
   generateReport();
 }
 function loadMdsSuspicious(){
@@ -477,7 +490,7 @@ function loadMdsSuspicious(){
   set('dx2','Findings are suspicious for a myelodysplastic neoplasm.');
   set('commentType','mDS');
   set('aspQuality','contain adequate cellular marrow particles'); set('aspCell','hypercellular with decreased fat spaces'); set('aspEryNum','proportionately increased'); set('aspEryMat','show full-spectrum maturation'); set('aspEryMorph','with dysplastic features'); set('aspMyeNum','proportionately normal in number'); set('aspMyeMat','show full-spectrum maturation'); set('aspMyeMorph','with dysplastic features'); set('aspBlasts','are not increased (<5%)'); set('aspMkNum','proportionately increased'); set('aspMkMorph','include frequent smaller and/or hypolobated forms and forms with separated nuclear lobes'); set('ironStore','increased'); set('ringSid','not increased');
-  set('bxQuality','adequate for evaluation'); set('bxCellPhrase','hypercellular for age'); set('bxArch','preserved'); set('bxEryNum','increased'); set('bxEryMat','show full-spectrum maturation'); set('bxEryMorph','with dysplastic features'); set('bxMyeNum','normal in number'); set('bxMyeMat','show full-spectrum maturation'); set('bxMkNum','increased'); set('bxMkMorph','vary in size, with a subset of smaller forms'); set('bxBlasts','not increased'); set('retic','A reticulin stain performed on the bone marrow core biopsy shows patchy increases in reticulin fibers with increased intersections (MF-0 to 1 of 3).');
+  set('bxQuality','adequate for evaluation'); set('bxCellPhrase','hypercellular for age'); set('bxArch','preserved'); set('bxEryNum','increased'); set('bxEryMat','show full-spectrum maturation'); set('bxEryMorph','with dysplastic features'); set('bxMyeNum','normal in number'); set('bxMyeMat','show full-spectrum maturation'); set('bxMkNum','increased'); set('bxMkMorph','vary in size, with a subset of smaller forms'); set('bxBlasts','not increased'); set('retic','A reticulin stain performed on the bone marrow core biopsy shows a loose network of reticulin fibers with numerous intersections, particularly in perivascular areas (MF-1 of 3).');
   generateReport();
 }
 
@@ -503,7 +516,7 @@ function applyNormalBiopsy(cell='40%'){
   set('bxMyeNum','normal in number'); set('bxMyeMat','show proper/full-spectrum maturation'); set('bxMyeMorph','with unremarkable morphology');
   set('bxMe','approximately 3:1'); set('bxBlasts','not increased (<1%)'); set('bxLymph','Scattered small lymphocytes, no lymphoid aggregates identified.');
   set('bxPlasma','present in normal numbers'); set('trabBone','unremarkable'); set('clot','shows features similar to the core biopsy');
-  set('retic','Reticulin fibers are not increased (MF grade 0 of 3).');
+  set('retic','A reticulin stain performed on the bone marrow core biopsy shows scattered linear reticulin fibers without significant intersections (MF-0 of 3).');
 }
 function applyBasicIhc(){
   set('ihcCd34','highlights blasts (<5%)'); set('ihcCd117','highlights early myeloid/erythroid precursors and mast cells within normal limits');
@@ -516,7 +529,7 @@ function loadAnemiaNegativeMDS(){
   set('customComment','The overall findings are of a moderately hypercellular bone marrow with mildly erythroid-predominant maturing hematopoiesis. There is no evidence of a myeloid or lymphoid neoplasm in this biopsy. In the absence of significant dysplasia or MDS-defining cytogenetics, other causes of anemia such as nutritional deficiencies, drugs/medications, chronic inflammatory states, infection, liver disease and renal disease should be excluded. Clinical correlation is advised.');
   set('rbcMorph','normocytic anemia with no significant anisopoikilocytosis'); set('pltNum','increased');
   set('aspEryNum','mildly relatively increased'); set('aspMyeNum','mildly relatively decreased'); set('bxCellPhrase','hypercellular for age'); set('bxEryNum','mildly relatively increased'); set('bxMyeNum','mildly relatively decreased');
-  set('retic','Reticulin is mildly diffusely increased.'); generateReport();
+  set('retic','A reticulin stain performed on the bone marrow core biopsy shows a loose network of reticulin fibers with numerous intersections, particularly in perivascular areas (MF-1 of 3).'); generateReport();
 }
 function loadCytopeniaReactiveAggregates(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('XX%'); applyBasicIhc();
@@ -539,7 +552,7 @@ function loadPositiveLymphomaStaging(){
   set('customComment','Morphologic and immunophenotypic evaluation of the bone marrow shows diffuse/focal involvement by the patient’s recently diagnosed ___. There is no evidence of a large cell component in this specimen. Correlation with clinical findings is advised.');
   set('bxCellPhrase','hypercellular for age'); set('bxMkNum','decreased'); set('bxEryNum','decreased'); set('bxMyeNum','decreased');
   set('bxLymph','Lymphoid cells are markedly increased in a diffuse/focal/interstitial pattern, compatible with marrow involvement by ___.');
-  set('retic','Reticulin is increased in association with the lymphoid infiltrate/aggregates.');
+  set('retic','Reticulin fibrosis is increased in association with the lymphoid infiltrate/aggregates.');
   set('ihcExtra','Additional lymphoma markers: CD5 ___. CD10 ___. BCL2 ___. BCL6 ___. Cyclin D1 ___. SOX11 ___. LEF1 ___. Ki-67 ___.'); generateReport();
 }
 function loadMdsLowGrade(){
@@ -547,7 +560,7 @@ function loadMdsLowGrade(){
   set('dx1','Hypercellular bone marrow with erythroid and megakaryocytic dysplasia.'); set('pbdx','Mildly macrocytic anemia.'); set('commentType','mDS');
   set('customComment','The overall findings are concerning for a diagnosis of myelodysplastic syndrome with multilineage dysplasia (MDS-MLD). Clinical correlation is required.');
   set('rbcSize','macrocytic'); set('rbcMorph','mild anisopoikilocytosis'); set('aspMkMorph','include occasional small hypolobated forms'); set('aspEryNum','moderately relatively increased'); set('aspEryMorph','with dysplastic forms having nuclear budding, irregular nuclear membranes, binucleate forms, and megaloblastoid changes'); set('aspMyeNum','moderately relatively decreased'); set('aspMyeMat','show left-shifted maturation');
-  set('bxCellPhrase','hypercellular for age'); set('bxMkNum','moderately increased'); set('bxMkMorph','variable, including small hypolobated forms'); set('bxEryNum','mildly relatively increased'); set('bxEryMat','show left-shifted maturation'); set('bxMyeNum','mildly relatively decreased'); set('bxMyeMat','show left-shifted maturation'); set('retic','Reticulin is mildly focally increased (MF grade 1).'); set('ihcCd61',''); set('ihcExtra','CD61 highlights variable megakaryocytes.'); generateReport();
+  set('bxCellPhrase','hypercellular for age'); set('bxMkNum','moderately increased'); set('bxMkMorph','variable, including small hypolobated forms'); set('bxEryNum','mildly relatively increased'); set('bxEryMat','show left-shifted maturation'); set('bxMyeNum','mildly relatively decreased'); set('bxMyeMat','show left-shifted maturation'); set('retic','A reticulin stain performed on the bone marrow core biopsy shows a loose network of reticulin fibers with numerous intersections, particularly in perivascular areas (MF-1 of 3).'); set('ihcCd61',''); set('ihcExtra','CD61 highlights variable megakaryocytes.'); generateReport();
 }
 function loadMdsEb(){
   clearAll(); loadMdsLowGrade();
@@ -566,20 +579,20 @@ function loadCml(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('90%'); applyBasicIhc();
   set('dx1','Chronic myeloid leukemia, BCR::ABL1-positive, chronic phase.'); set('dx2','No significant fibrosis (MF-0 of 3). No increase in blasts.'); set('pbdx','Leukocytosis with maturing myeloid cells and basophilia.');
   set('customComment','The overall morphologic and molecular findings are consistent with CML, chronic phase. Blasts are not increased. Correlation with clinical findings is advised.');
-  set('neutDesc','increased'); set('neutMorph','show a full spectrum of maturing myeloid cells with basophilia'); set('aspCell','hypercellular with decreased fat spaces'); set('aspMkNum','moderately increased'); set('aspMkMorph','include frequent small hypolobated forms'); set('aspEryNum','markedly proportionately decreased'); set('aspMyeNum','markedly proportionately increased'); set('aspMyeMat','show full-spectrum maturation'); set('bxCellPhrase','markedly hypercellular for age'); set('bxMkNum','moderately increased'); set('bxMkMorph','include frequent small hypolobated forms'); set('bxEryNum','markedly proportionately decreased'); set('bxMyeNum','markedly proportionately increased'); set('bxBlasts','not increased (<1%)'); set('retic','Reticulin is not increased (MF grade 0 of 3).'); generateReport();
+  set('neutDesc','increased'); set('neutMorph','show a full spectrum of maturing myeloid cells with basophilia'); set('aspCell','hypercellular with decreased fat spaces'); set('aspMkNum','moderately increased'); set('aspMkMorph','include frequent small hypolobated forms'); set('aspEryNum','markedly proportionately decreased'); set('aspMyeNum','markedly proportionately increased'); set('aspMyeMat','show full-spectrum maturation'); set('bxCellPhrase','markedly hypercellular for age'); set('bxMkNum','moderately increased'); set('bxMkMorph','include frequent small hypolobated forms'); set('bxEryNum','markedly proportionately decreased'); set('bxMyeNum','markedly proportionately increased'); set('bxBlasts','not increased (<1%)'); set('retic','A reticulin stain performed on the bone marrow core biopsy shows scattered linear reticulin fibers without significant intersections (MF-0 of 3).'); generateReport();
 }
 function loadCmml(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('XX%'); applyBasicIhc();
   set('dx1','Hypercellular bone marrow with dysplastic hematopoiesis, most notably in the granulocytic lineage. Consistent with chronic myelomonocytic leukemia (CMML).'); set('dx2','Blasts are not increased.'); set('pbdx','Neutrophilia and monocytosis with dysplastic features.');
   set('customComment','The findings of hypercellular bone marrow with leukocytosis and monocytosis in the peripheral blood, together with dysplasia, are consistent with chronic myelomonocytic leukemia without increased blasts. Correlation with clinical, cytogenetic, molecular diagnostic and other laboratory findings is advised.');
-  set('monoDesc','increased'); set('neutDesc','increased'); set('neutMorph','show dysplastic features including hypolobulation and hypogranulation'); set('aspMkMorph','include occasional small dysplastic forms with hypolobated nuclei'); set('aspEryNum','moderately relatively decreased'); set('aspEryMorph','with dysplastic forms showing irregular nuclear contours and nuclear budding'); set('aspMyeNum','moderately relatively increased'); set('aspMyeMat','show left-shifted maturation'); set('aspMyeMorph','with frequent hypogranular forms and occasional pseudo-Pelger-Huet forms'); set('bxCellPhrase','hypercellular for age'); set('bxMkNum','mildly decreased'); set('bxMkMorph','include occasional small dysplastic forms with hypolobated nuclei'); set('bxEryNum','moderately relatively decreased'); set('bxMyeNum','moderately relatively increased'); set('bxMyeMat','show left-shifted maturation'); set('retic','Reticulin is not increased.'); generateReport();
+  set('monoDesc','increased'); set('neutDesc','increased'); set('neutMorph','show dysplastic features including hypolobulation and hypogranulation'); set('aspMkMorph','include occasional small dysplastic forms with hypolobated nuclei'); set('aspEryNum','moderately relatively decreased'); set('aspEryMorph','with dysplastic forms showing irregular nuclear contours and nuclear budding'); set('aspMyeNum','moderately relatively increased'); set('aspMyeMat','show left-shifted maturation'); set('aspMyeMorph','with frequent hypogranular forms and occasional pseudo-Pelger-Huet forms'); set('bxCellPhrase','hypercellular for age'); set('bxMkNum','mildly decreased'); set('bxMkMorph','include occasional small dysplastic forms with hypolobated nuclei'); set('bxEryNum','moderately relatively decreased'); set('bxMyeNum','moderately relatively increased'); set('bxMyeMat','show left-shifted maturation'); set('retic','A reticulin stain performed on the bone marrow core biopsy shows scattered linear reticulin fibers without significant intersections (MF-0 of 3).'); generateReport();
 }
 function loadMyelofibrosis(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('>90%'); applyBasicIhc();
   set('dx1','Hypercellular bone marrow with MF grade 3 of 3 reticulin fibrosis, grade 1 of 3 collagen fibrosis and no increase in blasts.'); set('dx2','Consistent with persistent involvement by the patient’s known JAK2-positive primary myelofibrosis.'); set('pbdx','Macrocytic anemia with nucleated red blood cells and thrombocytopenia.');
   set('customComment','The overall findings are in keeping with the patient’s known JAK2-positive myeloid neoplasm, previously classified as primary myelofibrosis. Evaluating atypical megakaryocytes in this biopsy is difficult due to background fibrosis; however, blasts are not increased. Clinical correlation is advised.');
   set('aspQuality','are paucicellular and hemodilute'); set('aspCell','hypocellular with increased adipocytes'); set('aspMkNum','rare'); set('aspEryNum','scattered'); set('aspMyeNum','predominantly mature forms with rare maturing myeloid cells'); set('aspBlasts','are not increased'); set('meRatio','N/A'); set('aspPlasma','not seen'); set('aspMast','not seen'); set('ironStore','cannot be assessed due to aspicular/hemodilute aspirate'); set('ringSid','not seen');
-  set('bxQuality','adequate; architectural distortion is present due to background fibrosis'); set('bxCellPhrase','markedly hypercellular for age'); set('bxMkMorph','show atypical forms, assessment limited by background fibrosis'); set('bxBlasts','not increased (<5%)'); set('retic','Reticulin stain shows marked reticulin fibrosis (MF grade 3 of 3).'); set('trichrome','Trichrome stain shows grade 1 of 3 collagen fibrosis.'); set('ihcCd34','highlights blasts (<5% of cells)'); set('ihcExtra','CD61 highlights megakaryocytes.'); generateReport();
+  set('bxQuality','adequate; architectural distortion is present due to background fibrosis'); set('bxCellPhrase','markedly hypercellular for age'); set('bxMkMorph','show atypical forms, assessment limited by background fibrosis'); set('bxBlasts','not increased (<5%)'); set('retic','A reticulin stain performed on the bone marrow core biopsy shows diffuse and dense increase in reticulin fibers with extensive intersections and coarse bundles of thick fibers (MF-3 of 3).'); set('trichrome','A trichrome stain shows focal paratrabecular or central collagen deposition without a connecting meshwork.'); set('ihcCd34','highlights blasts (<5% of cells)'); set('ihcExtra','CD61 highlights megakaryocytes.'); generateReport();
 }
 
 window.addEventListener('load', generateReport);
