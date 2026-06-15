@@ -542,14 +542,14 @@ function loadCytopeniaReactiveAggregates(){
 }
 function loadNegativeLymphomaStaging(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('XX%'); applyBasicIhc();
-  set('dx1','Hyper/hypo/normocellular bone marrow with maturing trilineage hematopoiesis, no evidence of involvement by lymphoma.');
+  set('dx1','Normocellular bone marrow with maturing trilineage hematopoiesis and no increase in blasts.');
   set('pbdx','No significant morphologic abnormality.'); set('commentType','posttx');
-  set('customComment','Morphologic and immunophenotypic evaluation of this bone marrow is shows no evidence of involvement by the patient’s lymphoma. Clinical correlation is advised.');
+  set('dx2','No evidence of involvement by lymphoma.'); set('customComment','Morphologic and immunophenotypic evaluation of this bone marrow shows no evidence of involvement by the patient’s lymphoma. Clinical correlation is advised.');
   set('ihcCd3','highlights frequent/scattered T cells'); set('ihcCd20','highlights rare/scattered small B cells'); generateReport();
 }
 function loadPositiveLymphomaStaging(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('XX%'); applyBasicIhc();
-  set('dx1','Hypercellular bone marrow with diffuse/focal (approximately XX%) involvement by ___.'); set('pbdx','Normocytic anemia with mild thrombocytopenia and increased monocytes.'); set('commentType','lymphoma');
+  set('dx1','Bone marrow involved by ___ (approximately XX% of marrow cellularity).'); set('pbdx','Normocytic anemia with mild thrombocytopenia and increased monocytes.'); set('commentType','lymphoma');
   set('customComment','Morphologic and immunophenotypic evaluation of the bone marrow shows diffuse/focal involvement by the patient’s recently diagnosed ___. There is no evidence of a large cell component in this specimen. Correlation with clinical findings is advised.');
   set('bxCellPhrase','hypercellular for age'); set('bxMkNum','decreased'); set('bxEryNum','decreased'); set('bxMyeNum','decreased');
   set('bxLymph','Lymphoid cells are markedly increased in a diffuse/focal/interstitial pattern, compatible with marrow involvement by ___.');
@@ -558,39 +558,39 @@ function loadPositiveLymphomaStaging(){
 }
 function loadMdsLowGrade(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('70%'); applyBasicIhc();
-  set('dx1','Hypercellular bone marrow with erythroid and megakaryocytic dysplasia.'); set('pbdx','Mildly macrocytic anemia.'); set('commentType','mDS');
+  set('dx1','Hypercellular bone marrow with erythroid and megakaryocytic dysplasia, no increase in blasts.'); set('pbdx','Mildly macrocytic anemia.'); set('commentType','mDS');
   set('customComment','The overall findings are concerning for a diagnosis of myelodysplastic syndrome with multilineage dysplasia (MDS-MLD). Clinical correlation is required.');
   set('rbcSize','macrocytic'); set('rbcMorph','mild anisopoikilocytosis'); set('aspMkMorph','include occasional small hypolobated forms'); set('aspEryNum','moderately relatively increased'); set('aspEryMorph','with dysplastic forms having nuclear budding, irregular nuclear membranes, binucleate forms, and megaloblastoid changes'); set('aspMyeNum','moderately relatively decreased'); set('aspMyeMat','show left-shifted maturation');
   set('bxCellPhrase','hypercellular for age'); set('bxMkNum','moderately increased'); set('bxMkMorph','variable, including small hypolobated forms'); set('bxEryNum','mildly relatively increased'); set('bxEryMat','show left-shifted maturation'); set('bxMyeNum','mildly relatively decreased'); set('bxMyeMat','show left-shifted maturation'); set('retic','A reticulin stain performed on the bone marrow core biopsy shows a loose network of reticulin fibers with numerous intersections, particularly in perivascular areas (MF-1 of 3).'); set('ihcCd61',''); set('ihcExtra','CD61 highlights variable megakaryocytes.'); generateReport();
 }
 function loadMdsEb(){
   clearAll(); loadMdsLowGrade();
-  set('dx1','Moderately hypercellular bone marrow with trilineage dysplasia and 5-9% blasts overall.'); set('pbdx','Myeloid dysplasia with leukoerythroblastosis.');
+  set('dx1','Moderately hypercellular bone marrow with trilineage dysplasia and increased blasts (5-9%).'); set('pbdx','Myeloid dysplasia with leukoerythroblastosis.');
   set('customComment','The overall findings are consistent with MDS-EB1. If there is a prior history of chemotherapy/radiation, the findings would support therapy-related MDS-EB1. Due to suboptimal/aspicular aspirate quality, the blast percentage may be estimated based on flow cytometry and CD34 immunostain and may underrepresent the true blast count. Correlation with clinical and other laboratory findings is advised.');
   set('aspBlasts','are increased/estimated at ___%'); set('bxBlasts','increased, 5-9% by CD34 immunostain'); set('ihcCd34','and CD117 highlight increased blasts (5-9%)'); generateReport();
 }
 function loadAml(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('XX%'); applyBasicIhc();
-  set('dx1','Hyper/hypo/normocellular bone marrow with XX% blasts. Consistent with acute myeloid leukemia.'); set('pbdx','See peripheral blood smear description.'); set('commentType','mDS');
+  set('dx1','Bone marrow involved by acute myeloid leukemia with XX% blasts.'); set('pbdx','See peripheral blood smear description.'); set('commentType','mDS');
   set('customComment','Correlation with clinical, cytogenetic, molecular diagnostic and laboratory findings is advised. AML genetic risk classification should be finalized after integration of cytogenetic and molecular results.');
   set('aspMyeNum','decreased maturing myeloid cells'); set('aspBlasts','are increased, approximately XX%'); set('bxMyeNum','decreased'); set('bxBlasts','increased, approximately XX% by CD34 immunostain');
   set('ihcCd34','and CD117 highlight the increased blasts'); set('ihcExtra','CD61 highlights megakaryocytes. CD3 and CD20 highlight scattered T cells and fewer B cells, respectively.'); generateReport();
 }
 function loadCml(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('90%'); applyBasicIhc();
-  set('dx1','Chronic myeloid leukemia, BCR::ABL1-positive, chronic phase.'); set('dx2','No significant fibrosis (MF-0 of 3). No increase in blasts.'); set('pbdx','Leukocytosis with maturing myeloid cells and basophilia.');
+  set('dx1','Chronic myeloid leukemia, BCR::ABL1-positive, chronic phase.'); set('dx2','No increase in blasts.'); set('pbdx','Leukocytosis with maturing myeloid cells and basophilia.');
   set('customComment','The overall morphologic and molecular findings are consistent with CML, chronic phase. Blasts are not increased. Correlation with clinical findings is advised.');
   set('neutDesc','increased'); set('neutMorph','show a full spectrum of maturing myeloid cells with basophilia'); set('aspCell','hypercellular with decreased fat spaces'); set('aspMkNum','moderately increased'); set('aspMkMorph','include frequent small hypolobated forms'); set('aspEryNum','markedly proportionately decreased'); set('aspMyeNum','markedly proportionately increased'); set('aspMyeMat','show full-spectrum maturation'); set('bxCellPhrase','markedly hypercellular for age'); set('bxMkNum','moderately increased'); set('bxMkMorph','include frequent small hypolobated forms'); set('bxEryNum','markedly proportionately decreased'); set('bxMyeNum','markedly proportionately increased'); set('bxBlasts','not increased (<1%)'); set('retic','A reticulin stain performed on the bone marrow core biopsy shows scattered linear reticulin fibers without significant intersections (MF-0 of 3).'); generateReport();
 }
 function loadCmml(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('XX%'); applyBasicIhc();
-  set('dx1','Hypercellular bone marrow with dysplastic hematopoiesis, most notably in the granulocytic lineage. Consistent with chronic myelomonocytic leukemia (CMML).'); set('dx2','Blasts are not increased.'); set('pbdx','Neutrophilia and monocytosis with dysplastic features.');
+  set('dx1','Hypercellular bone marrow with dysplastic hematopoiesis and absolute peripheral blood monocytosis.'); set('dx2','Consistent with chronic myelomonocytic leukemia.'); set('pbdx','Neutrophilia and monocytosis with dysplastic features.');
   set('customComment','The findings of hypercellular bone marrow with leukocytosis and monocytosis in the peripheral blood, together with dysplasia, are consistent with chronic myelomonocytic leukemia without increased blasts. Correlation with clinical, cytogenetic, molecular diagnostic and other laboratory findings is advised.');
   set('monoDesc','increased'); set('neutDesc','increased'); set('neutMorph','show dysplastic features including hypolobulation and hypogranulation'); set('aspMkMorph','include occasional small dysplastic forms with hypolobated nuclei'); set('aspEryNum','moderately relatively decreased'); set('aspEryMorph','with dysplastic forms showing irregular nuclear contours and nuclear budding'); set('aspMyeNum','moderately relatively increased'); set('aspMyeMat','show left-shifted maturation'); set('aspMyeMorph','with frequent hypogranular forms and occasional pseudo-Pelger-Huet forms'); set('bxCellPhrase','hypercellular for age'); set('bxMkNum','mildly decreased'); set('bxMkMorph','include occasional small dysplastic forms with hypolobated nuclei'); set('bxEryNum','moderately relatively decreased'); set('bxMyeNum','moderately relatively increased'); set('bxMyeMat','show left-shifted maturation'); set('retic','A reticulin stain performed on the bone marrow core biopsy shows scattered linear reticulin fibers without significant intersections (MF-0 of 3).'); generateReport();
 }
 function loadMyelofibrosis(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('>90%'); applyBasicIhc();
-  set('dx1','Hypercellular bone marrow with MF grade 3 of 3 reticulin fibrosis, grade 1 of 3 collagen fibrosis and no increase in blasts.'); set('dx2','Consistent with persistent involvement by the patient’s known JAK2-positive primary myelofibrosis.'); set('pbdx','Macrocytic anemia with nucleated red blood cells and thrombocytopenia.');
+  set('dx1','Hypercellular bone marrow with marked megakaryocytic atypia and severe reticulin fibrosis (MF-3 of 3).'); set('dx2','No increase in blasts. Consistent with persistent involvement by the patient’s known JAK2-positive primary myelofibrosis.'); set('pbdx','Macrocytic anemia with nucleated red blood cells and thrombocytopenia.');
   set('customComment','The overall findings are in keeping with the patient’s known JAK2-positive myeloid neoplasm, previously classified as primary myelofibrosis. Evaluating atypical megakaryocytes in this biopsy is difficult due to background fibrosis; however, blasts are not increased. Clinical correlation is advised.');
   set('aspQuality','are paucicellular and hemodilute'); set('aspCell','hypocellular with increased adipocytes'); set('aspMkNum','rare'); set('aspEryNum','scattered'); set('aspMyeNum','predominantly mature forms with rare maturing myeloid cells'); set('aspBlasts','are not increased'); set('meRatio','N/A'); set('aspPlasma','not seen'); set('aspMast','not seen'); set('ironStore','cannot be assessed due to aspicular/hemodilute aspirate'); set('ringSid','not seen');
   set('bxQuality','adequate; architectural distortion is present due to background fibrosis'); set('bxCellPhrase','markedly hypercellular for age'); set('bxMkMorph','show atypical forms, assessment limited by background fibrosis'); set('bxBlasts','not increased (<5%)'); set('retic','A reticulin stain performed on the bone marrow core biopsy shows diffuse and dense increase in reticulin fibers with extensive intersections and coarse bundles of thick fibers (MF-3 of 3).'); set('trichrome','A trichrome stain shows focal paratrabecular or central collagen deposition without a connecting meshwork.'); set('ihcCd34','highlights blasts (<5% of cells)'); set('ihcExtra','CD61 highlights megakaryocytes.'); generateReport();
