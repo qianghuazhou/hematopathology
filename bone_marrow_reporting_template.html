@@ -192,7 +192,7 @@
         <div><label>CD138</label><textarea id="ihcCd138"></textarea></div>
         <div><label>Kappa/Lambda</label><textarea id="ihcKappaLambda"></textarea></div>
         <div><label>CD3</label><textarea id="ihcCd3"></textarea></div>
-        <div><label>CD20/CD79a</label><textarea id="ihcCd20"></textarea></div>
+        <div><label>CD20</label><textarea id="ihcCd20"></textarea></div>
       </div>
       <div class="row"><label>Additional IHC</label><textarea id="ihcExtra" style="min-height:70px"></textarea></div>
       <div class="sectionTitle">Reticulin / Trichrome</div>
@@ -371,7 +371,7 @@ function generateReport(){
   r += ihcLine('ihcCd138','CD138');
   r += ihcLine('ihcKappaLambda','Kappa/Lambda ISH');
   r += ihcLine('ihcCd3','CD3');
-  r += ihcLine('ihcCd20','CD20/CD79a');
+  r += ihcLine('ihcCd20','CD20');
   if(v('ihcExtra')) r += v('ihcExtra')+'\n';
   if(v('retic') || v('trichrome')){
     r += '\nReticulin and trichrome:\n';
