@@ -1,0 +1,292 @@
+EXTRANODAL LYMPHOMA / LYMPHOID CONSULT MORPHOLOGY CHEAT SHEET
+STOMACH
+Normal
+
+Gastric mucosa with preserved foveolar and glandular architecture. The lamina propria contains scattered chronic inflammatory cells without significant expansion.
+
+Chronic gastritis
+
+The lamina propria is expanded by lymphocytes and plasma cells. Reactive lymphoid follicles with germinal centres may be present.
+
+Reactive follicle
+
+Well-formed lymphoid follicles with polarized germinal centres, tingible body macrophages, and preserved mantle zones.
+
+MALT lymphoma
+
+Dense infiltrates of small atypical lymphocytes expand the lamina propria with infiltration of glandular epithelium forming lymphoepithelial lesions. Residual glands are entrapped within the infiltrate.
+
+DLBCL
+
+Diffuse infiltrates of large atypical lymphoid cells efface the mucosa and infiltrate the submucosa. Tumour cells exhibit vesicular chromatin, prominent nucleoli and frequent mitotic figures.
+
+SMALL BOWEL
+Normal
+
+Preserved villous architecture with intact villous-to-crypt ratio.
+
+Reactive
+
+Lamina propria contains mixed inflammatory cells with preserved architecture.
+
+Celiac-type injury
+
+Villous blunting with crypt hyperplasia and increased intraepithelial lymphocytes.
+
+Lymphoma
+
+Diffuse expansion of the lamina propria and/or submucosa by atypical lymphoid cells with distortion of normal mucosal architecture.
+
+EATL
+
+Transmural infiltrates of pleomorphic atypical lymphoid cells associated with ulceration, necrosis and inflammatory debris.
+
+COLON
+Reactive lymphoid aggregate
+
+Well-circumscribed lymphoid aggregate with preserved germinal centre formation and no significant cytologic atypia.
+
+Reactive lymphoid hyperplasia
+
+Prominent lymphoid follicles with preserved architecture and reactive germinal centres.
+
+Lymphoma
+
+Diffuse or nodular infiltrates of atypical lymphoid cells expand the lamina propria and may distort crypt architecture.
+
+SALIVARY GLAND
+Normal
+
+Salivary gland tissue composed of acini and ductal structures arranged in lobules.
+
+Chronic sialadenitis
+
+Lymphoplasmacytic infiltrates surround ducts and acini with variable acinar loss.
+
+Sjogren pattern
+
+Dense periductal lymphoid infiltrates with reactive follicle formation and acinar atrophy.
+
+MALT lymphoma
+
+Dense infiltrates of small atypical lymphocytes replace salivary gland parenchyma with residual entrapped ducts and acini.
+
+THYROID
+Hashimoto thyroiditis
+
+Diffuse lymphoplasmacytic infiltrates with numerous reactive germinal centres and oncocytic follicular epithelial change.
+
+Thyroid lymphoma
+
+Extensive replacement of thyroid parenchyma by atypical lymphoid cells with destruction of native follicles.
+
+LUNG
+Normal
+
+Preserved alveolated lung parenchyma with delicate alveolar septa.
+
+Reactive
+
+Patchy chronic inflammatory infiltrates involving alveolar septa and bronchovascular structures.
+
+MALT lymphoma
+
+Dense lymphoid infiltrates expand bronchovascular bundles and interstitium with preservation of overall lung architecture.
+
+DLBCL
+
+Sheets of large atypical lymphoid cells replace alveolated lung parenchyma.
+
+Lymphoid interstitial pneumonia
+
+Diffuse widening of alveolar septa by mature lymphocytes and plasma cells.
+
+LIVER
+Normal
+
+Preserved hepatic lobular architecture with unremarkable portal tracts.
+
+Chronic hepatitis
+
+Portal tracts expanded by lymphocytic infiltrates with variable interface activity.
+
+Reactive lymphoid aggregate
+
+Small portal tract lymphoid aggregate without significant cytologic atypia.
+
+Lymphoma
+
+Portal tracts and adjacent hepatic parenchyma are infiltrated by atypical lymphoid cells.
+
+Sinusoidal pattern
+
+Atypical lymphoid cells preferentially involve hepatic sinusoids.
+
+KIDNEY
+Normal
+
+Renal cortex with preserved glomeruli and tubules.
+
+Lymphoma
+
+Diffuse interstitial infiltrates of atypical lymphoid cells separate renal tubules while largely preserving glomeruli.
+
+SKIN
+Superficial perivascular infiltrate
+
+Small lymphocytes are distributed around superficial dermal vessels.
+
+Superficial and deep perivascular infiltrate
+
+Lymphoid infiltrates involve both superficial and deep vascular plexuses.
+
+Periadnexal infiltrate
+
+Lymphocytes surround adnexal structures including hair follicles and sweat glands.
+
+Nodular dermal infiltrate
+
+Dense lymphoid aggregates expand the dermis.
+
+Diffuse dermal infiltrate
+
+The dermis is extensively replaced by lymphoid cells.
+
+Grenz zone
+
+A narrow uninvolved zone separates the infiltrate from the overlying epidermis.
+
+Epidermotropism
+
+Lymphocytes infiltrate the epidermis singly and in small collections.
+
+Pautrier microabscess
+
+Small intraepidermal collections of atypical lymphocytes.
+
+BREAST
+Normal
+
+Breast tissue composed of terminal duct lobular units embedded within fibroadipose stroma.
+
+Reactive
+
+Mixed inflammatory infiltrates without significant architectural distortion.
+
+Lymphoma
+
+Atypical lymphoid cells infiltrate breast parenchyma and permeate fibrofatty tissue. Native ducts and lobules are entrapped but preserved.
+
+SOFT TISSUE
+Reactive
+
+Fibroadipose tissue contains scattered lymphoid aggregates.
+
+Lymphoma
+
+Diffuse infiltrates of atypical lymphoid cells permeate fibroadipose tissue.
+
+Adipocyte permeation
+
+Atypical lymphoid cells infiltrate between individual adipocytes.
+
+Indian-file pattern
+
+Single atypical lymphoid cells infiltrate between adipocytes in linear arrays.
+
+SPLEEN
+Normal
+
+Preserved white pulp and red pulp compartments.
+
+Splenic marginal zone lymphoma
+
+White pulp nodules are expanded by small atypical lymphocytes with extension into adjacent red pulp.
+
+Hairy cell leukemia
+
+Diffuse red pulp expansion by small to intermediate-sized lymphoid cells with abundant pale cytoplasm.
+
+BONE
+Reactive
+
+Preserved marrow spaces with trilineage hematopoiesis.
+
+Lymphoma
+
+Marrow spaces infiltrated by atypical lymphoid cells in an interstitial, nodular, diffuse or paratrabecular distribution.
+
+IMPORTANT SURGICAL PATHOLOGY TERMS
+Entrapped glands
+
+Native glandular structures are surrounded by infiltrating lymphoid cells but retain overall architecture.
+
+Lymphoepithelial lesion
+
+Lymphoid cells infiltrate and partially destroy epithelial structures.
+
+Follicular colonization
+
+Neoplastic lymphocytes infiltrate and expand pre-existing reactive follicles.
+
+Architectural effacement
+
+Normal tissue architecture is partially or completely replaced by infiltrating cells.
+
+Angiocentric
+
+The infiltrate surrounds blood vessels.
+
+Angiodestructive
+
+The infiltrate invades and destroys vascular walls.
+
+Perineural invasion
+
+Tumour cells track along or surround nerve fibres.
+
+Peribronchiolar
+
+Surrounding bronchioles.
+
+Periportal
+
+Surrounding portal tracts.
+
+Interstitial pattern
+
+Cells infiltrate between native tissue elements.
+
+Nodular pattern
+
+Discrete lymphoid nodules are present.
+
+Diffuse pattern
+
+Confluent infiltrate without preservation of normal architecture.
+
+Desmoplasia
+
+Dense collagenized stromal response associated with infiltrating cells.
+
+Fibrosis
+
+Increased deposition of collagen within the involved tissue.
+
+Sclerosis
+
+Dense collagen deposition resulting in architectural distortion.
+
+VERY COMMON "SAFE" SURGPATH PHRASES
+"Residual native structures are entrapped within the infiltrate."
+"The infiltrate expands but does not completely efface the native architecture."
+"The infiltrate demonstrates a nodular to diffuse growth pattern."
+"The infiltrate permeates the surrounding stroma."
+"The infiltrate extends between pre-existing tissue structures."
+"No definitive lymphoepithelial lesions are identified."
+"Reactive germinal centres with preserved polarization and tingible body macrophages are present."
+"The overall architecture is preserved."
+"The overall architecture is partially effaced."
+"The overall architecture is extensively effaced by the infiltrate."
+
+These phrases cover probably 80–90% of extranodal lymphoma consult morphology descriptions encountered in routine hematopathology practice.
