@@ -132,7 +132,7 @@
         <div><label>Other</label><textarea id="aspOther"></textarea></div>
       </div>
       <div class="grid2">
-        <div><label>Iron stores</label><select id="ironStore"><option></option><option>absent</option><option>reduced</option><option>adequate</option><option>increased</option></select></div>
+        <div><label>Iron stores</label><select id="ironStore"><option></option><option>absent</option><option>reduced</option><option>present</option><option>increased</option></select></div>
         <div><label>Ring sideroblasts</label><input id="ringSid" placeholder="not increased / __%"></div>
       </div>
     </div>
@@ -582,7 +582,7 @@ function applyNormalAspirate(){
   set('aspEryNum','normal in number'); set('aspEryMat',''); set('aspEryMorph','with mainly normoblastic maturation');
   set('aspMyeNum','normal in number'); set('aspMyeMat',''); set('aspMyeMorph','with orderly maturation through all stages');
   set('aspBlasts','not increased'); set('aspLymph','Scattered small lymphocytes are present in normal numbers. No lymphoid aggregates identified.');
-  set('aspPlasma','not increased'); set('aspMast','not increased'); set('ironStore','adequate'); set('ringSid','not identified');
+  set('aspPlasma','not increased'); set('aspMast','not increased'); set('ironStore','present'); set('ringSid','not identified');
 }
 function applyNormalBiopsy(cell='40%'){
   set('bxQuality','adequate for evaluation'); set('bxCellPhrase','normocellular for age'); set('bxCell',cell); set('bxArch','preserved with hematopoietic elements distributed within the intertrabecular spaces');
