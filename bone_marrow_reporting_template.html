@@ -243,7 +243,7 @@
       <button class="light" onclick="loadNormal()">Load Normal Marrow</button>
       <button class="light" onclick="loadAnemiaNegativeMDS()">Anemia: No evidence of MDS</button>
       <button class="light" onclick="loadCytopeniaReactiveAggregates()">Cytopenia + Reactive Aggregates</button>
-      <button class="light" onclick="loadNegativeLymphomaStaging()">No Evidence of Lymphoma Staging</button>
+      <button class="light" onclick="loadNegativeLymphomaStaging()">Negative Lymphoma Staging</button>
       <button class="light" onclick="loadPositiveLymphomaStaging()">Positive Lymphoma Staging</button>
       <button class="light" onclick="loadMdsLowGrade()">MDS Low Grade</button>
       <button class="light" onclick="loadMdsEb()">MDS-EB</button>
@@ -599,7 +599,7 @@ function applyBasicIhc(){
 }
 function loadAnemiaNegativeMDS(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('XX%'); applyBasicIhc();
-  set('dx1','Moderately hypercellular bone marrow with mild erythroid-predominant maturing trilineage hematopoiesis.'); set('dx2','No evidence of a hematopoietic neoplasm.'); 
+  set('dx1','Moderately hypercellular bone marrow with mild erythroid-predominant maturing trilineage hematopoiesis.'); set('dx2','No morphologic or immunophenotypic evidence of a hematologic neoplasm.'); 
   set('pbdx','Normocytic anemia.'); set('commentType','nonspecific');
   set('customComment','The overall findings are of a moderately hypercellular bone marrow with mildly erythroid-predominant maturing hematopoiesis. There is no evidence of a myeloid or lymphoid neoplasm in this biopsy. In the absence of significant dysplasia or MDS-defining cytogenetics, other causes of anemia such as nutritional deficiencies, drugs/medications, chronic inflammatory states, infection, liver disease and renal disease should be excluded. Clinical correlation is advised.');
   set('rbcMorph','normocytic anemia with no significant anisopoikilocytosis'); set('pltNum','increased');
@@ -609,7 +609,7 @@ function loadAnemiaNegativeMDS(){
 function loadCytopeniaReactiveAggregates(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('XX%'); applyBasicIhc();
   set('dx1','Normocellular bone marrow with maturing trilineage hematopoiesis, reactive lymphoid aggregates, no overt dysplasia and no increase in blasts.');
-  set('dx2','No evidence of a hematopoietic neoplasm.'); set('pbdx','Cytopenia.'); set('commentType','nonspecific');
+  set('dx2','No morphologic or immunophenotypic evidence of a hematologic neoplasm.'); set('pbdx','Cytopenia.'); set('commentType','nonspecific');
   set('customComment','There is no morphologic or immunophenotypic evidence of a hematolymphoid neoplasm in this biopsy. Reactive lymphoid aggregates are not uncommon in bone marrow biopsies and have a non-specific differential diagnosis that includes normal aging, autoimmune disorders, inflammatory conditions, and infection. Correlation with clinical and laboratory findings is advised.');
   set('bxLymph','Small lymphoid aggregates are present and show features compatible with reactive lymphoid aggregates.');
   set('ihcCd3','highlights frequent T cells within and around the aggregates'); set('ihcCd20','highlights fewer small B cells without an abnormal distribution'); generateReport();
@@ -618,7 +618,7 @@ function loadNegativeLymphomaStaging(){
   clearAll(); applyCommonNormalPb(); applyNormalAspirate(); applyNormalBiopsy('XX%'); applyBasicIhc();
   set('dx1','Normocellular bone marrow with maturing trilineage hematopoiesis and no increase in blasts.');
   set('pbdx','No significant morphologic abnormality.'); set('commentType','posttx');
-  set('dx2','No evidence of involvement by lymphoma.'); set('customComment','Morphologic and immunophenotypic evaluation of this bone marrow shows no evidence of involvement by the patient’s lymphoma. Clinical correlation is advised.');
+  set('dx2','No morphologic or immunophenotypic evidence of involvement by lymphoma.'); set('customComment','Morphologic and immunophenotypic evaluation of this bone marrow shows morphologic or immunophenotypic evidence of involvement by the patient’s lymphoma. Clinical correlation is advised.');
   set('ihcCd3','highlights frequent/scattered T cells'); set('ihcCd20','highlights rare/scattered small B cells'); generateReport();
 }
 function loadPositiveLymphomaStaging(){
