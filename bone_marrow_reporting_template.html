@@ -44,7 +44,7 @@
 </head>
 <body>
 <header>
-  <h1>Bone Marrow Report and Amendment Template <span class="pill">v0.9 HTML</span></h1>
+  <h1>Bone Marrow Report and Amendment Template <span class="pill">v0.9.1 HTML</span></h1>
   <div class="sub">Integrated aspirate, biopsy, peripheral blood, IHC, flow, cytogenetics, molecular, comments and addendum modules.</div>
 </header>
 
@@ -279,8 +279,8 @@ function ihcLine(id, label){
   if(!txt) return '';
   const low=txt.toLowerCase();
   const first=label.split(/[\/ ]/)[0].toLowerCase();
-  if(low.startsWith(first) || low.startsWith(label.toLowerCase())) return txt+'\n';
-  return label+': '+txt+'\n';
+  if(low.startsWith(first) || low.startsWith(label.toLowerCase())) return capFirst(stripFinalPeriod(txt))+'.\n';
+  return label+': '+capFirst(stripFinalPeriod(txt))+'.\n';
 }
 
 function capFirst(txt){
@@ -368,21 +368,21 @@ function generateReport(){
   if(v('poik')) rbcParts.push(v('poik')+' poikilocytosis');
   if(v('poly')) rbcParts.push('polychromasia '+v('poly'));
   if(v('rbcMorph')) rbcParts.push(v('rbcMorph'));
-  r += 'RBC: '+(rbcParts.length ? rbcParts.join(', ') : '***')+'.\n';
+  r += 'RBC: '+(rbcParts.length ? capFirst(rbcParts.join(', ')) : '***')+'.\n';
 
   let wbcParts=[];
   let neutLine=[v('neutDesc'), v('neutMorph')].filter(Boolean).join(', ');
-  if(neutLine) wbcParts.push('Neutrophils: '+neutLine);
-  if(v('pbBlasts')) wbcParts.push('Blasts: '+v('pbBlasts'));
-  if(v('monoDesc')) wbcParts.push('Monocytes: '+v('monoDesc'));
-  if(v('lymphDesc')) wbcParts.push('Lymphocytes: '+v('lymphDesc'));
+  if(neutLine) wbcParts.push('Neutrophils: '+capFirst(neutLine));
+  if(v('pbBlasts')) wbcParts.push('Blasts: '+capFirst(stripFinalPeriod(v('pbBlasts'))));
+  if(v('monoDesc')) wbcParts.push('Monocytes: '+capFirst(stripFinalPeriod(v('monoDesc'))));
+  if(v('lymphDesc')) wbcParts.push('Lymphocytes: '+capFirst(stripFinalPeriod(v('lymphDesc'))));
   r += 'WBC: '+(wbcParts.length ? wbcParts.join('. ') : '***')+'.\n';
 
   let pltParts=[];
   if(v('pltNum')) pltParts.push(v('pltNum'));
   if(v('pltMorph')) pltParts.push(v('pltMorph'));
-  r += 'PLT: '+(pltParts.length ? pltParts.join(', ') : '***')+'.\n';
-  if(v('pbOther')) r += 'Other: '+v('pbOther')+'\n';
+  r += 'PLT: '+(pltParts.length ? capFirst(pltParts.join(', ')) : '***')+'.\n';
+  if(v('pbOther')) r += 'Other: '+capFirst(stripFinalPeriod(v('pbOther')))+'.\n';
   r += '\n';
 
   r += 'BONE MARROW ASPIRATE:\n';
@@ -398,10 +398,10 @@ function generateReport(){
   r += lineageLine('Myeloid', aspMye);
   r += lineageLine('Megakaryocytes', aspMk, '; ');
   if(v('aspBlasts')) r += 'Blasts: '+capFirst(stripFinalPeriod(v('aspBlasts')))+'.\n';
-  if(v('aspLymph')) r += 'Lymphocytes: '+stripFinalPeriod(v('aspLymph'))+'.\n';
-  if(v('aspPlasma')) r += 'Plasma cells: '+stripFinalPeriod(v('aspPlasma'))+'.\n';
-  if(v('aspMast')) r += 'Mast cells: '+stripFinalPeriod(v('aspMast'))+'.\n';
-  if(v('aspOther')) r += 'Other: '+v('aspOther')+'.\n';
+  if(v('aspLymph')) r += 'Lymphocytes: '+capFirst(stripFinalPeriod(v('aspLymph')))+'.\n';
+  if(v('aspPlasma')) r += 'Plasma cells: '+capFirst(stripFinalPeriod(v('aspPlasma')))+'.\n';
+  if(v('aspMast')) r += 'Mast cells: '+capFirst(stripFinalPeriod(v('aspMast')))+'.\n';
+  if(v('aspOther')) r += 'Other: '+capFirst(stripFinalPeriod(v('aspOther')))+'.\n';
   if(v('ironStore') || v('ringSid')) r += 'Iron: '+capFirst(stripFinalPeriod(v('ironStore')||'***'))+(v('ringSid')?', ring sideroblasts '+stripFinalPeriod(v('ringSid')):'')+'.\n';
   r += '\n';
 
@@ -422,10 +422,10 @@ function generateReport(){
   if(v('bxMe')) r += 'M:E ratio: '+v('bxMe')+'.\n';
   r += lineageLine('Megakaryocytes', bxMk, '; ');
   if(v('bxBlasts')) r += 'Blasts: '+capFirst(stripFinalPeriod(v('bxBlasts')))+'.\n';
-  if(v('bxLymph')) r += 'Lymphocytes: '+stripFinalPeriod(v('bxLymph'))+'.\n';
-  if(v('bxPlasma')) r += 'Plasma cells: '+stripFinalPeriod(v('bxPlasma'))+'.\n';
-  if(v('trabBone')) r += 'Trabecular bone: '+v('trabBone')+'.\n';
-  if(v('clot') || v('clotOther')) r += 'Clot section: '+(v('clot')||v('clotOther'))+'.\n';
+  if(v('bxLymph')) r += 'Lymphocytes: '+capFirst(stripFinalPeriod(v('bxLymph')))+'.\n';
+  if(v('bxPlasma')) r += 'Plasma cells: '+capFirst(stripFinalPeriod(v('bxPlasma')))+'.\n';
+  if(v('trabBone')) r += 'Trabecular bone: '+capFirst(stripFinalPeriod(v('trabBone')))+'.\n';
+  if(v('clot') || v('clotOther')) r += 'Clot section: '+capFirst(stripFinalPeriod(v('clot')||v('clotOther')))+'.\n';
   r += '\n';
 
   r += section('ANCILLARY STUDIES');
