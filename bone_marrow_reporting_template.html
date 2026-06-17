@@ -332,17 +332,35 @@ function generateReport(){
   r += 'WBC '+(v('wbc')||'[]')+' E9/L, Hb '+(v('hb')||'[]')+' g/L, MCV '+(v('mcv')||'[]')+' fL, Platelets '+(v('plt')||'[]')+' E9/L,\n';
   r += 'Neutrophils '+(v('neutAbs')||'[]')+' E9/L, Lymphocytes '+(v('lymphAbs')||'[]')+' E9/L, Monocytes '+(v('monoAbs')||'[]')+' E9/L, Eosinophils '+(v('eosAbs')||'[]')+' E9/L, Basophils '+(v('basoAbs')||'[]')+' E9/L.\n\n';
 
-  r += 'PERIPHERAL BLOOD SMEAR:\n';
-  let rbcs=[];
-  if(v('rbcChromia')) rbcs.push(v('rbcChromia'));
-  if(v('rbcSize')) rbcs.push(v('rbcSize'));
-  r += 'Red blood cells are '+(rbcs.length?rbcs.join(' and '):'***')+'. ';
-  if(v('anisocytosis')) r += 'Anisocytosis is '+v('anisocytosis')+'. ';
-  if(v('poik')) r += 'Poikilocytosis is '+v('poik')+(v('rbcMorph')?', with '+v('rbcMorph'):'')+'. ';
-  if(v('poly')) r += 'Polychromasia is '+v('poly')+'. ';
-  r += '\n';
-  r += 'Neutrophils are '+(v('neutDesc')||'***')+' and '+(v('neutMorph')||'show *** morphology')+'. Blasts are '+(v('pbBlasts')||'***')+'. Monocytes are '+(v('monoDesc')||'***')+'. Lymphocytes are '+(v('lymphDesc')||'***')+'. Platelets are '+(v('pltNum')||'***')+' and '+(v('pltMorph')||'***')+'.\n';
-  r += line(v('pbOther'))+'\n';
+r += 'PERIPHERAL BLOOD SMEAR:\n';
+
+let rbcParts = [];
+if(v('rbcChromia')) rbcParts.push(v('rbcChromia'));
+if(v('rbcSize')) rbcParts.push(v('rbcSize'));
+
+let rbcLine = rbcParts.join(' ');
+if(v('anisocytosis')) rbcLine += ', ' + v('anisocytosis') + ' anisocytosis';
+if(v('poik')) rbcLine += ', ' + v('poik') + ' poikilocytosis';
+if(v('rbcMorph')) rbcLine += ', ' + v('rbcMorph');
+
+r += 'RBC: ' + (rbcLine || '***') + '.\n';
+
+let wbcParts = [];
+if(v('neutDesc')) wbcParts.push('Neutrophils ' + v('neutDesc'));
+if(v('neutMorph')) wbcParts.push(v('neutMorph'));
+if(v('pbBlasts')) wbcParts.push('Blasts ' + v('pbBlasts'));
+if(v('monoDesc')) wbcParts.push('Monocytes ' + v('monoDesc'));
+if(v('lymphDesc')) wbcParts.push('Lymphocytes ' + v('lymphDesc'));
+
+r += 'WBC: ' + (wbcParts.length ? wbcParts.join('. ') : '***') + '.\n';
+
+let pltLine = '';
+if(v('pltNum')) pltLine += v('pltNum');
+if(v('pltMorph')) pltLine += (pltLine ? ', ' : '') + v('pltMorph');
+
+r += 'PLT: ' + (pltLine || '***') + '.\n';
+
+if(v('pbOther')) r += v('pbOther') + '\n';
 
   r += 'BONE MARROW ASPIRATE:\n';
   r += 'The bone marrow aspirate smears '+(v('aspQuality')||'***')+'.\n';
