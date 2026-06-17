@@ -369,7 +369,7 @@ function generateReport(){
     let p=[]; if(checked('pendingCyto')) p.push('cytogenetic'); if(checked('pendingMol')) p.push('molecular');
     r += '- Pending '+p.join(' and ')+' studies.\n';
   }
-  if(v('pbdx')){ r += '\nPeripheral blood:\n'+bullet(v('pbdx')); }
+  if(v('pbdx')){ r += '\nPeripheral blood smear:\n'+bullet(v('pbdx')); }
 
   let cmt = v('customComment') || generateComment();
   if(cmt || checked('reviewedQA')){
