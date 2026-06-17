@@ -81,7 +81,6 @@
         <div><label>Anisocytosis</label><select id="anisocytosis"><option></option><option>minimal</option><option>mild</option><option>moderate</option><option>marked</option></select></div>
         <div><label>Poikilocytosis</label><select id="poik"><option></option><option>minimal</option><option>mild</option><option>moderate</option><option>marked</option></select></div>
         <div><label>Polychromasia</label><select id="poly"><option></option><option>not increased</option><option>mildly increased</option><option>increased</option><option>increased with circulating nucleated red blood cells</option></select></div>
-        <div><label>Platelets number</label><select id="pltNum"><option></option><option>decreased</option><option>normal in number</option><option>increased</option></select></div>
       </div>
       <div class="row"><label>RBC morphology</label><textarea id="rbcMorph"></textarea></div>
       <div class="grid2">
@@ -90,7 +89,10 @@
         <div><label>Blasts</label><input id="pbBlasts" placeholder="not increased / rare / __%"></div>
         <div><label>Lymphocytes</label><select id="lymphDesc"><option></option><option>decreased</option><option>normal in number</option><option>increased</option></select></div>
         <div><label>Monocytes</label><select id="monoDesc"><option></option><option>decreased</option><option>normal in number</option><option>increased</option></select></div>
-        <div><label>Platelet morphology</label><select id="pltMorph"><option></option><option>normal in morphology</option><option>vary in size</option><option>include a subset of large and/or hypogranular forms</option></select></div>
+      </div>
+      <div class="grid2">
+        <div><label>Platelets number</label><select id="pltNum"><option></option><option>decreased</option><option>normal in number</option><option>increased</option></select></div>
+        <div><label>Platelet morphology</label><select id="pltMorph"><option></option><option>normal in morphology</option><option>predominantly mature multilobated forms, scattered singly, with abundant granular cytoplasm and no significant atypia</option><option>vary in size</option><option>include a subset of large and/or hypogranular forms</option></select></div>
       </div>
       <div class="row"><label>Other PB comment</label><textarea id="pbOther"></textarea></div>
     </div>
@@ -100,7 +102,7 @@
     <summary>Bone Marrow Aspirate</summary>
     <div class="inner">
       <div class="grid2">
-        <div><label>Sample quality</label><select id="aspQuality"><option></option><option>contain adequate cellular marrow particles</option><option>contain paucicellular marrow particles</option><option>are paucicellular and hemodilute</option><option>are hemodilute with few marrow particles</option><option>yielded no spicules (dry tap)</option></select></div>
+        <div><label>Sample quality</label><select id="aspQuality"><option></option><option>adequate with numerous marrow particles</option><option>contain adequate cellular marrow particles</option><option>contain paucicellular marrow particles</option><option>are paucicellular and hemodilute</option><option>are hemodilute with few marrow particles</option><option>yielded no spicules (dry tap)</option></select></div>
         <div><label>Particles cellularity</label><select id="aspCell"><option></option><option>normocellular for age</option><option>hypercellular with decreased fat spaces</option><option>hypocellular with increased adipocytes</option></select></div>
       </div>
       <div class="sectionTitle">Differential count (%)</div>
@@ -120,7 +122,7 @@
         <div><label>Myeloid maturation</label><select id="aspMyeMat"><option></option><option>show full-spectrum maturation</option><option>show left-shifted maturation</option></select></div>
         <div><label>Myeloid morphology</label><input id="aspMyeMorph"></div>
         <div><label>Mk number</label><select id="aspMkNum"><option></option><option>proportionately decreased</option><option>proportionately normal in number</option><option>proportionately increased</option><option>sparse</option></select></div>
-        <div><label>Mk morphology</label><select id="aspMkMorph"><option></option><option>show largely normal morphology</option><option>vary in size</option><option>vary in size, with a subset of smaller forms</option><option>include a subset of smaller and/or hypolobated forms</option><option>include frequent smaller and/or hypolobated forms and forms with separated nuclear lobes</option></select></div>
+        <div><label>Mk morphology</label><select id="aspMkMorph"><option></option><option>show largely normal morphology</option><option>predominantly mature multilobated forms, scattered singly, with abundant granular cytoplasm and no significant atypia</option><option>vary in size</option><option>vary in size, with a subset of smaller forms</option><option>include a subset of smaller and/or hypolobated forms</option><option>include frequent smaller and/or hypolobated forms and forms with separated nuclear lobes</option></select></div>
         <div><label>Blasts</label><input id="aspBlasts" placeholder="are not increased (<5%)"></div>
       </div>
       <div class="grid2">
@@ -322,6 +324,27 @@ function lineageLine(label, parts, sep=', '){
   }
   return label+': '+capFirst(text)+'.\n';
 }
+
+function normalizeQuality(txt){
+  txt=stripFinalPeriod(txt);
+  if(!txt) return '';
+  const low=txt.toLowerCase();
+  if(low.includes('adequate') && (low.includes('spicules') || low.includes('marrow particles') || low.includes('cellular marrow particles'))) return 'Adequate with numerous marrow particles';
+  if(low.includes('hemodilute') && low.includes('few')) return 'Hemodilute with few marrow particles';
+  if(low.includes('paucicellular') && low.includes('hemodilute')) return 'Paucicellular and hemodilute';
+  if(low.includes('dry tap') || low.includes('no spicules')) return 'No spicules obtained (dry tap)';
+  return capFirst(txt);
+}
+function ironLine(store, ring){
+  store=stripFinalPeriod(store||''); ring=stripFinalPeriod(ring||'');
+  if(!store && !ring) return '';
+  let out='Iron: '+capFirst(store || '***');
+  if(ring){
+    if(/^(not identified|not seen|absent|none)$/i.test(ring)) out += '. No ring sideroblasts identified';
+    else out += '. Ring sideroblasts '+ring;
+  }
+  return out+'.\n';
+}
 function generateComment(){
   const t=v('commentType');
   const map={
@@ -386,7 +409,7 @@ function generateReport(){
   r += '\n';
 
   r += 'BONE MARROW ASPIRATE:\n';
-  if(v('aspQuality')) r += 'Quality: '+capFirst(stripFinalPeriod(v('aspQuality')))+'.\n';
+  if(v('aspQuality')) r += 'Quality: '+normalizeQuality(v('aspQuality'))+'.\n';
   if(v('aspCell')) r += 'Cellularity: '+capFirst(stripFinalPeriod(v('aspCell')))+'.\n';
   let diffs=[['Blasts',v('dBlast')],['Promyelocytes',v('dPro')],['Myelo/Meta',v('dMyeloMeta')],['Segs/Bands',v('dSeg')],['Erythroid',v('dEry')],['Lymphocytes',v('dLymph')],['Monocytes',v('dMono')],['Eosinophils',v('dEos')],['Basophils',v('dBaso')],['Plasma cells',v('dPlasma')],['Mast cells',v('dMast')],['Other',v('dOther')]].filter(x=>x[1]);
   if(diffs.length){ r += 'Differential count: '+diffs.map(x=>x[0]+': '+x[1]+'%').join('; ')+'.\n'; }
@@ -402,7 +425,7 @@ function generateReport(){
   if(v('aspPlasma')) r += 'Plasma cells: '+capFirst(stripFinalPeriod(v('aspPlasma')))+'.\n';
   if(v('aspMast')) r += 'Mast cells: '+capFirst(stripFinalPeriod(v('aspMast')))+'.\n';
   if(v('aspOther')) r += 'Other: '+capFirst(stripFinalPeriod(v('aspOther')))+'.\n';
-  if(v('ironStore') || v('ringSid')) r += 'Iron: '+capFirst(stripFinalPeriod(v('ironStore')||'***'))+(v('ringSid')?', ring sideroblasts '+stripFinalPeriod(v('ringSid')):'')+'.\n';
+  r += ironLine(v('ironStore'), v('ringSid'));
   r += '\n';
 
   r += 'BONE MARROW CORE BIOPSY:\n';
@@ -410,10 +433,8 @@ function generateReport(){
   if(v('bxLength')) bxQuality.push(v('bxLength'));
   if(v('bxQuality')) bxQuality.push(v('bxQuality'));
   if(bxQuality.length) r += 'Quality/length: '+capFirst(stripFinalPeriod(bxQuality.join(', ')))+'.\n';
-  let bxCellArch=[];
-  if(v('bxCellPhrase') || v('bxCell')) bxCellArch.push((v('bxCellPhrase')||'cellularity ***')+(v('bxCell')?' (~'+v('bxCell')+')':''));
-  if(v('bxArch')) bxCellArch.push('architecture '+v('bxArch'));
-  if(bxCellArch.length) r += 'Cellularity/architecture: '+capFirst(stripFinalPeriod(bxCellArch.join(', ')))+'.\n';
+  if(v('bxCellPhrase') || v('bxCell')) r += 'Cellularity: '+capFirst(stripFinalPeriod((v('bxCellPhrase')||'cellularity ***')+(v('bxCell')?' (~'+v('bxCell')+')':'')))+'.\n';
+  if(v('bxArch')) r += 'Architecture: '+capFirst(stripFinalPeriod(v('bxArch')))+'.\n';
   let bxEry=[v('bxEryNum'), v('bxEryMat'), v('bxEryMorph')].filter(Boolean);
   let bxMye=[v('bxMyeNum'), v('bxMyeMat'), v('bxMyeMorph')].filter(Boolean);
   let bxMk=[v('bxMkNum'), v('bxMkMorph')].filter(Boolean);
@@ -483,14 +504,14 @@ function loadNormal(){
   set('poik','minimal');
   set('poly','not increased');
   set('neutDesc','normal in number');
-  set('neutMorph','show unremarkable morphology');
+  set('neutMorph','unremarkable morphology');
   set('pbBlasts','not increased');
   set('monoDesc','normal in number');
   set('lymphDesc','normal in number');
   set('pltNum','normal in number');
   set('pltMorph','normal in morphology');
 
-  set('aspQuality','are adequate with numerous spicules');
+  set('aspQuality','adequate with numerous marrow particles');
   set('aspCell','normocellular for age');
   set('dBlast','0'); set('dPro','4'); set('dMyeloMeta','10'); set('dSeg','26'); set('dEry','41'); set('dLymph','13'); set('dMono','2'); set('dEos','2'); set('dBaso','0'); set('dPlasma','2');
   set('meRatio','1.1:1');
@@ -506,7 +527,7 @@ function loadNormal(){
   set('aspLymph','present in expected numbers');
   set('aspPlasma','not increased');
   set('aspMast','rare');
-  set('ironStore','present/adequate');
+  set('ironStore','adequate');
   set('ringSid','not identified');
 
   set('bxQuality','adequate for evaluation');
@@ -550,18 +571,18 @@ function loadMdsSuspicious(){
 
 function applyCommonNormalPb(){
   set('rbcChromia','normochromic'); set('rbcSize','normocytic'); set('anisocytosis','minimal'); set('poik','minimal'); set('poly','not increased');
-  set('neutDesc','normal in number'); set('neutMorph','show unremarkable morphology'); set('pbBlasts','not increased');
+  set('neutDesc','normal in number'); set('neutMorph','unremarkable morphology'); set('pbBlasts','not increased');
   set('monoDesc','normal in number'); set('lymphDesc','normal in number'); set('pltNum','normal in number'); set('pltMorph','normal in morphology');
 }
 function applyNormalAspirate(){
-  set('aspQuality','contain adequate cellular marrow particles'); set('aspCell','normocellular for age');
+  set('aspQuality','adequate with numerous marrow particles'); set('aspCell','normocellular for age');
   set('dBlast','0'); set('dPro','4'); set('dMyeloMeta','10'); set('dSeg','26'); set('dEry','41'); set('dLymph','13'); set('dMono','2'); set('dEos','2'); set('dBaso','0'); set('dPlasma','2');
   set('meRatio','1.1:1');
   set('aspMkNum','normal in number'); set('aspMkMorph','predominantly mature multilobated forms, scattered singly, with abundant granular cytoplasm and no significant atypia');
   set('aspEryNum','normal in number'); set('aspEryMat',''); set('aspEryMorph','with mainly normoblastic maturation');
   set('aspMyeNum','normal in number'); set('aspMyeMat',''); set('aspMyeMorph','with orderly maturation through all stages');
   set('aspBlasts','not increased'); set('aspLymph','Scattered small lymphocytes are present in normal numbers. No lymphoid aggregates identified.');
-  set('aspPlasma','not increased'); set('aspMast','not increased'); set('ironStore','present'); set('ringSid','not seen');
+  set('aspPlasma','not increased'); set('aspMast','not increased'); set('ironStore','adequate'); set('ringSid','not identified');
 }
 function applyNormalBiopsy(cell='40%'){
   set('bxQuality','adequate for evaluation'); set('bxCellPhrase','normocellular for age'); set('bxCell',cell); set('bxArch','preserved with hematopoietic elements distributed within the intertrabecular spaces');
