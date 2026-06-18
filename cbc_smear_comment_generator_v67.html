@@ -64,7 +64,7 @@
             <label>Hemoglobin / RBC indices</label>
             <div class="checks" style="grid-template-columns: 1fr;">
               <label><input type="checkbox" id="cbcAnemia" /> NORMOCYTIC ANEMIA</label>
-              <label><input type="checkbox" id="cbcPolyHb" /> NORMOCYTIC ERYTHROCYTOSIS (polycythemia pattern)</label>
+              <label><input type="checkbox" id="cbcPolyHb" /> NORMOCYTIC ERYTHROCYTOSIS ( pattern)</label>
               <div id="polyContextHint" style="display:none; margin: 6px 0 2px 22px; font-size: 12px; line-height: 1.3; opacity: 0.85;">
                 If patient is an <b>infant/neonate</b>, check <b>Neonate / newborn context</b>. If <b>premature</b> or there is a <b>neonatal stress pattern</b>, also check <b>Prematurity / neonatal stress pattern</b>.
               </div>
@@ -446,7 +446,7 @@
     }
 
     if (polycythemia) {
-      pushSentence(short, "Erythrocytosis / polycythemia suggested");
+      pushSentence(short, "Erythrocytosis / polycythemia noted");
 
       const polyAdult =
         "Erythrocytosis/polycythemia. Differential diagnosis includes relative erythrocytosis, secondary erythrocytosis, and polycythemia vera. Correlation with clinical and laboratory findings is recommended.";
