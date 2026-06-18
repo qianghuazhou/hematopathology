@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plasma Donation Physician Guide</title>
+  <style>
+    :root{
+      --bg:#f4f7f9; --panel:#ffffff; --text:#22313f; --muted:#5f6b76;
+      --primary:#243746; --accent:#2d8cff; --border:#dbe3ea;
+      --soft:#eef4f8; --soft2:#f8fbfd; --tag:#e9eef3;
+      --ok:#eaf5ee; --warn:#fff7e8; --danger:#fdeeee;
+      --shadow:0 10px 28px rgba(25,45,66,.08);
+      --radius:18px; --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.62}
+    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:var(--max);margin:0 auto;padding:24px}
+    .back-link{display:inline-flex;align-items:center;gap:8px;margin:6px 0 14px;color:var(--primary);font-weight:700;text-decoration:none}
+    .back-link:hover{text-decoration:none;color:var(--accent)}
+    .hero{background:linear-gradient(135deg,#243746 0%,#2f4c63 100%);color:#fff;border-radius:24px;padding:34px 32px;box-shadow:var(--shadow);margin-top:10px}
+    .eyebrow{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:6px 12px;border-radius:999px;font-size:.84rem;letter-spacing:.02em;margin-bottom:14px}
+    h1,h2,h3{margin:0 0 12px} h1{font-size:2.3rem;line-height:1.15} h2{font-size:1.45rem;color:var(--primary)} h3{font-size:1.03rem;color:var(--primary)}
+    .hero p{max-width:960px;margin:0;color:rgba(255,255,255,.92);font-size:1rem}
+    .hero-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:22px}
+    .hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:16px 18px}
+    .hero-stat .label{font-size:.83rem;color:rgba(255,255,255,.75)} .hero-stat .value{font-size:1.06rem;font-weight:700;margin-top:4px}
+    .quick-nav{position:sticky;top:0;z-index:10;background:rgba(244,247,249,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);margin-top:18px}
+    .quick-nav-inner{max-width:var(--max);margin:0 auto;padding:12px 24px;display:flex;flex-wrap:wrap;gap:10px}
+    .quick-nav a{display:inline-block;padding:9px 13px;border-radius:999px;background:#fff;border:1px solid var(--border);color:var(--primary);font-size:.92rem;font-weight:600}
+    .layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px;align-items:start;margin-top:24px}
+    .sidebar{position:sticky;top:78px;display:flex;flex-direction:column;gap:18px}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+    .sidebar .card{padding:18px}.toc{list-style:none;padding:0;margin:0}.toc li+li{margin-top:8px}.toc a{color:var(--text);font-size:.95rem}.toc a:hover{color:var(--accent)}
+    .main{display:flex;flex-direction:column;gap:22px}.section{scroll-margin-top:92px}.section-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+    .pill{display:inline-block;background:var(--tag);color:var(--primary);border:1px solid var(--border);padding:5px 10px;border-radius:999px;font-size:.8rem;font-weight:700;white-space:nowrap}
+    .muted{color:var(--muted)}.grid-2,.grid-3,.grid-4{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .mini{background:var(--soft2);border:1px solid var(--border);border-radius:16px;padding:16px;height:100%}.mini h3{margin-bottom:8px}.mini p{margin:0}
+    table{width:100%;border-collapse:collapse;font-size:.95rem;background:#fff;overflow:hidden;border-radius:14px}
+    th,td{padding:12px 12px;border-bottom:1px solid var(--border);vertical-align:top;text-align:left} th{background:var(--soft);color:var(--primary);font-weight:700} tr:last-child td{border-bottom:none}
+    .notice,.warning,.danger{border-radius:16px;padding:16px 18px;border:1px solid var(--border);margin-top:14px}.notice{background:var(--soft)}.warning{background:var(--warn)}.danger{background:var(--danger)}
+    .list-tight{margin:8px 0 0 0;padding-left:18px}.list-tight li+li{margin-top:6px}
+    .refs{padding-left:18px;margin:0}.refs li+li{margin-top:10px}
+    code.inline{background:var(--soft);border:1px solid var(--border);border-radius:8px;padding:2px 6px;font-family:Consolas,monospace;font-size:.9em}
+    .checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.check{background:#fff;border:1px solid var(--border);border-radius:14px;padding:12px 14px}.check strong{color:var(--primary)}
+    .footer{color:var(--muted);font-size:.92rem;padding:10px 0 40px}
+    @media (max-width:1060px){.layout{grid-template-columns:1fr}.sidebar{position:static}.hero-grid,.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:760px){.container{padding:16px}.quick-nav-inner{padding:10px 16px}.hero{padding:24px 20px}h1{font-size:1.9rem}.hero-grid,.grid-2,.grid-3,.grid-4,.checklist{grid-template-columns:1fr}th,td{font-size:.9rem}}
+    @media print{.quick-nav,.sidebar,.back-link{display:none}.layout{display:block}.card{box-shadow:none;break-inside:avoid}.container{max-width:100%;padding:8px}.hero{box-shadow:none}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-link" href="transfusion_medicine.html">← Back to Transfusion Medicine</a>
+    <header class="hero">
+      <div class="eyebrow">Transfusion Medicine Reference</div>
+      <h1>Plasma Donation Physician Guide</h1>
+      <p>
+        Practical reference for physicians supporting a plasma donation centre. This page focuses on donor safety, visit record review, physician substitute supervision, physical examination quality, adverse donor reactions, and physician communication with the medical director.
+      </p>
+      <div class="hero-grid">
+        <div class="hero-stat"><div class="label">On-site presence</div><div class="value">4 hours weekly</div></div>
+        <div class="hero-stat"><div class="label">Highest priority review</div><div class="value">All deferred donors</div></div>
+        <div class="hero-stat"><div class="label">Routine QC</div><div class="value">Spot-check normal physicals</div></div>
+        <div class="hero-stat"><div class="label">Core safety focus</div><div class="value">Donor reactions</div></div>
+      </div>
+    </header>
+  </div>
+
+  <nav class="quick-nav">
+    <div class="quick-nav-inner">
+      <a href="#overview">Overview</a>
+      <a href="#weekly">Duties</a>
+      <a href="#visit-check">Visit Check</a>
+      <a href="#eligibility">Eligibility</a>
+      <a href="#exam">Exam</a>
+      <a href="#reactions">Reactions</a>
+      <a href="#process">Procedure</a>
+      <a href="#quality">Quality</a>
+      <a href="#references">References</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="card">
+          <h3>On this page</h3>
+          <ul class="toc">
+            <li><a href="#overview">1. Physician role</a></li>
+            <li><a href="#weekly">2. Daily / weekly / monthly duties</a></li>
+            <li><a href="#visit-check">3. PC-Blut visit check</a></li>
+            <li><a href="#eligibility">4. Eligibility quick reference</a></li>
+            <li><a href="#exam">5. Physical examination</a></li>
+            <li><a href="#substitutes">6. Physician substitute observation</a></li>
+            <li><a href="#reactions">7. Adverse donor reactions</a></li>
+            <li><a href="#process">8. Plasmapheresis process</a></li>
+            <li><a href="#safety">9. Safety and infection risk</a></li>
+            <li><a href="#quality">10. QA and escalation</a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>High-yield points</h3>
+          <ul class="list-tight muted">
+            <li>Physician presence in the donation hall is part of the role, not just computer sign-off.</li>
+            <li>Red-coded deferred donor visits require careful review.</li>
+            <li>Normal visits can be reviewed by spot check according to local process.</li>
+            <li>Donor adverse reactions should be reviewed weekly; EMS cases require medical director involvement.</li>
+            <li>Observation of physician substitutes is best used as coaching and quality improvement.</li>
+          </ul>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section id="overview" class="section card">
+          <div class="section-header"><h2>1. Role of the plasma donation physician</h2><span class="pill">Core role</span></div>
+          <p>
+            The local on-site physician provides medical oversight for donor safety and donation centre quality. The work includes review of donor suitability decisions, review of adverse donor reactions, direct interaction with physician substitutes and donation staff, observation of the donation hall, and communication with the medical director.
+          </p>
+          <div class="grid-3">
+            <div class="mini"><h3>Donor safety</h3><p>Confirm that screening, vitals, laboratory thresholds, physical examination, consent, and deferrals are appropriately documented.</p></div>
+            <div class="mini"><h3>Staff support</h3><p>Coach physician substitutes and donor staff on assessment, consent, procedure explanation, reaction recognition, and escalation.</p></div>
+            <div class="mini"><h3>Quality oversight</h3><p>Review records, identify trends, complete observations, and escalate concerns to QA or the medical director.</p></div>
+          </div>
+          <div class="notice"><strong>Practical framing:</strong> the physician is not only a sign-off function. A visible presence in the donation hall and constructive coaching of staff are central to improving donor safety.</div>
+        </section>
+
+        <section id="weekly" class="section card">
+          <div class="section-header"><h2>2. Daily, weekly, monthly, and annual duties</h2><span class="pill">Checklist</span></div>
+          <h3>Daily / as needed</h3>
+          <ul class="list-tight">
+            <li>Be available for consultation with the medical director with reasonable notice, usually within 24 hours under normal circumstances.</li>
+            <li>Respond to urgent clinical or operational questions escalated through the centre process.</li>
+          </ul>
+          <h3 style="margin-top:18px">Weekly</h3>
+          <div class="checklist">
+            <div class="check"><strong>On-site coverage</strong><br>Provide a total of 4 hours in person during normal working hours, ideally when the centre is busy.</div>
+            <div class="check"><strong>Time log and QA check-in</strong><br>Check in with QA and record physician hours in the physician time log.</div>
+            <div class="check"><strong>Email / communications</strong><br>Log in and review applicable communications.</div>
+            <div class="check"><strong>Visit record review</strong><br>Review outstanding donor visit records, including all red-coded deferrals and spot checks of normal physical exam visits.</div>
+            <div class="check"><strong>Adverse donor reactions</strong><br>Review donor adverse reaction records and discuss serious or concerning events with appropriate staff.</div>
+            <div class="check"><strong>Staff contact</strong><br>Meet briefly with physician substitutes and observe donation hall activity.</div>
+          </div>
+          <h3 style="margin-top:18px">Monthly / periodic</h3>
+          <ul class="list-tight">
+            <li>Complete at least one performance observation related to donor evaluation / physical exam, donor screening, and phlebotomy / apheresis practice, according to local checklists.</li>
+            <li>Complete assigned medical education items in the document control / training system.</li>
+            <li>Review non-conformance trends, staff scheduling, equipment issues, and competency findings periodically with QA, the centre manager, and the medical director.</li>
+          </ul>
+        </section>
+
+        <section id="visit-check" class="section card">
+          <div class="section-header"><h2>3. PC-Blut visit check guide</h2><span class="pill">Record review</span></div>
+          <p>
+            Visit check is a quality control process. Prioritize records most likely to affect donor safety: deferrals, adverse reactions, out-of-range vitals, out-of-range hematocrit or total protein, medication issues, incomplete documentation, and unclear comments.
+          </p>
+          <table>
+            <thead><tr><th>Record type</th><th>What to review</th><th>Practical focus</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Red-coded deferrals</strong></td><td>Review all. Check reason, duration, vitals / Hct / TP trigger, medication documentation, physical exam comments, and further comments.</td><td>Is the deferral justified, correctly documented, and understandable?</td></tr>
+              <tr><td><strong>Green physical exam visits</strong></td><td>Spot-check. Review exam documentation, vitals, total protein, hematocrit, medications, photo quality, and collection volume.</td><td>Does the documentation support a real exam and appropriate donor suitability decision?</td></tr>
+              <tr><td><strong>Yellow / white non-critical visits</strong></td><td>May be signed in bulk unless there is a specific flag, concern, or local requirement.</td><td>Do not miss comments, abnormal trends, or repeated borderline values.</td></tr>
+            </tbody>
+          </table>
+          <div class="warning"><strong>Documentation pearl:</strong> exam comments should be comprehensible and should vary appropriately. Repetitive generic comments may suggest superficial examination and reduce documentation quality.</div>
+        </section>
+
+        <section id="eligibility" class="section card">
+          <div class="section-header"><h2>4. Donor eligibility quick reference</h2><span class="pill">Thresholds</span></div>
+          <table>
+            <thead><tr><th>Parameter</th><th>Usual acceptable range</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Hematocrit</td><td>38%–54%</td><td>Verify out-of-range values and related deferral documentation.</td></tr>
+              <tr><td>Total protein</td><td>6.0–9.0 g/dL</td><td>Review trends and repeat testing requirements per local SOP.</td></tr>
+              <tr><td>Pulse</td><td>50–100 bpm</td><td>40–49 bpm may be acceptable in athletic donors according to local criteria.</td></tr>
+              <tr><td>Blood pressure</td><td>Systolic 100–180 mmHg<br>Diastolic 50–100 mmHg</td><td>Systolic 90–99 mmHg may be acceptable in athletic donors according to local criteria.</td></tr>
+              <tr><td>Temperature</td><td>35.5–37.5 °C</td><td>Consider illness symptoms and screening responses.</td></tr>
+              <tr><td>Weight</td><td>50–180 kg</td><td>Collection volume is determined by height, weight, and hematocrit according to the system nomogram.</td></tr>
+              <tr><td>Blood loss</td><td>&lt;200 mL usually no deferral</td><td>Repeated or greater blood loss may require deferral according to local rules.</td></tr>
+            </tbody>
+          </table>
+          <div class="notice"><strong>Use current controlled SOPs:</strong> thresholds and deferral durations should always be confirmed in the live controlled document system before operational use.</div>
+        </section>
+
+        <section id="exam" class="section card">
+          <div class="section-header"><h2>5. Physical examination checklist</h2><span class="pill">Donor exam</span></div>
+          <p>
+            The physical exam should be systematic and sufficiently detailed to identify donors who are unwell, at risk during donation, or potentially unsafe to donate. The physician should teach physician substitutes to perform each component consistently rather than relying on check-box documentation.
+          </p>
+          <div class="grid-2">
+            <div class="mini"><h3>Skin, hair, nails, venipuncture sites</h3><p>Inspect forearms and phlebotomy sites for wounds, puncture marks, injection scars, rashes, lesions, inflammation, infection, or edema.</p></div>
+            <div class="mini"><h3>Eyes, ears, nose, throat</h3><p>Assess pallor, jaundice, redness, discharge, moisture, oral lesions, and general condition of teeth and gums. Check pupils with light when required.</p></div>
+            <div class="mini"><h3>Neck</h3><p>Assess lymph nodes, thyroid enlargement, jugular venous distension, and smooth movement.</p></div>
+            <div class="mini"><h3>Lungs</h3><p>Auscultate breath sounds and assess respiratory rate, rhythm, depth, symmetry, effort, wheezing, or crackles.</p></div>
+            <div class="mini"><h3>Cardiovascular</h3><p>Assess heart sounds, rate, rhythm, murmurs, and lower extremity edema.</p></div>
+            <div class="mini"><h3>Abdomen and neurologic</h3><p>Assess abdominal tenderness, distension, masses, bruits when indicated, orientation, speech, behavior, movement disorders, and limb strength.</p></div>
+          </div>
+        </section>
+
+        <section id="substitutes" class="section card">
+          <div class="section-header"><h2>6. Physician substitute observation and coaching</h2><span class="pill">Training</span></div>
+          <div class="grid-2">
+            <div>
+              <h3>Observation focus</h3>
+              <ul class="list-tight">
+                <li>Confirms donor identity and confidentiality.</li>
+                <li>Reviews questionnaire carefully and uses health appendices when needed.</li>
+                <li>Confirms donor hydration and food intake.</li>
+                <li>Explains plasmapheresis clearly and checks donor understanding.</li>
+                <li>Explains consent, risks, side effects, legal obligation to answer truthfully, and donor code of conduct.</li>
+                <li>Checks venipuncture sites and performs the physical exam appropriately.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Coaching approach</h3>
+              <p>
+                Treat observation primarily as a training encounter. The goal is to improve consistency, donor communication, documentation, and recognition of abnormal findings. Deficiencies should trigger additional observation or targeted retraining according to centre process.
+              </p>
+              <div class="notice"><strong>Useful teaching prompt:</strong> ask the physician substitute to explain the plasmapheresis process as if speaking to a first-time donor, then refine the explanation for clarity and brevity.</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="reactions" class="section card">
+          <div class="section-header"><h2>7. Donor adverse reactions</h2><span class="pill">Safety</span></div>
+          <table>
+            <thead><tr><th>Reaction category</th><th>Examples / definition</th><th>Physician role</th></tr></thead>
+            <tbody>
+              <tr><td>Minor</td><td>Brief prefaint symptoms, mild hypotension / dizziness, pallor, sweating, visual disturbance, mild citrate symptoms, small uncomplicated bruise or infiltration.</td><td>Confirm appropriate management and documentation; look for recurrent patterns.</td></tr>
+              <tr><td>Moderate</td><td>Reaction requiring physician substitute assistance or monitoring to achieve satisfactory recovery.</td><td>Review details, staff response, recovery, donor instructions, and need for process improvement.</td></tr>
+              <tr><td>Serious</td><td>Hospitalization, significant disability, intervention to prevent disability, life-threatening condition, or death.</td><td>Escalate promptly. Ensure medical director / QA involvement and regulatory process per SOP.</td></tr>
+            </tbody>
+          </table>
+          <h3 style="margin-top:18px">Common reaction patterns</h3>
+          <div class="grid-3">
+            <div class="mini"><h3>Citrate / hypocalcemia</h3><p>Metallic taste, lip tingling, hand or foot tingling, cramps, nausea, or more severe neuromuscular symptoms.</p></div>
+            <div class="mini"><h3>Vasovagal / hypotensive</h3><p>Lightheadedness, pallor, sweating, weakness, hypotension, presyncope, or syncope.</p></div>
+            <div class="mini"><h3>Local venipuncture injury</h3><p>Hematoma, bruising, arterial injury, nerve irritation, vein injury, pain, swelling, or restricted movement.</p></div>
+            <div class="mini"><h3>Allergic reaction</h3><p>Urticaria, pruritus, bronchospasm, angioedema, or anaphylaxis.</p></div>
+            <div class="mini"><h3>Hyperventilation / anxiety</h3><p>Paresthesia and dizziness may overlap with citrate symptoms; assess context and vitals.</p></div>
+            <div class="mini"><h3>Rare emergencies</h3><p>Air / pulmonary embolism, seizure, hemolytic reaction, cardiac or respiratory arrest.</p></div>
+          </div>
+          <div class="danger"><strong>Escalation:</strong> EMS activation and serious adverse reactions should be reviewed with the medical director according to local policy.</div>
+        </section>
+
+        <section id="process" class="section card">
+          <div class="section-header"><h2>8. Plasma donation process for physician teaching</h2><span class="pill">Procedure</span></div>
+          <p>
+            Donation plasmapheresis differs from therapeutic plasma exchange. In plasma donation, plasma is collected from a healthy donor, while red cells are returned to the donor. The procedure occurs through repeated draw and return cycles, followed by saline return at the end of donation.
+          </p>
+          <div class="grid-4">
+            <div class="mini"><h3>1. Draw phase</h3><p>Anticoagulant is added and whole blood is sent to the separation device.</p></div>
+            <div class="mini"><h3>2. Separation</h3><p>Plasma is separated from cellular components and sent to the collection container.</p></div>
+            <div class="mini"><h3>3. Return phase</h3><p>Red cells are returned to the donor from the reservoir.</p></div>
+            <div class="mini"><h3>4. End of donation</h3><p>Normal saline is returned after completion of multiple draw / return cycles.</p></div>
+          </div>
+          <div class="notice"><strong>Donor education phrase:</strong> “Your plasma is collected, but your red cells are returned to you during the procedure. This is why plasma donation can be performed more frequently than whole blood donation.”</div>
+        </section>
+
+        <section id="safety" class="section card">
+          <div class="section-header"><h2>9. Why plasma donation matters and modern safety standards</h2><span class="pill">Context</span></div>
+          <div class="grid-2">
+            <div>
+              <h3>Why plasma is collected</h3>
+              <ul class="list-tight">
+                <li>Immunoglobulin products for primary and secondary immunodeficiency.</li>
+                <li>Immune thrombocytopenia, Guillain-Barré syndrome, CIDP, Kawasaki disease, transplant-related indications, and selected off-label autoimmune / neurologic uses.</li>
+                <li>Albumin and plasma-derived products used across critical care, neurology, immunology, hematology, and transplant medicine.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Modern safety framework</h3>
+              <ul class="list-tight">
+                <li>Donor screening and eligibility criteria.</li>
+                <li>Donation testing and product testing.</li>
+                <li>Accreditation, audits, and quality management.</li>
+                <li>Manufacturing viral inactivation / removal steps.</li>
+                <li>Traceability and adverse event investigation.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="warning"><strong>Historical context:</strong> the Canadian tainted blood tragedy and Krever Inquiry remain central to plasma safety culture. Modern systems emphasize screening, testing, manufacturing controls, documentation, and transparent response to risk.</div>
+        </section>
+
+        <section id="quality" class="section card">
+          <div class="section-header"><h2>10. Quality assurance, communication, and escalation</h2><span class="pill">Governance</span></div>
+          <table>
+            <thead><tr><th>Issue</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>Planned or unplanned physician absence</td><td>Notify the medical director so coverage and virtual duties can be arranged.</td></tr>
+              <tr><td>Concerning physician substitute performance</td><td>Discuss constructively, document observation, leave completed forms with QA, and inform the medical director when needed.</td></tr>
+              <tr><td>Serious or recurrent adverse donor reactions</td><td>Review circumstances with donation hall staff and escalate to QA / medical director.</td></tr>
+              <tr><td>Non-conformance trends</td><td>Review periodically with QA and centre leadership; identify education or process changes.</td></tr>
+              <tr><td>Controlled document questions</td><td>Use current documents in the official controlled document system rather than old printed copies.</td></tr>
+            </tbody>
+          </table>
+          <div class="notice"><strong>Monthly report content:</strong> summarize completed visit checks, adverse reaction review, staff observations, unresolved concerns, training completed, and any issues requiring medical director input.</div>
+        </section>
+
+        <section id="references" class="section card">
+          <div class="section-header"><h2>11. Source notes</h2><span class="pill">References</span></div>
+          <ol class="refs">
+            <li>Local on-site physician guide, January 2026: physician presence, weekly duties, staff observations, medical director communication, and training framework.</li>
+            <li>Physician duties at the donation center onboarding tutorial, October 2025: PC-Blut visit check process, donor eligibility ranges, physical examination checklist, consent coaching, reaction definitions, and plasmapheresis process diagrams.</li>
+            <li>Canadian Blood Services Clinical Guide to Transfusion, Chapter 14: therapeutic apheresis background, indications, patient care, adverse events, vascular access, and technical ordering principles.</li>
+          </ol>
+          <p class="muted" style="margin-top:14px">
+            This page is a practical educational summary. Operational decisions must follow the most current local SOPs, controlled documents, regulatory requirements, and medical director guidance.
+          </p>
+        </section>
+      </main>
+    </div>
+    <div class="footer">
+      <a class="back-link" href="transfusion_medicine.html">← Return to Transfusion Medicine</a><br>
+      Prepared as a GitHub-ready standalone HTML reference page for a transfusion medicine site.
+    </div>
+  </div>
+</body>
+</html>
