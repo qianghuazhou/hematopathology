@@ -3,299 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Therapeutic Plasma Exchange (TPE)</title>
+  <title>Therapeutic Plasma Exchange (TPE) - Practical Guide</title>
   <style>
     :root{
-      --bg:#f4f7f9;
-      --panel:#ffffff;
-      --text:#22313f;
-      --muted:#5f6b76;
-      --primary:#243746;
-      --accent:#2d8cff;
-      --border:#dbe3ea;
-      --soft:#eef4f8;
-      --soft2:#f8fbfd;
-      --tag:#e9eef3;
-      --ok:#eaf5ee;
-      --warn:#fff7e8;
-      --danger:#fdeeee;
+      --bg:#f4f7f9; --panel:#ffffff; --text:#22313f; --muted:#5f6b76;
+      --primary:#243746; --accent:#2d8cff; --border:#dbe3ea;
+      --soft:#eef4f8; --soft2:#f8fbfd; --tag:#e9eef3;
+      --ok:#eaf5ee; --warn:#fff7e8; --danger:#fdeeee;
       --shadow:0 10px 28px rgba(25,45,66,.08);
-      --radius:18px;
-      --radius-sm:12px;
-      --max:1180px;
+      --radius:18px; --max:1180px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
-      color:var(--text);
-      background:var(--bg);
-      line-height:1.62;
-    }
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
+    body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.62}
+    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
     .container{max-width:var(--max);margin:0 auto;padding:24px}
     .back-link{display:inline-flex;align-items:center;gap:8px;margin:6px 0 14px;color:var(--primary);font-weight:700;text-decoration:none}
     .back-link:hover{text-decoration:none;color:var(--accent)}
-    .hero{
-      background:linear-gradient(135deg,#243746 0%,#2f4c63 100%);
-      color:#fff;
-      border-radius:24px;
-      padding:34px 32px;
-      box-shadow:var(--shadow);
-      margin-top:10px;
-    }
-    .eyebrow{
-      display:inline-block;
-      background:rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.18);
-      padding:6px 12px;
-      border-radius:999px;
-      font-size:.84rem;
-      letter-spacing:.02em;
-      margin-bottom:14px;
-    }
-    h1,h2,h3{margin:0 0 12px}
-    h1{font-size:2.3rem;line-height:1.15}
-    h2{font-size:1.45rem;color:var(--primary)}
-    h3{font-size:1.02rem;color:var(--primary)}
-    .hero p{
-      max-width:900px;
-      margin:0;
-      color:rgba(255,255,255,.92);
-      font-size:1rem;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns:2fr 1fr;
-      gap:18px;
-      margin-top:22px;
-    }
-    .hero-stat{
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:18px;
-      padding:16px 18px;
-    }
-    .hero-stat .label{font-size:.83rem;color:rgba(255,255,255,.75)}
-    .hero-stat .value{font-size:1.1rem;font-weight:700;margin-top:4px}
-
-    .topic-strip{margin-top:20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-    .topic-card{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);padding:18px;color:inherit;text-decoration:none}
-    .topic-card:hover{text-decoration:none;border-color:#c7d7e5;transform:translateY(-1px)}
-    .topic-card .title{font-weight:700;color:var(--primary);margin-bottom:6px}
-    .topic-card .desc{font-size:.92rem;color:var(--muted)}
-    .topic-card .tag{background:var(--tag);border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:.78rem;font-weight:700;color:var(--primary);white-space:nowrap}
-
-    .quick-nav{
-      position:sticky;
-      top:0;
-      z-index:10;
-      background:rgba(244,247,249,.92);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--border);
-      margin-top:18px;
-    }
-    .quick-nav-inner{
-      max-width:var(--max);
-      margin:0 auto;
-      padding:12px 24px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-    .quick-nav a{
-      display:inline-block;
-      padding:9px 13px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid var(--border);
-      color:var(--primary);
-      font-size:.92rem;
-      font-weight:600;
-    }
-
-    .layout{
-      display:grid;
-      grid-template-columns:280px minmax(0,1fr);
-      gap:22px;
-      align-items:start;
-      margin-top:24px;
-    }
-    .sidebar{
-      position:sticky;
-      top:78px;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
-    .card{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:22px;
-    }
-    .sidebar .card{padding:18px}
-    .toc{list-style:none;padding:0;margin:0}
-    .toc li+li{margin-top:8px}
-    .toc a{color:var(--text);font-size:.95rem}
-    .toc a:hover{color:var(--accent)}
-
-    .main{display:flex;flex-direction:column;gap:22px}
-    .section{scroll-margin-top:92px}
-    .section-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
-    .pill{
-      display:inline-block;
-      background:var(--tag);
-      color:var(--primary);
-      border:1px solid var(--border);
-      padding:5px 10px;
-      border-radius:999px;
-      font-size:.8rem;
-      font-weight:700;
-      white-space:nowrap;
-    }
-    .muted{color:var(--muted)}
-    .grid-2,.grid-3,.grid-4{display:grid;gap:16px}
-    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
-
-    .mini{
-      background:var(--soft2);
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:16px;
-      height:100%;
-    }
-    .mini h3{margin-bottom:8px}
-    .mini p{margin:0}
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      font-size:.95rem;
-      background:#fff;
-      overflow:hidden;
-      border-radius:14px;
-    }
-    th,td{padding:12px 12px;border-bottom:1px solid var(--border);vertical-align:top;text-align:left}
-    th{background:var(--soft);color:var(--primary);font-weight:700}
-    tr:last-child td{border-bottom:none}
-
-    .notice,.warning,.danger{
-      border-radius:16px;
-      padding:16px 18px;
-      border:1px solid var(--border);
-    }
-    .notice{background:var(--soft)}
-    .warning{background:var(--warn)}
-    .danger{background:var(--danger)}
-
-    .list-tight{margin:8px 0 0 0;padding-left:18px}
-    .list-tight li+li{margin-top:6px}
-    .refs{padding-left:18px;margin:0}
-    .refs li+li{margin-top:10px}
-    code.inline{
-      background:var(--soft);
-      border:1px solid var(--border);
-      border-radius:8px;
-      padding:2px 6px;
-      font-family:Consolas, monospace;
-      font-size:.9em;
-    }
-    .footer{
-      color:var(--muted);
-      font-size:.92rem;
-      padding:10px 0 40px;
-    }
-    @media (max-width:1060px){
-      .layout{grid-template-columns:1fr}
-      .sidebar{position:static}
-      .hero-grid,.grid-4,.topic-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
-    }
-    @media (max-width:760px){
-      .container{padding:16px}
-      .quick-nav-inner{padding:10px 16px}
-      .hero{padding:24px 20px}
-      h1{font-size:1.9rem}
-      .hero-grid,.grid-2,.grid-3,.grid-4,.topic-strip{grid-template-columns:1fr}
-      th,td{font-size:.9rem}
-    }
+    .hero{background:linear-gradient(135deg,#243746 0%,#2f4c63 100%);color:#fff;border-radius:24px;padding:34px 32px;box-shadow:var(--shadow);margin-top:10px}
+    .eyebrow{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:6px 12px;border-radius:999px;font-size:.84rem;letter-spacing:.02em;margin-bottom:14px}
+    h1,h2,h3{margin:0 0 12px} h1{font-size:2.3rem;line-height:1.15} h2{font-size:1.45rem;color:var(--primary)} h3{font-size:1.02rem;color:var(--primary)}
+    .hero p{max-width:940px;margin:0;color:rgba(255,255,255,.92);font-size:1rem}
+    .hero-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:22px}
+    .hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:16px 18px}
+    .hero-stat .label{font-size:.83rem;color:rgba(255,255,255,.75)} .hero-stat .value{font-size:1.08rem;font-weight:700;margin-top:4px}
+    .quick-nav{position:sticky;top:0;z-index:10;background:rgba(244,247,249,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);margin-top:18px}
+    .quick-nav-inner{max-width:var(--max);margin:0 auto;padding:12px 24px;display:flex;flex-wrap:wrap;gap:10px}
+    .quick-nav a{display:inline-block;padding:9px 13px;border-radius:999px;background:#fff;border:1px solid var(--border);color:var(--primary);font-size:.92rem;font-weight:600}
+    .layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px;align-items:start;margin-top:24px}
+    .sidebar{position:sticky;top:78px;display:flex;flex-direction:column;gap:18px}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+    .sidebar .card{padding:18px}.toc{list-style:none;padding:0;margin:0}.toc li+li{margin-top:8px}.toc a{color:var(--text);font-size:.95rem}.toc a:hover{color:var(--accent)}
+    .main{display:flex;flex-direction:column;gap:22px}.section{scroll-margin-top:92px}.section-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+    .pill{display:inline-block;background:var(--tag);color:var(--primary);border:1px solid var(--border);padding:5px 10px;border-radius:999px;font-size:.8rem;font-weight:700;white-space:nowrap}
+    .muted{color:var(--muted)}.grid-2,.grid-3,.grid-4{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .mini{background:var(--soft2);border:1px solid var(--border);border-radius:16px;padding:16px;height:100%}.mini h3{margin-bottom:8px}.mini p{margin:0}
+    table{width:100%;border-collapse:collapse;font-size:.95rem;background:#fff;overflow:hidden;border-radius:14px} th,td{padding:12px;border-bottom:1px solid var(--border);vertical-align:top;text-align:left} th{background:var(--soft);color:var(--primary);font-weight:700} tr:last-child td{border-bottom:none}
+    .notice,.warning,.danger,.okbox{border-radius:16px;padding:16px 18px;border:1px solid var(--border);margin-top:16px}.notice{background:var(--soft)}.warning{background:var(--warn)}.danger{background:var(--danger)}.okbox{background:var(--ok)}
+    .list-tight{margin:8px 0 0 0;padding-left:18px}.list-tight li+li{margin-top:6px}.refs{padding-left:18px;margin:0}.refs li+li{margin-top:10px}
+    code.inline, pre{background:var(--soft);border:1px solid var(--border);border-radius:8px;font-family:Consolas,monospace} code.inline{padding:2px 6px;font-size:.9em} pre{padding:14px;white-space:pre-wrap;line-height:1.45}
+    .footer{color:var(--muted);font-size:.92rem;padding:10px 0 40px}
+    @media (max-width:1060px){.layout{grid-template-columns:1fr}.sidebar{position:static}.hero-grid,.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:760px){.container{padding:16px}.quick-nav-inner{padding:10px 16px}.hero{padding:24px 20px}h1{font-size:1.9rem}.hero-grid,.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}th,td{font-size:.9rem}}
   </style>
 </head>
 <body>
   <div class="container">
     <a class="back-link" href="transfusion_medicine.html">← Back to Transfusion Medicine</a>
     <header class="hero">
-      <div class="eyebrow">Transfusion Medicine Reference</div>
+      <div class="eyebrow">Transfusion Medicine Practical Reference</div>
       <h1>Therapeutic Plasma Exchange (TPE)</h1>
       <p>
-        Therapeutic plasma exchange is an extracorporeal apheresis procedure in which plasma is removed and replaced with albumin, plasma, or a combined replacement solution. It is used when circulating pathogenic plasma constituents drive disease, especially autoantibodies, immune complexes, paraproteins, complement factors, cytokines, or selected toxins. In practice, TPE is most useful when the target molecule is largely intravascular, has a relatively long half-life, and is sufficiently large that dialysis is ineffective.
+        A practical prescription-focused guide for hematology and transfusion medicine practice. TPE removes plasma and replaces it with albumin, plasma, or a combined solution. It is most useful when disease is driven by circulating pathogenic plasma constituents such as autoantibodies, alloantibodies, immune complexes, paraproteins, complement factors, cytokines, or selected highly protein-bound toxins.
       </p>
       <div class="hero-grid">
-        <div class="hero-stat">
-          <div class="label">Typical exchange volume</div>
-          <div class="value">1.0–1.5 plasma volumes per session</div>
-        </div>
-        <div class="hero-stat">
-          <div class="label">Most common replacement fluid</div>
-          <div class="value">5% albumin</div>
-        </div>
-        <div class="hero-stat">
-          <div class="label">Classic plasma-requiring indication</div>
-          <div class="value">Acquired TTP</div>
-        </div>
-        <div class="hero-stat">
-          <div class="label">Common anticoagulant</div>
-          <div class="value">Citrate (ACD-A)</div>
-        </div>
+        <div class="hero-stat"><div class="label">Standard exchange</div><div class="value">1.0–1.5 TPV</div></div>
+        <div class="hero-stat"><div class="label">Most indications</div><div class="value">5% albumin</div></div>
+        <div class="hero-stat"><div class="label">TTP</div><div class="value">Daily TPE + plasma</div></div>
+        <div class="hero-stat"><div class="label">Key monitoring</div><div class="value">CBC, fibrinogen, Ca/Mg</div></div>
       </div>
     </header>
-
-    <div class="topic-strip">
-      <a href="#overview" class="topic-card">
-        <div>
-          <div class="title">Core Concepts</div>
-          <div class="desc">Overview, therapeutic rationale, and the biologic principles that determine when TPE is most effective.</div>
-        </div>
-        <div class="tag">Basics</div>
-      </a>
-      <a href="#prescription" class="topic-card">
-        <div>
-          <div class="title">How to Prescribe</div>
-          <div class="desc">Exchange volume, anticoagulation, vascular access, and replacement fluid selection for day-to-day practice.</div>
-        </div>
-        <div class="tag">Practical</div>
-      </a>
-      <a href="#indications" class="topic-card">
-        <div>
-          <div class="title">When to Use TPE</div>
-          <div class="desc">Hematologic, neurologic, transplant, metabolic, and urgent indications with clinically useful framing.</div>
-        </div>
-        <div class="tag">Indications</div>
-      </a>
-      <a href="#complications" class="topic-card">
-        <div>
-          <div class="title">Safety and Monitoring</div>
-          <div class="desc">Common complications, troubleshooting, and pregnancy-specific points relevant to transfusion practice.</div>
-        </div>
-        <div class="tag">Safety</div>
-      </a>
-    </div>
   </div>
 
   <nav class="quick-nav">
     <div class="quick-nav-inner">
-      <a href="#overview">Overview</a>
-      <a href="#principles">Core Principles</a>
-      <a href="#prescription">Prescription</a>
-      <a href="#indications">Indications</a>
-      <a href="#complications">Complications</a>
-      <a href="#pregnancy">Pregnancy</a>
-      <a href="#references">References</a>
+      <a href="#cheatsheet">Cheat Sheet</a><a href="#ttp">TTP Emergency</a><a href="#calculate">TPV</a><a href="#prescription">Prescription</a><a href="#replacement">Replacement</a><a href="#indications">Indications</a><a href="#tma">TMA</a><a href="#hyperviscosity">Hyperviscosity</a><a href="#drug">Drug Removal</a><a href="#complications">Safety</a><a href="#plasma-donation">Plasma Donation Physician Guide</a>
     </div>
   </nav>
 
@@ -305,530 +77,382 @@
         <div class="card">
           <h3>On this page</h3>
           <ul class="toc">
-            <li><a href="#overview">1. Overview and rationale</a></li>
-            <li><a href="#principles">2. Core principles</a></li>
-            <li><a href="#technology">3. Technology and access</a></li>
-            <li><a href="#prescription">4. Practical prescription</a></li>
+            <li><a href="#cheatsheet">1. Rapid prescription cheat sheet</a></li>
+            <li><a href="#ttp">2. TTP emergency box</a></li>
+            <li><a href="#calculate">3. Calculate plasma volume</a></li>
+            <li><a href="#prescription">4. Practical order design</a></li>
             <li><a href="#replacement">5. Replacement fluid</a></li>
             <li><a href="#indications">6. Clinical indications</a></li>
-            <li><a href="#urgent">7. Urgent TPE</a></li>
-            <li><a href="#complications">8. Adverse effects</a></li>
-            <li><a href="#pregnancy">9. Pregnancy considerations</a></li>
-            <li><a href="#pearls">10. Clinical pearls</a></li>
-            <li><a href="#references">11. References</a></li>
+            <li><a href="#tma">7. TMA differential</a></li>
+            <li><a href="#hyperviscosity">8. Hyperviscosity</a></li>
+            <li><a href="#drug">9. Drug removal</a></li>
+            <li><a href="#complications">10. Monitoring and complications</a></li>
+            <li><a href="#comparison">11. TPE versus RBC exchange</a></li>
+            <li><a href="#plasma-donation">12. Plasma donation physician guide</a></li>
+            <li><a href="#pearls">13. Pearls</a></li>
           </ul>
         </div>
         <div class="card">
           <h3>High-yield points</h3>
           <ul class="list-tight muted">
-            <li>TPE removes circulating factors; it does not suppress ongoing production, so disease-directed therapy usually must be given concurrently.</li>
-            <li>One session removes most efficiently substances confined to plasma, especially IgM and paraproteins.</li>
-            <li>Daily TPE with plasma replacement is standard for suspected acquired TTP.</li>
-            <li>Albumin is preferred for most non-TTP indications; plasma is used when clotting factors or ADAMTS13 replacement is needed.</li>
-            <li>Hypotension, citrate-related hypocalcemia, allergic reactions, and access problems are the most common complications.</li>
+            <li>Do not wait for ADAMTS13 before starting TPE if acquired TTP is strongly suspected.</li>
+            <li>Use plasma replacement for TTP; use albumin for most non-TTP indications.</li>
+            <li>Repeated albumin exchange can lower fibrinogen and coagulation factors.</li>
+            <li>Give rituximab, IVIG, monoclonal antibodies, and other critical drugs after TPE when possible.</li>
+            <li>Hyperviscosity from IgM usually responds rapidly.</li>
           </ul>
         </div>
       </aside>
 
       <main class="main">
-        <section id="overview" class="section card">
-          <div class="section-header">
-            <h2>1. Overview and therapeutic rationale</h2>
-            <span class="pill">Foundation</span>
-          </div>
-          <p>
-            Therapeutic plasma exchange removes a patient’s plasma and returns the cellular blood components together with replacement fluid. The major therapeutic logic is straightforward: if disease is mediated by a harmful circulating plasma component, rapid reduction of that component may produce organ-saving or life-saving benefit. TPE is therefore especially relevant in antibody-mediated disease, paraprotein-related hyperviscosity, complement-mediated disease, selected toxic ingestions, and a subset of transplant-related immune barriers.
-          </p>
-          <p>
-            TPE is not the same as simple plasmapheresis for donation. In therapeutic plasma exchange, removed plasma must be replaced. Although TPE can lead to dramatic clinical improvement, it is usually a temporizing or bridging intervention rather than definitive disease control. Ongoing synthesis of pathogenic molecules means that immunosuppression, chemotherapy, or other disease-specific treatment should generally accompany TPE.
-          </p>
-          <div class="grid-3">
-            <div class="mini">
-              <h3>What TPE removes best</h3>
-              <p>Large molecules, predominantly intravascular molecules, slowly generated substances, and factors with longer half-life.</p>
-            </div>
-            <div class="mini">
-              <h3>When TPE is less effective</h3>
-              <p>Small molecules, rapidly re-accumulating targets, or substances with large extravascular distribution.</p>
-            </div>
-            <div class="mini">
-              <h3>Why repeated sessions are needed</h3>
-              <p>Redistribution occurs from the extravascular compartment back into plasma after each exchange.</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="principles" class="section card">
-          <div class="section-header">
-            <h2>2. Core principles of TPE</h2>
-            <span class="pill">Mechanism</span>
-          </div>
-          <div class="grid-2">
-            <div>
-              <h3>Mechanisms of benefit</h3>
-              <ul class="list-tight">
-                <li>Direct removal of pathogenic autoantibodies, alloantibodies, immune complexes, cryoglobulins, paraproteins, lipoproteins, complement factors, cytokines, or toxins.</li>
-                <li>Replacement of beneficial plasma proteins when plasma is used, classically ADAMTS13 in thrombotic thrombocytopenic purpura.</li>
-                <li>Short-term reduction in inflammatory burden while disease-specific therapy takes effect.</li>
-              </ul>
-            </div>
-            <div>
-              <h3>Determinants of efficacy</h3>
-              <ul class="list-tight">
-                <li><strong>Molecular size:</strong> larger molecules are more effectively removed.</li>
-                <li><strong>Intravascular distribution:</strong> the more confined to plasma, the better the removal.</li>
-                <li><strong>Turnover:</strong> rapidly regenerated substances may rebound quickly.</li>
-                <li><strong>Frequency of exchange:</strong> serial procedures are often needed to keep pace with redistribution and resynthesis.</li>
-              </ul>
-            </div>
-          </div>
-          <div class="notice" style="margin-top:16px">
-            <strong>Clinical implication:</strong> IgM-mediated states and hyperviscosity often respond very quickly because IgM is largely intravascular. IgG-mediated autoimmune disease usually requires a course of repeated exchanges because IgG is more widely distributed.
-          </div>
-        </section>
-
-        <section id="technology" class="section card">
-          <div class="section-header">
-            <h2>3. Technology, separation method, and vascular access</h2>
-            <span class="pill">Procedure</span>
-          </div>
-          <div class="grid-2">
-            <div class="mini">
-              <h3>Centrifugation TPE</h3>
-              <p>
-                Separates blood components by density. It is the dominant approach in many apheresis units and can achieve high plasma extraction efficiency at lower blood flow rates. Peripheral venous access is often feasible.
-              </p>
-            </div>
-            <div class="mini">
-              <h3>Membrane filtration TPE</h3>
-              <p>
-                Uses a plasma filter similar in concept to dialysis-based convective separation. It generally requires higher blood flow rates, longer treatment times, and more commonly central venous access.
-              </p>
-            </div>
-          </div>
-          <h3 style="margin-top:18px">Typical vascular access choices</h3>
+        <section id="cheatsheet" class="section card">
+          <div class="section-header"><h2>1. Rapid prescription cheat sheet</h2><span class="pill">What to order</span></div>
           <table>
-            <thead>
-              <tr>
-                <th>Access</th>
-                <th>Typical use</th>
-                <th>Advantages</th>
-                <th>Limitations</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Item</th><th>Standard practical approach</th></tr></thead>
             <tbody>
-              <tr>
-                <td>Large-bore peripheral IV</td>
-                <td>Short treatment courses, centrifugation systems</td>
-                <td>Avoids central line complications; convenient</td>
-                <td>May not support repeated or high-flow procedures</td>
-              </tr>
-              <tr>
-                <td>Central venous catheter</td>
-                <td>Urgent therapy, poor peripheral access, membrane TPE</td>
-                <td>Reliable flow</td>
-                <td>Infection, thrombosis, bleeding, pneumothorax risk</td>
-              </tr>
-              <tr>
-                <td>AV fistula / graft</td>
-                <td>Chronic repeated TPE</td>
-                <td>Durable, lower infection risk</td>
-                <td>Not suitable for acute urgent initiation</td>
-              </tr>
-              <tr>
-                <td>Port</td>
-                <td>Selected chronic patients</td>
-                <td>Comfort, lower visible line burden</td>
-                <td>Flow limitations depending on device</td>
-              </tr>
+              <tr><td>Confirm indication</td><td>TTP, hyperviscosity, MG/GBS, antibody-mediated disease, selected transplant/rejection, selected TMA while clarifying diagnosis.</td></tr>
+              <tr><td>Calculate TPV</td><td><code class="inline">TPV = 0.065 × weight (kg) × (1 − Hct)</code></td></tr>
+              <tr><td>Exchange volume</td><td>Usually 1.0–1.5 total plasma volumes per session.</td></tr>
+              <tr><td>Replacement fluid</td><td>5% albumin for most indications. Plasma for TTP or when plasma factor replacement/coagulation support is required.</td></tr>
+              <tr><td>Access</td><td>Peripheral access if feasible for centrifugal TPE. Temporary dialysis catheter if membrane TPE, poor peripheral access, ICU, or urgent reliable flow needed.</td></tr>
+              <tr><td>Anticoagulation</td><td>Citrate for most centrifugal TPE. Heparin may be used for membrane TPE or according to local protocol.</td></tr>
+              <tr><td>Monitoring</td><td>CBC, platelets, fibrinogen, PT/INR/PTT if repeated exchange or bleeding risk, ionized calcium, magnesium, potassium, vital signs, access function.</td></tr>
+              <tr><td>Medication timing</td><td>Give important medications after TPE when possible, especially rituximab, IVIG, monoclonal antibodies, and highly protein-bound drugs.</td></tr>
+              <tr><td>Stop criteria</td><td>Disease-specific: platelet/hemolysis response for TTP; symptom/viscosity response for hyperviscosity; neurologic response/course completion for MG/GBS.</td></tr>
             </tbody>
           </table>
+        </section>
+
+        <section id="ttp" class="section card">
+          <div class="section-header"><h2>2. TTP emergency box</h2><span class="pill">Do not delay</span></div>
+          <div class="danger">
+            <h3>Suspected acquired TTP</h3>
+            <ul class="list-tight">
+              <li>Start TPE urgently if the clinical picture is strongly suspicious.</li>
+              <li>Do not wait for ADAMTS13 activity or inhibitor results before initiating treatment.</li>
+              <li>Use donor plasma as replacement fluid.</li>
+              <li>Exchange 1.0–1.5 TPV daily.</li>
+              <li>Add corticosteroids; consider caplacizumab and rituximab according to local protocol and hematology guidance.</li>
+              <li>Continue daily TPE until platelet count and hemolysis have clearly improved; taper/stop according to institutional TTP protocol.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="calculate" class="section card">
+          <div class="section-header"><h2>3. Calculate total plasma volume</h2><span class="pill">TPV</span></div>
+          <p>Use a simple Kaplan-style estimate for day-to-day prescribing:</p>
+          <pre>TPV (L) = 0.065 × weight (kg) × (1 − hematocrit)
+
+Example:
+Weight = 80 kg
+Hct = 0.30
+
+TPV = 0.065 × 80 × 0.70
+    = 3.64 L
+
+1.0 TPV exchange = approximately 3.6 L
+1.5 TPV exchange = approximately 5.5 L</pre>
+          <div class="notice"><strong>Practical rule:</strong> do not simply increase exchange volume indefinitely. Exchanging beyond approximately 1.5 TPV gives diminishing returns and increases procedure burden.</div>
         </section>
 
         <section id="prescription" class="section card">
-          <div class="section-header">
-            <h2>4. Practical prescription and session design</h2>
-            <span class="pill">Prescription</span>
-          </div>
+          <div class="section-header"><h2>4. Practical prescription and session design</h2><span class="pill">Order set</span></div>
           <div class="grid-2">
             <div>
-              <h3>Typical prescription framework</h3>
+              <h3>Template order</h3>
               <ul class="list-tight">
-                <li><strong>Exchange volume:</strong> usually 1.0–1.5 plasma volumes per procedure.</li>
-                <li><strong>Frequency:</strong> daily, every other day, or disease-specific.</li>
-                <li><strong>Course length:</strong> commonly 3–7 sessions, but may be longer in refractory disease.</li>
-                <li><strong>Replacement fluid:</strong> 5% albumin for most indications; plasma for TTP and selected bleeding/coagulopathic settings.</li>
-                <li><strong>Anticoagulant:</strong> citrate is most common; heparin may be preferred with membrane filtration or in selected patients.</li>
+                <li>Indication: __________</li>
+                <li>Technique: centrifugal / membrane filtration</li>
+                <li>Access: peripheral IV / temporary dialysis catheter</li>
+                <li>TPV: _____ L</li>
+                <li>Exchange volume: 1.0 / 1.5 TPV = _____ L</li>
+                <li>Replacement: albumin 5% / plasma / albumin + plasma</li>
+                <li>Anticoagulation: citrate / heparin / local protocol</li>
+                <li>Frequency: daily / q48h / disease-specific</li>
+                <li>Planned number of sessions: _____, reassess after each session</li>
               </ul>
             </div>
             <div>
-              <h3>How much is removed in one session</h3>
-              <p>
-                Exchanging 1–1.5 plasma volumes removes a large fraction of circulating intravascular targets. Increasing beyond this range produces diminishing returns while adding procedure time and adverse-effect risk.
-              </p>
-              <div class="notice">
-                <strong>Practical rule:</strong> most gains are achieved by repeating standard-volume sessions rather than by making a single session excessively large.
-              </div>
+              <h3>Pre-treatment checklist</h3>
+              <ul class="list-tight">
+                <li>CBC, smear if TMA, LDH, bilirubin, haptoglobin as indicated.</li>
+                <li>PT/INR, PTT, fibrinogen, calcium, magnesium, potassium.</li>
+                <li>Group and screen; plasma product planning if plasma replacement required.</li>
+                <li>Baseline disease-specific markers: ADAMTS13, IgM/viscosity, antibody titers, DSA, triglycerides, etc.</li>
+                <li>Review ACE inhibitor use if albumin replacement is planned because of bradykinin-mediated reactions.</li>
+              </ul>
             </div>
           </div>
-
-          <h3 style="margin-top:20px">Anticoagulation</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Agent</th>
-                <th>Typical role</th>
-                <th>Advantages</th>
-                <th>Main concern</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Citrate (ACD-A)</td>
-                <td>Preferred in many centrifugation procedures</td>
-                <td>Regional anticoagulation, short half-life, good safety profile</td>
-                <td>Hypocalcemia, paresthesias, cramps, arrhythmia risk if severe</td>
-              </tr>
-              <tr>
-                <td>Heparin</td>
-                <td>Often used in membrane filtration TPE</td>
-                <td>Familiar agent, useful when citrate load is problematic</td>
-                <td>Bleeding, heparin-associated complications</td>
-              </tr>
-            </tbody>
-          </table>
-          <p class="muted" style="margin-top:10px">
-            In membrane filtration TPE, citrate clearance is lower and citrate accumulation can be more relevant, particularly in liver dysfunction or kidney failure. Calcium supplementation is often required during citrate-anticoagulated procedures.
-          </p>
         </section>
 
         <section id="replacement" class="section card">
-          <div class="section-header">
-            <h2>5. Replacement fluid selection</h2>
-            <span class="pill">Critical choice</span>
-          </div>
+          <div class="section-header"><h2>5. Replacement fluid selection</h2><span class="pill">Albumin vs plasma</span></div>
           <table>
-            <thead>
-              <tr>
-                <th>Replacement fluid</th>
-                <th>Typical indications</th>
-                <th>Benefits</th>
-                <th>Limitations</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Replacement</th><th>Use when</th><th>Advantages</th><th>Main cautions</th></tr></thead>
             <tbody>
-              <tr>
-                <td>5% albumin</td>
-                <td>Most autoimmune, neurologic, renal, metabolic, and transplant indications</td>
-                <td>Low infectious risk, fewer allergic reactions, good oncotic support</td>
-                <td>Depletes coagulation factors; may worsen bleeding tendency</td>
-              </tr>
-              <tr>
-                <td>Frozen plasma</td>
-                <td>Acquired TTP, selected bleeding or coagulopathic settings, diffuse alveolar hemorrhage</td>
-                <td>Provides clotting factors and ADAMTS13</td>
-                <td>Allergic reactions, transfusion-related complications, higher citrate burden</td>
-              </tr>
-              <tr>
-                <td>Albumin / saline mixture</td>
-                <td>Selected hyperviscosity situations or cost-sensitive settings</td>
-                <td>Reduces albumin requirement</td>
-                <td>Greater hypotension risk; not ideal in unstable patients</td>
-              </tr>
+              <tr><td>5% albumin</td><td>Most neurologic, autoimmune, hyperviscosity, transplant/desensitization, and non-TTP indications.</td><td>Lower allergic reaction risk; no TRALI; no infectious plasma exposure; good oncotic support.</td><td>Does not replace ADAMTS13 or clotting factors; repeated use may lower fibrinogen.</td></tr>
+              <tr><td>Plasma</td><td>TTP; selected bleeding/coagulopathic states; when plasma factor replacement is part of treatment.</td><td>Provides ADAMTS13 and coagulation factors.</td><td>Allergic reactions, citrate load, TRALI/TACO risk, transfusion-transmitted infection risk.</td></tr>
+              <tr><td>Albumin + plasma</td><td>Selected high bleeding-risk patients undergoing repeated exchanges, or when partial factor support is desired.</td><td>Balances lower plasma exposure with some factor replacement.</td><td>Still requires careful fibrinogen and volume monitoring.</td></tr>
+              <tr><td>Crystalloid adjunct</td><td>Selected hyperviscosity or resource-sensitive settings.</td><td>Reduces albumin use.</td><td>Do not exceed about 30% of replacement; increased hypotension/low oncotic risk.</td></tr>
             </tbody>
           </table>
-          <div class="warning" style="margin-top:16px">
-            <strong>Important:</strong> albumin replacement lowers both procoagulant and anticoagulant factors. Coagulation tests soon after TPE may look abnormal because of procedural factor depletion rather than a new disease process.
-          </div>
+          <h3 style="margin-top:18px">Fibrinogen monitoring</h3>
+          <table>
+            <thead><tr><th>Fibrinogen</th><th>Practical action</th></tr></thead>
+            <tbody>
+              <tr><td>&gt;1.5 g/L</td><td>Usually acceptable to continue planned albumin exchange if no bleeding.</td></tr>
+              <tr><td>1.0–1.5 g/L</td><td>Monitor closely; consider plasma component if repeated daily exchange or procedure/bleeding risk.</td></tr>
+              <tr><td>&lt;1.0 g/L</td><td>Consider plasma, cryoprecipitate, or fibrinogen concentrate depending on local policy and clinical context.</td></tr>
+              <tr><td>Any level with active bleeding</td><td>Treat clinically; consider plasma/cryo/fibrinogen replacement and reassess whether TPE should continue.</td></tr>
+            </tbody>
+          </table>
         </section>
 
         <section id="indications" class="section card">
-          <div class="section-header">
-            <h2>6. Clinical indications</h2>
-            <span class="pill">Disease-focused</span>
-          </div>
-          <p>
-            The strongest indications for TPE are those in which a circulating pathogenic plasma constituent is clearly linked to disease and rapid removal changes outcome. The quality of evidence varies widely by condition. In practice, it is helpful to think of indications by syndrome rather than by organ system alone.
-          </p>
-
-          <h3>Hematologic indications</h3>
-          <div class="grid-2">
-            <div class="mini">
-              <h3>Thrombotic thrombocytopenic purpura (TTP)</h3>
-              <p>
-                The classic emergency indication. Daily TPE with donor plasma replacement should begin as soon as acquired TTP is suspected, even before diagnostic confirmation, because delay increases mortality. Plasma both removes anti-ADAMTS13 autoantibodies and replenishes ADAMTS13.
-              </p>
-            </div>
-            <div class="mini">
-              <h3>Hyperviscosity syndrome</h3>
-              <p>
-                Particularly important in Waldenström macroglobulinemia and other paraproteinemias. TPE rapidly reduces serum viscosity and relieves neurologic symptoms, visual symptoms, and mucosal bleeding. Clinical response is often brisk, sometimes after one procedure.
-              </p>
-            </div>
-            <div class="mini">
-              <h3>Complement-mediated TMA</h3>
-              <p>
-                TPE may be used while other causes of thrombotic microangiopathy are being sorted out or when anti-factor H antibodies are implicated. However, TPE is not uniformly beneficial across all TMAs and should not be reflexively applied to every case.
-              </p>
-            </div>
-            <div class="mini">
-              <h3>Myeloma cast nephropathy</h3>
-              <p>
-                More controversial. Some experts consider TPE in severe acute kidney injury with markedly elevated serum free light chains, early in the course, and always alongside prompt myeloma-directed therapy rather than as stand-alone treatment.
-              </p>
-            </div>
-          </div>
-
-          <h3 style="margin-top:18px">Neurologic indications</h3>
+          <div class="section-header"><h2>6. Clinical indications</h2><span class="pill">High-yield</span></div>
           <div class="grid-3">
-            <div class="mini">
-              <h3>Guillain–Barré syndrome</h3>
-              <p>Established role in acute inflammatory demyelinating polyneuropathy, especially in severe or progressive disease.</p>
-            </div>
-            <div class="mini">
-              <h3>Myasthenia gravis</h3>
-              <p>Used for myasthenic crisis, severe bulbar or respiratory involvement, or as rapid preoperative short-term disease control.</p>
-            </div>
-            <div class="mini">
-              <h3>Neuromyelitis optica spectrum disorder</h3>
-              <p>Often used after incomplete steroid response in severe attacks. Early initiation appears associated with better neurologic outcome.</p>
-            </div>
-          </div>
-
-          <h3 style="margin-top:18px">Transplant indications</h3>
-          <div class="grid-2">
-            <div class="mini">
-              <h3>ABO-incompatible transplantation</h3>
-              <p>
-                TPE is incorporated into desensitization protocols to lower anti-A or anti-B isoagglutinin titers before transplant, especially in kidney transplantation.
-              </p>
-            </div>
-            <div class="mini">
-              <h3>HLA sensitization and antibody-mediated rejection</h3>
-              <p>
-                TPE can reduce donor-specific antibodies and is commonly combined with IVIG, rituximab, and other immunosuppressive approaches for desensitization or treatment of antibody-mediated rejection.
-              </p>
-            </div>
-          </div>
-
-          <h3 style="margin-top:18px">Metabolic and toxicologic indications</h3>
-          <div class="grid-3">
-            <div class="mini">
-              <h3>Hypertriglyceridemic pancreatitis</h3>
-              <p>May be considered in severe disease requiring rapid triglyceride reduction. It lowers triglycerides efficiently, though mortality benefit is less certain.</p>
-            </div>
-            <div class="mini">
-              <h3>Selected poisonings / overdose</h3>
-              <p>Most relevant when the toxin is largely intravascular, highly protein bound, and poorly removed by dialysis.</p>
-            </div>
-            <div class="mini">
-              <h3>Thyroid storm</h3>
-              <p>Rescue or bridging option in refractory severe thyrotoxicosis, especially when standard therapy is contraindicated or inadequate.</p>
-            </div>
+            <div class="mini"><h3>Hematology</h3><p>TTP, hyperviscosity syndrome, selected TMA while clarifying diagnosis, selected severe antibody-mediated cytopenias, and selected paraprotein-related complications.</p></div>
+            <div class="mini"><h3>Neurology</h3><p>Guillain-Barré syndrome, myasthenia gravis crisis, CIDP, severe steroid-refractory demyelinating attacks, and neuromyelitis optica spectrum disorder.</p></div>
+            <div class="mini"><h3>Transplant/immune</h3><p>ABO-incompatible transplant desensitization, donor-specific antibody reduction, antibody-mediated rejection protocols, and selected autoimmune diseases.</p></div>
           </div>
         </section>
 
-        <section id="urgent" class="section card">
-          <div class="section-header">
-            <h2>7. Urgent and emergency TPE</h2>
-            <span class="pill">Time-sensitive</span>
-          </div>
-          <p>
-            A limited set of TPE indications are true emergencies. In these settings, TPE is used because rapid removal of the offending plasma constituent can immediately affect survival or irreversible organ injury.
-          </p>
+        <section id="tma" class="section card">
+          <div class="section-header"><h2>7. TMA differential: when TPE helps</h2><span class="pill">Call relevance</span></div>
           <table>
-            <thead>
-              <tr>
-                <th>Urgent condition</th>
-                <th>Why TPE matters urgently</th>
-                <th>Common replacement fluid</th>
-              </tr>
-            </thead>
+            <thead><tr><th>TMA diagnosis</th><th>Role of TPE</th><th>Practical comment</th></tr></thead>
             <tbody>
-              <tr>
-                <td>Acquired TTP</td>
-                <td>Life-threatening microvascular thrombosis; delay increases mortality</td>
-                <td>Plasma</td>
-              </tr>
-              <tr>
-                <td>Hyperviscosity syndrome</td>
-                <td>Rapid symptom relief and reduction in viscosity</td>
-                <td>Albumin ± saline</td>
-              </tr>
-              <tr>
-                <td>Myasthenic crisis</td>
-                <td>Fast reduction in circulating pathogenic antibodies</td>
-                <td>Albumin</td>
-              </tr>
-              <tr>
-                <td>Guillain–Barré syndrome</td>
-                <td>Can alter course in severe acute demyelinating disease</td>
-                <td>Albumin</td>
-              </tr>
-              <tr>
-                <td>Neuromyelitis optica severe attack</td>
-                <td>Earlier use may improve likelihood of recovery</td>
-                <td>Albumin</td>
-              </tr>
-              <tr>
-                <td>Selected transplant rejection / desensitization scenarios</td>
-                <td>Rapid antibody reduction when timing is critical</td>
-                <td>Albumin ± plasma</td>
-              </tr>
+              <tr><td>Acquired immune TTP</td><td>Yes, urgent first-line</td><td>Start immediately if suspected; use plasma replacement.</td></tr>
+              <tr><td>Congenital TTP</td><td>Yes / plasma infusion</td><td>Goal is ADAMTS13 replacement; chronic strategy differs.</td></tr>
+              <tr><td>Complement-mediated aHUS</td><td>Not routine definitive therapy</td><td>Complement blockade is preferred once diagnosis is established; TPE may be used empirically while sorting out TTP.</td></tr>
+              <tr><td>STEC-HUS</td><td>Generally no</td><td>Supportive care is the main approach.</td></tr>
+              <tr><td>Malignancy-associated TMA</td><td>Usually poor response</td><td>Treat underlying malignancy if possible.</td></tr>
+              <tr><td>Drug-induced TMA</td><td>Variable</td><td>Stop offending drug; TPE role depends on mechanism and severity.</td></tr>
             </tbody>
           </table>
-          <div class="danger" style="margin-top:16px">
-            <strong>Do not delay TTP treatment while awaiting ADAMTS13 results.</strong> If the clinical picture is strongly suspicious, urgent plasma exchange should start promptly with hematology input.
-          </div>
+        </section>
+
+        <section id="hyperviscosity" class="section card">
+          <div class="section-header"><h2>8. Hyperviscosity syndrome</h2><span class="pill">Hematology</span></div>
+          <p>Use TPE for symptomatic hyperviscosity: visual disturbance, neurologic symptoms, mucosal bleeding, or severe symptomatic paraproteinemia. Do not delay for a serum viscosity result if the syndrome is clinically obvious.</p>
+          <table>
+            <thead><tr><th>Setting</th><th>Expected response</th><th>Comment</th></tr></thead>
+            <tbody>
+              <tr><td>Waldenström macroglobulinemia / IgM</td><td>Excellent</td><td>IgM is largely intravascular; one exchange can produce rapid improvement.</td></tr>
+              <tr><td>IgA myeloma</td><td>Moderate to good</td><td>Can cause hyperviscosity; response depends on burden and symptoms.</td></tr>
+              <tr><td>IgG myeloma</td><td>Less dramatic</td><td>IgG has greater extravascular distribution; may require repeated treatment and systemic therapy.</td></tr>
+            </tbody>
+          </table>
+          <div class="okbox"><strong>Practical:</strong> TPE treats viscosity quickly, but chemotherapy/immunotherapy treats production. Start disease-directed therapy promptly.</div>
+        </section>
+
+        <section id="drug" class="section card">
+          <div class="section-header"><h2>9. Drug removal by TPE</h2><span class="pill">Medication timing</span></div>
+          <p>TPE most affects drugs that are highly protein-bound, mainly intravascular, or have low volume of distribution. When practical, give critical medications after TPE.</p>
+          <table>
+            <thead><tr><th>Drug/class</th><th>Likely TPE removal</th><th>Practical advice</th></tr></thead>
+            <tbody>
+              <tr><td>Rituximab</td><td>Significant</td><td>Give after TPE; avoid immediate post-infusion exchange when possible.</td></tr>
+              <tr><td>IVIG</td><td>Significant</td><td>Give after final exchange or after daily TPE session.</td></tr>
+              <tr><td>Monoclonal antibodies, e.g. daratumumab</td><td>Likely significant/possible</td><td>Prefer dosing after TPE; coordinate with treating team.</td></tr>
+              <tr><td>Caplacizumab</td><td>Possible</td><td>Follow local TTP protocol; timing often coordinated around TPE.</td></tr>
+              <tr><td>Steroids</td><td>Usually limited practical impact</td><td>Do not delay urgent steroid therapy.</td></tr>
+              <tr><td>Bortezomib</td><td>Likely limited</td><td>Still coordinate timing with systemic therapy schedule.</td></tr>
+              <tr><td>Warfarin / DOACs</td><td>Possible, especially highly protein-bound agents</td><td>Monitor anticoagulant effect clinically/laboratorily when relevant.</td></tr>
+            </tbody>
+          </table>
         </section>
 
         <section id="complications" class="section card">
-          <div class="section-header">
-            <h2>8. Adverse effects, monitoring, and troubleshooting</h2>
-            <span class="pill">Safety</span>
-          </div>
-          <div class="grid-2">
-            <div>
-              <h3>Common complications</h3>
-              <ul class="list-tight">
-                <li><strong>Hypotension:</strong> due to intravascular volume shifts or under-replacement.</li>
-                <li><strong>Citrate toxicity:</strong> perioral tingling, acral paresthesia, muscle cramps, nausea, tetany, or arrhythmia if severe.</li>
-                <li><strong>Allergic reactions:</strong> especially with plasma replacement.</li>
-                <li><strong>Bleeding tendency:</strong> from coagulation factor depletion, particularly with repeated albumin exchanges.</li>
-                <li><strong>Vascular access problems:</strong> infection, thrombosis, malfunction, bleeding, pneumothorax for central lines.</li>
-              </ul>
-            </div>
-            <div>
-              <h3>Monitoring points</h3>
-              <ul class="list-tight">
-                <li>Vital signs throughout the procedure, especially blood pressure.</li>
-                <li>Ionized calcium or calcium replacement protocol when citrate is used.</li>
-                <li>Fibrinogen and coagulation profile when repeated albumin exchanges are planned or bleeding risk is high.</li>
-                <li>Hemoglobin, platelet count, and disease-specific markers.</li>
-                <li>Access function and signs of catheter-associated complications.</li>
-              </ul>
-            </div>
-          </div>
-
-          <h3 style="margin-top:18px">Practical management of common problems</h3>
+          <div class="section-header"><h2>10. Monitoring, adverse effects, and troubleshooting</h2><span class="pill">Safety</span></div>
           <table>
-            <thead>
-              <tr>
-                <th>Problem</th>
-                <th>Typical cause</th>
-                <th>Practical response</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Problem</th><th>Typical cause</th><th>Practical response</th></tr></thead>
             <tbody>
-              <tr>
-                <td>Perioral tingling / paresthesia</td>
-                <td>Citrate-related hypocalcemia</td>
-                <td>Slow citrate exposure if possible and give oral or IV calcium</td>
-              </tr>
-              <tr>
-                <td>Hypotension</td>
-                <td>Volume shift, under-replacement, vasovagal event</td>
-                <td>Pause or slow procedure, saline bolus, reassess replacement strategy</td>
-              </tr>
-              <tr>
-                <td>Urticaria / allergic symptoms</td>
-                <td>Plasma exposure</td>
-                <td>Antihistamine, reassess need for plasma versus albumin</td>
-              </tr>
-              <tr>
-                <td>Bleeding or low fibrinogen</td>
-                <td>Repeated albumin replacement</td>
-                <td>Consider plasma supplementation in selected cases</td>
-              </tr>
-              <tr>
-                <td>Circuit clotting</td>
-                <td>Inadequate anticoagulation or poor flow</td>
-                <td>Reassess access and anticoagulation regimen</td>
-              </tr>
+              <tr><td>Perioral tingling / paresthesia</td><td>Citrate-related hypocalcemia</td><td>Check ionized calcium; give calcium orally or IV according to severity; slow procedure if needed.</td></tr>
+              <tr><td>Hypotension</td><td>Volume shift, low oncotic replacement, vasovagal event, unstable ICU physiology</td><td>Pause or slow procedure, volume support, reassess replacement fluid and access; vasopressors if needed.</td></tr>
+              <tr><td>Urticaria / allergic reaction</td><td>Plasma exposure; rarely albumin reaction</td><td>Pause, antihistamine; severe reaction requires epinephrine and standard anaphylaxis management.</td></tr>
+              <tr><td>Bleeding / low fibrinogen</td><td>Coagulation factor depletion after repeated albumin exchanges</td><td>Check fibrinogen; consider plasma/cryo/fibrinogen concentrate; reassess risk-benefit of further exchange.</td></tr>
+              <tr><td>Circuit clotting</td><td>Poor access flow or insufficient anticoagulation</td><td>Reassess access, flow rate, and anticoagulation protocol.</td></tr>
+              <tr><td>Catheter complication</td><td>Infection, thrombosis, bleeding, pneumothorax</td><td>Use ultrasound-guided placement; monitor site; remove catheter when no longer required.</td></tr>
             </tbody>
           </table>
         </section>
 
-        <section id="pregnancy" class="section card">
-          <div class="section-header">
-            <h2>9. Pregnancy considerations</h2>
-            <span class="pill">Special population</span>
-          </div>
+        <section id="comparison" class="section card">
+          <div class="section-header"><h2>11. TPE versus RBC exchange</h2><span class="pill">Avoid confusion</span></div>
+          <table>
+            <thead><tr><th></th><th>TPE</th><th>RBC exchange</th></tr></thead>
+            <tbody>
+              <tr><td>Primary target</td><td>Plasma</td><td>Red blood cells</td></tr>
+              <tr><td>Classic indications</td><td>TTP, hyperviscosity, MG/GBS, antibody-mediated disease</td><td>Sickle cell acute stroke, severe acute chest syndrome, selected severe malaria/babesiosis settings</td></tr>
+              <tr><td>Replacement</td><td>Albumin and/or plasma</td><td>Red blood cells</td></tr>
+              <tr><td>Main goal</td><td>Remove pathogenic plasma constituents or replace plasma factors</td><td>Reduce abnormal/pathogenic RBC fraction and improve oxygen-carrying RBC population</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+
+        <section id="plasma-donation" class="section card">
+          <div class="section-header"><h2>12. Plasma donation physician guide</h2><span class="pill">Donation center</span></div>
           <p>
-            TPE can be performed during pregnancy when indicated and when managed by an experienced multidisciplinary team. The evidence base is limited and is largely observational, but the overall safety profile appears broadly comparable to that of non-pregnant patients. The most important maternal procedural issue is hypotension because it can reduce placental perfusion.
+            This section is for physicians supporting a plasma donation center. It is separate from therapeutic plasma exchange: donor plasmapheresis collects plasma from a healthy donor and returns red cells, whereas TPE treats a patient by removing and replacing plasma. The physician role is mainly donor safety oversight, quality review, staff training, adverse reaction review, and escalation to the medical director when needed.
           </p>
+
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Core weekly physician presence</h3>
+              <ul class="list-tight">
+                <li>Provide 4 hours of in-person supervision during normal working hours, preferably when the center is busy.</li>
+                <li>Check in with QA staff and document time on the physician time log.</li>
+                <li>Review outstanding donor visit records in PC-Blut.</li>
+                <li>Review donor adverse reaction records from the previous week.</li>
+                <li>Meet briefly with physician substitutes and donation hall/screening staff.</li>
+                <li>Spend visible time in the donation hall, observe plasmapheresis, and be present for donor reactions when possible.</li>
+              </ul>
+            </div>
+            <div class="mini">
+              <h3>Daily / as-needed availability</h3>
+              <ul class="list-tight">
+                <li>Be available for consultation with the medical director with reasonable notice, usually within 24 hours under normal circumstances.</li>
+                <li>Check Grifols email for relevant communications during weekly duties and reply when needed.</li>
+                <li>Notify the medical director of planned or unplanned service gaps.</li>
+                <li>Escalate serious reactions, concerning staff performance issues, policy uncertainty, or donor safety concerns.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 style="margin-top:18px">PC-Blut visit check: practical review approach</h3>
+          <table>
+            <thead><tr><th>Record type / colour</th><th>What to do</th><th>Key checks</th></tr></thead>
+            <tbody>
+              <tr><td>Deferred donors / red</td><td>Always review individually.</td><td>Reason and length of deferral; vitals/TP/Hct abnormality if applicable; medications; comments; photo quality; adverse reaction or behavioural notes.</td></tr>
+              <tr><td>Physical exam visits / green</td><td>Spot check approximately every 5th record or about 10%, according to local instruction.</td><td>Examination comments, medication list, vitals/TP/Hct within range or appropriately handled, photo quality, continuous nomogram collection volume.</td></tr>
+              <tr><td>Non-critical visits / yellow or white</td><td>May be signed off in bulk unless a specific concern is identified.</td><td>Look for unusual comments, incomplete documentation, or flags requiring physician review.</td></tr>
+              <tr><td>Donor screening only</td><td>Review comments and additional testing/medication tabs when applicable.</td><td>Ensure documentation is comprehensible and donor suitability decision is supported.</td></tr>
+            </tbody>
+          </table>
+
+          <h3 style="margin-top:18px">Donor eligibility values commonly checked</h3>
+          <table>
+            <thead><tr><th>Parameter</th><th>Acceptable range / note</th></tr></thead>
+            <tbody>
+              <tr><td>Hematocrit</td><td>38% to 54%</td></tr>
+              <tr><td>Total protein</td><td>6.0 to 9.0 g/dL</td></tr>
+              <tr><td>Pulse</td><td>50 to 100 bpm; 40 to 49 bpm may be acceptable for athletic donors per local criteria.</td></tr>
+              <tr><td>Blood pressure</td><td>Systolic 100 to 180 mmHg; systolic 90 to 99 mmHg may be acceptable for athletic donors. Diastolic 50 to 100 mmHg.</td></tr>
+              <tr><td>Temperature</td><td>35.5 °C to 37.5 °C</td></tr>
+              <tr><td>Weight</td><td>50 to 180 kg</td></tr>
+              <tr><td>Blood loss</td><td>&lt;200 mL: usually no deferral; &lt;200 mL twice within 8 weeks or &gt;200 mL: 57-day deferral.</td></tr>
+              <tr><td>Collection volume</td><td>Continuous nomogram collection volume is automatically determined by PC-Blut using height, weight, and hematocrit; usual range 690 to 950 mL including anticoagulant.</td></tr>
+            </tbody>
+          </table>
+
+          <h3 style="margin-top:18px">Observation and training responsibilities</h3>
           <div class="grid-2">
             <div>
-              <h3>Reported pregnancy uses</h3>
+              <h3>Physician substitutes</h3>
               <ul class="list-tight">
-                <li>Thrombotic microangiopathies, especially TTP</li>
-                <li>Severe autoimmune disease</li>
-                <li>Red cell alloimmunization</li>
-                <li>Severe hypertriglyceridemia / pancreatitis</li>
+                <li>Observe each physician substitute at least once per year using the performance observation checklist.</li>
+                <li>Use the encounter as teaching as well as evaluation; deficiencies require additional observation.</li>
+                <li>Focus on donor screening and physical examination sections.</li>
+                <li>Teach a consistent, organized explanation of plasmapheresis, consent, risks, and donor self-exclusion.</li>
+                <li>Ensure the physical examination is performed carefully, not simply documented.</li>
               </ul>
             </div>
             <div>
-              <h3>Practical precautions</h3>
+              <h3>Monthly observations</h3>
               <ul class="list-tight">
-                <li>Maintain maternal intravascular volume carefully.</li>
-                <li>Left lateral positioning in later pregnancy to reduce vena cava compression.</li>
-                <li>Consider fetal monitoring according to gestational age, logistics, and maternal stability.</li>
-                <li>Albumin reduces allergic reactions compared with plasma, but repeated albumin use may contribute to coagulopathy.</li>
+                <li>Complete at least one performance evaluation for donor evaluation and physical exam by a physician substitute.</li>
+                <li>Complete at least one observation of donor pre-donation screening by a donor processor.</li>
+                <li>Complete at least one observation of donor phlebotomy/apheresis by a phlebotomist.</li>
+                <li>Discuss concerning observations with the medical director and leave completed forms with QA.</li>
               </ul>
             </div>
           </div>
-          <div class="warning" style="margin-top:16px">
-            <strong>Pregnancy-specific safety note:</strong> maternal hypotension is the key procedural hazard. Reported fetal distress episodes have generally been transient and linked to maternal blood pressure drops.
+
+          <h3 style="margin-top:18px">Donor adverse reactions: physician oversight</h3>
+          <table>
+            <thead><tr><th>Reaction category</th><th>Examples / definition</th><th>Physician role</th></tr></thead>
+            <tbody>
+              <tr><td>Minor</td><td>Brief prefaint symptoms, mild citrate symptoms such as metallic taste or tingling, uncomplicated small bruise, no loss of consciousness.</td><td>Confirm appropriate documentation, prevention advice, and recovery.</td></tr>
+              <tr><td>Moderate</td><td>Reaction requiring assistance or monitoring by the physician substitute to achieve satisfactory recovery.</td><td>Review circumstances, confirm management, and identify preventable contributors.</td></tr>
+              <tr><td>Serious</td><td>Hospitalization, life-threatening event, significant disability/incapacity, intervention to prevent disability, or death.</td><td>Immediate escalation according to SOP; medical director involvement required.</td></tr>
+              <tr><td>EMS activation</td><td>External emergency services required.</td><td>Review locally; final signoff may be by medical director according to local policy.</td></tr>
+            </tbody>
+          </table>
+          <div class="warning">
+            <strong>Common reaction types to know:</strong> venipuncture injury, hematoma/bruising, nerve irritation, citrate reaction/hypocalcemia, hypotensive or vasovagal event, hyperventilation, allergic reaction/anaphylaxis, air/pulmonary embolism, seizure-like event, hemolytic reaction, and cardiac/respiratory arrest.
+          </div>
+
+          <h3 style="margin-top:18px">Donor counselling points</h3>
+          <div class="grid-2">
+            <div class="mini">
+              <h3>Before / during donation</h3>
+              <ul class="list-tight">
+                <li>Confirm the donor ate and hydrated well.</li>
+                <li>Reinforce water loading, salty snack, and applied muscle tension when appropriate.</li>
+                <li>Explain draw and return phases: anticoagulated whole blood enters the device, plasma is collected, red cells are returned, and saline is given at the end.</li>
+                <li>Tell donors they may stop the process at any time.</li>
+              </ul>
+            </div>
+            <div class="mini">
+              <h3>Consent and behaviour</h3>
+              <ul class="list-tight">
+                <li>Ensure the donor understands plasmapheresis purpose, risks, and common side effects such as bruising, pain/numbness, nausea, and citrate symptoms.</li>
+                <li>Emphasize truthful disclosure of health history and risk information.</li>
+                <li>Reinforce zero tolerance for aggressive, abusive, intimidating, intoxicated, or unsafe behaviour.</li>
+                <li>Use the code of conduct discussion to support a safe and respectful environment for donors and staff.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 style="margin-top:18px">Periodic physician duties</h3>
+          <table>
+            <thead><tr><th>Frequency</th><th>Tasks</th></tr></thead>
+            <tbody>
+              <tr><td>Monthly</td><td>Complete observation assignments; complete medical education assignments in MasterControl; provide informal/monthly communication to the medical director as required.</td></tr>
+              <tr><td>Twice per year</td><td>Review center equipment with physician substitutes; review staffing/scheduling issues with center manager; review non-conformance trends and performance issues with QA; meet virtually with the medical director.</td></tr>
+              <tr><td>Yearly</td><td>Complete yearly training; review competency assessment results for medical staff; physician substitute annual observation; annual evaluation with medical director.</td></tr>
+            </tbody>
+          </table>
+
+          <div class="notice">
+            <strong>Practical physician mindset:</strong> the weekly on-site shift is not only chart signoff. Visible physician presence, constructive staff teaching, and careful review of adverse reactions are the main safety contributions.
+          </div>
+        </section>
+
+        <section id="pregnancy" class="section card">
+          <div class="section-header"><h2>13. Pregnancy quick note</h2><span class="pill">Short</span></div>
+          <div class="warning">
+            <strong>Pregnancy:</strong> TPE may be used for TTP, severe autoimmune disease, red cell alloimmunization protocols, or severe hypertriglyceridemia when indicated. The major procedural concern is maternal hypotension, which may reduce uteroplacental perfusion. Use multidisciplinary planning and consider gestational-age-appropriate fetal monitoring.
           </div>
         </section>
 
         <section id="pearls" class="section card">
-          <div class="section-header">
-            <h2>10. Clinical pearls</h2>
-            <span class="pill">High-yield</span>
-          </div>
+          <div class="section-header"><h2>14. Clinical pearls</h2><span class="pill">High-yield</span></div>
           <div class="grid-2">
-            <div class="mini">
-              <h3>When TPE works best</h3>
-              <p>Think of intravascular, high-molecular-weight, slow-turnover targets: IgM paraprotein, pathogenic autoantibodies, complement-related mediators, or alloantibodies.</p>
-            </div>
-            <div class="mini">
-              <h3>Do not overestimate what TPE can do</h3>
-              <p>TPE removes what is already circulating; it does not stop new production. Combine with steroids, rituximab, chemotherapy, complement blockade, or other disease-specific treatment when indicated.</p>
-            </div>
-            <div class="mini">
-              <h3>Albumin versus plasma</h3>
-              <p>Albumin is simpler and safer for most indications. Plasma is chosen when factor replacement is part of the therapeutic goal, especially in TTP.</p>
-            </div>
-            <div class="mini">
-              <h3>Not every TMA is TTP</h3>
-              <p>Empiric TPE is common at presentation, but the final diagnosis matters because some TMAs gain little benefit and others may need targeted therapy instead.</p>
-            </div>
+            <div class="mini"><h3>Best targets</h3><p>Intravascular, high-molecular-weight, slow-turnover targets: IgM paraprotein, pathogenic autoantibodies, complement mediators, and alloantibodies.</p></div>
+            <div class="mini"><h3>TPE is a bridge</h3><p>It removes circulating material but does not stop production. Pair with steroids, rituximab, chemotherapy, complement blockade, or other disease-specific therapy when indicated.</p></div>
+            <div class="mini"><h3>Albumin vs plasma</h3><p>Albumin is safer for most indications. Plasma is selected when factor replacement is part of the therapeutic goal, especially TTP.</p></div>
+            <div class="mini"><h3>Daily reassessment</h3><p>Every session should have a stop/continue decision based on symptoms, platelet count/hemolysis, viscosity, antibody levels, or disease-specific markers.</p></div>
           </div>
         </section>
 
         <section id="references" class="section card">
-          <div class="section-header">
-            <h2>11. References used for this page</h2>
-            <span class="pill">Selected</span>
-          </div>
+          <div class="section-header"><h2>15. Selected references</h2><span class="pill">Reading</span></div>
           <ol class="refs">
-            <li>Fernández-Zarzoso M, Gómez-Seguí I, de la Rubia J. <em>Therapeutic plasma exchange: Review of current indications.</em> Transfusion and Apheresis Science. 2019.</li>
-            <li>Saheb S, Gallo A. <em>Urgent Therapeutic Plasma Exchange.</em> Transfusion and Apheresis Science. 2020.</li>
-            <li>Cervantes CE, Bloch EM, Sperati CJ. <em>Therapeutic Plasma Exchange: Core Curriculum 2023.</em> American Journal of Kidney Diseases. 2023.</li>
-            <li>Wind M, Gaasbeek AGA, Oosten LEM, et al. <em>Therapeutic plasma exchange in pregnancy: A literature review.</em> European Journal of Obstetrics &amp; Gynecology and Reproductive Biology. 2021.</li>
+            <li>Connelly-Smith L, et al. Guidelines on the Use of Therapeutic Apheresis in Clinical Practice. ASFA Ninth Special Issue. Journal of Clinical Apheresis. 2023.</li>
+            <li>Cervantes CE, Bloch EM, Sperati CJ. Therapeutic Plasma Exchange: Core Curriculum 2023. American Journal of Kidney Diseases. 2023.</li>
+            <li>Dias Pais M, Gaspar A, Coelho S. Therapeutic Plasma Exchange—A Practical Guide. Kidney and Dialysis. 2026.</li>
+            <li>Kaplan AA. Therapeutic plasma exchange: technical and operational review. Journal of Clinical Apheresis. 2013.</li>
+            <li>Guide for local onsite physicians. January 2026.</li>
+            <li>Physician duties at the donation center onboarding tutorial. October 2025.</li>
           </ol>
-          <p class="muted" style="margin-top:14px">
-            This page is intended as a practical reference summary. Final decisions should follow current institutional policy, apheresis service practice, and the most recent disease-specific guidance.
-          </p>
+          <p class="muted" style="margin-top:14px">This page is intended as a practical reference summary. Final decisions should follow current institutional policy, apheresis service practice, and disease-specific guidance.</p>
         </section>
       </main>
     </div>
-
-    <div class="footer">
-      <a class="back-link" href="transfusion_medicine.html">← Return to Transfusion Medicine</a><br>
-      Prepared as a GitHub-ready standalone HTML reference page for a transfusion medicine site.
-    </div>
+    <div class="footer"><a class="back-link" href="transfusion_medicine.html">← Return to Transfusion Medicine</a><br>Prepared as a GitHub-ready standalone HTML reference page for a transfusion medicine site.</div>
   </div>
 </body>
 </html>
