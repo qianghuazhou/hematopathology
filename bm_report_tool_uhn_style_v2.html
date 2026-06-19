@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Bone Marrow Report Tool — UHN Style</title>
+<title>Bone Marrow Report Tool - UHN Style</title>
 <style>
   :root {
     --bg: #0b1220;
@@ -132,7 +132,7 @@
 </head>
 <body>
 <header>
-  <h1>Bone Marrow Report Tool — UHN Style</h1>
+  <h1>Bone Marrow Report Tool - UHN Style</h1>
 </header>
 <div class="container">
   <main class="panel">
@@ -498,6 +498,20 @@ function autoCalcDiff() {
   document.getElementById('diff_warn').value = total ? ((total >= 98 && total <= 102) ? 'OK' : 'Check total') : '';
 }
 
+
+function sanitizeReport(txt) {
+  return String(txt || '')
+    .replace(/[]/g, '-')
+    .replace(/[]/g, '"')
+    .replace(/[]/g, "'")
+    .replace(//g, 'x')
+    .replace(//g, 'u')
+    .replace(//g, '>=')
+    .replace(//g, '<=')
+    .replace(//g, '-')
+    .replace(//g, '...');
+}
+
 function generateReport() {
   autoCalcDiff();
   const lines = [];
@@ -585,7 +599,7 @@ function generateReport() {
   lines.push('- Flow Cytometry -');
   if (v('flow_text')) lines.push(v('flow_text'));
 
-  document.getElementById('output').textContent = lines.join('\n');
+  document.getElementById('output').textContent = sanitizeReport(lines.join('\n'));
 }
 
 function copyOutput() {
