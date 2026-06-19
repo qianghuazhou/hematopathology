@@ -329,7 +329,7 @@ function generateReport(){
   r += bullet(v('dx1'));
   r += bullet(v('dx2'));
   if(checked('pendingCyto') || checked('pendingMol')){let p=[]; if(checked('pendingCyto')) p.push('cytogenetic'); if(checked('pendingMol')) p.push('molecular'); r += '- Pending '+p.join(' and ')+' studies.\n';}
-  if(v('pbdx')) r += '\nPeripheral blood:\n'+bullet(v('pbdx'));
+  if(v('pbdx')) r += '\nPeripheral blood smear:\n'+bullet(v('pbdx'));
   let cmt=v('customComment') || generateComment();
   if(cmt || checked('reviewedQA')){r += section('COMMENT'); if(cmt) r += cmt.trim()+'\n'; if(checked('reviewedQA')) r += 'Selected slides reviewed with a second hematopathologist as part of quality assurance activities.\n';}
   r += section('MICROSCOPIC DESCRIPTION');
