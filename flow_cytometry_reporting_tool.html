@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flow Cytometry Reporting Tool - Combined Library</title>
+<style>
+:root{
+  --bg:#f6f8fb;--panel:#ffffff;--ink:#1f2937;--muted:#6b7280;--line:#d9e2ec;
+  --brand:#2563eb;--brand2:#1e40af;--soft:#eaf1ff;--good:#ecfdf5;--warn:#fff7ed;
+  --shadow:0 8px 24px rgba(15,23,42,.08);--radius:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.45}
+header{background:linear-gradient(135deg,#eef4ff,#ffffff);border-bottom:1px solid var(--line);padding:18px 22px}
+h1{margin:0;font-size:22px;color:#0f172a}
+.subtitle{margin-top:4px;color:var(--muted);font-size:13px}
+.app{display:grid;grid-template-columns:360px 1fr;gap:16px;padding:16px;max-width:1500px;margin:0 auto}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.sidebar{padding:14px;position:sticky;top:12px;align-self:start;max-height:calc(100vh - 24px);overflow:auto}
+.main{padding:16px;min-height:calc(100vh - 110px)}
+label{font-weight:700;display:block;margin:10px 0 5px;color:#334155}
+select,input,textarea{width:100%;border:1px solid #cbd5e1;border-radius:10px;padding:8px 10px;font-family:Arial,Helvetica,sans-serif;font-size:13px;background:#fff;color:#111827}
+textarea{min-height:92px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.small{font-size:12px;color:var(--muted)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+button{border:0;border-radius:10px;padding:9px 12px;font-weight:700;cursor:pointer;background:var(--brand);color:white}
+button.secondary{background:#e2e8f0;color:#0f172a}
+button.ghost{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}
+button:hover{filter:brightness(.96)}
+.templateList{display:grid;gap:7px;margin-top:10px}
+.templateItem{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px;cursor:pointer}
+.templateItem:hover{background:var(--soft);border-color:#9bbcff}
+.templateItem.active{background:#dbeafe;border-color:#2563eb}
+.tTitle{font-weight:700;color:#0f172a;font-size:13px}.tMeta{font-size:12px;color:var(--muted);margin-top:2px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.tab{background:#f1f5f9;color:#334155;border:1px solid #cbd5e1}.tab.active{background:#2563eb;color:#fff;border-color:#2563eb}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.section{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfdff;margin-bottom:14px}.section h2{font-size:16px;margin:0 0 8px;color:#0f172a}.section h3{font-size:14px;margin:12px 0 6px;color:#1e3a8a}
+.outputBox{min-height:430px;white-space:pre-wrap;background:#ffffff;border:1px solid #cbd5e1;border-radius:12px;padding:14px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.55}
+.pillbar{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.pill{background:#f8fafc;border:1px solid #cbd5e1;border-radius:999px;padding:5px 8px;cursor:pointer;font-size:12px}.pill:hover{background:#eaf1ff}
+.notice{background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:9px;color:#7c2d12;font-size:12px;margin-top:10px}
+.footerNote{font-size:12px;color:#64748b;margin-top:8px}
+@media(max-width:1000px){.app{grid-template-columns:1fr}.sidebar{position:relative;max-height:none}.grid2,.row,.row3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Flow Cytometry Reporting Tool - Combined Library</h1>
+  <div class="subtitle">Comprehensive practical templates for hematopathology sign-out. No CPT code output. ASCII-safe wording.</div>
+</header>
+<div class="app">
+  <aside class="card sidebar">
+    <label>Category</label>
+    <select id="category" onchange="renderTemplates()"></select>
+    <label>Search template</label>
+    <input id="search" placeholder="CLL, CSF, AML, plasma, MDS..." oninput="renderTemplates()">
+    <div class="templateList" id="templateList"></div>
+    <div class="notice">Tip: select a template, edit variables, then generate. Percentages and markers can be left blank.</div>
+  </aside>
+  <main class="card main">
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('build',this)">Build report</button>
+      <button class="tab" onclick="showTab('phrases',this)">Quick phrases</button>
+      <button class="tab" onclick="showTab('refs',this)">Notes</button>
+    </div>
+
+    <div id="build">
+      <div class="grid2">
+        <section class="section">
+          <h2>Case variables</h2>
+          <div class="row">
+            <div><label>Specimen</label><input id="specimen" placeholder="Peripheral blood / bone marrow aspirate / lymph node / CSF"></div>
+            <div><label>Clinical context</label><input id="context" placeholder="Known CLL, cytopenia, lymphadenopathy..."></div>
+          </div>
+          <div class="row3">
+            <div><label>Main population</label><input id="population" placeholder="Monotypic B-cells"></div>
+            <div><label>Population size</label><input id="size" placeholder="12% of total leukocytes"></div>
+            <div><label>Light chain</label><input id="light" placeholder="kappa / lambda / polytypic / not assessable"></div>
+          </div>
+          <label>Positive markers</label><input id="positive" placeholder="CD19, CD20, CD5, CD23">
+          <label>Negative markers</label><input id="negative" placeholder="CD10, cyclin D1, CD34">
+          <label>Other findings</label><textarea id="other" placeholder="CD4:CD8 ratio, CD34 blasts, hematogones, viability, low events, etc."></textarea>
+          <label>Custom comment / additional correlation</label><textarea id="custom" placeholder="Optional case-specific wording"></textarea>
+          <div class="btns">
+            <button onclick="generateReport()">Generate</button>
+            <button class="secondary" onclick="copyOutput()">Copy output</button>
+            <button class="ghost" onclick="clearFields()">Clear fields</button>
+            <button class="ghost" onclick="loadNormal()">Load normal PB</button>
+          </div>
+        </section>
+        <section class="section">
+          <h2>Generated report</h2>
+          <div class="outputBox" id="output">Select a template and click Generate.</div>
+          <div class="footerNote">Output is intentionally concise. Edit for local validation, antibody panels, and case-specific findings.</div>
+        </section>
+      </div>
+    </div>
+
+    <div id="phrases" style="display:none">
+      <section class="section">
+        <h2>Quick phrase insertions</h2>
+        <div class="pillbar" id="phraseBar"></div>
+        <label>Phrase scratchpad</label><textarea id="phraseText" style="min-height:330px"></textarea>
+        <div class="btns"><button class="secondary" onclick="copyPhrase()">Copy phrase</button></div>
+      </section>
+    </div>
+
+    <div id="refs" style="display:none">
+      <section class="section">
+        <h2>Use notes</h2>
+        <p>This tool combines a broad disease-specific flow template library with more standardized modern canned comments. CPT coding and billing language have been removed.</p>
+        <p>Suggested workflow: report a short diagnosis line, then a compact interpretive comment. Avoid overcalling on low event counts, poor viability, hemodilute marrow aspirates, necrotic tissue, or body fluid samples with very few leukocytes.</p>
+        <h3>General limitation language</h3>
+        <p>Flow cytometry is an adjunct to morphology and may not reliably classify all lymphomas or estimate blast burden in all specimens. Correlation with histology, cytology, clinical findings, cytogenetic and molecular studies is recommended.</p>
+      </section>
+    </div>
+  </main>
+</div>
+<script>
+const templates = [
+{cat:'Negative / Reactive',name:'No flow evidence of lymphoproliferative disorder',dx:'No definitive immunophenotypic evidence of a lymphoproliferative disorder is identified.',comment:'Mature B-cells are polytypic without a definitive aberrant CD5-positive or CD10-positive B-cell population. T-cells show no definitive immunophenotypic abnormality. Correlation with clinical, morphologic and ancillary laboratory findings is recommended.'},
+{cat:'Negative / Reactive',name:'No evidence of acute leukemia',dx:'No immunophenotypic evidence of acute leukemia is identified.',comment:'No abnormal blast population is detected by flow cytometry. Correlation with morphology, blood counts and ancillary studies is recommended.'},
+{cat:'Negative / Reactive',name:'No residual acute leukemia',dx:'No residual leukemic population is identified by flow cytometry.',comment:'Correlation with morphology and molecular or cytogenetic studies is recommended, particularly if a disease-defining genetic abnormality was previously identified.'},
+{cat:'Negative / Reactive',name:'Reactive / polytypic lymphoid population',dx:'No monotypic B-cell population or aberrant T-cell population is identified.',comment:'The findings support a reactive lymphoid population by flow cytometry. Correlation with histologic architecture is recommended.'},
+{cat:'Negative / Reactive',name:'Post-rituximab B-cell depletion',dx:'Markedly decreased or absent mature B-cells are identified.',comment:'The finding may be related to prior anti-CD20 therapy. There is no definitive monotypic B-cell population identified in this specimen. Clinical correlation is recommended.'},
+{cat:'Negative / Reactive',name:'Low CD4:CD8 ratio without aberrancy',dx:'Altered CD4:CD8 ratio without definitive T-cell immunophenotypic aberrancy.',comment:'This finding is nonspecific and may be seen in reactive, infectious, inflammatory, autoimmune or treatment-related settings. Clinical correlation is recommended.'},
+{cat:'B-cell',name:'CLL/SLL phenotype',dx:'CD5-positive, CD23-positive monotypic B-cell population identified, consistent with a CLL/SLL immunophenotype.',comment:'Correlation with the absolute clonal B-cell count, clinical findings, imaging and tissue morphology is recommended to distinguish CLL, SLL and CLL-type monoclonal B-cell lymphocytosis. FISH or molecular studies may be considered for prognostication as clinically indicated.'},
+{cat:'B-cell',name:'CLL-type MBL',dx:'Small CD5-positive, CD23-positive monotypic B-cell population identified.',comment:'If the absolute clonal B-cell count is below the diagnostic threshold for CLL and there is no tissue disease, the findings may represent CLL-type monoclonal B-cell lymphocytosis. Clinical correlation is recommended.'},
+{cat:'B-cell',name:'Atypical CD5-positive B-cell LPD',dx:'CD5-positive monotypic B-cell population identified.',comment:'The findings support a CD5-positive B-cell lymphoproliferative disorder. Differential considerations include atypical CLL/SLL, mantle cell lymphoma, marginal zone lymphoma and lymphoplasmacytic lymphoma. Correlation with morphology and ancillary studies, including cyclin D1/SOX11 or t(11;14) testing if indicated, is recommended.'},
+{cat:'B-cell',name:'Mantle cell lymphoma phenotype',dx:'CD5-positive, CD23-negative monotypic B-cell population identified, suspicious for mantle cell lymphoma.',comment:'Correlation with morphology and cyclin D1, SOX11 and/or CCND1 rearrangement testing is recommended for definitive classification.'},
+{cat:'B-cell',name:'CD5-negative/CD10-negative B-cell LPD',dx:'CD5-negative, CD10-negative monotypic B-cell population identified.',comment:'The findings support involvement by a B-cell lymphoproliferative disorder. Differential considerations include marginal zone lymphoma, lymphoplasmacytic lymphoma and other low-grade B-cell lymphomas. Correlation with morphology, clinical findings and ancillary studies is recommended.'},
+{cat:'B-cell',name:'Marginal zone lymphoma favored',dx:'CD5-negative, CD10-negative monotypic B-cell population identified, favor marginal zone lymphoma in the appropriate context.',comment:'Flow cytometry cannot reliably distinguish all CD5-negative/CD10-negative small B-cell lymphomas. Correlation with tissue morphology, distribution of disease, serum protein studies and ancillary testing is recommended.'},
+{cat:'B-cell',name:'Lymphoplasmacytic lymphoma / WM',dx:'Monotypic B-cell population identified, raising consideration of lymphoplasmacytic lymphoma in the appropriate context.',comment:'Correlation with marrow morphology, serum IgM paraprotein, MYD88 mutation testing and clinical findings is recommended.'},
+{cat:'B-cell',name:'Follicular lymphoma phenotype',dx:'CD10-positive monotypic B-cell population identified, supporting involvement by a germinal center-derived B-cell lymphoma.',comment:'The differential diagnosis includes follicular lymphoma and other CD10-positive B-cell lymphomas. Correlation with architecture and histologic grade is required for definitive classification.'},
+{cat:'B-cell',name:'CD10-positive high-grade B-cell lymphoma',dx:'CD10-positive monotypic B-cell population identified with features concerning for an aggressive B-cell lymphoma.',comment:'Differential considerations include diffuse large B-cell lymphoma, high-grade B-cell lymphoma and Burkitt lymphoma. Correlation with morphology, Ki-67, MYC/BCL2/BCL6 studies and other ancillary testing is recommended.'},
+{cat:'B-cell',name:'Large B-cell lymphoma',dx:'Monotypic large B-cell population identified, supporting involvement by large B-cell lymphoma.',comment:'Definitive subclassification requires correlation with tissue morphology, immunohistochemistry and cytogenetic or molecular studies.'},
+{cat:'B-cell',name:'Hairy cell leukemia phenotype',dx:'Monotypic B-cell population with hairy cell leukemia-associated immunophenotypic features is identified.',comment:'Correlation with morphology, cytochemistry or immunohistochemistry, splenic findings and BRAF V600E testing is recommended as clinically indicated.'},
+{cat:'B-cell',name:'Burkitt lymphoma phenotype',dx:'Monotypic CD10-positive B-cell population identified with features concerning for Burkitt lymphoma.',comment:'Correlation with morphology, Ki-67 proliferation index and MYC rearrangement testing is required for definitive classification.'},
+{cat:'B-cell',name:'Small monotypic B-cell population, uncertain significance',dx:'Small monotypic B-cell population identified.',comment:'The clinical significance is uncertain and may represent minimal involvement by a B-cell lymphoproliferative disorder, monoclonal B-cell lymphocytosis, or peripheral blood contamination depending on the specimen. Correlation with morphology and clinical findings is recommended.'},
+{cat:'T/NK-cell',name:'No T-cell immunophenotypic abnormality',dx:'No definitive aberrant T-cell population is identified.',comment:'T-cells show no definitive aberrant loss or aberrant expression of pan-T-cell markers in the analyzed sample. Clinical and morphologic correlation is recommended.'},
+{cat:'T/NK-cell',name:'Aberrant mature T-cell population',dx:'Aberrant mature T-cell population identified.',comment:'The findings raise concern for a mature T-cell lymphoproliferative disorder. Correlation with morphology, clinical findings and T-cell receptor clonality or molecular studies is recommended as clinically indicated.'},
+{cat:'T/NK-cell',name:'T-LGL, supportive',dx:'Expanded T large granular lymphocyte population identified.',comment:'Persistent expansion in the appropriate clinical setting may support T-cell large granular lymphocytic leukemia. Correlation with cytopenias, splenomegaly, morphology and T-cell clonality or STAT3/STAT5B testing is recommended as clinically indicated.'},
+{cat:'T/NK-cell',name:'Reactive LGL expansion',dx:'Relative increase in CD57-positive T-cells without definitive immunophenotypic aberrancy.',comment:'Transient expansions may be seen in reactive conditions such as viral infection, autoimmune disease, inflammation or post-transplantation. Repeat flow cytometry may be considered if the population persists or if cytopenias, organomegaly or systemic symptoms develop.'},
+{cat:'T/NK-cell',name:'Increased NK cells',dx:'Increased NK-cell population identified.',comment:'No definitive aberrant NK-cell phenotype is identified with the available panel. Reactive NK-cell expansions may be seen in infection, inflammation, autoimmune disease and post-transplant settings. Persistent or symptomatic cases may warrant repeat flow cytometry and additional studies.'},
+{cat:'T/NK-cell',name:'Chronic NK-cell lymphoproliferative disorder considered',dx:'Expanded NK-cell population identified.',comment:'In the appropriate clinical setting, a chronic lymphoproliferative disorder of NK-cells is a consideration. Correlation with duration of lymphocytosis, cytopenias, organomegaly, EBV status and additional NK-cell studies is recommended.'},
+{cat:'T/NK-cell',name:'Sezary syndrome / CTCL blood involvement',dx:'Aberrant CD4-positive T-cell population identified, compatible with blood involvement by cutaneous T-cell lymphoma in the appropriate clinical context.',comment:'Correlation with skin findings, morphology, absolute Sezary cell count and T-cell clonality is recommended.'},
+{cat:'T/NK-cell',name:'AITL / TFH phenotype suspected',dx:'Aberrant T-cell population with follicular helper T-cell marker expression identified.',comment:'The findings may support a TFH-derived T-cell lymphoma in the appropriate morphologic context. Correlation with lymph node morphology, immunohistochemistry and molecular studies is required.'},
+{cat:'Plasma cell',name:'No monotypic plasma cells',dx:'No monotypic plasma cell population is identified by flow cytometry.',comment:'Correlation with marrow morphology, serum and urine protein studies and clinical findings is recommended. Flow cytometry may underestimate plasma cell burden due to hemodilution or sample processing.'},
+{cat:'Plasma cell',name:'Monotypic plasma cells',dx:'Monotypic plasma cell population identified.',comment:'The findings support involvement by a plasma cell neoplasm. Correlation with bone marrow morphology, serum/urine protein studies, imaging and cytogenetic studies is recommended.'},
+{cat:'Plasma cell',name:'Plasma cell myeloma phenotype',dx:'Aberrant monotypic plasma cell population identified, consistent with a plasma cell neoplasm.',comment:'Typical aberrancies may include CD19 loss, CD56 expression, CD117 expression, CD45 downregulation or abnormal light-chain restriction. Correlation with marrow plasma cell percentage and myeloma-defining events is recommended.'},
+{cat:'Plasma cell',name:'Polyclonal plasmacytosis',dx:'Plasma cells show polytypic light-chain expression.',comment:'No flow cytometric evidence of a monotypic plasma cell population is identified. Correlation with morphology and clinical findings is recommended.'},
+{cat:'Acute leukemia / Myeloid',name:'AML',dx:'Abnormal myeloid blast population identified, consistent with acute myeloid leukemia in the appropriate morphologic context.',comment:'Correlation with morphology, blast percentage, cytogenetic and molecular studies is required for definitive classification.'},
+{cat:'Acute leukemia / Myeloid',name:'APL phenotype',dx:'Abnormal promyelocytic/myeloid population identified, concerning for acute promyelocytic leukemia in the appropriate context.',comment:'Urgent correlation with morphology and PML::RARA testing is recommended.'},
+{cat:'Acute leukemia / Myeloid',name:'Monocytic AML phenotype',dx:'Abnormal myeloid/monocytic blast population identified.',comment:'The findings support acute myeloid leukemia with monocytic differentiation in the appropriate morphologic context. Correlation with cytochemistry, morphology and genetics is recommended.'},
+{cat:'Acute leukemia / Myeloid',name:'Megakaryoblastic AML phenotype',dx:'Abnormal blast population with megakaryocytic marker expression identified.',comment:'The findings support acute megakaryoblastic leukemia in the appropriate morphologic context. Correlation with morphology and cytogenetic/molecular studies is recommended.'},
+{cat:'Acute leukemia / Myeloid',name:'B-ALL',dx:'Abnormal precursor B-cell population identified, consistent with B-lymphoblastic leukemia/lymphoma.',comment:'Correlation with morphology, cytogenetic and molecular studies is recommended. Distinction from hematogones should incorporate maturation pattern and aberrant antigen expression.'},
+{cat:'Acute leukemia / Myeloid',name:'T-ALL',dx:'Abnormal precursor T-cell population identified, consistent with T-lymphoblastic leukemia/lymphoma.',comment:'Correlation with tissue morphology, marrow/blood involvement and ancillary studies is recommended.'},
+{cat:'Acute leukemia / Myeloid',name:'ETP-ALL phenotype',dx:'Abnormal immature T-cell population with early T-cell precursor phenotype identified.',comment:'Correlation with morphology, complete immunophenotype and genetic studies is recommended for definitive classification.'},
+{cat:'Acute leukemia / Myeloid',name:'Mixed phenotype / ambiguous lineage',dx:'Abnormal blast population identified with lineage ambiguity.',comment:'The findings raise consideration of acute leukemia of ambiguous lineage or mixed phenotype acute leukemia. Complete correlation with morphology, cytochemistry, cytogenetic and molecular studies is required.'},
+{cat:'MDS / MPN / Marrow',name:'No definitive flow evidence of MDS',dx:'No definitive flow cytometric evidence of myelodysplasia is identified.',comment:'Flow cytometry is an adjunctive test and does not exclude myelodysplastic syndrome. Correlation with marrow morphology, cytogenetic and molecular studies is recommended.'},
+{cat:'MDS / MPN / Marrow',name:'Flow abnormalities suggestive of MDS',dx:'Immunophenotypic abnormalities are identified in myeloid maturation.',comment:'The findings may be seen in a myeloid neoplasm such as myelodysplastic syndrome, but are not diagnostic in isolation. Correlation with morphology, cytogenetics and molecular studies is recommended.'},
+{cat:'MDS / MPN / Marrow',name:'CMML support',dx:'Monocytosis with immunophenotypic findings supportive of chronic myelomonocytic leukemia in the appropriate clinical context.',comment:'Correlation with persistent absolute monocytosis, morphology, blast percentage, cytogenetic and molecular studies is recommended.'},
+{cat:'MDS / MPN / Marrow',name:'CML / MPN with blasts',dx:'Myeloblasts are increased.',comment:'The findings may support accelerated phase or transformation in the appropriate clinical context. Correlation with morphology, blast count, BCR::ABL1 status and other ancillary studies is recommended.'},
+{cat:'MDS / MPN / Marrow',name:'Hematogones',dx:'Hematogone population identified.',comment:'The immunophenotypic pattern shows maturation consistent with hematogones. No definitive immunophenotypic evidence of acute leukemia is identified. Correlation with clinical context is recommended.'},
+{cat:'MDS / MPN / Marrow',name:'No abnormal mast cells',dx:'No abnormal mast cell population is identified by flow cytometry.',comment:'Correlation with tryptase, KIT mutation testing and marrow morphology is recommended if systemic mastocytosis remains clinically suspected.'},
+{cat:'Body fluid / CSF',name:'CSF negative',dx:'No definitive immunophenotypic evidence of lymphoma or leukemia is identified in the CSF sample.',comment:'Correlation with concurrent cytology and clinical findings is recommended. Sensitivity may be limited by low cellularity or prior therapy.'},
+{cat:'Body fluid / CSF',name:'CSF small atypical population',dx:'Small atypical lymphoid population identified in the CSF sample.',comment:'Definitive classification is limited by the low number of events available for analysis. Correlation with cytology and repeat sampling, if clinically indicated, is recommended.'},
+{cat:'Body fluid / CSF',name:'CSF positive for known leukemia/lymphoma',dx:'Abnormal population identified in the CSF sample, supporting involvement by the known hematologic neoplasm.',comment:'Correlation with cytology, clinical findings and prior immunophenotype is recommended.'},
+{cat:'Body fluid / CSF',name:'Pleural/ascitic fluid negative',dx:'No definitive immunophenotypic evidence of lymphoma is identified in this fluid sample.',comment:'Correlation with cytology is recommended. Flow cytometry may be limited by low cellularity, blood contamination, poor viability or fragile large cells.'},
+{cat:'Body fluid / CSF',name:'Primary effusion lymphoma considered',dx:'Abnormal large cell population identified in the effusion sample.',comment:'The findings raise consideration of an effusion-based lymphoma in the appropriate clinical and morphologic context. Correlation with cytology, HHV8/EBV studies and immunohistochemistry is recommended.'},
+{cat:'Body fluid / CSF',name:'BAL negative',dx:'No definitive immunophenotypic evidence of hematolymphoid malignancy is identified in the BAL sample.',comment:'Correlation with cytology, microbiology and clinical findings is recommended.'},
+{cat:'Limited / Nondiagnostic',name:'Quantity not sufficient',dx:'The specimen is insufficient for definitive flow cytometric assessment.',comment:'Too few viable leukocytes are available for reliable analysis. Repeat sampling may be considered if clinically indicated.'},
+{cat:'Limited / Nondiagnostic',name:'Low viability',dx:'Flow cytometric assessment is limited by low cell viability.',comment:'No definitive abnormal population is identified in the viable cells analyzed; however, a false-negative result cannot be excluded. Correlation with morphology and repeat sampling may be considered.'},
+{cat:'Limited / Nondiagnostic',name:'Necrotic tissue / poor sample',dx:'The sample is suboptimal for flow cytometric interpretation.',comment:'Poor viability, necrosis or low cellular recovery limits assessment. Correlation with histology and immunohistochemistry is recommended.'},
+{cat:'Limited / Nondiagnostic',name:'Possible hemodilute marrow',dx:'No definitive abnormal population is identified; however, assessment may be limited by sample quality.',comment:'A hemodilute aspirate may underestimate marrow involvement or blast burden. Correlation with core biopsy morphology and aspirate differential count is recommended.'},
+{cat:'Limited / Nondiagnostic',name:'Large cell lymphoma false-negative caution',dx:'No definitive abnormal B-cell population is identified by flow cytometry.',comment:'Flow cytometry may be negative in large B-cell lymphoma due to necrosis, poor viability, sampling, or loss of surface immunoglobulin. Correlation with tissue morphology and immunohistochemistry is required.'},
+{cat:'PNH / Enumeration',name:'PNH negative',dx:'No population with a PNH-related phenotype is detected by flow cytometry.',comment:'Normal expression of GPI-linked markers is demonstrated in neutrophils, monocytes and red blood cells.'},
+{cat:'PNH / Enumeration',name:'Minor PNH clone',dx:'Minor populations with PNH-related phenotypes are detected.',comment:'Small GPI-deficient populations may be seen in bone marrow failure syndromes. Correlation with clinical and laboratory findings is recommended. Repeat testing may be considered to assess clone size over time.'},
+{cat:'PNH / Enumeration',name:'PNH positive',dx:'Large populations with PNH-associated phenotypes are detected, consistent with paroxysmal nocturnal hemoglobinuria in the appropriate clinical context.',comment:'Differences between red cell and white cell clone sizes may reflect hemolysis or prior red cell transfusion. Clinical correlation and interval monitoring are recommended.'},
+{cat:'PNH / Enumeration',name:'CD19/CD20 enumeration',dx:'Mature CD19-positive/CD20-positive B-cells are enumerated by flow cytometry.',comment:'Use absolute counts and percent of total leukocytes or lymphocytes as applicable. Correlation with treatment history, particularly anti-CD20 therapy, is recommended.'},
+{cat:'Non-hematopoietic / Other',name:'Non-hematopoietic malignancy suspected',dx:'No definitive abnormal hematolymphoid population is identified by flow cytometry.',comment:'A substantial CD45-negative population or morphologic findings may suggest a non-hematopoietic process. Correlation with cytology, histology and immunohistochemistry is recommended.'},
+{cat:'Non-hematopoietic / Other',name:'Thymic tissue / thymoma pattern',dx:'Immature T-cell population with thymocyte-like maturation pattern identified.',comment:'The findings may be compatible with thymic tissue or thymoma in the appropriate anatomic and morphologic context. Correlation with histology is required.'}
+];
+const phrases=[
+['Correlation','Correlation with clinical, morphologic, cytogenetic and molecular findings is recommended.'],
+['Flow limitation','Flow cytometry is an adjunct to morphology and may not reliably classify all lymphomas or estimate blast percentage in all specimens.'],
+['Low events','Interpretation is limited by the low number of events available for analysis.'],
+['Low viability','Interpretation is limited by low cell viability; a false-negative result cannot be excluded.'],
+['Hemodilute marrow','A hemodilute aspirate may underestimate marrow involvement or blast burden.'],
+['Large cell caution','Large cell lymphoma may be underrepresented or not detected by flow cytometry due to fragility, necrosis or sampling.'],
+['Repeat sample','Repeat sampling may be considered if clinical concern persists.'],
+['TCR clonality','T-cell receptor clonality testing may be considered if clinically indicated.'],
+['FISH','FISH/cytogenetic studies may be considered for diagnosis or prognostication as clinically indicated.'],
+['Molecular','Molecular studies may be helpful for definitive classification and risk stratification.']
+];
+let current=null;
+function init(){let cats=[...new Set(templates.map(t=>t.cat))];category.innerHTML='<option value="All">All categories</option>'+cats.map(c=>`<option>${c}</option>`).join('');renderTemplates();renderPhrases();}
+function renderTemplates(){let c=category.value||'All', q=(search.value||'').toLowerCase();let list=templates.filter(t=>(c==='All'||t.cat===c)&&((t.name+' '+t.dx+' '+t.comment).toLowerCase().includes(q)));templateList.innerHTML=list.map((t,i)=>`<div class="templateItem" onclick="selectTemplate('${t.name.replace(/'/g,"\\'")}')"><div class="tTitle">${t.name}</div><div class="tMeta">${t.cat}</div></div>`).join('')||'<div class="small">No matching templates.</div>';}
+function selectTemplate(name){current=templates.find(t=>t.name===name);document.querySelectorAll('.templateItem').forEach(x=>x.classList.remove('active'));[...document.querySelectorAll('.templateItem')].find(x=>x.innerText.startsWith(name))?.classList.add('active');generateReport();}
+function val(id){return document.getElementById(id).value.trim();}
+function generateReport(){let t=current||templates[0];let specimen=val('specimen'), context=val('context'), pop=val('population'), size=val('size'), light=val('light'), pos=val('positive'), neg=val('negative'), other=val('other'), custom=val('custom');let lines=[];lines.push('DIAGNOSIS');lines.push(t.dx);if(specimen||context){lines.push('');lines.push('SPECIMEN / CONTEXT');if(specimen)lines.push('Specimen: '+specimen+'.');if(context)lines.push('Clinical context: '+context+'.');}
+let details=[];if(pop)details.push('Population: '+pop+'.');if(size)details.push('Size: '+size+'.');if(pos)details.push('Positive markers: '+pos+'.');if(neg)details.push('Negative markers: '+neg+'.');if(light)details.push('Light chain: '+light+'.');if(other)details.push(other.replace(/\s+$/,''));if(details.length){lines.push('');lines.push('FLOW CYTOMETRIC FINDINGS');lines.push(details.join('\n'));}
+lines.push('');lines.push('COMMENT');lines.push(t.comment);if(custom){lines.push('');lines.push(custom);}output.textContent=lines.join('\n');}
+function copyOutput(){navigator.clipboard.writeText(output.textContent);} 
+function clearFields(){['specimen','context','population','size','light','positive','negative','other','custom'].forEach(id=>document.getElementById(id).value='');output.textContent='Select a template and click Generate.';}
+function loadNormal(){specimen.value='Peripheral blood';population.value='Mature lymphocytes';size='';positive.value='';negative.value='';light.value='Polytypic B-cells';other.value='CD34-positive blasts are not increased.';current=templates.find(t=>t.name==='No flow evidence of lymphoproliferative disorder');generateReport();}
+function renderPhrases(){phraseBar.innerHTML=phrases.map(p=>`<span class="pill" onclick="insertPhrase('${p[0].replace(/'/g,"\\'")}')">${p[0]}</span>`).join('');}
+function insertPhrase(k){let p=phrases.find(x=>x[0]===k);phraseText.value+=(phraseText.value?'\n':'')+p[1];}
+function copyPhrase(){navigator.clipboard.writeText(phraseText.value);} 
+function showTab(id,btn){['build','phrases','refs'].forEach(x=>document.getElementById(x).style.display=x===id?'block':'none');document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');}
+window.onload=init;
+</script>
+</body>
+</html>
