@@ -3,46 +3,55 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Heme Body Fluids / CSF Cytology Comment Generator</title>
+  <title>Heme Body Fluids / CSF Cytology Comment Generator - FNA Style v4</title>
   <style>
-    :root { --pad: 12px; --gap: 10px; }
-    body { font-family: Arial, Helvetica, sans-serif; margin: 0; background:#f6f7f9; color:#111; }
-    header { background:#0b5; color:white; padding:16px 18px; }
-    header h1 { margin:0; font-size:18px; }
-    header p { margin:6px 0 0; opacity:0.95; font-size:13px; }
-    main { padding: 18px; max-width: 1100px; margin: 0 auto; }
-    .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    @media (max-width: 980px){ .grid{ grid-template-columns:1fr; } }
-    .card { background:white; border:1px solid #e5e7eb; border-radius:10px; padding: 14px; box-shadow:0 1px 2px rgba(0,0,0,0.04); }
-    .card h2 { margin:0 0 10px; font-size:15px; }
-    .row { display:flex; gap: 10px; flex-wrap:wrap; align-items:center; }
-    label { font-size: 13px; }
-    input[type="text"], select, textarea {
-      border:1px solid #d1d5db; border-radius:8px; padding: 8px 10px; font-size:13px;
-      outline:none; background:white;
-    }
-    textarea { width:100%; min-height: 220px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; }
-    .small { font-size:12px; color:#4b5563; }
-    .pill { display:inline-flex; align-items:center; gap:8px; padding:7px 10px; border:1px solid #e5e7eb; border-radius:999px; background:#fafafa; }
-    .checks { display:grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; }
-    @media (max-width: 520px){ .checks{ grid-template-columns:1fr; } }
-    .checks label { display:flex; gap:8px; align-items:flex-start; line-height:1.25; }
-    .btns { display:flex; gap: 10px; flex-wrap:wrap; }
-    button {
-      border: 1px solid #d1d5db; background:white; border-radius:10px; padding: 9px 12px;
-      font-size:13px; cursor:pointer;
-    }
-    button.primary { background:#0b5; color:white; border-color:#0b5; }
-    button:active { transform: translateY(1px); }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace; }
-    .warn { color:#b45309; }
-    .sep { height:1px; background:#e5e7eb; margin: 12px 0; }
-  </style>
+:root{
+  --bg:#f5f7fb;--card:#ffffff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;
+  --accent:#2563eb;--accent2:#eff6ff;--warn:#fff7ed;--danger:#fef2f2;--ok:#f0fdf4;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+header{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:white;padding:28px 22px}
+header h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
+header p{margin:0;color:#dbeafe;font-size:14px}
+main{max-width:1180px;margin:24px auto;padding:0 16px 40px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+.card h2{font-size:18px;margin:0 0 14px;color:#0f172a}
+label{font-weight:700;font-size:13px;color:#374151}
+input[type="text"],select,textarea{width:100%;border:1px solid #d1d5db;border-radius:10px;padding:10px 11px;font-size:14px;background:white;color:var(--ink);outline:none}
+input[type="text"]:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+textarea{min-height:220px;resize:vertical;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.5}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end}
+.row .pill{display:block}
+.small{font-size:12px;color:var(--muted);margin-top:6px}
+.pill{border:0;background:transparent;padding:0;border-radius:0}
+.pill label{display:block;margin:0;color:#374151}
+.pill input,.pill select{margin-top:6px}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px}
+.checks label{display:flex;gap:9px;align-items:flex-start;font-weight:600;line-height:1.25;border:1px solid #e5e7eb;background:#f8fafc;border-radius:10px;padding:8px 10px;margin:0}
+.checks input{width:auto;margin-top:2px}
+.btns{display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:10px;margin:12px 0 14px;padding-top:8px;border-top:1px solid var(--line)}
+button{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;font-size:14px;background:#e5e7eb;color:#111827}
+button.primary{background:var(--accent);color:white}
+button.secondary{background:#e5e7eb;color:#111827}
+button.ghost{background:#fff;border:1px solid #d1d5db;color:#111827}
+button.danger{background:#fee2e2;color:#991b1b}
+button:active{transform:translateY(1px)}
+.mono{font-family:Consolas,Menlo,monospace}
+.warn{color:#b45309;font-weight:600}
+.sep,.hr{border-top:1px solid var(--line);height:0;margin:16px 0}
+.output-card textarea#output{background:#0b1220;color:#e5e7eb;border-radius:14px;padding:16px;min-height:360px;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.5;border:0}
+.badge{display:inline-block;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;margin-left:6px;background:#eff6ff;color:#1d4ed8}
+.refbox,.dxbox{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:12px;color:#334155;font-size:13px;margin-top:12px}
+@media(max-width:900px){.grid,.row{grid-template-columns:1fr}}
+@media print{body{background:white}header,.btns,.no-print{display:none}.grid{display:block}.card{box-shadow:none;border:0}.output-card textarea#output{color:black;background:white;border:0;padding:0}}
+</style>
 </head>
 <body>
 <header>
   <h1>Heme Body Fluids / CSF Cytology Comment Generator</h1>
-  <p>Pick specimen type + findings → generates concise Diagnosis/Comment (and optional expanded text).</p>
+  <p>Pick specimen type + findings -> generates concise Diagnosis/Comment (and optional expanded text).</p>
 </header>
 
 <main class="grid">
@@ -62,7 +71,7 @@
     <div class="sep"></div>
 
     <h2>Key Findings</h2>
-    <p class="small">Select all that apply. “Intracellular organisms” will override “extracellular” language where both are selected.</p>
+    <p class="small">Select all that apply. "Intracellular organisms" will override "extracellular" language where both are selected.</p>
     <div class="checks" id="checksBody">
       <label><input type="checkbox" data-tag="NO_MALIGNANT">No malignant cells seen</label>
       <label><input type="checkbox" data-tag="MALIGNANT_UNCERTAIN">Atypical cells present. Correlation with cytologic and ancillary studies is recommended.</label>
@@ -146,19 +155,18 @@
       </label></span>
     </div>
 
-    <div class="sep"></div>
-    <div class="btns">
-      <button class="primary" id="generateBtn">Generate</button>
-      <button id="copyBtn">Copy</button>
-      <button id="resetBtn">Reset</button>
-    </div>
-    <p class="small warn" id="warn"></p>
   </section>
 
-  <section class="card">
-    <h2>Generated Text</h2>
+  <section class="card output-card">
+    <h2>Generated Text <span class="badge">ASCII-safe</span></h2>
+    <div class="btns no-print">
+      <button class="primary" id="generateBtn">Generate</button>
+      <button class="secondary" id="copyBtn">Copy</button>
+      <button class="danger" id="resetBtn">Reset</button>
+    </div>
+    <p class="small warn" id="warn"></p>
     <textarea id="output" spellcheck="false" class="mono"></textarea>
-    <p class="small">Tip: Use <span class="mono">Short</span> for heme body-fluid “comment-only” workflows; use <span class="mono">Report</span> if your LIS expects separate sections.</p>
+    <p class="small">Tip: Use <span class="mono">Short</span> for heme body-fluid "comment-only" workflows; use <span class="mono">Report</span> if your LIS expects separate sections.</p>
   </section>
 </main>
 
@@ -172,6 +180,11 @@
   }
 
   function sanitize(s){ return (s||"").trim(); }
+
+  function sanitizeAscii(s){
+    const map = {"\u2013":"-","\u2014":"-","\u2212":"-","\u201c":"\"","\u201d":"\"","\u2018":"'","\u2019":"'","\u2265":">=","\u2264":"<=","\u00b1":"+/-","\u00d7":"x","\u03bc":"u","\u2022":"-","\u2026":"...","\u00a0":" "};
+    return String(s || "").replace(/[\u2013\u2014\u2212\u201c\u201d\u2018\u2019\u2265\u2264\u00b1\u00d7\u03bc\u2022\u2026\u00a0]/g, ch => map[ch] || ch);
+  }
 
   function buildBodyFluid(tags){
     const has = (t)=>tags.includes(t);
@@ -291,7 +304,7 @@
     const has = (t)=>tags.includes(t);
     const warnings = [];
     if (has("NO_MALIGNANT") && (has("MALIGN_GLANDULAR") || has("MALIGNANT_CLUSTERS") || has("LARGE_PLEO_MALIGN") || has("MALIGNANT_UNCERTAIN") || has("MONO_ATYP_SMALL_LYMPH") || has("MONO_ATYP_LARGE_LYMPH"))) {
-      warnings.push("You selected “No malignant cells seen” AND malignant/atypical categories. Consider unchecking one.");
+      warnings.push('You selected "No malignant cells seen" AND malignant/atypical categories. Consider unchecking one.');
     }
     if (has("BACT_COCCI_EC") && has("BACT_COCCI_IC")) warnings.push("Both extracellular and intracellular bacterial cocci selected; output will use intracellular wording.");
     if (has("MIXED_FLORA_EC") && has("MIXED_FLORA_IC")) warnings.push("Both extracellular and intracellular mixed flora selected; output will use intracellular wording.");
@@ -305,13 +318,13 @@
     const style = $("style").value;
 
     const tags = selectedTags();
-    $("warn").textContent = validate(tags);
+    $("warn").textContent = sanitizeAscii(validate(tags));
 
     let lines = [];
     if (specimenType === "CSF") lines = buildCSF(tags, history);
     else lines = buildBodyFluid(tags);
 
-    $("output").value = toReport(site, history, lines, style, specimenType);
+    $("output").value = sanitizeAscii(toReport(site, history, lines, style, specimenType));
   }
 
   function resetAll(){
@@ -327,7 +340,7 @@
   async function copyOut(){
     const text = $("output").value;
     if (!text) return;
-    try { await navigator.clipboard.writeText(text); $("warn").textContent = "Copied to clipboard."; }
+    try { await navigator.clipboard.writeText(sanitizeAscii(text)); $("warn").textContent = "Copied to clipboard."; }
     catch(e){ $("warn").textContent = "Copy failed (browser permission). You can manually copy from the box."; }
   }
 
