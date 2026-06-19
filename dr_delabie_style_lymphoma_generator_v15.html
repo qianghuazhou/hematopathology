@@ -83,7 +83,7 @@
     .marker .mname{font-weight:900; font-size:12px; margin-bottom:8px; color:var(--text)}
     .marker small{color:var(--muted); display:block; margin-top:8px}
 
-    /* + / − / ± / ND toggles */
+    /* + / - / +/- / ND toggles */
     .marker-buttons{display:flex; gap:6px; flex-wrap:wrap}
     .mbtn{
       padding:4px 10px;
@@ -238,7 +238,7 @@
 
         <!-- Double Expressor/Prognostic -->
         <div class="group">
-          <div class="ghead"><div class="gtitle">Double Expressor / Prognostic</div><div class="gtag">MYC ≥40 / BCL2 ≥50</div></div>
+          <div class="ghead"><div class="gtitle">Double Expressor / Prognostic</div><div class="gtag">MYC >=40 / BCL2 >=50</div></div>
           <div class="markers" id="grp_prog"></div>
         </div>
 
@@ -256,10 +256,10 @@
 
         
 
-        <!-- Stroma -->
+        <!-- Interfollicular area -->
         <div class="group">
-          <div class="ghead"><div class="gtitle">Stroma</div><div class="gtag">T cells</div></div>
-          <div class="markers" id="grp_stroma"></div>
+          <div class="ghead"><div class="gtitle">Interfollicular area</div><div class="gtag">T cells</div></div>
+          <div class="markers" id="grp_interfollicular"></div>
         </div>
 <!-- Infectious/Epithelial -->
         <div class="group">
@@ -309,7 +309,7 @@
           <div>
             <label for="fishMyc">FISH: MYC</label>
             <select id="fishMyc">
-              <option value="" selected>—</option>
+              <option value="" selected>-</option>
               <option>requested</option>
               <option>detected</option>
               <option>not detected</option>
@@ -319,7 +319,7 @@
           <div>
             <label for="fishBcl2">FISH: BCL2</label>
             <select id="fishBcl2">
-              <option value="" selected>—</option>
+              <option value="" selected>-</option>
               <option>requested</option>
               <option>detected</option>
               <option>not detected</option>
@@ -329,7 +329,7 @@
           <div>
             <label for="fishBcl6">FISH: BCL6</label>
             <select id="fishBcl6">
-              <option value="" selected>—</option>
+              <option value="" selected>-</option>
               <option>requested</option>
               <option>detected</option>
               <option>not detected</option>
@@ -353,23 +353,23 @@
           <div class="calcgrid">
             <div>
               <div class="calclabel">Hans result</div>
-              <div class="calcval" id="calcCOO">—</div>
+              <div class="calcval" id="calcCOO">-</div>
             </div>
             <div>
               <div class="calclabel">MYC/BCL2 (40% / 50%)</div>
-              <div class="calcval" id="calcExpr">—</div>
+              <div class="calcval" id="calcExpr">-</div>
             </div>
             <div>
               <div class="calclabel">Double expressor</div>
-              <div class="calcval" id="calcDE">—</div>
+              <div class="calcval" id="calcDE">-</div>
             </div>
             <div>
               <div class="calclabel">HGBL triage flag</div>
-              <div class="calcval" id="calcHGBL">—</div>
+              <div class="calcval" id="calcHGBL">-</div>
             </div>
           </div>
           <div class="footnote">
-            Hans uses CD10/BCL6/MUM1 with 30% cutoff (based on % if provided). Double-expressor uses MYC ≥40% and BCL2 ≥50%.
+            Hans uses CD10/BCL6/MUM1 with 30% cutoff (based on % if provided). Double-expressor uses MYC >=40% and BCL2 >=50%.
           </div>
         </div>
 
@@ -380,7 +380,7 @@
           <button class="btn-ghost" id="saveBtn">Save</button>
           <button class="btn-ghost" id="loadBtn">Load</button>
         </div>
-        <div class="muted" style="margin-top:6px; font-size:12px">Save/Load uses your browser’s localStorage.</div>
+        <div class="muted" style="margin-top:6px; font-size:12px">Save/Load uses your browser's localStorage.</div>
       </div>
 
       <!-- RIGHT: Output -->
@@ -390,7 +390,7 @@
           <div class="warnhead">Unchecked markers</div>
           <div id="warnList" class="warnlist"></div>
         </div>
-        <div id="preview" class="preview muted">Click Generate…</div>
+        <div id="preview" class="preview muted">Click Generate...</div>
         <textarea id="plainOut" style="position:absolute; left:-99999px; top:-99999px;"></textarea>
       </div>
     </div>
@@ -401,10 +401,10 @@
     // Marker model
     // ---------------------------
     const STATES = [
-      {v:"",         t:"—",  cls:"placeholder"},
+      {v:"",         t:"-",  cls:"placeholder"},
       {v:"+",        t:"+",  cls:"pos"},
-      {v:"-",        t:"−",  cls:"neg"},
-      {v:"equivocal",t:"±",  cls:"eq"},
+      {v:"-",        t:"-",  cls:"neg"},
+      {v:"equivocal",t:"+/-",  cls:"eq"},
       {v:"not done", t:"ND", cls:"nd"}
     ];
 
@@ -460,7 +460,7 @@
         ]
       },
       {
-        id: "grp_stroma",
+        id: "grp_interfollicular",
         markers: [
           { key:"CD3IF", label:"CD3", type:"status", default:"", note:"Interfollicular T cells" },
           { key:"CD5IF", label:"CD5", type:"status", default:"", note:"Interfollicular T cells" }
@@ -517,7 +517,7 @@
       if(def.type === "lightchain"){
         const sel = document.createElement("select");
         sel.id = "sel_" + def.key;
-        [["","— not selected —"],["polytypic","polytypic"],["kappa restricted","kappa restricted"],["lambda restricted","lambda restricted"],["not assessed","not assessed"]].forEach(([v,l])=>{
+        [["","- not selected -"],["polytypic","polytypic"],["kappa restricted","kappa restricted"],["lambda restricted","lambda restricted"],["not assessed","not assessed"]].forEach(([v,l])=>{
           const o = document.createElement("option");
           o.value = v; o.textContent = l;
           sel.appendChild(o);
@@ -531,7 +531,7 @@
       if(def.type === "pattern"){
         const sel = document.createElement("select");
         sel.id = "sel_" + def.key;
-        [["","— not selected —"],["wild-type","wild-type"],["overexpression","overexpression"],["null pattern","null pattern"],["equivocal","equivocal"],["not assessed","not assessed"]].forEach(([v,l])=>{
+        [["","- not selected -"],["wild-type","wild-type"],["overexpression","overexpression"],["null pattern","null pattern"],["equivocal","equivocal"],["not assessed","not assessed"]].forEach(([v,l])=>{
           const o = document.createElement("option");
           o.value = v; o.textContent = l;
           sel.appendChild(o);
@@ -604,13 +604,13 @@
     function tokenStatus(key, label){
       const st = markerState(key);
       if(st === "not done" || st === "not assessed") return null;
-      const sym = (st === "+") ? "+" : (st === "-") ? "-" : (st === "equivocal") ? "±" : "ND";
+      const sym = (st === "+") ? "+" : (st === "-") ? "-" : (st === "equivocal") ? "+/-" : "ND";
       return `${label}${sym}`;
     }
     function tokenStatusPct(key, label){
       const st = markerState(key);
       if(st === "not done" || st === "not assessed") return null;
-      const sym = (st === "+") ? "+" : (st === "-") ? "-" : (st === "equivocal") ? "±" : "ND";
+      const sym = (st === "+") ? "+" : (st === "-") ? "-" : (st === "equivocal") ? "+/-" : "ND";
       const pct = markerPct(key);
       const pctPart = (pct !== null) ? `(${pct}%)` : "";
       return `${label}${sym}${pctPart}`;
@@ -762,7 +762,7 @@
       }).join("");
       const prev = document.getElementById("preview");
       prev.classList.remove("muted");
-      prev.innerHTML = html || '<span class="muted">Click Generate…</span>';
+      prev.innerHTML = html || '<span class="muted">Click Generate...</span>';
     }
 
     // Generate
@@ -789,7 +789,7 @@
 
       // Build Delabie single-line IHC summary
 // - ND markers are omitted
-// - Standard order first: CD5 → CD23 → CD10 → CD20 → CD30 → BCL2 → BCL6 → MUM1 → MYC → CCND1 → EBER
+// - Standard order first: CD5 -> CD23 -> CD10 -> CD20 -> CD30 -> BCL2 -> BCL6 -> MUM1 -> MYC -> CCND1 -> EBER
 // - Everything else follows (original group order), excluding CD21/CD23(FDC) and interfollicular markers (reported separately)
 const tokenByKey = {};
 GROUPS.forEach(g=>{
@@ -896,7 +896,7 @@ function fishSummaryLine(myc, bcl2, bcl6){
             "By immunohistochemistry",
             ...(ihcSummary ? ["Lymphoma immunophenotype: " + ihcSummary + "."] : []),
             (fdcLine ? ("Follicular dendritic cells: " + fdcLine) : null),
-            (interfollicularLine ? ("Stroma: " + interfollicularLine) : null)
+            (interfollicularLine ? ("Interfollicular area: " + interfollicularLine) : null)
           ].filter(Boolean);
           const ki67Pct = markerPct("KI67");
           const ki67State = markerState("KI67");
@@ -991,7 +991,7 @@ function fishSummaryLine(myc, bcl2, bcl6){
       document.getElementById("plainOut").value = "";
       const prev = document.getElementById("preview");
       prev.classList.add("muted");
-      prev.textContent = "Click Generate…";
+      prev.textContent = "Click Generate...";
       updateCalcBox();
     }
 
