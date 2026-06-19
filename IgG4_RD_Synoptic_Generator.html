@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IgG4-RD Synoptic Generator - FNA-style theme</title>
+  <style>
+
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --ink:#111827;
+  --muted:#6b7280;
+  --line:#e5e7eb;
+  --accent:#2563eb;
+  --accent2:#eff6ff;
+  --warn:#fff7ed;
+  --danger:#fef2f2;
+  --ok:#f0fdf4;
+  --mono:Consolas,Menlo,Monaco,"Courier New",monospace;
+  --sans:Arial,Helvetica,sans-serif;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.45;
+}
+.wrap{
+  max-width:1180px;
+  margin:0 auto;
+  padding:0 16px 40px;
+}
+header{
+  background:linear-gradient(135deg,#0f172a,#1d4ed8);
+  color:white;
+  padding:28px 22px;
+  margin:0 calc(50% - 50vw) 24px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+}
+h1{
+  margin:0 0 6px;
+  font-size:26px;
+  letter-spacing:.2px;
+}
+.sub{
+  color:#dbeafe;
+  font-size:14px;
+  margin-top:0;
+  line-height:1.35;
+}
+.layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+.panel{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+  box-shadow:0 8px 24px rgba(15,23,42,.06);
+}
+details{
+  border:1px solid var(--line);
+  background:#ffffff;
+  border-radius:14px;
+  padding:0;
+  margin-bottom:14px;
+  overflow:hidden;
+}
+summary{
+  cursor:pointer;
+  list-style:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:14px 14px;
+  background:#f8fafc;
+  border-bottom:1px solid var(--line);
+}
+details[open] summary{
+  background:var(--accent2);
+}
+summary::-webkit-details-marker{display:none}
+.sumL{display:flex;gap:10px;align-items:center}
+.caret{opacity:.8;color:#1d4ed8;font-weight:700}
+.secTitle{font-weight:700;color:#0f172a}
+.secHint{color:var(--muted);font-size:12px;margin-top:2px}
+.row{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:12px;
+  padding:0 14px 14px;
+  margin-top:0;
+}
+details .row:first-of-type{padding-top:14px}
+label{
+  display:block;
+  font-weight:700;
+  font-size:13px;
+  margin:12px 0 6px;
+  color:#374151;
+}
+input[type="text"], input[type="number"], select, textarea{
+  width:100%;
+  border:1px solid #d1d5db;
+  border-radius:10px;
+  padding:10px 11px;
+  font-size:14px;
+  background:white;
+  color:var(--ink);
+  outline:none;
+}
+input[type="text"]:focus, input[type="number"]:focus, select:focus, textarea:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(37,99,235,.10);
+}
+select option{
+  color:#111827;
+  background:#ffffff;
+}
+textarea{
+  min-height:110px;
+  resize:vertical;
+  font-family:var(--mono);
+  font-size:13px;
+  line-height:1.45;
+}
+#out{
+  white-space:pre-wrap;
+  background:#0b1220;
+  color:#e5e7eb;
+  border:0;
+  border-radius:14px;
+  padding:16px;
+  min-height:520px;
+  font-family:var(--mono);
+  font-size:13px;
+  line-height:1.5;
+}
+.small{font-size:12px;color:var(--muted);margin-top:6px}
+.cb,.opt{
+  display:flex;
+  gap:9px;
+  align-items:flex-start;
+  margin:8px 0 0;
+  padding:10px 11px;
+  border-radius:12px;
+  border:1px solid #e5e7eb;
+  background:#f8fafc;
+  color:#374151;
+  font-weight:600;
+}
+.cb input,.opt input{width:auto;margin-top:3px}
+.optgrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+fieldset{
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:12px;
+  background:#ffffff;
+}
+legend{
+  font-weight:700;
+  color:#0f172a;
+  padding:0 6px;
+}
+.span12{grid-column:span 12}.span8{grid-column:span 8}.span6{grid-column:span 6}.span4{grid-column:span 4}.span3{grid-column:span 3}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0 12px}
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:10px 14px;
+  font-weight:700;
+  cursor:pointer;
+  font-size:14px;
+  background:var(--accent);
+  color:white;
+}
+.btn.secondary{background:#e5e7eb;color:#111827}
+.btn.good{background:var(--accent);color:white}
+.btn.warn{background:#fee2e2;color:#991b1b}
+.tag{
+  display:inline-block;
+  border-radius:999px;
+  padding:4px 10px;
+  font-size:12px;
+  font-weight:700;
+  border:1px solid #d1d5db;
+  background:#f3f4f6;
+  color:#374151;
+  white-space:nowrap;
+}
+.tag.ok{background:var(--ok);border-color:#bbf7d0;color:#166534}
+.tag.no{background:var(--danger);border-color:#fecaca;color:#991b1b}
+.tag.maybe{background:var(--warn);border-color:#fed7aa;color:#9a3412}
+.hr{height:1px;background:var(--line);margin:14px 0}
+.scorebox{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+  border:1px solid #cbd5e1;
+  background:#f8fafc;
+  border-radius:14px;
+  padding:12px;
+  margin-top:12px;
+}
+.score{font-family:var(--mono);font-size:13px;color:#111827}
+.footnote{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.35;
+  background:#f8fafc;
+  border:1px dashed #cbd5e1;
+  border-radius:12px;
+  padding:12px;
+}
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr}
+  header{display:block}
+  #out{min-height:360px}
+}
+@media (max-width:720px){
+  .span12,.span8,.span6,.span4,.span3{grid-column:span 12}
+  .optgrid{grid-template-columns:1fr}
+}
+@media print{
+  body{background:white}
+  header,.toolbar{display:none}
+  .layout{display:block}
+  .panel,details{box-shadow:none;border:0}
+  #out{color:black;background:white;border:0;padding:0}
+}
+
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>IgG4-RD Synoptic Generator</h1>
+        <div class="sub">
+          Integrated pathology + optional ACR/EULAR (2019) classification scoring. Generates a concise "WashU-style" diagnosis line with a fuller Comment.
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <span id="dxTag" class="tag maybe">Suggestive / not definitive</span>
+        <span id="classTag" class="tag maybe">Classification: Unknown</span>
+      </div>
+    </header>
+
+    <div class="layout">
+      <!-- Inputs -->
+      <div class="panel">
+        <details open>
+          <summary>
+            <div class="sumL">
+              <span class="caret">v</span>
+              <div>
+                <div class="secTitle">Specimen</div>
+                <div class="secHint">Site/organ + procedure type</div>
+              </div>
+            </div>
+            <span class="tag">Header</span>
+          </summary>
+          <div class="row">
+            <div class="span8">
+              <label>Site / Organ</label>
+              <input id="site" type="text" placeholder="e.g., Nasal cavity, right turbinate" />
+            </div>
+            <div class="span4">
+              <label>Procedure</label>
+              <select id="proc">
+                <option value="Biopsy">Biopsy</option>
+                <option value="Core biopsy">Core biopsy</option>
+                <option value="Needle biopsy">Needle biopsy</option>
+                <option value="Excision">Excision</option>
+                <option value="Resection">Resection</option>
+              </select>
+            </div>
+          </div>
+        </details>
+
+        <details open>
+          <summary>
+            <div class="sumL">
+              <span class="caret">v</span>
+              <div>
+                <div class="secTitle">Key histologic features</div>
+                <div class="secHint">Select fibrosis/phlebitis subtype; check supportive features</div>
+              </div>
+            </div>
+            <span class="tag">Histology</span>
+          </summary>
+
+          <div class="row">
+            <div class="span6">
+              <div class="cb">
+                <input id="denseLP" type="checkbox" checked />
+                <div>
+                  <div style="font-weight:650">Dense lymphoplasmacytic infiltrate</div>
+                  <div class="small">Often present in involved sites</div>
+                </div>
+              </div>
+            </div>
+            <div class="span6">
+              <div class="cb">
+                <input id="eos" type="checkbox" />
+                <div>
+                  <div style="font-weight:650">Tissue eosinophilia</div>
+                  <div class="small">Supportive but non-specific</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="span6">
+              <label>Fibrosis</label>
+              <select id="fib">
+                <option value="Absent">Absent</option>
+                <option value="Irregular/sclerotic">Irregular/sclerotic</option>
+                <option value="Storiform">Storiform</option>
+              </select>
+            </div>
+            <div class="span6">
+              <label>Phlebitis</label>
+              <select id="phleb">
+                <option value="Absent">Absent</option>
+                <option value="Present (non-obliterative)">Present (non-obliterative)</option>
+                <option value="Present (obliterative)">Present (obliterative)</option>
+              </select>
+            </div>
+
+            <div class="span12">
+              <label>Lymph node pattern (optional)</label>
+              <select id="lnPattern">
+                <option value="">(Not applicable)</option>
+                <option value="Castleman-like">Castleman-like</option>
+                <option value="Follicular hyperplasia">Follicular hyperplasia</option>
+                <option value="Interfollicular expansion">Interfollicular expansion</option>
+                <option value="PTGC-like">PTGC-like</option>
+                <option value="Inflammatory pseudotumor-like">Inflammatory pseudotumor-like</option>
+                <option value="Infectious mononucleosis-like">Infectious mononucleosis-like</option>
+              </select>
+            </div>
+
+            <div class="span12">
+              <div class="cb">
+                <input id="gran" type="checkbox" />
+                <div>
+                  <div style="font-weight:650">Granulomas present (exclusion feature)</div>
+                  <div class="small">If checked, generator will default ACR/EULAR Exclusion=Yes</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details open>
+          <summary>
+            <div class="sumL">
+              <span class="caret">v</span>
+              <div>
+                <div class="secTitle">Immunohistochemistry</div>
+                <div class="secHint">Enter IgG4/HPF + ratio; set plasma cell clonality</div>
+              </div>
+            </div>
+            <span class="tag">IHC</span>
+          </summary>
+
+          <div class="row">
+            <div class="span3">
+              <label>IgG4+ plasma cells (/HPF, max)</label>
+              <input id="igg4hpf" type="number" min="0" step="1" placeholder="e.g., 80" />
+            </div>
+            <div class="span3">
+              <label>IgG4/IgG ratio (%)</label>
+              <input id="ratio" type="number" min="0" max="100" step="1" placeholder="e.g., 55" />
+            </div>
+            <div class="span3">
+              <label>IgG (optional /HPF)</label>
+              <input id="igghpf" type="number" min="0" step="1" placeholder="optional" />
+            </div>
+            <div class="span3">
+              <label>Plasma cells</label>
+              <select id="polytypic">
+                <option value="Polytypic">Polytypic</option>
+                <option value="Not assessed">Not assessed</option>
+                <option value="Light chain restriction">Light chain restriction</option>
+              </select>
+            </div>
+
+            <div class="span12">
+              <div class="cb">
+                <input id="addDiff" type="checkbox" checked />
+                <div>
+                  <div style="font-weight:650">Include differential diagnosis sentence</div>
+                  <div class="small">MCD, IMT, RDD, granulomatous/infection, low-grade lymphoma</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details>
+          <summary>
+            <div class="sumL">
+              <span class="caret">></span>
+              <div>
+                <div class="secTitle">Optional ACR/EULAR (2019) classification</div>
+                <div class="secHint">Fill if clinical/radiology/serology data available</div>
+              </div>
+            </div>
+            <span class="tag">Classification</span>
+          </summary>
+
+          
+          <div class="row">
+            <div class="span12">
+              <fieldset>
+                <legend>STEP 1 - Entry criteria met?</legend>
+                <div class="optgrid">
+                  <label class="opt"><input type="radio" name="entry" id="entryYes" value="Yes"><div><b>Yes</b><div class="small">Characteristic organ involvement OR lymphoplasmacytic inflammation in a typical organ</div></div></label>
+                  <label class="opt"><input type="radio" name="entry" id="entryNo" value="No"><div><b>No</b></div></label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="span12">
+              <fieldset>
+                <legend>STEP 2 - Exclusion criteria (check all that apply)</legend>
+
+                <div class="small" style="margin-bottom:8px">If any exclusion is checked, "Exclusion present" will auto-set to <b>Yes</b>.</div>
+
+                <div class="optgrid">
+                  <div class="span12"><div class="secTitle" style="font-size:13px;margin:2px 0 6px">Clinical</div></div>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclFever"><div><b>Fever</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclNoSteroid"><div><b>No steroid response</b></div></label>
+
+                  <div class="span12"><div class="secTitle" style="font-size:13px;margin:8px 0 6px">Serologic</div></div>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclLeukoThrombo"><div><b>Leukopenia + thrombocytopenia</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclEosHigh"><div><b>Eosinophils &gt; 3000/mm3</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclAnca"><div><b>PR3/MPO-ANCA positive</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclAutoAbs"><div><b>SSA/SSB/dsDNA/RNP/Sm</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclDiseaseAbs"><div><b>Disease-specific antibodies</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclCryo"><div><b>Cryoglobulinemia</b></div></label>
+
+                  <div class="span12"><div class="secTitle" style="font-size:13px;margin:8px 0 6px">Radiologic</div></div>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclMalInf"><div><b>Suspicious malignancy / infection</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclRapid"><div><b>Rapid progression</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclEcd"><div><b>Erdheim-Chester lesions</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclSpleno"><div><b>Splenomegaly</b></div></label>
+
+                  <div class="span12"><div class="secTitle" style="font-size:13px;margin:8px 0 6px">Pathologic</div></div>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclMalInfil"><div><b>Malignant infiltrate</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclImt"><div><b>ALK/ROS1 inflammatory myofibroblastic tumor</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclNeutro"><div><b>Prominent neutrophils</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclNecVasc"><div><b>Necrotizing vasculitis</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclNecrosis"><div><b>Large-area necrosis</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclGran"><div><b>Granulomas</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclRdd"><div><b>Rosai-Dorfman features</b></div></label>
+
+                  <div class="span12"><div class="secTitle" style="font-size:13px;margin:8px 0 6px">Disease-specific</div></div>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclMcd"><div><b>Multicentric Castleman disease</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclIbd"><div><b>Crohn's / UC (pancreatobiliary-only)</b></div></label>
+                  <label class="opt"><input type="checkbox" class="exclItem" id="exclHashi"><div><b>Hashimoto thyroiditis (thyroid-only)</b></div></label>
+                </div>
+
+                <div class="hr"></div>
+
+                <div class="optgrid">
+                  <label class="opt"><input type="radio" name="exclPresent" id="exclNo" value="No"><div><b>Exclusion present: No</b></div></label>
+                  <label class="opt"><input type="radio" name="exclPresent" id="exclYes" value="Yes"><div><b>Exclusion present: Yes</b></div></label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="span12">
+              <fieldset>
+                <legend>STEP 3 - Inclusion criteria (weighted points)</legend>
+
+                <div class="secTitle" style="font-size:13px;margin:2px 0 6px">1) Histopathology (highest)</div>
+                <div class="optgrid">
+                  <label class="opt"><input type="radio" name="domHist" value="0" checked><div><b>Uninformative (0)</b></div></label>
+                  <label class="opt"><input type="radio" name="domHist" value="4"><div><b>Dense lymphocytes (+4)</b></div></label>
+                  <label class="opt"><input type="radio" name="domHist" value="6"><div><b>+ Obliterative phlebitis (+6)</b></div></label>
+                  <label class="opt"><input type="radio" name="domHist" value="13"><div><b>Storiform fibrosis +/- phlebitis (+13)</b></div></label>
+                </div>
+
+                <div class="secTitle" style="font-size:13px;margin:10px 0 6px">2) Immunostaining (IgG4) (highest)</div>
+                <div class="optgrid">
+                  <label class="opt"><input type="radio" name="domIgg4" value="0" checked><div><b><=40% &amp; &lt;10/HPF (0)</b></div></label>
+                  <label class="opt"><input type="radio" name="domIgg4" value="7"><div><b>>=41% OR >=10/HPF (+7)</b></div></label>
+                  <label class="opt"><input type="radio" name="domIgg4" value="14"><div><b>41-70% &amp; >=10/HPF OR >=71% &amp; 10-50/HPF (+14)</b></div></label>
+                  <label class="opt"><input type="radio" name="domIgg4" value="16"><div><b>>=71% &amp; >=51/HPF (+16)</b></div></label>
+                </div>
+
+                <div class="secTitle" style="font-size:13px;margin:10px 0 6px">3) Serum IgG4</div>
+                <div class="optgrid">
+                  <label class="opt"><input type="radio" name="domSerum" value="0" checked><div><b>Normal / Not tested (0)</b></div></label>
+                  <label class="opt"><input type="radio" name="domSerum" value="4"><div><b>&gt;ULN &lt;2x (+4)</b></div></label>
+                  <label class="opt"><input type="radio" name="domSerum" value="6"><div><b>2-5x (+6)</b></div></label>
+                  <label class="opt"><input type="radio" name="domSerum" value="11"><div><b>&gt;5x (+11)</b></div></label>
+                </div>
+
+                <div class="secTitle" style="font-size:13px;margin:10px 0 6px">4) Organ features (highest applicable)</div>
+                <div class="optgrid">
+                  <label class="opt"><input type="radio" name="domOrgan" value="0" checked><div><b>None / not available (0)</b></div></label>
+                  <label class="opt"><input type="radio" name="domOrgan" value="6"><div><b>Salivary/Lacrimal: one set (+6)</b></div></label>
+                  <label class="opt"><input type="radio" name="domOrgan" value="14"><div><b>Salivary/Lacrimal: >=2 sets (+14)</b></div></label>
+                  <label class="opt"><input type="radio" name="domOrgan" value="4"><div><b>Chest: peribronchovascular thickening (+4)</b></div></label>
+                  <label class="opt"><input type="radio" name="domOrgan" value="10"><div><b>Chest: paravertebral soft tissue (+10)</b></div></label>
+                  <label class="opt"><input type="radio" name="domOrgan" value="8"><div><b>Pancreas/Biliary: diffuse pancreas (+8)</b></div></label>
+                  <label class="opt"><input type="radio" name="domOrgan" value="11"><div><b>Pancreas/Biliary: + capsule-like rim (+11)</b></div></label>
+                  <label class="opt"><input type="radio" name="domOrgan" value="19"><div><b>Pancreas + biliary (+19)</b></div></label>
+                  <label class="opt"><input type="radio" name="domOrgan" value="6"><div><b>Kidney: hypocomplementemia (+6)</b></div></label>
+                  <label class="opt"><input type="radio" name="domOrgan" value="8"><div><b>Kidney: renal pelvis thickening (+8)</b></div></label>
+                  <label class="opt"><input type="radio" name="domOrgan" value="10"><div><b>Kidney: bilateral cortical lesions (+10)</b></div></label>
+                  <label class="opt"><input type="radio" name="domOrgan" value="4"><div><b>Retroperitoneum: aortic wall thickening (+4)</b></div></label>
+                  <label class="opt"><input type="radio" name="domOrgan" value="8"><div><b>Retroperitoneum: periaortic/iliac soft tissue (+8)</b></div></label>
+                </div>
+
+                <div class="scorebox">
+                  <div>
+                    <div style="font-weight:650">Classification score</div>
+                    <div class="small">Meets classification if Entry=Yes, Exclusion=No, Total >=20</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div class="score">Total: <span id="total">0</span></div>
+                    <div id="meets" class="tag maybe">Unknown</div>
+                  </div>
+                </div>
+
+                <div class="small" id="exclSummary" style="margin-top:8px"></div>
+              </fieldset>
+            </div>
+          </div>
+
+        </details>
+      </div>
+
+      <!-- Output -->
+      <div class="panel">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+          <div>
+            <div class="secTitle" style="font-size:16px">Generated report</div>
+            <div class="secHint">Copy/paste into LIS; edit freely after generation.</div>
+          </div>
+          <span class="tag">WashU-style</span>
+        </div>
+
+        <div class="toolbar">
+          <button class="btn good" id="regen">Regenerate</button>
+          <button class="btn secondary" id="copy">Copy</button>
+          <button class="btn warn" id="clear">Clear</button>
+          <span class="small" id="copyStatus"></span>
+        </div>
+
+        <textarea id="out" spellcheck="false"></textarea>
+
+        <div class="hr"></div>
+        <div class="footnote">
+          Note: ACR/EULAR criteria are classification criteria (research); pathology diagnosis still requires clinicoradiologic/serologic correlation.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const el = (id)=>document.getElementById(id);
+
+    function sanitizeReport(txt){
+      const map = {
+        "\u2013":"-", "\u2014":"-", "\u2212":"-",
+        "\u201c":"\"", "\u201d":"\"",
+        "\u2018":"'", "\u2019":"'",
+        "\u2265":">=", "\u2264":"<=", "\u00b1":"+/-",
+        "\u00d7":"x", "\u03bc":"u", "\u2022":"-", "\u2026":"...",
+        "\u00a0":" ", "\u25be":"v", "\u25b8":">", "\u00b3":"3"
+      };
+      return String(txt || "").replace(/[\u2013\u2014\u2212\u201c\u201d\u2018\u2019\u2265\u2264\u00b1\u00d7\u03bc\u2022\u2026\u00a0\u25be\u25b8\u00b3]/g, ch => map[ch] || ch);
+    }
+
+
+    function numVal(id){
+      const v = parseFloat(el(id).value);
+      return Number.isFinite(v) ? v : null;
+    }
+
+    function radioVal(name, fallback=null){
+      const r = document.querySelector(`input[type="radio"][name="${name}"]:checked`);
+      return r ? r.value : fallback;
+    }
+    function radioInt(name, fallback=0){
+      const v = parseInt(radioVal(name, String(fallback)), 10);
+      return Number.isFinite(v) ? v : fallback;
+    }
+
+    function syncExclusionPresent(){
+      const any = Array.from(document.querySelectorAll('.exclItem')).some(x=>x.checked);
+      const yes = el('exclYes'), no = el('exclNo');
+      if(any){
+        if(yes) yes.checked = true;
+      }else{
+        if(no) no.checked = true;
+      }
+
+      // show a short summary line
+      const names = [];
+      document.querySelectorAll('.exclItem').forEach(x=>{
+        if(x.checked){
+          const lab = x.closest('label');
+          if(lab){
+            const b = lab.querySelector('b');
+            names.push(b ? b.textContent.trim() : 'Exclusion');
+          }
+        }
+      });
+      const out = el('exclSummary');
+      if(out){
+        out.textContent = names.length ? ('Checked exclusions: ' + names.join('; ')) : 'Checked exclusions: none';
+      }
+      return { any, names };
+    }
+function computeScore(){
+      // sync exclusion-present based on checked exclusions
+      const ex = syncExclusionPresent();
+
+      const entry = radioVal('entry', 'Unknown'); // Yes/No
+      const excl = radioVal('exclPresent', 'Unknown'); // Yes/No
+
+      const hist = radioInt('domHist', 0);
+      const igg4 = radioInt('domIgg4', 0);
+      const serum = radioInt('domSerum', 0);
+      const organ = radioInt('domOrgan', 0);
+
+      const total = hist + igg4 + serum + organ;
+      el('total').textContent = String(total);
+
+      let status = 'Unknown', cls = 'tag maybe';
+      if(entry === 'No' || excl === 'Yes'){
+        status = 'Does NOT meet (Entry/Exclusion)';
+        cls = 'tag no';
+      } else if(entry === 'Yes' && excl === 'No'){
+        if(total >= 20){ status = 'Meets classification (>=20)'; cls = 'tag ok'; }
+        else { status = 'Does NOT meet (<20)'; cls = 'tag no'; }
+      } else {
+        status = 'Unknown (need Entry/Exclusion)';
+        cls = 'tag maybe';
+      }
+
+      el('meets').className = cls;
+      el('meets').textContent = status;
+
+      // top right tag
+      el('classTag').className = cls;
+      el('classTag').textContent = 'Classification: ' + status;
+
+      return { total, entry, excl, exclusions: ex.names };
+    }
+
+    function autoSuggestDomainsFromHistology(){
+      // keep ACR domains roughly in sync with pathology selections
+      const fib = el('fib').value;
+      const phl = el('phleb').value;
+
+      const setRadio = (name, val)=>{
+        const r = document.querySelector(`input[type="radio"][name="${name}"][value="${val}"]`);
+        if(r) r.checked = true;
+      };
+
+      if(fib === 'Storiform'){
+        setRadio('domHist','13');
+      } else if(phl.includes('obliterative')){
+        setRadio('domHist','6');
+      } else if(el('denseLP').checked){
+        setRadio('domHist','4');
+      } else {
+        setRadio('domHist','0');
+      }
+
+      const igg4hpf = numVal('igg4hpf');
+      const ratio = numVal('ratio');
+
+      if(igg4hpf !== null || ratio !== null){
+        let v = 0;
+        if((ratio !== null && ratio >= 71 && igg4hpf !== null && igg4hpf >= 51)) v = 16;
+        else if(
+          (ratio !== null && ratio >= 41 && ratio <= 70 && igg4hpf !== null && igg4hpf >= 10) ||
+          (ratio !== null && ratio >= 71 && igg4hpf !== null && igg4hpf >= 10 && igg4hpf <= 50)
+        ) v = 14;
+        else if((ratio !== null && ratio >= 41) || (igg4hpf !== null && igg4hpf >= 10)) v = 7;
+        else v = 0;
+        setRadio('domIgg4', String(v));
+      }
+    }
+
+    function diagnosisBucket(){
+      // pathology-facing bucket (not meant to replace judgement)
+      const fib = el('fib').value;
+      const phl = el('phleb').value;
+      const igg4hpf = numVal('igg4hpf');
+      const ratio = numVal('ratio');
+      const poly = el('polytypic').value;
+
+      const hasClassic = (fib === 'Storiform') || (phl.startsWith('Present'));
+      const hasIgg4 = (igg4hpf !== null && igg4hpf >= 10) || (ratio !== null && ratio >= 41);
+
+      if(poly === 'Light chain restriction'){
+        return { dx:'Findings do not meet histologic criteria for IgG4-related disease (see Comment).', level:'no' };
+      }
+      if(hasClassic && hasIgg4){
+        return { dx:'Findings are consistent with IgG4-related disease (IgG4-RD).', level:'ok' };
+      }
+      if((hasClassic && !hasIgg4) || (!hasClassic && hasIgg4)){
+        return { dx:'Findings are suggestive of IgG4-related disease, but not definitive (see Comment).', level:'maybe' };
+      }
+      return { dx:'Findings do not meet histologic criteria for IgG4-related disease (see Comment).', level:'no' };
+    }
+
+    function regenerate(){
+      // if granulomas checked, tick the ACR/EULAR exclusion + set exclusion-present
+      if(el('gran').checked){
+        const g = el('exclGran'); if(g) g.checked = true;
+        const yes = el('exclYes'); if(yes) yes.checked = true;
+      }
+
+      autoSuggestDomainsFromHistology();
+      const score = computeScore();
+
+      const site = (el('site').value || '[Site/Organ]').trim();
+      const proc = el('proc').value;
+
+      const denseLP = el('denseLP').checked;
+      const eos = el('eos').checked;
+      const fib = el('fib').value;
+      const phl = el('phleb').value;
+      const lnPattern = el('lnPattern').value;
+
+      const igg4hpfVal = el('igg4hpf').value ? `${el('igg4hpf').value}/HPF` : '[max IgG4/HPF]';
+      const ratioVal = el('ratio').value ? `${el('ratio').value}%` : '[IgG4/IgG %]';
+      const iggVal = el('igghpf').value ? `${el('igghpf').value}/HPF` : '';
+      const poly = el('polytypic').value;
+
+      const diag = diagnosisBucket();
+
+      // top dx tag
+      const dxTag = el('dxTag');
+      dxTag.className = (diag.level === 'ok') ? 'tag ok' : (diag.level === 'maybe' ? 'tag maybe' : 'tag no');
+      dxTag.textContent = (diag.level === 'ok') ? 'Consistent' : (diag.level === 'maybe' ? 'Suggestive / not definitive' : 'Not supportive');
+
+      const dx =
+`DIAGNOSIS
+${site}, ${proc}:
+- ${diag.dx}`;
+
+      const key =
+`KEY HISTOLOGIC FEATURES
+Inflammation / Fibrosis:
+- Dense lymphoplasmacytic infiltrate: ${denseLP ? 'Present' : 'Absent'}
+- Fibrosis: ${fib}
+- Phlebitis: ${phl}
+- Tissue eosinophilia: ${eos ? 'Present' : 'Absent'}`
+      + (lnPattern ? `\n\nLymph Node Pattern:\n- ${lnPattern}` : '');
+
+      const exclList = (score.exclusions && score.exclusions.length) ? score.exclusions.join('; ') : 'None selected';
+      const acr =
+`ACR/EULAR IGG4-RD CLASSIFICATION (2019) - OPTIONAL
+STEP 1 - Entry criteria: ${score.entry}
+STEP 2 - Exclusion criteria present: ${score.excl}
+Exclusions checked: ${exclList}
+STEP 3 - Inclusion points (total): ${score.total}  (>=20 = meets classification if Entry=Yes and Exclusion=No)`;
+
+      const bits = [];
+      bits.push(`Biopsy shows a fibro-inflammatory process with ${denseLP ? 'dense lymphoplasmacytic inflammation' : 'a lymphoplasmacytic infiltrate'}${eos ? ' and eosinophils' : ''}.`);
+      bits.push(`Fibrosis is ${fib.toLowerCase()}.`);
+      bits.push(`Phlebitis is ${phl === 'Absent' ? 'absent' : 'present'}.`);
+      if(lnPattern) bits.push(`If lymph node: pattern is ${lnPattern}.`);
+      bits.push(`IgG4 immunostain shows increased IgG4-positive plasma cells (${igg4hpfVal}${iggVal ? `; IgG ${iggVal}` : ''}), with an IgG4/IgG ratio of ${ratioVal}.`);
+      bits.push(`Plasma cells are ${poly.toLowerCase()}.`);
+
+      let interp = '';
+      if(diag.level === 'ok') interp = 'Together, the findings are consistent with IgG4-related disease in the appropriate clinical context.';
+      else if(diag.level === 'maybe') interp = 'Overall, the findings raise the possibility of IgG4-related disease but are not definitive; clinical, radiologic, and serologic correlation is required.';
+      else interp = 'Overall, the findings are not supportive of IgG4-related disease based on histology and/or immunophenotype; correlation is recommended.';
+
+      const diff = el('addDiff').checked
+        ? 'Differential diagnosis includes multicentric Castleman disease, inflammatory myofibroblastic tumor, Rosai-Dorfman disease, granulomatous/infectious processes, and low-grade lymphomas. Increased IgG4-positive cells alone are non-specific.'
+        : '';
+
+      const comment =
+`COMMENT
+${bits.join(' ')} ${interp}
+${diff}`.trim();
+
+      const micro =
+`MICROSCOPIC DESCRIPTION
+- Architecture: [ ]
+- Inflammatory infiltrate: ${denseLP ? 'Dense lymphoplasmacytic' : 'Lymphoplasmacytic'}${eos ? '; eosinophils present' : '; eosinophils not prominent'}
+- Fibrosis: ${fib} [focal/diffuse]
+- Vascular: Phlebitis ${phl}; arteritis [ ]
+- Granulomas/necrosis: ${el('gran').checked ? 'Granulomas present' : '[ ]'}
+- Site-specific features: [ ]
+- No atypical large-cell sheets or carcinoma identified.`;
+
+      const ihc =
+`IMMUNOHISTOCHEMISTRY
+IgG4: ${el('igg4hpf').value ? el('igg4hpf').value : '[n]'} /HPF
+IgG: ${el('igghpf').value ? el('igghpf').value : '[n]'} /HPF
+IgG4/IgG ratio: ${el('ratio').value ? el('ratio').value : '[%]'}%
+CD138: Increased plasma cells
+Kappa/Lambda: ${poly}
+CD3/CD20/PAX5: Preserved / background distribution
+EBER: [ ]
+HHV8: [ ]
+ALK/SMA/Desmin/S100: [as indicated]`;
+
+      const one =
+`SUMMARY
+Fibro-inflammatory lesion with IgG4+ plasma cells (${igg4hpfVal}; ratio ${ratioVal}) and ${fib === 'Storiform' ? 'storiform fibrosis' : fib.toLowerCase() + ' fibrosis'}${phl !== 'Absent' ? ` with ${phl.toLowerCase()} phlebitis` : ''}; ${diag.level === 'ok' ? 'consistent with' : (diag.level === 'maybe' ? 'suggestive of' : 'not supportive of')} IgG4-related disease; correlate clinically.`;
+
+      el('out').value = sanitizeReport([dx, '', key, '', acr, '', comment, '', micro, '', ihc, '', one].join('\n'));
+    }
+
+    
+    // Wire inputs
+    const inputs = [
+      'site','proc','denseLP','eos','fib','phleb','lnPattern','gran',
+      'igg4hpf','ratio','igghpf','polytypic','addDiff'
+    ];
+    inputs.forEach(id=>{
+      const node = el(id);
+      if(!node) return;
+      node.addEventListener('input', regenerate);
+      node.addEventListener('change', regenerate);
+    });
+
+    // ACR/EULAR radios + exclusion checkboxes
+    document.querySelectorAll('input[type="radio"][name="entry"], input[type="radio"][name="exclPresent"], input[type="radio"][name="domHist"], input[type="radio"][name="domIgg4"], input[type="radio"][name="domSerum"], input[type="radio"][name="domOrgan"], .exclItem')
+      .forEach(node=>{
+        node.addEventListener('input', regenerate);
+        node.addEventListener('change', regenerate);
+      });
+
+
+    // Buttons
+    el('regen').addEventListener('click', regenerate);
+    el('clear').addEventListener('click', ()=>{
+      el('out').value = '';
+      el('copyStatus').textContent = '';
+    });
+    el('copy').addEventListener('click', async ()=>{
+      const t = el('out').value || '';
+      try{
+        await navigator.clipboard.writeText(sanitizeReport(t));
+        el('copyStatus').textContent = 'Copied.';
+        setTimeout(()=> el('copyStatus').textContent='', 1200);
+      }catch(e){
+        el('out').value = sanitizeReport(el('out').value); el('out').focus(); el('out').select();
+        document.execCommand('copy');
+        el('copyStatus').textContent = 'Copied.';
+        setTimeout(()=> el('copyStatus').textContent='', 1200);
+      }
+    });
+
+    // Caret toggle
+    document.querySelectorAll('details').forEach(d=>{
+      const caret = d.querySelector('.caret');
+      const sync = ()=>{ if(caret) caret.textContent = d.open ? 'v' : '>'; };
+      d.addEventListener('toggle', sync);
+      sync();
+    });
+
+    // Initial render
+    regenerate();
+  </script>
+</body>
+</html>
