@@ -1,358 +1,124 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Heme Body Fluids / CSF Cytology Comment Generator - FNA Style v4</title>
-  <style>
-:root{
-  --bg:#f5f7fb;--card:#ffffff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;
-  --accent:#2563eb;--accent2:#eff6ff;--warn:#fff7ed;--danger:#fef2f2;--ok:#f0fdf4;
-}
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Heme Body Fluids / CSF Cytology Comment Generator - FNA Style v6</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#2563eb;--accent2:#eff6ff;--danger:#fee2e2;--dangerText:#991b1b}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
-header{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:white;padding:28px 22px}
-header h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px}
-header p{margin:0;color:#dbeafe;font-size:14px}
-main{max-width:1180px;margin:24px auto;padding:0 16px 40px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(15,23,42,.06)}
-.card h2{font-size:18px;margin:0 0 14px;color:#0f172a}
-label{font-weight:700;font-size:13px;color:#374151}
-input[type="text"],select,textarea{width:100%;border:1px solid #d1d5db;border-radius:10px;padding:10px 11px;font-size:14px;background:white;color:var(--ink);outline:none}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.35}
+header{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:white;padding:18px 22px}
+header h1{margin:0 0 4px;font-size:22px;letter-spacing:.2px}
+header p{margin:0;color:#dbeafe;font-size:13px}
+main{max-width:1540px;margin:14px auto;padding:0 14px 22px}
+.grid{display:grid;grid-template-columns:280px minmax(560px,1fr) 440px;gap:14px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+.card h2{font-size:16px;margin:0 0 10px;color:#0f172a}.card h3{font-size:13px;margin:0 0 8px;color:#0f172a}
+label{font-weight:700;font-size:12px;color:#374151}.field{margin-bottom:10px}
+input[type="text"],select,textarea{width:100%;border:1px solid #d1d5db;border-radius:10px;padding:8px 10px;font-size:13px;background:white;color:var(--ink);outline:none}
 input[type="text"]:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
-textarea{min-height:220px;resize:vertical;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.5}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:end}
-.row .pill{display:block}
-.small{font-size:12px;color:var(--muted);margin-top:6px}
-.pill{border:0;background:transparent;padding:0;border-radius:0}
-.pill label{display:block;margin:0;color:#374151}
-.pill input,.pill select{margin-top:6px}
-.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px}
-.checks label{display:flex;gap:9px;align-items:flex-start;font-weight:600;line-height:1.25;border:1px solid #e5e7eb;background:#f8fafc;border-radius:10px;padding:8px 10px;margin:0}
-.checks input{width:auto;margin-top:2px}
-.btns{display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:10px;margin:12px 0 14px;padding-top:8px;border-top:1px solid var(--line)}
-button{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;font-size:14px;background:#e5e7eb;color:#111827}
-button.primary{background:var(--accent);color:white}
-button.secondary{background:#e5e7eb;color:#111827}
-button.ghost{background:#fff;border:1px solid #d1d5db;color:#111827}
-button.danger{background:#fee2e2;color:#991b1b}
-button:active{transform:translateY(1px)}
-.mono{font-family:Consolas,Menlo,monospace}
-.warn{color:#b45309;font-weight:600}
-.sep,.hr{border-top:1px solid var(--line);height:0;margin:16px 0}
-.output-card textarea#output{background:#0b1220;color:#e5e7eb;border-radius:14px;padding:16px;min-height:360px;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.5;border:0}
-.badge{display:inline-block;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;margin-left:6px;background:#eff6ff;color:#1d4ed8}
-.refbox,.dxbox{background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px;padding:12px;color:#334155;font-size:13px;margin-top:12px}
-@media(max-width:900px){.grid,.row{grid-template-columns:1fr}}
-@media print{body{background:white}header,.btns,.no-print{display:none}.grid{display:block}.card{box-shadow:none;border:0}.output-card textarea#output{color:black;background:white;border:0;padding:0}}
+
+.type-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+.type-pill{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #d1d5db;background:#fff;border-radius:999px;padding:9px 10px;font-size:13px;font-weight:700;color:#374151;cursor:pointer;user-select:none}
+.type-pill input{width:auto;margin:0}
+.type-pill:has(input:checked){background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.small{font-size:11px;color:var(--muted);margin-top:5px}.sep{border-top:1px solid var(--line);height:0;margin:12px 0}.warn{color:#b45309;font-weight:600}
+.findings{display:grid;grid-template-columns:1fr 1fr;gap:12px}.subcard{border:1px solid var(--line);background:#f8fafc;border-radius:14px;padding:12px}.subcard.active{border-color:#93c5fd;background:#eff6ff}.subcard h3{display:flex;justify-content:space-between;align-items:center;gap:8px}.badge{display:inline-block;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:700;background:#eff6ff;color:#1d4ed8}.badge.gray{background:#f3f4f6;color:#374151}
+.checks{display:grid;grid-template-columns:1fr;gap:6px}.checks label{display:flex;gap:8px;align-items:flex-start;font-weight:600;line-height:1.2;border:1px solid #e5e7eb;background:white;border-radius:9px;padding:6px 8px;margin:0;font-size:12px}.checks input{width:auto;margin:1px 0 0}.compact{display:grid;grid-template-columns:1fr 1fr;gap:6px}.compact label{font-size:11.5px;padding:5px 7px}
+.btns{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+button{border:0;border-radius:10px;padding:9px 13px;font-weight:700;cursor:pointer;font-size:13px;background:#e5e7eb;color:#111827}button.primary{background:var(--accent);color:white}button.secondary{background:#e5e7eb;color:#111827}button.danger{background:var(--danger);color:var(--dangerText)}button:active{transform:translateY(1px)}
+#output{background:#0b1220;color:#e5e7eb;border-radius:14px;padding:14px;min-height:500px;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.45;border:0;resize:vertical}.mono{font-family:Consolas,Menlo,monospace}
+@media(max-width:1180px){.grid{grid-template-columns:1fr}.findings{grid-template-columns:1fr}#output{min-height:320px}}
+@media print{body{background:white}header,.btns,.small.no-print{display:none}.grid{display:block}.card{box-shadow:none;border:0}#output{color:black;background:white;border:0;padding:0}}
 </style>
 </head>
 <body>
-<header>
-  <h1>Heme Body Fluids / CSF Cytology Comment Generator</h1>
-  <p>Pick specimen type + findings -> generates concise Diagnosis/Comment (and optional expanded text).</p>
-</header>
-
+<header><h1>Heme Body Fluids / CSF Cytology Comment Generator</h1><p>Compact one-screen layout with Body Fluid and CSF findings side-by-side; two-button specimen selector; ASCII-safe output.</p></header>
 <main class="grid">
-  <section class="card">
-    <h2>Case Info</h2>
-    <div class="row">
-      <span class="pill"><label>Specimen type&nbsp;
-        <select id="specimenType">
-          <option value="BODY_FLUID">Body fluid (pleural / peritoneal / pericardial / other)</option>
-          <option value="CSF">Cerebrospinal fluid (CSF)</option>
-        </select>
-      </label></span>
+<section class="card">
+<h2>Case / Output Options</h2>
+<div class="field"><label>Specimen type</label><div class="type-toggle" role="radiogroup" aria-label="Specimen type"><label class="type-pill"><input type="radio" name="specimenType" value="BODY_FLUID" checked>Body fluid</label><label class="type-pill"><input type="radio" name="specimenType" value="CSF">CSF</label></div></div>
+<div class="field"><label>Site</label><input id="site" type="text" placeholder="e.g., Pleural fluid, right / CSF"/></div>
+<div class="field"><label>Known history</label><input id="history" type="text" placeholder="e.g., CLL; carcinoma; shunt; post-op"/></div>
+<div class="field"><label>Output style</label><select id="style"><option value="SHORT">Short comment</option><option value="REPORT">Report sections</option><option value="EXPANDED">Expanded report</option></select></div>
+<div class="field"><label>Include history line</label><select id="includeHistory"><option value="AUTO" selected>Auto if entered</option><option value="YES">Yes</option><option value="NO">No</option></select></div>
+<div class="sep"></div>
+<p class="small">Select the specimen type first. The matching finding panel is highlighted. Both panels are visible to avoid scrolling.</p>
+<p class="small warn" id="warn"></p>
+</section>
 
-      <span class="pill"><label>Site&nbsp;<input id="site" type="text" placeholder="e.g., Pleural fluid, Right"></label></span>
-      <span class="pill"><label>Known history (optional)&nbsp;<input id="history" type="text" placeholder="e.g., CLL; carcinoma; shunt; post-op"></label></span>
-    </div>
-    <div class="sep"></div>
+<section class="card">
+<h2>Findings</h2>
+<div class="findings">
+<div class="subcard" id="bodyPanel"><h3>Body fluid <span class="badge gray">pleural/peritoneal/pericardial</span></h3><div class="checks compact" id="checksBody">
+<label><input type="checkbox" data-tag="NO_MALIGNANT">No malignant cells seen</label>
+<label><input type="checkbox" data-tag="MALIGNANT_UNCERTAIN">Atypical cells</label>
+<label><input type="checkbox" data-tag="BENIGN_EPITH">Benign epithelial cells</label>
+<label><input type="checkbox" data-tag="REACTIVE_MESO">Reactive mesothelial cells</label>
+<label><input type="checkbox" data-tag="ATYP_MESO">Atypical mesothelial cells, likely reactive</label>
+<label><input type="checkbox" data-tag="MACROPHAGES">Macrophages</label>
+<label><input type="checkbox" data-tag="HEMOSIDERIN_MACS">Hemosiderin-laden macrophages</label>
+<label><input type="checkbox" data-tag="EOSINOPHILS">Eosinophils</label>
+<label><input type="checkbox" data-tag="BACKGROUND_BLOOD">Background blood</label>
+<label><input type="checkbox" data-tag="DEGENERATING_CELLS">Degenerating cells / limited</label>
+<label><input type="checkbox" data-tag="NECRO_DEBRIS">Necro-inflammatory debris</label>
+<label><input type="checkbox" data-tag="NEUTRO_PRED">Neutrophil predominant</label>
+<label><input type="checkbox" data-tag="BACT_COCCI_EC">Extracellular bacterial cocci</label>
+<label><input type="checkbox" data-tag="BACT_COCCI_IC">Intracellular bacterial cocci</label>
+<label><input type="checkbox" data-tag="MIXED_FLORA_EC">Extracellular mixed flora</label>
+<label><input type="checkbox" data-tag="MIXED_FLORA_IC">Intracellular mixed flora</label>
+<label><input type="checkbox" data-tag="FUNGAL_YEAST">Fungal yeast</label>
+<label><input type="checkbox" data-tag="FUNGAL_HYPHAE">Fungal hyphae</label>
+<label><input type="checkbox" data-tag="VIRAL_CPE">Viral cytopathic changes</label>
+<label><input type="checkbox" data-tag="NO_ORGS">No microorganisms seen</label>
+<label><input type="checkbox" data-tag="MONO_ATYP_SMALL_LYMPH">Atypical small lymphoid cells / low-grade LPD</label>
+<label><input type="checkbox" data-tag="MONO_ATYP_LARGE_LYMPH">Atypical large lymphoid cells / high-grade lymphoma</label>
+<label><input type="checkbox" data-tag="MALIGN_GLANDULAR">Malignant glandular cells, ?adenocarcinoma</label>
+<label><input type="checkbox" data-tag="MALIGNANT_CLUSTERS">3D malignant clusters, ?carcinoma</label>
+<label><input type="checkbox" data-tag="LARGE_PLEO_MALIGN">Large pleomorphic malignant cells</label>
+<label><input type="checkbox" data-tag="CORRELATE_CYTO">Correlate with cytology</label>
+</div></div>
 
-    <h2>Key Findings</h2>
-    <p class="small">Select all that apply. "Intracellular organisms" will override "extracellular" language where both are selected.</p>
-    <div class="checks" id="checksBody">
-      <label><input type="checkbox" data-tag="NO_MALIGNANT">No malignant cells seen</label>
-      <label><input type="checkbox" data-tag="MALIGNANT_UNCERTAIN">Atypical cells present. Correlation with cytologic and ancillary studies is recommended.</label>
+<div class="subcard" id="csfPanel"><h3>CSF <span class="badge gray">cytology</span></h3><div class="checks compact" id="checksCSF">
+<label><input type="checkbox" data-tag="CSF_NO_MALIGNANT">No malignant cells seen</label>
+<label><input type="checkbox" data-tag="CSF_FEW_RBC">Few RBCs</label>
+<label><input type="checkbox" data-tag="CSF_RBC_PREDOM">Predominance of RBCs</label>
+<label><input type="checkbox" data-tag="CSF_LYMPHO_PLEO">Reactive lymphocytes / pleocytosis</label>
+<label><input type="checkbox" data-tag="CSF_NEUTRO_PREDOM">Neutrophil predominant</label>
+<label><input type="checkbox" data-tag="CSF_BM_CONTAM">Maturing hematopoietic elements / BM contamination</label>
+<label><input type="checkbox" data-tag="CSF_RARE_BLASTLIKE">Rare blast-like cells, unclear significance</label>
+<label><input type="checkbox" data-tag="CSF_BLASTS_KNOWN">Blasts present</label>
+<label><input type="checkbox" data-tag="CSF_RARE_ATYPICAL">Rare atypical cells, unclear significance</label>
+<label><input type="checkbox" data-tag="CSF_MALIGN_TUMOR">Malignant tumor cells</label>
+<label><input type="checkbox" data-tag="CSF_BACT_COCCI_IC">Intracellular bacteria</label>
+<label><input type="checkbox" data-tag="CSF_BACT_COCCI_EC">Extracellular bacteria</label>
+<label><input type="checkbox" data-tag="CSF_FUNGAL_HYPHAE">Fungal hyphae</label>
+<label><input type="checkbox" data-tag="CSF_HEMOPHAG">Hemophagocytic histiocytes</label>
+<label><input type="checkbox" data-tag="CSF_HEMOSIDERIN">Hemosiderin-laden histiocytes</label>
+</div></div>
+</div>
+</section>
 
-      <label><input type="checkbox" data-tag="BENIGN_EPITH">Benign epithelial cells present</label>
-      <label><input type="checkbox" data-tag="REACTIVE_MESO">Reactive mesothelial cells present</label>
-
-      <label><input type="checkbox" data-tag="ATYP_MESO">Atypical mesothelial cells present, likely reactive</label>
-      <label><input type="checkbox" data-tag="MACROPHAGES">Macrophages present</label>
-
-      <label><input type="checkbox" data-tag="HEMOSIDERIN_MACS">Hemosiderin-laden macrophages present</label>
-      <label><input type="checkbox" data-tag="EOSINOPHILS">Eosinophils present</label>
-
-      <label><input type="checkbox" data-tag="BACKGROUND_BLOOD">Background blood present</label>
-      <label><input type="checkbox" data-tag="DEGENERATING_CELLS">Numerous degenerating cells; assessment is limited</label>
-
-      <label><input type="checkbox" data-tag="NECRO_DEBRIS">Abundant necro-inflammatory debris</label>
-      <label><input type="checkbox" data-tag="NEUTRO_PRED">Predominance of neutrophils</label>
-
-      <label><input type="checkbox" data-tag="BACT_COCCI_EC">Extracellular bacterial cocci</label>
-      <label><input type="checkbox" data-tag="BACT_COCCI_IC">Intracellular bacterial cocci</label>
-
-      <label><input type="checkbox" data-tag="MIXED_FLORA_EC">Extracellular mixed bacterial flora</label>
-      <label><input type="checkbox" data-tag="MIXED_FLORA_IC">Intracellular mixed bacterial flora (true infection)</label>
-
-      <label><input type="checkbox" data-tag="FUNGAL_YEAST">Fungal yeast present</label>
-      <label><input type="checkbox" data-tag="FUNGAL_HYPHAE">Fungal hyphae present</label>
-
-      <label><input type="checkbox" data-tag="VIRAL_CPE">Viral cytopathic changes</label>
-      <label><input type="checkbox" data-tag="NO_ORGS">No microorganisms seen</label>
-
-      <label><input type="checkbox" data-tag="MONO_ATYP_SMALL_LYMPH">Monotonous atypical small lymphoid cells suggestive of low-grade LPD</label>
-      <label><input type="checkbox" data-tag="MONO_ATYP_LARGE_LYMPH">Monotonous atypical large lymphoid cells suspicious high-grade lymphoma</label>
-
-      <label><input type="checkbox" data-tag="MALIGN_GLANDULAR">Malignant glandular cells ?adenocarcinoma</label>
-      <label><input type="checkbox" data-tag="MALIGNANT_CLUSTERS">3D clusters of malignant cells ?carcinoma</label>
-
-      <label><input type="checkbox" data-tag="LARGE_PLEO_MALIGN">Large pleomorphic malignant cells ?high-grade malignancy</label>
-      <label><input type="checkbox" data-tag="CORRELATE_CYTO">Correlate with cytology for final interpretation</label>
-    </div>
-
-    <div class="sep"></div>
-
-    <h2>CSF-specific toggles</h2>
-    <p class="small">Only used when specimen type = CSF.</p>
-    <div class="checks" id="checksCSF">
-      <label><input type="checkbox" data-tag="CSF_FEW_RBC">Few red blood cells present</label>
-      <label><input type="checkbox" data-tag="CSF_RBC_PREDOM">Predominance of red blood cells</label>
-      <label><input type="checkbox" data-tag="CSF_LYMPHO_PLEO">Predominance of reactive lymphocytes</label>
-      <label><input type="checkbox" data-tag="CSF_NEUTRO_PREDOM">Predominance of neutrophils</label>
-      <label><input type="checkbox" data-tag="CSF_BM_CONTAM">Maturing hematopoietic elements ?bone marrow contamination</label>
-      <label><input type="checkbox" data-tag="CSF_RARE_BLASTLIKE">Rare blast-like cells present, unclear significance</label>
-      <label><input type="checkbox" data-tag="CSF_BLASTS_KNOWN">Blasts present</label>
-      <label><input type="checkbox" data-tag="CSF_RARE_ATYPICAL">Rare atypical cells present, unclear significance</label>
-      <label><input type="checkbox" data-tag="CSF_MALIGN_TUMOR">Malignant tumour cells present</label>
-      <label><input type="checkbox" data-tag="CSF_BACT_COCCI_IC">Intracellular bacteria present</label>
-      <label><input type="checkbox" data-tag="CSF_BACT_COCCI_EC">Extracellular bacteria present</label>
-      <label><input type="checkbox" data-tag="CSF_FUNGAL_HYPHAE">Fungal hyphae present</label>
-      <label><input type="checkbox" data-tag="CSF_HEMOPHAG">Hemophagocytic histiocytes present</label>
-      <label><input type="checkbox" data-tag="CSF_HEMOSIDERIN">Hemosiderin-laden histiocytes present</label>
-    </div>
-
-    <div class="sep"></div>
-
-    <h2>Output options</h2>
-    <div class="row">
-      <span class="pill"><label>Output style&nbsp;
-        <select id="style">
-          <option value="SHORT">Short (single-line / brief comment)</option>
-          <option value="REPORT">Report sections (Diagnosis + Comment)</option>
-          <option value="EXPANDED">Expanded (Diagnosis + Comment + Microscopic cues)</option>
-        </select>
-      </label></span>
-
-      <span class="pill"><label>Include "Known history" line&nbsp;
-        <select id="includeHistory">
-          <option value="AUTO" selected>Auto (if entered)</option>
-          <option value="YES">Yes</option>
-          <option value="NO">No</option>
-        </select>
-      </label></span>
-    </div>
-
-  </section>
-
-  <section class="card output-card">
-    <h2>Generated Text <span class="badge">ASCII-safe</span></h2>
-    <div class="btns no-print">
-      <button class="primary" id="generateBtn">Generate</button>
-      <button class="secondary" id="copyBtn">Copy</button>
-      <button class="danger" id="resetBtn">Reset</button>
-    </div>
-    <p class="small warn" id="warn"></p>
-    <textarea id="output" spellcheck="false" class="mono"></textarea>
-    <p class="small">Tip: Use <span class="mono">Short</span> for heme body-fluid "comment-only" workflows; use <span class="mono">Report</span> if your LIS expects separate sections.</p>
-  </section>
+<section class="card output-card"><h2>Generated Text <span class="badge">ASCII-safe</span></h2>
+<div class="btns"><button class="primary" id="generateBtn">Generate</button><button class="secondary" id="copyBtn">Copy</button><button class="danger" id="resetBtn">Reset</button></div>
+<textarea id="output" spellcheck="false" class="mono"></textarea><p class="small no-print">Buttons are beside the output for faster copy/paste. Body Fluid and CSF panels remain visible in parallel.</p></section>
 </main>
-
 <script>
-  const $ = (id)=>document.getElementById(id);
-
-  function selectedTags() {
-    const type = $("specimenType").value;
-    const root = (type === "CSF") ? $("checksCSF") : $("checksBody");
-    return [...root.querySelectorAll("input[type=checkbox]:checked")].map(cb=>cb.dataset.tag);
-  }
-
-  function sanitize(s){ return (s||"").trim(); }
-
-  function sanitizeAscii(s){
-    const map = {"\u2013":"-","\u2014":"-","\u2212":"-","\u201c":"\"","\u201d":"\"","\u2018":"'","\u2019":"'","\u2265":">=","\u2264":"<=","\u00b1":"+/-","\u00d7":"x","\u03bc":"u","\u2022":"-","\u2026":"...","\u00a0":" "};
-    return String(s || "").replace(/[\u2013\u2014\u2212\u201c\u201d\u2018\u2019\u2265\u2264\u00b1\u00d7\u03bc\u2022\u2026\u00a0]/g, ch => map[ch] || ch);
-  }
-
-  function buildBodyFluid(tags){
-    const has = (t)=>tags.includes(t);
-    const lines = [];
-
-    // Malignant / atypical
-    if (has("MALIGN_GLANDULAR")) lines.push("Malignant glandular cells present, suspicious for involvement by a primary or metastatic adenocarcinoma.");
-    if (has("MALIGNANT_CLUSTERS")) lines.push("Three-dimensional clusters of malignant cells present, suspicious for involvement by a primary or metastatic carcinoma.");
-    if (has("LARGE_PLEO_MALIGN")) lines.push("Large pleomorphic malignant cells present, suspicious for involvement by a high-grade malignant neoplasm.");
-    if (has("MONO_ATYP_SMALL_LYMPH")) lines.push("Monotonous atypical small lymphoid cells present, suspicious for involvement by a low-grade lymphoproliferative disorder.");
-    if (has("MONO_ATYP_LARGE_LYMPH")) lines.push("Monotonous atypical large lymphoid cells present, suspicious for involvement by a high-grade lymphoma.");
-    if (has("MALIGNANT_UNCERTAIN")) lines.push("Atypical cells present. Correlation with cytologic and ancillary studies is recommended.");
-
-    // Inflammation / infection
-    if (has("NEUTRO_PRED")) lines.push("Predominance of neutrophils, consistent with an acute inflammatory or infectious serositis.");
-    if (has("NECRO_DEBRIS")) lines.push("Abundant necro-inflammatory debris present, consistent with acute infection or tissue necrosis.");
-
-    if (has("BACT_COCCI_IC")) lines.push("Intracellular bacteria present; correlation with microbiologic cultures is recommended.");
-    else if (has("BACT_COCCI_EC")) lines.push("Extracellular bacteria present; correlation with microbiologic cultures is recommended.");
-
-    if (has("MIXED_FLORA_IC")) lines.push("Intracellular mixed bacterial flora present; correlation with microbiologic cultures is recommended.");
-    else if (has("MIXED_FLORA_EC")) lines.push("Extracellular mixed bacterial flora present; correlation with microbiologic cultures is recommended.");
-
-    if (has("FUNGAL_YEAST")) lines.push("Fungal yeast forms present; correlation with fungal cultures for speciation is recommended.");
-    if (has("FUNGAL_HYPHAE")) lines.push("Fungal hyphae present; correlation with fungal cultures for speciation is recommended.");
-    if (has("VIRAL_CPE")) lines.push("Viral cytopathic changes present, suggestive of viral infection.");
-    if (has("NO_ORGS")) lines.push("No microorganisms seen.");
-
-    // Reactive components
-    if (has("BENIGN_EPITH")) lines.push("Benign epithelial cells present, without cytologic features of malignancy.");
-    if (has("REACTIVE_MESO")) lines.push("Reactive mesothelial cells present, consistent with a reactive serosal process.");
-    if (has("ATYP_MESO")) lines.push("Atypical mesothelial cells present, likely reactive in the appropriate clinical context.");
-    if (has("MACROPHAGES")) lines.push("Macrophages present, consistent with a reactive effusion.");
-    if (has("HEMOSIDERIN_MACS")) lines.push("Hemosiderin-laden macrophages present, suggestive of prior or ongoing hemorrhage.");
-    if (has("EOSINOPHILS")) lines.push("Eosinophils present, which may be associated with air or blood in the serosal cavity, drug reaction, or parasitic infection.");
-    if (has("BACKGROUND_BLOOD")) lines.push("Background blood present.");
-    if (has("DEGENERATING_CELLS")) lines.push("Numerous degenerating cells present, limiting optimal cytomorphologic assessment.");
-
-    if (has("NO_MALIGNANT")) lines.push("No malignant cells seen.");
-    if (has("CORRELATE_CYTO")) lines.push("Correlate with cytology for final interpretation / diagnosis.");
-
-    const seen = new Set();
-    return lines.filter(x => (seen.has(x) ? false : seen.add(x)));
-  }
-
-  function buildCSF(tags, history){
-    const has = (t)=>tags.includes(t);
-    const lines = [];
-
-    if (has("CSF_MALIGN_TUMOR")) lines.push(`Malignant tumour cells present.${history ? " Known history of " + history + " is noted." : ""}`);
-    if (has("CSF_BLASTS_KNOWN")) lines.push(`Blasts present.${history ? " Known history of " + history + " is noted." : ""}`);
-    if (has("CSF_RARE_BLASTLIKE")) lines.push("Rare blast-like cells present. The significance of these cells is unclear, and reactive lymphocytes cannot be excluded. In the appropriate clinical setting, repeat examination with additional fluid collected for flow cytometry is recommended.");
-    if (has("CSF_RARE_ATYPICAL")) lines.push("Rare atypical cells present. The significance of these cells is unclear, and degenerating or reactive lymphocytes cannot be excluded. As clinically warranted, repeat CSF examination may be helpful.");
-
-    if (has("CSF_BACT_COCCI_IC")) lines.push("Intracellular bacterial cocci present. Correlation with microbiologic cultures is recommended.");
-    else if (has("CSF_BACT_COCCI_EC")) lines.push("Extracellular bacterial cocci present. Correlation with microbiologic cultures is recommended.");
-
-    if (has("CSF_FUNGAL_HYPHAE")) lines.push("Fungal hyphae present. Correlation with microbiologic cultures is recommended.");
-
-    if (has("CSF_HEMOPHAG")) lines.push("Hemophagocytic histiocytes present. In a shunt collection, this finding is usually incidental and related to CSF storage. In a spinal aspirate, the finding may represent true hemophagocytosis; correlation with clinical findings and other laboratory data is recommended.");
-    if (has("CSF_HEMOSIDERIN")) lines.push("Hemosiderin-laden histiocytes present. This may be expected in an immediate post-surgical sample or shunt fluid. In a non-surgical or lumbar aspirate sample, this may represent central nervous system hemorrhage; correlate clinically and radiographically.");
-
-    if (has("CSF_BM_CONTAM")) lines.push("Maturing hematopoietic elements present, consistent with bone marrow contamination.");
-    if (has("CSF_LYMPHO_PLEO")) lines.push("Predominance of reactive lymphocytes (lymphocytic pleocytosis).");
-    if (has("CSF_NEUTRO_PREDOM")) lines.push("Predominance of neutrophils.");
-    if (has("CSF_FEW_RBC")) lines.push("Few red blood cells present.");
-    if (has("CSF_RBC_PREDOM")) lines.push("Predominance of red blood cells.");
-
-    if (lines.length === 0) lines.push("No malignant cells seen.");
-
-    const seen = new Set();
-    return lines.filter(x => (seen.has(x) ? false : seen.add(x)));
-  }
-
-  function toReport(site, history, lines, style, specimenType){
-    const includeHistoryMode = $("includeHistory").value;
-    const addHistory = (includeHistoryMode === "YES") || (includeHistoryMode === "AUTO" && history.length>0);
-
-    const hdr = specimenType === "CSF" ? "Cerebrospinal Fluid, Cytology" : "Body Fluid, Cytology";
-    const titleLine = site ? `${hdr} (${site}):` : `${hdr}:`;
-
-    if (style === "SHORT"){
-      return lines.join(" ");
-    }
-
-    const diag = (lines.length>0 ? lines[0] : "No malignant cells seen.");
-    const rest = (lines.slice(1).length ? lines.slice(1).join(" ") : "");
-
-    if (style === "REPORT"){
-      return [
-        (addHistory ? `Clinical history: ${history}` : "").trim(),
-        "DIAGNOSIS",
-        titleLine,
-        diag,
-        "",
-        "COMMENT",
-        (rest ? rest : "Correlation with clinical and ancillary studies is recommended as appropriate.")
-      ].filter(Boolean).join("\n");
-    }
-
-    const microCue = "MICROSCOPIC DESCRIPTION\nCytologic preparations show the findings described above.";
-
-    return [
-      (addHistory ? `Clinical history: ${history}` : "").trim(),
-      "DIAGNOSIS",
-      titleLine,
-      diag,
-      "",
-      "COMMENT",
-      (rest ? rest : "Correlation with clinical and ancillary studies is recommended as appropriate."),
-      "",
-      microCue
-    ].filter(Boolean).join("\n");
-  }
-
-  function validate(tags){
-    const has = (t)=>tags.includes(t);
-    const warnings = [];
-    if (has("NO_MALIGNANT") && (has("MALIGN_GLANDULAR") || has("MALIGNANT_CLUSTERS") || has("LARGE_PLEO_MALIGN") || has("MALIGNANT_UNCERTAIN") || has("MONO_ATYP_SMALL_LYMPH") || has("MONO_ATYP_LARGE_LYMPH"))) {
-      warnings.push('You selected "No malignant cells seen" AND malignant/atypical categories. Consider unchecking one.');
-    }
-    if (has("BACT_COCCI_EC") && has("BACT_COCCI_IC")) warnings.push("Both extracellular and intracellular bacterial cocci selected; output will use intracellular wording.");
-    if (has("MIXED_FLORA_EC") && has("MIXED_FLORA_IC")) warnings.push("Both extracellular and intracellular mixed flora selected; output will use intracellular wording.");
-    return warnings.join(" ");
-  }
-
-  function generate(){
-    const specimenType = $("specimenType").value;
-    const site = sanitize($("site").value);
-    const history = sanitize($("history").value);
-    const style = $("style").value;
-
-    const tags = selectedTags();
-    $("warn").textContent = sanitizeAscii(validate(tags));
-
-    let lines = [];
-    if (specimenType === "CSF") lines = buildCSF(tags, history);
-    else lines = buildBodyFluid(tags);
-
-    $("output").value = sanitizeAscii(toReport(site, history, lines, style, specimenType));
-  }
-
-  function resetAll(){
-    for (const cb of document.querySelectorAll("input[type=checkbox]")) cb.checked = false;
-    $("site").value = "";
-    $("history").value = "";
-    $("style").value = "SHORT";
-    $("includeHistory").value = "AUTO";
-    $("warn").textContent = "";
-    $("output").value = "";
-  }
-
-  async function copyOut(){
-    const text = $("output").value;
-    if (!text) return;
-    try { await navigator.clipboard.writeText(sanitizeAscii(text)); $("warn").textContent = "Copied to clipboard."; }
-    catch(e){ $("warn").textContent = "Copy failed (browser permission). You can manually copy from the box."; }
-  }
-
-  $("generateBtn").addEventListener("click", generate);
-  $("resetBtn").addEventListener("click", resetAll);
-  $("copyBtn").addEventListener("click", copyOut);
-
-  document.addEventListener("change", (e)=>{
-    if (e.target.matches("input, select")) generate();
-  });
-
-  generate();
+const $ = (id)=>document.getElementById(id);
+function sanitize(s){return (s||"").trim();}
+function sanitizeAscii(s){const map={"\u2013":"-","\u2014":"-","\u2212":"-","\u201c":"\"","\u201d":"\"","\u2018":"'","\u2019":"'","\u2265":">=","\u2264":"<=","\u00b1":"+/-","\u00d7":"x","\u03bc":"u","\u2022":"-","\u2026":"...","\u00a0":" "};return String(s||"").replace(/[\u2013\u2014\u2212\u201c\u201d\u2018\u2019\u2265\u2264\u00b1\u00d7\u03bc\u2022\u2026\u00a0]/g,ch=>map[ch]||ch);}
+function specimenType(){const r=document.querySelector('input[name="specimenType"]:checked');return r?r.value:"BODY_FLUID";}
+function selectedTags(){const root=$(specimenType()==="CSF"?"checksCSF":"checksBody");return [...root.querySelectorAll("input[type=checkbox]:checked")].map(cb=>cb.dataset.tag);}
+function updatePanels(){const isCSF=specimenType()==="CSF";$("csfPanel").classList.toggle("active",isCSF);$("bodyPanel").classList.toggle("active",!isCSF);}
+function buildBodyFluid(tags){const has=t=>tags.includes(t);const lines=[];if(has("MALIGN_GLANDULAR"))lines.push("Malignant glandular cells present, suspicious for involvement by a primary or metastatic adenocarcinoma.");if(has("MALIGNANT_CLUSTERS"))lines.push("Three-dimensional clusters of malignant cells present, suspicious for involvement by a primary or metastatic carcinoma.");if(has("LARGE_PLEO_MALIGN"))lines.push("Large pleomorphic malignant cells present, suspicious for involvement by a high-grade malignant neoplasm.");if(has("MONO_ATYP_SMALL_LYMPH"))lines.push("Monotonous atypical small lymphoid cells present, suspicious for involvement by a low-grade lymphoproliferative disorder.");if(has("MONO_ATYP_LARGE_LYMPH"))lines.push("Monotonous atypical large lymphoid cells present, suspicious for involvement by a high-grade lymphoma.");if(has("MALIGNANT_UNCERTAIN"))lines.push("Atypical cells present. Correlation with cytologic and ancillary studies is recommended.");if(has("NEUTRO_PRED"))lines.push("Predominance of neutrophils, consistent with an acute inflammatory or infectious serositis.");if(has("NECRO_DEBRIS"))lines.push("Abundant necro-inflammatory debris present, consistent with acute infection or tissue necrosis.");if(has("BACT_COCCI_IC"))lines.push("Intracellular bacteria present; correlation with microbiologic cultures is recommended.");else if(has("BACT_COCCI_EC"))lines.push("Extracellular bacteria present; correlation with microbiologic cultures is recommended.");if(has("MIXED_FLORA_IC"))lines.push("Intracellular mixed bacterial flora present; correlation with microbiologic cultures is recommended.");else if(has("MIXED_FLORA_EC"))lines.push("Extracellular mixed bacterial flora present; correlation with microbiologic cultures is recommended.");if(has("FUNGAL_YEAST"))lines.push("Fungal yeast forms present; correlation with fungal cultures for speciation is recommended.");if(has("FUNGAL_HYPHAE"))lines.push("Fungal hyphae present; correlation with fungal cultures for speciation is recommended.");if(has("VIRAL_CPE"))lines.push("Viral cytopathic changes present, suggestive of viral infection.");if(has("NO_ORGS"))lines.push("No microorganisms seen.");if(has("BENIGN_EPITH"))lines.push("Benign epithelial cells present, without cytologic features of malignancy.");if(has("REACTIVE_MESO"))lines.push("Reactive mesothelial cells present, consistent with a reactive serosal process.");if(has("ATYP_MESO"))lines.push("Atypical mesothelial cells present, likely reactive in the appropriate clinical context.");if(has("MACROPHAGES"))lines.push("Macrophages present, consistent with a reactive effusion.");if(has("HEMOSIDERIN_MACS"))lines.push("Hemosiderin-laden macrophages present, suggestive of prior or ongoing hemorrhage.");if(has("EOSINOPHILS"))lines.push("Eosinophils present, which may be associated with air or blood in the serosal cavity, drug reaction, or parasitic infection.");if(has("BACKGROUND_BLOOD"))lines.push("Background blood present.");if(has("DEGENERATING_CELLS"))lines.push("Numerous degenerating cells present, limiting optimal cytomorphologic assessment.");if(has("NO_MALIGNANT"))lines.push("No malignant cells seen.");if(has("CORRELATE_CYTO"))lines.push("Correlate with cytology for final interpretation / diagnosis.");if(!lines.length)lines.push("No malignant cells seen.");const seen=new Set();return lines.filter(x=>seen.has(x)?false:seen.add(x));}
+function buildCSF(tags,history){const has=t=>tags.includes(t);const lines=[];if(has("CSF_MALIGN_TUMOR"))lines.push("Malignant tumor cells present."+(history?" Known history of "+history+" is noted.":""));if(has("CSF_BLASTS_KNOWN"))lines.push("Blasts present."+(history?" Known history of "+history+" is noted.":""));if(has("CSF_RARE_BLASTLIKE"))lines.push("Rare blast-like cells present. The significance of these cells is unclear, and reactive lymphocytes cannot be excluded. In the appropriate clinical setting, repeat examination with additional fluid collected for flow cytometry is recommended.");if(has("CSF_RARE_ATYPICAL"))lines.push("Rare atypical cells present. The significance of these cells is unclear, and degenerating or reactive lymphocytes cannot be excluded. As clinically warranted, repeat CSF examination may be helpful.");if(has("CSF_BACT_COCCI_IC"))lines.push("Intracellular bacterial cocci present. Correlation with microbiologic cultures is recommended.");else if(has("CSF_BACT_COCCI_EC"))lines.push("Extracellular bacterial cocci present. Correlation with microbiologic cultures is recommended.");if(has("CSF_FUNGAL_HYPHAE"))lines.push("Fungal hyphae present. Correlation with microbiologic cultures is recommended.");if(has("CSF_HEMOPHAG"))lines.push("Hemophagocytic histiocytes present. In a shunt collection, this finding is usually incidental and related to CSF storage. In a spinal aspirate, the finding may represent true hemophagocytosis; correlation with clinical findings and other laboratory data is recommended.");if(has("CSF_HEMOSIDERIN"))lines.push("Hemosiderin-laden histiocytes present. This may be expected in an immediate post-surgical sample or shunt fluid. In a non-surgical or lumbar aspirate sample, this may represent central nervous system hemorrhage; correlate clinically and radiographically.");if(has("CSF_BM_CONTAM"))lines.push("Maturing hematopoietic elements present, consistent with bone marrow contamination.");if(has("CSF_LYMPHO_PLEO"))lines.push("Predominance of reactive lymphocytes (lymphocytic pleocytosis).");if(has("CSF_NEUTRO_PREDOM"))lines.push("Predominance of neutrophils.");if(has("CSF_FEW_RBC"))lines.push("Few red blood cells present.");if(has("CSF_RBC_PREDOM"))lines.push("Predominance of red blood cells.");if(has("CSF_NO_MALIGNANT"))lines.push("No malignant cells seen.");if(lines.length===0)lines.push("No malignant cells seen.");const seen=new Set();return lines.filter(x=>seen.has(x)?false:seen.add(x));}
+function toReport(site,history,lines,style,specimenType){const mode=$("includeHistory").value;const addHistory=(mode==="YES")||(mode==="AUTO"&&history.length>0);const hdr=specimenType==="CSF"?"Cerebrospinal Fluid, Cytology":"Body Fluid, Cytology";const titleLine=site?`${hdr} (${site}):`:`${hdr}:`;if(style==="SHORT")return lines.join(" ");const diag=lines.length?lines[0]:"No malignant cells seen.";const rest=lines.slice(1).length?lines.slice(1).join(" "):"";if(style==="REPORT")return[(addHistory?`Clinical history: ${history}`:""),"DIAGNOSIS",titleLine,diag,"","COMMENT",(rest?rest:"Correlation with clinical and ancillary studies is recommended as appropriate.")].filter(Boolean).join("\n");return[(addHistory?`Clinical history: ${history}`:""),"DIAGNOSIS",titleLine,diag,"","COMMENT",(rest?rest:"Correlation with clinical and ancillary studies is recommended as appropriate."),"","MICROSCOPIC DESCRIPTION","Cytologic preparations show the findings described above."].filter(Boolean).join("\n");}
+function validate(tags){const has=t=>tags.includes(t);const warnings=[];if(has("NO_MALIGNANT")&&(has("MALIGN_GLANDULAR")||has("MALIGNANT_CLUSTERS")||has("LARGE_PLEO_MALIGN")||has("MALIGNANT_UNCERTAIN")||has("MONO_ATYP_SMALL_LYMPH")||has("MONO_ATYP_LARGE_LYMPH")))warnings.push('You selected "No malignant cells seen" and malignant/atypical categories.');if(has("CSF_NO_MALIGNANT")&&(has("CSF_MALIGN_TUMOR")||has("CSF_BLASTS_KNOWN")||has("CSF_RARE_BLASTLIKE")||has("CSF_RARE_ATYPICAL")))warnings.push('You selected "No malignant cells seen" and atypical/malignant CSF categories.');if(has("BACT_COCCI_EC")&&has("BACT_COCCI_IC"))warnings.push("Both extracellular and intracellular bacterial cocci selected; output uses intracellular wording.");if(has("MIXED_FLORA_EC")&&has("MIXED_FLORA_IC"))warnings.push("Both extracellular and intracellular mixed flora selected; output uses intracellular wording.");if(has("CSF_BACT_COCCI_EC")&&has("CSF_BACT_COCCI_IC"))warnings.push("Both extracellular and intracellular CSF bacteria selected; output uses intracellular wording.");return warnings.join(" ");}
+function generate(){updatePanels();const type=specimenType();const site=sanitize($("site").value);const history=sanitize($("history").value);const style=$("style").value;const tags=selectedTags();$("warn").textContent=sanitizeAscii(validate(tags));const lines=type==="CSF"?buildCSF(tags,history):buildBodyFluid(tags);$("output").value=sanitizeAscii(toReport(site,history,lines,style,type));}
+function resetAll(){document.querySelectorAll("input[type=checkbox]").forEach(cb=>cb.checked=false);const bodyRadio=document.querySelector('input[name="specimenType"][value="BODY_FLUID"]');if(bodyRadio)bodyRadio.checked=true;$("site").value="";$("history").value="";$("style").value="SHORT";$("includeHistory").value="AUTO";$("warn").textContent="";$("output").value="";generate();}
+async function copyOut(){const text=$("output").value;if(!text)return;try{await navigator.clipboard.writeText(sanitizeAscii(text));$("warn").textContent="Copied to clipboard.";}catch(e){$("warn").textContent="Copy failed. You can manually copy from the box.";}}
+$("generateBtn").addEventListener("click",generate);$("resetBtn").addEventListener("click",resetAll);$("copyBtn").addEventListener("click",copyOut);document.addEventListener("change",e=>{if(e.target.matches("input, select"))generate();});document.addEventListener("input",e=>{if(e.target.matches('input[type="text"]'))generate();});generate();
 </script>
 </body>
 </html>
