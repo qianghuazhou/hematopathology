@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hodgkin Lymphoma Synoptic Case Summary — Generator</title>
+  <title>Hodgkin Lymphoma Synoptic Case Summary - Optimized Generator</title>
   <style>
     :root{
       --bg:#0b0f19; --card:#121a2a; --ink:#e8eefc; --muted:#a9b7d6; --line:#24314b;
@@ -107,8 +107,8 @@
   </style>
 </head>
 <body>
-  <h1>Hodgkin Lymphoma Synoptic Case Summary — HTML Generator</h1>
-  <p class="sub">Select elements and click <b>Generate</b> to produce a synoptic block.</p>
+  <h1>Hodgkin Lymphoma Synoptic Case Summary - v17 Optimized Generator</h1>
+  <p class="sub">Select elements and click <b>Generate</b> to produce an ASCII-safe synoptic block with morphology, IHC, and comment.</p>
 
   <div class="grid">
     <div class="leftcol">
@@ -138,9 +138,9 @@
         <h2>Tumor site <span class="pill">select all that apply</span></h2>
         <fieldset>
           <label><input type="checkbox" name="site" value="Lymph node(s), site not specified"><span class="lbltxt">Lymph node(s), site not specified</span></label>
-          <label><input type="checkbox" id="siteLNChk" name="site" value="Lymph node(s)"><span class="lbltxt">Lymph node(s) — specify site(s)</span></label>
+          <label><input type="checkbox" id="siteLNChk" name="site" value="Lymph node(s)"><span class="lbltxt">Lymph node(s) - specify site(s)</span></label>
           <input type="text" id="siteLNTxt" class="hidden" placeholder="e.g., cervical, axillary, inguinal..." />
-          <label><input type="checkbox" id="siteOtherChk" name="site" value="Other tissue(s) or organ(s)"><span class="lbltxt">Other tissue(s) / organ(s) — specify</span></label>
+          <label><input type="checkbox" id="siteOtherChk" name="site" value="Other tissue(s) or organ(s)"><span class="lbltxt">Other tissue(s) / organ(s) - specify</span></label>
           <input type="text" id="siteOtherTxt" class="hidden" placeholder="Specify other tissue(s) / organ(s)..." />
           <label><input type="checkbox" name="site" value="Not specified"><span class="lbltxt">Not specified</span></label>
         </fieldset>
@@ -161,16 +161,16 @@
       <div class="card">
         <h2>Pathologic extent of tumor <span class="pill">select all that apply</span></h2>
         <fieldset>
-          <label><input type="checkbox" id="extSingleChk" name="extent" value="Involvement of a single lymph node region"><span class="lbltxt">Single lymph node region — specify</span></label>
+          <label><input type="checkbox" id="extSingleChk" name="extent" value="Involvement of a single lymph node region"><span class="lbltxt">Single lymph node region - specify</span></label>
           <input type="text" id="extSingleTxt" class="hidden" placeholder="Specify site..." />
-          <label><input type="checkbox" id="extSameChk" name="extent" value="Involvement of 2 or more lymph node regions on the same side of the diaphragm"><span class="lbltxt">≥2 lymph node regions (same side of diaphragm) — specify</span></label>
+          <label><input type="checkbox" id="extSameChk" name="extent" value="Involvement of 2 or more lymph node regions on the same side of the diaphragm"><span class="lbltxt">>=2 lymph node regions (same side of diaphragm) - specify</span></label>
           <input type="text" id="extSameTxt" class="hidden" placeholder="Specify sites..." />
-          <label><input type="checkbox" id="extBothChk" name="extent" value="Involvement of lymph node regions on both sides of the diaphragm"><span class="lbltxt">Lymph node regions on both sides of diaphragm — specify</span></label>
+          <label><input type="checkbox" id="extBothChk" name="extent" value="Involvement of lymph node regions on both sides of the diaphragm"><span class="lbltxt">Lymph node regions on both sides of diaphragm - specify</span></label>
           <input type="text" id="extBothTxt" class="hidden" placeholder="Specify sites..." />
           <label><input type="checkbox" name="extent" value="Spleen involvement"><span class="lbltxt">Spleen involvement</span></label>
           <label><input type="checkbox" name="extent" value="Liver involvement"><span class="lbltxt">Liver involvement</span></label>
           <label><input type="checkbox" name="extent" value="Bone marrow involvement"><span class="lbltxt">Bone marrow involvement</span></label>
-          <label><input type="checkbox" id="extOtherChk" name="extent" value="Other site involvement"><span class="lbltxt">Other site involvement — specify</span></label>
+          <label><input type="checkbox" id="extOtherChk" name="extent" value="Other site involvement"><span class="lbltxt">Other site involvement - specify</span></label>
           <input type="text" id="extOtherTxt" class="hidden" placeholder="Specify other site(s)..." />
         </fieldset>
       </div>
@@ -194,7 +194,7 @@
       <div class="card">
         <h2>Clinical prognostic factors <span class="pill">select all that apply</span></h2>
         <fieldset>
-          <label><input type="checkbox" id="ipsChk" name="prognostic" value="International Prognostic Score (IPS)"><span class="lbltxt">International Prognostic Score (IPS) — specify</span></label>
+          <label><input type="checkbox" id="ipsChk" name="prognostic" value="International Prognostic Score (IPS)"><span class="lbltxt">International Prognostic Score (IPS) - specify</span></label>
           <input type="text" id="ipsTxt" class="hidden" placeholder="IPS value..." />
           <label><input type="checkbox" name="prognostic" value="B symptoms present"><span class="lbltxt">B symptoms present</span></label>
         </fieldset>
@@ -210,7 +210,7 @@
 
         <label style="margin-top:10px">
           <input type="checkbox" id="appendSeeCommentDx">
-          <span class="lbltxt">Append “See comment.” to the last diagnosis line</span>
+          <span class="lbltxt">Append "See comment." to the last diagnosis line</span>
         </label>
 
         <label for="dxExtra" style="display:block; margin-top:10px">Additional diagnosis line(s) <span class="pill">optional</span></label>
@@ -285,13 +285,14 @@ Sections show lymph node architecture partially effaced by a polymorphous infilt
       </div>
 
       <div class="card">
-        <h2>Generated synoptic report <span class="pill">copy/paste</span></h2>
+        <h2>Generated synoptic report <span class="pill">ASCII-safe copy/paste</span></h2>
         <div class="btnbar">
           <button id="btnGen" type="button">Generate</button>
           <button id="btnCopy" type="button" class="secondary">Copy</button>
+          <button id="btnDownload" type="button" class="secondary">Download TXT</button>
           <button id="btnClear" type="button" class="danger">Clear all</button>
         </div>
-        <p class="hint">Output is plain text for easy LIS pasting.</p>
+        <p class="hint">Output is sanitized plain text for LIS/HL7/EMR pasting.</p>
         <textarea id="output" placeholder="Click Generate..." style="min-height:180px; max-height:420px; overflow:auto"></textarea>
         <p id="status" class="mini" style="margin-top:10px"></p>
       </div>
@@ -315,6 +316,27 @@ Sections show lymph node architecture partially effaced by a polymorphous infilt
       if (!t) return "";
       return /[.!?;:]$/.test(t) ? t : t + ".";
     }
+
+    function sanitizeReport(txt){
+      return String(txt || "")
+        .replace(/[]/g, "-")
+        .replace(/[]/g, '"')
+        .replace(/[]/g, "'")
+        .replace(//g, ">=")
+        .replace(//g, "<=")
+        .replace(//g, "+/-")
+        .replace(//g, "x")
+        .replace(//g, "u")
+        .replace(//g, "-")
+        .replace(//g, "...")
+        .replace(/\u00a0/g, " ");
+    }
+
+    function safeSetValue(selector, txt){
+      const el = $(selector);
+      if (el) el.value = sanitizeReport(txt);
+    }
+
     function appendSeeComment(s){
       const t = clean(s);
       if (!t) return "See comment.";
@@ -362,7 +384,7 @@ Sections show lymph node architecture partially effaced by a polymorphous infilt
     function buildExtent(){
       return checkedValues("extent").map(v => {
         if (v === "Involvement of a single lymph node region") return clean($("#extSingleTxt").value) ? `Single lymph node region: ${clean($("#extSingleTxt").value)}` : "Single lymph node region";
-        if (v === "Involvement of 2 or more lymph node regions on the same side of the diaphragm") return clean($("#extSameTxt").value) ? `≥2 lymph node regions (same side): ${clean($("#extSameTxt").value)}` : "≥2 lymph node regions (same side)";
+        if (v === "Involvement of 2 or more lymph node regions on the same side of the diaphragm") return clean($("#extSameTxt").value) ? `>=2 lymph node regions (same side): ${clean($("#extSameTxt").value)}` : ">=2 lymph node regions (same side)";
         if (v === "Involvement of lymph node regions on both sides of the diaphragm") return clean($("#extBothTxt").value) ? `Both sides of diaphragm: ${clean($("#extBothTxt").value)}` : "Both sides of diaphragm";
         if (v === "Other site involvement") return clean($("#extOtherTxt").value) ? `Other site involvement: ${clean($("#extOtherTxt").value)}` : "Other site involvement";
         return v;
@@ -484,7 +506,7 @@ Sections show lymph node architecture partially effaced by a polymorphous infilt
         if (!r) return;
         if (r === '+') pos.push(`${label}+`);
         else if (r === '-') neg.push(label);
-        else if (r === '+/-') partial.push(`${label}+/−`);
+        else if (r === '+/-') partial.push(`${label}+/-`);
         else if (r === 'ND') nd.push(label);
       };
 
@@ -540,7 +562,7 @@ Sections show lymph node architecture partially effaced by a polymorphous infilt
         if (!r) return;
         if (r === '+') pos.push(`${label}+`);
         else if (r === '-') neg.push(label);
-        else if (r === '+/-') partial.push(`${label}+/−`);
+        else if (r === '+/-') partial.push(`${label}+/-`);
         else if (r === 'ND') nd.push(label);
       };
 
@@ -574,25 +596,25 @@ Sections show lymph node architecture partially effaced by a polymorphous infilt
 
       const templates = {
         "Nodular sclerosis classic Hodgkin lymphoma": `Sections show lymph node architecture effaced by nodules separated by fibrous bands.
-Within the nodules are scattered large atypical cells with abundant cytoplasm and irregular nuclei with prominent nucleoli, in keeping with lacunar-type Reed–Sternberg cells.
+Within the nodules are scattered large atypical cells with abundant cytoplasm and irregular nuclei with prominent nucleoli, in keeping with lacunar-type Reed-Sternberg cells.
 The background shows a mixed inflammatory infiltrate including small lymphocytes, eosinophils and histiocytes.`,
         "Mixed-cellularity classic Hodgkin lymphoma": `Sections show lymph node architecture diffusely effaced by a polymorphous infiltrate.
-Scattered large atypical mononuclear and binucleated Reed–Sternberg cells are present in a background of small lymphocytes, eosinophils, histiocytes and plasma cells.
+Scattered large atypical mononuclear and binucleated Reed-Sternberg cells are present in a background of small lymphocytes, eosinophils, histiocytes and plasma cells.
 Fibrous bands and a nodular growth pattern are not identified.`,
         "Lymphocyte-rich classic Hodgkin lymphoma": `Sections show nodular to vaguely nodular lymphoid tissue with a predominant background of small lymphocytes.
-Scattered large atypical Hodgkin/Reed–Sternberg cells are identified, with irregular nuclei and prominent nucleoli.
+Scattered large atypical Hodgkin/Reed-Sternberg cells are identified, with irregular nuclei and prominent nucleoli.
 Eosinophils and other inflammatory cells are not prominent.`,
-        "Lymphocyte-depleted classic Hodgkin lymphoma": `Sections show lymphoid tissue extensively effaced by numerous large pleomorphic atypical cells, including forms with Reed–Sternberg cell morphology.
+        "Lymphocyte-depleted classic Hodgkin lymphoma": `Sections show lymphoid tissue extensively effaced by numerous large pleomorphic atypical cells, including forms with Reed-Sternberg cell morphology.
 The background is relatively depleted of small lymphocytes and shows associated fibrosis and histiocytes.
 Necrosis may be present.`,
         "Classic Hodgkin lymphoma, subtype cannot be determined": `Sections show lymph node architecture partially to extensively effaced by a polymorphous infiltrate.
-Scattered large atypical Hodgkin/Reed–Sternberg cells are present in a mixed inflammatory background including small lymphocytes, eosinophils and histiocytes.
+Scattered large atypical Hodgkin/Reed-Sternberg cells are present in a mixed inflammatory background including small lymphocytes, eosinophils and histiocytes.
 Definitive subclassification of classical Hodgkin lymphoma is not established on the current specimen.`,
         "Hodgkin lymphoma, histologic subtype cannot be determined": `Sections show lymphoid tissue involved by a Hodgkin lymphoma.
-Large atypical cells with Hodgkin/Reed–Sternberg-like morphology are identified in an inflammatory background.
+Large atypical cells with Hodgkin/Reed-Sternberg-like morphology are identified in an inflammatory background.
 Correlation with immunohistochemical findings is required for further classification.`,
         "Nodular lymphocyte predominant Hodgkin lymphoma": `Sections show a nodular lymphoid proliferation with expanded nodules composed predominantly of small lymphocytes and histiocytes.
-Scattered large atypical lymphocyte-predominant (LP, “popcorn”) cells are present, showing multilobated nuclei with delicate chromatin and small nucleoli.
+Scattered large atypical lymphocyte-predominant (LP, "popcorn") cells are present, showing multilobated nuclei with delicate chromatin and small nucleoli.
 Background small T-cells are present, including cells cuffing around LP cells.`
       };
 
@@ -604,7 +626,7 @@ Background small T-cells are present, including cells cuffing around LP cells.`
       if (!morph) return "";
       const lines = ["MORPHOLOGICAL DESCRIPTION", ""];
       morph.split(/\r?\n/).map(x => clean(x)).filter(Boolean).forEach(line => lines.push(ensureTerminalPeriod(line)));
-      return lines.join("\n");
+      return sanitizeReport(lines.join("\n"));
     }
 
     function buildIHCOnlySection(){
@@ -682,7 +704,7 @@ Background small T-cells are present, including cells cuffing around LP cells.`
       const extra = clean($("#dxExtra").value);
       if (extra) {
         extra.split(/\r?\n/).map(x => clean(x)).filter(Boolean).forEach(line => {
-          bullets.push(ensureTerminalPeriod(line.replace(/^[–-]\s*/, "")));
+          bullets.push(ensureTerminalPeriod(line.replace(/^[--]\s*/, "")));
         });
       }
 
@@ -690,8 +712,29 @@ Background small T-cells are present, including cells cuffing around LP cells.`
         bullets[bullets.length - 1] = appendSeeComment(bullets[bullets.length - 1]);
       }
 
-      bullets.forEach(line => lines.push(`– ${line}`));
-      return lines.join("\n");
+      bullets.forEach(line => lines.push(`- ${line}`));
+      return sanitizeReport(lines.join("\n"));
+    }
+
+
+    function buildPathologyComment(){
+      const hist = selectedRadio("histType");
+      const type = selectedRadio("ihcTemplateType");
+      const comments = [];
+
+      if (hist && hist.includes("Classic Hodgkin lymphoma")) {
+        comments.push("The morphologic and immunophenotypic findings support classic Hodgkin lymphoma. Correlation with clinical and imaging findings is recommended for staging.");
+      } else if (hist && hist.includes("Nodular lymphocyte predominant Hodgkin lymphoma")) {
+        comments.push("The findings support nodular lymphocyte predominant Hodgkin lymphoma. Correlation with clinical and imaging findings is recommended. Careful assessment for a T-cell/histiocyte-rich large B-cell lymphoma-like pattern or transformation is suggested if clinically indicated.");
+      }
+
+      const ebvCHL = cHL_MARKERS.find(m => m.id === "ebv");
+      const ebvNLPHL = NLPHL_MARKERS.find(m => m.id === "nl_ebv");
+      const ebvRes = type === "NLPHL" ? getMarkerResult(ebvNLPHL) : getMarkerResult(ebvCHL);
+      if (ebvRes === "+") comments.push("EBER positivity is present in the lesional cells.");
+      if (ebvRes === "-") comments.push("EBER is negative in the lesional cells.");
+
+      return comments.length ? comments.join(" ") : "";
     }
 
     function buildOutput(){
@@ -736,6 +779,13 @@ Background small T-cells are present, including cells cuffing around LP cells.`
         lines.push("");
       }
 
+      const pathComment = buildPathologyComment();
+      if (pathComment) {
+        lines.push("COMMENT:");
+        lines.push(pathComment);
+        lines.push("");
+      }
+
       if (prognostic.length) {
         lines.push("Clinical prognostic factors / indices:");
         prognostic.forEach(x => lines.push(`- ${x}`));
@@ -744,7 +794,7 @@ Background small T-cells are present, including cells cuffing around LP cells.`
 
       const missing = [];
       if (!hist) missing.push("Histologic type");
-      return { text: lines.join("\n"), missing };
+      return { text: sanitizeReport(lines.join("\n")), missing };
     }
     function clearAll(){
       $$('input[type="checkbox"]').forEach(el => el.checked = false);
@@ -776,7 +826,7 @@ Background small T-cells are present, including cells cuffing around LP cells.`
           const el = $('input[name="ihcTemplateType"][value="NLPHL"]');
           if (el) el.checked = true;
         }
-      } else if (hist.toLowerCase().includes("classical hodgkin lymphoma") || hist.toLowerCase().includes("nodular sclerosis classical hodgkin lymphoma") || hist.toLowerCase().includes("mixed cellularity classical hodgkin lymphoma") || hist.toLowerCase().includes("lymphocyte-rich classical hodgkin lymphoma") || hist.toLowerCase().includes("lymphocyte-depleted classical hodgkin lymphoma")) {
+      } else if (hist.toLowerCase().includes("classic hodgkin lymphoma") || hist.toLowerCase().includes("classical hodgkin lymphoma")) {
         if (current !== "cHL") {
           const el = $('input[name="ihcTemplateType"][value="cHL"]');
           if (el) el.checked = true;
@@ -794,11 +844,11 @@ Background small T-cells are present, including cells cuffing around LP cells.`
     $("#btnAutoMorph").addEventListener("click", () => {
       const template = morphologyTemplateFromHistology();
       if (!template) {
-        $("#morphStatus").textContent = "⚠️ Select a histologic type first.";
+        $("#morphStatus").textContent = "Warning: Select a histologic type first.";
         return;
       }
       $("#morphInput").value = template;
-      $("#morphStatus").textContent = "✅ Morphology template loaded.";
+      $("#morphStatus").textContent = "OK: Morphology template loaded.";
     });
     $("#btnClearMorph").addEventListener("click", () => {
       $("#morphInput").value = "";
@@ -811,15 +861,15 @@ Background small T-cells are present, including cells cuffing around LP cells.`
       if (!buildSite().length) missing.push("Tumor site");
       if (!buildProcedure().length) missing.push("Procedure");
       if (!selectedRadio("histType")) missing.push("Histologic type");
-      $("#dxOutput").value = text;
+      safeSetValue("#dxOutput", text);
       $("#dxStatus").innerHTML = text
-        ? (missing.length ? `⚠️ Generated with limited components: <b>${missing.join(", ")}</b>.` : "✅ Diagnosis generated.")
-        : "⚠️ Could not generate diagnosis. Select Tumor site, Procedure, and Histologic type.";
+        ? (missing.length ? `Generated with limited components: <b>${missing.join(", ")}</b>.` : "Diagnosis generated.")
+        : "Warning: Could not generate diagnosis. Select Tumor site, Procedure, and Histologic type.";
     });
     $("#btnCopyDx").addEventListener("click", async () => {
       const text = $("#dxOutput").value.trim();
       if (!text) { $("#dxStatus").textContent = "Nothing to copy (generate first)."; return; }
-      try { await navigator.clipboard.writeText(text); $("#dxStatus").textContent = "Copied to clipboard."; }
+      try { await navigator.clipboard.writeText(sanitizeReport(text)); $("#dxStatus").textContent = "Copied to clipboard."; }
       catch { $("#dxOutput").focus(); $("#dxOutput").select(); document.execCommand("copy"); $("#dxStatus").textContent = "Copied (fallback)."; }
     });
     $("#btnClearDx").addEventListener("click", () => {
@@ -830,13 +880,13 @@ Background small T-cells are present, including cells cuffing around LP cells.`
 
     $("#btnGenIHC").addEventListener("click", () => {
       const text = buildIHCSection();
-      $("#ihcOutput").value = text;
-      $("#ihcStatus").innerHTML = text ? "✅ Morphology and immunohistochemistry generated." : "⚠️ Enter morphology and/or select markers for generation.";
+      safeSetValue("#ihcOutput", text);
+      $("#ihcStatus").innerHTML = text ? "OK: Morphology and immunohistochemistry generated." : "Warning: Enter morphology and/or select markers for generation.";
     });
     $("#btnCopyIHC").addEventListener("click", async () => {
       const text = $("#ihcOutput").value.trim();
       if (!text) { $("#ihcStatus").textContent = "Nothing to copy (generate first)."; return; }
-      try { await navigator.clipboard.writeText(text); $("#ihcStatus").textContent = "Copied to clipboard."; }
+      try { await navigator.clipboard.writeText(sanitizeReport(text)); $("#ihcStatus").textContent = "Copied to clipboard."; }
       catch { $("#ihcOutput").focus(); $("#ihcOutput").select(); document.execCommand("copy"); $("#ihcStatus").textContent = "Copied (fallback)."; }
     });
         $("#btnClearIHC").addEventListener("click", () => {
@@ -850,15 +900,28 @@ Background small T-cells are present, including cells cuffing around LP cells.`
 
     $("#btnGen").addEventListener("click", () => {
       const result = buildOutput();
-      $("#output").value = result.text;
-      $("#status").innerHTML = result.missing.length ? `⚠️ Missing: <b>${result.missing.join(", ")}</b>.` : "✅ Generated.";
+      safeSetValue("#output", result.text);
+      $("#status").innerHTML = result.missing.length ? `Warning: Missing: <b>${result.missing.join(", ")}</b>.` : "OK: Generated.";
     });
     $("#btnCopy").addEventListener("click", async () => {
       const text = $("#output").value.trim();
       if (!text) { $("#status").textContent = "Nothing to copy (generate first)."; return; }
-      try { await navigator.clipboard.writeText(text); $("#status").textContent = "Copied to clipboard."; }
+      try { await navigator.clipboard.writeText(sanitizeReport(text)); $("#status").textContent = "Copied to clipboard."; }
       catch { $("#output").focus(); $("#output").select(); document.execCommand("copy"); $("#status").textContent = "Copied (fallback)."; }
     });
+
+    $("#btnDownload").addEventListener("click", () => {
+      const txt = sanitizeReport($("#output").value.trim());
+      if (!txt) { $("#status").textContent = "Nothing to download (generate first)."; return; }
+      const blob = new Blob([txt + "\n"], {type:"text/plain;charset=us-ascii"});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "hodgkin_synoptic_report.txt";
+      a.click();
+      URL.revokeObjectURL(a.href);
+      $("#status").textContent = "TXT downloaded.";
+    });
+
     $("#btnClear").addEventListener("click", clearAll);
   </script>
 </body>
