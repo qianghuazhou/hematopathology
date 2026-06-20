@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Therapeutic Apheresis Physician Handbook</title>
+  <style>
+    :root{--bg:#f4f7f9;--panel:#ffffff;--text:#22313f;--muted:#5f6b76;--primary:#243746;--accent:#2d8cff;--border:#dbe3ea;--soft:#eef4f8;--soft2:#f8fbfd;--tag:#e9eef3;--ok:#eaf5ee;--warn:#fff7e8;--danger:#fdeeee;--shadow:0 10px 28px rgba(25,45,66,.08);--radius:18px;--max:1180px}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.62}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.container{max-width:var(--max);margin:0 auto;padding:24px}.back-link{display:inline-flex;align-items:center;gap:8px;margin:6px 0 14px;color:var(--primary);font-weight:700;text-decoration:none}.back-link:hover{text-decoration:none;color:var(--accent)}.hero{background:linear-gradient(135deg,#243746 0%,#2f4c63 100%);color:#fff;border-radius:24px;padding:34px 32px;box-shadow:var(--shadow);margin-top:10px}.eyebrow{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:6px 12px;border-radius:999px;font-size:.84rem;letter-spacing:.02em;margin-bottom:14px}h1,h2,h3{margin:0 0 12px}h1{font-size:2.3rem;line-height:1.15}h2{font-size:1.45rem;color:var(--primary)}h3{font-size:1.02rem;color:var(--primary)}.hero p{max-width:940px;margin:0;color:rgba(255,255,255,.92);font-size:1rem}.hero-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:22px}.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:16px 18px}.hero-stat .label{font-size:.83rem;color:rgba(255,255,255,.75)}.hero-stat .value{font-size:1.08rem;font-weight:700;margin-top:4px}.quick-nav{position:sticky;top:0;z-index:10;background:rgba(244,247,249,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);margin-top:18px}.quick-nav-inner{max-width:var(--max);margin:0 auto;padding:12px 24px;display:flex;flex-wrap:wrap;gap:10px}.quick-nav a{display:inline-block;padding:9px 13px;border-radius:999px;background:#fff;border:1px solid var(--border);color:var(--primary);font-size:.92rem;font-weight:600}.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px;align-items:start;margin-top:24px}.sidebar{position:sticky;top:78px;display:flex;flex-direction:column;gap:18px}.card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}.sidebar .card{padding:18px}.toc{list-style:none;padding:0;margin:0}.toc li+li{margin-top:8px}.toc a{color:var(--text);font-size:.95rem}.toc a:hover{color:var(--accent)}.main{display:flex;flex-direction:column;gap:22px}.section{scroll-margin-top:92px}.section-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.pill{display:inline-block;background:var(--tag);color:var(--primary);border:1px solid var(--border);padding:5px 10px;border-radius:999px;font-size:.8rem;font-weight:700;white-space:nowrap}.muted{color:var(--muted)}.grid-2,.grid-3,.grid-4{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}.mini{background:var(--soft2);border:1px solid var(--border);border-radius:16px;padding:16px;height:100%}.mini h3{margin-bottom:8px}.mini p{margin:0}table{width:100%;border-collapse:collapse;font-size:.95rem;background:#fff;overflow:hidden;border-radius:14px}th,td{padding:12px;border-bottom:1px solid var(--border);vertical-align:top;text-align:left}th{background:var(--soft);color:var(--primary);font-weight:700}tr:last-child td{border-bottom:none}.notice,.warning,.danger,.okbox{border-radius:16px;padding:16px 18px;border:1px solid var(--border);margin-top:16px}.notice{background:var(--soft)}.warning{background:var(--warn)}.danger{background:var(--danger)}.okbox{background:var(--ok)}.list-tight{margin:8px 0 0 0;padding-left:18px}.list-tight li+li{margin-top:6px}.refs{padding-left:18px;margin:0}.refs li+li{margin-top:10px}code.inline,pre{background:var(--soft);border:1px solid var(--border);border-radius:8px;font-family:Consolas,monospace}code.inline{padding:2px 6px;font-size:.9em}pre{padding:14px;white-space:pre-wrap;line-height:1.45;overflow:auto}.footer{color:var(--muted);font-size:.92rem;padding:10px 0 40px}.copy-row{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:10px 0}.copy-btn{border:1px solid var(--border);background:var(--primary);color:#fff;border-radius:999px;padding:8px 12px;font-weight:700;cursor:pointer}.copy-btn:hover{background:#2f4c63}.template{margin-top:10px}.small{font-size:.9rem;color:var(--muted)}@media (max-width:1060px){.layout{grid-template-columns:1fr}.sidebar{position:static}.hero-grid,.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:760px){.container{padding:16px}.quick-nav-inner{padding:10px 16px}.hero{padding:24px 20px}h1{font-size:1.9rem}.hero-grid,.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}th,td{font-size:.9rem}}
+</style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-link" href="transfusion_medicine.html">Back to Transfusion Medicine</a>
+    <header class="hero">
+      <div class="eyebrow">Transfusion Medicine Operational Handbook</div>
+      <h1>Therapeutic Apheresis Physician Handbook</h1>
+      <p>Copy-ready consultation templates, procedure notes, complication documentation, and order sets for hospital-based therapeutic apheresis. This companion page is intended for chart documentation and on-call workflow. For disease rationale, prescribing principles, and CBS/ASFA-style reference content, use the Therapeutic Plasma Exchange guide.</p>
+      <div class="hero-grid">
+        <div class="hero-stat"><div class="label">Consults</div><div class="value">TTP, GBS, cryoglobulinemia, CAPS</div></div>
+        <div class="hero-stat"><div class="label">Procedures</div><div class="value">TPE, RBC exchange, cytapheresis</div></div>
+        <div class="hero-stat"><div class="label">Complications</div><div class="value">Hypotension, citrate, catheter</div></div>
+        <div class="hero-stat"><div class="label">Orders</div><div class="value">Plasma, albumin, RBC exchange</div></div>
+      </div>
+    </header>
+  </div>
+
+  <nav class="quick-nav"><div class="quick-nav-inner">
+    <a href="#overview">Overview</a><a href="#consults">Consult Templates</a><a href="#procedures">Procedure Notes</a><a href="#complications">Complications</a><a href="#orders">Order Sets</a><a href="#protocols">Disease Protocols</a><a href="#related">Related</a>
+  </div></nav>
+
+  <div class="container"><div class="layout">
+    <aside class="sidebar">
+      <div class="card"><h3>On this page</h3><ul class="toc">
+        <li><a href="#overview">1. Documentation workflow</a></li>
+        <li><a href="#consults">2. Consultation templates</a></li>
+        <li><a href="#procedures">3. Procedure note templates</a></li>
+        <li><a href="#complications">4. Complication notes</a></li>
+        <li><a href="#orders">5. Order sets</a></li>
+        <li><a href="#protocols">6. Disease protocols</a></li>
+        <li><a href="#related">7. Related resources</a></li>
+      </ul></div>
+      <div class="card"><h3>Documentation rule</h3><p class="muted">Every note should explicitly state indication, procedure type, volume, replacement fluid, access, calcium/anticoagulation, pre/post vitals, labs, fluid balance, complications, and next plan.</p></div>
+    </aside>
+
+    <main class="main">
+      <section id="overview" class="section card">
+        <div class="section-header"><h2>1. Documentation workflow</h2><span class="pill">On-call use</span></div>
+        <div class="grid-2">
+          <div class="mini"><h3>Consult note purpose</h3><p>Establish whether apheresis is indicated, document risk-benefit discussion and consent, define access and replacement fluid, and set a treatment endpoint.</p></div>
+          <div class="mini"><h3>Procedure note purpose</h3><p>Document what was actually done: volume exchanged, product used, access performance, calcium given, vitals, labs, fluid balance, complications, and next session.</p></div>
+        </div>
+        <table style="margin-top:18px"><thead><tr><th>Note type</th><th>Must include</th></tr></thead><tbody>
+          <tr><td>Initial consultation</td><td>Reason for consult, relevant history, clinical indication, ASFA category if useful, labs, access assessment, consent, planned prescription, monitoring, endpoint.</td></tr>
+          <tr><td>Daily procedure note</td><td>Diagnosis, procedure number, exchange/replacement details, access, pre/post vitals, labs, fluid balance, complications, next plan.</td></tr>
+          <tr><td>Complication note</td><td>Event timing, procedure status, symptoms/signs, actions taken, response, communication with primary team, decision to continue/stop/retry.</td></tr>
+        </tbody></table>
+      </section>
+
+      <section id="consults" class="section card">
+        <div class="section-header"><h2>2. Consultation templates</h2><span class="pill">Copy-ready</span></div>
+        <p class="muted">Use these as starting points. Replace bracketed text and adjust to local policy, current ASFA guidance, and patient-specific details.</p>
+
+        <div class="template"><div class="copy-row"><h3>TPE consultation - suspected acquired TTP</h3><button class="copy-btn" onclick="copyTemplate('tpl-ttp-consult')">Copy</button></div>
+<pre id="tpl-ttp-consult">TRANSFUSION MEDICINE / APHERESIS CONSULTATION NOTE
+
+Reason for consultation:
+Therapeutic plasma exchange for suspected acquired thrombotic thrombocytopenic purpura (TTP).
+
+History / clinical context:
+[Age]-year-old [sex] with [presentation: thrombocytopenia, microangiopathic hemolytic anemia, neurologic symptoms, renal dysfunction, fever, other]. The apheresis service was consulted for urgent evaluation for TPE.
+
+Pertinent findings:
+Platelets: [ ] x 10^9/L
+Hemoglobin: [ ] g/L
+LDH: [ ]
+Bilirubin: [ ]
+Haptoglobin: [ ]
+Creatinine: [ ]
+Peripheral smear: [schistocytes present / pending / not seen]
+Coagulation studies: [PT/INR/PTT/fibrinogen]
+ADAMTS13: [sent before TPE / pending / not yet sent]
+
+Assessment:
+The clinical and laboratory findings are concerning for TTP. Given the high morbidity and mortality of untreated acquired TTP, urgent TPE is indicated and should not be delayed while awaiting ADAMTS13 results when clinical suspicion is high.
+
+Plan:
+1. Obtain informed consent for therapeutic plasma exchange and blood product exposure.
+2. Draw ADAMTS13 activity/inhibitor before first exchange if this will not delay treatment.
+3. Start TPE urgently: exchange 1.0 to 1.5 total plasma volumes daily.
+4. Replacement fluid: donor plasma.
+5. Access: [peripheral access / temporary apheresis or dialysis catheter].
+6. Monitor CBC, platelet count, LDH, bilirubin, hemolysis markers, electrolytes including ionized calcium, and coagulation studies as clinically indicated.
+7. Coordinate disease-directed therapy with hematology, including corticosteroids and consideration of caplacizumab and rituximab according to local protocol.
+8. Continue daily TPE until platelet count and hemolysis have clearly improved, then stop/taper according to institutional TTP protocol and clinical response.</pre></div>
+
+        <div class="template"><div class="copy-row"><h3>TPE consultation - Guillain-Barre syndrome / immune neuropathy</h3><button class="copy-btn" onclick="copyTemplate('tpl-gbs-consult')">Copy</button></div>
+<pre id="tpl-gbs-consult">TRANSFUSION MEDICINE / APHERESIS CONSULTATION NOTE
+
+Reason for consultation:
+Therapeutic plasma exchange for [Guillain-Barre syndrome / CIDP exacerbation / myasthenia gravis crisis / other immune-mediated neurologic disorder].
+
+History / clinical context:
+[Age]-year-old [sex] with [diagnosis] presenting with [weakness, sensory symptoms, bulbar symptoms, respiratory involvement, progression despite IVIG/steroids, other]. Neurology has requested TPE.
+
+Pertinent findings:
+Neurologic status: [summary]
+Respiratory status: [stable / declining / ventilated / FVC/NIF if available]
+Prior therapy: [IVIG / steroids / none / other]
+CBC: [ ]
+Creatinine/electrolytes/calcium: [ ]
+Coagulation/fibrinogen if relevant: [ ]
+Access assessment: [ ]
+
+Assessment:
+The clinical scenario is compatible with an immune-mediated neurologic disorder for which TPE is an accepted treatment option. TPE is intended to remove pathogenic circulating antibodies or immune mediators and should be coordinated with neurology and ICU/respiratory monitoring when needed.
+
+Plan:
+1. Obtain informed consent for TPE.
+2. Planned course: [5] exchanges, typically every other day, with reassessment based on clinical response.
+3. Exchange volume: approximately 1.0 total plasma volume per session.
+4. Replacement fluid: 5% albumin unless plasma is specifically indicated.
+5. Access: [peripheral / central].
+6. Calcium replacement and citrate monitoring per protocol.
+7. Monitor neurologic and respiratory status closely; coordinate with neurology regarding endpoint and concurrent therapy.</pre></div>
+
+        <div class="template"><div class="copy-row"><h3>TPE consultation - cryoglobulinemia / cryoglobulinemic vasculitis</h3><button class="copy-btn" onclick="copyTemplate('tpl-cryo-consult')">Copy</button></div>
+<pre id="tpl-cryo-consult">TRANSFUSION MEDICINE / APHERESIS CONSULTATION NOTE
+
+Reason for consultation:
+Therapeutic plasma exchange for severe cryoglobulinemia / cryoglobulinemic vasculitis.
+
+History / clinical context:
+[Age]-year-old [sex] with [HCV / autoimmune disease / lymphoproliferative disorder / other] and evidence of severe cryoglobulinemia with [renal involvement, skin vasculitis, neuropathy, hyperviscosity, other].
+
+Pertinent findings:
+Cryoglobulin/cryocrit: [ ]
+Complement levels: [ ]
+Renal function: creatinine [ ], proteinuria [ ]
+Biopsy findings if available: [ ]
+CBC/coagulation/fibrinogen: [ ]
+Volume status/comorbidities: [CHF/renal failure/edema/other]
+
+Assessment:
+The patient has severe cryoglobulinemia with organ-threatening involvement. TPE is reasonable as a rapid temporizing therapy to remove circulating cryoglobulins while definitive disease-directed therapy is initiated.
+
+Plan:
+1. Obtain informed consent for TPE.
+2. Planned course: [5 to 7] procedures, frequency [daily / every other day] depending on severity and response.
+3. Exchange volume: approximately 1.0 total plasma volume per session.
+4. Replacement fluid: 5% albumin, with plasma added only if clinically indicated for bleeding/coagulopathy.
+5. Use isovolemic or carefully controlled fluid balance if volume overload risk is present.
+6. Calcium replacement per citrate protocol.
+7. Monitor renal function, urine protein, cryoglobulin/cryocrit if used locally, symptoms, fibrinogen, and access status.
+8. Coordinate antiviral, immunosuppressive, or hematologic therapy with the primary team.</pre></div>
+
+        <div class="template"><div class="copy-row"><h3>TPE consultation - catastrophic antiphospholipid syndrome</h3><button class="copy-btn" onclick="copyTemplate('tpl-caps-consult')">Copy</button></div>
+<pre id="tpl-caps-consult">TRANSFUSION MEDICINE / APHERESIS CONSULTATION NOTE
+
+Reason for consultation:
+Therapeutic plasma exchange for suspected catastrophic antiphospholipid syndrome (CAPS) or severe antibody-mediated hypercoagulability.
+
+History / clinical context:
+[Age]-year-old [sex] with [recurrent thrombosis / multiorgan thrombosis / pulmonary embolism / DVT / renal/CNS/skin involvement] despite [anticoagulation or other therapy]. Hematology/ICU has requested TPE.
+
+Pertinent findings:
+Thrombotic events: [ ]
+Antiphospholipid testing: [LA/anticardiolipin/beta-2 glycoprotein results or pending]
+Anticoagulation: [heparin/argatroban/warfarin/DOAC]
+Platelets: [ ]
+PT/INR/PTT/fibrinogen: [ ]
+Renal/liver function: [ ]
+Bleeding risk: [ ]
+
+Assessment:
+The clinical scenario is concerning for CAPS or severe antibody-mediated thrombotic disease. TPE may be used as part of multimodal therapy together with anticoagulation, corticosteroids, and other immunomodulatory therapy as directed by hematology/rheumatology/ICU.
+
+Plan:
+1. Obtain informed consent for TPE and blood product exposure.
+2. Planned course: [5] procedures with daily reassessment.
+3. Exchange volume: 1.0 to 1.5 total plasma volumes.
+4. Replacement fluid: [plasma / albumin plus plasma], selected based on bleeding risk, fibrinogen, anticoagulation, and local protocol.
+5. Monitor CBC, coagulation profile, fibrinogen, electrolytes including calcium, and organ-specific markers.
+6. Coordinate anticoagulation and immunosuppressive therapy with hematology and the primary team.</pre></div>
+
+        <div class="template"><div class="copy-row"><h3>RBC exchange consultation - sickle cell disease / acute chest syndrome</h3><button class="copy-btn" onclick="copyTemplate('tpl-rbcx-consult')">Copy</button></div>
+<pre id="tpl-rbcx-consult">TRANSFUSION MEDICINE / APHERESIS CONSULTATION NOTE
+
+Reason for consultation:
+Red blood cell exchange for sickle cell disease with [acute stroke / acute chest syndrome / severe vaso-occlusive complication / perioperative indication / other].
+
+History / clinical context:
+[Age]-year-old [sex] with [HbSS / HbSC / other sickle genotype] presenting with [clinical syndrome]. The apheresis service was consulted for RBC exchange.
+
+Pertinent findings:
+Hemoglobin: [ ] g/L
+Hematocrit: [ ]
+Platelets: [ ]
+HbS/HbC or electrophoresis: [pre-exchange result or pending]
+Oxygen requirement / chest imaging / neurologic findings: [ ]
+Antibody history / phenotype or genotype: [ ]
+Access assessment: [ ]
+
+Assessment:
+The clinical indication supports urgent RBC exchange to reduce the fraction of sickling red cells and improve oxygen-carrying capacity while minimizing viscosity risk.
+
+Plan:
+1. Obtain consent for RBC exchange and RBC transfusion.
+2. Arrange antigen-matched RBC units according to local sickle cell transfusion policy, including Rh and Kell matching and additional matching based on antibody history/genotype where available.
+3. Perform automated RBC exchange using [number] units RBC, targeting [post-Hct] and [HbS target] as clinically appropriate.
+4. Obtain pre- and post-exchange hemoglobin electrophoresis/HbS quantification.
+5. Monitor CBC, calcium, vital signs, transfusion reaction symptoms, and fluid balance.
+6. Coordinate ongoing sickle cell management with hematology and the primary team.</pre></div>
+      </section>
+
+      <section id="procedures" class="section card">
+        <div class="section-header"><h2>3. Procedure note templates</h2><span class="pill">Daily notes</span></div>
+
+        <div class="template"><div class="copy-row"><h3>Standard TPE procedure note</h3><button class="copy-btn" onclick="copyTemplate('tpl-tpe-procedure')">Copy</button></div>
+<pre id="tpl-tpe-procedure">THERAPEUTIC APHERESIS PROCEDURE NOTE
+
+Diagnosis:
+[Diagnosis / indication]
+
+Procedure:
+Therapeutic plasma exchange (TPE)
+
+Procedure number:
+[#] of [planned total] / [daily ongoing]
+
+Assessment:
+[Brief clinical update and reason for continuing TPE].
+
+Procedure details:
+Exchange volume: [ ] L ([ ] total plasma volume)
+Replacement fluid: [5% albumin / plasma / mixed]
+Access: [peripheral IV / right IJ catheter / femoral catheter / other]
+Anticoagulation: [citrate / heparin / protocol]
+Calcium: [ ] g calcium gluconate/chloride given [prophylactically / PRN]
+Premedication: [none / diphenhydramine / acetaminophen / steroid / other]
+
+Vital signs:
+Pre-procedure: BP [ ], T [ ], HR [ ], RR [ ], O2 sat [ ]
+Post-procedure: BP [ ], T [ ], HR [ ], RR [ ], O2 sat [ ]
+
+Pertinent labs:
+WBC [ ], Hgb [ ], Hct [ ], platelets [ ]
+Creatinine [ ], potassium [ ], ionized calcium [ ]
+LDH [ ], bilirubin [ ], fibrinogen [ ] as applicable
+
+Fluid balance:
+Total infused: [ ] mL
+Total removed: [ ] mL
+Net balance: [ ] mL
+
+Access assessment:
+[Good access and return flow / access alarms / poor flow]. Catheter/IV site [without evidence of infection or bleeding / findings described].
+
+Complications:
+[None / describe event, management, and outcome].
+
+Plan:
+[Continue daily / next TPE scheduled on date / stop after this session / reassess with primary team]. Monitor [disease-specific endpoint].</pre></div>
+
+        <div class="template"><div class="copy-row"><h3>Standard RBC exchange procedure note</h3><button class="copy-btn" onclick="copyTemplate('tpl-rbcx-procedure')">Copy</button></div>
+<pre id="tpl-rbcx-procedure">RED BLOOD CELL EXCHANGE PROCEDURE NOTE
+
+Diagnosis:
+[Sickle cell disease genotype and indication]
+
+Procedure:
+Automated red blood cell exchange
+
+Procedure number:
+[Initial / #]
+
+Assessment:
+[Brief clinical update and indication, e.g., acute chest syndrome, stroke, severe complication].
+
+Procedure details:
+RBC units used: [ ] units
+RBC unit specifications: [Rh/K matched / antigen matched / HbS negative / irradiated if applicable]
+Access: [peripheral / central]
+Anticoagulation: citrate per protocol
+Calcium: [ ] g administered
+Target post-procedure hematocrit: [ ]
+Target HbS or fraction of cells remaining: [ ]
+
+Vital signs:
+Pre-procedure: BP [ ], T [ ], HR [ ], RR [ ], O2 sat [ ]
+Post-procedure: BP [ ], T [ ], HR [ ], RR [ ], O2 sat [ ]
+
+Pertinent labs:
+Pre-exchange Hgb/Hct: [ ] / [ ]
+Pre-exchange HbS or electrophoresis: [ ]
+Post-exchange Hgb/Hct: [if available]
+Post-exchange HbS/electrophoresis: [ordered / result]
+Platelets [ ], ionized calcium [ ]
+
+Fluid balance:
+Total infused: [ ] mL
+Total removed: [ ] mL
+Net balance: [ ] mL
+
+Complications:
+[None / transfusion reaction / citrate symptoms / access issue / other].
+
+Plan:
+Post-exchange hemoglobin electrophoresis/HbS quantification [ordered / pending]. Continue management with hematology and primary team.</pre></div>
+
+        <div class="template"><div class="copy-row"><h3>Leukocytapheresis procedure note</h3><button class="copy-btn" onclick="copyTemplate('tpl-leuk-procedure')">Copy</button></div>
+<pre id="tpl-leuk-procedure">LEUKOCYTAPHERESIS PROCEDURE NOTE
+
+Diagnosis:
+[Acute leukemia / hyperleukocytosis with symptomatic leukostasis]
+
+Procedure:
+Therapeutic leukocytapheresis
+
+Indication:
+[Respiratory symptoms / neurologic symptoms / other signs of leukostasis]
+
+Procedure details:
+Blood volume processed: [ ]
+Access: [ ]
+Anticoagulation: [citrate per protocol]
+Calcium: [ ]
+
+Pre-procedure WBC: [ ] x 10^9/L
+Post-procedure WBC: [ordered / result]
+Other labs: Hgb [ ], platelets [ ], electrolytes [ ], coagulation [ ]
+
+Clinical course / complications:
+[ ]
+
+Plan:
+Coordinate urgently with hematology for definitive cytoreductive therapy. Leukocytapheresis is a temporizing measure and should not delay chemotherapy when indicated.</pre></div>
+      </section>
+
+      <section id="complications" class="section card">
+        <div class="section-header"><h2>4. Complication note templates</h2><span class="pill">Troubleshooting</span></div>
+
+        <div class="template"><div class="copy-row"><h3>Hypotension during TPE</h3><button class="copy-btn" onclick="copyTemplate('tpl-hypotension')">Copy</button></div>
+<pre id="tpl-hypotension">APHERESIS EVENT NOTE - HYPOTENSION DURING TPE
+
+Event:
+During TPE #[ ], approximately [ ] minutes after initiation, the patient developed hypotension from BP [ ] to [ ]. Symptoms were [none / dizziness / nausea / chest pain / dyspnea / altered mental status].
+
+Immediate management:
+The procedure was [paused / stopped]. The patient was assessed at bedside. [ ] mL normal saline bolus was given. Vital signs were monitored closely. The primary team was notified.
+
+Response:
+Blood pressure improved to [ ] after [time/intervention]. Symptoms [resolved / persisted].
+
+Decision:
+After discussion with [primary team/neurology/hematology/ICU], the procedure was [resumed at slower rate / deferred until later / terminated for the day].
+
+Outcome:
+The patient [completed the procedure / did not complete the procedure] with final BP [ ]. No further complications were noted / [describe].
+
+Plan:
+For future procedures, consider [pre-procedure fluid bolus, medication review, positive fluid balance, slower inlet rate, albumin/plasma adjustment, ICU monitoring].</pre></div>
+
+        <div class="template"><div class="copy-row"><h3>Catheter malfunction or suspected infection</h3><button class="copy-btn" onclick="copyTemplate('tpl-catheter')">Copy</button></div>
+<pre id="tpl-catheter">APHERESIS EVENT NOTE - ACCESS PROBLEM / SUSPECTED CATHETER INFECTION
+
+Event:
+TPE #[ ] was attempted via [catheter type/site]. At the start of the procedure, access and/or return flow was poor despite [repositioning/flushes/line reversal/other].
+
+Site assessment:
+Catheter site showed [no abnormality / erythema / tenderness / induration / drainage / bleeding]. Findings were concerning for [catheter malfunction / possible infection / thrombosis / other].
+
+Management:
+The procedure was [terminated / paused / completed with difficulty]. The primary team and [hematology/nephrology/ICU] were notified. Recommendation was made for [catheter removal, blood cultures, line replacement, imaging, local care] according to clinical context.
+
+Fluid balance if procedure started:
+Infused: [ ] mL
+Removed: [ ] mL
+Net: [ ] mL
+
+Plan:
+Reassess need for further apheresis after access issue is addressed. If ongoing TPE is required, arrange new suitable access before next procedure.</pre></div>
+
+        <div class="template"><div class="copy-row"><h3>Citrate toxicity / hypocalcemia</h3><button class="copy-btn" onclick="copyTemplate('tpl-citrate')">Copy</button></div>
+<pre id="tpl-citrate">APHERESIS EVENT NOTE - CITRATE TOXICITY / HYPOCALCEMIA
+
+Event:
+During [TPE/RBC exchange], the patient developed symptoms consistent with citrate-related hypocalcemia: [perioral tingling / paresthesia / metallic taste / cramps / carpopedal spasm / nausea / QT prolongation / arrhythmia / seizure].
+
+Assessment:
+Ionized calcium was [ ] if available. Symptoms were [mild/moderate/severe].
+
+Management:
+The procedure was [continued with intervention / slowed / paused / stopped]. Calcium [gluconate/chloride] [dose] was administered [IV/oral] according to protocol. Citrate exposure/AC ratio was adjusted if applicable.
+
+Response:
+Symptoms [resolved/improved/persisted] after [time].
+
+Plan:
+For future procedures, use prophylactic calcium, monitor ionized calcium, consider slower citrate exposure, and reassess anticoagulation strategy in high-risk patients.</pre></div>
+
+        <div class="template"><div class="copy-row"><h3>Allergic reaction during plasma replacement</h3><button class="copy-btn" onclick="copyTemplate('tpl-allergy')">Copy</button></div>
+<pre id="tpl-allergy">APHERESIS EVENT NOTE - ALLERGIC REACTION
+
+Event:
+During TPE with [plasma/albumin] replacement, the patient developed [urticaria/pruritus/flushing/rigors/dyspnea/wheezing/hypotension/angioedema].
+
+Assessment:
+Severity was [mild/moderate/severe/anaphylaxis]. Vital signs: BP [ ], HR [ ], O2 sat [ ].
+
+Management:
+The procedure was [paused/stopped]. The patient received [diphenhydramine/acetaminophen/steroid/epinephrine/oxygen/IV fluids] as clinically indicated. Blood bank/transfusion reaction protocol was followed if plasma product reaction was suspected.
+
+Response:
+Symptoms [resolved/improved/persisted].
+
+Plan:
+For future procedures, consider premedication, alternative plasma product if available, albumin replacement if clinically acceptable, and closer monitoring. Severe reactions require discussion with the apheresis physician and primary team before further procedures.</pre></div>
+      </section>
+
+      <section id="orders" class="section card">
+        <div class="section-header"><h2>5. Order sets</h2><span class="pill">Operational</span></div>
+        <div class="grid-2">
+          <div>
+            <h3>TPE with plasma replacement</h3>
+            <ul class="list-tight">
+              <li>Therapeutic plasma exchange: [date/time], exchange [ ] mL or [ ] TPV.</li>
+              <li>Replacement fluid: plasma [ ] mL or [ ] units/liters for TPE.</li>
+              <li>Calcium gluconate: [3 to 5 g] IV on call or per protocol.</li>
+              <li>CBC, differential, platelet count; BMP/electrolytes; ionized calcium.</li>
+              <li>LDH, bilirubin, haptoglobin for TTP/TMA monitoring.</li>
+              <li>PT/INR, PTT, fibrinogen if bleeding risk or repeated procedures.</li>
+              <li>ADAMTS13 before first TPE if suspected TTP and not already sent.</li>
+              <li>Access order and post-procedure access bleeding check.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>TPE with albumin replacement</h3>
+            <ul class="list-tight">
+              <li>Therapeutic plasma exchange: [date/time], exchange [ ] mL or [ ] TPV.</li>
+              <li>Replacement fluid: 5% albumin [ ] mL at bedside for apheresis.</li>
+              <li>Calcium gluconate: [3 to 5 g] IV on call or per protocol.</li>
+              <li>CBC, BMP/electrolytes, ionized calcium.</li>
+              <li>Fibrinogen and coagulation studies if daily/repeated exchange or procedure planned.</li>
+              <li>Vital signs per apheresis protocol.</li>
+              <li>Access order and post-procedure access assessment.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="notice"><strong>RBC exchange orders:</strong> include RBC product order, antigen-matching requirements, pre- and post-exchange hemoglobin electrophoresis/HbS quantification, CBC, ionized calcium, and access order.</div>
+      </section>
+
+      <section id="protocols" class="section card">
+        <div class="section-header"><h2>6. Disease-specific quick protocols</h2><span class="pill">One-page summaries</span></div>
+        <table><thead><tr><th>Indication</th><th>Exchange</th><th>Replacement</th><th>Frequency / endpoint</th></tr></thead><tbody>
+          <tr><td>Acquired TTP</td><td>1.0 to 1.5 TPV</td><td>Plasma</td><td>Daily until platelet count and hemolysis improve; ADAMTS13 before first exchange if possible.</td></tr>
+          <tr><td>GBS / MG crisis / immune neuropathy</td><td>About 1.0 TPV</td><td>5% albumin</td><td>Commonly 5 procedures every other day; adjust to neurologic response.</td></tr>
+          <tr><td>Cryoglobulinemia with organ threat</td><td>About 1.0 TPV</td><td>5% albumin</td><td>Daily or every other day; often 5 to 7 procedures while definitive therapy starts.</td></tr>
+          <tr><td>Hyperviscosity syndrome</td><td>1.0 TPV</td><td>5% albumin +/- saline per protocol</td><td>Usually 1 to 2 procedures for IgM; endpoint is symptom/viscosity improvement.</td></tr>
+          <tr><td>Renal transplant desensitization / rejection</td><td>1.0 to 1.5 TPV</td><td>5% albumin +/- plasma</td><td>Protocol driven; endpoint often DSA reduction and transplant-team plan.</td></tr>
+          <tr><td>RBC exchange for sickle complication</td><td>Device-calculated RBC exchange</td><td>Antigen-matched RBC</td><td>Endpoint is target HbS/fraction of cells remaining and clinical stabilization.</td></tr>
+        </tbody></table>
+      </section>
+
+      <section id="related" class="section card">
+        <div class="section-header"><h2>7. Related resources</h2><span class="pill">Navigation</span></div>
+        <div class="grid-2">
+          <div class="notice" style="margin-top:0"><h3>Therapeutic Plasma Exchange Guide</h3><p>For indication rationale, replacement fluid selection, vascular access, complications, drug removal, and CBS/ASFA-style clinical reference.</p><p><a href="therapeutic_plasma_exchange_v2.html">Therapeutic Plasma Exchange Practical Guide</a></p></div>
+          <div class="notice" style="margin-top:0"><h3>Plasma Donation Physician Guide</h3><p>For donor eligibility, plasma donation physician duties, donor adverse reactions, physician substitute supervision, and QA activities.</p><p><a href="plasma_donation_physician_guide.html">Plasma Donation Physician Guide</a></p></div>
+        </div>
+      </section>
+
+      <section id="references" class="section card">
+        <div class="section-header"><h2>Selected source material</h2><span class="pill">References</span></div>
+        <ol class="refs">
+          <li>Therapeutic pheresis consultation / procedure note templates, last revision 2016.</li>
+          <li>Oliver M, Patriquin C. Therapeutic apheresis. Clinical Guide to Transfusion. Canadian Blood Services. 2023.</li>
+          <li>Connelly-Smith L, et al. ASFA guidelines, Ninth Special Issue. Journal of Clinical Apheresis. 2023.</li>
+          <li>Dias Pais M, Gaspar A, Coelho S. Therapeutic Plasma Exchange - A Practical Guide. Kidney and Dialysis. 2026.</li>
+        </ol>
+      </section>
+    </main>
+  </div><div class="footer"><a class="back-link" href="transfusion_medicine.html">Return to Transfusion Medicine</a><br>Prepared as a GitHub-ready standalone HTML handbook for a transfusion medicine site.</div></div>
+
+<script>
+function copyTemplate(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const text = el.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btns = document.querySelectorAll('button.copy-btn');
+    btns.forEach(b => { if (b.getAttribute('onclick') && b.getAttribute('onclick').includes(id)) { const old=b.textContent; b.textContent='Copied'; setTimeout(()=>b.textContent=old,1200); } });
+  }).catch(() => {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    document.execCommand('copy');
+    sel.removeAllRanges();
+  });
+}
+</script>
+</body>
+</html>
