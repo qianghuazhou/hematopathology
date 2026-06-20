@@ -44,7 +44,7 @@
 </head>
 <body>
 <header>
-  <h1>Bone Marrow Report and Amendment Template <span class="pill">v1.3 ASCII-safe compatible HTML</span></h1>
+  <h1>Bone Marrow Report and Amendment Template <span class="pill">v1.4 lineage order - previous wording</span></h1>
   <div class="sub">Integrated aspirate, biopsy, peripheral blood, IHC, flow, cytogenetics, molecular, comments and addendum modules. Output is sanitized to ASCII-safe text for LIS/EMR transfer. Preset templates are dropdown-compatible.</div>
 </header>
 
@@ -111,21 +111,51 @@
       <div class="row"><label>M:E ratio</label><input id="meRatio" placeholder="e.g. 3:1"></div>
       <div class="sectionTitle">Lineages</div>
       <div class="grid3">
+        <div><label>Mk number</label><select id="aspMkNum"><option></option><option>proportionately decreased</option><option>proportionately normal in number</option><option>proportionately increased</option><option>sparse</option></select></div>
+        <div><label>Mk morphology</label><select id="aspMkMorph"><option></option><option>show largely normal morphology</option><option>vary in size</option><option>vary in size, with a subset of smaller forms</option><option>include a subset of smaller and/or hypolobated forms</option><option>include frequent smaller and/or hypolobated forms and forms with separated nuclear lobes</option></select></div>
         <div><label>Erythroid number</label><select id="aspEryNum"><option></option><option>proportionately decreased</option><option>proportionately normal in number</option><option>proportionately increased</option><option>sparse</option></select></div>
         <div><label>Erythroid maturation</label><select id="aspEryMat"><option></option><option>show full-spectrum maturation</option><option>show left-shifted maturation</option></select></div>
         <div><label>Erythroid morphology</label><input id="aspEryMorph" placeholder="with normoblastic morphology / dysplastic features"></div>
         <div><label>Myeloid number</label><select id="aspMyeNum"><option></option><option>proportionately decreased</option><option>proportionately normal in number</option><option>proportionately increased</option><option>sparse</option></select></div>
         <div><label>Myeloid maturation</label><select id="aspMyeMat"><option></option><option>show full-spectrum maturation</option><option>show left-shifted maturation</option></select></div>
         <div><label>Myeloid morphology</label><input id="aspMyeMorph"></div>
-        <div><label>Mk number</label><select id="aspMkNum"><option></option><option>proportionately decreased</option><option>proportionately normal in number</option><option>proportionately increased</option><option>sparse</option></select></div>
-        <div><label>Mk morphology</label><select id="aspMkMorph"><option></option><option>show largely normal morphology</option><option>vary in size</option><option>vary in size, with a subset of smaller forms</option><option>include a subset of smaller and/or hypolobated forms</option><option>include frequent smaller and/or hypolobated forms and forms with separated nuclear lobes</option></select></div>
-        <div><label>Blasts</label><input id="aspBlasts" placeholder="are not increased (<5%)"></div>
+        <div><label>Blasts</label><select id="aspBlasts">
+          <option></option>
+          <option>are not increased (&lt;5%)</option>
+          <option>are rare</option>
+          <option>are mildly increased</option>
+          <option>are increased</option>
+          <option>cannot be assessed</option>
+        </select></div>
       </div>
       <div class="grid2">
-        <div><label>Lymphocytes</label><textarea id="aspLymph"></textarea></div>
-        <div><label>Plasma cells</label><textarea id="aspPlasma"></textarea></div>
-        <div><label>Mast cells</label><textarea id="aspMast"></textarea></div>
-        <div><label>Other</label><textarea id="aspOther"></textarea></div>
+        <div><label>Lymphocytes</label><select id="aspLymph">
+          <option></option>
+          <option>present in expected numbers</option>
+          <option>not increased</option>
+          <option>mildly increased</option>
+          <option>increased</option>
+          <option>atypical lymphoid cells are present</option>
+          <option>cannot be assessed</option>
+        </select></div>
+        <div><label>Plasma cells</label><select id="aspPlasma">
+          <option></option>
+          <option>not increased</option>
+          <option>mildly increased</option>
+          <option>increased</option>
+          <option>atypical plasma cells are present</option>
+          <option>cannot be assessed</option>
+        </select></div>
+        <div><label>Mast cells</label><select id="aspMast">
+          <option></option>
+          <option>rare scattered mast cells</option>
+          <option>not increased</option>
+          <option>mildly increased</option>
+          <option>increased</option>
+          <option>atypical/spindled mast cells are present</option>
+          <option>cannot be assessed</option>
+        </select></div>
+        <div><label>Other aspirate finding</label><textarea id="aspOther" placeholder="Free text for additional aspirate findings"></textarea></div>
       </div>
       <div class="grid2">
         <div><label>Iron stores</label><select id="ironStore"><option></option><option>absent</option><option>reduced</option><option>adequate</option><option>increased</option></select></div>
@@ -147,21 +177,58 @@
         <div><label>Architecture</label><select id="bxArch"><option></option><option>preserved</option><option>partially effaced by abnormal cellular infiltrates</option><option>patchy</option></select></div>
       </div>
       <div class="grid3">
+        <div><label>Mk number</label><select id="bxMkNum"><option></option><option>decreased</option><option>normal in number</option><option>increased</option></select></div>
+        <div><label>Mk morphology</label><select id="bxMkMorph"><option></option><option>normal in morphology</option><option>vary in size</option><option>vary in size, with a subset of smaller forms</option><option>include frequent smaller forms</option><option>include forms with deep nuclear lobulations</option><option>include large forms with aggregated, bulbous nuclei and hyperchromasia</option></select></div>
+        <div><label>M:E ratio</label><input id="bxMe" placeholder="__ : __"></div>
         <div><label>Erythroid number</label><select id="bxEryNum"><option></option><option>decreased</option><option>normal in number</option><option>increased</option></select></div>
         <div><label>Erythroid maturation</label><select id="bxEryMat"><option></option><option>show full-spectrum maturation</option><option>show left-shifted maturation</option></select></div>
         <div><label>Erythroid morph</label><input id="bxEryMorph"></div>
         <div><label>Myeloid number</label><select id="bxMyeNum"><option></option><option>decreased</option><option>normal in number</option><option>increased</option></select></div>
         <div><label>Myeloid maturation</label><select id="bxMyeMat"><option></option><option>show full-spectrum maturation</option><option>show left-shifted maturation</option></select></div>
         <div><label>Myeloid morph</label><input id="bxMyeMorph"></div>
-        <div><label>M:E ratio</label><input id="bxMe" placeholder="__ : __"></div>
-        <div><label>Mk number</label><select id="bxMkNum"><option></option><option>decreased</option><option>normal in number</option><option>increased</option></select></div>
-        <div><label>Mk morphology</label><select id="bxMkMorph"><option></option><option>normal in morphology</option><option>vary in size</option><option>vary in size, with a subset of smaller forms</option><option>include frequent smaller forms</option><option>include forms with deep nuclear lobulations</option><option>include large forms with aggregated, bulbous nuclei and hyperchromasia</option></select></div>
       </div>
       <div class="grid2">
-        <div><label>Blasts</label><textarea id="bxBlasts"></textarea></div>
-        <div><label>Lymphocytes</label><textarea id="bxLymph"></textarea></div>
-        <div><label>Plasma cells</label><textarea id="bxPlasma"></textarea></div>
-        <div><label>Bony Trabeculae</label><select id="trabBone"><option></option><option>normal</option><option>focally thinned</option><option>thinned</option><option>sparse</option></select></div>
+        <div><label>Blasts</label><select id="bxBlasts">
+          <option></option>
+          <option>not increased</option>
+          <option>not increased (&lt;5%)</option>
+          <option>rare scattered blasts</option>
+          <option>mildly increased</option>
+          <option>increased, approximately ___% by CD34 immunostain</option>
+          <option>cannot be assessed</option>
+        </select></div>
+        <div><label>Lymphocytes</label><select id="bxLymph">
+          <option></option>
+          <option>not increased</option>
+          <option>scattered small lymphocytes without aggregates</option>
+          <option>reactive lymphoid aggregates present</option>
+          <option>increased lymphoid infiltrate in an interstitial pattern</option>
+          <option>increased lymphoid infiltrate in a focal/nodular pattern</option>
+          <option>increased lymphoid infiltrate in a diffuse pattern</option>
+          <option>atypical lymphoid infiltrate present</option>
+          <option>cannot be assessed</option>
+        </select></div>
+        <div><label>Plasma cells</label><select id="bxPlasma">
+          <option></option>
+          <option>not increased</option>
+          <option>mildly increased and scattered interstitially</option>
+          <option>increased, scattered interstitially</option>
+          <option>increased plasma cells in interstitial/focal aggregates, comprising approximately ___% of marrow cellularity</option>
+          <option>atypical plasma cells are present</option>
+          <option>cannot be assessed</option>
+        </select></div>
+        <div><label>Mast cells</label><select id="bxMast">
+          <option></option>
+          <option>rare scattered mast cells</option>
+          <option>not increased</option>
+          <option>mildly increased</option>
+          <option>increased</option>
+          <option>atypical/spindled mast cells are present</option>
+          <option>mast cell aggregates are present</option>
+          <option>cannot be assessed</option>
+        </select></div>
+        <div><label>Trabecular bone</label><select id="trabBone"><option></option><option>normal</option><option>focally thinned</option><option>thinned</option><option>sparse</option></select></div>
+        <div><label>Other core finding</label><textarea id="bxOther" placeholder="Free text for additional core biopsy findings"></textarea></div>
       </div>
       <div class="row"><label>Clot section</label><select id="clot"><option></option><option>shows similar findings as the core biopsy</option><option>primarily shows peripheral blood</option><option>shows limited marrow elements</option></select></div>
       <div class="row"><label>Clot other</label><textarea id="clotOther"></textarea></div>
@@ -370,9 +437,9 @@ function generateReport(){
   let diffs=[['Blasts',v('dBlast')],['Promyelocytes',v('dPro')],['Myelo/Meta',v('dMyeloMeta')],['Segs/Bands',v('dSeg')],['Erythroid',v('dEry')],['Lymphocytes',v('dLymph')],['Monocytes',v('dMono')],['Eosinophils',v('dEos')],['Basophils',v('dBaso')],['Plasma cells',v('dPlasma')],['Mast cells',v('dMast')],['Other',v('dOther')]].filter(x=>x[1]);
   if(diffs.length) r += 'Differential count: '+diffs.map(x=>x[0]+' '+x[1]+'%').join(', ')+'.\n';
   if(v('meRatio')) r += 'M:E ratio: '+v('meRatio')+'.\n';
+  r += lineage('Megakaryocytes',[v('aspMkNum'),v('aspMkMorph')]);
   r += lineage('Erythroid',[v('aspEryNum'),v('aspEryMat'),v('aspEryMorph')]);
   r += lineage('Granulocytes',[v('aspMyeNum'),v('aspMyeMat'),v('aspMyeMorph')]);
-  r += lineage('Megakaryocytes',[v('aspMkNum'),v('aspMkMorph')]);
   if(v('aspBlasts')) r += 'Blasts: '+sent(v('aspBlasts'))+'\n';
   let other=[]; if(v('aspLymph')) other.push('Lymphocytes '+normPart(v('aspLymph'))); if(v('aspPlasma')) other.push('Plasma cells '+normPart(v('aspPlasma'))); if(v('aspMast')) other.push('Mast cells '+normPart(v('aspMast')));
   if(other.length) r += 'Other cells: '+cap(other.join('; '))+'.\n';
@@ -384,14 +451,16 @@ function generateReport(){
   if(v('bxCellPhrase') || v('bxCell')) r += 'Cellularity: '+sent((v('bxCellPhrase')||'***')+(v('bxCell')?' (~'+v('bxCell')+')':''))+'\n';
   if(v('bxArch')) r += 'Architecture: '+sent(v('bxArch'))+'\n';
   if(v('bxHematopoiesis')) r += 'Hematopoiesis: '+sent(v('bxHematopoiesis'))+'\n';
+  r += lineage('Megakaryocytes',[v('bxMkNum'),v('bxMkMorph')]);
   r += lineage('Erythroid',[v('bxEryNum'),v('bxEryMat'),v('bxEryMorph')]);
   r += lineage('Granulocytes',[v('bxMyeNum'),v('bxMyeMat'),v('bxMyeMorph')]);
   if(v('bxMe')) r += 'M:E ratio: '+v('bxMe')+'.\n';
-  r += lineage('Megakaryocytes',[v('bxMkNum'),v('bxMkMorph')]);
   if(v('bxBlasts')) r += 'Blasts: '+sent(v('bxBlasts'))+'\n';
-  if(v('bxLymph')) r += 'Lymphoid aggregates: '+sent(v('bxLymph'))+'\n';
+  if(v('bxLymph')) r += 'Lymphocytes/lymphoid aggregates: '+sent(v('bxLymph'))+'\n';
   if(v('bxPlasma')) r += 'Plasma cells: '+sent(v('bxPlasma'))+'\n';
-  if(v('trabBone')) r += 'Bony Trabeculae: '+sent(v('trabBone'))+'\n';
+  if(v('bxMast')) r += 'Mast cells: '+sent(v('bxMast'))+'\n';
+  if(v('trabBone')) r += 'Trabecular bone: '+sent(v('trabBone'))+'\n';
+  if(v('bxOther')) r += 'Other: '+sent(v('bxOther'))+'\n';
   if(v('clot')||v('clotOther')) r += 'Clot section: '+sent(v('clot')||v('clotOther'))+'\n';
   r += '\n';
   r += section('ANCILLARY STUDIES');
@@ -424,7 +493,7 @@ function clearAll(){
 }
 function applyCommonNormalPb(){set('pbRbc','Normocytic normochromic red blood cells.');set('pbWbc','No significant morphologic abnormality. No circulating blasts.');set('pbPlt','Normal in number and morphology.');}
 function applyNormalAspirate(){set('aspQuality','adequate with numerous spicules');set('aspCell','normocellular for age');set('dBlast','0');set('dPro','4');set('dMyeloMeta','10');set('dSeg','26');set('dEry','41');set('dLymph','13');set('dMono','2');set('dEos','2');set('dBaso','0');set('dPlasma','2');set('meRatio','1.1:1');set('aspEryNum','normal in number');set('aspEryMat','');set('aspEryMorph','mainly normoblastic maturation');set('aspMyeNum','normal in number');set('aspMyeMat','');set('aspMyeMorph','orderly maturation through all stages');set('aspMkNum','normal in number');set('aspMkMorph','mature multilobated forms, scattered singly, with abundant granular cytoplasm and no significant atypia');set('aspBlasts','not increased (<5%)');set('aspLymph','present in expected numbers');set('aspPlasma','not increased');set('aspMast','rare');set('ironStore','adequate');set('ringSid','not identified');}
-function applyNormalBiopsy(cell='40%'){set('bxQuality','adequate for evaluation');set('bxCellPhrase','normocellular for age');set('bxCell',cell);set('bxArch','preserved');set('bxEryNum','normal in number');set('bxEryMat','');set('bxEryMorph','mainly normoblastic maturation');set('bxMyeNum','normal in number');set('bxMyeMat','');set('bxMyeMorph','orderly maturation through all stages');set('bxMkNum','normal in number');set('bxMkMorph','mature multilobated forms, scattered singly, with abundant granular cytoplasm and no significant atypia');set('bxMe','approximately 3:1');set('bxBlasts','not increased');set('bxLymph','not identified');set('bxPlasma','not increased');set('trabBone','unremarkable');set('clot','shows similar findings as the core biopsy');set('retic','Reticulin stain shows scattered linear reticulin fibers without significant intersections (MF-0 of 3).');set('trichrome','');}
+function applyNormalBiopsy(cell='40%'){set('bxQuality','adequate for evaluation');set('bxCellPhrase','normocellular for age');set('bxCell',cell);set('bxArch','preserved');set('bxEryNum','normal in number');set('bxEryMat','');set('bxEryMorph','mainly normoblastic maturation');set('bxMyeNum','normal in number');set('bxMyeMat','');set('bxMyeMorph','orderly maturation through all stages');set('bxMkNum','normal in number');set('bxMkMorph','mature multilobated forms, scattered singly, with abundant granular cytoplasm and no significant atypia');set('bxMe','approximately 3:1');set('bxBlasts','not increased');set('bxLymph','scattered small lymphocytes without aggregates');set('bxPlasma','not increased');set('bxMast','rare scattered mast cells');set('trabBone','unremarkable');set('clot','shows similar findings as the core biopsy');set('retic','Reticulin stain shows scattered linear reticulin fibers without significant intersections (MF-0 of 3).');set('trichrome','');}
 function applyBasicIhc(){set('ihcCd34','highlights no increase in blasts (<5%)');set('ihcCd117','highlights scattered immature myeloid precursors and mast cells');set('ihcCd61','highlights scattered megakaryocytes');set('ihcCd138','highlights scattered plasma cells without increase');set('ihcKappaLambda','shows no definite light chain restriction');set('ihcCd3','highlights scattered small T cells');set('ihcCd20','highlights scattered small B cells');}
 function loadNormal(){clearAll();applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('40%');applyBasicIhc();set('dx1','Normocellular bone marrow with trilineage hematopoiesis, no increase in blasts.');set('dx2','No morphologic or immunophenotypic evidence of a hematologic neoplasm.');set('pbdx','No significant morphologic abnormality.');set('commentType','normal');generateReport();}
 function loadAnemiaNegativeMDS(){clearAll();applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('XX%');applyBasicIhc();set('dx1','Moderately hypercellular bone marrow with mild erythroid-predominant maturing trilineage hematopoiesis.');set('dx2','No morphologic or immunophenotypic evidence of a hematologic neoplasm.');set('pbdx','Normocytic anemia.');set('commentType','nonspecific');set('customComment','The overall findings are of a moderately hypercellular bone marrow with mildly erythroid-predominant maturing hematopoiesis. There is no evidence of a myeloid or lymphoid neoplasm in this biopsy. In the absence of significant dysplasia or MDS-defining cytogenetics, other causes of anemia such as nutritional deficiencies, drugs/medications, chronic inflammatory states, infection, liver disease and renal disease should be excluded. Clinical correlation is advised.');set('pbRbc','Normocytic anemia with no significant anisopoikilocytosis.');set('pbPlt','Increased in number with unremarkable morphology.');set('aspCell','hypercellular for age');set('aspEryNum','mildly increased');set('aspMyeNum','mildly decreased');set('bxCellPhrase','hypercellular for age');set('bxEryNum','mildly increased');set('bxMyeNum','mildly decreased');set('retic','Reticulin stain shows a loose network of reticulin fibers with numerous intersections, particularly in perivascular areas (MF-1 of 3).');generateReport();}
