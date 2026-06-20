@@ -161,7 +161,7 @@
         <div><label>Blasts</label><textarea id="bxBlasts"></textarea></div>
         <div><label>Lymphocytes</label><textarea id="bxLymph"></textarea></div>
         <div><label>Plasma cells</label><textarea id="bxPlasma"></textarea></div>
-        <div><label>Trabecular bone</label><select id="trabBone"><option></option><option>normal</option><option>focally thinned</option><option>thinned</option><option>sparse</option></select></div>
+        <div><label>Bony Trabeculae</label><select id="trabBone"><option></option><option>normal</option><option>focally thinned</option><option>thinned</option><option>sparse</option></select></div>
       </div>
       <div class="row"><label>Clot section</label><select id="clot"><option></option><option>shows similar findings as the core biopsy</option><option>primarily shows peripheral blood</option><option>shows limited marrow elements</option></select></div>
       <div class="row"><label>Clot other</label><textarea id="clotOther"></textarea></div>
@@ -391,7 +391,7 @@ function generateReport(){
   if(v('bxBlasts')) r += 'Blasts: '+sent(v('bxBlasts'))+'\n';
   if(v('bxLymph')) r += 'Lymphoid aggregates: '+sent(v('bxLymph'))+'\n';
   if(v('bxPlasma')) r += 'Plasma cells: '+sent(v('bxPlasma'))+'\n';
-  if(v('trabBone')) r += 'Trabecular bone: '+sent(v('trabBone'))+'\n';
+  if(v('trabBone')) r += 'Bony Trabeculae: '+sent(v('trabBone'))+'\n';
   if(v('clot')||v('clotOther')) r += 'Clot section: '+sent(v('clot')||v('clotOther'))+'\n';
   r += '\n';
   r += section('ANCILLARY STUDIES');
