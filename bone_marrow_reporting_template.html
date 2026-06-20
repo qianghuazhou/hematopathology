@@ -70,20 +70,20 @@
   <div class="inner">
     <div class="row"><label>CBC Date</label><input type="date" id="cbcDate"></div>
     <div class="grid3">
-      <div><label>Hb</label><input id="hb"></div>
-      <div><label>WBC</label><input id="wbc"></div>
-      <div><label>Platelets</label><input id="plt"></div>
+      <div><label>Hb (g/L)</label><input id="hb"></div>
+      <div><label>WBC (x10E12/L)</label><input id="wbc"></div>
+      <div><label>Platelets (x10E9/L)</label><input id="plt"></div>
 
-      <div><label>MCV</label><input id="mcv"></div>
-      <div><label>RDW</label><input id="rdw"></div>
-      <div><label>RBC</label><input id="rbc"></div>
+      <div><label>MCV (fL)</label><input id="mcv"></div>
+      <div><label>RDW (%)</label><input id="rdw"></div>
+      <div><label>RBC (x10E9/L)</label><input id="rbc"></div>
 
-      <div><label>Neut abs</label><input id="neutAbs"></div>
-      <div><label>Lymph abs</label><input id="lymphAbs"></div>
-      <div><label>Mono abs</label><input id="monoAbs"></div>
+      <div><label>Neutrophils (x10E9/L)</label><input id="neutAbs"></div>
+      <div><label>Lymphocytes (x10E9/L)</label><input id="lymphAbs"></div>
+      <div><label>Monocytes (x10E9/L)</label><input id="monoAbs"></div>
 
-      <div><label>Eos abs</label><input id="eosAbs"></div>
-      <div><label>Baso abs</label><input id="basoAbs"></div>
+      <div><label>Eosinophils (x10E9/L)</label><input id="eosAbs"></div>
+      <div><label>Basophils (x10E9/L)</label><input id="basoAbs"></div>
     </div>
 
     <div class="sectionTitle">Peripheral blood smear</div>
@@ -345,11 +345,18 @@ function generateReport(){
   let cmt=v('customComment') || generateComment();
   if(cmt || checked('reviewedQA')){r += section('COMMENT'); if(cmt) r += cmt.trim()+'\n'; if(checked('reviewedQA')) r += 'Selected slides reviewed with a second hematopathologist as part of quality assurance activities.\n';}
   r += section('MICROSCOPIC DESCRIPTION');
- r += 'PERIPHERAL BLOOD COUNT (Date: '+(v('cbcDate')||'[]')+'):\n';
-r += 'Hb '+(v('hb')||'[]')+' g/L, WBC '+(v('wbc')||'[]')+' E9/L, Platelets '+(v('plt')||'[]')+' E9/L,\n';
-r += 'MCV '+(v('mcv')||'[]')+' fL, RDW '+(v('rdw')||'[]')+'%, RBC '+(v('rbc')||'[]')+' E12/L,\n';
-r += 'Neutrophils '+(v('neutAbs')||'[]')+' E9/L, Lymphocytes '+(v('lymphAbs')||'[]')+' E9/L, Monocytes '+(v('monoAbs')||'[]')+' E9/L,\n';
-r += 'Eosinophils '+(v('eosAbs')||'[]')+' E9/L, Basophils '+(v('basoAbs')||'[]')+' E9/L.\n\n';
+  r += 'PERIPHERAL BLOOD COUNT (Date: '+(v('cbcDate')||'[]')+'):\n';
+  r += 'Hb:\t'+(v('hb')||'[]')+' g/L\n';
+  r += 'WBC:\t'+(v('wbc')||'[]')+' x10E12/L\n';
+  r += 'Platelets:\t'+(v('plt')||'[]')+' x10E9/L\n';
+  r += 'MCV:\t'+(v('mcv')||'[]')+' fL\n';
+  r += 'RDW:\t'+(v('rdw')||'[]')+' %\n';
+  r += 'RBC:\t'+(v('rbc')||'[]')+' x10E9/L\n';
+  r += 'Neutrophils:\t'+(v('neutAbs')||'[]')+' x10E9/L\n';
+  r += 'Lymphocytes:\t'+(v('lymphAbs')||'[]')+' x10E9/L\n';
+  r += 'Monocytes:\t'+(v('monoAbs')||'[]')+' x10E9/L\n';
+  r += 'Eosinophils:\t'+(v('eosAbs')||'[]')+' x10E9/L\n';
+  r += 'Basophils:\t'+(v('basoAbs')||'[]')+' x10E9/L\n\n';
   r += 'PERIPHERAL BLOOD SMEAR:\n';
   r += finding('RBC', v('pbRbc'));
   r += finding('WBC', v('pbWbc'));
