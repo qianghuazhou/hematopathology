@@ -104,7 +104,7 @@
       <div class="sectionTitle">Differential count (%)</div>
       <div class="grid3">
         <div><label>Blasts</label><input id="dBlast"></div><div><label>Promyelocytes</label><input id="dPro"></div><div><label>Myelo/Meta</label><input id="dMyeloMeta"></div>
-        <div><label>Segs/Bands</label><input id="dSeg"></div><div><label>Erythroid</label><input id="dEry"></div><div><label>Lymphocytes</label><input id="dLymph"></div>
+        <div><label>Segs/Bands</label><input id="dSeg"></div><div><label>Erythroids</label><input id="dEry"></div><div><label>Lymphocytes</label><input id="dLymph"></div>
         <div><label>Monocytes</label><input id="dMono"></div><div><label>Eosinophils</label><input id="dEos"></div><div><label>Plasma cells</label><input id="dPlasma"></div>
         <div><label>Basophils</label><input id="dBaso"></div><div><label>Mast cells</label><input id="dMast"></div><div><label>Other</label><input id="dOther"></div>
       </div>
@@ -434,11 +434,11 @@ function generateReport(){
   r += 'BONE MARROW ASPIRATE:\n';
   if(v('aspQuality')) r += 'Quality: '+sent(v('aspQuality'))+'\n';
   if(v('aspCell')) r += 'Cellularity: '+sent(v('aspCell'))+'\n';
-  let diffs=[['Blasts',v('dBlast')],['Promyelocytes',v('dPro')],['Myelo/Meta',v('dMyeloMeta')],['Segs/Bands',v('dSeg')],['Erythroid',v('dEry')],['Lymphocytes',v('dLymph')],['Monocytes',v('dMono')],['Eosinophils',v('dEos')],['Basophils',v('dBaso')],['Plasma cells',v('dPlasma')],['Mast cells',v('dMast')],['Other',v('dOther')]].filter(x=>x[1]);
+  let diffs=[['Blasts',v('dBlast')],['Promyelocytes',v('dPro')],['Myelo/Meta',v('dMyeloMeta')],['Segs/Bands',v('dSeg')],['Erythroids',v('dEry')],['Lymphocytes',v('dLymph')],['Monocytes',v('dMono')],['Eosinophils',v('dEos')],['Basophils',v('dBaso')],['Plasma cells',v('dPlasma')],['Mast cells',v('dMast')],['Other',v('dOther')]].filter(x=>x[1]);
   if(diffs.length) r += 'Differential count: '+diffs.map(x=>x[0]+' '+x[1]+'%').join(', ')+'.\n';
   if(v('meRatio')) r += 'M:E ratio: '+v('meRatio')+'.\n';
   r += lineage('Megakaryocytes',[v('aspMkNum'),v('aspMkMorph')]);
-  r += lineage('Erythroid',[v('aspEryNum'),v('aspEryMat'),v('aspEryMorph')]);
+  r += lineage('Erythroids',[v('aspEryNum'),v('aspEryMat'),v('aspEryMorph')]);
   r += lineage('Granulocytes',[v('aspMyeNum'),v('aspMyeMat'),v('aspMyeMorph')]);
   if(v('aspBlasts')) r += 'Blasts: '+sent(v('aspBlasts'))+'\n';
   let other=[]; if(v('aspLymph')) other.push('Lymphocytes '+normPart(v('aspLymph'))); if(v('aspPlasma')) other.push('Plasma cells '+normPart(v('aspPlasma'))); if(v('aspMast')) other.push('Mast cells '+normPart(v('aspMast')));
@@ -452,7 +452,7 @@ function generateReport(){
   if(v('bxArch')) r += 'Architecture: '+sent(v('bxArch'))+'\n';
   if(v('bxHematopoiesis')) r += 'Hematopoiesis: '+sent(v('bxHematopoiesis'))+'\n';
   r += lineage('Megakaryocytes',[v('bxMkNum'),v('bxMkMorph')]);
-  r += lineage('Erythroid',[v('bxEryNum'),v('bxEryMat'),v('bxEryMorph')]);
+  r += lineage('Erythroids',[v('bxEryNum'),v('bxEryMat'),v('bxEryMorph')]);
   r += lineage('Granulocytes',[v('bxMyeNum'),v('bxMyeMat'),v('bxMyeMorph')]);
   if(v('bxMe')) r += 'M:E ratio: '+v('bxMe')+'.\n';
   if(v('bxBlasts')) r += 'Blasts: '+sent(v('bxBlasts'))+'\n';
