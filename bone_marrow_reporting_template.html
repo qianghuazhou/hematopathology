@@ -419,7 +419,7 @@
 <label class="pillOpt"><input type="radio" name="bxMast__radio" data-pill-single="bxMast" value="mast cell aggregates are present"><span>Mast cell aggregates</span></label>
 <label class="pillOpt"><input type="radio" name="bxMast__radio" data-pill-single="bxMast" value="cannot be assessed"><span>Cannot assess</span></label>
 <input type="hidden" id="bxMast"></div></div>
-        <div><label>Trabecular bone</label><div class="pillGrid" data-pill-wrap="trabBone"><label class="pillOpt"><input type="radio" name="trabBone__radio" data-pill-single="trabBone" value="normal"><span>Normal</span></label>
+        <div><label>Bony trabeculae</label><div class="pillGrid" data-pill-wrap="trabBone"><label class="pillOpt"><input type="radio" name="trabBone__radio" data-pill-single="trabBone" value="normal"><span>Normal</span></label>
 <label class="pillOpt"><input type="radio" name="trabBone__radio" data-pill-single="trabBone" value="unremarkable"><span>Unremarkable</span></label>
 <label class="pillOpt"><input type="radio" name="trabBone__radio" data-pill-single="trabBone" value="focally thinned"><span>Focally thinned</span></label>
 <label class="pillOpt"><input type="radio" name="trabBone__radio" data-pill-single="trabBone" value="thinned"><span>Thinned</span></label>
@@ -855,7 +855,7 @@ function generateReport(){
   if(v('bxLymph')) r += 'Lymphocytes/lymphoid aggregates: '+sent(normPart(v('bxLymph')))+'\n';
   if(v('bxPlasma')) r += 'Plasma cells: '+sent(normPart(v('bxPlasma')))+'\n';
   if(v('bxMast')) r += 'Mast cells: '+sent(normPart(v('bxMast')))+'\n';
-  if(v('trabBone')) r += 'Trabecular bone: '+sent(v('trabBone'))+'\n';
+  if(v('trabBone')) r += 'Bony trabeculae: '+sent(v('trabBone'))+'\n';
   if(v('bxOther')) r += 'Other: '+sent(v('bxOther'))+'\n';
   if(v('clot')||v('clotOther')) r += 'Clot section: '+sent(v('clot')||v('clotOther'))+'\n';
   r += '\n';
