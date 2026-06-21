@@ -67,20 +67,6 @@
 <main>
 <section>
 
-  <details class="card" open>
-    <summary>Clinical / Diagnosis</summary>
-    <div class="inner">
-      <div class="row"><label>Diagnosis line 1</label><textarea id="dx1" placeholder="e.g. Normocellular bone marrow with trilineage hematopoiesis, no increase in blasts."></textarea></div>
-      <div class="row"><label>Diagnosis line 2</label><textarea id="dx2"></textarea></div>
-      <div class="row"><label>Peripheral blood dx</label><textarea id="pbdx"></textarea></div>
-      <div class="checkboxRow">
-        <label><input type="checkbox" id="pendingCyto"> Pending cytogenetic studies</label>
-        <label><input type="checkbox" id="pendingMol"> Pending molecular studies</label>
-        <label><input type="checkbox" id="reviewedQA"> Selected slides reviewed/QA</label>
-      </div>
-    </div>
-  </details>
-
 <details class="card" open>
   <summary>CBC / Peripheral Blood</summary>
   <div class="inner">
@@ -495,21 +481,16 @@
   </details>
 
   <details class="card" open>
-    <summary>Comment / Addendum Library</summary>
+    <summary>Clinical / Diagnosis</summary>
     <div class="inner">
-      <div class="row"><label>Comment type</label><select id="commentType">
-        <option></option>
-        <option value="normal">Normal marrow</option>
-        <option value="nonspecific">Nonspecific cytopenia / reactive differential</option>
-        <option value="mDS">Suspicious/supportive of MDS</option>
-        <option value="ccus">CCUS</option>
-        <option value="lymphoma">Lymphoma involvement</option>
-        <option value="plasma">Plasma cell neoplasm</option>
-        <option value="posttx">Post-treatment marrow</option>
-      </select></div>
-      <div class="row"><label>Custom comment</label><textarea id="customComment" style="min-height:120px"></textarea></div>
-      <div class="sectionTitle">Addendum</div>
-      <div class="row"><label>Addendum results</label><textarea id="addendum" placeholder="Karyotype/FISH/NGS result and whether diagnosis remains unchanged."></textarea></div>
+      <div class="row"><label>Diagnosis line 1</label><textarea id="dx1" placeholder="e.g. Normocellular bone marrow with trilineage hematopoiesis, no increase in blasts."></textarea></div>
+      <div class="row"><label>Diagnosis line 2</label><textarea id="dx2"></textarea></div>
+      <div class="row"><label>Peripheral blood dx</label><textarea id="pbdx"></textarea></div>
+      <div class="checkboxRow">
+        <label><input type="checkbox" id="pendingCyto"> Pending cytogenetic studies</label>
+        <label><input type="checkbox" id="pendingMol"> Pending molecular studies</label>
+        <label><input type="checkbox" id="reviewedQA"> Selected slides reviewed/QA</label>
+      </div>
     </div>
   </details>
 
@@ -533,6 +514,27 @@
     </div>
     <div class="small">Buttons are placed here at the end of the entry form for one-click generation after data entry.</div>
   </div>
+
+  <details class="card" open>
+    <summary>Comment / Addendum Library</summary>
+    <div class="inner">
+      <div class="row"><label>Comment type</label><select id="commentType">
+        <option></option>
+        <option value="normal">Normal marrow</option>
+        <option value="nonspecific">Nonspecific cytopenia / reactive differential</option>
+        <option value="mDS">Suspicious/supportive of MDS</option>
+        <option value="ccus">CCUS</option>
+        <option value="lymphoma">Lymphoma involvement</option>
+        <option value="plasma">Plasma cell neoplasm</option>
+        <option value="posttx">Post-treatment marrow</option>
+      </select></div>
+      <div class="row"><label>Custom comment</label><textarea id="customComment" style="min-height:120px"></textarea></div>
+      <div class="sectionTitle">Addendum</div>
+      <div class="row"><label>Addendum results</label><textarea id="addendum" placeholder="Karyotype/FISH/NGS result and whether diagnosis remains unchanged."></textarea></div>
+    </div>
+  </details>
+
+
 </section>
 
 <section>
@@ -744,7 +746,7 @@ function clean(txt){return (txt||'').trim().replace(/\s+/g,' ');}
 function strip(txt){return clean(txt).replace(/[.;,\s]+$/,'');}
 function cap(txt){txt=clean(txt);return txt?txt.charAt(0).toUpperCase()+txt.slice(1):'';}
 function sent(txt){txt=cap(strip(txt));return txt?txt+'.':'';}
-function normPart(txt){txt=strip(txt);if(!txt)return '';txt=txt.replace(/^are\s+/i,'').replace(/^is\s+/i,'').replace(/^show(s)?\s+/i,'').replace(/^with\s+/i,'');const reps=[[/^proportionately normal in number$/i,'normal in number'],[/^present in normal numbers$/i,'normal in number'],[/^proportionately increased$/i,'increased'],[/^proportionately decreased$/i,'decreased'],[/^markedly proportionately increased$/i,'markedly increased'],[/^markedly proportionately decreased$/i,'markedly decreased'],[/^moderately relatively increased$/i,'moderately increased'],[/^moderately relatively decreased$/i,'moderately decreased'],[/^mildly relatively increased$/i,'mildly increased'],[/^mildly relatively decreased$/i,'mildly decreased'],[/^show proper\/full-spectrum maturation$/i,'orderly maturation through all stages'],[/^proper\/full-spectrum maturation$/i,'orderly maturation through all stages'],[/^show full-spectrum maturation$/i,'orderly maturation through all stages'],[/^full-spectrum maturation$/i,'orderly maturation through all stages'],[/^unremarkable morphology$/i,'morphologically unremarkable'],[/^show no significant abnormalities$/i,'morphologically unremarkable'],[/^predominantly mature multilobated forms/i,'mature multilobated forms']];for(const [re,rep] of reps){txt=txt.replace(re,rep);}return txt;}
+function normPart(txt){txt=strip(txt);if(!txt)return '';txt=txt.replace(/^are\s+/i,'').replace(/^is\s+/i,'').replace(/^show(s)?\s+/i,'').replace(/^with\s+/i,'');const reps=[[/^contain adequate cellular marrow particles$/i,'adequate with numerous spicules'],[/^rare scattered mast cells$/i,'rare scattered forms'],[/^rare scattered blasts$/i,'rare scattered blasts'],[/^proportionately normal in number$/i,'normal in number'],[/^present in normal numbers$/i,'normal in number'],[/^proportionately increased$/i,'increased'],[/^proportionately decreased$/i,'decreased'],[/^markedly proportionately increased$/i,'markedly increased'],[/^markedly proportionately decreased$/i,'markedly decreased'],[/^moderately relatively increased$/i,'moderately increased'],[/^moderately relatively decreased$/i,'moderately decreased'],[/^mildly relatively increased$/i,'mildly increased'],[/^mildly relatively decreased$/i,'mildly decreased'],[/^show proper\/full-spectrum maturation$/i,'orderly maturation through all stages'],[/^proper\/full-spectrum maturation$/i,'orderly maturation through all stages'],[/^show full-spectrum maturation$/i,'orderly maturation through all stages'],[/^full-spectrum maturation$/i,'orderly maturation through all stages'],[/^unremarkable morphology$/i,'morphologically unremarkable'],[/^show no significant abnormalities$/i,'morphologically unremarkable'],[/^predominantly mature multilobated forms/i,'mature multilobated forms']];for(const [re,rep] of reps){txt=txt.replace(re,rep);}return txt;}
 function lineage(label,parts){let arr=parts.map(normPart).filter(Boolean);if(!arr.length)return '';let out=[];for(const p of arr){if(out.length&&/^(including|with|and)\b/i.test(p))out[out.length-1]+=', '+p.replace(/^with\s+/i,'');else out.push(p);}return label+': '+cap(out.join('; '))+'.\n';}
 function finding(label,txt){txt=sent(txt);return txt?label+': '+txt+'\n':'';}
 function ironLine(store,ring){store=strip(store);ring=strip(ring);if(!store&&!ring)return '';let out='Iron: '+cap(store||'***')+'.';if(ring){if(/^(not identified|not seen|absent|none)$/i.test(ring))out+=' No ring sideroblasts identified.';else out+=' Ring sideroblasts '+ring+'.';}return out+'\n';}
@@ -821,12 +823,12 @@ function generateReport(){
   if(!v('pbRbc')&&!v('pbWbc')&&!v('pbPlt')&&!v('pbOther')) r += 'RBC: ***\nWBC: ***\nPLT: ***\n';
   r += '\n';
   r += 'BONE MARROW ASPIRATE:\n';
-  if(v('aspQuality')) r += 'Quality: '+sent(v('aspQuality'))+'\n';
+  if(v('aspQuality')) r += 'Quality: '+sent(normPart(v('aspQuality')))+'\n';
   if(v('aspCell')) r += 'Cellularity: '+sent(v('aspCell'))+'\n';
   r += lineageWithExtras('Megakaryopoiesis',[v('aspMkNum'),v('aspMkMorph')],['aspMkMorphOther'],'aspMkDysExtent');
   r += lineageWithExtras('Erythropoiesis',[v('aspEryNum'),v('aspEryMat'),v('aspEryMorph')],['aspEryMorphOther'],'aspEryDysExtent');
   r += lineageWithExtras('Granulopoiesis',[v('aspMyeNum'),v('aspMyeMat'),v('aspMyeMorph')],['aspMyeMorphOther'],'aspMyeDysExtent');
-  if(v('aspBlasts')) r += 'Blasts: '+sent(v('aspBlasts'))+'\n';
+  if(v('aspBlasts')) r += 'Blasts: '+sent(normPart(v('aspBlasts')))+'\n';
   let other=[]; if(v('aspLymph')) other.push('Lymphocytes '+normPart(v('aspLymph'))); if(v('aspPlasma')) other.push('Plasma cells '+normPart(v('aspPlasma'))); if(v('aspMast')) other.push('Mast cells '+normPart(v('aspMast')));
   if(other.length) r += 'Other cells: '+cap(other.join('; '))+'.\n';
   if(v('aspOther')) r += 'Other: '+sent(v('aspOther'))+'\n';
@@ -845,15 +847,14 @@ function generateReport(){
   let q=[]; if(v('bxLength')) q.push(v('bxLength')); if(v('bxQuality')) q.push(normPart(v('bxQuality'))); if(q.length) r += 'Quality/length: '+sent(q.join(', '))+'\n';
   if(v('bxCellPhrase') || v('bxCell')) r += 'Cellularity: '+sent((v('bxCellPhrase')||'***')+(v('bxCell')?' (~'+v('bxCell')+')':''))+'\n';
   if(v('bxArch')) r += 'Architecture: '+sent(v('bxArch'))+'\n';
-  if(v('bxHematopoiesis')) r += 'Hematopoiesis: '+sent(v('bxHematopoiesis'))+'\n';
   r += lineageWithExtras('Megakaryopoiesis',[v('bxMkNum'),v('bxMkMorph')],['bxMkMorphOther'],'bxMkDysExtent');
   r += lineageWithExtras('Erythropoiesis',[v('bxEryNum'),v('bxEryMat'),v('bxEryMorph')],['bxEryMorphOther'],'bxEryDysExtent');
   r += lineageWithExtras('Granulopoiesis',[v('bxMyeNum'),v('bxMyeMat'),v('bxMyeMorph')],['bxMyeMorphOther'],'bxMyeDysExtent');
   if(v('bxMe')) r += 'M:E ratio: '+v('bxMe')+'.\n';
-  if(v('bxBlasts')) r += 'Blasts: '+sent(v('bxBlasts'))+'\n';
-  if(v('bxLymph')) r += 'Lymphocytes/lymphoid aggregates: '+sent(v('bxLymph'))+'\n';
-  if(v('bxPlasma')) r += 'Plasma cells: '+sent(v('bxPlasma'))+'\n';
-  if(v('bxMast')) r += 'Mast cells: '+sent(v('bxMast'))+'\n';
+  if(v('bxBlasts')) r += 'Blasts: '+sent(normPart(v('bxBlasts')))+'\n';
+  if(v('bxLymph')) r += 'Lymphocytes/lymphoid aggregates: '+sent(normPart(v('bxLymph')))+'\n';
+  if(v('bxPlasma')) r += 'Plasma cells: '+sent(normPart(v('bxPlasma')))+'\n';
+  if(v('bxMast')) r += 'Mast cells: '+sent(normPart(v('bxMast')))+'\n';
   if(v('trabBone')) r += 'Trabecular bone: '+sent(v('trabBone'))+'\n';
   if(v('bxOther')) r += 'Other: '+sent(v('bxOther'))+'\n';
   if(v('clot')||v('clotOther')) r += 'Clot section: '+sent(v('clot')||v('clotOther'))+'\n';
