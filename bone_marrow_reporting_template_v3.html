@@ -372,13 +372,163 @@
 <label class="pillOpt"><input type="radio" name="aspMyeMat__radio" data-pill-single="aspMyeMat" value="show dysplastic maturation"><span>Dysplastic</span></label>
 <input type="hidden" id="aspMyeMat"></div></div>
           <div><label>Morphology</label><div class="pillGrid" data-pill-wrap="aspMyeMorph"><label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="orderly maturation through all stages"><span>Orderly maturation</span></label>
-            <label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="reduced maturing granulopoiesis"><span>Reduced maturing granulopoiesis</span></label>
+WHO5	
+Dyserythropoiesis	 
+ 	Nuclear	Budding
+Internuclear bridging
+Multinuclearity
+Megaloblastic changes
+Karyorrhexis
+ 	Cytoplasmic	Ring sideroblasts
+Vacuolization
+PAS positivity
+Dysgranulopoiesis	 
+ 	Nuclear	Hyposegmentation (pseudo–Pelger–Huët)
+Hypersegmentation
+ 	Cytoplasmic	Hypogranularity
+Pseudo–Chédiak–Higashi granules
+Small size
+Auer rods
+Dysmegakaryopoiesis	 
+ 	Nuclear	Hypolobation in megakaryocytes of all sizes
+Multinucleation (multiple widely separated nuclei)
+ 	Cytoplasmic	Micromegakaryocytes
+
+Based on the WHO-HAEM5 approach, dysplasia is generally categorized by lineage and then by specific morphologic abnormalities:
+
+Dyserythropoiesis
+
+Nuclear abnormalities
+
+Nuclear budding
+Internuclear bridging
+Multinuclearity
+Megaloblastoid changes
+Karyorrhexis
+Irregular nuclear contours
+
+Cytoplasmic abnormalities
+
+Ring sideroblasts (iron stain)
+Cytoplasmic vacuolization
+PAS positivity/block positivity
+Asynchrony between nuclear and cytoplasmic maturation
+Dysgranulopoiesis
+
+Nuclear abnormalities
+
+Hyposegmentation (pseudo-Pelger-Huët anomaly)
+Hypersegmentation
+Abnormal chromatin clumping
+
+Cytoplasmic abnormalities
+
+Hypogranularity/agranularity
+Pseudo-Chédiak-Higashi granules
+Abnormally small neutrophils
+Auer rods
+Cytoplasmic vacuolization
+Dysmegakaryopoiesis
+
+Nuclear abnormalities
+
+Hypolobation (including monolobated forms)
+Multinucleation (widely separated nuclei)
+Multiple distinct nuclei
+Non-lobated nuclei
+
+Cell size abnormalities
+
+Micromegakaryocytes (most specific finding)
+Small mononuclear megakaryocytes
+Most diagnostically useful WHO5 dysplastic features
+Lineage	Most specific findings
+Erythroid	Nuclear budding, internuclear bridging, multinuclearity, ring sideroblasts
+Granulocytic	Pseudo-Pelger-Huët cells, marked hypogranularity, pseudo-Chédiak-Higashi granules
+Megakaryocytic	Micromegakaryocytes, hypolobated megakaryocytes, multiple separated nuclei
+Practical reporting template
+
+Dyserythropoiesis: Nuclear budding, multinuclearity, and occasional megaloblastoid change are identified. Ring sideroblasts account for XX% of erythroid precursors.
+
+Dysgranulopoiesis: Hypogranular neutrophils with occasional pseudo-Pelger-Huët forms are present.
+
+Dysmegakaryopoiesis: Frequent small hypolobated megakaryocytes (micromegakaryocytes) and megakaryocytes with multiple separated nuclei are identified.
+
+For MDS reporting, I would recommend limiting selectable dysplastic features in your bone marrow HTML tool to the WHO5-recognized abnormalities above, grouped under nuclear and cytoplasmic categories, with an additional cell size category for megakaryocytes. This keeps the tool aligned with current WHO terminology and avoids over-calling nonspecific findings.
+
+            <label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="megaloblastoid change"><span>Megaloblastoid change</span></label>
+            <label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="nuclear budding"><span>Nuclear budding</span></label>
+            <label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="irregular nuclear contours"><span>Irregular nuclear contours</span></label>
+            <label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="binucleation/multinuclearity"><span>Binucleation/multinuclearity</span></label>
+            <label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="cytoplasmic vacuolation"><span>Cytoplasmic vacuolation</span></label>
+            <label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="dysplastic features"><span>Dysplastic features</span></label>
+            <label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="ring sideroblasts"><span>Ring sideroblasts</span></label>    change the description according the who table
+
+I would revise the erythroid dysplasia section to more closely reflect WHO-HAEM5 terminology and remove the nonspecific "dysplastic features" option:
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="nuclear budding"><span>Nuclear budding</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="internuclear bridging"><span>Internuclear bridging</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="multinuclearity"><span>Multinuclearity</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="megaloblastoid changes"><span>Megaloblastoid changes</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="karyorrhexis"><span>Karyorrhexis</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="cytoplasmic vacuolization"><span>Cytoplasmic vacuolization</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="ring sideroblasts"><span>Ring sideroblasts</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspEryMorph" value="PAS positivity"><span>PAS positivity</span></label>
+Remove
+irregular nuclear contours
+dysplastic features
+
+because:
+
+Irregular nuclear contours are seen but are not among the classic WHO-listed dysplastic features commonly quantified for MDS diagnosis.
+Dysplastic features is too nonspecific and should not be selectable if the goal is morphology-driven reporting.
+Suggested display order
+
+Nuclear
+
+Nuclear budding
+Internuclear bridging
+Multinuclearity
+Megaloblastoid changes
+Karyorrhexis
+
+Cytoplasmic
+6. Ring sideroblasts
+7. Cytoplasmic vacuolization
+8. PAS positivity
+
+This mirrors the WHO5 classification and would integrate well into a structured MDS bone marrow reporting tool.
+
+ <label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="reduced maturing granulopoiesis"><span>Reduced maturing granulopoiesis</span></label>
             <label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="hypogranulation"><span>Hypogranulation</span></label>
             <label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="hyposegmentation/pseudo-Pelger-Huet forms"><span>Hyposegmentation/pseudo-Pelger-Huet</span></label>
             <label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="hypersegmentation"><span>Hypersegmentation</span></label>
             <label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="dysplastic features"><span>Dysplastic features</span></label>
             <label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="Dohle bodies"><span>Dohle bodies</span></label>
             <label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="pseudo-Chediak-Higashi granules"><span>Pseudo-Chediak-Higashi granules</span></label>
+
+For WHO-HAEM5-aligned dysgranulopoiesis, I would simplify and standardize the options as follows:
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="hypogranularity"><span>Hypogranularity</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="hyposegmentation (pseudo-Pelger-Huet anomaly)"><span>Hyposegmentation (Pseudo-Pelger-Huet)</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="hypersegmentation"><span>Hypersegmentation</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="pseudo-Chediak-Higashi granules"><span>Pseudo-Chediak-Higashi granules</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="abnormally small neutrophils"><span>Abnormally small neutrophils</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="Auer rods"><span>Auer rods</span></label>
+
+<label class="pillOpt"><input type="checkbox" data-pill-group="aspMyeMorph" value="cytoplasmic vacuolization"><span>Cytoplasmic vacuolization</span></label>
             <input type="hidden" id="aspMyeMorph">
           </div></div>
         </div>
