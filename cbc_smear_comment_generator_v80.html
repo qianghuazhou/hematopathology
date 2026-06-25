@@ -10,7 +10,7 @@
 </style>
 </head>
 <body>
-<header><h1>CBC + Peripheral Smear Comment Generator v80</h1><p>Single-output interpretive CBC/smear comment generator. Comments focus on high-level diagnostic reasoning and action-oriented follow-up; morphology is not repeated and generic boilerplate is removed.</p></header>
+<header><h1>CBC + Peripheral Smear Comment Generator v80</h1><p>Pilot project</p></header>
 <main><div class="layout">
 <div class="card"><h2>Input</h2>
 <div class="grid3">
@@ -39,7 +39,7 @@
 <div class="card out"><h2>Output</h2>
 <div class="panel"><div class="gt">Optional custom text</div><textarea id="custom" rows="3" placeholder="Add optional clinical context or extra comment..."></textarea></div>
 <div class="btns"><button onclick="clearAll()">Clear</button><button class="primary" onclick="generate()">Generate</button></div>
-<div style="height:10px"></div><label>Interpretive comment</label><textarea id="final" readonly></textarea><div class="btns"><button class="primary" onclick="copyText('final')">Copy comment</button></div><p class="hint">ASCII-safe output. Interpretive reasoning only; no separate morphology description and no generic boilerplate.</p><div class="warn">Design rule: selected morphology drives an interpretive comment, but the output does not repeat the technologist morphology description. Pattern checkboxes are optional and should be selected only when the pattern is clear.</div></div>
+<div style="height:10px"></div><label>Interpretive comment</label><textarea id="final" readonly></textarea><div class="btns"><button class="primary" onclick="copyText('final')">Copy comment</button>
 </div></main>
 <script>
 const $=id=>document.getElementById(id); const on=id=>$(id)&&$(id).checked;
