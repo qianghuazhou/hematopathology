@@ -242,7 +242,7 @@
 </head>
 <body>
 <header>
-  <h1>Bone Marrow Report and Amendment Template <span class="pill">v4 WHO5 reformat</span></h1>
+  <h1>Bone Marrow Report and Amendment Template <span class="pill">v4 WHO5 reformat fixed</span></h1>
 </header>
 
 <main>
@@ -427,7 +427,6 @@
       <div class="grid3">
         <div><label>Total cells counted</label><input id="dTotal" placeholder="e.g. 500"></div>
         <div><label>M:E ratio</label><input id="meRatio" placeholder="auto or e.g. 3:1"></div>
-        <div><label>Other count</label><input id="dOther" placeholder="%"></div>
         <div><label>Blasts (%)</label><input id="dBlast"></div>
         <div><label>Promyelocytes (%)</label><input id="dPro"></div>
         <div><label>Myelo/Meta (%)</label><input id="dMyeloMeta"></div>
@@ -729,6 +728,16 @@
 <script>
 function v(id){return (document.getElementById(id)?.value || '').trim();}
 function checked(id){return document.getElementById(id)?.checked;}
+function addMM(x){
+  x = String(x || '').trim();
+  if(!x) return '';
+  return /\bmm\b/i.test(x) ? x : x + ' mm';
+}
+function addPercent(x){
+  x = String(x || '').trim();
+  if(!x) return '';
+  return /%/.test(x) ? x : x + '%';
+}
 function line(txt){return txt && txt.trim()? txt.trim()+"\n" : "";}
 function bullet(txt){return txt && txt.trim()? "- "+txt.trim()+"\n" : "";}
 function section(title){return "\n--------------------------------------------------\n"+title+"\n--------------------------------------------------\n";}
@@ -1012,18 +1021,18 @@ function generateReport(){
   if(v('aspOther')) r += 'Other: '+sent(v('aspOther'))+'\n';
   r += ironLine(v('ironStore'), v('ringSid'));
 
-  let diffs=[['Blasts',v('dBlast')],['Promyelocytes',v('dPro')],['Myelo/Meta',v('dMyeloMeta')],['Segs/Bands',v('dSeg')],['Erythroid',v('dEry')],['Lymphocytes',v('dLymph')],['Monocytes',v('dMono')],['Eosinophils',v('dEos')],['Basophils',v('dBaso')],['Plasma cells',v('dPlasma')],['Mast cells',v('dMast')],['Other',v('dOther')]].filter(x=>x[1]);
+  let diffs=[['Blasts',v('dBlast')],['Promyelocytes',v('dPro')],['Myelo/Meta',v('dMyeloMeta')],['Segs/Bands',v('dSeg')],['Erythroid',v('dEry')],['Lymphocytes',v('dLymph')],['Monocytes',v('dMono')],['Eosinophils',v('dEos')],['Basophils',v('dBaso')],['Plasma cells',v('dPlasma')],['Mast cells',v('dMast')]].filter(x=>x[1]);
   const mer = calcAspirateMERatio();
   if(diffs.length || v('dTotal') || mer){
     r += '\nDIFFERENTIAL COUNT:\n';
     if(v('dTotal')) r += 'Cells counted: '+v('dTotal')+'.\n';
-    if(diffs.length) r += 'Cells: '+diffs.map(x=>x[0]+' '+x[1]+'%').join(', ')+'.\n';
+    if(diffs.length) r += 'Cells: '+diffs.map(x=>x[0]+' '+addPercent(x[1])).join(', ')+'.\n';
     if(mer) r += 'M:E ratio: '+mer+'.\n';
   }
   r += '\n';
   r += 'BONE MARROW CORE BIOPSY:\n';
-  let q=[]; if(v('bxLength')) q.push(v('bxLength')); if(v('bxQuality')) q.push(normPart(v('bxQuality'))); if(q.length) r += 'Quality/length: '+sent(q.join(', '))+'\n';
-  if(v('bxCellPhrase') || v('bxCell')) r += 'Cellularity: '+sent((v('bxCellPhrase')||'***')+(v('bxCell')?' (~'+v('bxCell')+')':''))+'\n';
+  let q=[]; if(v('bxLength')) q.push(addMM(v('bxLength'))); if(v('bxQuality')) q.push(normPart(v('bxQuality'))); if(q.length) r += 'Quality/length: '+sent(q.join(', '))+'\n';
+  if(v('bxCellPhrase') || v('bxCell')) r += 'Cellularity: '+sent((v('bxCellPhrase')||'***')+(v('bxCell')?' (~'+addPercent(v('bxCell'))+')':''))+'\n';
   if(v('bxArch')) r += 'Architecture: '+sent(v('bxArch'))+'\n';
   r += lineageWithExtras('Megakaryopoiesis',[v('bxMkNum'),v('bxMkMorph')],['bxMkMorphOther'],'bxMkDysExtent');
   r += lineageWithExtras('Erythropoiesis',[v('bxEryNum'),v('bxEryMat'),v('bxEryMorph')],['bxEryMorphOther'],'bxEryDysExtent');
