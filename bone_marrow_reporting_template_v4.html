@@ -837,7 +837,6 @@ function normalizeOneTemplateValue(id, value, mode){
   else if(/^increased$|are increased/.test(x)) common.push('are increased','increased');
   if(/cannot be assessed|cannot assess/.test(x)) common.push('cannot be assessed');
   if(/present in expected numbers|expected numbers/.test(x)) common.push('present in expected numbers');
-  if(/scattered small lymphocytes/.test(x)) common.push('scattered small lymphocytes without aggregates');
   if(/reactive lymphoid aggregates/.test(x)) common.push('reactive lymphoid aggregates present');
   if(/atypical lymphoid/.test(x)) common.push('atypical lymphoid cells are present','atypical lymphoid infiltrate present');
   if(/atypical plasma/.test(x)) common.push('atypical plasma cells are present');
