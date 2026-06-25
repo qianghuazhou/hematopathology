@@ -303,7 +303,7 @@
 <label class="pillOpt"><input type="radio" name="aspMkNum__radio" data-pill-single="aspMkNum" value="proportionately increased"><span>Increased</span></label>
 <label class="pillOpt"><input type="radio" name="aspMkNum__radio" data-pill-single="aspMkNum" value="sparse"><span>Sparse</span></label>
 <input type="hidden" id="aspMkNum"></div></div>
-          <div><label>Morphology</label><div class="pillGrid" data-pill-wrap="aspMkMorph"><label class="pillOpt"><input type="checkbox" data-pill-group="aspMkMorph" value="largely normal morphology"><span>Largely normal morphology</span></label>
+          <div><label>Morphology</label><div class="pillGrid" data-pill-wrap="aspMkMorph"><label class="pillOpt"><input type="checkbox" data-pill-group="aspMkMorph" value="normal morphology"><span>Normal morphology</span></label>
 <label class="pillOpt"><input type="checkbox" data-pill-group="aspMkMorph" value="micromegakaryocytes"><span>Micromegakaryocytes</span></label>
 <label class="pillOpt"><input type="checkbox" data-pill-group="aspMkMorph" value="small mononuclear megakaryocytes"><span>Small mononuclear forms</span></label>
 <label class="pillOpt"><input type="checkbox" data-pill-group="aspMkMorph" value="hypolobated megakaryocytes"><span>Hypolobated forms</span></label>
@@ -482,7 +482,7 @@
 <label class="pillOpt"><input type="radio" name="bxMkNum__radio" data-pill-single="bxMkNum" value="decreased/variable"><span>Decreased/variable</span></label>
 <label class="pillOpt"><input type="radio" name="bxMkNum__radio" data-pill-single="bxMkNum" value="rare"><span>Rare</span></label>
 <input type="hidden" id="bxMkNum"></div></div>
-          <div><label>Morphology</label><div class="pillGrid" data-pill-wrap="bxMkMorph"><label class="pillOpt"><input type="checkbox" data-pill-group="bxMkMorph" value="largely normal morphology"><span>Largely normal morphology</span></label>
+          <div><label>Morphology</label><div class="pillGrid" data-pill-wrap="bxMkMorph"><label class="pillOpt"><input type="checkbox" data-pill-group="bxMkMorph" value="normal morphology"><span>Normal morphology</span></label>
 <label class="pillOpt"><input type="checkbox" data-pill-group="bxMkMorph" value="micromegakaryocytes"><span>Micromegakaryocytes</span></label>
 <label class="pillOpt"><input type="checkbox" data-pill-group="bxMkMorph" value="small mononuclear megakaryocytes"><span>Small mononuclear forms</span></label>
 <label class="pillOpt"><input type="checkbox" data-pill-group="bxMkMorph" value="hypolobated megakaryocytes"><span>Hypolobated forms</span></label>
@@ -803,7 +803,7 @@ function normalizeOneTemplateValue(id, value, mode){
   if(/dysplastic maturation/.test(x)) common.push('show dysplastic maturation','dysplastic maturation');
   if(/limited assessment/.test(x)) common.push('limited assessment');
 
-  if(/largely normal morphology|normal morphology|no significant atypia/.test(x)) common.push('largely normal morphology');
+  if(/normal morphology|no significant atypia/.test(x)) common.push('normal morphology');
   if(/mainly normoblastic maturation|normoblastic maturation/.test(x)) common.push('mainly normoblastic maturation');
   if(/hypolobated|hypolobation/.test(x)) common.push('dysplastic, including hypolobated forms','include a subset of smaller and/or hypolobated forms','dysplastic, including small hypolobated forms');
   if(/small forms|micromegakaryocyte/.test(x)) common.push('vary in size, with a subset of smaller forms','dysplastic, including micromegakaryocytes','include frequent smaller forms');
