@@ -1030,7 +1030,7 @@ function generateReport(){
   }
   r += '\n';
   r += 'BONE MARROW CORE BIOPSY:\n';
-  let q=[]; if(v('bxLength')) q.push(addMM(v('bxLength'))); if(v('bxQuality')) q.push(normPart(v('bxQuality'))); if(q.length) r += 'Quality/length: '+sent(q.join(', '))+'\n';
+  let q=[]; if(v('bxLength')) q.push(addMM(v('bxLength'))); if(v('bxQuality')) q.push(normPart(v('bxQuality'))); if(q.length) r += 'Length/Quality: '+sent(q.join(', '))+'\n';
   if(v('bxCellPhrase') || v('bxCell')) r += 'Cellularity: '+sent((v('bxCellPhrase')||'***')+(v('bxCell')?' (~'+addPercent(v('bxCell'))+')':''))+'\n';
   if(v('bxArch')) r += 'Architecture: '+sent(v('bxArch'))+'\n';
   r += lineageWithExtras('Megakaryopoiesis',[v('bxMkNum'),v('bxMkMorph')],['bxMkMorphOther'],'bxMkDysExtent');
