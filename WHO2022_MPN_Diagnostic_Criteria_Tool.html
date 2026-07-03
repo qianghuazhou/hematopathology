@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WHO 2022 MPN Diagnostic Criteria Tool</title>
+<style>
+  :root{
+    --bg:#f4f6f8; --card:#ffffff; --ink:#1f2937; --muted:#6b7280;
+    --blue:#1f4e79; --blue2:#e8f1f8; --green:#0f766e; --red:#b91c1c;
+    --border:#d8dee6; --soft:#f9fafb; --yellow:#fff7ed;
+  }
+  body{font-family:Arial, Helvetica, sans-serif; margin:0; background:var(--bg); color:var(--ink);}
+  header{background:var(--blue); color:white; padding:18px 26px;}
+  header h1{margin:0; font-size:24px;}
+  header p{margin:6px 0 0; color:#dbeafe; font-size:14px;}
+  .wrap{max-width:1250px; margin:22px auto; padding:0 18px;}
+  .topbar{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:16px;}
+  select, button{font-size:15px; padding:9px 12px; border:1px solid var(--border); border-radius:8px; background:white;}
+  button{cursor:pointer; background:var(--blue); color:white; border-color:var(--blue);}
+  button.secondary{background:white; color:var(--blue);}
+  .grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:18px;}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:12px; box-shadow:0 1px 3px rgba(0,0,0,.05); overflow:hidden;}
+  .card h2{margin:0; padding:14px 16px; background:var(--blue2); color:var(--blue); font-size:20px;}
+  .section{padding:14px 16px; border-top:1px solid var(--border);}
+  .section h3{margin:0 0 10px; font-size:16px; color:#111827;}
+  label.crit{display:block; padding:9px 10px; margin:7px 0; background:var(--soft); border:1px solid var(--border); border-radius:8px; line-height:1.35;}
+  label.crit:hover{background:#f3f7fb;}
+  input[type="checkbox"]{transform:scale(1.12); margin-right:8px; vertical-align:top; margin-top:2px;}
+  .small{font-size:13px; color:var(--muted);}
+  .result{padding:18px;}
+  .dx{font-weight:bold; font-size:20px; margin-bottom:10px;}
+  .met{color:var(--green);}
+  .notmet{color:var(--red);}
+  .equivocal{color:#92400e;}
+  .box{background:#f8fafc; border:1px solid var(--border); border-radius:10px; padding:12px; margin:10px 0;}
+  .warn{background:var(--yellow); border-color:#fed7aa;}
+  .counts{display:grid; grid-template-columns:repeat(2,1fr); gap:8px; font-size:14px;}
+  .pill{display:inline-block; padding:3px 8px; border-radius:999px; background:#e5e7eb; margin:2px; font-size:12px;}
+  textarea{width:100%; min-height:170px; box-sizing:border-box; border:1px solid var(--border); border-radius:8px; padding:10px; font-family:Consolas, monospace; font-size:13px;}
+  .hidden{display:none;}
+  footer{font-size:12px; color:var(--muted); margin:18px 0 30px;}
+  @media(max-width:900px){.grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>WHO 2022 MPN Diagnostic Criteria Tool</h1>
+  <p>Select criteria to generate a diagnostic interpretation for PV, ET, pre-PMF, overt PMF, post-PV MF, and post-ET MF.</p>
+</header>
+
+<div class="wrap">
+  <div class="topbar">
+    <label><b>Entity:</b></label>
+    <select id="entity" onchange="renderEntity()">
+      <option value="pv">Polycythaemia vera (PV)</option>
+      <option value="et">Essential thrombocythaemia (ET)</option>
+      <option value="prepmf">Primary myelofibrosis, prefibrotic stage</option>
+      <option value="pmf">Primary myelofibrosis, overt fibrotic stage</option>
+      <option value="postpv">Post-PV myelofibrosis</option>
+      <option value="postet">Post-ET myelofibrosis</option>
+    </select>
+    <button onclick="generate()">Generate Diagnosis</button>
+    <button class="secondary" onclick="clearChecks()">Clear</button>
+    <button class="secondary" onclick="copyReport()">Copy Report</button>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2 id="entityTitle"></h2>
+      <div id="criteria"></div>
+    </div>
+
+    <div class="card">
+      <h2>Diagnostic Interpretation</h2>
+      <div class="result">
+        <div id="dx" class="dx">Select criteria, then generate.</div>
+        <div id="summary" class="box"></div>
+        <div id="warnings" class="box warn hidden"></div>
+        <h3>Report Text</h3>
+        <textarea id="report"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    For pathology reporting support only. Final diagnosis requires integration with morphology, molecular/cytogenetic findings, clinical history, CBC trends, serum EPO/LDH, splenomegaly, and exclusion of reactive or secondary causes.
+  </footer>
+</div>
+
+<script>
+const DATA = {
+  pv: {
+    title:'Polycythaemia Vera (PV) — WHO 2022',
+    rule:'Diagnosis requires all 3 major criteria OR first 2 major criteria plus the minor criterion.',
+    major:[
+      'Elevated haemoglobin concentration (>16.5 g/dL in men or >16.0 g/dL in women), elevated haematocrit (>49% in men or >48% in women), or increased red cell mass.',
+      'Bone marrow biopsy showing age-adjusted hypercellularity with trilineage growth / panmyelosis, including prominent erythroid, granulocytic, and megakaryocytic proliferation with pleomorphic mature megakaryocytes.',
+      'Presence of JAK2 p.V617F or JAK2 exon 12 mutation.'
+    ],
+    minor:['Subnormal serum erythropoietin level.'],
+    eval:function(M,m){return (M[0]&&M[1]&&M[2]) || (M[0]&&M[1]&&m[0]);},
+    name:'polycythaemia vera'
+  },
+  et: {
+    title:'Essential Thrombocythaemia (ET) — WHO 2022',
+    rule:'Diagnosis requires all 4 major criteria OR first 3 major criteria plus 1 minor criterion.',
+    major:[
+      'Sustained platelet count ≥450 × 10⁹/L.',
+      'Bone marrow biopsy showing proliferation mainly of the megakaryocytic lineage, with increased enlarged mature megakaryocytes with hyperlobulated nuclei; no significant increase or left shift in neutrophil granulopoiesis or erythropoiesis; very rarely grade 1 reticulin fibrosis.',
+      'WHO criteria for BCR::ABL1-positive CML, PV, PMF, myelodysplastic neoplasms, or other myeloid neoplasms are not met.',
+      'Presence of JAK2, CALR, or MPL mutation.'
+    ],
+    minor:['Presence of another clonal marker OR exclusion of reactive thrombocytosis.'],
+    eval:function(M,m){return (M[0]&&M[1]&&M[2]&&M[3]) || (M[0]&&M[1]&&M[2]&&m[0]);},
+    name:'essential thrombocythaemia'
+  },
+  prepmf: {
+    title:'Primary Myelofibrosis, Prefibrotic Stage — WHO 2022',
+    rule:'Diagnosis requires all 3 major criteria plus at least 1 minor criterion, confirmed in two consecutive determinations.',
+    major:[
+      'Megakaryocytic proliferation and atypia, with reticulin fibrosis grade 0–1, accompanied by increased age-adjusted bone marrow cellularity, granulocytic proliferation, and often decreased erythropoiesis.',
+      'Diagnostic criteria for BCR::ABL1-positive CML, PV, ET, myelodysplastic neoplasms, or other defined myeloid neoplasms are not met.',
+      'Presence of JAK2, CALR, or MPL mutation, or another clonal marker, or absence of evidence for reactive bone marrow fibrosis.'
+    ],
+    minor:[
+      'Anaemia not attributed to a comorbid condition.',
+      'Leukocytosis ≥11 × 10⁹/L.',
+      'Splenomegaly detected clinically and/or by imaging.',
+      'LDH above the upper limit of the institutional reference range.'
+    ],
+    eval:function(M,m){return M.every(Boolean) && m.filter(Boolean).length>=1;},
+    name:'primary myelofibrosis, prefibrotic stage'
+  },
+  pmf: {
+    title:'Primary Myelofibrosis, Overt Fibrotic Stage — WHO 2022',
+    rule:'Diagnosis requires all 3 major criteria plus at least 1 minor criterion, confirmed in two consecutive determinations.',
+    major:[
+      'Megakaryocytic proliferation and atypia, accompanied by reticulin and/or collagen fibrosis grade 2 or 3.',
+      'Diagnostic criteria for BCR::ABL1-positive CML, PV, ET, myelodysplastic neoplasms, or other defined myeloid neoplasms are not met.',
+      'Presence of JAK2, CALR, or MPL mutation, or another clonal marker, or absence of evidence for reactive bone marrow fibrosis.'
+    ],
+    minor:[
+      'Anaemia not attributed to a comorbid condition.',
+      'Leukocytosis ≥11 × 10⁹/L.',
+      'Splenomegaly detected clinically and/or by imaging.',
+      'LDH above the upper limit of the institutional reference range.',
+      'Leukoerythroblastosis.'
+    ],
+    eval:function(M,m){return M.every(Boolean) && m.filter(Boolean).length>=1;},
+    name:'primary myelofibrosis, overt fibrotic stage'
+  },
+  postpv: {
+    title:'Post-Polycythaemia Vera Myelofibrosis — WHO 2022',
+    rule:'Diagnosis requires both required criteria plus at least 2 additional criteria.',
+    required:[
+      'Documentation of previous diagnosis of WHO-defined polycythaemia vera.',
+      'Bone marrow fibrosis grade 2–3 on a 0–3 scale.'
+    ],
+    additional:[
+      'Anaemia below reference range or sustained loss of requirement for phlebotomy, in the absence of cytoreductive therapy, or cytoreductive treatment for erythrocytosis.',
+      'Leukoerythroblastosis.',
+      'Increasing splenomegaly: increase in palpable splenomegaly by >5 cm from baseline or newly palpable splenomegaly.',
+      'Elevated LDH above reference range.',
+      'Development of at least two constitutional symptoms: >10% weight loss in 6 months, night sweats, unexplained fever >37.5°C.'
+    ],
+    eval:function(R,A){return R.every(Boolean) && A.filter(Boolean).length>=2;},
+    name:'post-polycythaemia vera myelofibrosis'
+  },
+  postet: {
+    title:'Post-Essential Thrombocythaemia Myelofibrosis — WHO 2022',
+    rule:'Diagnosis requires both required criteria plus at least 2 additional criteria.',
+    required:[
+      'Documentation of previous diagnosis of WHO-defined essential thrombocythaemia.',
+      'Bone marrow fibrosis grade 2–3 on a 0–3 scale.'
+    ],
+    additional:[
+      'Anaemia below reference range and >2 g/dL decrease from baseline haemoglobin concentration.',
+      'Leukoerythroblastosis.',
+      'Increasing splenomegaly: increase in palpable splenomegaly by >5 cm from baseline or newly palpable splenomegaly.',
+      'Elevated LDH above reference range.',
+      'Development of at least two constitutional symptoms: >10% weight loss in 6 months, night sweats, unexplained fever >37.5°C.'
+    ],
+    eval:function(R,A){return R.every(Boolean) && A.filter(Boolean).length>=2;},
+    name:'post-essential thrombocythaemia myelofibrosis'
+  }
+};
+
+function renderEntity(){
+  const key=document.getElementById('entity').value;
+  const d=DATA[key];
+  document.getElementById('entityTitle').textContent=d.title;
+  let html='';
+  html += `<div class="section"><h3>Diagnostic rule</h3><div class="box">${d.rule}</div></div>`;
+  if(d.major){
+    html += `<div class="section"><h3>Major criteria</h3>`;
+    d.major.forEach((t,i)=> html += crit('major',i,t));
+    html += `</div><div class="section"><h3>Minor criteria</h3>`;
+    d.minor.forEach((t,i)=> html += crit('minor',i,t));
+    html += `</div>`;
+  } else {
+    html += `<div class="section"><h3>Required criteria</h3>`;
+    d.required.forEach((t,i)=> html += crit('required',i,t));
+    html += `</div><div class="section"><h3>Additional criteria</h3>`;
+    d.additional.forEach((t,i)=> html += crit('additional',i,t));
+    html += `</div>`;
+  }
+  document.getElementById('criteria').innerHTML=html;
+  document.getElementById('dx').textContent='Select criteria, then generate.';
+  document.getElementById('dx').className='dx';
+  document.getElementById('summary').innerHTML='';
+  document.getElementById('warnings').classList.add('hidden');
+  document.getElementById('report').value='';
+}
+function crit(type,i,text){return `<label class="crit"><input type="checkbox" data-type="${type}" data-index="${i}" onchange="generate()">${text}</label>`;}
+function arr(type,n){
+  const out=Array(n).fill(false);
+  document.querySelectorAll(`input[data-type="${type}"]`).forEach(cb=>out[+cb.dataset.index]=cb.checked);
+  return out;
+}
+function checkedTexts(type,list){
+  const a=[]; document.querySelectorAll(`input[data-type="${type}"]`).forEach(cb=>{if(cb.checked)a.push(list[+cb.dataset.index]);}); return a;
+}
+function generate(){
+  const key=document.getElementById('entity').value, d=DATA[key];
+  let met=false, report='', summary='', warn=[];
+  if(d.major){
+    const M=arr('major',d.major.length), m=arr('minor',d.minor.length);
+    met=d.eval(M,m);
+    summary=`<div class="counts"><div><b>Major met:</b> ${M.filter(Boolean).length}/${d.major.length}</div><div><b>Minor met:</b> ${m.filter(Boolean).length}/${d.minor.length}</div></div>`;
+    const missingMajor=d.major.map((x,i)=>M[i]?null:i+1).filter(x=>x);
+    if(missingMajor.length) warn.push('Missing major criteria: ' + missingMajor.join(', '));
+    if((key==='prepmf'||key==='pmf') && m.filter(Boolean).length<1) warn.push('At least one minor criterion is required and should be confirmed on two consecutive determinations.');
+    if(key==='pv' && !M[2] && !(M[0]&&M[1]&&m[0])) warn.push('PV usually requires demonstration of JAK2 V617F or exon 12 mutation unless using the first two major plus minor formulation in your local workflow.');
+    report = makeReport(d.name, met, d.rule, checkedTexts('major',d.major), checkedTexts('minor',d.minor), 'Major criteria met', 'Minor criteria met');
+  } else {
+    const R=arr('required',d.required.length), A=arr('additional',d.additional.length);
+    met=d.eval(R,A);
+    summary=`<div class="counts"><div><b>Required met:</b> ${R.filter(Boolean).length}/${d.required.length}</div><div><b>Additional met:</b> ${A.filter(Boolean).length}/${d.additional.length}</div></div>`;
+    const missingReq=d.required.map((x,i)=>R[i]?null:i+1).filter(x=>x);
+    if(missingReq.length) warn.push('Missing required criteria: ' + missingReq.join(', '));
+    if(A.filter(Boolean).length<2) warn.push('At least two additional criteria are required.');
+    report = makeReport(d.name, met, d.rule, checkedTexts('required',d.required), checkedTexts('additional',d.additional), 'Required criteria met', 'Additional criteria met');
+  }
+  document.getElementById('dx').textContent = met ? 'Criteria met for ' + d.name + '.' : 'Criteria not fully met for ' + d.name + '.';
+  document.getElementById('dx').className = met ? 'dx met' : 'dx notmet';
+  document.getElementById('summary').innerHTML = summary;
+  const w=document.getElementById('warnings');
+  if(warn.length){w.classList.remove('hidden'); w.innerHTML='<b>Notes / missing elements:</b><br>' + warn.map(x=>'• '+x).join('<br>');} else {w.classList.add('hidden'); w.innerHTML='';}
+  document.getElementById('report').value=report;
+}
+function makeReport(name, met, rule, group1, group2, label1, label2){
+  let txt='WHO 2022 diagnostic criteria assessment for ' + name + ': ' + (met ? 'criteria are met.' : 'criteria are not fully met.') + '\n\n';
+  txt += 'Diagnostic rule: ' + rule + '\n\n';
+  txt += label1 + ':\n';
+  txt += group1.length ? group1.map(x=>' - '+x).join('\n') : ' - None selected';
+  txt += '\n\n' + label2 + ':\n';
+  txt += group2.length ? group2.map(x=>' - '+x).join('\n') : ' - None selected';
+  txt += '\n\nComment: Correlation with clinical history, CBC trends, serum EPO/LDH as applicable, splenomegaly, molecular/cytogenetic studies, and exclusion of reactive or secondary causes is recommended.';
+  return txt;
+}
+function clearChecks(){document.querySelectorAll('input[type="checkbox"]').forEach(cb=>cb.checked=false); generate();}
+function copyReport(){const t=document.getElementById('report'); t.select(); document.execCommand('copy');}
+renderEntity();
+</script>
+</body>
+</html>
