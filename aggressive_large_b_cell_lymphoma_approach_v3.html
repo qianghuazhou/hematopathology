@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aggressive Large B-Cell Lymphoma Diagnostic Approach</title>
+  <style>
+    :root{
+      --bg:#f4f7f9;
+      --panel:#ffffff;
+      --text:#22313f;
+      --muted:#5f6b76;
+      --primary:#243746;
+      --accent:#2d8cff;
+      --border:#dbe3ea;
+      --soft:#eef4f8;
+      --tag:#e9eef3;
+    }
+
+    *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:"Segoe UI", system-ui, -apple-system, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+    }
+
+    .container{
+      max-width:1120px;
+      margin:0 auto;
+      padding:24px;
+    }
+
+    .back-link{
+      display:inline-block;
+      margin-bottom:18px;
+      color:var(--primary);
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .back-link:hover{text-decoration:underline}
+
+    .hero{
+      background:linear-gradient(135deg, #243746 0%, #35556d 100%);
+      color:#fff;
+      padding:34px 28px;
+      border-radius:16px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.08);
+      margin-bottom:28px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      font-size:0.78rem;
+      font-weight:700;
+      letter-spacing:0.08em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.82);
+      margin-bottom:10px;
+    }
+
+    .hero h1{
+      margin:0 0 10px 0;
+      font-size:2rem;
+      letter-spacing:0.3px;
+      line-height:1.15;
+    }
+
+    .hero p{
+      margin:0;
+      max-width:920px;
+      color:rgba(255,255,255,0.92);
+    }
+
+    .toc{
+      margin-top:18px;
+      padding:16px 18px;
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.16);
+      border-radius:14px;
+    }
+
+    .toc strong{
+      display:block;
+      margin-bottom:8px;
+      font-size:0.9rem;
+    }
+
+    .toc-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:8px 14px;
+    }
+
+    .toc a{
+      color:#fff;
+      text-decoration:none;
+      font-size:0.94rem;
+    }
+
+    .toc a:hover{text-decoration:underline}
+
+    .intro-grid{
+      display:grid;
+      grid-template-columns:1.1fr 0.9fr;
+      gap:18px;
+      margin-bottom:28px;
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:18px 20px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.04);
+    }
+
+    .panel h2{
+      margin:0 0 10px 0;
+      font-size:1rem;
+      color:var(--primary);
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+    }
+
+    .panel p{margin:0;color:var(--muted)}
+
+    .quick-list{margin:0;padding-left:18px;color:var(--muted)}
+    .quick-list li{margin:6px 0}
+
+    .section{margin-top:34px}
+
+    .section h2{
+      margin:0 0 14px 0;
+      font-size:1.15rem;
+      color:var(--primary);
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      border-bottom:2px solid var(--border);
+      padding-bottom:10px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+      gap:16px;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:18px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.04);
+    }
+
+    .card h3{margin:0 0 8px 0;color:var(--primary);font-size:1.03rem}
+    .card p{margin:0;color:var(--muted)}
+
+    .badge{
+      display:inline-block;
+      margin-bottom:10px;
+      font-size:0.74rem;
+      font-weight:700;
+      letter-spacing:0.03em;
+      color:var(--primary);
+      background:var(--tag);
+      border-radius:999px;
+      padding:5px 9px;
+    }
+
+    .callout{
+      margin-top:16px;
+      background:var(--soft);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:16px 18px;
+      color:var(--text);
+    }
+
+    .table-wrap{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.04);
+      overflow:auto;
+    }
+
+    table{width:100%;border-collapse:collapse;min-width:760px}
+
+    th, td{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      vertical-align:top;
+      text-align:left;
+      font-size:0.95rem;
+    }
+
+    th{
+      background:#f8fbfd;
+      color:var(--primary);
+      font-size:0.86rem;
+      text-transform:uppercase;
+      letter-spacing:0.04em;
+    }
+
+    tr:last-child td{border-bottom:none}
+    ul, ol{margin:0;padding-left:20px}
+    li{margin:6px 0}
+
+    .content-card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:20px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.04);
+    }
+
+    pre{
+      margin:0;
+      white-space:pre-wrap;
+      word-break:break-word;
+      background:#0f172a;
+      color:#e5edf8;
+      border-radius:14px;
+      padding:20px;
+      font-size:0.95rem;
+      line-height:1.65;
+      overflow-x:auto;
+      border:1px solid #1e293b;
+    }
+
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+    details{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:14px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.04);
+      margin-bottom:14px;
+      overflow:hidden;
+    }
+
+    summary{
+      cursor:pointer;
+      padding:16px 18px;
+      font-weight:700;
+      color:var(--primary);
+      background:#f8fbfd;
+      border-bottom:1px solid transparent;
+    }
+
+    details[open] summary{border-bottom:1px solid var(--border)}
+    details .details-body{padding:18px}
+
+    .footer{
+      margin-top:36px;
+      padding:18px 0 8px;
+      text-align:center;
+      color:var(--muted);
+      font-size:0.9rem;
+    }
+
+    @media (max-width: 900px){.intro-grid,.two-col{grid-template-columns:1fr}}
+    @media (max-width: 800px){
+      .container{padding:16px}
+      .hero{padding:26px 20px}
+      .hero h1{font-size:1.7rem}
+      .toc-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <section class="hero">
+      <div class="eyebrow">Hematopathology Reference</div>
+      <h1>Aggressive Large B-Cell Lymphoma Diagnostic Approach</h1>
+      <p>A practical sign-out reference for large B-cell / high-grade B-cell lymphomas: first recognize an aggressive B-cell neoplasm, then separate DLBCL, Burkitt lymphoma, high-grade B-cell lymphoma, blastoid mantle cell lymphoma, and selected special entities using morphology, IHC, and FISH.</p>
+
+      <div class="toc">
+        <strong>Contents</strong>
+        <div class="toc-grid">
+          <a href="#overview">Overview</a>
+          <a href="#algorithm">Initial Algorithm</a>
+          <a href="#prelim">Preliminary Sign-out</a>
+          <a href="#ihc">Core IHC Panel</a>
+          <a href="#fish">FISH Interpretation</a>
+          <a href="#hans">Hans Algorithm</a>
+          <a href="#differential">Differential Diagnosis</a>
+          <a href="#pitfalls">Diagnostic Pitfalls</a>
+          <a href="#templates">Report Templates</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="intro-grid">
+      <div class="panel">
+        <h2>Overview</h2>
+        <p>This page is intentionally focused on the practical approach to an aggressive large B-cell lymphoma biopsy. It is not a full lymphoma encyclopedia. The main workflow is: morphology → core B-cell phenotype → Burkitt-like vs DLBCL-like → exclude blastoid mantle cell lymphoma → order FISH → finalize classification.</p>
+      </div>
+      <div class="panel">
+        <h2>High-Yield Points</h2>
+        <ul class="quick-list">
+          <li>Do not finalize DLBCL, NOS before MYC/BCL2/BCL6 FISH if high-grade features are present.</li>
+          <li>Burkitt-like morphology requires MYC, BCL2/BCL6, and 11q correlation.</li>
+          <li>CD5/Cyclin D1/SOX11 positivity should trigger exclusion of blastoid mantle cell lymphoma.</li>
+          <li>Double expresser is IHC; double-hit is genetic.</li>
+        </ul>
+      </div>
+    </div>
+
+    <section class="section" id="overview">
+      <h2>Overview</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="badge">DLBCL-like</div>
+          <h3>Diffuse large B-cell lymphoma, NOS</h3>
+          <p>Diffuse sheets of large atypical B cells; classify by Hans algorithm and exclude HGBL with MYC and BCL2 and/or BCL6 rearrangements.</p>
+        </div>
+        <div class="card">
+          <div class="badge">Burkitt-like</div>
+          <h3>Burkitt lymphoma / HGBL</h3>
+          <p>Intermediate-sized monomorphic cells, starry-sky pattern, very high Ki-67; requires FISH correlation including MYC and 11q.</p>
+        </div>
+        <div class="card">
+          <div class="badge">CD5 / Cyclin D1</div>
+          <h3>Blastoid / pleomorphic mantle cell lymphoma</h3>
+          <p>Can mimic aggressive LBCL. Confirm with Cyclin D1, SOX11, and CCND1/IGH FISH.</p>
+        </div>
+      </div>
+      <div class="callout"><strong>Practical framing:</strong> in a core biopsy showing a high-grade B-cell infiltrate, a preliminary diagnosis is often safer until FISH is available.</div>
+    </section>
+
+    <section class="section" id="algorithm">
+      <h2>Initial Algorithm</h2>
+      <div class="content-card">
+        <pre>Large atypical B-cell proliferation
+        │
+        ├── Confirm B-cell lineage
+        │      CD20 / PAX5 / CD79a / CD19
+        │
+        ├── Assess morphology
+        │      DLBCL-like vs Burkitt-like vs blastoid
+        │
+        ├── Apply first-line IHC
+        │      CD5, CD10, BCL6, MUM1, BCL2, MYC, Ki-67, Cyclin D1
+        │
+        ├── Exclude blastoid mantle cell lymphoma
+        │      CD5+, Cyclin D1+, SOX11+, CCND1/IGH+
+        │
+        ├── Classify preliminary category
+        │      DLBCL, NOS vs Burkitt-like ABCL vs HGBL vs MCL
+        │
+        └── Correlate with FISH
+               MYC / BCL2 / BCL6 / 11q / CCND1-IGH</pre>
+      </div>
+    </section>
+
+    <section class="section" id="prelim">
+      <h2>Preliminary Sign-out Pathway Before FISH</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Morphology</th>
+              <th>IHC Pattern</th>
+              <th>Preliminary Sign-out</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>A</strong></td>
+              <td>Burkitt-like</td>
+              <td>CD10+, BCL6+, Ki-67 ≥90%, BCL2 negative/weak, CD5−</td>
+              <td>Aggressive B-cell lymphoma, most consistent with Burkitt lymphoma; FISH pending to exclude HGBL-DH/TH, HGBL-NOS, and HGBL with 11q aberrations.</td>
+            </tr>
+            <tr>
+              <td><strong>B</strong></td>
+              <td>Burkitt-like</td>
+              <td>Not supportive of Burkitt lymphoma</td>
+              <td>Aggressive B-cell lymphoma, high-grade; FISH pending to classify among HGBL categories versus DLBCL, NOS.</td>
+            </tr>
+            <tr>
+              <td><strong>C</strong></td>
+              <td>DLBCL-like</td>
+              <td>Not Burkitt phenotype</td>
+              <td>DLBCL, NOS, Hans GCB/non-GCB, pending FISH to exclude HGBL with MYC and BCL2 and/or BCL6 rearrangements.</td>
+            </tr>
+            <tr>
+              <td><strong>D</strong></td>
+              <td>DLBCL-like, Burkitt-like, or blastoid</td>
+              <td>CD5+, Cyclin D1+ ± SOX11</td>
+              <td>Aggressive B-cell lymphoma; immunophenotype favors mantle cell lymphoma; FISH pending for CCND1/IGH and MYC/BCL2/BCL6.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="ihc">
+      <h2>Core IHC Panel</h2>
+      <div class="two-col">
+        <div class="content-card">
+          <h3>First-line panel</h3>
+          <pre>CD79a
+CD5
+CD10
+BCL6
+MUM1
+BCL2
+MYC
+Ki-67
+Cyclin D1</pre>
+        </div>
+        <div class="content-card">
+          <h3>Add as needed</h3>
+          <pre>CD20 / PAX5 / CD19
+SOX11
+TdT / CD34
+EBER
+CD30
+CD23
+CD21 / CD23 FDC markers
+ALK
+HHV8
+CD138 / CD38 / EMA
+IRF4</pre>
+        </div>
+      </div>
+      <div class="callout"><strong>Useful default:</strong> CD20, PAX5, CD3, CD5, CD10, BCL6, MUM1, BCL2, MYC, Ki-67, Cyclin D1, SOX11, TdT, EBER, CD21/CD23.</div>
+    </section>
+
+    <section class="section" id="fish">
+      <h2>FISH Interpretation</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>FISH Result</th>
+              <th>Final Entity / Interpretation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>MYC only</td><td>DLBCL, NOS with MYC rearrangement, or Burkitt lymphoma if classic morphology and phenotype.</td></tr>
+            <tr><td>MYC + BCL2 ± BCL6</td><td>High-grade B-cell lymphoma with MYC and BCL2 and/or BCL6 rearrangements.</td></tr>
+            <tr><td>BCL6 only</td><td>DLBCL, NOS with BCL6 rearrangement.</td></tr>
+            <tr><td>BCL2 only</td><td>DLBCL, NOS, often GCB phenotype; correlate with morphology and clinical context.</td></tr>
+            <tr><td>11q gain/loss, MYC−</td><td>High-grade B-cell lymphoma with 11q aberrations.</td></tr>
+            <tr><td>All negative, high-grade morphology</td><td>High-grade B-cell lymphoma, NOS.</td></tr>
+            <tr><td>All negative, DLBCL morphology</td><td>Diffuse large B-cell lymphoma, NOS.</td></tr>
+            <tr><td>CCND1/IGH+</td><td>Mantle cell lymphoma, blastoid/pleomorphic variant if high-grade morphology.</td></tr>
+            <tr><td>IRF4 rearranged</td><td>Large B-cell lymphoma with IRF4 rearrangement.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout"><strong>Core FISH order:</strong> MYC, BCL2, BCL6, 11q gain/loss, and CCND1/IGH when blastoid mantle cell lymphoma is in the differential.</div>
+    </section>
+
+    <section class="section" id="hans">
+      <h2>Hans Algorithm</h2>
+      <div class="content-card">
+        <pre>CD10 positive
+        ↓
+GCB phenotype
+
+CD10 negative
+        ↓
+BCL6 positive?
+        │
+        ├── No  → non-GCB phenotype
+        │
+        └── Yes → assess MUM1
+                  │
+                  ├── MUM1 negative → GCB phenotype
+                  └── MUM1 positive → non-GCB phenotype</pre>
+      </div>
+      <div class="callout"><strong>Use carefully:</strong> Hans algorithm is for DLBCL, NOS. Do not use it to classify Burkitt lymphoma, PMBCL, plasmablastic lymphoma, or blastoid mantle cell lymphoma.</div>
+    </section>
+
+    <section class="section" id="differential">
+      <h2>Differential Diagnosis</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Diagnosis</th>
+              <th>Key Morphology</th>
+              <th>Helpful IHC / FISH</th>
+              <th>Practical Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>DLBCL, NOS</strong></td><td>Diffuse sheets of large cells</td><td>Hans panel; MYC/BCL2/BCL6 FISH</td><td>Default category after excluding specific entities.</td></tr>
+            <tr><td><strong>Burkitt lymphoma</strong></td><td>Monomorphic intermediate cells; starry-sky</td><td>CD10+, BCL6+, BCL2−/weak, Ki-67 ~100%, isolated MYC</td><td>Classic phenotype plus genetics required.</td></tr>
+            <tr><td><strong>HGBL-DH/TH</strong></td><td>Blastoid, Burkitt-like, or DLBCL-like</td><td>MYC + BCL2 and/or BCL6 rearrangements</td><td>Genetically defined.</td></tr>
+            <tr><td><strong>HGBL, NOS</strong></td><td>High-grade/blastoid morphology</td><td>No defining DH/TH or 11q abnormality</td><td>Diagnosis after exclusion of defined entities.</td></tr>
+            <tr><td><strong>HGBL with 11q aberration</strong></td><td>Often Burkitt-like</td><td>11q gain/loss; MYC negative</td><td>Important Burkitt mimic.</td></tr>
+            <tr><td><strong>Blastoid MCL</strong></td><td>Blastoid or pleomorphic</td><td>CD5+, Cyclin D1+, SOX11+, CCND1/IGH+</td><td>Do not miss in CD5+ aggressive B-cell lymphoma.</td></tr>
+            <tr><td><strong>Plasmablastic lymphoma</strong></td><td>Immunoblastic/plasmablastic</td><td>CD138/CD38/MUM1+, CD20/PAX5 weak or negative, often EBER+</td><td>Consider in CD20-negative aggressive lymphoma.</td></tr>
+            <tr><td><strong>ALK-positive LBCL</strong></td><td>Plasmablastic/sinusoidal pattern</td><td>ALK+, CD138+, often CD20−</td><td>Can mimic carcinoma or plasmablastic lymphoma.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="pitfalls">
+      <h2>Diagnostic Pitfalls</h2>
+      <div class="grid">
+        <div class="card"><h3>Double expresser vs double hit</h3><p>Double expresser is MYC/BCL2 protein overexpression by IHC. Double hit requires gene rearrangements by FISH.</p></div>
+        <div class="card"><h3>Burkitt-like is not Burkitt</h3><p>Burkitt-like morphology should trigger FISH rather than immediate final classification.</p></div>
+        <div class="card"><h3>CD20-negative recurrence</h3><p>After anti-CD20 therapy, use PAX5, CD79a, CD19, OCT2/BOB1, and clinical history.</p></div>
+        <div class="card"><h3>Limited core or FNA</h3><p>Use “aggressive B-cell lymphoma” wording if architecture and full classification cannot be assessed.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="templates">
+      <h2>Report Templates</h2>
+
+      <details open>
+        <summary>Preliminary report — FISH pending</summary>
+        <div class="details-body"><pre>Diagnosis
+[Site], [procedure]:
+- Aggressive B-cell lymphoma, pending FISH.
+
+Comment
+The morphology and immunophenotype support an aggressive B-cell lymphoma most consistent with [Burkitt lymphoma / diffuse large B-cell lymphoma, NOS / high-grade B-cell lymphoma, NOS / aggressive B-cell lymphoma with immunophenotype favoring mantle cell lymphoma].
+
+Definitive classification per WHO-HAEM5 / ICC requires cytogenetic correlation. Final classification is deferred pending FISH for MYC, BCL2, BCL6, 11q, and [CCND1/IGH if indicated].</pre></div>
+      </details>
+
+      <details>
+        <summary>DLBCL, NOS — FISH pending</summary>
+        <div class="details-body"><pre>Diagnosis
+[Site], [procedure]:
+- Diffuse large B-cell lymphoma, NOS (Hans: [GCB / non-GCB]), pending FISH.
+
+Comment
+The findings are consistent with DLBCL, NOS. Cytogenetic studies are pending to exclude high-grade B-cell lymphoma with MYC and BCL2 and/or BCL6 rearrangements.</pre></div>
+      </details>
+
+      <details>
+        <summary>Burkitt lymphoma — classic phenotype</summary>
+        <div class="details-body"><pre>Diagnosis
+[Site], [procedure]:
+- Aggressive B-cell lymphoma, most consistent with Burkitt lymphoma.
+
+Comment
+The morphologic features and immunophenotype are characteristic of Burkitt lymphoma. Definitive classification per WHO-HAEM5 / ICC requires cytogenetic correlation; FISH for MYC, BCL2, BCL6, and 11q is pending [or demonstrates isolated MYC rearrangement, confirming Burkitt lymphoma].</pre></div>
+      </details>
+
+      <details>
+        <summary>HGBL with MYC and BCL2 and/or BCL6 rearrangements</summary>
+        <div class="details-body"><pre>Diagnosis
+[Site], [procedure]:
+- High-grade B-cell lymphoma with MYC and BCL2 and/or BCL6 rearrangements.
+
+Comment
+Concurrent rearrangements of MYC and BCL2 and/or BCL6 establish the diagnosis of high-grade B-cell lymphoma with double-/triple-hit genetics per WHO-HAEM5 / ICC.</pre></div>
+      </details>
+
+      <details>
+        <summary>HGBL, NOS — FISH negative</summary>
+        <div class="details-body"><pre>Diagnosis
+[Site], [procedure]:
+- High-grade B-cell lymphoma, NOS.
+
+Comment
+Despite high-grade morphology, FISH does not demonstrate MYC, BCL2, or BCL6 rearrangements or 11q aberrations. The findings support classification as high-grade B-cell lymphoma, NOS.</pre></div>
+      </details>
+
+      <details>
+        <summary>Blastoid / pleomorphic mantle cell lymphoma</summary>
+        <div class="details-body"><pre>Diagnosis
+[Site], [procedure]:
+- Mantle cell lymphoma, blastoid/pleomorphic variant.
+
+Comment
+The morphologic features, immunophenotype, and detection of CCND1/IGH rearrangement support mantle cell lymphoma with blastoid/pleomorphic transformation.</pre></div>
+      </details>
+
+      <details>
+        <summary>FISH addendum — diagnosis unchanged</summary>
+        <div class="details-body"><pre>ADDENDUM — CYTOGENETIC STUDIES (FISH)
+
+FISH analysis for MYC, BCL2, and BCL6 rearrangements [and 11q aberrations / CCND1-IGH, if performed] shows:
+[insert result].
+
+Interpretation:
+The cytogenetic findings do not identify abnormalities that would necessitate reclassification under current WHO-HAEM5 / ICC criteria.
+
+Final Diagnosis:
+The previously rendered diagnosis remains unchanged:
+[insert original diagnosis].</pre></div>
+      </details>
+    </section>
+
+    <div class="footer">Aggressive Large B-Cell Lymphoma Diagnostic Approach · Practical hematopathology reference</div>
+  </div>
+</body>
+</html>
