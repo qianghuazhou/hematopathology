@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T-Cell Lymphoma Diagnostic Reference</title>
+  <style>
+    :root{--bg:#f4f7f9;--panel:#ffffff;--text:#22313f;--muted:#5f6b76;--primary:#243746;--accent:#2d8cff;--border:#dbe3ea;--soft:#eef4f8;--tag:#e9eef3;}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+    .container{max-width:1120px;margin:0 auto;padding:24px;}
+    .back-link{display:inline-block;margin-bottom:18px;color:var(--primary);text-decoration:none;font-weight:600;}.back-link:hover{text-decoration:underline;}
+    .hero{background:linear-gradient(135deg,#243746 0%,#35556d 100%);color:#fff;padding:34px 28px;border-radius:16px;box-shadow:0 10px 24px rgba(0,0,0,.08);margin-bottom:28px;}
+    .eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.82);margin-bottom:10px;}
+    .hero h1{margin:0 0 10px 0;font-size:2rem;letter-spacing:.3px;line-height:1.15;}.hero p{margin:0;max-width:900px;color:rgba(255,255,255,.92);}
+    .toc{margin-top:18px;padding:16px 18px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);border-radius:14px;}.toc strong{display:block;margin-bottom:8px;font-size:.9rem;}.toc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 14px;}.toc a{color:#fff;text-decoration:none;font-size:.94rem;}.toc a:hover{text-decoration:underline;}
+    .intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-bottom:28px;}.panel,.card,.content-card,details{background:var(--panel);border:1px solid var(--border);border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.04);}.panel{padding:18px 20px}.panel h2{margin:0 0 10px 0;font-size:1rem;color:var(--primary);text-transform:uppercase;letter-spacing:.08em}.panel p{margin:0;color:var(--muted)}
+    .quick-list{margin:0;padding-left:18px;color:var(--muted)}.quick-list li{margin:6px 0;}
+    .section{margin-top:34px}.section h2{margin:0 0 14px 0;font-size:1.15rem;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid var(--border);padding-bottom:10px;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.card{padding:18px}.card h3{margin:0 0 8px 0;color:var(--primary);font-size:1.03rem}.card p{margin:0;color:var(--muted)}
+    .badge{display:inline-block;margin-bottom:10px;font-size:.74rem;font-weight:700;letter-spacing:.03em;color:var(--primary);background:var(--tag);border-radius:999px;padding:5px 9px;}
+    .callout{margin-top:16px;background:var(--soft);border:1px solid var(--border);border-radius:14px;padding:16px 18px;color:var(--text);}.table-wrap{background:var(--panel);border:1px solid var(--border);border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.04);overflow:auto;}table{width:100%;border-collapse:collapse;min-width:760px;}th,td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top;text-align:left;font-size:.95rem;}th{background:#f8fbfd;color:var(--primary);font-size:.86rem;text-transform:uppercase;letter-spacing:.04em;}tr:last-child td{border-bottom:none;}
+    ul,ol{margin:0;padding-left:20px}li{margin:6px 0}.content-card{padding:20px;}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}.footer{margin-top:36px;padding:18px 0 8px;text-align:center;color:var(--muted);font-size:.9rem;}
+    pre,.flow{margin:0;white-space:pre-wrap;word-break:break-word;background:#0f172a;color:#e5edf8;border-radius:14px;padding:20px;font-size:.95rem;line-height:1.65;overflow-x:auto;border:1px solid #1e293b;}.flow{font-family:Consolas,"Courier New",monospace;}
+    details{margin-bottom:14px;overflow:hidden;}summary{cursor:pointer;padding:15px 18px;font-weight:700;color:var(--primary);background:#f8fbfd;border-bottom:1px solid var(--border);}details[open] summary{border-bottom:1px solid var(--border);} .detail-body{padding:18px;}
+    .copy-btn{margin-top:10px;border:1px solid var(--border);background:#fff;color:var(--primary);border-radius:10px;padding:7px 10px;font-weight:700;cursor:pointer}.copy-btn:hover{background:var(--soft)}
+    .search{width:100%;border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin:0 0 16px;font-size:1rem;background:#fff;color:var(--text);}
+    @media (max-width:900px){.intro-grid,.two-col{grid-template-columns:1fr}} @media (max-width:800px){.container{padding:16px}.hero{padding:26px 20px}.hero h1{font-size:1.7rem}.toc-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back-link">← Back to Home</a>
+<section class="hero">
+  <div class="eyebrow">Diagnosis Reference</div>
+  <h1>T-Cell and NK-Cell Lymphoma Diagnostic Reference</h1>
+  <p>Focused sign-out reference for suspected mature T-cell and NK-cell lymphomas: initial approach, core immunophenotyping, TFH vs PTCL-NOS, ALCL, extranodal NK/T-cell lymphoma, aggressive NK-cell leukemia, mycosis fungoides, clonality, pitfalls, and copy-ready report wording.</p>
+  <div class="toc"><strong>Contents</strong><div class="toc-grid">
+    <a href="#overview">Overview</a><a href="#algorithm">Initial Algorithm</a><a href="#panel">Core Panel</a><a href="#entities">Major Entities</a><a href="#tfh">TFH / AITL</a><a href="#ptcl">PTCL-NOS</a><a href="#alcl">ALCL</a><a href="#nkt">NK/T and NK</a><a href="#cutaneous">Cutaneous T-cell</a><a href="#clonality">Clonality</a><a href="#differential">Differential Tables</a><a href="#templates">Report Templates</a><a href="#pitfalls">Pitfalls</a>
+  </div></div>
+</section>
+
+<div class="intro-grid">
+  <div class="panel"><h2>Practical frame</h2><p>Do not diagnose T-cell lymphoma from one abnormal marker. Integrate architecture, cytology, distribution, immunophenotypic aberrancy, lineage/subset, EBV status, clonality, flow cytometry, and clinical context.</p></div>
+  <div class="panel"><h2>High-yield anchors</h2><ul class="quick-list"><li>TFH lymphoma: CD4 plus ≥2–3 TFH markers and FDC/HEV pattern.</li><li>PTCL-NOS: diagnosis of exclusion after defined T/NK entities are excluded.</li><li>ENKTL: destructive extranodal lesion, cytotoxic phenotype, EBER-positive tumor cells.</li><li>ALCL: strong CD30 with appropriate morphology; then ALK, DUSP22/TP63 context.</li></ul></div>
+</div>
+
+<section class="section" id="overview"><h2>Overview</h2><div class="content-card"><p><strong>Malignant T cells usually show atypical morphology, aberrant immunophenotype, and clonal T-cell receptor gene rearrangement or TRBC1 restriction.</strong> Aberrancy includes loss of pan-T markers such as CD5/CD7, homogeneous expansion of a T-cell subset, aberrant expression of non-native markers, or an abnormal flow phenotype. Clonality supports the diagnosis but is not by itself diagnostic.</p></div></section>
+
+<section class="section" id="algorithm"><h2>Initial Diagnostic Algorithm</h2><div class="flow">Atypical lymphoid infiltrate with T-cell / NK-cell predominance
+        │
+        ├── Immature phenotype? TdT+, CD34+/−, CD1a+/−, cCD3+
+        │        ↓
+        │   T-lymphoblastic leukemia/lymphoma / ETP-ALL
+        │
+        ├── Mature T/NK phenotype? CD2/CD3/CD5/CD7, CD4/CD8, cytotoxic markers
+        │        ↓
+        │   Assess site + architecture + defining phenotype
+        │
+        ├── Nodal disease
+        │        ├── TFH phenotype: CD4+, PD1/CD279, ICOS/CD278, CXCL13, CD10, BCL6
+        │        │       ↓ Nodal TFH lymphoma: AI type / follicular type / NOS
+        │        ├── Strong diffuse CD30 with hallmark cells
+        │        │       ↓ ALCL, ALK+ or ALK−; consider BIA-ALCL / pcALCL by site
+        │        └── No defining phenotype after work-up
+        │                ↓ PTCL, NOS
+        │
+        ├── Extranodal destructive lesion + cytotoxic phenotype + EBER+ tumor cells
+        │        ↓ Extranodal NK/T-cell lymphoma, nasal type
+        │
+        ├── Leukemic / marrow / systemic NK phenotype
+        │        ↓ Aggressive NK-cell leukemia vs chronic NK-cell LPD transformation
+        │
+        └── Skin-predominant disease
+                 ├── Epidermotropism / Pautrier / CD4 phenotype → Mycosis fungoides
+                 ├── CD30+ dermal nodules → LyP vs primary cutaneous ALCL
+                 └── Blood involvement → Sézary syndrome</div></section>
+
+<section class="section" id="panel"><h2>Core IHC / Flow Panel</h2><div class="two-col"><div class="content-card"><h3>First-line tissue panel</h3><pre>CD2
+CD3
+CD4
+CD5
+CD7
+CD8
+CD20 / PAX5
+CD30
+ALK
+CD10
+BCL6
+PD1 / CD279
+ICOS / CD278
+CXCL13
+CD21 / CD23
+TIA1
+Granzyme B
+Perforin
+CD56
+EBER ISH
+Ki-67</pre></div><div class="content-card"><h3>Second-line / context-dependent</h3><pre>TdT / CD34 / CD1a
+TCR betaF1
+TCR gamma-delta
+TRBC1 by flow
+CD16 / CD57
+CD25
+FOXP3
+CD38 / CD138 / MUM1
+HHV8
+DUSP22 / TP63 FISH for ALK− ALCL
+TCR clonality PCR
+NGS: RHOA, TET2, DNMT3A, IDH2, JAK/STAT pathway</pre></div></div></section>
+
+<section class="section" id="entities"><h2>Major Entities</h2><div class="grid">
+  <div class="card"><span class="badge">Diagnosis of exclusion</span><h3>PTCL, NOS</h3><p>Nodal or extranodal mature T-cell lymphoma lacking defining features of TFH lymphoma, ALCL, ENKTL, or site-specific entities.</p></div>
+  <div class="card"><span class="badge">TFH lineage</span><h3>Nodal TFH lymphoma</h3><p>AI type, follicular type, or NOS. Requires TFH phenotype and compatible architecture.</p></div>
+  <div class="card"><span class="badge">CD30-driven</span><h3>ALCL</h3><p>Strong CD30, hallmark cells; classify ALK+ vs ALK− and consider site-specific entities.</p></div>
+  <div class="card"><span class="badge">EBV/cytotoxic</span><h3>Extranodal NK/T</h3><p>Angiocentric/angiodestructive cytotoxic lymphoma with EBER-positive tumor cells.</p></div>
+  <div class="card"><span class="badge">Skin</span><h3>Mycosis fungoides</h3><p>Epidermotropic cutaneous T-cell lymphoma; folliculotropic forms may show follicular mucinosis.</p></div>
+  <div class="card"><span class="badge">Systemic NK</span><h3>Aggressive NK-cell leukemia</h3><p>Systemic NK-cell neoplasm often with marrow/blood disease, cytotoxic phenotype, and hemophagocytosis.</p></div>
+</div></section>
+
+<section class="section" id="tfh"><h2>TFH / AITL Approach</h2><div class="content-card"><ol><li>Confirm mature T-cell proliferation, usually CD3+, CD4-predominant.</li><li>Assess TFH markers: PD1, ICOS, CXCL13, CD10, BCL6; multiple markers are preferred.</li><li>Look for HEV proliferation and expanded/disrupted CD21/CD23 follicular dendritic cell meshworks.</li><li>Evaluate polymorphous background, plasma cells/eosinophils, and EBV-positive B-immunoblasts.</li><li>Classify pattern: angioimmunoblastic type, follicular type, or NOS.</li></ol><div class="callout"><strong>Essential AI-type pattern:</strong> nodal T-cell lymphoma, CD4+/CD8−, expression of multiple TFH markers, and extrafollicular FDC expansion around high endothelial venules.</div></div></section>
+
+<section class="section" id="ptcl"><h2>PTCL-NOS Approach</h2><div class="content-card"><p>PTCL-NOS is a mature T-cell lymphoma that remains after excluding specific entities. Typical features include diffuse or paracortical/T-zone expansion by atypical small-to-large pleomorphic T cells, aberrant loss of CD5 and/or CD7, variable CD4/CD8 phenotype, variable cytotoxic markers, and absence of a convincing TFH phenotype, ALCL morphology, or EBV-positive NK/T phenotype.</p><div class="callout"><strong>Helpful negative anchors:</strong> no diffuse TFH phenotype, no abnormal FDC expansion, ALK negative, no diagnostic ALCL morphology, EBER negative in tumor cells.</div></div></section>
+
+<section class="section" id="alcl"><h2>ALCL Approach</h2><div class="flow">CD30 strong/diffuse large-cell lymphoma
+        │
+        ├── ALK positive
+        │       ↓ ALCL, ALK-positive
+        │
+        ├── ALK negative
+        │       ├── Nodal/systemic → ALCL, ALK-negative; consider DUSP22 and TP63
+        │       ├── Breast implant seroma/capsule → breast implant-associated ALCL
+        │       └── Skin-limited → primary cutaneous ALCL
+        │
+        └── Not classic ALCL morphology
+                ↓ CD30+ PTCL, NOS / ENKTL / CHL mimic / transformed MF</div><div class="callout"><strong>Do not call ALCL on CD30 alone.</strong> Correlate with hallmark-cell morphology, T-cell/null phenotype, ALK, EBER, PAX5/CD15, and clinical site.</div></section>
+
+<section class="section" id="nkt"><h2>NK/T and Aggressive NK Approach</h2><div class="two-col"><div class="content-card"><h3>Extranodal NK/T-cell lymphoma</h3><ul><li>Extranodal destructive lesion, commonly nasal/oral/sinonasal but may occur elsewhere.</li><li>Angiocentricity/angiodestruction and necrosis are typical.</li><li>CD2+, cytoplasmic CD3ε+, CD56+, cytotoxic markers positive.</li><li>EBER ISH diffusely positive in tumor cells.</li><li>Usually negative for surface CD3, CD5, CD7, CD20/PAX5, ALK, keratins, SOX10, MPO.</li></ul></div><div class="content-card"><h3>Aggressive NK-cell leukemia</h3><ul><li>Systemic blood/marrow/splenic disease; may show intrasinusoidal or interstitial marrow infiltrates.</li><li>CD2+, CD56 bright, cytotoxic markers positive; CD5/CD7 often absent.</li><li>EBER may be positive, but EBV-negative cases exist.</li><li>Hemophagocytosis may be prominent.</li><li>Distinguish from chronic lymphoproliferative disorder of NK cells and reactive NK expansion.</li></ul></div></div></section>
+
+<section class="section" id="cutaneous"><h2>Cutaneous T-cell Approach</h2><div class="content-card"><ol><li>Confirm primary skin process vs secondary involvement by systemic T-cell lymphoma.</li><li>MF clues: epidermotropism, Pautrier microabscesses, basal alignment of atypical lymphocytes, CD4 predominance, CD7/CD26 loss.</li><li>Folliculotropic MF: follicular involvement, follicular mucinosis, less prominent epidermotropism in some cases.</li><li>CD30+ lesions: distinguish lymphomatoid papulosis, primary cutaneous ALCL, transformed MF, and systemic ALCL involving skin.</li><li>Use flow and TCR clonality as supportive evidence, not isolated proof.</li></ol></div></section>
+
+<section class="section" id="clonality"><h2>Clonality and Flow Cytometry</h2><div class="content-card"><p>TCR clonality by BIOMED-2 PCR and TRBC1 restriction by flow cytometry are supportive tools. A clonal T-cell result can occur in reactive or immune-driven processes, and false-negative/inconclusive results occur with poor DNA, low tumor burden, or sampling issues. Always interpret with morphology and phenotype.</p><pre>Suggested wording:
+T-cell receptor gene rearrangement studies show a clonal T-cell population / are negative / are pending. This result is interpreted in conjunction with the morphologic and immunophenotypic findings.</pre></div></section>
+
+<section class="section" id="differential"><h2>Differential Diagnosis Tables</h2><div class="table-wrap"><table><thead><tr><th>Problem</th><th>Favor entity</th><th>Key support</th><th>Common trap</th></tr></thead><tbody><tr><td>CD4+ nodal T-cell proliferation</td><td>nTFHL vs PTCL-NOS</td><td>TFH markers, HEV, CD21/CD23 FDC expansion, EBV+ B-immunoblasts</td><td>Calling TFH from one weak marker</td></tr><tr><td>CD30+ large-cell lymphoma</td><td>ALCL vs CHL vs ENKTL vs PTCL</td><td>ALK, PAX5, CD15, EBER, cytotoxic markers, morphology</td><td>Calling ALCL based only on CD30</td></tr><tr><td>Destructive sinonasal/oral lesion</td><td>ENKTL</td><td>EBER diffuse in tumor cells, CD56, cytotoxic markers, angiodestruction</td><td>Confusing with carcinoma, CHL, ALCL, or EBV+ B-cell lymphoma</td></tr><tr><td>Epidermotropic skin infiltrate</td><td>MF</td><td>Disproportionate epidermotropism, CD4 phenotype, CD7 loss, TCR clone</td><td>Overcalling inflammatory dermatosis with oligoclonality</td></tr><tr><td>Histiocyte-rich nodal infiltrate</td><td>PTCL-NOS Lennert variant</td><td>Aberrant T-cell phenotype, T-cell clonality, CD68-rich background</td><td>Granulomatous infection or reactive histiocytic process</td></tr></tbody></table></div>
+<div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Marker</th><th>PTCL-NOS</th><th>nTFHL / AITL</th><th>ALCL</th><th>ENKTL</th><th>MF</th></tr></thead><tbody><tr><td>CD3</td><td>+</td><td>+</td><td>variable/lost</td><td>cytoplasmic CD3ε+</td><td>+</td></tr><tr><td>CD4</td><td>often +</td><td>usually +</td><td>variable</td><td>usually −</td><td>usually +</td></tr><tr><td>CD7 loss</td><td>common</td><td>common</td><td>common</td><td>often lost</td><td>common</td></tr><tr><td>PD1/ICOS/CXCL13/CD10/BCL6</td><td>absent/focal</td><td>multiple +</td><td>usually −</td><td>−</td><td>usually −/weak PD1</td></tr><tr><td>CD30</td><td>variable</td><td>subset</td><td>strong/diffuse</td><td>subset/common</td><td>negative unless transformed</td></tr><tr><td>CD56</td><td>variable/rare</td><td>−</td><td>variable</td><td>often +</td><td>−</td></tr><tr><td>EBER</td><td>usually − in tumor</td><td>often + in B-immunoblasts</td><td>−</td><td>diffuse + in tumor</td><td>−</td></tr></tbody></table></div></section>
+
+<section class="section" id="templates"><h2>Copy-ready Report Templates</h2><input class="search" id="templateSearch" placeholder="Filter templates: PTCL, TFH, AITL, NK/T, aggressive NK, mycosis fungoides..." />
+
+<details class="template" open><summary>PTCL-NOS</summary><div class="detail-body"><pre>DIAGNOSIS
+LYMPH NODE, [SITE], [CORE BIOPSY / EXCISIONAL BIOPSY]
+– Peripheral T-cell lymphoma, NOS (see comment)
+
+COMMENT
+The findings support peripheral T-cell lymphoma, NOS. A nodal T-follicular helper (TFH)-type lymphoma is not supported, as TFH markers are not diffusely expressed and there is no expansion of follicular dendritic cell meshworks. There is no evidence of anaplastic large cell lymphoma (ALK negative) or other defined T-cell lymphoma subtype. Correlation with clinical findings, PET/CT, and T-cell receptor gene rearrangement and/or NGS studies is recommended for confirmation and risk stratification.
+
+MICROSCOPIC DESCRIPTION
+Sections show [partial/complete] effacement of the nodal architecture by a diffuse / paracortical / T-zone-predominant atypical lymphoid infiltrate. The neoplastic cells are [small/intermediate/large/pleomorphic] with irregular / cleaved / vesicular nuclei, [inconspicuous/prominent] nucleoli, and [scant/moderate] cytoplasm. Mitotic activity and apoptosis are [scant/moderate/frequent]. Arborizing high endothelial venules are [present/absent]. Confluent epithelioid histiocytes (Lennert pattern) are [present/absent].
+
+IMMUNOHISTOCHEMISTRY
+The atypical lymphoid cells are CD2+ and CD3+, with CD5 and CD7 [retained / partially lost / lost]. The population is predominantly [CD4+ / CD8+ / double-negative / double-positive]. TCR-betaF1 is [positive/negative], and TCR-gamma-delta is [positive/negative]. Cytotoxic markers are [negative / positive in a subset]. CD30 is [negative / positive in a subset / strongly positive]. ALK is negative. TFH markers show [no / focal / patchy] expression without a diffuse TFH phenotype. CD21/CD23 highlight only residual follicular dendritic cell meshworks. EBER is [negative / positive in scattered B-immunoblasts]. Ki-67 is approximately __%.</pre><button class="copy-btn">Copy template</button></div></details>
+
+<details class="template"><summary>Nodal TFH Cell Lymphoma, Angioimmunoblastic Type</summary><div class="detail-body"><pre>DIAGNOSIS
+LYMPH NODE, [SITE], [EXCISIONAL / CORE BIOPSY]
+– Nodal T-follicular helper cell lymphoma, angioimmunoblastic type (nTFHL-AI) (WHO-HAEM5 / ICC) (see comment)
+
+COMMENT
+The findings support angioimmunoblastic T-cell lymphoma, classified as nodal T-follicular helper (TFH) cell lymphoma, angioimmunoblastic type in WHO-HAEM5. The neoplastic cells show a TFH phenotype (PD-1, ICOS, BCL6, CXCL13 ± CD10) with prominent high endothelial venules and expanded/disrupted follicular dendritic cell meshworks in a polymorphous background with variable EBV-positive B-immunoblasts. TCR and IGH clonality studies will be performed and reported separately. Correlation with clinical and imaging findings is recommended.
+
+MICROSCOPIC DESCRIPTION
+The lymph node architecture is partially / largely / completely effaced. There is expansion of the interfollicular regions by a polymorphous lymphoid infiltrate composed predominantly of small-to-medium sized atypical lymphocytes with irregular nuclear contours, moderately condensed chromatin and pale to clear cytoplasm, showing a peri- and interfollicular distribution with clustering around prominent high endothelial venules. Mixed inflammatory background, scattered B-immunoblasts, arborizing vascular proliferation, and expanded irregular FDC networks are present. Pattern I / II / III.
+
+IMMUNOHISTOCHEMISTRY
+The atypical lymphoid cells are CD2+, CD3+, CD5+, predominantly CD4+, with retained / partial loss / loss of CD7. They express TFH markers including strong PD-1 and ICOS, with CXCL13 and BCL6 positive in a subset, and CD10 positive / negative. Cytotoxic markers are negative. CD30 highlights a subset. CD21/CD23 demonstrate expanded and disrupted FDC meshworks, often encircling high endothelial venules. EBER highlights scattered B-immunoblasts / is negative. Ki-67 is approximately ___%.</pre><button class="copy-btn">Copy template</button></div></details>
+
+<details class="template"><summary>Suspicious for Nodal TFH Lymphoma — Limited Core</summary><div class="detail-body"><pre>DIAGNOSIS
+LYMPH NODE, [SITE], CORE BIOPSY
+– Suspicious for nodal T-follicular helper (TFH) cell lymphoma (see comment)
+
+COMMENT
+The biopsy shows a CD4-predominant TFH-phenotype T-cell population with associated vascular and follicular dendritic cell expansion in a polymorphous background, raising suspicion for nodal TFH cell lymphoma. Given the limited tissue and preserved architecture, the findings are not definitively diagnostic. TCR/IGH clonality studies will be attempted. An excisional lymph node biopsy with full lymphoma protocol is recommended for confirmation and subclassification.</pre><button class="copy-btn">Copy template</button></div></details>
+
+<details class="template"><summary>Extranodal NK/T-cell Lymphoma, Nasal Type</summary><div class="detail-body"><pre>DIAGNOSIS
+[Site], biopsy:
+– Extranodal NK/T-cell lymphoma, nasal type (ICC) / extranodal NK/T-cell lymphoma (WHO-HAEM5).
+
+MICROSCOPIC DESCRIPTION
+Sections show mucosa / soft tissue with ulceration and a diffuse / patchy atypical polymorphous lymphoid infiltrate composed of small / intermediate / large atypical lymphoid cells with scant to moderate cytoplasm, irregular / ovoid nuclei, coarse / vesicular chromatin, and inconspicuous / prominent nucleoli. There is angiocentricity / angiodestruction (present / focal / not overt) with coagulative necrosis (present / focal / absent). Background shows histiocytes / plasma cells / granulocytes.
+
+IMMUNOHISTOCHEMISTRY / ISH
+Neoplastic cells are positive for CD2, cytoplasmic CD3ε, CD56, cytotoxic markers (TIA1, granzyme B, perforin), and CD30 (subset/≈__%). EBER ISH is diffusely positive. They are negative for CD4, CD5, CD7, CD20, CD79a, PAX5, ALK, MPO, SOX10, AE1/AE3/p40, and ERG. TCR betaF1 is negative / equivocal. Ki-67 is ~__%.
+
+COMMENT
+The angiocentric/angiodestructive pattern, EBER positivity, and cytotoxic NK/T phenotype are diagnostic / highly supportive of extranodal NK/T-cell lymphoma, nasal type. Correlation with imaging of the nasal cavity/sinonasal tract and systemic staging is recommended.</pre><button class="copy-btn">Copy template</button></div></details>
+
+<details class="template"><summary>Aggressive NK-cell Leukemia / Lymphoma</summary><div class="detail-body"><pre>DIAGNOSIS
+BONE MARROW / BLOOD / [SITE]:
+– Aggressive NK-cell leukemia / aggressive NK-cell lymphoma (see comment)
+
+MICROSCOPIC DESCRIPTION
+The marrow / tissue shows multifocal interstitial and/or intrasinusoidal involvement by atypical lymphoid cells, ranging from small to large forms with irregular nuclei, condensed to vesicular chromatin, occasional nucleoli, and limited cytoplasm. Hemophagocytosis is [present/absent]. Residual trilineage hematopoiesis is [preserved/reduced].
+
+IMMUNOPHENOTYPE
+The atypical cells are positive for CD2, CD56, cytotoxic markers TIA1 / granzyme B / perforin, and [variable cytoplasmic CD3]. They are negative for surface CD3, CD5, CD7, CD4, CD8, CD20, CD79a, CD138, ALK, and TCR betaF1. EBER ISH is [positive/negative]. Flow cytometry shows an abnormal NK-cell population with CD2+, CD56 bright, CD5−, CD7−/dim, CD57− phenotype.
+
+COMMENT
+The findings support an aggressive NK-cell malignancy. Correlation with peripheral blood findings, EBV studies, hemophagocytic syndrome parameters, imaging, and prior history of chronic NK-cell lymphoproliferative disorder is recommended.</pre><button class="copy-btn">Copy template</button></div></details>
+
+<details class="template"><summary>Mycosis Fungoides — Folliculotropic Component</summary><div class="detail-body"><pre>DIAGNOSIS
+Skin, [site], biopsy:
+– Primary cutaneous T-cell lymphoma, mycosis fungoides [with prominent folliculotropic component].
+
+COMMENT
+The biopsy shows a morphologically atypical and immunophenotypically aberrant T-cell infiltrate. There is epidermotropism and/or folliculotropism with follicular mucinosis. T-cell receptor gene rearrangement analysis has been requested / is pending / is inconclusive. The diagnosis remains based on the combined morphologic and immunophenotypic findings.
+
+MICROSCOPIC DESCRIPTION
+The epidermis shows acanthosis and focal parakeratosis. Spongiosis or interface pathology is not prominent. Epidermal Pautrier microabscesses are present, consisting of dendritic cells and small to intermediate lymphoid cells with irregular nuclei. Single lymphoid cell epidermotropism and focal linear basal alignment are seen. There is prominent follicular mucinosis and lymphocytic folliculotropism. The papillary dermis shows perivascular lymphoid and dendritic cell infiltration.
+
+IMMUNOPHENOTYPE
+The atypical T cells are CD2+, CD3+, CD4+, CD5+, CD8−, CD56−, with partial loss of CD7 [approximately __% retained]. PD1/CD279 is weak. Flow cytometry, if performed, shows an aberrant CD3+, CD4dim, CD5+, CD8− T-cell population.</pre><button class="copy-btn">Copy template</button></div></details>
+</section>
+
+<section class="section" id="pitfalls"><h2>Key Pitfalls</h2><div class="content-card"><ul><li>Reactive T-cell proliferations may show partial CD7 loss and even clonal TCR peaks.</li><li>TFH markers are not specific alone; use a panel and architecture.</li><li>EBER-positive cells in AITL/nTFHL are often B-immunoblasts, not the neoplastic T cells.</li><li>ENKTL can be CD30-positive and mimic ALCL or Hodgkin lymphoma.</li><li>Limited core biopsies are often insufficient for definitive TFH lymphoma subclassification.</li><li>CD20/PAX5 should be checked in CD30-rich cases to exclude CHL or B-cell lymphoma mimics.</li><li>MF diagnosis is strengthened by clinicopathologic correlation and repeat biopsies when early lesions are subtle.</li></ul></div></section>
+
+<section class="section" id="references"><h2>Source Notes</h2><div class="content-card"><p>Built from the uploaded Delabie T-cell lymphoma lecture framework and the uploaded BC Cancer-style templates for PTCL-NOS, nodal TFH/AITL, extranodal NK/T-cell lymphoma, aggressive NK-cell lymphoma/leukemia, and mycosis fungoides.</p></div></section>
+
+<div class="footer">T-cell and NK-cell Lymphoma Diagnostic Reference · same visual theme as the mediastinal lymphoma reference</div>
+</div>
+<script>
+  document.querySelectorAll('.copy-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const pre=btn.parentElement.querySelector('pre');
+      navigator.clipboard.writeText(pre.innerText).then(()=>{const old=btn.innerText;btn.innerText='Copied';setTimeout(()=>btn.innerText=old,1200);});
+    });
+  });
+  const search=document.getElementById('templateSearch');
+  if(search){search.addEventListener('input',()=>{
+    const q=search.value.toLowerCase();
+    document.querySelectorAll('details.template').forEach(d=>{
+      d.style.display=d.innerText.toLowerCase().includes(q)?'block':'none';
+    });
+  });}
+</script>
+</body>
+</html>
