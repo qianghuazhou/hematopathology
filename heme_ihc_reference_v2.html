@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hematopathology IHC Reference</title>
+<style>
+:root{
+  --bg:#f4f7fb; --panel:#ffffff; --ink:#1f2937; --muted:#64748b; --blue:#1e3a8a; --blue2:#2563eb; --line:#dbe3ef;
+  --green:#166534; --red:#991b1b; --amber:#92400e; --purple:#6d28d9; --teal:#0f766e;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+header{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:white;padding:24px 28px;border-bottom:5px solid #93c5fd}
+header h1{margin:0;font-size:30px;letter-spacing:.3px} header p{margin:8px 0 0;color:#dbeafe;font-size:14px}
+.container{display:grid;grid-template-columns:310px 1fr;gap:18px;padding:18px;max-width:1500px;margin:0 auto}
+.sidebar{position:sticky;top:14px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 2px 10px rgba(15,23,42,.06)}
+.search{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font-size:14px;margin-bottom:10px}
+.navtitle{font-weight:700;color:var(--blue);font-size:13px;text-transform:uppercase;margin:12px 0 6px}
+.nav a{display:block;text-decoration:none;color:#334155;padding:6px 8px;border-radius:8px;font-size:13px}.nav a:hover{background:#eaf2ff;color:var(--blue)}
+main{min-width:0}.section{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin-bottom:16px;padding:18px;box-shadow:0 2px 10px rgba(15,23,42,.05)}
+h2{margin:0 0 12px;color:var(--blue);font-size:24px;border-bottom:2px solid #bfdbfe;padding-bottom:8px}h3{color:#1e40af;margin:16px 0 8px}h4{margin:12px 0 6px;color:#334155}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.mini{border:1px solid var(--line);border-radius:12px;padding:12px;background:#f8fafc}
+.badge{display:inline-block;padding:3px 8px;border-radius:999px;font-size:12px;font-weight:700;margin:2px}.b{background:#dbeafe;color:#1e40af}.t{background:#dcfce7;color:#166534}.m{background:#fee2e2;color:#991b1b}.p{background:#f3e8ff;color:#6d28d9}.s{background:#fef3c7;color:#92400e}.i{background:#ccfbf1;color:#0f766e}
+.card{border:1px solid var(--line);border-radius:14px;margin:12px 0;overflow:hidden;background:#fff}.card summary{cursor:pointer;list-style:none;padding:14px 16px;background:#eff6ff;font-weight:800;color:#1e3a8a;display:flex;justify-content:space-between;align-items:center}.card summary::-webkit-details-marker{display:none}.card summary:after{content:'+';font-size:20px}.card[open] summary:after{content:'–'} .cardbody{padding:14px 16px}
+table{border-collapse:collapse;width:100%;margin:8px 0 14px;font-size:13px}th,td{border:1px solid var(--line);padding:7px 8px;vertical-align:top}th{background:#eef4ff;color:#1e3a8a;text-align:left}.yes{color:var(--green);font-weight:700}.no{color:var(--red);font-weight:700}.var{color:var(--amber);font-weight:700}.weak{color:#7c3aed;font-weight:700}
+ul{margin-top:6px}li{margin:3px 0}.note{border-left:4px solid #2563eb;background:#eff6ff;padding:10px 12px;border-radius:8px;margin:10px 0}.warn{border-left:4px solid #f59e0b;background:#fffbeb;padding:10px 12px;border-radius:8px;margin:10px 0}.copybox{background:#0f172a;color:#e5e7eb;border-radius:10px;padding:10px 12px;font-family:Consolas,monospace;font-size:13px;white-space:pre-wrap}.btn{border:0;border-radius:9px;background:#1e40af;color:#fff;padding:7px 10px;font-size:12px;cursor:pointer;margin:4px 0}.btn:hover{background:#1d4ed8}.hidden{display:none!important}
+.footer{font-size:12px;color:var(--muted);text-align:center;padding:20px}
+@media(max-width:900px){.container{grid-template-columns:1fr}.sidebar{position:relative;top:0}}
+</style>
+</head>
+<body>
+<header>
+<h1>Hematopathology IHC Reference</h1>
+<p>Practical marker interpretation for lymphoma, bone marrow, leukemia, plasma cell, histiocytic, infectious and special stains. Updated expanded marker set.</p>
+</header>
+<div class="container">
+<aside class="sidebar">
+<input class="search" id="search" oninput="filterCards()" placeholder="Search marker, disease, pitfall…"/>
+<div class="nav">
+<div class="navtitle">Sections</div>
+<a href="#quick">Quick Panels</a><a href="#markers">Marker Cards</a><a href="#diff">Differential Tables</a><a href="#special">Infectious &amp; Special Stains</a><a href="#index">Marker Index</a>
+<div class="navtitle">Markers</div>
+<a href="#ALK">ALK</a><a href="#BCL6">BCL6</a><a href="#CD3">CD3</a><a href="#CD5">CD5</a><a href="#CD10">CD10</a><a href="#CD15">CD15</a><a href="#CD20">CD20</a><a href="#CD30">CD30</a><a href="#CD34">CD34</a><a href="#CD45">CD45</a><a href="#CD68">CD68</a><a href="#CD117">CD117</a><a href="#EBV">EBER / LMP1</a><a href="#ECAD">E-cadherin</a><a href="#MPO">MPO</a><a href="#PAX5">PAX5</a><a href="#TdT">TdT</a>
+</div>
+</aside>
+<main>
+<section class="section" id="quick">
+<h2>Quick Diagnostic Panels</h2>
+<div class="grid">
+<div class="mini"><h4>Hodgkin lymphoma</h4><div class="copybox" id="p1">CD30, CD15, PAX5, CD20, CD45, CD3, EBER, ALK, EMA</div><button class="btn" onclick="copyText('p1')">Copy panel</button></div>
+<div class="mini"><h4>Large B-cell lymphoma</h4><div class="copybox" id="p2">CD20, PAX5, CD3, CD5, CD10, BCL6, MUM1, BCL2, MYC, Ki-67, EBER</div><button class="btn" onclick="copyText('p2')">Copy panel</button></div>
+<div class="mini"><h4>Follicular / germinal center</h4><div class="copybox" id="p3">CD20, CD3, CD10, BCL6, BCL2, Ki-67, CD21/CD23, IgD</div><button class="btn" onclick="copyText('p3')">Copy panel</button></div>
+<div class="mini"><h4>CD5+ small B-cell lymphoma</h4><div class="copybox" id="p4">CD20, PAX5, CD3, CD5, CD23, LEF1, Cyclin D1, SOX11, CD10, BCL6, Ki-67</div><button class="btn" onclick="copyText('p4')">Copy panel</button></div>
+<div class="mini"><h4>Bone marrow core</h4><div class="copybox" id="p5">CD34, CD117, MPO, E-cadherin, CD61/CD41, CD138, kappa/lambda, reticulin, iron</div><button class="btn" onclick="copyText('p5')">Copy panel</button></div>
+<div class="mini"><h4>Acute leukemia</h4><div class="copybox" id="p6">CD34, CD117, MPO, TdT, CD3, PAX5, CD68, CD61/CD41, E-cadherin, NPM1</div><button class="btn" onclick="copyText('p6')">Copy panel</button></div>
+</div>
+</section>
+<section class="section" id="markers"><h2>Marker Cards</h2>
+<details class="card marker" id="ALK" open=""><summary>ALK <span class="badge m">lymphoma / predictive</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Diagnose ALK-positive anaplastic large cell lymphoma.</li><li>Support ALK-positive large B-cell lymphoma and rare ALK-positive histiocytosis.</li><li>Predictive biomarker for ALK inhibitor eligibility in appropriate tumors.</li></ul>
+<table><tr><th>Pattern</th><td>Cytoplasmic in most fusions; nuclear + cytoplasmic pattern strongly suggests NPM1::ALK.</td></tr><tr><th>Normal</th><td>Restricted CNS/peripheral nervous system and testis; essentially absent in normal lymphoid tissue.</td></tr><tr><th>Positive disease</th><td>ALK+ ALCL, ALK+ LBCL, ALK+ histiocytosis; many non-heme tumors including IMT and lung adenocarcinoma.</td></tr></table>
+<div class="warn"><b>Pitfall:</b> staining pattern varies by fusion partner. Interpret with CD30, EMA, CD3, cytotoxic markers, PAX5/CD20 and morphology.</div>
+</div></details>
+<details class="card marker" id="CD3"><summary>CD3 <span class="badge t">T / NK lineage</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Most specific routine T-cell marker; confirms T-cell lineage in benign and malignant processes.</li><li>IHC detects surface and cytoplasmic CD3; NK-cell lesions may be cytoplasmic CD3 positive by IHC but surface CD3 negative by flow.</li><li>cCD3 supports T-lymphoblastic leukemia/lymphoma.</li></ul>
+<table><tr><th>Normal</th><td>Thymocytes, peripheral T cells, cytoplasmic CD3 in NK cells; nonspecific faint cytoplasmic staining may occur in plasma cells/macrophages.</td></tr><tr><th>Positive disease</th><td>Most T-cell lymphomas, T-ALL/LBL, NK/T lymphoma, reactive T-cell rosettes in NLPHL.</td></tr><tr><th>Negative/variable</th><td>Reed-Sternberg cells in CHL negative; LP cells in NLPHL negative. CD3 may be lost/dim in MF, ALCL, AITL and some NK processes.</td></tr></table>
+<div class="note"><b>Pearl:</b> loss of CD3 does not exclude mature T-cell lymphoma. Always compare with CD2, CD5, CD7, CD4/CD8 and TCR markers.</div>
+</div></details>
+<details class="card marker" id="CD15"><summary>CD15 <span class="badge s">Hodgkin / granulocytic</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Classic Hodgkin lymphoma marker used with CD30, PAX5 and CD45.</li><li>Helps separate CHL from NLPHL and ALCL.</li><li>Granulocyte marker; may support myeloid differentiation in AML/myeloid sarcoma.</li></ul>
+<table><tr><th>Normal</th><td>Neutrophils, eosinophils, activated B/T cells, variable monocytes/basophils; Paneth cells and renal proximal tubules.</td></tr><tr><th>Positive disease</th><td>CHL usually positive; subset AML, myeloid sarcoma, PTCL, rare B-cell lymphomas and rare ALCL.</td></tr><tr><th>Negative</th><td>LP cells in NLPHL, most DLBCL, hairy cell leukemia, mastocytosis, LCH.</td></tr></table>
+<div class="warn"><b>Pitfall:</b> EBV/infectious mononucleosis can show Reed-Sternberg-like CD15+ cells. CD15 positivity alone is not diagnostic of CHL.</div>
+</div></details>
+<details class="card marker" id="CD20"><summary>CD20 <span class="badge b">B-cell / therapeutic</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Workhorse pan-B-cell marker in reactive and neoplastic lymphoid tissues.</li><li>Highlights architecture and extent of B-cell infiltrates.</li><li>Therapeutic target; document expression before/after anti-CD20 therapy.</li></ul>
+<table><tr><th>Normal</th><td>Mature B cells; late hematogones acquire CD20. Plasma cells are negative.</td></tr><tr><th>Positive disease</th><td>Most mature B-cell lymphomas; variable B-ALL/LBL; NLPHL usually positive; CHL minority weak/variable.</td></tr><tr><th>Negative/variable</th><td>Post-rituximab B-cell lymphomas may lose CD20. Most plasma cell neoplasms negative.</td></tr></table>
+<div class="note"><b>Pearl:</b> CD20-negative does not exclude B-cell lymphoma. Use PAX5, CD79a and CD19, especially after rituximab or plasmacytic differentiation.</div>
+</div></details>
+<details class="card marker" id="CD30"><summary>CD30 <span class="badge m">activation / targeted therapy</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Essential for CHL, ALCL and lymphomatoid papulosis.</li><li>Evaluate CD30 expression in T-cell lymphomas and relapsed/refractory DLBCL or PMBL when therapy is relevant.</li><li>Report any degree of tumor-cell CD30 expression when clinically relevant.</li></ul>
+<table><tr><th>Pattern</th><td>Strong membranous and Golgi in CHL/ALCL; scattered activated immunoblasts may be positive.</td></tr><tr><th>Normal</th><td>Transient activated B, T and NK cells; rare circulating activated cells.</td></tr><tr><th>Positive disease</th><td>CHL, ALCL, primary cutaneous ALCL, BIA-ALCL, LyP, PMBL, gray zone lymphoma, EBV+ DLBCL, PEL, EBV mucocutaneous ulcer, MF with LCT.</td></tr></table>
+<div class="warn"><b>Pitfall:</b> reactive immunoblasts are often CD30 positive. Estimate neoplastic-cell staining separately from background cells.</div>
+</div></details>
+<details class="card marker" id="CD45"><summary>CD45 / LCA <span class="badge i">hematolymphoid origin</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Confirm hematolymphoid nature of tumors.</li><li>Distinguish CHL from NLPHL and most nonhematopoietic malignancies.</li><li>Highlight inflammatory infiltrates.</li></ul>
+<table><tr><th>Normal</th><td>Most leukocytes including granulocytes, lymphocytes, monocytes/histiocytes, mast cells and plasma cells; not RBCs, megakaryocytes or platelets.</td></tr><tr><th>Positive disease</th><td>Most B/T lymphomas, leukemias, histiocytic tumors, mast cell disorders, BPDCN, NLPHL LP cells.</td></tr><tr><th>Negative/variable</th><td>CHL Reed-Sternberg cells negative; ALCL, plasma cell neoplasms and ALL can be weak/negative.</td></tr></table>
+<div class="note"><b>Pearl:</b> CHL is typically CD45−/CD30+/CD15+/weak PAX5+. NLPHL is CD45+/CD20+/PAX5+/CD30−/CD15−.</div>
+</div></details>
+<details class="card marker" id="EBV"><summary>EBER ISH / LMP1 <span class="badge i">EBV</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>EBER ISH is the preferred test for latent EBV infection.</li><li>Classify EBV-associated B-cell, T/NK-cell, Hodgkin and immunodeficiency-associated lymphoproliferative disorders.</li><li>LMP1 IHC is supportive but less sensitive than EBER.</li></ul>
+<table><tr><th>EBER pattern</th><td>Strong nuclear signal only.</td></tr><tr><th>LMP1 pattern</th><td>Cytoplasmic ± membranous.</td></tr><tr><th>Positive disease</th><td>Extranodal NK/T lymphoma, aggressive NK leukemia, EBV+ DLBCL, PTLD, methotrexate-associated LPD, EBV mucocutaneous ulcer, subset CHL, PBL/PEL subset.</td></tr></table>
+<div class="warn"><b>Pitfall:</b> scattered EBER+ bystander cells can occur. Report whether positivity is in tumor cells or background lymphocytes.</div>
+</div></details>
+<details class="card marker" id="PAX5"><summary>PAX5 / BSAP <span class="badge b">B-cell lineage</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Best nuclear marker of B-cell lineage from pro-B to mature B cells.</li><li>Very useful in CD20-negative/post-rituximab B-cell lymphomas.</li><li>Weak PAX5 supports CHL; strong PAX5 supports most other B-cell neoplasms and NLPHL.</li></ul>
+<table><tr><th>Normal</th><td>Pro-B, pre-B and mature B cells; lost with terminal plasma cell differentiation.</td></tr><tr><th>Positive disease</th><td>Most B-cell lymphomas, B-ALL/LBL, NLPHL, weak CHL, PMBL.</td></tr><tr><th>Negative/exception</th><td>Plasma cell neoplasms and plasmacytic component of B-cell lymphomas negative. Rare t(8;21) AML and neuroendocrine tumors may be positive.</td></tr></table>
+<div class="note"><b>Pearl:</b> In Hodgkin workup, intensity matters: CHL is weak PAX5, while NLPHL is strong PAX5/CD20/CD45 positive.</div>
+</div></details>
+<details class="card marker" id="BCL6"><summary>BCL6 <span class="badge b">germinal center / TFH</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Marker of germinal center B-cell differentiation; useful with CD10 and BCL2 in follicular lymphoma workup.</li><li>Used with CD10 and MUM1 for DLBCL cell-of-origin algorithms.</li><li>TFH marker used with PD1, ICOS, CXCL13 and CD10 for AITL/nodal TFH lymphomas.</li></ul>
+<table><tr><th>Pattern</th><td>Nuclear staining.</td></tr><tr><th>Normal</th><td>Germinal center B cells and follicular helper T cells.</td></tr><tr><th>Positive disease</th><td>Follicular lymphoma, germinal center subtype DLBCL, Burkitt lymphoma, NLPHL, AITL/nodal TFH lymphomas.</td></tr><tr><th>Usually negative</th><td>Post-germinal center B cells/plasma cells, MALT/nodal marginal zone lymphoma outside colonized follicles, mantle cell lymphoma, most CHL.</td></tr></table>
+<div class="warn"><b>Pitfall:</b> BCL6 positivity in colonized follicles does not by itself diagnose follicular lymphoma. Interpret with CD10, BCL2, follicular dendritic meshworks, light chains and architecture.</div>
+</div></details>
+<details class="card marker" id="CD5"><summary>CD5 <span class="badge t">T-cell / CD5+ B-cell lymphoma</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Pan-T-cell marker, normally expressed on most mature T cells.</li><li>Key marker for CD5-positive B-cell lymphomas, especially CLL/SLL and mantle cell lymphoma.</li><li>CD5+ DLBCL should prompt exclusion of pleomorphic/blastoid mantle cell lymphoma with cyclin D1, SOX11 and CCND1 testing.</li></ul>
+<table><tr><th>Normal</th><td>Most mature T cells; small subset of normal B cells.</td></tr><tr><th>Positive disease</th><td>Most T-cell lymphomas/leukemias, T-ALL, CLL/SLL, mantle cell lymphoma, subset DLBCL, subset LPL/SMZL/HCL.</td></tr><tr><th>Usually negative</th><td>Follicular lymphoma, most marginal zone lymphoma/MALT lymphoma, most non-thymic carcinomas; ALCL often negative but variable.</td></tr></table>
+<div class="note"><b>Pearl:</b> CD5 loss in T-cell lymphoma can be diagnostically important. In B-cell lesions, interpret CD5 with CD23, LEF1, cyclin D1 and SOX11.</div>
+</div></details>
+<details class="card marker" id="CD10"><summary>CD10 / CALLA <span class="badge b">germinal center / precursor B</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Marker of germinal center differentiation; useful for follicular lymphoma, Burkitt lymphoma and GCB-type DLBCL.</li><li>Common acute lymphoblastic leukemia antigen in B-ALL; CD10-negative infant/pro-B ALL is associated with KMT2A rearrangement.</li><li>Helps separate B lymphoblasts from hematogones when used in a broader flow/IHC panel.</li></ul>
+<table><tr><th>Normal</th><td>Germinal center B cells, early B-cell precursors/hematogones; also non-heme tissues such as renal tubular brush border and stromal/myoepithelial cells.</td></tr><tr><th>Positive disease</th><td>Follicular lymphoma, Burkitt lymphoma, subset DLBCL, B-ALL/LBL, subset AITL/TFH lymphomas.</td></tr><tr><th>Usually negative</th><td>CLL/SLL, mantle cell lymphoma, marginal zone lymphoma, lymphoplasmacytic lymphoma, most plasma cell neoplasms.</td></tr></table>
+<div class="warn"><b>Pitfall:</b> CD10 is not lymphoma-specific and has many non-heme uses. In lymph nodes, interpret with BCL6, BCL2, CD20/PAX5, Ki-67 and architecture.</div>
+</div></details>
+<details class="card marker" id="CD34"><summary>CD34 <span class="badge m">blasts / vessels</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Identify and estimate blasts in bone marrow cores, especially hypoplastic marrows.</li><li>Help distinguish MDS/acute leukemia with increased CD34+ blasts from aplastic anemia with low/absent CD34+ progenitors.</li><li>Also highlights vascular endothelium and can assess microvessels; not all myeloblasts are CD34 positive.</li></ul>
+<table><tr><th>Pattern</th><td>Membranous/cytoplasmic in blasts and endothelial cells.</td></tr><tr><th>Normal</th><td>Hematopoietic progenitors/early hematogones, vascular endothelium, some megakaryocytes and stromal cells.</td></tr><tr><th>Positive disease</th><td>AML subset, B-ALL/LBL, MDS blasts, transient myeloproliferative disorder blasts; numerous non-heme vascular/spindle cell tumors.</td></tr><tr><th>Usually negative</th><td>Many mature lymphoid neoplasms; some AML/myeloid sarcomas can be CD34 negative.</td></tr></table>
+<div class="note"><b>Pearl:</b> In marrow, count only appropriate blast morphology/distribution; endothelial cells are internal positive controls and should not be counted as blasts.</div>
+</div></details>
+<details class="card marker" id="CD68"><summary>CD68 <span class="badge m">histiocytic / monocytic</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Highlights macrophages/histiocytes and supports histiocytic differentiation.</li><li>Useful in histiocytic sarcoma, myeloid/monocytic sarcoma and monocytic differentiation in AML.</li><li>PGM1 is more specific for monocyte/macrophage lineage than KP1, which is broader and more cross-reactive.</li></ul>
+<table><tr><th>Pattern</th><td>Cytoplasmic granular/dot-like staining; clone-dependent.</td></tr><tr><th>Normal</th><td>Macrophages, tissue histiocytes, osteoclasts, Kupffer cells, microglia; lower/variable staining in other myeloid cells and activated lymphocytes depending on clone.</td></tr><tr><th>Positive disease</th><td>Histiocytic sarcoma, Rosai-Dorfman disease, LCH, Erdheim-Chester disease, Kikuchi disease, AML/myeloid sarcoma, CMML/CML marrow histiocytes, hairy cell leukemia subset.</td></tr><tr><th>Usually negative/limited</th><td>ALCL usually negative; many sarcomas show variable nonspecific KP1 staining.</td></tr></table>
+<div class="warn"><b>Pitfall:</b> CD68 alone is not specific. For histiocytic sarcoma, require a panel such as CD68, CD163, CD4 and lysozyme plus exclusion of mimics.</div>
+</div></details>
+<details class="card marker" id="CD117"><summary>CD117 / c-KIT <span class="badge m">blasts / mast cells</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Estimate immature myeloid cells/blasts in marrow together with CD34 and MPO.</li><li>Highlight mast cells in mastocytosis workup; use with tryptase, CD25, CD2 and CD30.</li><li>Non-heme use: supports GIST with DOG1 and CD34.</li></ul>
+<table><tr><th>Pattern</th><td>Membranous and/or cytoplasmic depending on cell type and antibody.</td></tr><tr><th>Normal</th><td>Hematopoietic progenitors, mast cells, interstitial cells of Cajal, melanocytes, germ cells and some epithelia.</td></tr><tr><th>Positive disease</th><td>AML subset, mast cell disease, GIST, seminoma/dysgerminoma, melanoma and other non-heme tumors.</td></tr><tr><th>Usually negative</th><td>Many lymphoid neoplasms; CD117 positivity does not establish myeloid lineage alone.</td></tr></table>
+<div class="note"><b>Pearl:</b> CD117 highlights both blasts and mast cells; distinguish by morphology, distribution and tryptase/CD25/CD2/CD30.</div>
+</div></details>
+<details class="card marker" id="ECAD"><summary>E-cadherin <span class="badge m">erythroid / epithelial adhesion</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>In bone marrow, highlights immature erythroid precursors and supports erythroid differentiation, including pure erythroid leukemia.</li><li>Non-heme use: distinguishes ductal from lobular breast lesions and helps evaluate tumors with discohesive growth.</li></ul>
+<table><tr><th>Pattern</th><td>Membranous in epithelial cells; membranous staining in erythroid precursors.</td></tr><tr><th>Normal</th><td>Most epithelial cells and hematopoietic erythroid precursors.</td></tr><tr><th>Positive disease</th><td>Erythroid proliferations/pure erythroid leukemia; most ductal carcinomas and many carcinomas.</td></tr><tr><th>Negative/lost</th><td>Lobular breast carcinoma, diffuse-type gastric carcinoma subset, solid pseudopapillary neoplasm of pancreas, plasmacytoid urothelial carcinoma subset.</td></tr></table>
+<div class="warn"><b>Pitfall:</b> In breast pathology, morphology takes precedence because aberrant E-cadherin staining can occur. In marrow, interpret with glycophorin/hemoglobin A when needed.</div>
+</div></details>
+<details class="card marker" id="MPO"><summary>MPO / Myeloperoxidase <span class="badge m">myeloid lineage</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Most useful tissue marker for granulocytic/myeloid differentiation in AML and myeloid sarcoma.</li><li>Part of initial marrow screening with CD34, CD117, CD61 and erythroid markers.</li><li>Helps AML subtyping; flow/cytochemistry may be more sensitive in some contexts.</li></ul>
+<table><tr><th>Pattern</th><td>Diffuse granular cytoplasmic staining reflecting primary granules.</td></tr><tr><th>Normal</th><td>Neutrophils, eosinophils, myeloid precursors/myeloblasts; monocytes/histiocytes variable and usually less granular.</td></tr><tr><th>Positive disease</th><td>AML with granulocytic differentiation, APL, AML with maturation, AML with inv(16), myeloid sarcoma, leukemia cutis.</td></tr><tr><th>Usually negative</th><td>ALL, acute monoblastic/monocytic leukemia often negative/weak, acute megakaryoblastic leukemia, pure erythroid leukemia, BPDCN, histiocytic sarcoma, systemic mastocytosis.</td></tr></table>
+<div class="warn"><b>Pitfall:</b> Rare ALL can show isolated MPO by IHC/flow; do not classify lineage from MPO alone if the overall phenotype is discordant.</div>
+</div></details>
+<details class="card marker" id="TdT"><summary>TdT <span class="badge m">lymphoblast / thymocyte</span></summary><div class="cardbody">
+<h3>Use</h3><ul><li>Identifies immature lymphoid precursors in B-ALL/LBL and T-ALL/LBL.</li><li>Helpful when CD45 is negative/dim and the differential includes small round blue cell tumor.</li><li>Highlights thymocytes in thymoma; usually absent in thymic carcinoma.</li></ul>
+<table><tr><th>Pattern</th><td>Nuclear staining.</td></tr><tr><th>Normal</th><td>Early hematogones, progenitor T cells and cortical thymocytes.</td></tr><tr><th>Positive disease</th><td>B-ALL/LBL, T-ALL/LBL, mixed phenotype acute leukemia, BPDCN subset, thymoma-associated thymocytes; non-heme exceptions include Merkel cell carcinoma and germ cell tumors.</td></tr><tr><th>Usually negative</th><td>Mature B-cell malignancies, Burkitt lymphoma, DLBCL, mantle cell lymphoma, most AML, Ewing sarcoma, thymic carcinoma.</td></tr></table>
+<div class="note"><b>Pearl:</b> TdT-negative B-ALL can occur, particularly with KMT2A rearrangements; use full precursor panel and genetics.</div>
+</div></details>
+</section>
+<section class="section" id="diff"><h2>Differential Tables</h2>
+<h3>Hodgkin differential</h3>
+<table><tr><th>Entity</th><th>CD30</th><th>CD15</th><th>PAX5</th><th>CD20</th><th>CD45</th><th>EBER</th></tr>
+<tr><td>Classical Hodgkin lymphoma</td><td class="yes">+++</td><td class="yes">+</td><td class="weak">weak +</td><td class="var">variable</td><td class="no">−</td><td class="var">variable</td></tr>
+<tr><td>NLPHL</td><td class="no">−</td><td class="no">−</td><td class="yes">strong +</td><td class="yes">+</td><td class="yes">+</td><td class="no">−</td></tr>
+<tr><td>ALCL</td><td class="yes">+++</td><td class="no">usually −</td><td class="no">−</td><td class="no">−</td><td class="var">variable</td><td class="no">−</td></tr>
+<tr><td>PMBL / gray zone</td><td class="var">variable +</td><td class="var">variable</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="var">variable</td></tr></table>
+<h3>CD5-positive small B-cell lymphoma</h3>
+<table><tr><th>Entity</th><th>CD5</th><th>CD23</th><th>LEF1</th><th>Cyclin D1</th><th>SOX11</th><th>CD20</th></tr>
+<tr><td>CLL/SLL</td><td class="yes">+</td><td class="yes">+</td><td class="yes">+</td><td class="no">−</td><td class="no">−</td><td class="var">dim</td></tr>
+<tr><td>Mantle cell lymphoma</td><td class="yes">+</td><td class="no">usually −</td><td class="no">−</td><td class="yes">+</td><td class="yes">+</td><td class="yes">strong</td></tr>
+<tr><td>CD5+ MZL / others</td><td class="yes">+</td><td class="no">−</td><td class="no">−</td><td class="no">−</td><td class="no">−</td><td class="yes">+</td></tr></table>
+<h3>Blast / acute leukemia orientation</h3>
+<table><tr><th>Lineage/process</th><th>Useful markers</th><th>Typical interpretation</th></tr>
+<tr><td>Myeloid blasts</td><td>CD34, CD117, MPO</td><td>CD34/CD117 highlight immaturity; MPO supports granulocytic/myeloid differentiation.</td></tr>
+<tr><td>B lymphoblasts</td><td>TdT, PAX5, CD34, CD10, CD20 variable</td><td>TdT nuclear; PAX5 confirms B lineage; CD10 may be absent in pro-B/KMT2A cases.</td></tr>
+<tr><td>T lymphoblasts</td><td>TdT, cytoplasmic CD3, CD5, CD7, CD4/CD8</td><td>cCD3 is lineage-defining; TdT supports precursor state.</td></tr>
+<tr><td>Monocytic/myeloid sarcoma</td><td>CD68, lysozyme, CD4, CD33, MPO variable</td><td>CD68/lysozyme support monocytic differentiation; MPO may be negative in pure monocytic lesions.</td></tr>
+<tr><td>Erythroid proliferation</td><td>E-cadherin, hemoglobin A/glycophorin, CD71</td><td>E-cadherin highlights immature erythroid islands/blasts.</td></tr></table>
+</section>
+<section class="section" id="special"><h2>Infectious &amp; Special Stains</h2>
+<div class="grid">
+<div class="mini"><h4>Infectious</h4><p><span class="badge i">AFB</span> mycobacteria<br/><span class="badge i">GMS</span> fungi/PJP<br/><span class="badge i">PAS</span> fungi, storage material<br/><span class="badge i">Warthin-Starry</span> spirochetes / Bartonella<br/><span class="badge i">CMV</span> viral inclusions<br/><span class="badge i">HHV8</span> PEL, Kaposi, MCD<br/><span class="badge i">EBER</span> latent EBV</p></div>
+<div class="mini"><h4>Bone marrow special stains</h4><p><span class="badge s">Iron</span> storage iron/ring sideroblasts<br/><span class="badge s">Reticulin</span> fibrosis grading<br/><span class="badge s">Masson trichrome</span> collagen fibrosis<br/><span class="badge s">PAS</span> megakaryocytes/glycogen<br/><span class="badge s">Congo red</span> amyloid</p></div>
+<div class="mini"><h4>Bone marrow IHC groups</h4><p><b>Blasts:</b> CD34, CD117, TdT<br/><b>Myeloid:</b> MPO, CD68, lysozyme<br/><b>Erythroid:</b> E-cadherin, hemoglobin A<br/><b>Megakaryocytes:</b> CD41, CD61, Factor VIII<br/><b>Mast cells:</b> CD117, tryptase, CD25, CD2, CD30</p></div>
+</div>
+</section>
+<section class="section" id="index"><h2>Marker Index</h2>
+<p><span class="badge b">B cell</span> CD10 CD19 CD20 CD23 CD79a PAX5 BCL2 BCL6 LEF1 SOX11 Cyclin D1 kappa lambda</p>
+<p><span class="badge t">T/NK</span> CD2 CD3 CD4 CD5 CD7 CD8 CD56 TIA1 Granzyme B Perforin TCRβF1 TCRγδ PD1 ICOS CXCL13</p>
+<p><span class="badge m">Myeloid/acute leukemia</span> CD34 CD117 MPO TdT CD68 CD163 NPM1 E-cadherin CD41 CD61 lysozyme CD71 hemoglobin A</p>
+<p><span class="badge p">Plasma cell</span> CD138 CD38 MUM1 CD56 Cyclin D1 kappa lambda</p>
+<p><span class="badge i">Infectious/special</span> EBER LMP1 CMV HHV8 AFB GMS PAS Warthin-Starry Iron Reticulin Trichrome</p>
+</section>
+<div class="footer">For diagnostic support only. Interpret all stains with morphology, clinical context, flow cytometry, cytogenetics/molecular results, and local antibody validation.</div>
+</main></div>
+<script>
+function copyText(id){navigator.clipboard.writeText(document.getElementById(id).innerText)}
+function filterCards(){
+ const q=document.getElementById('search').value.toLowerCase().trim();
+ document.querySelectorAll('.marker').forEach(c=>{c.classList.toggle('hidden', q && !c.innerText.toLowerCase().includes(q)); if(q && !c.classList.contains('hidden')) c.open=true;});
+}
+</script>
+<h2>Additional Mature B-cell Markers (from uploaded reference)</h2><table border="1" style="border-collapse:collapse;width:100%"><tr><th>Marker</th><th>Diagnostic utility</th></tr><tr><td>CD200</td><td>Strong in CLL/SLL; helps distinguish from mantle cell lymphoma.</td></tr><tr><td>LEF1</td><td>Highly supportive of CLL/SLL; nuclear stain; normal T cells also positive.</td></tr><tr><td>ROR1</td><td>Characteristic of CLL/SLL; useful adjunct.</td></tr><tr><td>CD81</td><td>Typically dim in CLL/SLL.</td></tr><tr><td>CD49d</td><td>Adverse prognostic marker in CLL.</td></tr><tr><td>CD38</td><td>Prognostic marker in CLL; plasma cell marker.</td></tr><tr><td>FMC7</td><td>Usually negative in CLL; positive in MCL, SMZL and many other B-cell lymphomas.</td></tr><tr><td>CD79b</td><td>Weak/negative in typical CLL; strong in MCL and others.</td></tr><tr><td>CD103</td><td>Hairy cell leukemia marker.</td></tr><tr><td>CD25</td><td>Hairy cell leukemia marker; also therapeutic target.</td></tr><tr><td>CD11c</td><td>Hairy cell leukemia; variable in SMZL/CLL.</td></tr><tr><td>Annexin A1</td><td>Highly specific for classic hairy cell leukemia.</td></tr><tr><td>Cyclin D1</td><td>Mantle cell lymphoma; rare proliferation-center positivity in CLL.</td></tr><tr><td>SOX11</td><td>Mantle cell lymphoma (especially cyclin D1-negative cases).</td></tr><tr><td>BCL2</td><td>Follicular lymphoma t(14;18); anti-apoptotic marker.</td></tr><tr><td>MYC</td><td>Burkitt lymphoma and high-grade B-cell lymphoma.</td></tr></table></body>
+</html>
