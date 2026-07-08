@@ -635,7 +635,13 @@
     <div class="inner">
       <div class="sectionTitle">Special stains / Fibrosis stains</div>
       <div class="grid2">
-        <div><label>AFB/Fite/GMS</label><select id="organisms"><option></option><option>Definite mycobacterial and fungal elements are not appreciated on AFB, Fite, and GMS stains performed on the bone marrow core biopsy.</option><option>Not performed.</option></select></div>
+        <div><label>AFB/Fite/GMS</label><select id="organisms">
+          <option value="" selected>Not applicable / leave blank</option>
+          <option value="Definite mycobacterial and fungal elements are not appreciated on AFB, Fite, and GMS stains performed on the bone marrow core biopsy.">Negative for mycobacterial and fungal organisms</option>
+          <option value="Definite fungal organisms are identified on special stains.">Positive fungal organisms</option>
+          <option value="Definite acid-fast bacilli are identified on special stains.">Positive AFB</option>
+          <option value="Not performed.">Not performed</option>
+        </select></div>
         <div><label>EBER</label><select id="eber"><option></option><option>EBV-positive cells are not appreciated by in situ hybridization performed on the bone marrow core biopsy.</option><option>EBER highlights rare scattered cells.</option><option>EBER is positive in the abnormal infiltrate.</option></select></div>
         <div><label>Congo Red</label><select id="congo"><option></option><option>Definite polarizable amyloid is not appreciated on a Congo red stain performed on the bone marrow core biopsy.</option><option>Congo red stain shows polarizable amyloid deposition.</option></select></div>
       </div>
