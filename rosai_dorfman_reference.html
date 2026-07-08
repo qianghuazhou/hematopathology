@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rosai-Dorfman Disease Reference & Report Helper</title>
+<style>
+:root{
+  --bg:#f5f7fb; --card:#ffffff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb;
+  --accent:#2563eb; --accent2:#eff6ff; --warn:#fff7ed; --danger:#fef2f2; --ok:#f0fdf4;
+  --purple:#7c3aed; --purple2:#f5f3ff; --teal:#0f766e; --teal2:#f0fdfa;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+header{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:white;padding:28px 22px}
+header h1{margin:0 0 6px;font-size:26px;letter-spacing:.2px;color:white}
+header p{margin:0;color:#dbeafe;font-size:14px}
+nav{position:sticky;top:0;z-index:5;background:#ffffffcc;backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.navwrap{max-width:1240px;margin:0 auto;padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.navwrap a,.pill{font-size:12px;font-weight:700;text-decoration:none;color:#1f2937;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:999px;padding:6px 10px}
+.navwrap a:hover{background:var(--accent2);border-color:#bfdbfe;color:#1d4ed8}
+main{max-width:1240px;margin:22px auto;padding:0 16px 42px;display:grid;grid-template-columns:1.08fr .92fr;gap:18px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(15,23,42,.06);margin-bottom:18px}
+h2{font-size:18px;margin:0 0 14px;color:#0f172a;border-bottom:1px solid var(--line);padding-bottom:6px}
+h3{font-size:15px;margin:16px 0 8px;color:#0f172a}
+h4{font-size:13px;margin:12px 0 6px;color:#374151}
+p{margin:8px 0}.muted{color:var(--muted);font-size:13px}.small{font-size:12px}.red{color:#991b1b}.green{color:#166534}.blue{color:#1d4ed8}
+ul{margin:8px 0 8px 20px;padding:0}li{margin:4px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.card{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}.card.ok{background:var(--ok)}.card.warn{background:var(--warn)}.card.danger{background:var(--danger)}.card.blue{background:var(--accent2)}.card.purple{background:var(--purple2)}.card.teal{background:var(--teal2)}
+.tag{display:inline-block;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;margin:2px 4px 2px 0;background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}.tag.blue{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}.tag.red{background:#fef2f2;color:#991b1b;border-color:#fecaca}.tag.purple{background:#f5f3ff;color:#6d28d9;border-color:#ddd6fe}.tag.gray{background:#f3f4f6;color:#374151;border-color:#e5e7eb}
+.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{border:1px solid var(--line);padding:8px;vertical-align:top}.table th{background:#f8fafc;text-align:left;color:#374151}
+label{display:block;font-weight:700;font-size:13px;color:#374151;margin:12px 0 6px}input,select,textarea{width:100%;border:1px solid #d1d5db;border-radius:10px;padding:10px 11px;font-size:14px;background:white;color:var(--ink);outline:none}textarea{min-height:74px;resize:vertical;font-family:Arial,Helvetica,sans-serif}input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.checkrow{display:flex;align-items:center;gap:9px;margin:8px 0 0;font-weight:600;color:#374151;padding:0}.checkrow input{width:auto}.score-grid{display:grid;grid-template-columns:1fr 110px;gap:8px;align-items:center;margin-bottom:8px}.score-grid label{margin:0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}button{border:0;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;font-size:14px;background:var(--accent);color:white}button.secondary{background:#e5e7eb;color:#111827}button.danger{background:#fee2e2;color:#991b1b}
+pre{white-space:pre-wrap;word-wrap:break-word;margin:0;font-family:Consolas,Menlo,monospace;font-size:13px;line-height:1.5;background:#0b1220;color:#e5e7eb;border-radius:14px;border:0;padding:16px;min-height:520px}.rightcol{position:sticky;top:64px;align-self:start}.highlight{border-left:4px solid var(--accent);padding-left:12px;background:#f8fafc;border-radius:10px;padding-top:8px;padding-bottom:8px}
+.searchbox{display:flex;gap:8px}.searchbox input{margin:0}.hidden{display:none!important}.result-count{font-size:12px;color:var(--muted);margin-top:6px}
+@media(max-width:980px){main,.grid2,.grid3{grid-template-columns:1fr}.rightcol{position:static}pre{min-height:360px}}
+@media print{body{background:white}header,nav,.actions,.searchbox,.result-count{display:none}main{display:block;margin:0;padding:0}.panel{box-shadow:none;border:0;break-inside:avoid}pre{color:black;background:white;border:0;padding:0}.rightcol{position:static}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Rosai-Dorfman Disease Reference & Report Helper</h1>
+  <p>Daily-practice diagnostic page: key morphology, IHC profile, IgG4 overlap, differential diagnosis, and sign-out generator</p>
+</header>
+<nav><div class="navwrap">
+  <a href="#diagnosis">Diagnosis</a><a href="#morphology">Morphology</a><a href="#ihc">IHC</a><a href="#igg4">IgG4 overlap</a><a href="#ddx">Differential</a><a href="#workup">Workup</a><a href="#generator">Report generator</a>
+  <span class="pill">RDD: S100+, OCT2+, CD68/CD163+, CD1a-/langerin-</span>
+</div></nav>
+<main>
+<section>
+  <section class="panel" id="diagnosis">
+    <h2>Diagnostic essence</h2>
+    <div class="grid3">
+      <div class="card blue"><h3>Pattern</h3><p><b>Nodal RDD</b>: preserved but distorted architecture with markedly dilated sinuses filled by pale histiocytes, lymphocytes and plasma cells.</p></div>
+      <div class="card ok"><h3>Cell</h3><p>Large histiocytes with abundant eosinophilic cytoplasm, vesicular round/central nuclei, distinct nucleoli, and <b>emperipolesis</b>.</p></div>
+      <div class="card purple"><h3>Phenotype</h3><p><b>S100+</b>, <b>OCT-2+</b>, CD68/CD163+, cyclin D1 and/or pERK often positive; <b>CD1a-</b>, <b>CD207/langerin-</b>.</p></div>
+    </div>
+    <div class="highlight"><b>Practical diagnostic line:</b> RDD is favored when characteristic histiocytes with emperipolesis are present in a compatible pattern and show S100/OCT2 positivity with absence of CD1a/langerin. In extranodal lesions, emperipolesis may be focal or absent; the immunophenotype becomes more important.</div>
+    <p><span class="tag blue">Older term</span> Sinus histiocytosis with massive lymphadenopathy <span class="tag purple">Current term</span> Rosai-Dorfman disease / Rosai-Dorfman-Destombes disease</p>
+  </section>
+
+  <section class="panel" id="morphology">
+    <h2>Morphology checklist</h2>
+    <div class="grid2">
+      <div class="card"><h3>Nodal disease</h3><ul><li>Architecture often intact but distorted.</li><li>Marked sinus dilatation.</li><li>Sinuses filled by RDD histiocytes.</li><li>Emperipolesis of lymphocytes, plasma cells, neutrophils or RBCs.</li><li>Often many plasma cells between sinuses.</li><li>Reactive follicles may be present.</li><li>Sclerosis is common.</li><li>Mitotic figures are uncommon.</li></ul></div>
+      <div class="card"><h3>Extranodal disease</h3><ul><li>May form a mass in skin/subcutis, bone, head/neck, upper respiratory tract, kidney, breast, dura, or other sites.</li><li>Sinusoidal pattern is absent outside lymph node.</li><li>RDD histiocytes may be sparse.</li><li>Emperipolesis may be minimal or absent.</li><li>Fibrosis and plasma cells can be prominent.</li></ul></div>
+    </div>
+    <h3>Helpful cytology clue</h3>
+    <p>Large histiocytes with abundant cytoplasm and well-defined borders, central nuclei, prominent nucleoli, and engulfed viable inflammatory cells. Early lesions may show many lymphocytes/immunoblasts; late lesions may show more plasma cells and Russell bodies.</p>
+  </section>
+
+  <section class="panel" id="ihc">
+    <h2>Ancillary tests / immunophenotype</h2>
+    <table class="table">
+      <tr><th>Marker group</th><th>Expected result / use</th></tr>
+      <tr><td><b>Core RDD markers</b></td><td>S100 positive; OCT-2 positive. S100 often highlights cytoplasm and negatively outlines engulfed lymphocytes.</td></tr>
+      <tr><td><b>Histiocyte markers</b></td><td>CD68, CD163, CD14, CD64 positive; CD11c/CD31 may be positive.</td></tr>
+      <tr><td><b>MAPK activation surrogates</b></td><td>Cyclin D1 and/or pERK may be positive; MAPK pathway mutations occur in a subset.</td></tr>
+      <tr><td><b>Negative markers</b></td><td>CD1a negative; CD207/langerin negative; CD21/CD23/CD35 negative in histiocytes; keratin, melanocytic markers, B/T markers negative in RDD histiocytes.</td></tr>
+      <tr><td><b>Plasma cells / flow</b></td><td>Usually polytypic plasma cells; B and T cells usually polytypic/normal by flow. Evaluate clonality if plasma cells are prominent.</td></tr>
+      <tr><td><b>Viruses</b></td><td>EBER, HHV8, CMV and HHV6 are expected negative in RDD; positivity should prompt reconsideration or associated process.</td></tr>
+    </table>
+  </section>
+
+  <section class="panel" id="igg4">
+    <h2>IgG4-related disease overlap</h2>
+    <div class="grid2">
+      <div class="card warn"><h3>Important pitfall</h3><p>RDD can show increased IgG4-positive plasma cells. Increased IgG4 cells alone do <b>not</b> establish IgG4-related disease.</p></div>
+      <div class="card blue"><h3>Typical IgG4-RD lymph node clue</h3><p>IgG4-RD lymph nodes may show follicular hyperplasia, PTGC-like changes, interfollicular expansion, Castleman-like pattern, or inflammatory pseudotumor-like changes.</p></div>
+    </div>
+    <p>Practical approach: report the IgG4 count/ratio when increased, but emphasize correlation with serum IgG4, systemic organ involvement, storiform fibrosis/obliterative phlebitis in extranodal tissue, and exclusion of RDD when RDD histiocytes are present.</p>
+  </section>
+
+  <section class="panel" id="ddx">
+    <h2>Differential diagnosis</h2>
+    <div class="searchbox"><input id="filter" placeholder="Filter differential, e.g. LCH, IgG4, ALCL, melanoma..." oninput="filterCards()" /><button class="secondary" onclick="document.getElementById('filter').value='';filterCards();">Clear</button></div><div class="result-count" id="count"></div>
+    <div id="ddxCards" class="grid2" style="margin-top:12px">
+      <div class="card ddx" data-terms="langerhans lch cd1a langerin eosinophils"><h3>Langerhans cell histiocytosis</h3><p>Can expand sinuses. Grooved/folded nuclei, eosinophils and necrosis are common. <b>S100+, CD1a+, langerin/CD207+</b>; OCT2 negative. No true emperipolesis.</p></div>
+      <div class="card ddx" data-terms="erdheim chester ecd braf touton long bone"><h3>Erdheim-Chester disease</h3><p>Extranodal disease with foamy histiocytes, Touton-like giant cells and fibrosis; long bone involvement common. CD68+, factor XIIIa+, usually <b>S100-, CD1a-, langerin-, OCT2-</b>.</p></div>
+      <div class="card ddx" data-terms="igg4 related disease plasma cells fibrosis castleman"><h3>IgG4-related disease</h3><p>May show increased IgG4+ plasma cells and sclerosis, including Castleman-like lymph node pattern. No RDD histiocytes/emperipolesis.</p></div>
+      <div class="card ddx" data-terms="granulomatous infection necrosis histiocytes"><h3>Chronic granulomatous inflammation</h3><p>Necrosis and mixed acute/chronic inflammation may be present. Epithelioid histiocytes, multinucleated giant cells; organisms may be identified. Histiocytes do not resemble RDD.</p></div>
+      <div class="card ddx" data-terms="histiocytic sarcoma atypia mitotic"><h3>Histiocytic sarcoma</h3><p>Architectural effacement, cytologic atypia and mitotic activity. Phagocytosis can occur but true emperipolesis is not prominent.</p></div>
+      <div class="card ddx" data-terms="metastatic melanoma carcinoma keratin hmb45 mart1"><h3>Metastatic melanoma/carcinoma</h3><p>Sinusoidal metastasis can mimic sinus process. Look for cohesive atypical cells; melanoma markers or keratins support metastasis.</p></div>
+      <div class="card ddx" data-terms="alcl anaplastic large cell lymphoma cd30 alk sinusoidal"><h3>Anaplastic large cell lymphoma</h3><p>May show sinusoidal involvement. Large atypical CD30+ cells, ALK positive or negative; S100 negative. Consider T-cell markers and TCR studies.</p></div>
+      <div class="card ddx" data-terms="classic hodgkin lymphoma cd30 cd15 pax5"><h3>Classic Hodgkin lymphoma</h3><p>Rarely sinus-predominant. HRS cells CD30+, CD15+/-, weak PAX5+, CD45-, S100-; eosinophils often present.</p></div>
+      <div class="card ddx" data-terms="toxoplasma monocytoid b cells follicular hyperplasia epithelioid"><h3>Toxoplasma lymphadenitis</h3><p>Triad: follicular hyperplasia, monocytoid B-cell sinusoidal expansion, and epithelioid histiocytes encroaching on germinal centers.</p></div>
+      <div class="card ddx" data-terms="sinus histiocytosis reactive breast carcinoma"><h3>Reactive sinus histiocytosis</h3><p>Nonspecific sinus expansion by smaller benign histiocytes with less cytoplasm; no characteristic RDD cytology or emperipolesis; S100 negative or focal.</p></div>
+    </div>
+  </section>
+
+  <section class="panel" id="workup">
+    <h2>Suggested workup</h2>
+    <div class="grid2">
+      <div class="card"><h3>Minimum diagnostic panel</h3><p><span class="tag">S100</span><span class="tag">OCT2</span><span class="tag">CD68/CD163</span><span class="tag red">CD1a</span><span class="tag red">Langerin/CD207</span></p><p class="muted">Add keratin, SOX10/MART1/HMB45, CD30/ALK, EBER/HHV8, or infectious stains as dictated by morphology.</p></div>
+      <div class="card"><h3>When to add molecular</h3><p>Consider MAPK pathway testing in multifocal, recurrent, refractory, extranodal, or clinically aggressive disease, or when targeted therapy is being considered.</p></div>
+      <div class="card"><h3>When plasma cells are prominent</h3><p>Assess kappa/lambda, IgG/IgG4 if clinically relevant, and correlate with SPEP/IFE, serum free light chains, serum IgG4, autoimmune features and systemic disease.</p></div>
+      <div class="card"><h3>Associated diseases</h3><p>RDD can coexist with lymphoma or other histiocytic disorders. A focal RDD component should not distract from evaluation of a separate neoplasm.</p></div>
+    </div>
+  </section>
+</section>
+
+<aside class="rightcol" id="generator">
+  <section class="panel">
+    <h2>Report generator</h2>
+    <div class="grid2"><div><label>Specimen site</label><input id="site" value="Lymph node, site" /></div><div><label>Procedure</label><select id="procedure"><option>Excision</option><option>Core biopsy</option><option>Biopsy</option><option>FNA/cell block</option></select></div></div>
+    <label>Clinical history</label><textarea id="clinical" placeholder="Lymphadenopathy, extranodal mass, autoimmune disease, lymphoma history, IgG4 concern..."></textarea>
+    <h3>Morphology</h3>
+    <div class="score-grid"><label>Sinus dilatation / RDD distribution</label><select id="sinus"><option>Absent</option><option>Mild</option><option>Moderate</option><option selected>Marked</option><option>Extranodal/infiltrative</option></select></div>
+    <div class="score-grid"><label>RDD histiocytes</label><select id="histiocytes"><option>Absent</option><option>Focal</option><option selected>Present</option><option>Numerous</option></select></div>
+    <div class="score-grid"><label>Emperipolesis</label><select id="emper"><option>Absent</option><option>Rare/focal</option><option selected>Present</option><option>Prominent</option></select></div>
+    <div class="score-grid"><label>Plasmacytosis</label><select id="plasma"><option>Absent</option><option>Mild</option><option selected>Moderate</option><option>Marked</option></select></div>
+    <label class="checkrow"><input type="checkbox" id="sclerosis" checked /> Sclerosis/fibrosis present</label>
+    <label class="checkrow"><input type="checkbox" id="reactiveFol" checked /> Reactive follicles present</label>
+    <label class="checkrow"><input type="checkbox" id="necrosis" /> Necrosis/infarct present</label>
+    <h3>IHC / ancillary</h3>
+    <div class="grid2"><div><label>S100</label><select id="s100"><option selected>Positive</option><option>Negative</option><option>Pending</option></select></div><div><label>OCT2</label><select id="oct2"><option selected>Positive</option><option>Negative</option><option>Pending</option><option>Not performed</option></select></div></div>
+    <div class="grid2"><div><label>CD68/CD163</label><select id="hmark"><option selected>Positive</option><option>Negative</option><option>Pending</option></select></div><div><label>CD1a/langerin</label><select id="lchmark"><option selected>Negative</option><option>Positive</option><option>Pending</option></select></div></div>
+    <div class="grid2"><div><label>EBER/HHV8/CMV</label><select id="virus"><option selected>Negative</option><option>Positive</option><option>Pending</option><option>Not performed</option></select></div><div><label>Plasma cell clonality</label><select id="clonality"><option selected>Polytypic</option><option>Lambda-restricted</option><option>Kappa-restricted</option><option>Pending</option><option>Not assessed</option></select></div></div>
+    <div class="grid2"><div><label>IgG4</label><select id="igg4"><option>Not increased</option><option>Mildly increased</option><option>Increased</option><option>Pending</option><option selected>Not assessed</option></select></div><div><label>Favored diagnosis</label><select id="favored"><option selected>Rosai-Dorfman disease</option><option>Focal Rosai-Dorfman disease-like change</option><option>Suspicious for Rosai-Dorfman disease</option><option>Sinus histiocytosis; insufficient for RDD</option></select></div></div>
+    <label>Additional comment</label><textarea id="extra" placeholder="Correlation, associated lymphoma, molecular testing, etc."></textarea>
+    <div class="actions"><button onclick="generateReport()">Generate</button><button class="secondary" onclick="copyReport()">Copy</button><button class="secondary" onclick="shortComment()">Short comment</button><button class="danger" onclick="clearForm()">Clear</button></div>
+  </section>
+  <section class="panel"><h2>Generated report</h2><pre id="output"></pre></section>
+</aside>
+</main>
+<script>
+function v(id){return document.getElementById(id).value.trim()}
+function c(id){return document.getElementById(id).checked}
+function add(a,t){if(t&&String(t).trim())a.push(t)}
+function clean(txt){const map={"\u2013":"-","\u2014":"-","\u2212":"-","\u201c":"\"","\u201d":"\"","\u2018":"'","\u2019":"'","\u2265":">=","\u2264":"<=","\u00b1":"+/-","\u00d7":"x","\u03bc":"u","\u2022":"-","\u2026":"...","\u00a0":" "};return String(txt||"").replace(/[\u2013\u2014\u2212\u201c\u201d\u2018\u2019\u2265\u2264\u00b1\u00d7\u03bc\u2022\u2026\u00a0]/g,ch=>map[ch]||ch)}
+function morphSummary(){let f=[]; if(v('sinus')!=='Absent')f.push(v('sinus').toLowerCase()+" sinusoidal/RDD distribution"); if(v('histiocytes')!=='Absent')f.push(v('histiocytes').toLowerCase()+" large pale histiocytes"); if(v('emper')!=='Absent')f.push(v('emper').toLowerCase()+" emperipolesis"); if(v('plasma')!=='Absent')f.push(v('plasma').toLowerCase()+" plasmacytosis"); if(c('sclerosis'))f.push('sclerosis/fibrosis'); if(c('reactiveFol'))f.push('reactive follicles'); if(c('necrosis'))f.push('necrosis/infarct'); return f.length?f.join(', '):'no specific RDD features selected'}
+function dxLine(){const d=v('favored'); if(d==='Rosai-Dorfman disease')return '- Rosai-Dorfman disease. See comment.'; if(d==='Focal Rosai-Dorfman disease-like change')return '- Focal Rosai-Dorfman disease-like change. See comment.'; if(d==='Suspicious for Rosai-Dorfman disease')return '- Histiocytic proliferation suspicious for Rosai-Dorfman disease. See comment.'; return '- Sinus histiocytosis; the findings are insufficient for Rosai-Dorfman disease. See comment.'}
+function buildComment(){let l=[]; add(l,'Sections show '+morphSummary()+'.');
+ if(v('s100')==='Positive'&&v('oct2')==='Positive'&&v('lchmark')==='Negative') add(l,'The histiocytes are positive for S100 and OCT2 and negative for CD1a/langerin, supporting Rosai-Dorfman disease in the appropriate morphologic and clinical setting.');
+ else add(l,'The immunophenotype is not fully definitive: S100 '+v('s100')+', OCT2 '+v('oct2')+', CD1a/langerin '+v('lchmark')+'. Correlation with morphology and additional studies is recommended.');
+ if(v('virus')==='Positive') add(l,'Viral studies are reported positive; this is not typical for RDD and should prompt correlation/exclusion of an associated or alternative process.'); else if(v('virus')==='Negative') add(l,'EBER/HHV8/CMV studies are negative.');
+ if(v('clonality')==='Lambda-restricted'||v('clonality')==='Kappa-restricted') add(l,'Plasma cells show '+v('clonality').toLowerCase()+' light chain restriction; evaluate for an associated plasma cell neoplasm or other clonal process.'); else if(v('clonality')==='Polytypic') add(l,'Plasma cells are polytypic.');
+ if(v('igg4')==='Increased'||v('igg4')==='Mildly increased') add(l,'IgG4-positive plasma cells are '+v('igg4').toLowerCase()+'. Increased IgG4-positive plasma cells can be seen in RDD and are not by themselves diagnostic of IgG4-related disease. Correlate with serum IgG4 and systemic/extranodal findings.');
+ if(c('necrosis')) add(l,'Necrosis/infarct is unusual in RDD; superimposed infection or another process should be excluded if clinically indicated.');
+ if(v('extra')) add(l,v('extra')); return l.join('\n\n')}
+function generateReport(){let l=[]; add(l,'SPECIMEN(S)'); add(l,'A. '+v('site')+', '+v('procedure')); add(l,''); add(l,'CLINICAL HISTORY'); add(l,v('clinical')||'[Not provided]'); add(l,''); add(l,'DIAGNOSIS'); add(l,v('site')+', '+v('procedure')+':'); add(l,dxLine()); add(l,''); add(l,'COMMENT'); add(l,buildComment()); add(l,''); add(l,'MICROSCOPIC DESCRIPTION'); add(l,'Sections show '+morphSummary()+'. The histiocytes have abundant pale/eosinophilic cytoplasm with round to oval vesicular nuclei and visible nucleoli.'); add(l,''); add(l,'IMMUNOHISTOCHEMISTRY / ANCILLARY STUDIES'); add(l,'S100: '+v('s100')+'.'); add(l,'OCT2: '+v('oct2')+'.'); add(l,'CD68/CD163: '+v('hmark')+'.'); add(l,'CD1a/langerin: '+v('lchmark')+'.'); add(l,'EBER/HHV8/CMV: '+v('virus')+'.'); add(l,'Kappa/lambda: '+v('clonality')+'.'); add(l,'IgG4: '+v('igg4')+'.'); document.getElementById('output').textContent=clean(l.join('\n'))}
+function shortComment(){let s='COMMENT\nThe specimen shows '+morphSummary()+'. The histiocytes are S100 '+v('s100')+', OCT2 '+v('oct2')+', CD68/CD163 '+v('hmark')+', and CD1a/langerin '+v('lchmark')+'. The findings '+(v('favored').includes('insufficient')?'are not sufficient for Rosai-Dorfman disease.':'support '+v('favored').toLowerCase()+' in the appropriate clinical setting.')+' Correlation with clinical/radiologic findings and exclusion of mimics is recommended.'; document.getElementById('output').textContent=clean(s)}
+function copyReport(){navigator.clipboard.writeText(clean(document.getElementById('output').textContent))}
+function clearForm(){document.querySelectorAll('textarea').forEach(e=>e.value='');document.getElementById('site').value='Lymph node, site';document.querySelectorAll('select').forEach(e=>e.selectedIndex=0);document.getElementById('sinus').selectedIndex=3;document.getElementById('histiocytes').selectedIndex=2;document.getElementById('emper').selectedIndex=2;document.getElementById('plasma').selectedIndex=2;document.getElementById('oct2').selectedIndex=0;document.getElementById('igg4').selectedIndex=4;document.getElementById('favored').selectedIndex=0;document.querySelectorAll('input[type="checkbox"]').forEach(e=>e.checked=false);document.getElementById('sclerosis').checked=true;document.getElementById('reactiveFol').checked=true;generateReport()}
+function filterCards(){let q=document.getElementById('filter').value.toLowerCase().trim();let cards=[...document.querySelectorAll('.ddx')];let n=0;cards.forEach(card=>{let text=(card.innerText+' '+card.dataset.terms).toLowerCase();let show=!q||text.includes(q);card.classList.toggle('hidden',!show);if(show)n++});document.getElementById('count').textContent=n+' differential cards shown'}
+filterCards();generateReport();
+</script>
+</body>
+</html>
