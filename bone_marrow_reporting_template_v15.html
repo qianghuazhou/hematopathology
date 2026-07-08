@@ -635,15 +635,23 @@
     <div class="inner">
       <div class="sectionTitle">Special stains / Fibrosis stains</div>
       <div class="grid2">
-        <div><label>AFB/Fite/GMS</label><select id="organisms">
+        <div><label>Congo Red</label><select id="congo"><option value="" selected>Not applicable / leave blank</option><option>Congo Red: Definite polarizable amyloid is not appreciated.</option><option>Congo Red: Polarizable amyloid deposition is present.</option></select></div>
+        <div><label>Reticulin</label><select id="retic">
           <option value="" selected>Not applicable / leave blank</option>
-          <option value="Definite mycobacterial and fungal elements are not appreciated on AFB, Fite, and GMS stains performed on the bone marrow core biopsy.">Negative for mycobacterial and fungal organisms</option>
-          <option value="Definite fungal organisms are identified on special stains.">Positive fungal organisms</option>
-          <option value="Definite acid-fast bacilli are identified on special stains.">Positive AFB</option>
-          <option value="Not performed.">Not performed</option>
+          <option>Reticulin: Not increased (MF grade 0 of 3 fibrosis).</option>
+          <option>Reticulin: Mildly diffusely increased (MF grade 1 of 3 fibrosis).</option>
+          <option>Reticulin: Moderately increased (MF grade 2 of 3 fibrosis).</option>
+          <option>Reticulin: Markedly increased (MF grade 3 of 3 fibrosis).</option>
         </select></div>
-        <div><label>EBER</label><select id="eber"><option></option><option>EBV-positive cells are not appreciated by in situ hybridization performed on the bone marrow core biopsy.</option><option>EBER highlights rare scattered cells.</option><option>EBER is positive in the abnormal infiltrate.</option></select></div>
-        <div><label>Congo Red</label><select id="congo"><option></option><option>Definite polarizable amyloid is not appreciated on a Congo red stain performed on the bone marrow core biopsy.</option><option>Congo red stain shows polarizable amyloid deposition.</option></select></div>
+        <div><label>Trichrome</label><select id="trichrome">
+          <option value="" selected>Not applicable / leave blank</option>
+          <option>Trichrome: Not performed.</option>
+          <option>Trichrome: Not increased.</option>
+          <option>Trichrome: Perivascular collagen only.</option>
+          <option>Trichrome: Focal paratrabecular or central collagen deposition without a connecting meshwork.</option>
+          <option>Trichrome: Paratrabecular and/or central collagen deposition with focal connecting meshwork.</option>
+          <option>Trichrome: Diffuse connecting meshwork of collagen involving more than 30% of marrow spaces.</option>
+        </select></div>
       </div>
       <div class="sectionTitle">IHC</div>
       <div class="grid2">
@@ -656,24 +664,6 @@
         <div><label>CD20</label><textarea id="ihcCd20"></textarea></div>
       </div>
       <div class="row"><label>Additional IHC</label><textarea id="ihcExtra" style="min-height:70px"></textarea></div>
-      <div class="grid2">
-        <div><label>Reticulin</label><select id="retic">
-          <option></option>
-          <option>Reticulin: Not increased (MF grade 0 of 3 fibrosis).</option>
-          <option>Reticulin: Mildly diffusely increased (MF grade 1 of 3 fibrosis).</option>
-          <option>Reticulin: Moderately increased (MF grade 2 of 3 fibrosis).</option>
-          <option>Reticulin: Markedly increased (MF grade 3 of 3 fibrosis).</option>
-        </select></div>
-        <div><label>Trichrome</label><select id="trichrome">
-          <option></option>
-          <option>Trichrome: Not performed.</option>
-          <option>Trichrome: Not increased.</option>
-          <option>Trichrome: Perivascular collagen only.</option>
-          <option>Trichrome: Focal paratrabecular or central collagen deposition without a connecting meshwork.</option>
-          <option>Trichrome: Paratrabecular and/or central collagen deposition with focal connecting meshwork.</option>
-          <option>Trichrome: Diffuse connecting meshwork of collagen involving more than 30% of marrow spaces.</option>
-        </select></div>
-      </div>
       <div class="sectionTitle">Flow / Cytogenetics / Molecular</div>
       <div class="row"><label>Flow cytometry</label><textarea id="flow" placeholder="See separate report. / Not performed."></textarea></div>
       <div class="row"><label>Cytogenetics</label><textarea id="cyto" placeholder="Fixed cells are available at NYGH for up to 80 days from the date of this report."></textarea></div>
@@ -1084,10 +1074,6 @@ function trichromeLine(txt){
   return 'Trichrome: '+sent(t)+'\n';
 }
 
-function maybeAppend(parts, id){
-  const txt = v(id);
-  if(txt) parts.push(txt);
-}
 function lineageWithExtras(label, baseParts, extraIds, extentId){
   let parts = baseParts.slice();
   extraIds.forEach(id => maybeAppend(parts, id));
@@ -1250,8 +1236,6 @@ function finalizePresetInputs(){
   setIfBlank('ihcKappaLambda','shows no definite light chain restriction');
   setIfBlank('ihcCd3','highlights scattered small T cells');
   setIfBlank('ihcCd20','highlights scattered small B cells');
-  setIfBlank('organisms','Not performed.');
-  setIfBlank('eber','');
   setIfBlank('congo','');
   setIfBlank('flow','See separate report, if performed.');
   setIfBlank('cyto','Fixed cells are available at NYGH for up to 80 days from the date of this report.');
@@ -1413,8 +1397,6 @@ function generateReport(){
   r += '\n';
   r += section('ANCILLARY STUDIES');
   const specialLines=[];
-  if(v('organisms')) specialLines.push(v('organisms'));
-  if(v('eber')) specialLines.push(v('eber'));
   if(v('congo')) specialLines.push(v('congo'));
   if(v('retic')) specialLines.push(shortRetic2(v('retic')).trim());
   if(v('trichrome')) specialLines.push(trichromeLine(v('trichrome')).trim());
