@@ -1329,11 +1329,11 @@ function generateReport(){
   r += '\n';
   r += section('ANCILLARY STUDIES');
   if(v('organisms')) r += v('organisms')+'\n'; if(v('eber')) r += v('eber')+'\n'; if(v('congo')) r += v('congo')+'\n';
-  r += '\nImmunohistochemistry:\n';
+  r += '\nIMMUNOHISTOCHEMISTRY:\n';
   r += ihcLine2('ihcCd34','CD34'); r += ihcLine2('ihcCd117','CD117'); r += ihcLine2('ihcCd61','CD61'); r += ihcLine2('ihcCd138','CD138'); r += ihcLine2('ihcKappaLambda','Kappa/Lambda'); r += ihcLine2('ihcCd3','CD3'); r += ihcLine2('ihcCd20','CD20');
   if(v('ihcExtra')) r += v('ihcExtra')+'\n';
-  if(v('retic')||v('trichrome')){r += '\nFibrosis stains:\n'; if(v('retic')) r += shortRetic2(v('retic')); if(v('trichrome')) r += trichromeLine(v('trichrome'));}
-  r += '\nFlow cytometry:\n'+sent(v('flow')||'See separate report, if performed')+'\n';
+  if(v('retic')||v('trichrome')){r += '\nFIBROSIS STAINS:\n'; if(v('retic')) r += shortRetic2(v('retic')); if(v('trichrome')) r += trichromeLine(v('trichrome'));}
+  r += '\nFLOW CYTOMETRY:\n'+sent(v('flow')||'See separate report, if performed')+'\n';
   if(v('cyto')||checked('pendingCyto')) r += '\nCytogenetics:\n'+sent(v('cyto')||'Pending, will be reported as an addendum')+'\n';
   if(v('mol')||checked('pendingMol')) r += '\nMolecular:\n'+sent(v('mol')||'Pending, will be reported as an addendum')+'\n';
   if(v('addendum')){r += section('ADDENDUM'); r += v('addendum').trim()+'\n'; r += 'Diagnosis remains unchanged unless otherwise stated.\n';}
