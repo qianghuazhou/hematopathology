@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heme Flow Dx Support Tool</title>
+<style>
+  :root{--bg:#f7f8fb;--card:#fff;--ink:#1f2937;--muted:#6b7280;--line:#d9dee8;--accent:#2563eb;--good:#047857;--warn:#b45309;--bad:#b91c1c;}
+  body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);margin:0;padding:18px;}
+  h1{margin:0 0 6px;font-size:26px}.sub{color:var(--muted);margin-bottom:16px;line-height:1.35}
+  .grid{display:grid;grid-template-columns:380px 1fr;gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 1px 2px #0001}.sticky{position:sticky;top:12px;align-self:start}
+  label{font-weight:700;font-size:13px;display:block;margin:10px 0 4px} input,select,textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:9px;padding:8px;background:#fff;font-size:14px} textarea{min-height:76px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}button{border:0;border-radius:10px;padding:9px 12px;font-weight:700;cursor:pointer;background:var(--accent);color:white}button.secondary{background:#e5e7eb;color:#111827}button.danger{background:#dc2626}
+  .markers{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:8px}.mk{border:1px solid var(--line);border-radius:10px;padding:7px;background:#fbfdff}.mk b{font-size:13px}.mk select{padding:5px;margin-top:4px;font-size:12px}.mk input{padding:5px;margin-top:4px;font-size:12px}
+  table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:#f3f4f6;position:sticky;top:0}.score{font-weight:800}.pill{display:inline-block;border-radius:999px;padding:2px 8px;font-size:12px;background:#eef2ff;color:#3730a3;margin:2px}.match{color:var(--good)}.mismatch{color:var(--bad)}.neutral{color:var(--muted)}
+  .sectionTitle{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}.small{font-size:12px;color:var(--muted)}.warn{background:#fff7ed;border-left:4px solid #f59e0b;padding:8px;border-radius:8px;color:#7c2d12}.out{white-space:pre-wrap;background:#0b1020;color:#e5e7eb;border-radius:12px;padding:12px;font-family:Consolas,monospace;font-size:13px}.hide{display:none}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}.sticky{position:static}}
+</style>
+</head>
+<body>
+<h1>Heme Flow Dx Support Tool</h1>
+<div class="sub">Practice-focused, transparent differential diagnosis support for hematopathology flow cytometry. Enter marker results, then generate a ranked differential and report-ready comment. Not a substitute for morphology, IHC, cytogenetics/molecular studies, or clinical correlation.</div>
+<div class="grid">
+  <div class="card sticky">
+    <div class="sectionTitle"><h2 style="margin:0;font-size:18px">Case input</h2><span class="small">v1.0</span></div>
+    <div class="row"><div><label>Specimen</label><select id="specimen"><option>Peripheral blood</option><option>Bone marrow</option><option>Lymph node</option><option>Body fluid</option><option>Tissue/FNA</option><option>Other</option></select></div><div><label>Population size</label><input id="popSize" placeholder="e.g. 12% leukocytes"></div></div>
+    <label>Clinical / morphology notes</label><textarea id="notes" placeholder="CBC, blasts, lymphadenopathy, morphology, viability, hemodilution, prior diagnosis..."></textarea>
+    <div class="row"><div><label>Light chain</label><select id="lightchain"><option value="">Not assessed / N/A</option><option>Kappa restricted</option><option>Lambda restricted</option><option>Polytypic</option><option>Negative/absent</option></select></div><div><label>Lineage focus</label><select id="focus"><option value="all">All</option><option value="b">B-cell</option><option value="t">T/NK</option><option value="myeloid">Myeloid/blast</option><option value="plasma">Plasma cell</option></select></div></div>
+    <div class="btns"><button onclick="scoreAll()">Score differential</button><button class="secondary" onclick="makeComment()">Generate comment</button><button class="secondary" onclick="copyOutput()">Copy output</button><button class="danger" onclick="resetAll()">Reset</button></div>
+    <p class="warn small">Use intensity and pattern in the free-text notes. This tool scores marker direction only; final diagnosis requires integrated interpretation.</p>
+  </div>
+  <div>
+    <div class="card">
+      <div class="sectionTitle"><h2 style="margin:0;font-size:18px">Markers</h2><span class="small">Positive / dim / partial count as supportive positivity</span></div>
+      <div id="markers" class="markers"></div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="sectionTitle"><h2 style="margin:0;font-size:18px">Ranked differential</h2><span id="summary" class="small"></span></div>
+      <table id="results"><thead><tr><th>Differential</th><th>Score</th><th>Supportive</th><th>Against / missing</th><th>Suggested next steps</th></tr></thead><tbody></tbody></table>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="sectionTitle"><h2 style="margin:0;font-size:18px">Report-ready text</h2><span class="small">editable after copy</span></div>
+      <div id="output" class="out">Click “Generate comment”.</div>
+    </div>
+  </div>
+</div>
+<script>
+const markerList=['CD45','CD34','CD117','HLA-DR','MPO','CD13','CD33','CD11b','CD14','CD64','CD36','CD41','CD61','TdT','CD19','CD20','CD22','CD79a','PAX5','CD10','CD5','CD23','FMC7','CD200','CD38','CD138','CD56','CD2','CD3','CD4','CD7','CD8','TRBC1','TCRgd','CD30','CD57','CD16','EBER'];
+const positive = new Set(['pos','dim','partial','bright']); const negative = new Set(['neg']);
+const entities=[
+{name:'CLL/SLL phenotype',cat:'b',need:['CD19','CD5','CD23','CD200'],anti:['CD10','CD103'],next:'Correlate with absolute clonal B-cell count, tissue involvement, LEF1/cyclin D1 if tissue, and CLL FISH/TP53 if clinically indicated.'},
+{name:'Mantle cell lymphoma',cat:'b',need:['CD19','CD20','CD5','FMC7'],anti:['CD23','CD10','CD200'],next:'Confirm with cyclin D1/SOX11 and t(11;14)/CCND1::IGH FISH.'},
+{name:'Follicular lymphoma',cat:'b',need:['CD19','CD20','CD10'],anti:['CD5','CD23'],next:'Correlate with follicular architecture; add BCL2, BCL6, CD21/CD23 FDC meshworks, Ki-67, and BCL2 rearrangement if needed.'},
+{name:'DLBCL / large B-cell lymphoma',cat:'b',need:['CD19','CD20'],anti:[],next:'Flow may be limited in large-cell lymphoma. Correlate with tissue morphology, CD10/BCL6/MUM1, MYC/BCL2, EBER, and FISH as indicated.'},
+{name:'Marginal zone lymphoma / LPL pattern',cat:'b',need:['CD19','CD20'],anti:['CD5','CD10','CD23'],next:'Correlate with site, plasmacytic differentiation, serum paraprotein, MYD88 if LPL is considered.'},
+{name:'Hairy cell leukemia',cat:'b',need:['CD19','CD20','CD11c','CD25','CD103','CD200'],anti:['CD5','CD10'],next:'Confirm with CD123, annexin A1, BRAF V600E, TRAP/DBA44 as appropriate.'},
+{name:'B-lymphoblastic leukemia/lymphoma',cat:'myeloid',need:['CD19','CD10','TdT','CD34','CD38'],anti:['sIg','MPO'],next:'Correlate with blasts, cytogenetics/FISH including BCR::ABL1, KMT2A, ETV6::RUNX1 and other ALL studies.'},
+{name:'AML, myeloid differentiation',cat:'myeloid',need:['CD34','CD117','MPO','CD13','CD33'],anti:['CD19','CD3'],next:'Correlate with blast count, morphology, cytochemistry/IHC, karyotype/FISH and AML NGS.'},
+{name:'AML with monocytic differentiation',cat:'myeloid',need:['CD33','CD64','CD14','CD11b','CD36'],anti:['CD19','CD3'],next:'Correlate with monoblast/promonocyte morphology, NSE if used, KMT2A and other genetics.'},
+{name:'Acute promyelocytic leukemia pattern',cat:'myeloid',need:['MPO','CD33'],anti:['CD34','HLA-DR'],next:'If suspected, urgent PML::RARA testing and clinical management correlation.'},
+{name:'Plasma cell neoplasm',cat:'plasma',need:['CD38','CD138','CD56'],anti:['CD19','CD45'],next:'Assess cytoplasmic light-chain restriction, CD117/CD20/cyclin D1, marrow plasma cell burden, SPEP/IFE/FLC and myeloma FISH.'},
+{name:'T-lymphoblastic leukemia/lymphoma',cat:'myeloid',need:['CD3','TdT','CD34','CD7'],anti:['CD19','MPO'],next:'Correlate with blast morphology, cytoplasmic/surface CD3, CD1a/CD4/CD8 pattern and T-ALL genetics.'},
+{name:'Peripheral T-cell lymphoma, NOS / aberrant T-cell population',cat:'t',need:['CD3','CD2','CD5','CD7'],anti:[],next:'Look for antigen loss, abnormal CD4/CD8, TRBC1 restriction, TCR clonality, CD30/PD1/ICOS/CXCL13 and tissue morphology.'},
+{name:'T-large granular lymphocytic leukemia',cat:'t',need:['CD3','CD8','CD57','CD16'],anti:['CD4'],next:'Correlate with persistent LGL count, cytopenias, STAT3/STAT5B mutation and TCR clonality.'},
+{name:'NK-cell population / NK-LGL',cat:'t',need:['CD56','CD16','CD57'],anti:['CD3'],next:'Correlate with CD2, cytoplasmic CD3 epsilon, EBER, clinical course and NK clonality limitations.'},
+{name:'Classic Hodgkin lymphoma not excluded by flow',cat:'b',need:['CD30'],anti:['CD45'],next:'Flow is usually not definitive for CHL. Correlate with tissue morphology and IHC: CD30, CD15, weak PAX5, MUM1, CD45, CD20, EBER.'}
+];
+function renderMarkers(){let h=''; markerList.forEach(m=>{h+=`<div class="mk"><b>${m}</b><select id="m_${m}"><option value="">NA</option><option value="pos">+</option><option value="dim">dim+</option><option value="partial">partial+</option><option value="bright">bright+</option><option value="neg">−</option></select></div>`}); document.getElementById('markers').innerHTML=h;}
+function val(m){let e=document.getElementById('m_'+m); return e?e.value:''}
+function markerText(m){let v=val(m); if(!v)return ''; return m+(v==='neg'?'−':v==='dim'?' dim+':v==='partial'?' partial+':v==='bright'?' bright+':'+')}
+function scoreEntity(e){let support=[],against=[],missing=[],score=0,max=0; e.need.forEach(m=>{max+=2; let v=val(m); if(positive.has(v)){score+=2; support.push(markerText(m));} else if(negative.has(v)){score-=2; against.push(m+' expected positive but is negative');} else missing.push(m)}); e.anti.forEach(m=>{max+=1; let v=val(m); if(negative.has(v)){score+=1; support.push(m+'−');} else if(positive.has(v)){score-=1.5; against.push(m+' is positive');} else missing.push(m)});
+ let lc=document.getElementById('lightchain').value; if(e.cat==='b' && (lc==='Kappa restricted'||lc==='Lambda restricted')){score+=2; max+=2; support.push(lc)} if(e.cat==='b' && lc==='Polytypic'){score-=2; against.push('polytypic light chains')}
+ let pct=Math.round(Math.max(0,Math.min(100,((score+max)/(2*max||1))*100))); return {...e,score,pct,support,against,missing};}
+function scoreAll(){let focus=document.getElementById('focus').value; let arr=entities.filter(e=>focus==='all'||e.cat===focus).map(scoreEntity).sort((a,b)=>b.score-a.score); let tb=document.querySelector('#results tbody'); tb.innerHTML=''; arr.forEach(r=>{let cls=r.pct>=70?'match':r.pct>=50?'warn':'mismatch'; tb.innerHTML+=`<tr><td><b>${r.name}</b></td><td class="score ${cls}">${r.pct}%</td><td>${r.support.slice(0,12).map(x=>`<span class="pill">${x}</span>`).join(' ')||'<span class="neutral">No supportive markers entered</span>'}</td><td>${r.against.map(x=>`<span class="pill" style="background:#fee2e2;color:#991b1b">${x}</span>`).join(' ')||'<span class="neutral">None from entered data</span>'}<br><span class="small">Missing key: ${r.missing.slice(0,8).join(', ')}</span></td><td>${r.next}</td></tr>`}); document.getElementById('summary').textContent=arr.length+' entities scored'; return arr;}
+function allEntered(){return markerList.map(markerText).filter(Boolean).join(', ')}
+function makeComment(){let arr=scoreAll(); let top=arr.slice(0,3); let specimen=document.getElementById('specimen').value, pop=document.getElementById('popSize').value||'not specified', notes=document.getElementById('notes').value.trim(); let markers=allEntered()||'No marker results entered.'; let text=`FLOW CYTOMETRY INTERPRETATION\nSpecimen: ${specimen}\nAbnormal/target population size: ${pop}\n\nEntered immunophenotype: ${markers}.\n\nRanked differential generated by this support tool:\n${top.map((r,i)=>`${i+1}. ${r.name} (${r.pct}% pattern support): supportive ${r.support.slice(0,10).join(', ')||'none entered'}${r.against.length?`; against: ${r.against.join(', ')}`:''}.`).join('\n')}\n\nSuggested integrated comment:\nThe flow cytometric findings should be interpreted in conjunction with morphology, immunohistochemistry, cytogenetic/molecular studies and clinical findings. Based on the entered marker pattern, the leading considerations are ${top.map(r=>r.name).join(', ')}. This output is intended as decision support and should not be used as a standalone diagnosis.`; if(notes) text+=`\n\nClinical/morphology notes entered:\n${notes}`; document.getElementById('output').textContent=text;}
+function copyOutput(){navigator.clipboard.writeText(document.getElementById('output').textContent)}
+function resetAll(){markerList.forEach(m=>{document.getElementById('m_'+m).value=''}); ['popSize','notes'].forEach(id=>document.getElementById(id).value=''); document.getElementById('lightchain').value=''; document.querySelector('#results tbody').innerHTML=''; document.getElementById('output').textContent='Click “Generate comment”.'; document.getElementById('summary').textContent='';}
+renderMarkers(); scoreAll();
+</script>
+</body>
+</html>
