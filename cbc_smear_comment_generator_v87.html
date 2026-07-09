@@ -183,7 +183,7 @@ function generate(){
  else if(on('poly') && (on('rbc_anemia')||on('nrbc')) && !cmpNormoPolyAnemia) addc('Polychromasia suggests increased erythropoietic activity, as may be seen with hemolysis, recent blood loss, or recovery from anemia. Correlation with reticulocyte count may be useful.');
  if(on('hemolysis')) addc('The findings support hemolysis in the appropriate setting. Correlation with reticulocyte count, bilirubin, LDH, haptoglobin, and DAT is recommended as clinically indicated.');
  if(on('liver')) addc('The red cell pattern may be seen in liver disease and/or alcohol-related change. Review of liver enzymes, alcohol history, and medication history may be useful.');
- else if((on('target')||on('acanth')||on('stomato')) && !on('thal') && !cmpMicroHighRbc && !cmpMicroHypoHighRbc && !cmpMicroHypoTargetStippleHighRbc) addc('Target cells, acanthocytes, or stomatocytes may be associated with liver disease; hemoglobinopathy and iron-restricted erythropoiesis may also be considered depending on the full pattern.');
+ else if((on('target')||on('acanth')||on('stomato')) && !on('thal') && !cmpMicroHighRbc && !cmpMicroHypoHighRbc && !cmpMicroHypoTargetStippleHighRbc) addc('Target cells may be seen in thalassemia and other hemoglobinopathies, liver disease, iron deficiency, or hyposplenic/post-splenectomy states.');
  if(on('renal')) addc('Prominent burr cells may be seen with renal dysfunction or uremia.');
  else if(on('echino')) addc('Burr cells may be seen with renal dysfunction, electrolyte disturbance, or smear artifact.');
  if(on('hyposplenism')) addc('Howell-Jolly bodies and/or Pappenheimer bodies support hyposplenism or post-splenectomy state.');
