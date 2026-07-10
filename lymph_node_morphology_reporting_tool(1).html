@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lymph Node Morphology Reporting Tool</title>
+<style>
+  :root{
+    --bg:#f7f8fa;
+    --panel:#ffffff;
+    --ink:#172033;
+    --muted:#667085;
+    --line:#d9e0ea;
+    --accent:#355c7d;
+    --accent2:#27465f;
+    --soft:#eef3f6;
+    --danger:#b42318;
+    --shadow:0 8px 28px rgba(16,24,40,.08);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+  }
+  header{
+    background:#ffffff;
+    color:var(--ink);
+    padding:22px 28px;
+    border-bottom:1px solid var(--line);
+  }
+  header h1{margin:0 0 6px;font-size:26px}
+  header p{margin:0;color:var(--muted)}
+  main{
+    max-width:1500px;
+    margin:24px auto;
+    padding:0 18px 34px;
+    display:grid;
+    grid-template-columns:minmax(0,1.2fr) minmax(420px,.8fr);
+    gap:20px;
+  }
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 3px 14px rgba(16,24,40,.05);
+  }
+  .panel-head{
+    padding:18px 20px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .panel-head h2{margin:0;font-size:18px}
+  .panel-body{padding:18px 20px}
+  .section{
+    border:1px solid var(--line);
+    border-radius:12px;
+    margin-bottom:14px;
+    overflow:hidden;
+  }
+  .section-title{
+    background:#fbfcfd;
+    padding:12px 14px;
+    font-weight:700;
+    font-size:14px;
+    border-bottom:1px solid var(--line);
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+    padding:14px;
+  }
+  .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+  label{
+    display:block;
+    font-size:12px;
+    font-weight:700;
+    color:#344054;
+    margin-bottom:6px;
+  }
+  select,input[type="text"],textarea{
+    width:100%;
+    border:1px solid #cfd7e3;
+    border-radius:9px;
+    padding:9px 10px;
+    background:white;
+    color:var(--ink);
+    font:inherit;
+  }
+  select:focus,input:focus,textarea:focus{
+    outline:none;
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(49,94,251,.12);
+  }
+  textarea{resize:vertical;min-height:72px}
+  .checks{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px 12px;
+    padding:14px;
+  }
+  .check{
+    display:flex;
+    gap:8px;
+    align-items:flex-start;
+    font-size:13px;
+    color:#344054;
+  }
+  .check input{margin-top:2px}
+  .toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  button{
+    border:0;
+    border-radius:9px;
+    padding:10px 14px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .primary{background:var(--accent);color:white}
+  .primary:hover{background:var(--accent2)}
+  .secondary{background:var(--soft);color:#2344ad}
+  .ghost{background:#f2f4f7;color:#344054}
+  .danger{background:#fff1f0;color:var(--danger)}
+  #output{
+    width:100%;
+    min-height:720px;
+    border:1px solid #cfd7e3;
+    border-radius:10px;
+    padding:16px;
+    line-height:1.55;
+    font-family:"Courier New",monospace;
+    font-size:14px;
+    background:#fcfcfd;
+    white-space:pre-wrap;
+  }
+  .note{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:10px;
+  }
+  .hidden{display:none!important}
+  .sticky{
+    position:sticky;
+    top:16px;
+    align-self:start;
+  }
+  .mode-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .mode-pill{
+    flex:1;
+    min-width:170px;
+    border:1px solid var(--line);
+    border-radius:11px;
+    padding:12px;
+    cursor:pointer;
+    background:#fff;
+  }
+  .mode-pill.active{
+    border-color:var(--accent);
+    background:var(--soft);
+  }
+  .mode-pill input{margin-right:7px}
+  @media (max-width:1050px){
+    main{grid-template-columns:1fr}
+    .sticky{position:static}
+  }
+  @media (max-width:680px){
+    .grid,.grid.three,.checks{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Lymph Node Morphology Reporting Tool</h1>
+  <p>Standardized morphology-only description for excisional, incisional, and core needle biopsies.</p>
+</header>
+
+<main>
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Report Inputs</h2>
+      <div class="toolbar">
+        <button class="secondary" type="button" onclick="loadReactiveExample()">Reactive example</button>
+        <button class="ghost" type="button" onclick="resetForm()">Reset</button>
+      </div>
+    </div>
+    <div class="panel-body">
+
+      <div class="section">
+        <div class="section-title">Specimen Type</div>
+        <div class="grid">
+          <div style="grid-column:1/-1">
+            <div class="mode-row">
+              <label class="mode-pill active" id="pillExcision">
+                <input type="radio" name="mode" value="excision" checked>
+                Excisional / incisional biopsy
+              </label>
+              <label class="mode-pill" id="pillCore">
+                <input type="radio" name="mode" value="core">
+                Core needle biopsy
+              </label>
+            </div>
+          </div>
+          <div>
+            <label for="specimen">Specimen wording</label>
+            <select id="specimen">
+              <option value="The specimen consists of an excisional lymph node biopsy.">Excisional lymph node biopsy</option>
+              <option value="The specimen consists of an incisional lymph node biopsy.">Incisional lymph node biopsy</option>
+              <option value="The specimen consists of multiple lymph node core biopsies.">Multiple core biopsies</option>
+            </select>
+          </div>
+          <div>
+            <label for="adequacy">Adequacy</label>
+            <select id="adequacy">
+              <option value="">Not stated</option>
+              <option>The lymph node is adequately sampled for morphologic evaluation.</option>
+              <option>The core biopsies contain adequate lymphoid tissue for evaluation.</option>
+              <option>The specimen contains limited lymphoid tissue, restricting architectural assessment.</option>
+              <option>The specimen is markedly fragmented and crushed, limiting morphologic evaluation.</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="section excision-only">
+        <div class="section-title">Architecture</div>
+        <div class="grid three">
+          <div>
+            <label for="architecture">Nodal architecture</label>
+            <select id="architecture">
+              <option value="">Not stated</option>
+              <option>preserved</option>
+              <option>partially distorted</option>
+              <option>partially effaced</option>
+              <option>diffusely effaced</option>
+            </select>
+          </div>
+          <div>
+            <label for="capsule">Capsule</label>
+            <select id="capsule">
+              <option value="">Not stated</option>
+              <option>thin and intact</option>
+              <option>thickened</option>
+              <option>fibrotic</option>
+              <option>focally disrupted</option>
+            </select>
+          </div>
+          <div>
+            <label for="perinodal">Perinodal tissue</label>
+            <select id="perinodal">
+              <option value="">Not stated</option>
+              <option>unremarkable</option>
+              <option>involved by the lymphoid infiltrate</option>
+            </select>
+          </div>
+        </div>
+        <div class="checks">
+          <label class="check"><input id="noENE" type="checkbox">No extranodal extension identified</label>
+          <label class="check"><input id="hasENE" type="checkbox">Lymphoid infiltrate extends into perinodal soft tissue</label>
+        </div>
+      </div>
+
+      <div class="section core-only hidden">
+        <div class="section-title">Core Architecture</div>
+        <div class="grid">
+          <div>
+            <label for="coreArch">Architectural assessment</label>
+            <select id="coreArch">
+              <option value="">Not stated</option>
+              <option>possible</option>
+              <option>limited</option>
+              <option>not possible</option>
+            </select>
+          </div>
+          <div>
+            <label for="corePattern">Sampled pattern</label>
+            <select id="corePattern">
+              <option value="">Not stated</option>
+              <option>preserved follicular and interfollicular compartments</option>
+              <option>partial architectural effacement</option>
+              <option>diffuse architectural effacement</option>
+              <option>fragmented lymphoid tissue without assessable architecture</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Follicular Compartment</div>
+        <div class="grid three">
+          <div>
+            <label for="follicleNumber">Follicles</label>
+            <select id="follicleNumber">
+              <option value="">Not stated</option>
+              <option>normal in number and distribution</option>
+              <option>increased in number</option>
+              <option>decreased in number</option>
+              <option>absent</option>
+            </select>
+          </div>
+          <div>
+            <label for="folliclePattern">Pattern</label>
+            <select id="folliclePattern">
+              <option value="">Not stated</option>
+              <option>small and primary</option>
+              <option>reactive secondary follicles</option>
+              <option>expanded</option>
+              <option>irregular</option>
+              <option>coalescent</option>
+              <option>back-to-back</option>
+            </select>
+          </div>
+          <div>
+            <label for="mantle">Mantle zones</label>
+            <select id="mantle">
+              <option value="">Not stated</option>
+              <option>preserved</option>
+              <option>expanded</option>
+              <option>attenuated</option>
+              <option>disrupted</option>
+              <option>absent</option>
+            </select>
+          </div>
+          <div>
+            <label for="polarization">Germinal center polarization</label>
+            <select id="polarization">
+              <option value="">Not stated</option>
+              <option>polarized</option>
+              <option>nonpolarized</option>
+            </select>
+          </div>
+          <div>
+            <label for="tbm">Tingible body macrophages</label>
+            <select id="tbm">
+              <option value="">Not stated</option>
+              <option>numerous</option>
+              <option>occasional</option>
+              <option>not identified</option>
+            </select>
+          </div>
+          <div>
+            <label for="atypicalFollicles">Follicular cytology</label>
+            <select id="atypicalFollicles">
+              <option value="">Not stated</option>
+              <option>No cytologically atypical follicles are identified.</option>
+              <option>The follicles contain a relatively monotonous population of atypical lymphoid cells.</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Paracortical / Interfollicular Compartment</div>
+        <div class="grid three">
+          <div>
+            <label for="paracortex">Expansion</label>
+            <select id="paracortex">
+              <option value="">Not stated</option>
+              <option>not expanded</option>
+              <option>mildly expanded</option>
+              <option>moderately expanded</option>
+              <option>markedly expanded</option>
+            </select>
+          </div>
+          <div>
+            <label for="paracortexComp">Composition</label>
+            <select id="paracortexComp">
+              <option value="">Not stated</option>
+              <option>small mature lymphocytes</option>
+              <option>a polymorphous population of small lymphocytes, histiocytes, plasma cells, and immunoblasts</option>
+              <option>atypical lymphoid cells</option>
+            </select>
+          </div>
+          <div>
+            <label for="immunoblasts">Immunoblasts</label>
+            <select id="immunoblasts">
+              <option value="">Not stated</option>
+              <option>not increased</option>
+              <option>mildly increased</option>
+              <option>markedly increased</option>
+            </select>
+          </div>
+          <div>
+            <label for="largeCells">Large transformed cells</label>
+            <select id="largeCells">
+              <option value="">Not stated</option>
+              <option>Scattered large transformed lymphoid cells are present.</option>
+              <option>Numerous large transformed lymphoid cells are present.</option>
+              <option>No significant increase in large transformed lymphoid cells is identified.</option>
+            </select>
+          </div>
+          <div>
+            <label for="hev">High endothelial venules</label>
+            <select id="hev">
+              <option value="">Not stated</option>
+              <option>not increased</option>
+              <option>prominent</option>
+              <option>increased and arborizing</option>
+            </select>
+          </div>
+          <div>
+            <label for="paraNecrosis">Paracortical necrosis</label>
+            <select id="paraNecrosis">
+              <option value="">Not stated</option>
+              <option>No significant paracortical necrosis is identified.</option>
+              <option>Focal areas of paracortical necrosis are present.</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="section excision-only">
+        <div class="section-title">Sinuses and Medullary Compartment</div>
+        <div class="grid three">
+          <div>
+            <label for="sinuses">Sinuses</label>
+            <select id="sinuses">
+              <option value="">Not stated</option>
+              <option>patent</option>
+              <option>expanded</option>
+              <option>compressed</option>
+              <option>effaced</option>
+            </select>
+          </div>
+          <div>
+            <label for="sinusHist">Sinus histiocytosis</label>
+            <select id="sinusHist">
+              <option value="">Not stated</option>
+              <option>absent</option>
+              <option>mild</option>
+              <option>moderate</option>
+              <option>marked</option>
+            </select>
+          </div>
+          <div>
+            <label for="sinusCells">Cells within sinuses</label>
+            <select id="sinusCells">
+              <option value="">Not stated</option>
+              <option>No atypical cells are identified within the sinuses.</option>
+              <option>The sinuses contain scattered atypical cells.</option>
+              <option>The sinuses contain cohesive clusters of nonhematolymphoid cells.</option>
+            </select>
+          </div>
+          <div>
+            <label for="medulla">Medullary cords and sinuses</label>
+            <select id="medulla">
+              <option value="">Not stated</option>
+              <option>preserved</option>
+              <option>expanded</option>
+              <option>compressed</option>
+              <option>effaced</option>
+            </select>
+          </div>
+          <div>
+            <label for="plasma">Plasma cells</label>
+            <select id="plasma">
+              <option value="">Not stated</option>
+              <option>not increased</option>
+              <option>mildly increased</option>
+              <option>moderately increased</option>
+              <option>markedly increased</option>
+            </select>
+          </div>
+          <div>
+            <label for="plasmaDist">Plasma cell distribution</label>
+            <select id="plasmaDist">
+              <option value="">Not stated</option>
+              <option>medullary cords</option>
+              <option>interfollicular areas</option>
+              <option>diffuse infiltrate</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Cytologic Features</div>
+        <div class="grid three">
+          <div>
+            <label for="population">Overall population</label>
+            <select id="population">
+              <option value="">Not stated</option>
+              <option>polymorphous</option>
+              <option>relatively monotonous</option>
+            </select>
+          </div>
+          <div>
+            <label for="cellSize">Predominant cell size</label>
+            <select id="cellSize">
+              <option value="">Not stated</option>
+              <option>small</option>
+              <option>small-to-intermediate</option>
+              <option>intermediate</option>
+              <option>large</option>
+            </select>
+          </div>
+          <div>
+            <label for="nuclearContour">Nuclear contour</label>
+            <select id="nuclearContour">
+              <option value="">Not stated</option>
+              <option>round</option>
+              <option>oval</option>
+              <option>irregular</option>
+              <option>angulated</option>
+              <option>cleaved</option>
+              <option>convoluted</option>
+            </select>
+          </div>
+          <div>
+            <label for="chromatin">Chromatin</label>
+            <select id="chromatin">
+              <option value="">Not stated</option>
+              <option>condensed</option>
+              <option>clumped</option>
+              <option>finely dispersed</option>
+              <option>vesicular</option>
+            </select>
+          </div>
+          <div>
+            <label for="nucleoli">Nucleoli</label>
+            <select id="nucleoli">
+              <option value="">Not stated</option>
+              <option>inconspicuous</option>
+              <option>small</option>
+              <option>prominent</option>
+            </select>
+          </div>
+          <div>
+            <label for="cytoplasm">Cytoplasm</label>
+            <select id="cytoplasm">
+              <option value="">Not stated</option>
+              <option>scant and pale</option>
+              <option>scant and basophilic</option>
+              <option>moderate and pale</option>
+              <option>moderate and basophilic</option>
+              <option>abundant and pale</option>
+              <option>abundant and clear</option>
+            </select>
+          </div>
+          <div>
+            <label for="sheets">Large atypical cells</label>
+            <select id="sheets">
+              <option value="">Not stated</option>
+              <option>No sheets of large atypical lymphoid cells are identified.</option>
+              <option>Scattered large atypical lymphoid cells are present.</option>
+              <option>Numerous large atypical lymphoid cells are present.</option>
+              <option>Confluent sheets of large atypical lymphoid cells are present.</option>
+            </select>
+          </div>
+          <div>
+            <label for="hrs">HRS-like cells</label>
+            <select id="hrs">
+              <option value="">Not stated</option>
+              <option>Hodgkin/Reed-Sternberg-like cells are not identified.</option>
+              <option>Scattered Hodgkin/Reed-Sternberg-like cells are present.</option>
+            </select>
+          </div>
+          <div>
+            <label for="mitoses">Mitotic activity</label>
+            <select id="mitoses">
+              <option value="">Not stated</option>
+              <option>low</option>
+              <option>moderately increased</option>
+              <option>brisk</option>
+            </select>
+          </div>
+          <div>
+            <label for="apoptosis">Apoptotic debris</label>
+            <select id="apoptosis">
+              <option value="">Not stated</option>
+              <option>not prominent</option>
+              <option>mildly increased</option>
+              <option>abundant</option>
+            </select>
+          </div>
+          <div>
+            <label for="starrySky">Starry-sky pattern</label>
+            <select id="starrySky">
+              <option value="">Not stated</option>
+              <option>No starry-sky pattern is identified.</option>
+              <option>A prominent starry-sky pattern is present.</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Background and Histiocytic Findings</div>
+        <div class="grid three">
+          <div>
+            <label for="backgroundType">Background</label>
+            <select id="backgroundType">
+              <option value="">Not stated</option>
+              <option>No significant mixed inflammatory background is present.</option>
+              <option>A polymorphous inflammatory background is present.</option>
+            </select>
+          </div>
+          <div>
+            <label for="histiocytes">Histiocytes</label>
+            <select id="histiocytes">
+              <option value="">Not stated</option>
+              <option>not increased</option>
+              <option>mildly increased</option>
+              <option>markedly increased</option>
+            </select>
+          </div>
+          <div>
+            <label for="emperipolesis">Emperipolesis</label>
+            <select id="emperipolesis">
+              <option value="">Not stated</option>
+              <option>No emperipolesis is identified.</option>
+              <option>Emperipolesis is present.</option>
+            </select>
+          </div>
+          <div>
+            <label for="hemophagocytosis">Hemophagocytosis</label>
+            <select id="hemophagocytosis">
+              <option value="">Not stated</option>
+              <option>No hemophagocytosis is identified.</option>
+              <option>Hemophagocytosis is present.</option>
+            </select>
+          </div>
+          <div>
+            <label for="pigment">Pigment-laden histiocytes</label>
+            <select id="pigment">
+              <option value="">Not stated</option>
+              <option>No pigment-laden histiocytes are identified.</option>
+              <option>Hemosiderin-laden histiocytes are present.</option>
+              <option>Melanin-laden histiocytes are present.</option>
+              <option>Carbon-laden histiocytes are present.</option>
+            </select>
+          </div>
+        </div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" id="bgPlasma">Plasma cells</label>
+          <label class="check"><input type="checkbox" id="bgHistiocytes">Histiocytes</label>
+          <label class="check"><input type="checkbox" id="bgEosinophils">Eosinophils</label>
+          <label class="check"><input type="checkbox" id="bgNeutrophils">Neutrophils</label>
+          <label class="check"><input type="checkbox" id="bgImmunoblasts">Immunoblasts</label>
+          <label class="check"><input type="checkbox" id="bgSmallLymphs">Small lymphocytes</label>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Granulomas, Necrosis, Fibrosis, and Other Findings</div>
+        <div class="grid three">
+          <div>
+            <label for="granulomas">Granulomas</label>
+            <select id="granulomas">
+              <option value="">Not stated</option>
+              <option>No granulomas are identified.</option>
+              <option>Scattered well-formed non-necrotizing granulomas are present.</option>
+              <option>Numerous well-formed non-necrotizing granulomas are present.</option>
+              <option>Scattered poorly formed non-necrotizing granulomas are present.</option>
+              <option>Scattered necrotizing granulomas are present.</option>
+              <option>Numerous necrotizing granulomas are present.</option>
+            </select>
+          </div>
+          <div>
+            <label for="giantCells">Giant cells / foreign material</label>
+            <select id="giantCells">
+              <option value="">Not stated</option>
+              <option>The granulomas contain occasional multinucleated giant cells.</option>
+              <option>The granulomas contain numerous multinucleated giant cells.</option>
+              <option>No foreign material is identified.</option>
+              <option>Polarizable foreign material is present.</option>
+            </select>
+          </div>
+          <div>
+            <label for="necrosis">Necrosis</label>
+            <select id="necrosis">
+              <option value="">Not stated</option>
+              <option>No necrosis is identified.</option>
+              <option>Focal coagulative necrosis is present.</option>
+              <option>Multifocal geographic necrosis is present.</option>
+              <option>Extensive geographic necrosis is present.</option>
+              <option>Focal suppurative necrosis is present.</option>
+              <option>Extensive suppurative necrosis is present.</option>
+              <option>Caseating necrosis is present.</option>
+            </select>
+          </div>
+          <div>
+            <label for="necrosisAssoc">Necrosis-associated cells</label>
+            <select id="necrosisAssoc">
+              <option value="">Not stated</option>
+              <option>The necrotic areas are associated with neutrophils.</option>
+              <option>The necrotic areas are associated with karyorrhectic debris.</option>
+              <option>The necrotic areas are associated with histiocytes.</option>
+              <option>The necrotic areas are associated with granulomatous inflammation.</option>
+            </select>
+          </div>
+          <div>
+            <label for="fibrosis">Fibrosis</label>
+            <select id="fibrosis">
+              <option value="">Not stated</option>
+              <option>No significant fibrosis is identified.</option>
+              <option>Focal fibrosis is present.</option>
+              <option>Diffuse fibrosis is present.</option>
+              <option>Broad fibrous bands divide the lymphoid tissue into nodules.</option>
+              <option>Thin fibrous bands divide the lymphoid tissue into nodules.</option>
+            </select>
+          </div>
+          <div>
+            <label for="vascular">Vascular findings</label>
+            <select id="vascular">
+              <option value="">Not stated</option>
+              <option>Blood vessels are unremarkable.</option>
+              <option>Blood vessels are increased in number.</option>
+              <option>Prominent vascular sclerosis is present.</option>
+              <option>No vasculitis is identified.</option>
+              <option>The vessels show inflammatory infiltration and mural damage.</option>
+            </select>
+          </div>
+          <div>
+            <label for="artifact">Artifact</label>
+            <select id="artifact">
+              <option value="">Not stated</option>
+              <option>No significant crush artifact is present.</option>
+              <option>Crush artifact limits cytologic evaluation.</option>
+            </select>
+          </div>
+        </div>
+        <div class="checks">
+          <label class="check"><input id="noMetastasis" type="checkbox">No metastatic malignancy identified</label>
+          <label class="check"><input id="noOrganisms" type="checkbox">No organisms identified on routine sections</label>
+          <label class="check"><input id="noAmyloid" type="checkbox">No amyloid-like material identified</label>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Optional Free Text</div>
+        <div class="grid">
+          <div style="grid-column:1/-1">
+            <label for="customText">Additional morphology</label>
+            <textarea id="customText" placeholder="Add specimen-specific morphologic findings here."></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <aside class="panel sticky">
+    <div class="panel-head">
+      <h2>Generated Microscopic Description</h2>
+      <div class="toolbar">
+        <button class="primary" type="button" onclick="copyOutput()">Copy</button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div id="output" contenteditable="true"></div>
+      <div class="note">The output contains morphology only. Delete or edit any sentence before copying into the LIS.</div>
+    </div>
+  </aside>
+</main>
+
+<script>
+const ids = [
+  "specimen","adequacy","architecture","capsule","perinodal","coreArch","corePattern",
+  "follicleNumber","folliclePattern","mantle","polarization","tbm","atypicalFollicles",
+  "paracortex","paracortexComp","immunoblasts","largeCells","hev","paraNecrosis",
+  "sinuses","sinusHist","sinusCells","medulla","plasma","plasmaDist",
+  "population","cellSize","nuclearContour","chromatin","nucleoli","cytoplasm",
+  "sheets","hrs","mitoses","apoptosis","starrySky","backgroundType","histiocytes",
+  "emperipolesis","hemophagocytosis","pigment","granulomas","giantCells",
+  "necrosis","necrosisAssoc","fibrosis","vascular","artifact","customText"
+];
+const checks = [
+  "noENE","hasENE","bgPlasma","bgHistiocytes","bgEosinophils","bgNeutrophils",
+  "bgImmunoblasts","bgSmallLymphs","noMetastasis","noOrganisms","noAmyloid"
+];
+
+function v(id){ return document.getElementById(id).value.trim(); }
+function checked(id){ return document.getElementById(id).checked; }
+function sentence(text){
+  if(!text) return "";
+  return /[.!?]$/.test(text) ? text : text + ".";
+}
+function add(arr,text){ if(text) arr.push(sentence(text)); }
+
+function generate(){
+  const mode = document.querySelector('input[name="mode"]:checked').value;
+  const sections = {
+    specimen: [], architecture: [], follicles: [], paracortex: [], sinuses: [],
+    cytology: [], background: [], granulomas: [], other: []
+  };
+
+  const push = (section, text) => { if(text) sections[section].push(sentence(text)); };
+
+  push("specimen", v("specimen"));
+  push("specimen", v("adequacy"));
+
+  if(mode === "excision"){
+    if(v("architecture")) push("architecture", `The lymph node architecture is ${v("architecture")}.`);
+    const cp=[];
+    if(v("capsule")) cp.push(`the capsule is ${v("capsule")}`);
+    if(v("perinodal")) cp.push(`the perinodal soft tissue is ${v("perinodal")}`);
+    if(cp.length) push("architecture", cp.join(", and ") + ".");
+    if(checked("noENE")) push("architecture", "No extranodal extension is identified.");
+    if(checked("hasENE")) push("architecture", "The lymphoid infiltrate extends into the perinodal soft tissue.");
+  } else {
+    const core=[];
+    if(v("coreArch")) core.push(`architectural assessment is ${v("coreArch")}`);
+    if(v("corePattern")) core.push(`the sampled tissue shows ${v("corePattern")}`);
+    if(core.length) push("architecture", core[0].charAt(0).toUpperCase()+core[0].slice(1)+(core.length>1?`; ${core[1]}`:"") + ".");
+  }
+
+  const follicle=[];
+  if(v("follicleNumber")) follicle.push(`Lymphoid follicles are ${v("follicleNumber")}`);
+  if(v("folliclePattern")) follicle.push(`the follicles are ${v("folliclePattern")}`);
+  if(follicle.length) push("follicles", follicle.join(". ") + ".");
+  const gc=[];
+  if(v("polarization")) gc.push(`The germinal centers are ${v("polarization")}`);
+  if(v("tbm")) gc.push(`${v("tbm")} tingible body macrophages are present`);
+  if(gc.length) push("follicles", gc.join(" and ") + ".");
+  if(v("mantle")) push("follicles", `Mantle zones are ${v("mantle")}.`);
+  push("follicles", v("atypicalFollicles"));
+
+  const para=[];
+  if(v("paracortex")) para.push(`The paracortex is ${v("paracortex")}`);
+  if(v("paracortexComp")) para.push(`the paracortical infiltrate is composed predominantly of ${v("paracortexComp")}`);
+  if(para.length) push("paracortex", para.join(". ") + ".");
+  if(v("immunoblasts")) push("paracortex", `Immunoblasts are ${v("immunoblasts")}.`);
+  push("paracortex", v("largeCells"));
+  if(v("hev")) push("paracortex", `High endothelial venules are ${v("hev")}.`);
+  push("paracortex", v("paraNecrosis"));
+
+  if(mode === "excision"){
+    if(v("sinuses")) push("sinuses", `The subcapsular and medullary sinuses are ${v("sinuses")}.`);
+    if(v("sinusHist")) push("sinuses", `Sinus histiocytosis is ${v("sinusHist")}.`);
+    push("sinuses", v("sinusCells"));
+    if(v("medulla")) push("sinuses", `Medullary cords and sinuses are ${v("medulla")}.`);
+    if(v("plasma")){
+      let t=`Plasma cells are ${v("plasma")}`;
+      if(v("plasmaDist")) t += ` and are distributed predominantly within the ${v("plasmaDist")}`;
+      push("sinuses", t + ".");
+    }
+  }
+
+  const cyt=[];
+  if(v("population")) cyt.push(`The lymphoid infiltrate is ${v("population")}`);
+  if(v("cellSize")) cyt.push(`the cells are predominantly ${v("cellSize")} in size`);
+  if(cyt.length) push("cytology", cyt.join(". ") + ".");
+  const detail=[];
+  if(v("nuclearContour")) detail.push(`${v("nuclearContour")} nuclear contours`);
+  if(v("chromatin")) detail.push(`${v("chromatin")} chromatin`);
+  if(v("nucleoli")) detail.push(`${v("nucleoli")} nucleoli`);
+  if(detail.length) push("cytology", `The cells have ${detail.join(", ")}${v("cytoplasm") ? `, and ${v("cytoplasm")} cytoplasm` : ""}.`);
+  else if(v("cytoplasm")) push("cytology", `The cells have ${v("cytoplasm")} cytoplasm.`);
+  push("cytology", v("sheets"));
+  push("cytology", v("hrs"));
+  if(v("mitoses")) push("cytology", `Mitotic activity is ${v("mitoses")}.`);
+  if(v("apoptosis")) push("cytology", `Apoptotic debris is ${v("apoptosis")}.`);
+  push("cytology", v("starrySky"));
+
+  push("background", v("backgroundType"));
+  const bg=[];
+  if(checked("bgPlasma")) bg.push("plasma cells");
+  if(checked("bgHistiocytes")) bg.push("histiocytes");
+  if(checked("bgEosinophils")) bg.push("eosinophils");
+  if(checked("bgNeutrophils")) bg.push("neutrophils");
+  if(checked("bgImmunoblasts")) bg.push("immunoblasts");
+  if(checked("bgSmallLymphs")) bg.push("small lymphocytes");
+  if(bg.length) push("background", `The background contains ${joinList(bg)}.`);
+  if(v("histiocytes")) push("background", `Histiocytes are ${v("histiocytes")}.`);
+  push("background", v("emperipolesis"));
+  push("background", v("hemophagocytosis"));
+  push("background", v("pigment"));
+
+  push("granulomas", v("granulomas"));
+  push("granulomas", v("giantCells"));
+  push("granulomas", v("necrosis"));
+  push("granulomas", v("necrosisAssoc"));
+  push("granulomas", v("fibrosis"));
+
+  push("other", v("vascular"));
+  push("other", v("artifact"));
+  if(checked("noMetastasis")) push("other", "No metastatic malignancy is identified.");
+  if(checked("noOrganisms")) push("other", "No organisms are identified on routine sections.");
+  if(checked("noAmyloid")) push("other", "No amyloid-like material is identified.");
+  if(v("customText")) push("other", v("customText"));
+
+  const order=["specimen","architecture","follicles","paracortex","sinuses","cytology","background","granulomas","other"];
+  const paragraphs=order.filter(k=>sections[k].length).map(k=>sections[k].join(" "));
+  document.getElementById("output").innerText = paragraphs.join("\n\n");
+}
+function joinList(items){
+  if(items.length === 1) return items[0];
+  if(items.length === 2) return items.join(" and ");
+  return items.slice(0,-1).join(", ") + ", and " + items[items.length-1];
+}
+
+function switchMode(){
+  const mode = document.querySelector('input[name="mode"]:checked').value;
+  document.querySelectorAll(".excision-only").forEach(x=>x.classList.toggle("hidden",mode!=="excision"));
+  document.querySelectorAll(".core-only").forEach(x=>x.classList.toggle("hidden",mode!=="core"));
+  document.getElementById("pillExcision").classList.toggle("active",mode==="excision");
+  document.getElementById("pillCore").classList.toggle("active",mode==="core");
+  if(mode==="core" && !v("specimen").includes("core")){
+    document.getElementById("specimen").value="The specimen consists of multiple lymph node core biopsies.";
+  }
+  if(mode==="excision" && v("specimen").includes("core")){
+    document.getElementById("specimen").value="The specimen consists of an excisional lymph node biopsy.";
+  }
+  generate();
+}
+
+function resetForm(){
+  document.querySelectorAll("select").forEach(s=>s.selectedIndex=0);
+  document.getElementById("specimen").selectedIndex=0;
+  document.querySelectorAll('input[type="checkbox"]').forEach(c=>c.checked=false);
+  document.getElementById("customText").value="";
+  document.querySelector('input[name="mode"][value="excision"]').checked=true;
+  switchMode();
+}
+
+function loadReactiveExample(){
+  resetForm();
+  const set=(id,val)=>document.getElementById(id).value=val;
+  set("architecture","preserved");
+  set("capsule","thin and intact");
+  set("perinodal","unremarkable");
+  set("follicleNumber","increased in number");
+  set("folliclePattern","reactive secondary follicles");
+  set("mantle","preserved");
+  set("polarization","polarized");
+  set("tbm","numerous");
+  set("atypicalFollicles","No cytologically atypical follicles are identified.");
+  set("paracortex","mildly expanded");
+  set("paracortexComp","a polymorphous population of small lymphocytes, histiocytes, plasma cells, and immunoblasts");
+  set("immunoblasts","mildly increased");
+  set("largeCells","Scattered large transformed lymphoid cells are present.");
+  set("hev","prominent");
+  set("sinuses","expanded");
+  set("sinusHist","moderate");
+  set("sinusCells","No atypical cells are identified within the sinuses.");
+  set("medulla","preserved");
+  set("plasma","mildly increased");
+  set("plasmaDist","medullary cords");
+  set("population","polymorphous");
+  set("sheets","No sheets of large atypical lymphoid cells are identified.");
+  set("hrs","Hodgkin/Reed-Sternberg-like cells are not identified.");
+  set("mitoses","low");
+  set("backgroundType","A polymorphous inflammatory background is present.");
+  set("granulomas","No granulomas are identified.");
+  set("necrosis","No necrosis is identified.");
+  set("fibrosis","No significant fibrosis is identified.");
+  document.getElementById("noMetastasis").checked=true;
+  generate();
+}
+
+async function copyOutput(){
+  const text=document.getElementById("output").innerText;
+  try{
+    await navigator.clipboard.writeText(text);
+    const btn=event.target;
+    const old=btn.textContent;
+    btn.textContent="Copied";
+    setTimeout(()=>btn.textContent=old,1200);
+  }catch(e){
+    const range=document.createRange();
+    range.selectNodeContents(document.getElementById("output"));
+    const sel=window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    document.execCommand("copy");
+    sel.removeAllRanges();
+  }
+}
+
+ids.forEach(id=>{
+  const el=document.getElementById(id);
+  el.addEventListener("input",generate);
+  el.addEventListener("change",generate);
+});
+checks.forEach(id=>document.getElementById(id).addEventListener("change",generate));
+document.querySelectorAll('input[name="mode"]').forEach(r=>r.addEventListener("change",switchMode));
+
+generate();
+</script>
+</body>
+</html>
