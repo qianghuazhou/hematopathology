@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lymph Node Morphology Generator</title>
+<style>
+  :root{
+    --ink:#1c2430;
+    --slate:#4b5768;
+    --line:#d9dee4;
+    --paper:#f7f8fa;
+    --panel:#ffffff;
+    --accent:#2b5a63;
+    --accent-soft:#e7eef0;
+    --mono: "IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+    --serif: "Source Serif Pro","Georgia",serif;
+    --sans: "Inter","Segoe UI",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:14px; line-height:1.5;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:28px 24px 60px;}
+  header{
+    display:flex; align-items:baseline; justify-content:space-between;
+    border-bottom:2px solid var(--ink); padding-bottom:12px; margin-bottom:22px;
+  }
+  header h1{
+    font-family:var(--serif); font-size:22px; font-weight:600; margin:0; letter-spacing:.2px;
+  }
+  header .sub{color:var(--slate); font-size:12px; text-transform:uppercase; letter-spacing:.08em;}
+  .layout{display:grid; grid-template-columns: 1.1fr 0.9fr; gap:22px;}
+  @media (max-width:920px){ .layout{grid-template-columns:1fr;} }
+
+  .specimen-toggle{
+    display:flex; gap:0; margin-bottom:18px; border:1px solid var(--ink); border-radius:6px; overflow:hidden; width:fit-content;
+  }
+  .specimen-toggle button{
+    border:none; background:var(--panel); color:var(--ink); padding:8px 18px; font:inherit; cursor:pointer;
+    font-weight:600; font-size:13px;
+  }
+  .specimen-toggle button.active{ background:var(--ink); color:#fff; }
+
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:16px 18px; margin-bottom:14px;
+  }
+  .card h2{
+    font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--accent);
+    margin:0 0 12px 0; padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  .field{ margin-bottom:12px; }
+  .field:last-child{ margin-bottom:0; }
+  .field label{ display:block; font-size:12.5px; color:var(--slate); margin-bottom:4px; }
+  select, input[type=text]{
+    width:100%; padding:7px 8px; border:1px solid var(--line); border-radius:5px;
+    background:#fff; font:inherit; color:var(--ink);
+  }
+  select:focus, input:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+
+  .check-row{ display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap; }
+  .check-row input[type=checkbox]{ width:15px; height:15px; accent-color:var(--accent); }
+  .check-row .amt{ width:110px; }
+  .check-row.disabled .amt{ opacity:.4; pointer-events:none; }
+
+  .cyto-toggle{
+    display:flex; align-items:center; gap:8px; margin-bottom:10px; font-size:13px; font-weight:600;
+  }
+  .cyto-toggle input{ width:16px; height:16px; accent-color:var(--accent); }
+  .cyto-body{ display:none; }
+  .cyto-body.show{ display:block; }
+
+  .output-col{ position:sticky; top:20px; align-self:start; }
+  .output-card{
+    background:var(--ink); border-radius:8px; padding:16px 18px; color:#f2f4f6;
+  }
+  .output-card h2{
+    font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:#9fb8bd;
+    margin:0 0 10px 0; display:flex; justify-content:space-between; align-items:center; border:none;
+  }
+  #output{
+    width:100%; min-height:520px; resize:vertical; background:#12181f; color:#e9edf0;
+    border:1px solid #2c3846; border-radius:6px; padding:12px; font-family:var(--mono);
+    font-size:12.5px; line-height:1.55; white-space:pre-wrap;
+  }
+  .copy-btn{
+    background:var(--accent-soft); color:var(--ink); border:none; border-radius:5px;
+    padding:6px 12px; font:inherit; font-size:12px; font-weight:600; cursor:pointer;
+  }
+  .copy-btn:hover{ background:#d3e2e5; }
+  .copy-btn.copied{ background:#2b5a63; color:#fff; }
+  .hint{ color:var(--slate); font-size:11.5px; margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>Lymph Node &mdash; Morphologic Description</h1>
+      <div class="sub">Excisional / Incisional / Core Needle Biopsy</div>
+    </div>
+  </header>
+
+  <div class="specimen-toggle">
+    <button id="btn-exc" class="active">Excisional / Incisional</button>
+    <button id="btn-core">Core Needle</button>
+  </div>
+
+  <div class="layout">
+    <div class="input-col">
+
+      <!-- ================= EXCISIONAL FORM ================= -->
+      <div id="form-exc">
+
+        <div class="card">
+          <h2>Architecture</h2>
+          <div class="field">
+            <label>Nodal architecture</label>
+            <select data-k="arch">
+              <option value="preserved">preserved</option>
+              <option value="partially effaced">partially effaced</option>
+              <option value="diffusely effaced">diffusely effaced</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Capsule</label>
+            <select data-k="capsule">
+              <option value="intact">intact</option>
+              <option value="thickened">thickened</option>
+              <option value="infiltrated by adjacent tissue">infiltrated by adjacent tissue</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Extranodal extension</label>
+            <select data-k="ene">
+              <option value="No">No</option>
+              <option value="Focal">Focal</option>
+              <option value="Extensive">Extensive</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Follicles</h2>
+          <div class="field">
+            <label>Number / distribution</label>
+            <select data-k="follNum">
+              <option value="normal in number and distribution">normal in number and distribution</option>
+              <option value="increased in number">increased in number</option>
+              <option value="decreased in number">decreased in number</option>
+              <option value="absent">absent</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Germinal center quality</label>
+            <select data-k="follQuality">
+              <option value="reactive germinal centers with tingible body macrophages and polarization">reactive, tingible body macrophages, polarized</option>
+              <option value="expanded, coalescent, and back-to-back germinal centers">expanded, coalescent, back-to-back</option>
+              <option value="attenuated or absent mantle zones">attenuated / absent mantle zones</option>
+              <option value="follicle lysis">follicle lysis</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Atypical / monotonous follicles</label>
+            <select data-k="follAtypia">
+              <option value="No">No</option>
+              <option value="Occasional">Occasional</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Interfollicular / Paracortex</h2>
+          <div class="field">
+            <label>Volume</label>
+            <select data-k="paraVol">
+              <option value="normal in volume">normal in volume</option>
+              <option value="expanded">expanded</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Composition</label>
+            <select data-k="paraComp">
+              <option value="small mature lymphocytes">small mature lymphocytes</option>
+              <option value="mixed small lymphocytes, histiocytes, and immunoblasts">mixed small lymphocytes, histiocytes, immunoblasts</option>
+              <option value="atypical lymphoid cells">atypical lymphoid cells</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Vascularity</label>
+            <select data-k="vasc">
+              <option value="normal high endothelial venules">normal high endothelial venules</option>
+              <option value="increased arborizing high endothelial venules">increased, arborizing HEVs</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Large atypical cells / immunoblasts</label>
+            <select data-k="paraAtypia">
+              <option value="No">No</option>
+              <option value="Occasional">Occasional</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Sinuses</h2>
+          <div class="field">
+            <label>Patency</label>
+            <select data-k="sinusPatency">
+              <option value="patent">patent</option>
+              <option value="distended">distended</option>
+              <option value="effaced">effaced</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Sinus histiocytosis</label>
+            <select data-k="sinusHist">
+              <option value="present">present</option>
+              <option value="absent">absent</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Atypical cells within sinuses</label>
+            <select data-k="sinusAtypia">
+              <option value="No">No</option>
+              <option value="Occasional">Occasional</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= CORE FORM ================= -->
+      <div id="form-core" style="display:none;">
+
+        <div class="card">
+          <h2>Adequacy</h2>
+          <div class="field">
+            <label>Lymphoid tissue for evaluation</label>
+            <select data-k="coreAdequacy">
+              <option value="adequate">adequate</option>
+              <option value="limited">limited</option>
+              <option value="scant">scant</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Architecture</h2>
+          <div class="field">
+            <label>Preservation</label>
+            <select data-k="corePreservation">
+              <option value="partial">partial preservation of architecture</option>
+              <option value="no">no preservation of architecture</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Follicular structures</label>
+            <select data-k="coreFollicles">
+              <option value="identified">identified</option>
+              <option value="not identified">not identified</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Cellularity</h2>
+          <div class="field">
+            <label>Cellular composition</label>
+            <select data-k="coreCellularity">
+              <option value="predominantly small lymphocytes">predominantly small lymphocytes</option>
+              <option value="mixed small and large cells">mixed small and large cells</option>
+              <option value="monotonous population of atypical cells">monotonous population of atypical cells</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= SHARED: CYTOLOGIC DETAIL ================= -->
+      <div class="card">
+        <div class="cyto-toggle">
+          <input type="checkbox" id="cytoEnable">
+          <label for="cytoEnable">Include cytologic detail (atypical/monotonous population present)</label>
+        </div>
+        <div id="cytoBody" class="cyto-body">
+          <div class="field">
+            <label>Cell size</label>
+            <select data-k="cellSize">
+              <option value="small">small</option>
+              <option value="small-to-intermediate">small-to-intermediate</option>
+              <option value="intermediate">intermediate</option>
+              <option value="large">large</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Nuclear contour</label>
+            <select data-k="nucContour">
+              <option value="round">round</option>
+              <option value="irregular">irregular</option>
+              <option value="cleaved">cleaved</option>
+              <option value="convoluted">convoluted</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Chromatin</label>
+            <select data-k="chromatin">
+              <option value="condensed">condensed</option>
+              <option value="vesicular">vesicular</option>
+              <option value="fine">fine</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Nucleoli</label>
+            <select data-k="nucleoli">
+              <option value="inconspicuous">inconspicuous</option>
+              <option value="small">small</option>
+              <option value="prominent">prominent</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Mitotic activity</label>
+            <select data-k="mitoses">
+              <option value="low">low</option>
+              <option value="brisk">brisk</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Necrosis</label>
+            <select data-k="necrosis">
+              <option value="not identified">not identified</option>
+              <option value="present, focal">present, focal</option>
+              <option value="present, extensive">present, extensive</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SHARED: BACKGROUND ================= -->
+      <div class="card">
+        <h2>Background</h2>
+        <div class="check-row" data-bg="plasma">
+          <input type="checkbox" class="bg-enable"><label style="margin:0; width:110px;">Plasma cells</label>
+          <select class="amt"><option>scant</option><option>mild</option><option>moderate</option><option>marked</option></select>
+        </div>
+        <div class="check-row" data-bg="eos">
+          <input type="checkbox" class="bg-enable"><label style="margin:0; width:110px;">Eosinophils</label>
+          <select class="amt"><option>scant</option><option>mild</option><option>moderate</option><option>marked</option></select>
+        </div>
+        <div class="check-row" data-bg="histio">
+          <input type="checkbox" class="bg-enable"><label style="margin:0; width:110px;">Histiocytes</label>
+          <select class="amt"><option>scant</option><option>mild</option><option>moderate</option><option>marked</option></select>
+        </div>
+        <div class="check-row" data-bg="neut">
+          <input type="checkbox" class="bg-enable"><label style="margin:0; width:110px;">Neutrophils</label>
+          <select class="amt"><option>scant</option><option>mild</option><option>moderate</option><option>marked</option></select>
+        </div>
+        <div class="field" style="margin-top:10px;">
+          <label>Granulomas</label>
+          <select data-k="granulomas">
+            <option value="not identified">not identified</option>
+            <option value="present, non-necrotizing">present, non-necrotizing</option>
+            <option value="present, necrotizing">present, necrotizing</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Fibrosis</label>
+          <select data-k="fibrosis">
+            <option value="not identified">not identified</option>
+            <option value="present, focal">present, focal</option>
+            <option value="present, sclerotic bands">present, sclerotic bands</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="output-col">
+      <div class="output-card">
+        <h2>
+          <span>Generated Description</span>
+          <button class="copy-btn" id="copyBtn">Copy</button>
+        </h2>
+        <textarea id="output" readonly></textarea>
+        <div class="hint">Morphology only — no diagnostic language. Diagnosis and Comment are entered separately per report template.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const btnExc = document.getElementById('btn-exc');
+const btnCore = document.getElementById('btn-core');
+const formExc = document.getElementById('form-exc');
+const formCore = document.getElementById('form-core');
+let mode = 'exc';
+
+btnExc.onclick = () => { mode='exc'; btnExc.classList.add('active'); btnCore.classList.remove('active');
+  formExc.style.display='block'; formCore.style.display='none'; generate(); };
+btnCore.onclick = () => { mode='core'; btnCore.classList.add('active'); btnExc.classList.remove('active');
+  formExc.style.display='none'; formCore.style.display='block'; generate(); };
+
+const cytoEnable = document.getElementById('cytoEnable');
+const cytoBody = document.getElementById('cytoBody');
+cytoEnable.onchange = () => { cytoBody.classList.toggle('show', cytoEnable.checked); generate(); };
+
+function val(k){
+  const el = document.querySelector(`[data-k="${k}"]`);
+  return el ? el.value : '';
+}
+
+function bgRow(key, noun){
+  const row = document.querySelector(`[data-bg="${key}"]`);
+  const on = row.querySelector('.bg-enable').checked;
+  const amt = row.querySelector('.amt').value;
+  return on ? `${amt} ${noun}` : null;
+}
+
+function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+function generate(){
+  let paras = [];
+
+  if (mode === 'exc'){
+
+    // --- Architecture paragraph ---
+    let p1 = `The nodal architecture is ${val('arch')}, with an ${val('capsule')} capsule.`;
+    const ene = val('ene');
+    if (ene === 'No'){
+      p1 += ` No extranodal extension is identified.`;
+    } else if (ene === 'Focal'){
+      p1 += ` Focal extranodal extension is identified.`;
+    } else {
+      p1 += ` Extensive extranodal extension is identified.`;
+    }
+    paras.push(p1);
+
+    // --- Follicles paragraph ---
+    let p2 = `Follicles are ${val('follNum')}, showing ${val('follQuality')}.`;
+    const follAtypia = val('follAtypia');
+    p2 += follAtypia === 'No'
+      ? ` No atypical or monotonous follicles are identified.`
+      : ` Occasional atypical or monotonous follicles are identified.`;
+    paras.push(p2);
+
+    // --- Paracortex paragraph ---
+    let p3 = `The paracortex is ${val('paraVol')} and composed of ${val('paraComp')}, with ${val('vasc')}.`;
+    const paraAtypia = val('paraAtypia');
+    p3 += paraAtypia === 'No'
+      ? ` No large atypical cells or immunoblasts are identified.`
+      : ` Occasional large atypical cells or immunoblasts are identified.`;
+    paras.push(p3);
+
+    // --- Sinuses paragraph ---
+    let p4 = `Sinuses are ${val('sinusPatency')}, with sinus histiocytosis ${val('sinusHist')}.`;
+    const sinusAtypia = val('sinusAtypia');
+    p4 += sinusAtypia === 'No'
+      ? ` No atypical cells are identified within the sinuses.`
+      : ` Occasional atypical cells are identified within the sinuses.`;
+    paras.push(p4);
+
+  } else {
+
+    // --- Core adequacy / architecture paragraph ---
+    let p1 = `The core(s) contain ${val('coreAdequacy')} lymphoid tissue for evaluation, showing fragmented nodal tissue with ${val('corePreservation')} preservation of architecture.`;
+    const foll = val('coreFollicles');
+    p1 += foll === 'identified'
+      ? ` Follicular structures are identified.`
+      : ` Follicular structures are not identified.`;
+    paras.push(p1);
+
+    // --- Cellularity paragraph ---
+    paras.push(`The cellular composition is ${val('coreCellularity')}.`);
+  }
+
+  // --- Cytologic features paragraph ---
+  if (cytoEnable.checked){
+    paras.push(
+      `The atypical population is composed of ${val('cellSize')} cells with ${val('nucContour')} nuclear contours, `
+      + `${val('chromatin')} chromatin, and ${val('nucleoli')} nucleoli. Mitotic activity is ${val('mitoses')}, `
+      + `and necrosis is ${val('necrosis')}.`
+    );
+  }
+
+  // --- Background paragraph ---
+  const bg = [
+    bgRow('plasma','plasma cells'),
+    bgRow('eos','eosinophils'),
+    bgRow('histio','histiocytes'),
+    bgRow('neut','neutrophils')
+  ].filter(Boolean);
+
+  let bgSentence = '';
+  if (bg.length){
+    bgSentence = `The background contains ${bg.join(', ')}.`;
+  }
+
+  const granulomas = val('granulomas');
+  let granSentence = granulomas === 'not identified'
+    ? `No granulomas are identified.`
+    : `Granulomas are ${granulomas}.`;
+
+  const fibrosis = val('fibrosis');
+  let fibSentence = fibrosis === 'not identified'
+    ? `No fibrosis is identified.`
+    : `Fibrosis is ${fibrosis}.`;
+
+  let bgPara = [bgSentence, granSentence, fibSentence].filter(Boolean).join(' ');
+  paras.push(bgPara);
+
+  document.getElementById('output').value = paras.filter(Boolean).join('\n\n');
+}
+
+document.querySelectorAll('select, input[type=checkbox]').forEach(el=>{
+  el.addEventListener('change', generate);
+});
+
+document.getElementById('copyBtn').onclick = () => {
+  const out = document.getElementById('output');
+  out.select();
+  navigator.clipboard.writeText(out.value).then(()=>{
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent='Copy'; btn.classList.remove('copied'); }, 1400);
+  });
+};
+
+generate();
+</script>
+</body>
+</html>
