@@ -1,4 +1,4 @@
-DIAGNOSIS
+DIAGNOSIS 
 Right/Left Iliac Crest, Bone Marrow Aspirate and Biopsy:
 - Hypercellular bone marrow with DIFFUSE (APPROXIMATELY XX%) INVOLVEMENT BY FOLLICULAR LYMPHOMA. Please see comment.
 
@@ -9,7 +9,7 @@ SYNOPTIC REPORT
 _
 
 COMMENT
-Morphologic and immunophenotypic evaluation of the bone marrow shows diffuse involvement by the patient’s recently diagnosed FOLLICULAR LYMPHOMA. There is no evidence of a large cell component in this specimen. Correlation with clinical findings is advised.
+Morphologic and immunophenotypic evaluation of the bone marrow shows diffuse involvement by the patientâ€™s recently diagnosed FOLLICULAR LYMPHOMA. There is no evidence of a large cell component in this specimen. Correlation with clinical findings is advised.
 
 MICROSCOPIC DESCRIPTION
 PERIPHERAL BLOOD
