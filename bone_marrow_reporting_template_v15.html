@@ -622,7 +622,7 @@
 <input type="hidden" id="trabBone"></div></div>
         <div><label>Other core finding</label><textarea id="bxOther" placeholder="Free text for additional core biopsy findings"></textarea></div>
       </div>
-      <div class="row"><label>Clot section</label><div class="pillGrid" data-pill-wrap="clot"><label class="pillOpt"><input type="radio" name="clot__radio" data-pill-single="clot" value="shows similar findings as the core biopsy"><span>Similar to core</span></label>
+      <div class="row"><label>Clot section</label><div class="pillGrid" data-pill-wrap="clot"><label class="pillOpt"><input type="radio" name="clot__radio" data-pill-single="clot" value="contains marrow fragments."><span>Similar to core</span></label>
 <label class="pillOpt"><input type="radio" name="clot__radio" data-pill-single="clot" value="primarily shows peripheral blood"><span>Peripheral blood only</span></label>
 <label class="pillOpt"><input type="radio" name="clot__radio" data-pill-single="clot" value="shows limited marrow elements"><span>Limited marrow elements</span></label>
 <input type="hidden" id="clot"></div></div>
@@ -1225,7 +1225,7 @@ function finalizePresetInputs(){
   setIfBlank('bxPlasma','not increased');
   setIfBlank('bxMast','not increased');
   setIfBlank('trabBone','unremarkable');
-  setIfBlank('clot','shows similar findings as the core biopsy');
+  setIfBlank('clot','contains marrow fragments.');
   setIfBlank('retic','Reticulin: Not increased (MF grade 0 of 3 fibrosis).');
 
   // Default IHC panel.
@@ -1428,7 +1428,7 @@ function clearAll(){
 }
 function applyCommonNormalPb(){set('pbRbc','Normocytic normochromic red blood cells.');set('pbWbc','No significant morphologic abnormality. No circulating blasts.');set('pbPlt','Normal in number and morphology.');}
 function applyNormalAspirate(){set('aspQuality','contain adequate cellular marrow particles');set('aspSpicules','present');set('aspCell','normocellular for age');set('dTotal','500');set('dBlast','0');set('dPro','4');set('dMyeloMeta','10');set('dSeg','26');set('dEry','41');set('dLymph','13');set('dMono','2');set('dEos','2');set('dBaso','0');set('dPlasma','2');set('meRatio','1.1:1');set('aspEryNum','proportionately normal in number');set('aspEryMat','');set('aspEryMorph','mainly normoblastic maturation');set('aspMyeNum','proportionately normal in number');set('aspMyeMat','');set('aspMyeMorph','orderly maturation through all stages');set('aspMkNum','adequate in number');set('aspMkMorph','normal morphology');set('aspBlasts','are not increased (<5%)');set('aspLymph','not increased');set('aspPlasma','not increased');set('aspMast','not increased');set('ironStore','adequate');set('ringSid','not identified');}
-function applyNormalBiopsy(cell='40%'){set('bxQuality','adequate for evaluation');set('bxCellPhrase','normocellular for age');set('bxCell',cell);set('bxArch','preserved');set('bxEryNum','normal in number');set('bxEryMat','');set('bxEryMorph','mainly normoblastic maturation');set('bxMyeNum','normal in number');set('bxMyeMat','');set('bxMyeMorph','orderly maturation through all stages');set('bxMkNum','adequate in number');set('bxMkMorph','normal morphology');set('bxBlasts','not increased (<5%)');set('bxLymph','not increased');set('bxPlasma','not increased');set('bxMast','not increased');set('trabBone','unremarkable');set('clot','shows similar findings as the core biopsy');set('retic','Reticulin: Not increased (MF grade 0 of 3 fibrosis).');set('trichrome','');}
+function applyNormalBiopsy(cell='40%'){set('bxQuality','adequate for evaluation');set('bxCellPhrase','normocellular for age');set('bxCell',cell);set('bxArch','preserved');set('bxEryNum','normal in number');set('bxEryMat','');set('bxEryMorph','mainly normoblastic maturation');set('bxMyeNum','normal in number');set('bxMyeMat','');set('bxMyeMorph','orderly maturation through all stages');set('bxMkNum','adequate in number');set('bxMkMorph','normal morphology');set('bxBlasts','not increased (<5%)');set('bxLymph','not increased');set('bxPlasma','not increased');set('bxMast','not increased');set('trabBone','unremarkable');set('clot','contains marrow fragments.');set('retic','Reticulin: Not increased (MF grade 0 of 3 fibrosis).');set('trichrome','');}
 function applyBasicIhc(){set('ihcCd34','highlights no increase in blasts (<5%)');set('ihcCd117','highlights scattered immature myeloid precursors and mast cells');set('ihcCd61','highlights scattered megakaryocytes');set('ihcCd138','highlights scattered plasma cells');set('ihcKappaLambda','shows polytypic plasma cells');set('ihcCd3','highlights scattered small T cells');set('ihcCd20','highlights scattered small B cells');}
 function loadNormal(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('40%');applyBasicIhc();set('dx1','Normocellular/Hypercellular/Hypocellular bone marrow with trilineage hematopoiesis and no increase in blasts.');set('dx2','No morphologic or immunophenotypic evidence of a hematologic neoplasm.');set('pbdx','No significant morphologic abnormality.');set('commentType','normal');generateReport();}
 function loadAnemiaNegativeMDS(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('XX%');applyBasicIhc();set('dx1','Moderately hypercellular bone marrow with mild erythroid-predominant maturing trilineage hematopoiesis.');set('dx2','No morphologic or immunophenotypic evidence of a hematologic neoplasm.');set('pbdx','Normocytic anemia.');set('commentType','nonspecific');set('customComment','The overall findings are of a moderately hypercellular bone marrow with mildly erythroid-predominant maturing hematopoiesis. There is no evidence of a myeloid or lymphoid neoplasm in this biopsy. In the absence of significant dysplasia or MDS-defining cytogenetics, other causes of anemia such as nutritional deficiencies, drugs/medications, chronic inflammatory states, infection, liver disease and renal disease should be excluded. Clinical correlation is advised.');set('pbRbc','Normocytic anemia with no significant anisopoikilocytosis.');set('pbPlt','Increased in number with unremarkable morphology.');set('aspCell','hypercellular with decreased fat spaces');set('aspEryNum','proportionately increased');set('aspMyeNum','proportionately decreased');set('bxCellPhrase','hypercellular for age');set('bxEryNum','increased');set('bxMyeNum','decreased');set('retic','Reticulin: Mildly diffusely increased (MF grade 1 of 3 fibrosis).');generateReport();}
@@ -1563,7 +1563,7 @@ function loadAggressiveBCellLarge(){
   set('aspLymph','atypical lymphoid cells are present');
   set('aspPlasma','not increased');
   set('aspMast','not increased');
-  set('aspOther','The aspirate smears are markedly hemodilute and mainly resemble peripheral blood. Touch preparations show clusters of atypical medium to large lymphoid cells with variable basophilic cytoplasm and pleomorphic nuclei with variably dispersed chromatin.');
+  set('aspOther','The aspirate smears are markedly hemodilute and mainly resemble peripheral blood. Touchprep shows clusters of atypical medium to large lymphoid cells with variable basophilic cytoplasm and pleomorphic nuclei with variably dispersed chromatin.');
   set('ironStore','');
   set('ringSid','unable to assess due to absent particles/sparse normoblasts');
   set('dTotal','');
@@ -1587,7 +1587,7 @@ function loadAggressiveBCellLarge(){
   set('bxMast','not increased');
   set('trabBone','osteosclerotic changes');
   set('bxOther','The marrow shows diffuse fibrosis with increased stromal cells and widespread infiltration by medium to large atypical lymphoid cells. The viable atypical cells show pleomorphic nuclei, vesicular chromatin, and prominent nucleoli. Trilineage hematopoiesis is markedly reduced to absent.');
-  set('clot','shows similar findings as the core biopsy');
+  set('clot','contains marrow fragments.');
   set('ihcCd34','highlights no increase in blasts (<5%; approximately <2%)');
   set('ihcCd117','highlights scattered immature myeloid precursors and mast cells');
   set('ihcCd61','highlights markedly reduced/scattered megakaryocytes');
@@ -1649,7 +1649,7 @@ function loadHgblDoubleHit(){
   set('bxMast','not increased');
   set('trabBone','unremarkable');
   set('bxOther','The marrow is extensively and diffusely infiltrated by monomorphic small to medium-sized blastoid lymphoid cells with scant cytoplasm, irregular nuclei, dispersed chromatin, and rare inconspicuous nucleoli. Abundant mitotic figures and single-cell necrosis/apoptotic bodies are present. Residual trilineage hematopoiesis with maturation is present without significant dysplasia.');
-  set('clot','shows similar findings as the core biopsy');
+  set('clot','contains marrow fragments.');
   set('ihcCd34','highlights no increase in blasts (<5%)');
   set('ihcCd117','highlights scattered immature myeloid precursors and mast cells');
   set('ihcCd61','highlights residual megakaryocytes');
@@ -1720,7 +1720,7 @@ function loadTpll(){
   set('bxMast','not increased');
   set('trabBone','unremarkable');
   set('bxOther','The core biopsy is hypercellular for age and extensively involved by a diffuse atypical lymphoid infiltrate, comprising approximately 80% of marrow cellularity. The lymphoid cells are small to mostly medium-sized with scant cytoplasm and irregular nuclei with coarse/dispersed chromatin and frequently visible nucleoli. Residual trilineage hematopoiesis is present but markedly reduced. Hemosiderin deposits are present.');
-  set('clot','shows similar findings as the core biopsy');
+  set('clot','contains marrow fragments.');
   set('ihcCd34','highlights no increase in blasts');
   set('ihcCd117','is negative in the atypical lymphoid cells');
   set('ihcCd61','highlights residual megakaryocytes');
@@ -1788,7 +1788,7 @@ function loadTall(){
   set('bxMast','not increased');
   set('trabBone','unremarkable');
   set('bxOther','The core biopsy is hypercellular for age and extensively involved by sheets/diffuse infiltrates of immature lymphoid cells with high nuclear-to-cytoplasmic ratio, immature chromatin, and variable nucleoli. Mitotic figures are increased. Residual trilineage hematopoiesis is present but reduced.');
-  set('clot','shows similar findings as the core biopsy');
+  set('clot','contains marrow fragments.');
   set('ihcCd34','highlights a subset of lymphoblasts/blasts; correlate with flow cytometry');
   set('ihcCd117','is negative or highlights only rare background immature myeloid precursors; correlate with flow cytometry');
   set('ihcCd61','highlights residual megakaryocytes');
@@ -1859,7 +1859,7 @@ function loadEtpAll(){
   set('bxMast','not increased');
   set('trabBone','unremarkable');
   set('bxOther','The core biopsy is hypercellular for age and extensively involved by sheets/diffuse infiltrates of immature lymphoid cells with high nuclear-to-cytoplasmic ratio, immature chromatin, and variable nucleoli. Mitotic figures are increased. Residual trilineage hematopoiesis is present but reduced. The morphology is indistinguishable from non-ETP T-ALL.');
-  set('clot','shows similar findings as the core biopsy');
+  set('clot','contains marrow fragments.');
   set('ihcCd34','highlights a subset of lymphoblasts/blasts; correlate with flow cytometry');
   set('ihcCd117','highlights a subset of lymphoblasts/blasts or only rare background immature myeloid precursors; correlate with flow cytometry');
   set('ihcCd61','highlights residual megakaryocytes');
