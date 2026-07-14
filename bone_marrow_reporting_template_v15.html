@@ -656,12 +656,12 @@
       <div class="sectionTitle">IHC</div>
       <div class="grid2">
         <div><label>CD34</label><textarea id="ihcCd34" placeholder="CD34 highlights no increase in blasts (<5%)."></textarea></div>
-        <div><label>CD117</label><textarea id="ihcCd117"></textarea></div>
-        <div><label>CD61</label><textarea id="ihcCd61"></textarea></div>
-        <div><label>CD138</label><textarea id="ihcCd138"></textarea></div>
+        <div><label>CD117</label><textarea id="ihcCd117" placeholder="Highlights scattered immature myeloid precursors and mast cells."></textarea></div>
+        <div><label>CD61</label><textarea id="ihcCd61" placeholder="Highlights scattered megakaryocytes with unremarkable morphology."></textarea></div>
+        <div><label>CD138</label><textarea id="ihcCd138" placeholder="Highlights scattered plasma cells."></textarea></div>
         <div><label>Kappa/Lambda</label><textarea id="ihcKappaLambda"></textarea></div>
-        <div><label>CD3</label><textarea id="ihcCd3"></textarea></div>
-        <div><label>CD20</label><textarea id="ihcCd20"></textarea></div>
+        <div><label>CD3</label><textarea id="ihcCd3" placeholder="Highlights scattered small T cells."></textarea></div>
+        <div><label>CD20</label><textarea id="ihcCd20" placeholder="Highlights scattered small B cells."></textarea></div>
       </div>
       <div class="row"><label>Additional IHC</label><textarea id="ihcExtra" style="min-height:70px"></textarea></div>
       <div class="sectionTitle">Flow / Cytogenetics / Molecular</div>
@@ -1232,7 +1232,7 @@ function finalizePresetInputs(){
   setIfBlank('ihcCd34','highlights no increase in blasts (<5%)');
   setIfBlank('ihcCd117','highlights scattered immature myeloid precursors and mast cells');
   setIfBlank('ihcCd61','highlights scattered megakaryocytes');
-  setIfBlank('ihcCd138','highlights scattered plasma cells without increase');
+  setIfBlank('ihcCd138','highlights scattered plasma cells');
   setIfBlank('ihcKappaLambda','shows no definite light chain restriction');
   setIfBlank('ihcCd3','highlights scattered small T cells');
   setIfBlank('ihcCd20','highlights scattered small B cells');
@@ -1429,7 +1429,7 @@ function clearAll(){
 function applyCommonNormalPb(){set('pbRbc','Normocytic normochromic red blood cells.');set('pbWbc','No significant morphologic abnormality. No circulating blasts.');set('pbPlt','Normal in number and morphology.');}
 function applyNormalAspirate(){set('aspQuality','contain adequate cellular marrow particles');set('aspSpicules','present');set('aspCell','normocellular for age');set('dTotal','500');set('dBlast','0');set('dPro','4');set('dMyeloMeta','10');set('dSeg','26');set('dEry','41');set('dLymph','13');set('dMono','2');set('dEos','2');set('dBaso','0');set('dPlasma','2');set('meRatio','1.1:1');set('aspEryNum','proportionately normal in number');set('aspEryMat','');set('aspEryMorph','mainly normoblastic maturation');set('aspMyeNum','proportionately normal in number');set('aspMyeMat','');set('aspMyeMorph','orderly maturation through all stages');set('aspMkNum','adequate in number');set('aspMkMorph','normal morphology');set('aspBlasts','are not increased (<5%)');set('aspLymph','not increased');set('aspPlasma','not increased');set('aspMast','not increased');set('ironStore','adequate');set('ringSid','not identified');}
 function applyNormalBiopsy(cell='40%'){set('bxQuality','adequate for evaluation');set('bxCellPhrase','normocellular for age');set('bxCell',cell);set('bxArch','preserved');set('bxEryNum','normal in number');set('bxEryMat','');set('bxEryMorph','mainly normoblastic maturation');set('bxMyeNum','normal in number');set('bxMyeMat','');set('bxMyeMorph','orderly maturation through all stages');set('bxMkNum','adequate in number');set('bxMkMorph','normal morphology');set('bxBlasts','not increased (<5%)');set('bxLymph','not increased');set('bxPlasma','not increased');set('bxMast','not increased');set('trabBone','unremarkable');set('clot','shows similar findings as the core biopsy');set('retic','Reticulin: Not increased (MF grade 0 of 3 fibrosis).');set('trichrome','');}
-function applyBasicIhc(){set('ihcCd34','highlights no increase in blasts (<5%)');set('ihcCd117','highlights scattered immature myeloid precursors and mast cells');set('ihcCd61','highlights scattered megakaryocytes');set('ihcCd138','highlights scattered plasma cells without increase');set('ihcKappaLambda','shows no definite light chain restriction');set('ihcCd3','highlights scattered small T cells');set('ihcCd20','highlights scattered small B cells');}
+function applyBasicIhc(){set('ihcCd34','highlights no increase in blasts (<5%)');set('ihcCd117','highlights scattered immature myeloid precursors and mast cells');set('ihcCd61','highlights scattered megakaryocytes');set('ihcCd138','highlights scattered plasma cells');set('ihcKappaLambda','shows polytypic plasma cells');set('ihcCd3','highlights scattered small T cells');set('ihcCd20','highlights scattered small B cells');}
 function loadNormal(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('40%');applyBasicIhc();set('dx1','Normocellular/Hypercellular/Hypocellular bone marrow with trilineage hematopoiesis and no increase in blasts.');set('dx2','No morphologic or immunophenotypic evidence of a hematologic neoplasm.');set('pbdx','No significant morphologic abnormality.');set('commentType','normal');generateReport();}
 function loadAnemiaNegativeMDS(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('XX%');applyBasicIhc();set('dx1','Moderately hypercellular bone marrow with mild erythroid-predominant maturing trilineage hematopoiesis.');set('dx2','No morphologic or immunophenotypic evidence of a hematologic neoplasm.');set('pbdx','Normocytic anemia.');set('commentType','nonspecific');set('customComment','The overall findings are of a moderately hypercellular bone marrow with mildly erythroid-predominant maturing hematopoiesis. There is no evidence of a myeloid or lymphoid neoplasm in this biopsy. In the absence of significant dysplasia or MDS-defining cytogenetics, other causes of anemia such as nutritional deficiencies, drugs/medications, chronic inflammatory states, infection, liver disease and renal disease should be excluded. Clinical correlation is advised.');set('pbRbc','Normocytic anemia with no significant anisopoikilocytosis.');set('pbPlt','Increased in number with unremarkable morphology.');set('aspCell','hypercellular with decreased fat spaces');set('aspEryNum','proportionately increased');set('aspMyeNum','proportionately decreased');set('bxCellPhrase','hypercellular for age');set('bxEryNum','increased');set('bxMyeNum','decreased');set('retic','Reticulin: Mildly diffusely increased (MF grade 1 of 3 fibrosis).');generateReport();}
 function loadCytopeniaReactiveAggregates(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('XX%');applyBasicIhc();set('dx1','Normocellular/Hypercellular/Hypocellular bone marrow with maturing trilineage hematopoiesis, reactive lymphoid aggregates, no overt dysplasia and no increase in blasts.');set('dx2','No morphologic or immunophenotypic evidence of a hematologic neoplasm.');set('pbdx','Cytopenia.');set('commentType','nonspecific');set('customComment','There is no morphologic or immunophenotypic evidence of a hematolymphoid neoplasm in this biopsy. Reactive lymphoid aggregates are not uncommon in bone marrow biopsies and have a non-specific differential diagnosis that includes normal aging, autoimmune disorders, inflammatory conditions, and infection. Correlation with clinical and laboratory findings is advised.');set('bxLymph','reactive lymphoid aggregates present');set('ihcCd3','highlights frequent T cells within and around the aggregates');set('ihcCd20','highlights fewer small B cells without an abnormal distribution');generateReport();}
@@ -1472,7 +1472,7 @@ function loadLplLimited(){
   set('bxMast','mildly increased');
   set('bxOther','Atypical plasma cells are present in a diffuse interstitial pattern with multiple small aggregates. The plasma cells are medium sized and show occasional intranuclear inclusions/Dutcher bodies. No atypical lymphoid infiltrate is identified.');
   set('ihcCd138','highlights an abnormal plasma cell infiltrate comprising approximately 10-15% of marrow cellularity');
-  set('ihcKappaLambda','shows kappa light chain restriction in the plasma cells');
+  set('ihcKappaLambda','shows kappa/lambda light chain restriction in the plasma cells');
   set('ihcCd20','is negative in the abnormal plasma cell infiltrate');
   set('ihcCd3','highlights predominantly small reactive interstitial T cells');
   set('ihcCd117','highlights increased mast cells associated with the plasma cell infiltrate');
@@ -1526,7 +1526,7 @@ function loadLplExtensive(){
   set('bxMast','mildly increased');
   set('bxOther','The atypical infiltrate represents approximately 90% of marrow cellularity and is composed of monomorphic small to medium-sized lymphoid cells with scant clear cytoplasm and irregular, occasionally plasmacytoid nuclei, admixed with scattered plasmacytoid cells with prominent Dutcher bodies. Residual trilineage hematopoiesis shows maturation without significant dysplasia.');
   set('ihcCd138','highlights scattered plasma cells, which are kappa light chain restricted');
-  set('ihcKappaLambda','shows kappa light chain restriction in the plasma cells');
+  set('ihcKappaLambda','shows kappa/lambda light chain restriction in the plasma cells');
   set('ihcCd20','highlights the atypical B-cell infiltrate');
   set('ihcCd3','highlights fewer background small T cells');
   set('ihcCd117','highlights reactive mast cells');
@@ -1591,7 +1591,7 @@ function loadAggressiveBCellLarge(){
   set('ihcCd34','highlights no increase in blasts (<5%; approximately <2%)');
   set('ihcCd117','highlights scattered immature myeloid precursors and mast cells');
   set('ihcCd61','highlights markedly reduced/scattered megakaryocytes');
-  set('ihcCd138','highlights scattered plasma cells without increase');
+  set('ihcCd138','highlights scattered plasma cells');
   set('ihcKappaLambda','shows no definite light chain restriction in plasma cells');
   set('ihcCd3','highlights scattered small T cells');
   set('ihcCd20','highlights markedly increased atypical B cells');
@@ -1653,7 +1653,7 @@ function loadHgblDoubleHit(){
   set('ihcCd34','highlights no increase in blasts (<5%)');
   set('ihcCd117','highlights scattered immature myeloid precursors and mast cells');
   set('ihcCd61','highlights residual megakaryocytes');
-  set('ihcCd138','highlights scattered plasma cells without increase');
+  set('ihcCd138','highlights scattered plasma cells');
   set('ihcKappaLambda','shows no definite plasma cell light chain restriction');
   set('ihcCd3','highlights scattered small T cells');
   set('ihcCd20','highlights the extensive atypical B-cell infiltrate');
@@ -1724,7 +1724,7 @@ function loadTpll(){
   set('ihcCd34','highlights no increase in blasts');
   set('ihcCd117','is negative in the atypical lymphoid cells');
   set('ihcCd61','highlights residual megakaryocytes');
-  set('ihcCd138','highlights scattered plasma cells without increase');
+  set('ihcCd138','highlights scattered plasma cells');
   set('ihcKappaLambda','shows no definite plasma cell light chain restriction');
   set('ihcCd3','highlights the extensive atypical T-cell infiltrate');
   set('ihcCd20','highlights rare background B cells, focally clustered in non-paratrabecular aggregates');
@@ -1792,7 +1792,7 @@ function loadTall(){
   set('ihcCd34','highlights a subset of lymphoblasts/blasts; correlate with flow cytometry');
   set('ihcCd117','is negative or highlights only rare background immature myeloid precursors; correlate with flow cytometry');
   set('ihcCd61','highlights residual megakaryocytes');
-  set('ihcCd138','highlights scattered plasma cells without increase');
+  set('ihcCd138','highlights scattered plasma cells');
   set('ihcKappaLambda','shows no definite plasma cell light chain restriction');
   set('ihcCd3','highlights the atypical T-lymphoblast infiltrate; cytoplasmic CD3 is lineage-specific for T-cell lineage');
   set('ihcCd20','highlights rare background B cells');
@@ -1863,7 +1863,7 @@ function loadEtpAll(){
   set('ihcCd34','highlights a subset of lymphoblasts/blasts; correlate with flow cytometry');
   set('ihcCd117','highlights a subset of lymphoblasts/blasts or only rare background immature myeloid precursors; correlate with flow cytometry');
   set('ihcCd61','highlights residual megakaryocytes');
-  set('ihcCd138','highlights scattered plasma cells without increase');
+  set('ihcCd138','highlights scattered plasma cells');
   set('ihcKappaLambda','shows no definite plasma cell light chain restriction');
   set('ihcCd3','highlights the atypical T-lymphoblast infiltrate; cytoplasmic CD3 is lineage-specific for T-cell lineage');
   set('ihcCd20','highlights rare background B cells');
