@@ -346,7 +346,7 @@
 <label class="pillOpt"><input type="radio" name="aspEryNum__radio" data-pill-single="aspEryNum" value="proportionately increased"><span>Increased</span></label>
 <label class="pillOpt"><input type="radio" name="aspEryNum__radio" data-pill-single="aspEryNum" value="sparse"><span>Sparse</span></label>
 <input type="hidden" id="aspEryNum"></div></div>
-          <div><label>Maturation</label><div class="pillGrid3" data-pill-wrap="aspEryMat"><label class="pillOpt"><input type="radio" name="aspEryMat__radio" data-pill-single="aspEryMat" value="show full-spectrum maturation"><span>Full-spectrum</span></label>
+          <div><label>Maturation</label><div class="pillGrid3" data-pill-wrap="aspEryMat"><label class="pillOpt"><input type="radio" name="aspEryMat__radio" data-pill-single="aspEryMat" value="show proper maturation"><span>Full-spectrum</span></label>
 <label class="pillOpt"><input type="radio" name="aspEryMat__radio" data-pill-single="aspEryMat" value="show left-shifted maturation"><span>Left-shifted</span></label>
 <label class="pillOpt"><input type="radio" name="aspEryMat__radio" data-pill-single="aspEryMat" value="show dysplastic maturation"><span>Dysplastic</span></label>
 <input type="hidden" id="aspEryMat"></div></div>
@@ -380,7 +380,7 @@
 <label class="pillOpt"><input type="radio" name="aspMyeNum__radio" data-pill-single="aspMyeNum" value="proportionately increased"><span>Increased</span></label>
 <label class="pillOpt"><input type="radio" name="aspMyeNum__radio" data-pill-single="aspMyeNum" value="sparse"><span>Sparse</span></label>
 <input type="hidden" id="aspMyeNum"></div></div>
-          <div><label>Maturation</label><div class="pillGrid3" data-pill-wrap="aspMyeMat"><label class="pillOpt"><input type="radio" name="aspMyeMat__radio" data-pill-single="aspMyeMat" value="show full-spectrum maturation"><span>Full-spectrum</span></label>
+          <div><label>Maturation</label><div class="pillGrid3" data-pill-wrap="aspMyeMat"><label class="pillOpt"><input type="radio" name="aspMyeMat__radio" data-pill-single="aspMyeMat" value="show proper maturation"><span>Full-spectrum</span></label>
 <label class="pillOpt"><input type="radio" name="aspMyeMat__radio" data-pill-single="aspMyeMat" value="show left-shifted maturation"><span>Left-shifted</span></label>
 <label class="pillOpt"><input type="radio" name="aspMyeMat__radio" data-pill-single="aspMyeMat" value="show dysplastic maturation"><span>Dysplastic</span></label>
 <input type="hidden" id="aspMyeMat"></div></div>
@@ -525,7 +525,7 @@
 <label class="pillOpt"><input type="radio" name="bxEryNum__radio" data-pill-single="bxEryNum" value="relatively decreased"><span>Relatively decreased</span></label>
 <label class="pillOpt"><input type="radio" name="bxEryNum__radio" data-pill-single="bxEryNum" value="relatively increased"><span>Relatively increased</span></label>            
 <input type="hidden" id="bxEryNum"></div></div>
-          <div><label>Maturation</label><div class="pillGrid" data-pill-wrap="bxEryMat"><label class="pillOpt"><input type="radio" name="bxEryMat__radio" data-pill-single="bxEryMat" value="show full-spectrum maturation"><span>Full-spectrum</span></label>
+          <div><label>Maturation</label><div class="pillGrid" data-pill-wrap="bxEryMat"><label class="pillOpt"><input type="radio" name="bxEryMat__radio" data-pill-single="bxEryMat" value="show proper maturation"><span>Full-spectrum</span></label>
 <label class="pillOpt"><input type="radio" name="bxEryMat__radio" data-pill-single="bxEryMat" value="show left-shifted maturation"><span>Left-shifted</span></label>
 <label class="pillOpt"><input type="radio" name="bxEryMat__radio" data-pill-single="bxEryMat" value="dysplastic maturation"><span>Dysplastic</span></label>
 <label class="pillOpt"><input type="radio" name="bxEryMat__radio" data-pill-single="bxEryMat" value="limited assessment"><span>Limited assessment</span></label>
@@ -559,7 +559,7 @@
 <label class="pillOpt"><input type="radio" name="bxMyeNum__radio" data-pill-single="bxMyeNum" value="relatively decreased"><span>Relatively decreased</span></label>
 <label class="pillOpt"><input type="radio" name="bxMyeNum__radio" data-pill-single="bxMyeNum" value="relatively increased"><span>Relatively increased</span></label>
 <input type="hidden" id="bxMyeNum"></div></div>
-          <div><label>Maturation</label><div class="pillGrid" data-pill-wrap="bxMyeMat"><label class="pillOpt"><input type="radio" name="bxMyeMat__radio" data-pill-single="bxMyeMat" value="show full-spectrum maturation"><span>Full-spectrum</span></label>
+          <div><label>Maturation</label><div class="pillGrid" data-pill-wrap="bxMyeMat"><label class="pillOpt"><input type="radio" name="bxMyeMat__radio" data-pill-single="bxMyeMat" value="show proper maturation"><span>Full-spectrum</span></label>
 <label class="pillOpt"><input type="radio" name="bxMyeMat__radio" data-pill-single="bxMyeMat" value="show left-shifted maturation"><span>Left-shifted</span></label>
 <label class="pillOpt"><input type="radio" name="bxMyeMat__radio" data-pill-single="bxMyeMat" value="limited assessment"><span>Limited assessment</span></label>
 <input type="hidden" id="bxMyeMat"></div></div>
@@ -862,7 +862,7 @@ function normalizeOneTemplateValue(id, value, mode){
   else if(/decreased|reduced|mildly decreased|relatively decreased/.test(x)) common.push('proportionately decreased','decreased','reduced','relatively decreased');
   if(/sparse|rare/.test(x)) common.push('sparse','rare');
 
-  if(/full-spectrum|proper maturation|orderly maturation through all stages|orderly maturation with a full range/.test(x)) common.push('show full-spectrum maturation','orderly maturation through all stages');
+  if(/full-spectrum|proper maturation|orderly maturation through all stages|orderly maturation with a full range/.test(x)) common.push('show proper maturation','orderly maturation through all stages');
   if(/left-shifted|left shifted/.test(x)) common.push('show left-shifted maturation');
   if(/dysplastic maturation/.test(x)) common.push('show dysplastic maturation','dysplastic maturation');
   if(/limited assessment/.test(x)) common.push('limited assessment');
@@ -989,7 +989,7 @@ function clean(txt){return (txt||'').trim().replace(/\s+/g,' ');}
 function strip(txt){return clean(txt).replace(/[.;,\s]+$/,'');}
 function cap(txt){txt=clean(txt);return txt?txt.charAt(0).toUpperCase()+txt.slice(1):'';}
 function sent(txt){txt=cap(strip(txt));return txt?txt+'.':'';}
-function normPart(txt){txt=strip(txt);if(!txt)return '';txt=txt.replace(/^are\s+/i,'').replace(/^is\s+/i,'').replace(/^show(s)?\s+/i,'').replace(/^with\s+/i,'');const reps=[[/^contain adequate cellular marrow particles$/i,'adequate with numerous spicules'],[/^rare scattered mast cells$/i,'rare scattered forms'],[/^rare scattered blasts$/i,'rare scattered blasts'],[/^proportionately normal in number$/i,'normal in number'],[/^present in normal numbers$/i,'normal in number'],[/^proportionately increased$/i,'increased'],[/^proportionately decreased$/i,'decreased'],[/^markedly proportionately increased$/i,'markedly increased'],[/^markedly proportionately decreased$/i,'markedly decreased'],[/^moderately relatively increased$/i,'moderately increased'],[/^moderately relatively decreased$/i,'moderately decreased'],[/^mildly relatively increased$/i,'mildly increased'],[/^mildly relatively decreased$/i,'mildly decreased'],[/^show proper\/full-spectrum maturation$/i,'orderly maturation through all stages'],[/^proper\/full-spectrum maturation$/i,'orderly maturation through all stages'],[/^show full-spectrum maturation$/i,'orderly maturation through all stages'],[/^full-spectrum maturation$/i,'orderly maturation through all stages'],[/^unremarkable morphology$/i,'morphologically unremarkable'],[/^show no significant abnormalities$/i,'morphologically unremarkable'],[/^predominantly mature multilobated forms/i,'mature multilobated forms']];for(const [re,rep] of reps){txt=txt.replace(re,rep);}return txt;}
+function normPart(txt){txt=strip(txt);if(!txt)return '';txt=txt.replace(/^are\s+/i,'').replace(/^is\s+/i,'').replace(/^show(s)?\s+/i,'').replace(/^with\s+/i,'');const reps=[[/^contain adequate cellular marrow particles$/i,'adequate with numerous spicules'],[/^rare scattered mast cells$/i,'rare scattered forms'],[/^rare scattered blasts$/i,'rare scattered blasts'],[/^proportionately normal in number$/i,'normal in number'],[/^present in normal numbers$/i,'normal in number'],[/^proportionately increased$/i,'increased'],[/^proportionately decreased$/i,'decreased'],[/^markedly proportionately increased$/i,'markedly increased'],[/^markedly proportionately decreased$/i,'markedly decreased'],[/^moderately relatively increased$/i,'moderately increased'],[/^moderately relatively decreased$/i,'moderately decreased'],[/^mildly relatively increased$/i,'mildly increased'],[/^mildly relatively decreased$/i,'mildly decreased'],[/^show proper\/proper maturation$/i,'orderly maturation through all stages'],[/^proper\/proper maturation$/i,'orderly maturation through all stages'],[/^show proper maturation$/i,'orderly maturation through all stages'],[/^proper maturation$/i,'orderly maturation through all stages'],[/^unremarkable morphology$/i,'morphologically unremarkable'],[/^show no significant abnormalities$/i,'morphologically unremarkable'],[/^predominantly mature multilobated forms/i,'mature multilobated forms']];for(const [re,rep] of reps){txt=txt.replace(re,rep);}return txt;}
 function lineage(label,parts){let arr=parts.map(normPart).filter(Boolean);if(!arr.length)return '';let out=[];for(const p of arr){if(out.length&&/^(including|with|and)\b/i.test(p))out[out.length-1]+=', '+p.replace(/^with\s+/i,'');else out.push(p);}return label+': '+cap(out.join('; '))+'.\n';}
 function finding(label,txt){txt=sent(txt);return txt?label+': '+txt+'\n':'';}
 function ironLine(store,ring){store=strip(store);ring=strip(ring);if(!store&&!ring)return '';let out='Iron: '+cap(store||'***')+'.';if(ring){if(/^(not identified|not seen|absent|none)$/i.test(ring))out+=' No ring sideroblasts identified.';else out+=' Ring sideroblasts '+ring+'.';}return out+'\n';}
@@ -1033,9 +1033,9 @@ function shortOtherCell(label, value){
   const t=normPart(value);
   if(!t) return '';
   if(/^not increased$/i.test(t)){
-    if(label==='Lymphocytes') return 'Lymphocytes: Scattered small lymphocytes present in normal numbers. Negative for lymphoid aggregates.\n';
+    if(label==='Lymphocytes') return 'Lymphocytes: Present in normal numbers; predominantly small lymphocytes.\n';
     if(label==='Plasma cells') return 'Plasma cells: Present in normal numbers.\n';
-    if(label==='Mast cells') return 'Mast cells: Not increased.\n';
+    if(label==='Mast cells') return 'Mast cells: Present in normal numbers.\n';
   }
   return label+': '+cap(t)+'.\n';
 }
@@ -1196,10 +1196,10 @@ function finalizePresetInputs(){
   setIfBlank('aspMkNum', adequateAspirate ? 'adequate in number' : 'sparse');
   setIfBlank('aspMkMorph', adequateAspirate ? 'normal morphology' : '');
   setIfBlank('aspEryNum', adequateAspirate ? 'proportionately normal in number' : 'sparse');
-  setIfBlank('aspEryMat', adequateAspirate ? 'show full-spectrum maturation' : '');
+  setIfBlank('aspEryMat', adequateAspirate ? 'show proper maturation' : '');
   setIfBlank('aspEryMorph', adequateAspirate ? 'mainly normoblastic maturation' : '');
   setIfBlank('aspMyeNum', adequateAspirate ? 'proportionately normal in number' : 'sparse');
-  setIfBlank('aspMyeMat', adequateAspirate ? 'show full-spectrum maturation' : '');
+  setIfBlank('aspMyeMat', adequateAspirate ? 'show proper maturation' : '');
   setIfBlank('aspMyeMorph', adequateAspirate ? 'orderly maturation through all stages' : '');
   setIfBlank('aspBlasts','are not increased (<5%)');
   setIfBlank('aspLymph','not increased');
@@ -1214,10 +1214,10 @@ function finalizePresetInputs(){
   setIfBlank('bxMkNum','adequate in number');
   setIfBlank('bxMkMorph','normal morphology');
   setIfBlank('bxEryNum','normal in number');
-  setIfBlank('bxEryMat','show full-spectrum maturation');
+  setIfBlank('bxEryMat','show proper maturation');
   setIfBlank('bxEryMorph','mainly normoblastic maturation');
   setIfBlank('bxMyeNum','normal in number');
-  setIfBlank('bxMyeMat','show full-spectrum maturation');
+  setIfBlank('bxMyeMat','show proper maturation');
   setIfBlank('bxMyeMorph','orderly maturation through all stages');
   setIfBlank('bxMe', v('meRatio') || 'approximately 3:1');
   setIfBlank('bxBlasts','not increased (<5%)');
@@ -1452,10 +1452,10 @@ function loadLplLimited(){
   set('aspQuality','contain adequate cellular marrow particles');
   set('aspCell','normocellular for age');
   set('aspEryNum','proportionately normal in number');
-  set('aspEryMat','show full-spectrum maturation');
+  set('aspEryMat','show proper maturation');
   set('aspEryMorph','mainly normoblastic maturation');
   set('aspMyeNum','proportionately normal in number');
-  set('aspMyeMat','show full-spectrum maturation');
+  set('aspMyeMat','show proper maturation');
   set('aspMyeMorph','orderly maturation through all stages; hypersegmentation');
   set('aspMkNum','adequate in number');
   set('aspMkMorph','normal morphology');
@@ -1496,10 +1496,10 @@ function loadLplExtensive(){
   set('aspQuality','contain adequate cellular marrow particles');
   set('aspCell','hypercellular with decreased fat spaces');
   set('aspEryNum','proportionately decreased');
-  set('aspEryMat','show full-spectrum maturation');
+  set('aspEryMat','show proper maturation');
   set('aspEryMorph','mainly normoblastic maturation');
   set('aspMyeNum','proportionately decreased');
-  set('aspMyeMat','show full-spectrum maturation');
+  set('aspMyeMat','show proper maturation');
   set('aspMyeMorph','orderly maturation through all stages');
   set('aspMkNum','adequate in number');
   set('aspMkMorph','normal morphology');
@@ -1514,9 +1514,9 @@ function loadLplExtensive(){
   set('bxCell','70%');
   set('bxArch','partially effaced by abnormal cellular infiltrates');
   set('bxEryNum','decreased');
-  set('bxEryMat','show full-spectrum maturation');
+  set('bxEryMat','show proper maturation');
   set('bxMyeNum','decreased');
-  set('bxMyeMat','show full-spectrum maturation');
+  set('bxMyeMat','show proper maturation');
   set('bxMkNum','adequate in number');
   set('bxMkMorph','normal morphology');
   set('bxMe','not reliably assessed due to extensive lymphoid infiltrate');
@@ -1620,10 +1620,10 @@ function loadHgblDoubleHit(){
   set('aspMkNum','proportionately decreased');
   set('aspMkMorph','');
   set('aspEryNum','proportionately decreased');
-  set('aspEryMat','show full-spectrum maturation');
+  set('aspEryMat','show proper maturation');
   set('aspEryMorph','');
   set('aspMyeNum','proportionately decreased');
-  set('aspMyeMat','show full-spectrum maturation');
+  set('aspMyeMat','show proper maturation');
   set('aspMyeMorph','');
   set('aspBlasts','are not increased (<5%)');
   set('aspLymph','atypical lymphoid cells are present');
@@ -1639,9 +1639,9 @@ function loadHgblDoubleHit(){
   set('bxMkNum','relatively decreased');
   set('bxMkMorph','normal morphology');
   set('bxEryNum','relatively decreased');
-  set('bxEryMat','show full-spectrum maturation');
+  set('bxEryMat','show proper maturation');
   set('bxMyeNum','relatively decreased');
-  set('bxMyeMat','show full-spectrum maturation');
+  set('bxMyeMat','show proper maturation');
   set('bxMe','not reliably assessed due to extensive lymphoma involvement');
   set('bxBlasts','not increased (<5%)');
   set('bxLymph','increased lymphoid infiltrate in a diffuse pattern');
@@ -1753,10 +1753,10 @@ function loadTall(){
   set('aspMkNum','proportionately decreased');
   set('aspMkMorph','');
   set('aspEryNum','proportionately decreased');
-  set('aspEryMat','show full-spectrum maturation');
+  set('aspEryMat','show proper maturation');
   set('aspEryMorph','');
   set('aspMyeNum','proportionately decreased');
-  set('aspMyeMat','show full-spectrum maturation');
+  set('aspMyeMat','show proper maturation');
   set('aspMyeMorph','');
   set('aspBlasts','are increased (>=20%)');
   set('aspLymph','atypical lymphoid cells are present');
@@ -1824,10 +1824,10 @@ function loadEtpAll(){
   set('aspMkNum','proportionately decreased');
   set('aspMkMorph','');
   set('aspEryNum','proportionately decreased');
-  set('aspEryMat','show full-spectrum maturation');
+  set('aspEryMat','show proper maturation');
   set('aspEryMorph','');
   set('aspMyeNum','proportionately decreased');
-  set('aspMyeMat','show full-spectrum maturation');
+  set('aspMyeMat','show proper maturation');
   set('aspMyeMorph','');
   set('aspBlasts','are increased (>=20%)');
   set('aspLymph','atypical lymphoid cells are present');
