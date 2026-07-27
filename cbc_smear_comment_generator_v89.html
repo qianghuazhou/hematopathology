@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CBC + Peripheral Smear Comment Generator v89</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#111827;--muted:#64748b;--line:#dbe3ef;--blue:#2563eb;--num:#eef6ff;--morph:#fbfdff;--interp:#fff7ed;--ctx:#f0fdf4;--danger:#fff1f2}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.35}header{background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;padding:18px 24px}h1{margin:0;font-size:22px}header p{margin:5px 0 0;color:#dbeafe;font-size:13px}main{max-width:1640px;margin:14px auto;padding:0 14px 24px}.layout{display:grid;grid-template-columns:1.25fr .75fr;gap:14px;align-items:start}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 24px rgba(15,23,42,.06);padding:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.panel{border:1px solid var(--line);border-radius:12px;padding:10px;background:#fff;margin-bottom:10px}.num{background:var(--num)}.morph{background:var(--morph)}.interp{background:var(--interp)}.ctx{background:var(--ctx)}.danger{background:var(--danger)}h2{font-size:17px;margin:0 0 10px}.st{font-size:13px;font-weight:800;text-transform:uppercase;color:#334155;margin:10px 0 8px}.gt{font-size:12px;font-weight:800;border-bottom:1px solid var(--line);padding-bottom:5px;margin-bottom:7px}.checks{display:grid;gap:6px}.checks.two{grid-template-columns:1fr 1fr}.checks label,.row{display:flex;gap:7px;align-items:flex-start;background:#fff;border:1px solid #e2e8f0;border-radius:9px;padding:7px 8px;font-weight:600;font-size:12.5px;line-height:1.2}.row{align-items:center;justify-content:space-between}.row span{flex:1}.row select,.row input[type=number]{width:112px}.inline{display:grid;grid-template-columns:1fr 1fr;gap:6px}.field{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700}.field input,.field select,select{border:1px solid #cbd5e1;border-radius:8px;padding:7px;background:#fff}
+
+select.visualized{position:absolute!important;opacity:0!important;pointer-events:none!important;width:1px!important;height:1px!important}
+.radio-select-group{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end;flex:1}
+.field .radio-select-group{justify-content:flex-start}
+.row .radio-select-group{max-width:280px}
+.radio-opt{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:#475569;font-size:11px;font-weight:600;cursor:pointer;user-select:none;transition:all .15s ease}
+.radio-opt:hover{border-color:#60a5fa;background:#eff6ff}
+.radio-opt.active{background:#eff6ff;border-color:#2563eb;color:#1e40af;font-weight:700}
+.radio-dot{width:12px;height:12px;border-radius:50%;border:1.5px solid #94a3b8;background:#fff;display:inline-block;box-sizing:border-box;position:relative;flex-shrink:0}
+.radio-opt.active .radio-dot{border-color:#2563eb;background:#2563eb}
+.radio-opt.active .radio-dot::after{content:'';position:absolute;top:3px;left:3px;width:4px;height:4px;border-radius:50%;background:#fff}
+
+.row{gap:10px}.row>span{min-width:130px}.small{font-size:11.5px;color:var(--muted);font-weight:700;margin:8px 0 4px}.hint{font-size:12px;color:var(--muted);margin-top:6px}.warn{background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:8px 10px;font-size:12px;color:#9a3412;margin-top:8px}textarea{width:100%;border:1px solid #cbd5e1;border-radius:10px;padding:10px;font-size:13px;font-family:Consolas,Menlo,monospace;line-height:1.45;resize:vertical}.out textarea{background:#0b1220;color:#e5e7eb;border:0}.out #final{min-height:430px}.btns{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:10px}button{border:0;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer;background:#e5e7eb}button.primary{background:var(--blue);color:#fff}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.tabs label{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 9px;font-size:12px;font-weight:700}.badge{display:inline-block;border-radius:999px;background:#dbeafe;color:#1e40af;padding:2px 7px;font-size:10px;font-weight:800;margin-left:5px}@media(max-width:1180px){.layout,.grid3,.grid2{grid-template-columns:1fr}.checks.two,.inline{grid-template-columns:1fr}}
+</style></head>
+<body><header><h1>CBC + Peripheral Smear Comment Generator v89</h1><p>ICSH-oriented morphology capture with concise interpretive synthesis</p></header>
+<main><div class="layout"><div class="card"><h2>Input</h2><div class="grid3">
+<section><div class="st">RBC</div>
+<div class="panel num"><div class="gt">CBC indices</div><div class="checks two">
+<label><input type="checkbox" id="rbc_anemia">Anemia</label><label><input type="checkbox" id="rbc_poly">Erythrocytosis</label><label><input type="checkbox" id="highrbc">Relatively high RBC count</label><label><input type="checkbox" id="rdw_high">RDW increased</label></div>
+<div class="inline"><label class="field">MCV category<select id="mcv"><option value="">Not selected</option><option value="micro">Microcytic</option><option value="normo">Normocytic</option><option value="macro">Macrocytic</option><option value="dimorphic">Dimorphic / mixed</option></select></label><label class="field">Hemoglobinization<select id="mch"><option value="">Not selected</option><option value="hypo">Hypochromic</option><option value="normo">Normochromic</option></select></label></div></div>
+<div class="panel morph"><div class="gt">RBC morphology grading <span class="badge">ICSH</span></div><div id="rbcGrades"></div></div>
+<div class="panel morph"><div class="gt">Arrangement / additional findings</div><div class="checks two">
+<label><input type="checkbox" id="dimorphic">Dimorphic RBC population</label><label><input type="checkbox" id="rouleaux">Rouleaux</label><label><input type="checkbox" id="agglutination">RBC agglutination</label><label><input type="checkbox" id="nrbc">Nucleated RBCs</label><label><input type="checkbox" id="roundmacro">Round macrocytosis</label><label><input type="checkbox" id="anisochromia">Anisochromia</label></div></div>
+<div class="panel interp"><div class="gt">Interpretive patterns</div><div class="checks">
+<label><input type="checkbox" id="irondef">Iron deficiency pattern</label><label><input type="checkbox" id="thal">Thalassemia / hemoglobinopathy pattern</label><label><input type="checkbox" id="mega">Megaloblastic pattern</label><label><input type="checkbox" id="retic">Reticulocytosis / marrow response</label><label><input type="checkbox" id="hemolysis">Hemolytic process</label><label><input type="checkbox" id="maha">Suspected microangiopathic hemolysis</label><label><input type="checkbox" id="aiha">Immune hemolysis pattern</label><label><input type="checkbox" id="coldagg">Cold agglutinin pattern</label><label><input type="checkbox" id="oxidative">Oxidative hemolysis pattern</label><label><input type="checkbox" id="liver">Liver disease / alcohol pattern</label><label><input type="checkbox" id="renal">Renal disease / uremia pattern</label><label><input type="checkbox" id="hyposplenism">Hyposplenism / post-splenectomy</label><label><input type="checkbox" id="heredspher">Hereditary spherocytosis considered</label><label><input type="checkbox" id="heredellipto">Hereditary elliptocytosis considered</label><label><input type="checkbox" id="marrowinf">Marrow infiltration / myelofibrosis pattern</label></div></div></section>
+<section><div class="st">WBC</div>
+<div class="panel num"><div class="gt">Numerical abnormalities</div><div class="checks two">
+<label><input type="checkbox" id="leukocytosis">Leukocytosis</label><label><input type="checkbox" id="leukopenia">Leukopenia</label><label><input type="checkbox" id="neutro">Neutrophilia</label><label><input type="checkbox" id="neutropenia">Neutropenia</label><label><input type="checkbox" id="lympho">Lymphocytosis</label><label><input type="checkbox" id="lymphopenia">Lymphopenia</label><label><input type="checkbox" id="mono">Monocytosis</label><label><input type="checkbox" id="eos">Eosinophilia</label><label><input type="checkbox" id="baso">Basophilia</label></div>
+<label class="field" style="margin-top:7px">ANC category<select id="anc"><option value="">Not selected</option><option value="mild">0.5-0.99 x10^9/L</option><option value="severe">&lt;0.5 x10^9/L</option></select></label></div>
+<div class="panel morph"><div class="gt">Neutrophil / myeloid morphology</div><div class="checks two">
+<label><input type="checkbox" id="leftshift">Left shift</label><label><input type="checkbox" id="toxic">Toxic granulation</label><label><input type="checkbox" id="dohle">Dohle bodies</label><label><input type="checkbox" id="vacuoles">Cytoplasmic vacuolation</label><label><input type="checkbox" id="hyperseg">Hypersegmented neutrophils</label><label><input type="checkbox" id="hyposeg">Hyposegmented neutrophils / pseudo-Pelger-Huet forms</label><label><input type="checkbox" id="hypogran">Neutrophil hypogranulation</label><label><input type="checkbox" id="hypergran">Abnormal hypergranulation</label><label><input type="checkbox" id="dysgran">Other granulocytic dysplasia</label><label><input type="checkbox" id="auer">Auer rods</label><label><input type="checkbox" id="abnmono">Abnormal monocytes</label><label><input type="checkbox" id="promono">Promonocytes</label></div></div>
+<div class="panel morph"><div class="gt">Lymphoid / blasts / plasma cells</div><div class="checks two">
+<label><input type="checkbox" id="reactlymph">Reactive lymphocytes</label><label><input type="checkbox" id="smallmono">Monomorphic small mature lymphocytes</label><label><input type="checkbox" id="smudge">Smudge cells</label><label><input type="checkbox" id="lgl">Large granular lymphocytes</label><label><input type="checkbox" id="prolymph">Prolymphocytes</label><label><input type="checkbox" id="plasmacytoid">Plasmacytoid lymphocytes</label><label><input type="checkbox" id="cerebriform">Cerebriform lymphocytes</label><label><input type="checkbox" id="abnlymph">Abnormal lymphocytes</label><label><input type="checkbox" id="plasmacells">Circulating plasma cells</label></div>
+<div class="inline" style="margin-top:7px"><label class="field">Blast estimate (%)<input type="number" id="blastpct" min="0" max="100" step="0.1" placeholder="e.g. 12"></label><label class="field">Plasma cell estimate (%)<input type="number" id="pcpct" min="0" max="100" step="0.1" placeholder="optional"></label></div></div>
+<div class="panel interp"><div class="gt">Interpretive patterns</div><div class="checks">
+<label><input type="checkbox" id="reactneut">Reactive neutrophilia</label><label><input type="checkbox" id="leukemoid">Leukemoid reaction</label><label><input type="checkbox" id="leukoery">Leukoerythroblastic picture</label><label><input type="checkbox" id="reactlymphint">Reactive lymphocytosis</label><label><input type="checkbox" id="cll">CLL-type process considered</label><label><input type="checkbox" id="bclpd">B-cell lymphoproliferative disorder</label><label><input type="checkbox" id="tlgl">T-LGL proliferation</label><label><input type="checkbox" id="nk">NK-cell proliferation</label><label><input type="checkbox" id="sezary">Sezary syndrome / CTCL considered</label><label><input type="checkbox" id="circlymphoma">Circulating lymphoma cells</label><label><input type="checkbox" id="acuteleuk">Acute leukemia considered</label><label><input type="checkbox" id="cml">CML considered</label><label><input type="checkbox" id="mdsmpn">MDS/MPN considered</label><label><input type="checkbox" id="plasmaleuk">Leukemic-phase plasma cell neoplasm</label></div></div></section>
+<section><div class="st">PLT / Other</div>
+<div class="panel num"><div class="gt">Platelet count</div><label class="field">Category<select id="pltcat"><option value="">Not selected</option><option value="normal">Normal</option><option value="low_mild">Mild thrombocytopenia</option><option value="low_mod">Moderate thrombocytopenia</option><option value="low_sev">Severe thrombocytopenia</option><option value="high_mild">Mild thrombocytosis</option><option value="high_mod">Moderate thrombocytosis</option><option value="high_marked">Marked thrombocytosis</option></select></label></div>
+<div class="panel morph"><div class="gt">Platelet morphology</div><div class="checks two"><label><input type="checkbox" id="largeplt">Large platelets</label><label><input type="checkbox" id="giantplt">Giant platelets</label><label><input type="checkbox" id="hypogranplt">Hypogranular platelets</label><label><input type="checkbox" id="clump">Platelet clumping</label><label><input type="checkbox" id="satellitism">Platelet satellitism</label><label><input type="checkbox" id="micromeg">Micromegakaryocytes</label><label><input type="checkbox" id="circmeg">Circulating megakaryocytes</label><label><input type="checkbox" id="barenuc">Bare megakaryocyte nuclei</label></div></div>
+<div class="panel interp"><div class="gt">Platelet patterns</div><div class="checks"><label><input type="checkbox" id="reactplt">Reactive thrombocytosis</label><label><input type="checkbox" id="mpnplt">Consider MPN</label><label><input type="checkbox" id="itp">Peripheral destruction / ITP pattern</label><label><input type="checkbox" id="hypersplenism">Hypersplenism pattern</label><label><input type="checkbox" id="consumption">Consumption pattern</label></div></div>
+<div class="panel ctx"><div class="gt">Context</div><div class="checks"><label><input type="checkbox" id="ctx_neonate">Neonate / newborn</label><label><input type="checkbox" id="ctx_premature">Prematurity / neonatal stress</label><label><input type="checkbox" id="ctx_neopoly">Neonatal polycythemia</label><label><input type="checkbox" id="pancytopenia">Pancytopenia</label><label><input type="checkbox" id="bicytopenia">Bicytopenia</label></div></div>
+<div class="panel danger"><div class="gt">Special / urgent findings</div><div class="checks"><label><input type="checkbox" id="sp_histo_pos">Intracellular small yeast-like organisms</label><label><input type="checkbox" id="sp_histo_neg">Buffy coat negative for Histoplasma-like organisms</label><label><input type="checkbox" id="sp_yeast">Extracellular fungal organisms</label><label><input type="checkbox" id="sp_staph">Intracytoplasmic cocci in neutrophils</label><label><input type="checkbox" id="sp_malaria">Malaria parasites</label></div><label class="field" style="margin-top:7px">Parasitemia (%)<input type="number" id="parasitemia" min="0" max="100" step="0.01" placeholder="optional"></label></div></section>
+</div></div>
+<div class="card out"><h2>Output</h2><div class="panel"><div class="gt">Output mode</div><div class="tabs"><label><input type="radio" name="mode" value="interpretive" checked> Interpretation only</label><label><input type="radio" name="mode" value="combined"> Morphology + interpretation</label><label><input type="radio" name="mode" value="structured"> Structured JSON</label></div><label><input type="checkbox" id="includeTests" checked> Include testing recommendations</label></div>
+<div class="panel"><div class="gt">Optional custom text</div><textarea id="custom" rows="3" placeholder="Add clinical context or an additional comment..."></textarea></div>
+<div class="btns"><button onclick="clearAll()">Clear</button><button class="primary" onclick="generate()">Generate</button></div><div style="height:10px"></div><textarea id="final" readonly></textarea><div class="btns"><button class="primary" onclick="copyText('final')">Copy output</button></div><div class="warn" id="warnings" style="display:none"></div></div>
+</div></main>
+<script>
+const $=id=>document.getElementById(id), on=id=>!!($(id)&&$(id).checked), val=id=>$(id)?$(id).value:'';
+const gradeDefs=[
+ ['aniso','Anisocytosis'],['macrocytes','Macrocytes'],['ovalmacro','Macro-ovalocytes'],['microcytes','Microcytes'],['hypochromic','Hypochromic cells'],['polychromasia','Polychromasia'],['poik','Nonspecific poikilocytosis'],['acanth','Acanthocytes'],['bite','Bite cells'],['blister','Blister cells'],['echino','Echinocytes'],['ellipto','Elliptocytes'],['ovalocytes','Ovalocytes'],['contracted','Irregularly contracted cells'],['spher','Spherocytes'],['stomato','Stomatocytes'],['target','Target cells'],['tear','Teardrop cells'],['sickle','Sickle cells'],['coarsestip','Coarse basophilic stippling'],['finestip','Fine basophilic stippling'],['hjb','Howell-Jolly bodies'],['pappenheimer','Pappenheimer bodies']];
+const gradeOptions='<option value="">None</option><option value="2">Moderate (2+)</option><option value="3">Many (3+)</option>';
+$('rbcGrades').innerHTML=gradeDefs.map(([id,n])=>`<div class="row"><span>${n}</span><select id="g_${id}">${gradeOptions}</select></div>`).join('')+`<div class="row"><span>Schistocytes</span><select id="g_schisto"><option value="">None</option><option value="lt1">&lt;1%</option><option value="1to2">1-2%</option><option value="gt2">&gt;2%</option></select></div>`;
+
+function enhanceSelects(){
+ document.querySelectorAll('select:not(.visualized)').forEach(sel=>{
+  sel.classList.add('visualized');
+  const box=document.createElement('div');
+  box.className='radio-select-group';
+  box.setAttribute('role','radiogroup');
+  [...sel.options].forEach(opt=>{
+   const label=document.createElement('label');
+   label.className='radio-opt';
+   label.dataset.value=opt.value;
+   const dot=document.createElement('span');
+   dot.className='radio-dot';
+   const text=document.createTextNode(opt.textContent);
+   label.appendChild(dot);
+   label.appendChild(text);
+   label.classList.toggle('active',sel.value===opt.value);
+   label.addEventListener('click',()=>{
+    sel.value=opt.value;
+    sel.dispatchEvent(new Event('change',{bubbles:true}));
+    syncSegment(sel);
+   });
+   box.appendChild(label);
+  });
+  sel.insertAdjacentElement('afterend',box);
+  sel.addEventListener('change',()=>syncSegment(sel));
+ });
+}
+
+function syncSegment(sel){
+ const box=sel.nextElementSibling;
+ if(!box||!box.classList.contains('radio-select-group'))return;
+ box.querySelectorAll('.radio-opt').forEach(opt=>{
+  opt.classList.toggle('active',opt.dataset.value===sel.value);
+ });
+}
+
+enhanceSelects();
+function ascii(s){const m={"\u2013":"-","\u2014":"-","\u2212":"-","\u201c":"\"","\u201d":"\"","\u2018":"'","\u2019":"'","\u2265":">=","\u2264":"<=","\u00b5":"u","\u00d7":"x","\u00a0":" "};return String(s||'').replace(/[\u2013\u2014\u2212\u201c\u201d\u2018\u2019\u2265\u2264\u00b5\u00d7\u00a0]/g,ch=>m[ch]||ch)}
+function sent(s){s=(s||'').trim();return !s?'':/[.!?]$/.test(s)?s:s+'.'}
+function oxford(a){a=a.filter(Boolean);if(a.length<2)return a[0]||'';if(a.length===2)return a.join(' and ');return a.slice(0,-1).join(', ')+', and '+a.at(-1)}
+function grade(id){return val('g_'+id)} function hasGrade(id){return !!grade(id)}
+function gradeWord(g){return g==='2'?'Moderate':g==='3'?'Marked':''}
+
+function generate(){
+ const morphology=[], comments=[], urgent=[], warnings=[]; 
+ const add=(a,s)=>{s=sent(s);if(s&&!a.includes(s))a.push(s)}; 
+ const tests=on('includeTests');
+ const mcv=val('mcv'),mch=val('mch'),plt=val('pltcat'),anc=val('anc'),blast=parseFloat(val('blastpct')),pc=parseFloat(val('pcpct'));
+ 
+ // Validation and hints
+ if(mcv==='dimorphic'&&!on('dimorphic'))$('dimorphic').checked=true;
+ if(on('maha')&&!hasGrade('schisto'))warnings.push('Microangiopathic hemolysis selected without schistocytes.');
+ if(on('itp')&&!plt.startsWith('low'))warnings.push('ITP pattern selected without checking a thrombocytopenia category.');
+ if(on('cll')&&!(on('lympho')&&on('smallmono')))warnings.push('CLL-type interpretation is strongest with lymphocytosis and monomorphic small mature lymphocytes.');
+
+ // Morphology capture
+ if(mcv) add(morphology,`${{micro:'Microcytic indices',normo:'Normocytic indices',macro:'Macrocytic indices',dimorphic:'Dimorphic red cell indices'}[mcv]}.`);
+ if(mch) add(morphology,mch==='hypo'?'Hypochromic indices.':'Normochromic indices.');
+ gradeDefs.forEach(([id,name])=>{
+  if(hasGrade(id)){
+   const verb = name.toLowerCase().includes('poikilocytosis') ? 'is' : 'are';
+   add(morphology,`${gradeWord(grade(id))} ${name.toLowerCase()} ${verb} present.`);
+  }
+ });
+ const sg=grade('schisto');if(sg)add(morphology,`Schistocytes are present (${sg==='lt1'?'<1%':sg==='1to2'?'1-2%':'>2%'}).`);
+ if(on('dimorphic'))add(morphology,'A dimorphic red cell population is present.');if(on('anisochromia'))add(morphology,'Anisochromia is present.');if(on('rouleaux'))add(morphology,'Rouleaux formation is present.');if(on('agglutination'))add(morphology,'Red cell agglutination is present.');if(on('nrbc'))add(morphology,'Nucleated red blood cells are present.');if(on('roundmacro'))add(morphology,'Round macrocytes are present.');
+ const toxic=oxford([on('toxic')?'toxic granulation':'',on('dohle')?'Dohle bodies':'',on('vacuoles')?'cytoplasmic vacuolation':'']);if(toxic)add(morphology,`Neutrophils show ${toxic}.`);if(on('leftshift'))add(morphology,'Granulocytic left shift is present.');if(on('hyperseg'))add(morphology,'Hypersegmented neutrophils are present.');if(on('hyposeg'))add(morphology,'Hyposegmented neutrophils, including pseudo-Pelger-Huet forms, are present.');if(on('hypogran'))add(morphology,'Neutrophil hypogranulation is present.');if(on('hypergran'))add(morphology,'Abnormal neutrophil hypergranulation is present.');if(on('dysgran'))add(morphology,'Additional granulocytic dysplasia is present.');if(on('auer'))add(morphology,'Auer rods are identified.');if(on('abnmono'))add(morphology,'Abnormal monocytes are present.');if(on('promono'))add(morphology,'Promonocytes are present.');
+ if(on('reactlymph'))add(morphology,'Reactive lymphocytes are present.');if(on('smallmono'))add(morphology,'A monomorphic population of small mature lymphocytes is present.');if(on('smudge'))add(morphology,'Smudge cells are present.');if(on('lgl'))add(morphology,'Large granular lymphocytes are present.');if(on('prolymph'))add(morphology,'Prolymphocytes are present.');if(on('plasmacytoid'))add(morphology,'Plasmacytoid lymphocytes are present.');if(on('cerebriform'))add(morphology,'Cerebriform lymphocytes are present.');if(on('abnlymph'))add(morphology,'Abnormal lymphocytes are present.');if(Number.isFinite(blast)&&blast>0)add(morphology,`Circulating blasts comprise approximately ${blast}% of leukocytes.`);if(on('plasmacells'))add(morphology,Number.isFinite(pc)&&pc>0?`Circulating plasma cells comprise approximately ${pc}% of leukocytes.`:'Circulating plasma cells are present.');
+ const pltMorph=oxford([on('largeplt')?'large platelets':'',on('giantplt')?'giant platelets':'',on('hypogranplt')?'hypogranular platelets':'',on('micromeg')?'micromegakaryocytes':'',on('circmeg')?'circulating megakaryocytes':'',on('barenuc')?'bare megakaryocyte nuclei':'']);if(pltMorph)add(morphology,`${pltMorph[0].toUpperCase()+pltMorph.slice(1)} are present.`);if(on('clump'))add(morphology,'Platelet clumping is present.');if(on('satellitism'))add(morphology,'Platelet satellitism is present.');
+
+ // Urgent findings
+ if(on('sp_histo_pos'))add(urgent,'Small intracellular yeast-like organisms are identified within neutrophils and are morphologically suggestive of Histoplasma; microbiologic confirmation is required.');
+ if(on('sp_histo_neg'))add(urgent,'Buffy coat smear shows no evidence of Histoplasma-like organisms within monocytes or neutrophils.');
+ if(on('sp_yeast'))add(urgent,'Extracellular fungal organisms are identified, including occasional forms within neutrophils; correlation with microbiologic results is required.');
+ if(on('sp_staph'))add(urgent,'Numerous intracytoplasmic cocci are present within neutrophils, consistent with bacteremia in the appropriate microbiologic context.');
+ if(on('sp_malaria')){const pp=parseFloat(val('parasitemia'));add(urgent,`Malaria parasites are identified${Number.isFinite(pp)?`; parasitemia is approximately ${pp}%`:''}. Species confirmation and urgent clinical correlation are recommended.`)}
+
+ // RBC Interpretations & Independent Flags
+ if(on('rbc_poly'))add(comments,'Erythrocytosis noted; consider primary polycythemia versus secondary causes such as chronic hypoxia, smoking, renal lesions, or volume contraction.');
+ if(on('rdw_high'))add(comments,'Increased RDW indicates increased red cell anisocytosis, often reflecting nutritional deficiency, reticulocytosis, or a dimorphic population.');
+ if(on('highrbc')&&!on('thal'))add(comments,'A relatively high RBC count in the setting of microcytosis raises consideration of thalassemia trait.');
+ if(on('irondef'))add(comments,`Microcytic hypochromic anemia pattern consistent with iron deficiency.${tests?' Correlation with ferritin and iron studies is recommended.':''}`);
+ if(on('thal'))add(comments,`Microcytosis with target cells/stippling raises consideration of thalassemia trait or hemoglobinopathy.${tests?' Correlation with hemoglobin analysis and iron studies is recommended.':''}`);
+ if(!on('irondef')&&!on('thal')&&mcv==='micro')add(comments,`Microcytic red cell indices. Differential diagnosis includes iron deficiency, thalassemia trait, and anemia of chronic inflammation.${tests?' Correlation with iron studies is recommended.':''}`);
+ if(on('mega'))add(comments,`Megaloblastic features present.${tests?' Correlation with vitamin B12, folate levels, and medication history is recommended.':''}`);
+ if(!on('mega')&&mcv==='macro'&&(hasGrade('ovalmacro')||on('hyperseg')))add(comments,`Macrocytic anemia with macro-ovalocytes and/or hypersegmented neutrophils supports a megaloblastic pattern.${tests?' B12 and folate correlation recommended.':''}`);
+ if(on('liver')||(mcv==='macro'&&on('roundmacro')&&!on('mega')))add(comments,'Macrocytic indices with round macrocytes raise consideration of liver disease, alcohol effect, reticulocytosis, medication effect, or hypothyroidism.');
+ if(on('retic')||(hasGrade('polychromasia')&&!on('aiha')&&!on('hemolysis')))add(comments,'Polychromasia suggests increased reticulocytosis and active erythroid marrow response.');
+ if(on('hemolysis'))add(comments,`Evidence of hemolysis present.${tests?' Correlation with LDH, haptoglobin, reticulocyte count, and bilirubin is recommended.':''}`);
+ if(on('maha')||(sg&&plt.startsWith('low')&&on('rbc_anemia')))add(comments,`Schistocytes in the presence of anemia and thrombocytopenia raise concern for microangiopathic hemolytic anemia (MAHA).${tests?' Urgent correlation with hemolysis markers, renal function, and coagulation studies is recommended.':''}`);
+ else if(sg)add(comments,`Schistocytes indicate mechanical red cell fragmentation; consider MAHA, prosthetic valves, DIC, or severe burns.${tests?' Hemolysis and coagulation studies recommended.':''}`);
+ if(on('aiha'))add(comments,`Spherocytes and polychromasia raise consideration of immune-mediated hemolysis.${tests?' Correlation with Direct Antiglobulin Test (DAT) and hemolysis markers is recommended.':''}`);
+ if(on('heredspher'))add(comments,`Prominent spherocytosis raises consideration of hereditary spherocytosis.${tests?' Correlation with family history, DAT, and specialized red cell testing is recommended.':''}`);
+ if(!on('aiha')&&!on('heredspher')&&hasGrade('spher'))add(comments,`Spherocytes identified; consider immune hemolysis, hereditary spherocytosis, or physical/chemical red cell injury.${tests?' DAT correlation recommended.':''}`);
+ if(on('heredellipto')||hasGrade('ellipto')==='3')add(comments,'Prominent elliptocytosis raises consideration of hereditary elliptocytosis or severe dyserythropoiesis.');
+ if(on('oxidative')||hasGrade('bite')||hasGrade('blister')||hasGrade('contracted'))add(comments,`Bite, blister, or irregularly contracted cells raise consideration of oxidative hemolysis or G6PD deficiency.${tests?' Evaluation for oxidant exposure and G6PD activity testing recommended.':''}`);
+ if(on('coldagg')||on('agglutination'))add(comments,'Red cell agglutination suggests cold agglutinins, which may spuriously elevate MCV and lower RBC counts.');
+ if(on('rouleaux'))add(comments,'Rouleaux formation suggests elevated plasma proteins or monoclonal immunoglobulins.');
+ if(on('hyposplenism')||hasGrade('hjb'))add(comments,'Howell-Jolly bodies and associated red cell features support hyposplenism or post-splenectomy status.');
+ if(hasGrade('coarsestip')||hasGrade('finestip'))add(comments,'Basophilic stippling may be seen in lead exposure, hemoglobinopathies, heavy metal toxicity, or dyserythropoiesis.');
+ if(hasGrade('pappenheimer'))add(comments,'Pappenheimer bodies suggest siderocytic inclusions seen in hyposplenism, sideroblastic anemia, or dyserythropoiesis.');
+ if(on('renal')||hasGrade('echino')==='3')add(comments,'Echinocytes/burr cells raise consideration of renal disease, uremia, or pyruvate kinase deficiency.');
+ if(on('marrowinf')||on('leukoery'))add(comments,`Leukoerythroblastic findings with teardrop cells raise consideration of marrow infiltration, myelofibrosis, or severe marrow stress.${tests?' Bone marrow evaluation may be indicated.':''}`);
+
+ // WBC Interpretations & Independent Flags
+ if(on('leukocytosis'))add(comments,'Leukocytosis present; evaluate underlying etiology based on differential count and clinical context.');
+ if(on('leukopenia'))add(comments,'Leukopenia noted; differential includes infection, medication effect, autoimmune conditions, hypersplenism, or marrow disorders.');
+ if(on('neutro')&&!on('reactneut'))add(comments,'Neutrophilia present; may be reactive to infection, inflammation, stress, corticosteroids, or a primary myeloid process.');
+ if(anc==='severe')add(comments,'Severe neutropenia (ANC <0.5 x10^9/L) carries a high risk of infection and requires prompt clinical evaluation.');
+ else if(anc==='mild'||on('neutropenia'))add(comments,'Neutropenia noted; clinical correlation and monitoring recommended.');
+ if(on('lympho')&&!on('reactlymphint')&&!on('cll'))add(comments,'Lymphocytosis noted; consider reactive immune responses versus lymphoproliferative disorders.');
+ if(on('lymphopenia'))add(comments,'Lymphopenia noted; common causes include acute infection, corticosteroids, stress, or immunodeficiency.');
+ if(on('mono')&&!on('mdsmpn'))add(comments,'Monocytosis present; common in chronic inflammation, infections, or myeloid neoplasms.');
+ if(on('eos'))add(comments,'Eosinophilia noted; consider allergic responses, parasitic infection, drug reactions, autoimmune disease, or hypereosinophilic syndromes.');
+ if(on('baso'))add(comments,'Basophilia present; consider hypersensitivity reactions, hypothyroidism, or myeloproliferative neoplasms (especially CML).');
+ if(on('reactneut')||(on('neutro')&&(on('toxic')||on('dohle')||on('vacuoles'))))add(comments,'Neutrophilia with toxic change supports a reactive infectious or inflammatory process.');
+ if(on('leukemoid'))add(comments,'Marked leukocytosis with left shift simulates a leukemoid reaction; clinical context or molecular studies recommended to rule out CML.');
+ if(on('leftshift')&&!on('reactneut')&&!on('leukemoid'))add(comments,'Granulocytic left shift present, suggestive of active marrow release or response to infection/inflammation.');
+ if(on('hyperseg'))add(comments,'Hypersegmented neutrophils present, strongly suggestive of megaloblastic anemia or medication effect.');
+ if(on('hyposeg')||on('hypogran')||on('dysgran')||on('abnmono'))add(comments,'Dysplastic granulocyte or monocyte morphology present; raises consideration of myelodysplastic syndrome (MDS) or marrow toxicity.');
+ if(Number.isFinite(blast)&&blast>0){
+  if(blast>=20)add(comments,`Circulating blasts (${blast}%) strongly support acute leukemia in the clinical context.${tests?' Flow cytometry and genetic studies required.':''}`);
+  else add(comments,`Circulating blasts identified (${blast}%); acute leukemia or high-risk myeloid neoplasm considered.${tests?' Flow cytometry recommended.':''}`);
+ }else if(on('acuteleuk'))add(comments,`Morphology raises concern for acute leukemia.${tests?' Flow cytometric immunophenotyping is recommended.':''}`);
+ if(on('auer'))add(comments,'Auer rods identified, confirming myeloid lineage and raising urgent concern for acute myeloid leukemia or APML.');
+ if(on('cml'))add(comments,`Leukocytosis with left shift and basophilia supports evaluation for Chronic Myeloid Leukemia (CML).${tests?' BCR::ABL1 testing recommended.':''}`);
+ if(on('mdsmpn'))add(comments,`Persistent monocytosis or myeloid dysplasia raises consideration of an MDS/MPN overlap disorder.${tests?' Bone marrow evaluation recommended.':''}`);
+ if(on('reactlymphint')||on('reactlymph'))add(comments,'Reactive lymphocytes present, typical of viral infection or immune stimulation.');
+ if(on('cll')||(on('smallmono')&&on('smudge')))add(comments,`Monomorphic small lymphocytes and smudge cells raise consideration of Chronic Lymphocytic Leukemia (CLL) or related lymphoproliferative disorder.${tests?' Flow cytometry recommended.':''}`);
+ if(on('smudge')&&!on('cll'))add(comments,'Smudge cells present; often associated with cell fragility in chronic lymphoproliferative disorders.');
+ if(on('bclpd')||on('abnlymph')||on('circlymphoma'))add(comments,`Abnormal/atypical lymphocytes raise consideration of a mature B-cell or T-cell lymphoproliferative disorder.${tests?' Flow cytometry recommended.':''}`);
+ if(on('sezary')||on('cerebriform'))add(comments,'Cerebriform lymphocytes identified; consider cutaneous T-cell lymphoma / Sezary syndrome in the appropriate clinical setting.');
+ if(on('tlgl')||on('nk')||on('lgl'))add(comments,'Large granular lymphocytes present; differential includes reactive expansion versus T-LGL / NK-cell lymphoproliferative disorder.');
+ if(on('plasmacells')||on('plasmaleuk'))add(comments,`Circulating plasma cells present; consider reactive plasmacytosis versus plasma cell neoplasm.${tests?' Serum protein electrophoresis and free light chains recommended.':''}`);
+
+ // Platelet / Cytopenia Interpretations
+ if(on('clump')||on('satellitism'))add(comments,`Platelet clumping or satellitism identified, which may cause pseudothrombocytopenia.${tests?' Repeat CBC in sodium citrate tube recommended.':''}`);
+ if(on('reactplt'))add(comments,'Reactive thrombocytosis favored; common causes include iron deficiency, infection, inflammation, tissue injury, and malignancy.');
+ if(on('mpnplt')||plt==='high_marked')add(comments,`Marked or persistent thrombocytosis raises consideration of a myeloproliferative neoplasm (e.g., Essential Thrombocythemia).${tests?' JAK2, CALR, MPL mutation analysis recommended.':''}`);
+ if(on('itp'))add(comments,'Thrombocytopenia with features of increased platelet turnover raises consideration of immune thrombocytopenia (ITP) or peripheral destruction.');
+ if(on('hypersplenism'))add(comments,'Cytopenias in the setting of splenomegaly raise consideration of hypersplenism.');
+ if(on('consumption'))add(comments,'Thrombocytopenia raises concern for consumption/destruction (e.g., DIC, TTP/HUS, sepsis).');
+ if(!on('itp')&&!on('consumption')&&plt.startsWith('low'))add(comments,`${plt==='low_sev'?'Severe':plt==='low_mod'?'Moderate':'Mild'} thrombocytopenia noted; differential includes decreased production, increased destruction, or sequestration.`);
+ if(on('hypogranplt')||on('micromeg')||on('circmeg')||on('barenuc'))add(comments,'Dysplastic megakaryocytic features / giant platelets present; consider primary marrow disease or MDS/MPN.');
+ if(on('pancytopenia'))add(comments,'Pancytopenia identified; differential includes drug effect, infection, autoimmune disease, aplastic anemia, or marrow infiltration/neoplasm.');
+ if(on('bicytopenia'))add(comments,'Bicytopenia identified; requires clinical correlation and monitoring for underlying marrow disorders.');
+
+ // Context & Custom
+ if(on('ctx_neonate'))add(comments,'Findings should be interpreted using neonatal age-specific reference ranges.');
+ if(on('ctx_premature'))add(comments,'Findings consistent with prematurity or neonatal physiologic stress.');
+ if(on('ctx_neopoly'))add(comments,'Neonatal polycythemia noted; consider maternal diabetes, placental insufficiency, or secondary hypoxia.');
+ if(on('custom')&&val('custom').trim())add(comments,val('custom').trim());
+
+ // Final Output Formatting
+ const mode=document.querySelector('input[name=mode]:checked').value;
+ let out='';
+ if(mode==='structured'){
+  out=JSON.stringify({
+   rbc:{anemia:on('rbc_anemia'),erythrocytosis:on('rbc_poly'),mcv:mcv||null,hemoglobinization:mch||null,rdw_increased:on('rdw_high'),morphology:Object.fromEntries(gradeDefs.map(([id])=>[id,grade(id)||null]).concat([['schistocytes',sg||null]]))},
+   wbc:{leukocytosis:on('leukocytosis'),leukopenia:on('leukopenia'),neutrophilia:on('neutro'),neutropenia:on('neutropenia'),lymphocytosis:on('lympho'),monocytosis:on('mono'),eosinophilia:on('eos'),basophilia:on('baso'),anc_category:anc||null,blast_percent:Number.isFinite(blast)?blast:null},
+   platelets:{category:plt||null,large:on('largeplt'),giant:on('giantplt'),hypogranular:on('hypogranplt'),clumping:on('clump')},
+   morphology_comments:morphology,
+   interpretation:comments,
+   urgent_findings:urgent
+  },null,2);
+ }else if(mode==='combined'){
+  out=[
+   urgent.length?'URGENT FINDING:\n'+urgent.join(' '):'',
+   morphology.length?'PERIPHERAL BLOOD MORPHOLOGY:\n'+morphology.join(' '):'',
+   comments.length?'INTERPRETATION:\n'+comments.join(' '):''
+  ].filter(Boolean).join('\n\n');
+ }else {
+  let textOut = [urgent.length?urgent.join(' '):'', comments.length?comments.join(' '):''].filter(Boolean).join(' ');
+  // Fallback to morphology if no explicit interpretive sentence was generated
+  if(!textOut && morphology.length) textOut = morphology.join(' ');
+  out = textOut || 'No comment generated for the selected inputs.';
+ }
+
+ $('final').value=ascii(out);
+ $('warnings').style.display=warnings.length?'block':'none';
+ $('warnings').textContent=warnings.join(' ');
+}
+
+function clearAll(){
+ document.querySelectorAll('input[type=checkbox],input[type=radio]').forEach(x=>x.checked=false);
+ document.querySelector('input[name=mode][value=interpretive]').checked=true;
+ document.querySelectorAll('select').forEach(x=>{x.value='';syncSegment(x)});
+ document.querySelectorAll('input[type=number],textarea').forEach(x=>x.value='');
+ $('includeTests').checked=true;
+ generate();
+}
+
+function copyText(id){navigator.clipboard.writeText(ascii($(id).value))}
+document.querySelectorAll('input,select,textarea').forEach(el=>{el.addEventListener('change',generate);el.addEventListener('input',generate)});
+window.addEventListener('load',generate);
+</script></body></html>
