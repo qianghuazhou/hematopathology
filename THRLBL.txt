@@ -1,0 +1,21 @@
+DIAGNOSIS
+
+A-B. Lymph node, axillary, core biopsies (review of consult case S-26-009529; North York General Hospital; procedure date June 5, 2026):
+
+T-cell/histiocyte-rich large B-cell lymphoma. See comment.
+
+Amendment electronically signed by Musani, Rumina, MD on 23/6/2026 at 1604 EDT
+
+Electronically signed by Musani, Rumina, MD on 23/6/2026 at 1558 EDT
+
+COMMENT
+
+FISH study has been requested.
+
+SLIDE BLOCK DESCRIPTION
+
+Received from North York General Hospital - General Division, S-26-009529; 27 stained slides, 6 blocks (A1-A3, B1-B3) and copy of report. /JS
+
+MICROSCOPIC DESCRIPTION
+
+Sections show cores of lymph node with architecture effaced by an abnormal proliferation of few scattered large cells with irregular nuclei and small eosinophilic nucleoli. These large cells are positive for CD20, CD19, PAX5, OCT2, CD79a, BCL6, MUM1, MYC, Ki67 and BCL2 and negative for CD10, CD30, CD15, LEF1 and IgM. A background of T-cells (CD3/5+) is present with scattered admixed histiocytes (cyclinD1+). CD45 is negative and may be a false negative due to technical reasons. CD138, kappa and lambda are non-contributory. CD21 and CD23 do not highlight any follicular dendritic cell meshworks. EBER-ISH is negative.
