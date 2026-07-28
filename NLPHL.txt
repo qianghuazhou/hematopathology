@@ -1,0 +1,49 @@
+DIAGNOSIS
+Excisional biopsy of the left axillary lymph node (consultation materials from North York General Hospital - General Division):
+- Nodular lymphocyte predominant Hodgkin lymphoma (See comment)
+
+Electronically signed by Delabie, Jan Maria-Andre, MD on 23/7/2026 at 11:49 EDT
+
+COMMENT
+The overall findings, in conjunction with an immunophenotype of CD20+, PAX5+, BCL6 (strong+), OCT2 (strong+), CD45+, CD79a+, CD30−, are those of nodular lymphocyte-predominant Hodgkin lymphoma.
+
+
+MICROSCOPIC DESCRIPTION
+
+Clinical History
+Unknown
+
+Specimen type
+Excisional biopsy
+
+Specimen quality
+Adequate
+
+Tissue type
+Lymph node
+
+Morphological description
+This lymph node shows partial effacement of node architecture with predominantly vaguely nodular proliferation composed of scattered large atypical lymphocyte-predominant (LP) cells with multilobated ("popcorn-like") nuclei, irregular nuclear contours, and small but distinct nucleoli. The nodules show further many small lymphocytes. No significant fibrosis is seen. The capsule is represented.
+
+Immunophenotype
+
+By immunohistochemistry
+
+Hodgkin cells immunophenotype:
+CD10−CD15−, CD19+ (weak variable), CD20+, CD30−, CD45+, CD79a+, PAX5+ (weak), BCL6+ (strong), IRF4+, OCT2+ (strong), BOB-1+, CCND1−, EBER (ISH)−
+Stroma:
+CD3+ CD5+ T cells; CD20+, PD-1 and ICOS highlights T helper follicular cells around LP cells. PAX5+ B cells. CD21+, CD23+ follicular dendritic cell networks.
+
+By flow cytometry
+Result: Please see report (): no immunophenotypic support for lymphoproliferative disorder.
+
+Proliferation index
+MKI67 staining: 5–10% (overall)
+
+Immunogenotyping
+Not performed
+
+Genetics
+Not performed
+
+
