@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Automated RBC / Manual Schistocyte Counter</title>
+<style>
+:root{
+  --bg:#f6f7f9; --card:#fff; --ink:#111827; --muted:#6b7280; --line:#d1d5db;
+  --accent:#7f1d1d; --blue:#2563eb; --red:#dc2626; --green:#16a34a; --orange:#f59e0b;
+}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:white;border-bottom:1px solid var(--line);padding:16px 22px} h1{margin:0;font-size:23px}.subtitle{font-size:13px;color:var(--muted);margin-top:5px}
+main{display:grid;grid-template-columns:350px 1fr;gap:14px;padding:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+h2{font-size:16px;margin:0 0 10px}label{display:block;font-size:13px;font-weight:bold;margin:9px 0 4px}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;font-size:13px;background:white}textarea{min-height:90px}
+button{border:1px solid var(--line);background:white;border-radius:8px;padding:8px 10px;margin:3px 2px;cursor:pointer;font-size:13px}button.active,button.primary{background:var(--accent);color:white;border-color:var(--accent)}button.blue{background:var(--blue);color:white;border-color:var(--blue)}button.green{background:var(--green);color:white;border-color:var(--green)}button.red{background:#fee2e2;color:#991b1b;border-color:#fecaca}button:disabled{opacity:.5;cursor:not-allowed}.small{font-size:12px;color:var(--muted);line-height:1.35}.btnrow{display:flex;flex-wrap:wrap;gap:4px}
+.viewer{background:white;border:1px solid var(--line);border-radius:12px;padding:12px}.canvasWrap{position:relative;background:#222;border-radius:10px;overflow:auto;max-height:72vh;text-align:center}canvas{max-width:100%;height:auto;cursor:crosshair;background:#eee}.results{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.metric{background:#f3f4f6;border-radius:10px;padding:10px}.metric .lab{font-size:12px;color:var(--muted)}.metric .val{font-size:22px;font-weight:bold;margin-top:3px}.legend{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0}.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px}.redDot{background:var(--red)}.blueDot{background:var(--blue)}.orangeDot{background:var(--orange)}.greenDot{background:var(--green)}
+.table{width:100%;border-collapse:collapse;font-size:13px}.table td,.table th{border-bottom:1px solid #e5e7eb;padding:6px;text-align:left}.note{background:#fffbeb;border:1px solid #f59e0b;color:#78350f;border-radius:10px;padding:9px;font-size:12px;line-height:1.35}.brackets{display:grid;grid-template-columns:1fr 1fr;gap:5px}.brackets button{margin:0}.brackets button.active{background:#111827;color:white}.status{font-size:12px;padding:8px;border-radius:8px;background:#f3f4f6;margin-top:8px}.rangeRow{display:grid;grid-template-columns:1fr 58px;gap:8px;align-items:center}.rangeRow output{text-align:right;font-size:12px;color:var(--muted)}
+@media(max-width:950px){main{grid-template-columns:1fr}.results{grid-template-columns:1fr 1fr}.canvasWrap{max-height:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Automated RBC / Manual Schistocyte Counter</h1>
+  <div class="subtitle">Automatically detects and counts RBCs. You manually identify schistocytes by clicking the corresponding cells. Processing remains in the browser.</div>
+</header>
+<main>
+<aside>
+  <div class="card">
+    <h2>1. Case / image</h2>
+    <label>Image upload</label><input type="file" id="upload" accept="image/*">
+    <label>Case / slide</label><input type="text" id="caseId" placeholder="Optional" oninput="updateReport()">
+    <label>Region assessed</label>
+    <select id="region" onchange="updateReport()">
+      <option>representative monolayer field</option><option>high-power monolayer fields</option><option>area of optimal RBC separation</option><option>user-selected field</option>
+    </select>
+  </div>
+
+  <div class="card">
+    <h2>2. Automated RBC detection</h2>
+    <div class="btnrow">
+      <button id="detectBtn" class="green" onclick="detectRBCs()" disabled>Detect RBCs</button>
+      <button onclick="clearAutoDetections()">Clear detection</button>
+    </div>
+    <label>Detection sensitivity</label>
+    <div class="rangeRow"><input id="sensitivity" type="range" min="14" max="36" value="24" oninput="sensVal.value=this.value"><output id="sensVal">24</output></div>
+    <label>Minimum RBC radius</label>
+    <div class="rangeRow"><input id="minRadius" type="range" min="5" max="18" value="8" oninput="minRadiusVal.value=this.value"><output id="minRadiusVal">8 px</output></div>
+    <label>Maximum RBC radius</label>
+    <div class="rangeRow"><input id="maxRadius" type="range" min="10" max="30" value="18" oninput="maxRadiusVal.value=this.value"><output id="maxRadiusVal">18 px</output></div>
+    <label>Minimum center distance</label>
+    <div class="rangeRow"><input id="minDistance" type="range" min="8" max="32" value="18" oninput="minDistanceVal.value=this.value"><output id="minDistanceVal">18 px</output></div>
+    <div id="cvStatus" class="status">Loading RBC detection library…</div>
+    <p class="small">Lower sensitivity values detect more circles but may add false positives. Adjust the radius range for image magnification.</p>
+  </div>
+
+  <div class="card">
+    <h2>3. Manual classification</h2>
+    <div class="btnrow">
+      <button id="modeSch" class="active" onclick="setMode('sch')">Mark schistocyte</button>
+      <button id="modeUnc" onclick="setMode('uncertain')">Uncertain</button>
+      <button id="modeRbc" onclick="setMode('rbc')">Add missed RBC</button>
+      <button id="modeErase" onclick="setMode('erase')">Erase / restore</button>
+    </div>
+    <p class="small">Click a detected RBC to reclassify it as a schistocyte. Click outside detected circles to add a missed schistocyte or RBC manually.</p>
+    <div class="legend">
+      <span><span class="dot greenDot"></span>Auto RBC</span>
+      <span><span class="dot redDot"></span>Schistocyte</span>
+      <span><span class="dot orangeDot"></span>Uncertain</span>
+      <span><span class="dot blueDot"></span>Manual RBC</span>
+    </div>
+    <label>Marker size: <span id="markerSizeVal">10</span></label>
+    <input type="range" min="4" max="24" value="10" id="markerSize" oninput="markerSizeVal.innerText=this.value;draw()">
+  </div>
+
+  <div class="card">
+    <h2>4. Controls</h2>
+    <button onclick="undoLast()">Undo last action</button>
+    <button onclick="resetAll()" class="red">Reset all</button>
+  </div>
+
+  <div class="card">
+    <h2>5. Manual final bracket</h2>
+    <div class="brackets" id="bracketButtons"></div>
+  </div>
+
+  <div class="note">
+    RBC detection is an assistive denominator count and should be visually reviewed. Schistocyte classification remains manual and morphology-based.
+  </div>
+</aside>
+
+<section>
+  <div class="card results">
+    <div class="metric"><div class="lab">Total RBC counted</div><div class="val" id="rbcCount">0</div></div>
+    <div class="metric"><div class="lab">Schistocytes</div><div class="val" id="schCount">0</div></div>
+    <div class="metric"><div class="lab">Uncertain</div><div class="val" id="uncCount">0</div></div>
+    <div class="metric"><div class="lab">Schistocyte %</div><div class="val" id="pct">0%</div></div>
+    <div class="metric"><div class="lab">Auto-detected RBCs</div><div class="val" id="autoCount">0</div></div>
+  </div>
+  <div class="viewer">
+    <h2>Image annotation</h2>
+    <div class="canvasWrap"><canvas id="canvas"></canvas></div>
+  </div>
+  <div class="card">
+    <h2>Count summary</h2>
+    <table class="table" id="fieldTable"></table>
+  </div>
+  <div class="card">
+    <h2>Report text</h2>
+    <textarea id="report"></textarea>
+    <div class="btnrow">
+      <button class="green" onclick="copyReport()">Copy report</button>
+      <button class="blue" onclick="downloadAnnotated()">Download annotated image</button>
+      <button onclick="downloadCSV()">Export CSV</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+const canvas=document.getElementById('canvas'), ctx=canvas.getContext('2d');
+let img=new Image(), imageLoaded=false, mode='sch', manualBracket='';
+let autoCells=[];       // {x,y,r,class:'rbc'|'sch'|'uncertain'}
+let manualMarks=[];     // {x,y,type:'rbc'|'sch'|'uncertain'}
+let history=[];
+let cvReady=false;
+const brackets=['<0.5%','0.5–1%','1–2%','2–5%','5–10%','>10%'];
+
+function initBrackets(){
+  const d=document.getElementById('bracketButtons');d.innerHTML='';
+  brackets.forEach(b=>{let bt=document.createElement('button');bt.textContent=b;bt.onclick=()=>{manualBracket=b;[...d.children].forEach(x=>x.classList.remove('active'));bt.classList.add('active');updateAll();};d.appendChild(bt);});
+}
+initBrackets();
+
+function onOpenCvReady(){
+  cvReady=true;
+  cvStatus.textContent='RBC detection library ready.';
+  detectBtn.disabled=!imageLoaded;
+}
+window.onOpenCvReady=onOpenCvReady;
+
+function setMode(m){
+  mode=m;
+  ['Rbc','Sch','Unc','Erase'].forEach(x=>document.getElementById('mode'+x).classList.remove('active'));
+  if(m==='rbc')modeRbc.classList.add('active');
+  if(m==='sch')modeSch.classList.add('active');
+  if(m==='uncertain')modeUnc.classList.add('active');
+  if(m==='erase')modeErase.classList.add('active');
+}
+
+function point(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height};}
+
+upload.addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const rd=new FileReader();
+  rd.onload=ev=>{img.onload=()=>{
+    let w=img.width,h=img.height,max=1800;
+    if(Math.max(w,h)>max){let s=max/Math.max(w,h);w=Math.round(w*s);h=Math.round(h*s);}
+    canvas.width=w;canvas.height=h;imageLoaded=true;autoCells=[];manualMarks=[];history=[];
+    detectBtn.disabled=!cvReady;draw();updateAll();
+  };img.src=ev.target.result;};rd.readAsDataURL(f);
+});
+
+function snapshot(){history.push(JSON.stringify({autoCells,manualMarks}));if(history.length>50)history.shift();}
+function restoreSnapshot(s){const x=JSON.parse(s);autoCells=x.autoCells;manualMarks=x.manualMarks;updateAll();}
+
+canvas.addEventListener('click',e=>{
+  if(!imageLoaded)return;
+  const p=point(e); snapshot();
+  const nearest=findNearestAuto(p.x,p.y);
+  if(mode==='erase'){
+    if(nearest && nearest.distance <= Math.max(nearest.cell.r*1.25,18)) nearest.cell.class='rbc';
+    else eraseManualNear(p.x,p.y);
+  } else if(nearest && nearest.distance <= Math.max(nearest.cell.r*1.25,18)) {
+    nearest.cell.class=mode;
+  } else {
+    manualMarks.push({x:p.x,y:p.y,type:mode});
+  }
+  updateAll();
+});
+
+function findNearestAuto(x,y){
+  let best=null;
+  autoCells.forEach(c=>{const d=Math.hypot(c.x-x,c.y-y);if(!best||d<best.distance)best={cell:c,distance:d};});
+  return best;
+}
+function eraseManualNear(x,y){
+  let bi=-1,bd=Infinity;manualMarks.forEach((m,i)=>{const d=(m.x-x)**2+(m.y-y)**2;if(d<bd){bd=d;bi=i;}});
+  const radius=Number(markerSize.value)*2.5;if(bi>=0&&bd<radius*radius)manualMarks.splice(bi,1);
+}
+
+function detectRBCs(){
+  if(!imageLoaded||!cvReady)return;
+  snapshot(); cvStatus.textContent='Detecting RBCs…'; detectBtn.disabled=true;
+  setTimeout(()=>{
+    try{
+      const src=cv.imread(canvas);
+      const gray=new cv.Mat(), blur=new cv.Mat(), circles=new cv.Mat(), lab=new cv.Mat();
+      cv.cvtColor(src,gray,cv.COLOR_RGBA2GRAY);
+      cv.medianBlur(gray,blur,5);
+      cv.cvtColor(src,lab,cv.COLOR_RGBA2RGB); cv.cvtColor(lab,lab,cv.COLOR_RGB2Lab);
+
+      const scale=canvas.width/1280;
+      const minR=Math.max(4,Math.round(Number(minRadius.value)*scale));
+      const maxR=Math.max(minR+2,Math.round(Number(maxRadius.value)*scale));
+      const minD=Math.max(8,Math.round(Number(minDistance.value)*scale));
+      const p2=Number(sensitivity.value);
+      cv.HoughCircles(blur,circles,cv.HOUGH_GRADIENT,1.2,minD,80,p2,minR,maxR);
+
+      const found=[];
+      for(let i=0;i<circles.cols;i++){
+        const x=circles.data32F[i*3], y=circles.data32F[i*3+1], r=circles.data32F[i*3+2];
+        if(x<0||y<0||x>=canvas.width||y>=canvas.height)continue;
+        const rr=Math.max(2,Math.floor(r*.75));
+        const x0=Math.max(0,Math.floor(x-rr)), y0=Math.max(0,Math.floor(y-rr));
+        const x1=Math.min(canvas.width-1,Math.ceil(x+rr)), y1=Math.min(canvas.height-1,Math.ceil(y+rr));
+        let sumA=0,n=0;
+        for(let yy=y0;yy<=y1;yy+=2){for(let xx=x0;xx<=x1;xx+=2){if((xx-x)*(xx-x)+(yy-y)*(yy-y)<=rr*rr){sumA+=lab.ucharPtr(yy,xx)[1];n++;}}}
+        const meanA=n?sumA/n:0;
+        if(meanA>=132) found.push({x,y,r,class:'rbc'});
+      }
+      autoCells=found;
+      src.delete();gray.delete();blur.delete();circles.delete();lab.delete();
+      cvStatus.textContent=`Detected ${autoCells.length} RBC candidates. Review the circles and adjust sensitivity/radius if needed.`;
+    }catch(err){
+      console.error(err);cvStatus.textContent='Detection failed. Try a smaller image or different settings.';
+    }finally{detectBtn.disabled=false;updateAll();}
+  },50);
+}
+
+function clearAutoDetections(){snapshot();autoCells=[];updateAll();cvStatus.textContent=cvReady?'RBC detection library ready.':'Loading RBC detection library…';}
+function undoLast(){if(history.length)restoreSnapshot(history.pop());}
+function resetAll(){autoCells=[];manualMarks=[];history=[];manualBracket='';initBrackets();updateAll();}
+
+function counts(){
+  let total=autoCells.length,sch=0,unc=0;
+  autoCells.forEach(c=>{if(c.class==='sch')sch++;if(c.class==='uncertain')unc++;});
+  manualMarks.forEach(m=>{if(m.type==='rbc')total++;if(m.type==='sch'){total++;sch++;}if(m.type==='uncertain')unc++;});
+  return{total,sch,unc,auto:autoCells.length};
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);if(imageLoaded)ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  autoCells.forEach(c=>{
+    ctx.save();ctx.lineWidth=1.5;
+    ctx.strokeStyle=c.class==='sch'?'#dc2626':c.class==='uncertain'?'#f59e0b':'#16a34a';
+    ctx.fillStyle=c.class==='sch'?'rgba(220,38,38,.23)':c.class==='uncertain'?'rgba(245,158,11,.20)':'rgba(22,163,74,.08)';
+    ctx.beginPath();ctx.arc(c.x,c.y,c.r,0,Math.PI*2);ctx.fill();ctx.stroke();
+    if(c.class==='sch'||c.class==='uncertain'){
+      ctx.fillStyle='#111';ctx.font=Math.max(10,Number(markerSize.value))+'px Arial';ctx.fillText(c.class==='sch'?'S':'?',c.x+c.r+2,c.y);
+    }
+    ctx.restore();
+  });
+  const size=Number(markerSize.value);
+  manualMarks.forEach(m=>{
+    ctx.save();ctx.lineWidth=2;
+    ctx.fillStyle=m.type==='sch'?'rgba(220,38,38,.35)':m.type==='uncertain'?'rgba(245,158,11,.35)':'rgba(37,99,235,.25)';
+    ctx.strokeStyle=m.type==='sch'?'#dc2626':m.type==='uncertain'?'#f59e0b':'#2563eb';
+    ctx.beginPath();ctx.arc(m.x,m.y,size,0,Math.PI*2);ctx.fill();ctx.stroke();
+    ctx.fillStyle='#111';ctx.font=Math.max(9,size)+'px Arial';if(m.type==='sch')ctx.fillText('S',m.x+size+2,m.y);if(m.type==='uncertain')ctx.fillText('?',m.x+size+2,m.y);ctx.restore();
+  });
+}
+
+function updateAll(){
+  draw();const c=counts();const p=c.total?c.sch/c.total*100:0;
+  rbcCount.innerText=c.total;schCount.innerText=c.sch;uncCount.innerText=c.unc;pct.innerText=p.toFixed(2)+'%';autoCount.innerText=c.auto;
+  updateTable();updateReport();
+}
+function autoBracket(p){if(p<0.5)return '<0.5%';if(p<1)return '0.5–1%';if(p<2)return '1–2%';if(p<5)return '2–5%';if(p<10)return '5–10%';return '>10%';}
+function updateTable(){
+  const c=counts();const p=c.total?c.sch/c.total*100:0;
+  let autoSch=autoCells.filter(x=>x.class==='sch').length, autoUnc=autoCells.filter(x=>x.class==='uncertain').length;
+  let manR=manualMarks.filter(x=>x.type==='rbc').length,manS=manualMarks.filter(x=>x.type==='sch').length,manU=manualMarks.filter(x=>x.type==='uncertain').length;
+  fieldTable.innerHTML=`<tr><th>Source</th><th>RBC denominator</th><th>Schistocytes</th><th>Uncertain</th></tr>
+  <tr><td>Automated detections</td><td>${autoCells.length}</td><td>${autoSch}</td><td>${autoUnc}</td></tr>
+  <tr><td>Manual additions</td><td>${manR+manS}</td><td>${manS}</td><td>${manU}</td></tr>
+  <tr><th>Total</th><th>${c.total}</th><th>${c.sch}</th><th>${c.unc}</th></tr>
+  <tr><td colspan="4"><strong>Schistocyte percentage: ${p.toFixed(2)}%</strong></td></tr>`;
+}
+function updateReport(){
+  const c=counts();const p=c.total?c.sch/c.total*100:0;const b=manualBracket||autoBracket(p);
+  const caseId=document.getElementById('caseId').value.trim();const region=document.getElementById('region').value;
+  let txt='';if(caseId)txt+='Case/slide: '+caseId+'\n';
+  txt+=`Schistocytes are estimated at approximately ${b} in the ${region}. Manual classification identified ${c.sch} schistocytes among ${c.total} red blood cells counted (${p.toFixed(2)}%). The red blood cell denominator was generated by automated circle detection with manual correction.`;
+  if(c.unc)txt+=` ${c.unc} uncertain fragmented/irregular red cells were marked separately and not included in the numerator.`;
+  txt+=' Final interpretation requires pathologist review.';report.value=txt;
+}
+function copyReport(){report.select();document.execCommand('copy');}
+function downloadAnnotated(){if(!canvas.width)return;draw();let a=document.createElement('a');a.download='rbc_schistocyte_annotated.png';a.href=canvas.toDataURL('image/png');a.click();}
+function downloadCSV(){
+  const rows=[['source','classification','x','y','radius']];
+  autoCells.forEach(c=>rows.push(['auto',c.class,Math.round(c.x),Math.round(c.y),Math.round(c.r)]));
+  manualMarks.forEach(m=>rows.push(['manual',m.type,Math.round(m.x),Math.round(m.y),'']));
+  let csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');
+  let blob=new Blob([csv],{type:'text/csv'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='rbc_schistocyte_count.csv';a.click();URL.revokeObjectURL(url);
+}
+updateAll();
+</script>
+<script async src="https://docs.opencv.org/4.x/opencv.js" onload="if(window.cv&&cv.Mat)onOpenCvReady();else cv['onRuntimeInitialized']=onOpenCvReady"></script>
+</body>
+</html>
