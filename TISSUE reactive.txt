@@ -643,3 +643,23 @@ COMMENT
 Sections show terminal ileal mucosa with prominent lymphoid infiltrates displaying predominantly follicular architecture. The infiltrate is composed predominantly of small mature lymphocytes without significant cytologic atypia. By immunohistochemistry, CD20, PAX5, and CD19 highlight B cells predominantly within follicles with scattered interfollicular B cells. The B cells are negative for CD5, CD10, and Cyclin D1. CD3 and CD5 highlight interfollicular T cells. CD43 and LEF1 are positive in T cells. The follicles are positive for BCL2 and negative for CD10 and BCL6, consistent with primary follicles. Ki67 proliferation index is low (<5%). Overall findings support reactive lymphoid hyperplasia without evidence of lymphoma.
 
 
+SPECIMEN(S)
+B	Terminal Ileum Biopsy
+
+
+ADDENDUM COMMENT
+B. Terminal Ileum Biopsy:
+- Benign lymphoid tissue (See comment).
+
+COMMENT
+Sections show terminal ileal mucosa with preserved villous architecture and prominent lymphoid aggregates with vague follicular pattern. The lymphoid tissue is composed predominantly of small mature lymphocytes with admixed plasma cells and scattered granulocytes. No significant cytologic atypia, confluent sheets of large atypical lymphoid cells, granulomas, or necrosis are identified.
+
+Immunohistochemical studies performed on block B1 show CD19+, CD20+, and PAX5+ B cells predominantly localized within lymphoid follicles, while the interfollicular areas are composed predominantly of CD3+, CD5+, and CD43+ T cells. CD10 and BCL6 highlight a single reactive germinal center, which is appropriately negative for BCL2. B cells are negative for CD5 and Cyclin D1. LEF1 expression is restricted to T cells. CD21 highlights preserved follicular dendritic cell meshworks. CD138-positive plasma cells are polytypic for kappa and lambda light chains. The Ki-67 proliferation index is appropriately increased within the polarized germinal center and is low elsewhere.
+
+Overall, the morphologic and immunophenotypic findings are consistent with reactive lymphoid tissue, with no morphologic or immunophenotypic evidence of a lymphoproliferative disorder.
+
+
+Electronically signed by Zhou , Qianghua (Steven)MD, FRCPC - Pathologist
+Verified:  29-JUL-2026
+
+QZ/QZ
