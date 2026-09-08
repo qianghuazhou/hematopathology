@@ -30,7 +30,7 @@ In summary, the biopsy shows a lymph node with non-specific polytypic plasmacyto
 DIAGNOSIS:
 RIGHT GROIN LYMPH NODE: CONSISTENT WITH REACTIVE EBV+ LYMPHADENITIS.
 Specimens Received 
-A: SL17-1038 HSC, NL Lymph Node, NOS 
+A: SL17- HSC, NL Lymph Node, NOS 
 Clinical Data
 Splenomegaly and diffuse lymphadenopathy. Increased LDH and liver enzymes. Unknown viral serology.
 Gross Description
@@ -42,7 +42,3 @@ Immunostains done on the original hospital and BCCA show the majority of the lym
 The proliferation is increased in the expanded interfollicular areas and the follicles show polarized reactive proliferation (KI67). 
 DNA PCR analysis using BIOMED2 immunoglobulin heavy chain and T cell receptor beta chain consensus primers failed to detect clonal B and T cell populations. 
 In summary the findings are consistent with reactive lymphadenitis positive for EBV. There is no morphologic evidence of lymphoma.
-
-
-
-
