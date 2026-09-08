@@ -1,6 +1,6 @@
 DIAGNOSIS
 Lymph Node, Core Biopsies, Right Axilla:
-- REACTIVE LYMPH NODE, please see comment.
+- REACTIVE LYMPH NODE
 
 COMMENT
 
@@ -40,7 +40,7 @@ Not performed
 
 DIAGNOSIS
 Left Parotid Nodule Core Biopsy:
-- Benign lymphoid tissue, please see comment.
+- Benign lymphoid tissue
 
 COMMENT
 
@@ -91,7 +91,7 @@ Flow Cytometry report Accession No.:  _ from Dr. _ at .
 
 
 Lymph Node, Core Biopsies, Left Axilla:
-- BENIGN LYMPH NODE WITH PROMINANT SINUS HISTIOCYTOSIS, please see comment.
+- BENIGN LYMPH NODE WITH PROMINANT SINUS HISTIOCYTOSIS
 
 COMMENT
 
@@ -131,7 +131,7 @@ Time into Formalin: 09:35
 
 DIAGNOSIS
 Lymph node, left submandibular, core biopsy:
-- Reactive lymph node tissue (see comment)
+- Reactive lymph node tissue
 
 COMMENT
 The findings show a lymph node with nonspecific reactive features. The differential diagnosis is broad and includes infectious, inflammatory, autoimmune, and other reactive etiologies. There is no morphologic or immunophenotypic evidence of lymphoma or other malignancy. Correlation with clinical, serologic, and imaging findings is recommended.
@@ -174,7 +174,7 @@ Time into Formalin: 00:00
 
 DIAGNOSIS
 Right axillary lymph node, excisional biopsy:
-- Reactive lymphoid hyperplasia, negative for lymphoma or metastatic carcinoma (see comment).
+- Reactive lymphoid hyperplasia, negative for lymphoma or metastatic carcinoma
 
 COMMENT
 The findings are most consistent with a reactive lymphoid process with follicular and paracortical hyperplasia and a relative expansion of CD4-positive T cells. There is no definitive morphologic, immunophenotypic, or architectural evidence of a lymphoproliferative disorder, including TFH-type T-cell lymphoma. The lymph node is also negative for metastatic carcinoma. Such a pattern may be seen in viral infection, autoimmune disease, drug reaction, or other immune stimulation. Correlation with clinical and radiologic findings is recommended.
@@ -229,7 +229,7 @@ Time into Formalin: 09:11
 
 DIAGNOSIS
 Lymph Node, Left Axilla, Core Biopsy: 
-– Limited tissue sample showing benign reactive lymph node tissue (see comment).
+– Limited tissue sample showing benign reactive lymph node tissue
 
 COMMENT
 The core biopsies are small and relatively inadequate, showing lymph node tissue with a nonspecific reactive pattern. There is no morphologic or immunophenotypic evidence of lymphoma or metastatic carcinoma. Correlation with clinical and imaging findings is recommended if suspicion for lymphoma remains.
@@ -253,8 +253,7 @@ B	Right Axilla Lymph Node Core Biopsy
 
 ADDENDUM COMMENT
 B. Right Axilla Lymph Node Core Biopsy
-
-	Reactive lymphoid tissue (see comment).
+Reactive lymphoid tissue
 
 COMMENT:
 The core biopsies show soft tissue and a small fragment of lymph node with a nonspecific reactive pattern. Lymph node architecture is partially effaced, with areas of sinus histiocytosis. The cellular population is composed predominantly of small lymphoid cells. Capsular thickening and focal brown pigment deposition are present. No Reed–Sternberg cells are identified.
@@ -274,7 +273,7 @@ Time into Formalin: 09:30
 
 DIAGNOSIS
 Right Parotid Lymph Node, Core Biopsy:
-Reactive lymph node, see comment.
+Reactive lymph node
 
 COMMENT
 Relatively small biopsy, interpretation with caution. The morphologic and immunophenotypic findings are most in keeping with reactive lymphadenopathy which has a broad differential and includes autoimmune, infectious and neoplastic causes. The biopsies evaluated were relatively small but are negative for evidence of involvement by a lymphoproliferative disorder. Should the clinical concern for a neoplastic process continue after other causes are ruled out an excisional biopsy could be considered. Correlation with clinical, serologic, and other laboratory information is advised.
@@ -282,7 +281,6 @@ Relatively small biopsy, interpretation with caution. The morphologic and immuno
 GROSS DESCRIPTION
 The specimen is received in formalin in a container labelled with the patient's demographic details and as "Right Parotid Node Biopsy". It consists of a single core and fragments of soft white-tan tissue measuring from 0.1 cm to 0.5 cm in length and up to 0.1 cm in diameter.
 Sections: 1,2 -many/2 EIT
-
 
 DS/03-FEB-2026
 
@@ -441,7 +439,7 @@ B	Sentinel Lymph Node, Right Palpable
 
 ADDENDUM COMMENT
 SENTINAL LYMPH NODE, EXCISIONAL BIOPSY:
-Reactive lymph node with sinus histiocytosis, see comment.
+Reactive lymph node with sinus histiocytosis
 
 COMMENT
 The lymph node shows preserved overall architecture with expanded sinuses distended by histiocytes. The follicles are enlarged and architecturally distorted. No sheets of atypical large lymphoid cells are identified. There are no morphologic features of Hodgkin lymphoma, anaplastic large cell lymphoma, or metastatic malignancy. Hemophagocytosis is not identified.
@@ -458,7 +456,7 @@ A	Nasal Biopsy, Right Turbinate
 
 ADDENDUM COMMENT
 Nasal mucosa, right turbinate, biopsy:
-– Reactive fibro-inflammatory process, see comment.
+– Reactive fibro-inflammatory process
 
 COMMENT
 Sections show a fibro-inflammatory lesion with mixed inflammation including numerous plasma cells, lymphocytes and eosinophils, with focal fibrosis. However, storiform fibrosis and obliterative phlebitis are not identified.
@@ -517,14 +515,13 @@ Flow cytometry was not performed due to insufficient cellularity of the specimen
 SPECIMEN(S)
 A	Lymph Node Core Biopsy, Left Cervical
 
-
 CLINICAL HISTORY
 Chronic bilateral cervical lymphadenopathy, query lymphoproliferative disorder, 1 core sent for flow cytometry
 Time into Formalin: 09:10
 
 DIAGNOSIS
 Lymph node, Left Cervical, core biopsy:
-– Reactive lymph node, see comment.
+– Reactive lymph node
 
 COMMENT
 The findings show a lymph node with nonspecific reactive features. There is no morphologic or immunophenotypic evidence of lymphoma or other malignancy. Correlation with clinical and imaging findings is recommended for full evaluation.
@@ -570,7 +567,7 @@ Time into Formalin: 12:00
 
 DIAGNOSIS
 Right Inguinal Lymph Node, Core Biopsy:
-- Reactive lymph node. See comment.
+- Reactive lymph node
 
 COMMENT
 The morphologic and immunophenotypic findings are most consistent with reactive lymphadenopathy. The differential diagnosis is broad and includes autoimmune, infectious, and less likely neoplastic etiologies. The biopsies are relatively small but show no evidence of involvement by a lymphoproliferative disorder or metastatic disease. If clinical concern for an underlying neoplastic process persists following exclusion of other causes, excisional biopsy may be considered for more definitive evaluation. Correlation with clinical, serologic, microbiologic, and other laboratory findings is recommended.
@@ -609,7 +606,7 @@ C	Colon Biopsy, Cecum, Mass
 
 ADDENDUM COMMENT
 Colon Biopsy, Cecum, Mass:
-– Reactive lymphoid hyperplasia. See comment.
+– Reactive lymphoid hyperplasia
 
 COMMENT
 Sections show colonic mucosa with a dense, polymorphous lymphoid infiltrate composed predominantly of small lymphocytes with admixed plasma cells, eosinophils, neutrophils, and histiocytes. No large atypical lymphoid cells or destructive growth pattern is identified.
