@@ -59,7 +59,7 @@ CD3 highlights surrounding small T cells.
 
 DIAGNOSIS
 Lymph Node, Core Biopsies, Right Inguinal:
-- BENIGN LYMPH NODE, please see comment.
+- BENIGN LYMPH NODE
 
 COMMENT
 
@@ -337,7 +337,7 @@ stained slides returned
 
 DIAGNOSIS:
 Skin, left lower eyelid, excisional biopsy:
-– Reactive T-cell–predominant inflammatory infiltrate. See comment.
+– Reactive T-cell–predominant inflammatory infiltrate
 
 COMMENT
 Sections show a lichenoid, perivascular, and focal intraepidermal lymphoid infiltrate composed predominantly of small mature-appearing lymphocytes. The lymphoid cells demonstrate condensed chromatin and scant to moderate cytoplasm without cytologic atypia. No destructive growth or clustering of large atypical cells is identified. Lymphatic spaces contain intraluminal histiocytes/inflammatory cells without cytologic atypia. No intravascular large atypical lymphoid cells are seen.
@@ -634,7 +634,7 @@ A	Terminal Ileum Biopsy
 ADDENDUM COMMENT
 DIAGNOSIS
 Terminal Ileum Biopsy:
-– Reactive lymphoid hyperplasia. See comment.
+– Reactive lymphoid hyperplasia
 
 COMMENT
 Sections show terminal ileal mucosa with prominent lymphoid infiltrates displaying predominantly follicular architecture. The infiltrate is composed predominantly of small mature lymphocytes without significant cytologic atypia. By immunohistochemistry, CD20, PAX5, and CD19 highlight B cells predominantly within follicles with scattered interfollicular B cells. The B cells are negative for CD5, CD10, and Cyclin D1. CD3 and CD5 highlight interfollicular T cells. CD43 and LEF1 are positive in T cells. The follicles are positive for BCL2 and negative for CD10 and BCL6, consistent with primary follicles. Ki67 proliferation index is low (<5%). Overall findings support reactive lymphoid hyperplasia without evidence of lymphoma.
@@ -646,7 +646,7 @@ B	Terminal Ileum Biopsy
 
 ADDENDUM COMMENT
 B. Terminal Ileum Biopsy:
-- Benign lymphoid tissue (See comment).
+- Benign lymphoid tissue
 
 COMMENT
 Sections show terminal ileal mucosa with preserved villous architecture and prominent lymphoid aggregates with vague follicular pattern. The lymphoid tissue is composed predominantly of small mature lymphocytes with admixed plasma cells and scattered granulocytes. No significant cytologic atypia, confluent sheets of large atypical lymphoid cells, granulomas, or necrosis are identified.
