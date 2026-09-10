@@ -73,7 +73,6 @@ Purpose of Test: Initial Diagnosis at UHN
 Reason for Marrow: Thrombocytopenia
 Number of Specimens: 5
 Flow Cytometry Status: Signed Out
-Marciano D. D. O. Reis, MD Date Reported: Mar-10-2023
 Interpretation
 Lymphocytes represent 36% of the viable cells. 12% of the lymphocytes are B cells, 29% of which are clonal expressing CD5, CD19, CD20 (bright), CD45, CD79b, CD200 (moderate) and IgL, negative for CD10 and CD23 (no CD11c available for testing). The 85% T cells show a predominance of CD4+ cells.
 This profile may represent mantle cell lymphoma. Correlation with cytomorphological, IHC and clinical data required. A definitive diagnosis may require assessment of lymphoid tissue.
