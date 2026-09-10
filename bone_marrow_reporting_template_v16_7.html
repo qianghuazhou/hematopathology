@@ -449,9 +449,9 @@
       <div class="sectionTitle">Clot section</div>
       <div class="row"><label>Description</label><div class="pillGrid" data-pill-wrap="clotDescription"><label class="pillOpt"><input type="radio" name="clotDescription__radio" data-pill-single="clotDescription" value="contains marrow fragments"><span>Contains marrow fragments</span></label>
 <label class="pillOpt"><input type="radio" name="clotDescription__radio" data-pill-single="clotDescription" value="contains adequate marrow fragments and is suitable for histologic assessment"><span>Adequate for histologic assessment</span></label>
-<label class="pillOpt"><input type="radio" name="clotDescription__radio" data-pill-single="clotDescription" value="demonstrates findings similar to those seen in the core biopsy"><span>Similar to core biopsy</span></label>
-<label class="pillOpt"><input type="radio" name="clotDescription__radio" data-pill-single="clotDescription" value="provides a more representative assessment than the core biopsy"><span>More representative than core</span></label>
-<label class="pillOpt"><input type="radio" name="clotDescription__radio" data-pill-single="clotDescription" value="is limited but confirms the findings in the core biopsy"><span>Limited; confirms core findings</span></label>
+<label class="pillOpt"><input type="radio" name="clotDescription__radio" data-pill-single="clotDescription" value="demonstrates findings similar to those seen in the trephine biopsy"><span>Similar to trephine biopsy</span></label>
+<label class="pillOpt"><input type="radio" name="clotDescription__radio" data-pill-single="clotDescription" value="provides a more representative assessment than the trephine biopsy"><span>More representative than core</span></label>
+<label class="pillOpt"><input type="radio" name="clotDescription__radio" data-pill-single="clotDescription" value="is limited but confirms the findings in the trephine biopsy"><span>Limited; confirms core findings</span></label>
 <input type="hidden" id="clotDescription"></div></div>
       <div class="row"><label>Additional description</label><textarea id="clotOther" placeholder="Optional morphologic findings or limitations"></textarea></div>
 
@@ -502,7 +502,7 @@
 <input type="hidden" id="bxArch"></div></div>
       </div>
 
-      <div class="sectionTitle">Core biopsy description</div>
+      <div class="sectionTitle">Trephine biopsy description</div>
 
       <div class="lineagePanel">
         <div class="lineageHead">Megakaryopoiesis</div>
@@ -630,7 +630,7 @@
 <label class="pillOpt"><input type="radio" name="trabBone__radio" data-pill-single="trabBone" value="sparse"><span>Sparse</span></label>
 <label class="pillOpt"><input type="radio" name="trabBone__radio" data-pill-single="trabBone" value="osteosclerotic changes"><span>Osteosclerotic changes</span></label>
 <input type="hidden" id="trabBone"></div></div>
-        <div><label>Other core finding</label><textarea id="bxOther" placeholder="Free text for additional core biopsy findings"></textarea></div>
+        <div><label>Other core finding</label><textarea id="bxOther" placeholder="Free text for additional trephine biopsy findings"></textarea></div>
       </div>
       <div class="sectionTitle">Touch prep</div>
       <div class="row"><label>Description</label><div class="pillGrid" data-pill-wrap="touchPrep"><label class="pillOpt"><input type="radio" name="touchPrep__radio" data-pill-single="touchPrep" value="contains marrow elements"><span>Contains marrow elements</span></label>
@@ -1221,7 +1221,7 @@ function finalizePresetInputs(){
   setIfBlank('aspPlasma','not increased');
   setIfBlank('aspMast','not increased');
 
-  // Default core biopsy fields.
+  // Default trephine biopsy fields.
   setIfBlank('bxQuality','adequate for evaluation');
   setIfBlank('bxCell','XX%');
   setIfBlank('bxCellPhrase','normocellular for age');
@@ -1346,7 +1346,7 @@ function generateReport(){
   let r='BONE MARROW REPORT\n';
   r += section('FINAL DIAGNOSIS');
   const site = v('specimenSite');
-  r += site ? ('Bone marrow, ' + site.toLowerCase() + ', aspirate, clot section and core biopsy:\n') : 'Bone marrow, aspirate, clot section and core biopsy:\n';
+  r += site ? ('Bone marrow, ' + site.toLowerCase() + ', aspirate and biopsy:\n') : 'Bone marrow, aspirate, trephine biopsy:\n';
   r += bullet(v('dx1'));
   r += bullet(v('dx2'));
   if(checked('pendingCyto') || checked('pendingMol')){let p=[]; if(checked('pendingCyto')) p.push('cytogenetic'); if(checked('pendingMol')) p.push('molecular'); r += '- Pending '+p.join(' and ')+' studies.\n';}
@@ -1464,7 +1464,7 @@ function loadLplLimited(){
   set('dx1','Limited marrow involvement by lymphoplasmacytic lymphoma, represented mainly by kappa-restricted plasma cells (approximately 10-15% of marrow cellularity by CD138 immunostain).');
   set('dx2','No evidence of a large cell component. No increase in blasts.');
   set('pbdx','Macrocytic anemia and leukopenia. No significant circulating plasma cells identified.');
-  set('customComment','Similar to the previous study, the marrow shows a kappa-light chain restricted plasma cell infiltrate comprising approximately 10-15% of marrow cellularity by CD138 immunostain on the core biopsy. In the context of the patient\'s history of kappa-restricted lymphoplasmacytic lymphoma, the findings are consistent with limited marrow involvement by the same process. There is no evidence of a large cell component in this specimen. Clinical correlation is advised.');
+  set('customComment','Similar to the previous study, the marrow shows a kappa-light chain restricted plasma cell infiltrate comprising approximately 10-15% of marrow cellularity by CD138 immunostain on the trephine biopsy. In the context of the patient\'s history of kappa-restricted lymphoplasmacytic lymphoma, the findings are consistent with limited marrow involvement by the same process. There is no evidence of a large cell component in this specimen. Clinical correlation is advised.');
   set('pbRbc','Macrocytic anemia with nonspecific red cell morphology.');
   set('pbWbc','Lymphocytes are unremarkable in appearance. No significant circulating plasma cells or blasts are seen. Granulocytes include occasional hypersegmented forms but show no definite dysplastic features.');
   set('pbPlt','Normal in number and morphology.');
@@ -1508,7 +1508,7 @@ function loadLplExtensive(){
   set('dx1','Lymphoplasmacytic lymphoma, MYD88 L265P-positive, involving approximately 90% of marrow cellularity.');
   set('dx2','No evidence of a large cell component. No increase in blasts.');
   set('pbdx','Anemia with rouleaux formation and circulating atypical lymphoid cells.');
-  set('customComment','The peripheral blood, aspirate, core biopsy, immunophenotype, and MYD88 L265P mutation support extensive bone marrow involvement by lymphoplasmacytic lymphoma. The marrow infiltrate is composed predominantly of small to medium-sized B cells with plasmacytoid forms and scattered kappa-restricted plasma cells with Dutcher bodies. The proliferation index is low. There is no evidence of a large cell component in this specimen. Clinical correlation is advised.');
+  set('customComment','The peripheral blood, aspirate, trephine biopsy, immunophenotype, and MYD88 L265P mutation support extensive bone marrow involvement by lymphoplasmacytic lymphoma. The marrow infiltrate is composed predominantly of small to medium-sized B cells with plasmacytoid forms and scattered kappa-restricted plasma cells with Dutcher bodies. The proliferation index is low. There is no evidence of a large cell component in this specimen. Clinical correlation is advised.');
   set('pbRbc','Anemia with rouleaux formation.');
   set('pbWbc','Increased atypical lymphoid cells with variable pale basophilic cytoplasm, irregular nuclei, and variably condensed chromatin.');
   set('pbPlt','Normal in number.');
@@ -1738,7 +1738,7 @@ function loadTpll(){
   set('bxPlasma','not increased');
   set('bxMast','not increased');
   set('trabBone','unremarkable');
-  set('bxOther','The core biopsy is hypercellular for age and extensively involved by a diffuse atypical lymphoid infiltrate, comprising approximately 80% of marrow cellularity. The lymphoid cells are small to mostly medium-sized with scant cytoplasm and irregular nuclei with coarse/dispersed chromatin and frequently visible nucleoli. Residual trilineage hematopoiesis is present but markedly reduced. Hemosiderin deposits are present.');
+  set('bxOther','The trephine biopsy is hypercellular for age and extensively involved by a diffuse atypical lymphoid infiltrate, comprising approximately 80% of marrow cellularity. The lymphoid cells are small to mostly medium-sized with scant cytoplasm and irregular nuclei with coarse/dispersed chromatin and frequently visible nucleoli. Residual trilineage hematopoiesis is present but markedly reduced. Hemosiderin deposits are present.');
   set('clot','contains marrow fragments.');
   set('ihcCd34','highlights no increase in blasts');
   set('ihcCd117','is negative in the atypical lymphoid cells');
@@ -1806,7 +1806,7 @@ function loadTall(){
   set('bxPlasma','not increased');
   set('bxMast','not increased');
   set('trabBone','unremarkable');
-  set('bxOther','The core biopsy is hypercellular for age and extensively involved by sheets/diffuse infiltrates of immature lymphoid cells with high nuclear-to-cytoplasmic ratio, immature chromatin, and variable nucleoli. Mitotic figures are increased. Residual trilineage hematopoiesis is present but reduced.');
+  set('bxOther','The trephine biopsy is hypercellular for age and extensively involved by sheets/diffuse infiltrates of immature lymphoid cells with high nuclear-to-cytoplasmic ratio, immature chromatin, and variable nucleoli. Mitotic figures are increased. Residual trilineage hematopoiesis is present but reduced.');
   set('clot','contains marrow fragments.');
   set('ihcCd34','highlights a subset of lymphoblasts/blasts; correlate with flow cytometry');
   set('ihcCd117','is negative or highlights only rare background immature myeloid precursors; correlate with flow cytometry');
@@ -1877,7 +1877,7 @@ function loadEtpAll(){
   set('bxPlasma','not increased');
   set('bxMast','not increased');
   set('trabBone','unremarkable');
-  set('bxOther','The core biopsy is hypercellular for age and extensively involved by sheets/diffuse infiltrates of immature lymphoid cells with high nuclear-to-cytoplasmic ratio, immature chromatin, and variable nucleoli. Mitotic figures are increased. Residual trilineage hematopoiesis is present but reduced. The morphology is indistinguishable from non-ETP T-ALL.');
+  set('bxOther','The trephine biopsy is hypercellular for age and extensively involved by sheets/diffuse infiltrates of immature lymphoid cells with high nuclear-to-cytoplasmic ratio, immature chromatin, and variable nucleoli. Mitotic figures are increased. Residual trilineage hematopoiesis is present but reduced. The morphology is indistinguishable from non-ETP T-ALL.');
   set('clot','contains marrow fragments.');
   set('ihcCd34','highlights a subset of lymphoblasts/blasts; correlate with flow cytometry');
   set('ihcCd117','highlights a subset of lymphoblasts/blasts or only rare background immature myeloid precursors; correlate with flow cytometry');
