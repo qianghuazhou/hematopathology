@@ -67,9 +67,6 @@ Basophils (%): 0
 Plasma cells (%): 1
 --------------------------------------------------------
 Electronically verified by:
-Qianghua Zhou, MD
-qz/11/30/22
-Rosemarie Tremblay-Le May, MD
 Clinical History
 Clinical History: DLBCL, pre CART
 Purpose of Test: Initial Diagnosis at UHN
@@ -112,7 +109,6 @@ Technologist: RP/LV
 The following antigens are analyzed:
 CD3, CD4, CD5, CD8, CD10, CD11c, CD19, CD20, CD23, CD31, CD38, CD43, CD45, CD56, CD79b, CD81, CD200, CD305, TCRg/d, IgM, IGK, IGL.
 Molecular Diagnostics Status: Signed Out
-Ian King, PhD, FACMG Date Reported: Dec-09-2022
 Interpretation
 Molecular Number: M#: 22.24035
 METHODOLOGY
