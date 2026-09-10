@@ -5,8 +5,6 @@ Specimen(s) Received
 4. Rt Il Crest: Iliac crest, Right Flow Cytometry
 5. Rt Il Crest: Iliac crest, Right Molecular
 Other Case Numbers
-B233163,
-M23-18405
 Diagnosis
 Mast cell leukemia (follow up post BMT):
 1. Mast cells with normal appearance less than 5%. Flow cytometry for MRD is negative.
@@ -66,7 +64,6 @@ Time Point Post BMT: 60 days post BMT
 Reason for Marrow: Other (specify in Comments)
 Number of Specimens: 5
 Flow Cytometry Status: Signed Out
-David Barth, MD Date Reported: Jul-10-2023
 Interpretation
 CD34+ and CD117+/CD34- myeloid precursors account for 0.36% and 0.9% total cells respectively. CD34+ hematogones are present 1.47%.
 Mast cells (CD117+) with previously seen aberrant leukemic immunophenotypic changes are not detected. The CD117+/CD34- myeloid precursors are comprised of the normal subsets.
