@@ -66,10 +66,8 @@ Interpretation
 Plasma cells 0.08% of total cells.
 A subpopulation of the plasma cells (0.02% of total cells) are monotypic and express CD38/81/117(partial)/138 with cytoplasmic lambda light chain restriction. CD19/27/56 are negative.
 No monotypic B cell population is detected.
-KARDASH, SIDNEY Blood and Bone Marrow Consultation Report B23-12364
-KARDASH, SIDNEY PM-4 Lymphoma Clinic Page 3 of 3
 This is consistent with a very small monotypic plasma cell population that is a subpopulation of a larger polytypic plasma cell population. Correlation with bone marrow is required for accurate plasma cell enumeration.
-Specimen Type: Bone Marrow (B23-12364)
+Specimen Type: Bone Marrow
 Viability: 99%
 Viable cells w/o doublets 257841 cells
 Viable cells w/o doublets 94 %
