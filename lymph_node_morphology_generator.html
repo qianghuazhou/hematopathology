@@ -236,43 +236,67 @@
       <div id="form-core" style="display:none;">
 
         <div class="card">
-          <h2>Adequacy</h2>
+          <h2>Core Biopsy</h2>
           <div class="field">
-            <label>Lymphoid tissue for evaluation</label>
+            <label>Adequacy</label>
             <select data-k="coreAdequacy">
               <option value="adequate">adequate</option>
               <option value="limited">limited</option>
               <option value="scant">scant</option>
             </select>
           </div>
-        </div>
 
-        <div class="card">
-          <h2>Architecture</h2>
           <div class="field">
-            <label>Preservation</label>
+            <label>Architecture</label>
             <select data-k="corePreservation">
-              <option value="partial">partial preservation of architecture</option>
-              <option value="no">no preservation of architecture</option>
+              <option value="preserved">preserved</option>
+              <option value="partially preserved">partially preserved</option>
+              <option value="partially effaced">partially effaced</option>
+              <option value="diffusely effaced">diffusely effaced</option>
+              <option value="not assessable">not reliably assessable</option>
             </select>
           </div>
-          <div class="field">
-            <label>Follicular structures</label>
-            <select data-k="coreFollicles">
-              <option value="identified">identified</option>
-              <option value="not identified">not identified</option>
-            </select>
-          </div>
-        </div>
 
-        <div class="card">
-          <h2>Cellularity</h2>
+          <div class="field">
+            <label>Follicular / interfollicular compartments</label>
+            <select data-k="coreCompartments">
+              <option value="preserved">preserved</option>
+              <option value="follicular structures identified">follicular structures identified</option>
+              <option value="follicular structures not identified">follicular structures not identified</option>
+              <option value="not assessable">not reliably assessable</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Follicles</label>
+            <select data-k="coreFolliclePattern">
+              <option value="reactive secondary follicles">reactive secondary follicles</option>
+              <option value="increased reactive follicles">increased reactive follicles</option>
+              <option value="decreased follicles">decreased follicles</option>
+              <option value="atypical follicles">atypical follicles</option>
+              <option value="not identified">not identified</option>
+              <option value="not assessable">not assessable</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Interfollicular / paracortical compartment</label>
+            <select data-k="coreParacortex">
+              <option value="unremarkable">unremarkable</option>
+              <option value="mildly expanded">mildly expanded</option>
+              <option value="expanded">expanded</option>
+              <option value="atypical">atypical</option>
+              <option value="not assessable">not assessable</option>
+            </select>
+          </div>
+
           <div class="field">
             <label>Cellular composition</label>
             <select data-k="coreCellularity">
-              <option value="predominantly small lymphocytes">predominantly small lymphocytes</option>
-              <option value="mixed small and large cells">mixed small and large cells</option>
-              <option value="monotonous population of atypical cells">monotonous population of atypical cells</option>
+              <option value="predominantly small mature lymphocytes">predominantly small mature lymphocytes</option>
+              <option value="polymorphous lymphoid population">polymorphous lymphoid population</option>
+              <option value="mixed small and large lymphoid cells">mixed small and large lymphoid cells</option>
+              <option value="monotonous atypical lymphoid population">monotonous atypical lymphoid population</option>
             </select>
           </div>
         </div>
@@ -463,16 +487,59 @@ function generate(){
 
   } else {
 
-    // --- Core adequacy / architecture paragraph ---
-    let p1 = `The core(s) contain ${val('coreAdequacy')} lymphoid tissue for evaluation, showing fragmented nodal tissue with ${val('corePreservation')} preservation of architecture.`;
-    const foll = val('coreFollicles');
-    p1 += foll === 'identified'
-      ? ` Follicular structures are identified.`
-      : ` Follicular structures are not identified.`;
-    paras.push(p1);
+    // --- Core biopsy: concise, complete, one-paragraph style ---
+    paras.push(`Multiple lymph node cores with ${val('coreAdequacy')} lymphoid tissue.`);
 
-    // --- Cellularity paragraph ---
-    paras.push(`The cellular composition is ${val('coreCellularity')}.`);
+    const arch = val('corePreservation');
+    const comp = val('coreCompartments');
+
+    if (arch === 'not assessable') {
+      paras.push(`Architecture is not reliably assessable in the sampled cores.`);
+    } else {
+      let p2 = `Architecture is ${arch}`;
+      if (comp === 'preserved') {
+        p2 += `, with follicular and interfollicular compartments identified`;
+      } else if (comp === 'follicular structures identified') {
+        p2 += `, with follicular structures identified`;
+      } else if (comp === 'follicular structures not identified') {
+        p2 += `; follicular structures are not identified`;
+      } else if (comp === 'not assessable') {
+        p2 += `; compartmental distribution is not reliably assessable`;
+      }
+      paras.push(p2 + `.`);
+    }
+
+    const foll = val('coreFolliclePattern');
+    const para = val('coreParacortex');
+
+    let p3 = [];
+    if (foll !== 'not assessable') {
+      if (foll === 'reactive secondary follicles') p3.push(`Reactive secondary follicles are present`);
+      else if (foll === 'increased reactive follicles') p3.push(`Reactive follicles are increased`);
+      else if (foll === 'decreased follicles') p3.push(`Follicles are decreased`);
+      else if (foll === 'atypical follicles') p3.push(`Atypical follicles are present`);
+      else if (foll === 'not identified') p3.push(`Follicles are not identified`);
+    }
+
+    if (para !== 'not assessable') {
+      if (para === 'unremarkable') p3.push(`the paracortex is unremarkable`);
+      else if (para === 'mildly expanded') p3.push(`the paracortex is mildly expanded`);
+      else if (para === 'expanded') p3.push(`the paracortex is expanded`);
+      else if (para === 'atypical') p3.push(`the paracortex is atypical`);
+    }
+
+    if (p3.length) paras.push(p3.join('; ') + `.`);
+
+    const cc = val('coreCellularity');
+    if (cc === 'predominantly small mature lymphocytes') {
+      paras.push(`The lymphoid population is predominantly composed of small mature lymphocytes.`);
+    } else if (cc === 'polymorphous lymphoid population') {
+      paras.push(`The lymphoid population is polymorphous.`);
+    } else if (cc === 'mixed small and large lymphoid cells') {
+      paras.push(`The lymphoid population is composed of mixed small and large lymphoid cells.`);
+    } else if (cc === 'monotonous atypical lymphoid population') {
+      paras.push(`A monotonous atypical lymphoid population is present.`);
+    }
   }
 
   // --- Cytologic features paragraph ---
@@ -498,19 +565,26 @@ function generate(){
   }
 
   const granulomas = val('granulomas');
-  let granSentence = granulomas === 'not identified'
-    ? `No granulomas are identified.`
-    : `Granulomas are ${granulomas}.`;
-
   const fibrosis = val('fibrosis');
-  let fibSentence = fibrosis === 'not identified'
-    ? `No fibrosis is identified.`
-    : `Fibrosis is ${fibrosis}.`;
 
-  let bgPara = [bgSentence, granSentence, fibSentence].filter(Boolean).join(' ');
+  let endSentence = '';
+  if (granulomas === 'not identified' && fibrosis === 'not identified') {
+    endSentence = `No granulomas or significant fibrosis are identified.`;
+  } else {
+    const parts = [];
+    if (granulomas === 'not identified') parts.push(`No granulomas are identified.`);
+    else parts.push(`Granulomas are ${granulomas}.`);
+
+    if (fibrosis === 'not identified') parts.push(`No significant fibrosis is identified.`);
+    else parts.push(`Fibrosis is ${fibrosis}.`);
+
+    endSentence = parts.join(' ');
+  }
+
+  let bgPara = [bgSentence, endSentence].filter(Boolean).join(' ');
   paras.push(bgPara);
 
-  document.getElementById('output').value = paras.filter(Boolean).join('\n\n');
+  document.getElementById('output').value = paras.filter(Boolean).join(' ');
 }
 
 document.querySelectorAll('select, input[type=checkbox]').forEach(el=>{
