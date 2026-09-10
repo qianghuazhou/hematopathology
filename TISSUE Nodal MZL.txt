@@ -127,3 +127,95 @@ CD5-CD10- lambda restricted monoclonal B cell population detected. By forward sc
 Comment:  
 
 Flow Cytometry report Accession No.:  H23-2629 from Dr. Hubert Tsui at Sunnybrook Health Sciences Centre, 2075 Bayview Ave., Toronto, ON, M4N 3M5.
+
+TEMPLATES
+DIAGNOSIS
+
+Lymph node, [site], [core/excision] biopsy:
+Nodal marginal zone lymphoma.
+[Predominantly small-cell / large-cell morphology].
+See comment.
+
+MORPHOLOGY
+
+The lymph node shows a [perifollicular / interfollicular / nodular / diffuse / mixed] atypical lymphoid proliferation composed predominantly of [small / intermediate-to-large / large] lymphoid cells with [irregular nuclei, inconspicuous nucleoli, and moderately abundant pale/clear cytoplasm]. [Residual reactive follicles are present / Follicular colonization is present / The architecture is largely effaced]. [No confluent sheets of overtly atypical large cells are identified.]
+
+IMMUNOHISTOCHEMISTRY
+
+The atypical lymphoid cells are positive for CD20 and PAX5 and negative for CD5, CD10, cyclin D1, and SOX11. [BCL6 highlights residual/colonized germinal centers.] CD21/CD23 highlights [preserved / expanded / compressed / disrupted / absent] follicular dendritic cell networks. [IgD shows weak / partial / strong expression in the neoplastic B cells.] The Ki-67 proliferation index is approximately [__]%.
+
+FLOW CYTOMETRY
+
+Flow cytometry identifies a CD5-negative/CD10-negative monoclonal B-cell population with [kappa/lambda] light-chain restriction.
+
+COMMENT
+
+The morphologic and immunophenotypic findings support nodal marginal zone lymphoma in the appropriate clinical setting. Correlation with clinical, radiologic, and laboratory findings is recommended to exclude secondary nodal involvement by extranodal or splenic marginal zone lymphoma.
+
+LARGE-CELL VARIANT
+
+DIAGNOSIS
+
+Lymph node, [site], [core/excision] biopsy:
+
+Nodal marginal zone lymphoma with large-cell morphology.
+See comment.
+
+COMMENT
+
+The lymphoma shows prominent large-cell morphology; however, the overall architectural and immunophenotypic features remain supportive of nodal marginal zone lymphoma. In particular, [perifollicular/interfollicular growth, follicular colonization, residual/compressed follicular dendritic cell networks, and/or IgD expression] support marginal zone differentiation. Increased cell size and/or proliferation alone should not be interpreted as diffuse large B-cell lymphoma.
+
+NMZL vs nDLBCL DIAGNOSTIC ALGORITHM
+
+CYCLIN D1
+Positive → Mantle cell lymphoma
+Negative → Proceed to CD10
+CD10
+Positive → Follicular lymphoma or DLBCL
+Negative → Proceed to morphometrics
+
+CELL AND NUCLEAR SIZE
+Small:
+Cell <10.5 µm AND nucleus <7.7 µm
+→ NMZL
+
+Large:
+Cell 10.5–14 µm and/or nucleus 7.7–9.4 µm
+→ Indeterminate/overlap zone
+→ Assess additional parameters below
+
+Abnormally large:
+Cell >14 µm AND nucleus >9.4 µm
+→ Most likely nDLBCL
+
+GROWTH PATTERN
+Perifollicular → NMZL
+Interfollicular → Favors NMZL
+Nodular → Most likely NMZL
+Diffuse → Favors nDLBCL
+FOLLICULAR COLONIZATION
+Present → NMZL
+No residual follicles → Favors nDLBCL
+FDC NETWORK (CD21)
+Intact or compressed → NMZL
+Expanded or disrupted → Favors NMZL
+Absent/completely effaced → Favors nDLBCL
+IgD
+Positive → Favors NMZL
+Negative → Favors nDLBCL
+Ki-67
+Low/intermediate (<40%) → Favors NMZL
+High (>40%) → Favors nDLBCL
+
+FINAL INTEGRATION
+
+If a determinant feature is present → classify accordingly.
+
+If findings remain indeterminate → majority vote using:
+Growth pattern
+Follicular colonization
+FDC network
+IgD
+Ki-67
+
+Important: Large-cell morphology or high Ki-67 alone does not exclude NMZL.
