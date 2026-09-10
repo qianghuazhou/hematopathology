@@ -1351,8 +1351,8 @@ function generateReport(){
   // Avoid duplicating peripheral blood in the diagnosis: when PB has a meaningful
   // abnormality it receives its own diagnostic heading and is omitted from the marrow heading.
   const specimenParts = hasAbnormalPbDx
-    ? 'core biopsy, clot section and aspirate'
-    : 'core biopsy, clot section, aspirate and peripheral blood smears';
+    ? 'aspirate and biopsy'
+    : 'aspirate and biopsy, peripheral blood';
   r += site ? ('Bone marrow, ' + site.toLowerCase() + ', ' + specimenParts + ':\n') : ('Bone marrow, ' + specimenParts + ':\n');
   r += bullet(v('dx1'));
   r += bullet(v('dx2'));
