@@ -561,6 +561,21 @@ img, table, pre, code, textarea, select, input, button{
   }
 }
 
+/* v19 bright clinical theme */
+:root{--bg:#f4f7fb;--panel:#ffffff;--panel-2:#f8fafc;--text:#172033;--muted:#5f6b7a;--accent:#2563eb;}
+body{background:#f4f7fb;color:var(--text);}
+header{background:#ffffff;border-bottom:1px solid #d9e1ec;box-shadow:0 1px 4px rgba(15,23,42,.05);}
+.panel{background:#ffffff;border-color:#d9e1ec;box-shadow:0 2px 10px rgba(15,23,42,.05);}
+.section{background:#f8fafc;border-color:#d9e1ec;}
+.section h3{color:#1f3b64;}
+input[type="text"],input[type="number"],input[type="date"],textarea,select{background:#ffffff;color:#172033;border-color:#cbd5e1;}
+button{background:#ffffff;color:#172033;border-color:#cbd5e1;}
+button.primary{background:#2563eb;color:#fff;border-color:#1d4ed8;}
+button.secondary{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;}
+.output{background:#ffffff;color:#111827;border-color:#94a3b8;}
+.footer-note,.hint{color:#64748b!important;}
+.cb-item{color:#172033;}
+.ihc-cat{border-color:#d9e1ec;}
 </style>
 </head>
 <body>
@@ -598,12 +613,12 @@ img, table, pre, code, textarea, select, input, button{
           <div class="grid-4">
             <div class="row"><label>Date</label><input type="date" id="cbc_date"></div>
             <div class="row"><label>HGB (g/L)</label><input type="number" id="hgb" step="any"></div>
-            <div class="row"><label>LKC (x10E12/L)</label><input type="number" id="lkc" step="any"></div>
+            <div class="row"><label>RBC (x10E12/L)</label><input type="number" id="lkc" step="any"></div>
             <div class="row"><label>Platelets (x10E9/L)</label><input type="number" id="plt" step="any"></div>
 
             <div class="row"><label>MCV (fL)</label><input type="number" id="mcv" step="any"></div>
             <div class="row"><label>RDW (%)</label><input type="number" id="rdw" step="any"></div>
-            <div class="row"><label>ERC (x10E9/L)</label><input type="number" id="erc" step="any"></div>
+            <div class="row"><label>WBC (x10E9/L)</label><input type="number" id="erc" step="any"></div>
             <div class="row"><label>Neutrophils (x10E9/L)</label><input type="number" id="anc" step="any"></div>
 
             <div class="row"><label>Lymphocytes (x10E9/L)</label><input type="number" id="alc" step="any"></div>
@@ -1231,6 +1246,7 @@ img, table, pre, code, textarea, select, input, button{
     <div class="row"><label>Basos (%)</label><input id="diff_baso" type="number" step="any"></div>
     <div class="row"><label>Plasma cells (%)</label><input id="diff_plasma" type="number" step="any"></div>
     <div class="row"><label>Mast cells (%)</label><input id="diff_mast" type="number" step="any"></div>
+    <div class="row"><label>Other (%)</label><input id="diff_other" type="number" step="any"></div>
 
     <div class="row"><label>Diff reliability</label><select id="diff_reliability"><option value="">Reliable / performed</option><option>Not reliable due to hemodilution</option><option>Not reliable due to aparticulate aspirate</option><option>Not performed</option></select></div>
     <div class="row"><label>M:E ratio</label><input id="diff_me" type="text" placeholder="e.g., 3:1" readonly></div>
@@ -1377,6 +1393,7 @@ img, table, pre, code, textarea, select, input, button{
   </div>
 </div>
             
+            <div class="row"><label>Cellularity (%)</label><input id="bx_cellularity_pct" type="number" step="any" placeholder="e.g., 50"></div>
             <div class="row"><label>Architecture</label><input id="bx_architecture" type="text" placeholder="Preserved / altered; distribution of hematopoietic elements"></div>
             <div class="row"><label>Abnormal infiltrate</label><input type="text" id="bx_infiltrate" placeholder="Extent, localization, pattern and cytology"></div>
             <div class="row"><label>Stromal / other</label><input type="text" id="bx_other" placeholder="Granulomas, necrosis, edema, myxoid/sinusoidal/stromal or bone changes"></div>
@@ -1530,7 +1547,7 @@ img, table, pre, code, textarea, select, input, button{
         </div>
 
         <div class="section">
-          <h3>Special Stains</h3>
+          <h3>Reticulin / Trichrome</h3>
           <div class="grid-2">
             <div class="row">
               <label>Reticulin (Gomori)</label>
@@ -1972,190 +1989,130 @@ function lineageNumberMorphFreeV17(numId, morphFreeId){
 }
 
 function generateReport() {
-  const lines = [];
-  const add = (s="") => lines.push(s);
-  const pushIf = (label, value, suffix="") => {
-    if (value && String(value).trim()) add(`${padLabel(label)}${capitalizeFirst(String(value).trim())}${suffix}`);
-  };
+  collectCheckboxGroups();
+  const lines=[]; const add=(s="")=>lines.push(s);
+  const value=id=>(document.getElementById(id)?.value||"").trim();
+  const line=(label,val,suffix="")=>{if(val)add(label+": "+val+suffix);};
+  const paragraph=(label,val)=>{if(val){add(label+":");add(val);add("");}};
+  const site=value("bm_site")||"[left/right] iliac crest";
 
-  // Integrated diagnosis / case information
-  add("DIAGNOSIS");
-  const site = v("bm_site") || "[left/right] iliac crest";
-  add("Bone marrow, " + site + ", aspirate and biopsy:");
-  const dxLines = (v("dx_primary") || "").split(/\n+/).map(s => s.trim()).filter(Boolean);
-  dxLines.forEach(s => add("- " + s.replace(/^-\s*/, "")));
-  if (v("dx_secondary")) add("- " + v("dx_secondary"));
-  add("");
-  add("Peripheral blood:");
-  if (v("dx_pb")) add("- " + v("dx_pb"));
-  add("");
-  if (v("report_status")) add("REPORT STATUS: " + v("report_status"));
-  pushIf("Clinical history / indication", v("clinical_indication"));
-  pushIf("Lab accession #", v("lab_accession"));
-  pushIf("Classification system", v("classification_system"));
-  add("");
+  add("DIAGNOSIS"); add("");
+  add("Bone marrow, "+site+", aspirate and biopsy:");
+  (value("dx_primary")||"").split(/\n+/).map(x=>x.trim()).filter(Boolean).forEach(x=>add("- "+x.replace(/^-\s*/,"")));
+  if(value("dx_secondary")) add("- "+value("dx_secondary"));
+  add(""); add("Peripheral blood:");
+  if(value("dx_pb")) add("- "+value("dx_pb"));
+  add(""); add("");
 
-  // CBC
-  add(`PERIPHERAL BLOOD COUNT${v("cbc_date") ? ` (Date: ${v("cbc_date")})` : ""}`);
-  pushIf("HGB", v("hgb"), " g/L");
-  pushIf("LKC", v("lkc"), " x10E12/L");
-  pushIf("Platelets", v("plt"), " x10E9/L");
-  pushIf("MCV", v("mcv"), " fL");
-  pushIf("RDW", v("rdw"), " %");
-  pushIf("ERC", v("erc"), " x10E9/L");
-  pushIf("Neutrophils", v("anc"), " x10E9/L");
-  pushIf("Lymphocytes", v("alc"), " x10E9/L");
-  pushIf("Monocytes", v("amc"), " x10E9/L");
-  pushIf("Eosinophils", v("eos"), " x10E9/L");
-  pushIf("Basophils", v("baso"), " x10E9/L");
-  add("");
+  add("PERIPHERAL BLOOD"); add("");
+  line("Lab Accession #",value("lab_accession"));
+  line("Hb",value("hgb")," g/L"); line("RBC",value("lkc")," x 10E12/L");
+  line("MCV",value("mcv")," fL"); line("RDW",value("rdw")," %");
+  line("WBC",value("erc")," x 10E9/L"); line("Neutrophils",value("anc")," x 10E9/L");
+  line("Lymphocytes",value("alc")," x 10E9/L"); line("Monocytes",value("amc")," x 10E9/L");
+  line("Eosinophils",value("eos")," x 10E9/L"); line("Basophils",value("baso")," x 10E9/L");
+  line("Plt",value("plt")," x 10E9/L"); add(""); add("");
 
-  // Blood smear morphology
-  add("BLOOD SMEAR MORPHOLOGY");
-  pushIf("RBC", v("rbc_morph"));
-  pushIf("WBC", v("wbc_morph"));
-  pushIf("Plt", v("plt_morph"));
-  add("");
+  add("SMEAR MORPHOLOGY"); add("");
+  line("RBC",value("rbc_morph")); line("WBC",value("wbc_morph")); line("Plt",value("plt_morph")); add(""); add("");
 
-  // Aspirate
-  add("BONE MARROW ASPIRATE");
-  pushIf("Sample quality", v("asp_quality"));
-  pushIf("Spicules", v("asp_spicules"));
-  pushIf("Trails", v("asp_trails"));
-  pushIf("Cellularity", v("asp_cellularity"));
-  add(buildAspirateLineage("asp_megas", "Megakaryopoiesis"));
-  add(buildAspirateLineage("asp_ery", "Erythropoiesis"));
-  add(buildAspirateLineage("asp_gran", "Granulopoiesis"));
-  pushIf("Blasts", v("asp_blasts"));
-  pushIf("Lymphocytes", v("asp_lymphs"));
-  pushIf("Plasma cells", v("asp_plasma"));
-  pushIf("Mast cells", v("asp_mast"));
-  pushIf("Other findings", v("asp_other_findings"));
-  pushIf("Iron status", v("asp_iron"));
-  pushIf("Ring sideroblasts", v("asp_rs"));
-  pushIf("Clot section", v("asp_clot"));
-  add("");
+  add("BONE MARROW ASPIRATE"); add("");
+  const adequacy=[value("asp_quality"),value("asp_spicules"),value("asp_trails")].filter(Boolean).join("; ");
+  paragraph("Adequacy",adequacy);
+  paragraph("Megakaryocytes",buildAspirateLineage("asp_megas","Megakaryocytes").replace(/^Megakaryocytes:\s*/,""));
+  paragraph("Erythroid",buildAspirateLineage("asp_ery","Erythroid").replace(/^Erythroid:\s*/,""));
+  paragraph("Granulocytes",buildAspirateLineage("asp_gran","Granulocytes").replace(/^Granulocytes:\s*/,""));
+  const otherAsp=[
+    value("asp_blasts")&&"Blasts: "+value("asp_blasts"),
+    value("asp_lymphs")&&"Lymphocytes: "+value("asp_lymphs"),
+    value("asp_plasma")&&"Plasma cells: "+value("asp_plasma"),
+    value("asp_mast")&&"Mast cells: "+value("asp_mast"),
+    value("asp_other_findings")
+  ].filter(Boolean).join("; ");
+  paragraph("Other findings",otherAsp);
 
-  // Differential count — ICSH-style terminology and line-by-line report
-  add("DIFFERENTIAL");
-  const totalCells = v("diff_total");
-  if (totalCells) add(totalCells + " cells counted.");
-  if (v("diff_reliability")) pushIf("Adequacy", v("diff_reliability"));
+  add("DIFFERENTIAL"); add("");
+  if(value("diff_total")) add(value("diff_total")+" cells counted.");
+  if(value("diff_reliability")) add("Adequacy: "+value("diff_reliability")+".");
   add("");
-  [
-    ["Blasts", "diff_blast"],
-    ["Promyelocytes", "diff_promy"],
-    ["Myelocytes", "diff_myelo"],
-    ["Metamyelocytes", "diff_meta"],
-    ["Neutrophils/bands", "diff_segs"],
-    ["Monocytes", "diff_mono"],
-    ["Erythroid precursors", "diff_ery"],
-    ["Lymphocytes", "diff_lymph"],
-    ["Plasma cells", "diff_plasma"],
-    ["Eosinophils", "diff_eos"],
-    ["Basophils", "diff_baso"],
-    ["Mast cells", "diff_mast"]
-  ].forEach(([label, id]) => {
-    const val = v(id);
-    if (val !== "" && val != null) add(label + ": " + val + "%");
-  });
-  add("");
-  pushIf("M:E ratio", v("diff_me"));
-  add("");
+  [["Blasts","diff_blast"],["Promyelocytes","diff_promy"],["Myelocytes","diff_myelo"],["Metamyelocytes","diff_meta"],
+   ["Neutrophils/bands","diff_segs"],["Monocytes","diff_mono"],["Erythroid precursors","diff_ery"],["Lymphocytes","diff_lymph"],
+   ["Plasma cells","diff_plasma"],["Eosinophils","diff_eos"],["Basophils","diff_baso"],["Mast cells","diff_mast"],["Other","diff_other"]]
+   .forEach(([lab,id])=>{if(value(id)!=="")add(lab+": "+value(id)+"%");});
+  add(""); if(value("diff_me")) add("M:E ratio: "+value("diff_me")); add(""); add("");
 
-  // Biopsy
-  add("BONE MARROW BIOPSY");
-  pushIf("Sample quality", v("bx_quality"));
-  if (v("bx_length")) {
-    const len = parseFloat(v("bx_length"));
-    let adequacy = "";
-    if (!isNaN(len)) adequacy = len < 1.5 ? "suboptimal length" : (len >= 2.0 ? "preferred adult core length achieved" : "acceptable adult core length");
-    add(`${padLabel("Core length")}${v("bx_length")} cm${adequacy ? " (" + adequacy + ")" : ""}.`);
-  }
-  pushIf("Architecture", v("bx_architecture"));
-  pushIf("Cellularity", v("bx_cellularity"));
-  add(buildBiopsyLineage("bx_megas", "Megakaryopoiesis"));
-  add(buildBiopsyLineage("bx_ery", "Erythropoiesis"));
-  add(buildBiopsyLineage("bx_gran", "Granulopoiesis"));
-  pushIf("Blasts", v("bx_blasts"));
-  pushIf("Lymphoid cells", v("bx_lymph"));
-  pushIf("Plasma cells", v("bx_plasma"));
-  pushIf("Abnormal infiltrate", v("bx_infiltrate"));
-  pushIf("Stromal / other findings", v("bx_other"));
-  pushIf("Bone trabeculae", v("bx_bone"));
-  pushIf("Touch prep", v("bx_touch"));
-  add("");
+  add("IRON"); add("");
+  line("Storage iron",value("asp_iron")); line("Ring sideroblasts",value("asp_rs")); add(""); add("");
 
-  // Special stains
-  const reticGrade = v("st_retic_grade");
-  const reticNote = v("st_retic_note");
-  const reticDescMap = {
-    "0": "Scattered linear reticulin, no intersections",
-    "1": "Fine network with sparse intersections",
-    "2": "Diffuse dense network with extensive intersections",
-    "3": "Dense fiber network with focal/diffuse collagen bundling"
-  };
-  const reticDesc = reticGrade ? (reticDescMap[reticGrade] || "") : "";
-  const trich = v("st_trich_collagen");
-  const trichNote = v("st_trich_note");
-
-  const hasSpecialStains = reticGrade || reticNote || trich || trichNote;
-  if (hasSpecialStains) {
-    add("SPECIAL STAINS");
-    if (reticGrade || reticNote) {
-      const rParts = [`${padLabel("Reticulin stain (Gomori)")}${reticGrade ? `MF-${reticGrade} (European Consensus grading)` : ""}`.trimEnd()];
-      if (reticDesc) rParts.push(reticDesc);
-      if (reticNote) rParts.push(reticNote);
-      add(rParts.join(" — "));
-    }
-    if (trich || trichNote) {
-      const tParts = [`${padLabel("Trichrome stain (Masson)")}${trich ? `Collagen ${trich.toLowerCase()}` : ""}`.trimEnd()];
-      if (trichNote) tParts.push(trichNote);
-      add(tParts.join(" — "));
-    }
+  add("BONE MARROW BIOPSY"); add("");
+  if(value("bx_length")){
+    const n=parseFloat(value("bx_length")); const aq=isNaN(n)?"":(n<1.5?"suboptimal":"adequate");
+    add("The "+site+" core biopsy measures "+value("bx_length")+" cm in aggregate length"+(aq?" and is "+aq+" for evaluation.":"."));
     add("");
   }
+  if(value("bx_cellularity_pct")||value("bx_cellularity")){
+    let s="The marrow is";
+    if(value("bx_cellularity_pct")) s+=" approximately "+value("bx_cellularity_pct")+"% cellular";
+    if(value("bx_cellularity")) s+=(value("bx_cellularity_pct")?", ":" ")+value("bx_cellularity").toLowerCase();
+    add(s+"."); add("");
+  }
+  paragraph("Architecture",value("bx_architecture"));
+  paragraph("Erythropoiesis",lineageNumberMorphFreeV17("bx_ery_num","bx_ery_morph_free"));
+  paragraph("Granulopoiesis",lineageNumberMorphFreeV17("bx_gran_num","bx_gran_morph_free"));
+  paragraph("Megakaryocytes",lineageNumberMorphFreeV17("bx_megas_num","bx_megas_morph_free"));
+  paragraph("Blasts",value("bx_blasts"));
+  const bxOther=[
+    value("bx_lymph")&&"Lymphoid cells/aggregates: "+value("bx_lymph"),
+    value("bx_plasma")&&"Plasma cells: "+value("bx_plasma"),
+    value("bx_infiltrate")&&"Abnormal infiltrate: "+value("bx_infiltrate"),
+    value("bx_other"), value("bx_bone")&&"Bone: "+value("bx_bone"),
+    value("bx_touch")&&"Touch preparation: "+value("bx_touch")
+  ].filter(Boolean).join("; ");
+  paragraph("Other findings",bxOther);
 
-  const ihcText = buildIhcNarrative();
-  if (ihcText){
-    add("IMMUNOHISTOCHEMISTRY");
-    add(ihcText);
+  add("RETICULIN"); add("");
+  if(value("st_retic_grade")) add((value("st_retic_grade")==="0"?"No significant increase":"Increased")+", MF-"+value("st_retic_grade")+" (European Consensus grading).");
+  if(value("st_retic_note")) add(value("st_retic_note")); add(""); add("");
 
-    const addTags = document.getElementById("ihcAutoTags")?.checked;
-    if (addTags){
-      const tags = buildIhcAutoTags();
-      if (tags.length){
-        add("");
-        add("IHC SUMMARY (auto)");
-        tags.forEach(t => add(`- ${t}`));
-      }
-    }
+  add("TRICHROME"); add("");
+  if(value("st_trich_collagen")){
+    const tr=value("st_trich_collagen");
+    add(tr==="Absent"?"No significant collagen fibrosis.":"Collagen fibrosis: "+tr.toLowerCase()+".");
+  }
+  if(value("st_trich_note")) add(value("st_trich_note")); add(""); add("");
 
-    add("");
-  }
-  // Ancillary studies and integrated interpretation
-  if (v("flow_quality") || v("flow_population") || v("flow_interpretation")) {
-    add("FLOW CYTOMETRY"); pushIf("Sample / quality", v("flow_quality")); pushIf("Findings", v("flow_population")); pushIf("Interpretation", v("flow_interpretation")); add("");
-  }
-  if (v("cyto_karyotype") || v("cyto_fish") || v("cyto_interpretation")) {
-    add("CYTOGENETICS / FISH"); pushIf("Karyotype", v("cyto_karyotype")); pushIf("FISH", v("cyto_fish")); pushIf("Interpretation", v("cyto_interpretation")); add("");
-  }
-  if (v("mol_assay") || v("mol_variants") || v("mol_interpretation")) {
-    add("MOLECULAR STUDIES"); pushIf("Assay / genes", v("mol_assay")); pushIf("Variants / VAF", v("mol_variants")); pushIf("Interpretation", v("mol_interpretation")); add("");
-  }
-  if (v("integrated_comment") || v("prior_marrow") || v("discrepancies") || v("monitoring_recommendation")) {
-    add("INTEGRATED INTERPRETATION / COMMENT");
-    if (v("integrated_comment")) add(v("integrated_comment"));
-    pushIf("Comparison with prior marrow", v("prior_marrow"));
-    pushIf("Unresolved discrepancies", v("discrepancies"));
-    pushIf("Recommended disease monitoring", v("monitoring_recommendation")); add("");
-  }
-  if (v("pending_studies")) { add("PENDING STUDIES"); add(v("pending_studies")); add(""); }
+  add("IMMUNOHISTOCHEMISTRY / SPECIAL STAINS"); add("");
+  const ihc=buildIhcNarrative(); if(ihc)add(ihc); add(""); add("");
+
+  add("FLOW CYTOMETRY"); add("");
+  if(value("flow_quality")) add(value("flow_quality"));
+  if(value("flow_population")) add(value("flow_population"));
+  if(value("flow_interpretation")) add(value("flow_interpretation"));
+  add(""); add("");
+
+  add("CYTOGENETICS / FISH"); add("");
+  paragraph("Karyotype",value("cyto_karyotype")); paragraph("FISH",value("cyto_fish")); paragraph("Interpretation",value("cyto_interpretation"));
+
+  add("MOLECULAR STUDIES"); add("");
+  if(value("mol_assay")) add(value("mol_assay"));
+  if(value("mol_variants")){add("");add(value("mol_variants"));}
+  if(value("mol_interpretation")){add("");paragraph("Interpretation",value("mol_interpretation"));}
+  else {add("");}
+
+  add("INTEGRATED INTERPRETATION / COMMENT"); add("");
+  if(value("integrated_comment")) add(value("integrated_comment"));
+  if(value("prior_marrow")){add("");add("Comparison with prior bone marrow: "+value("prior_marrow"));}
+  if(value("discrepancies")){add("");add("Unresolved discrepancies: "+value("discrepancies"));}
+  if(value("pending_studies")){add("");add("Pending investigations: "+value("pending_studies"));}
+  if(value("monitoring_recommendation")){add("");add("Recommended testing for disease monitoring: "+value("monitoring_recommendation"));}
+  add(""); add("");
+
+  add("PENDING STUDIES"); add("");
+  if(value("pending_studies")) add(value("pending_studies"));
+  add(""); add("");
   add("Reporting framework: ICSH Guidance on Bone Marrow Examination and Reporting (2026).");
-
-  document.getElementById("output").textContent = lines.join("\n");
+  document.getElementById("output").textContent=lines.join("\n");
 }
-
 
 async function copyOutput() {
   const text = document.getElementById("output").textContent || "";
@@ -2214,6 +2171,7 @@ function calcMERatioAuto() {
   const mono   = toNum("diff_mono");
   const plasma = toNum("diff_plasma");
   const mast   = toNum("diff_mast");
+  const other  = toNum("diff_other");
 
   // M:E: do not report when blasts/blast-equivalent cells are >=20%.
   const meEl = document.getElementById("diff_me");
@@ -2229,7 +2187,7 @@ function calcMERatioAuto() {
   }
 
   // Total sum
-  const total = blasts + promy + myelo + meta + segs + ery + lymph + mono + eos + baso + plasma + mast;
+  const total = blasts + promy + myelo + meta + segs + ery + lymph + mono + eos + baso + plasma + mast + other;
   const sumEl = document.getElementById("diff_sum");
   const warnEl = document.getElementById("diff_warn");
   if (sumEl) sumEl.value = total.toFixed(1) + "%";
@@ -2248,7 +2206,7 @@ function calcMERatioAuto() {
 
 // Attach listeners on load
 document.addEventListener("DOMContentLoaded", function() {
-  const ids = ["diff_blast","diff_promy","diff_myelo","diff_meta","diff_segs","diff_ery","diff_lymph","diff_mono","diff_eos","diff_baso","diff_plasma","diff_mast"];
+  const ids = ["diff_blast","diff_promy","diff_myelo","diff_meta","diff_segs","diff_ery","diff_lymph","diff_mono","diff_eos","diff_baso","diff_plasma","diff_mast","diff_other"];
   ids.forEach(id => {
     const el = document.getElementById(id);
     if (el) {
@@ -2287,20 +2245,50 @@ window.generateReport = function() {
 <script>
 function setVal19(id,value){const el=document.getElementById(id);if(el)el.value=value;}
 function checkVal19(group,value){document.querySelectorAll('input[type="checkbox"][data-group="'+group+'"]').forEach(cb=>cb.checked=(cb.value===value));}
-function applyBuiltinTemplate19(){
- const t=document.getElementById("builtin_template")?.value||""; if(!t)return;
- checkVal19("asp_quality","Adequate"); checkVal19("asp_spicules","Adequate cellular spicules"); checkVal19("bx_quality","Satisfactory");
+function normalMorph19(){
+ checkVal19("rbc_morph","unremarkable");checkVal19("wbc_morph","unremarkable");checkVal19("plt_morph","unremarkable");
+ checkVal19("asp_quality","Adequate");checkVal19("asp_spicules","Adequate cellular spicules");
  setVal19("asp_trails","Well-preserved cellular trails adjacent to representative particles");
- if(t==="normal"){setVal19("dx_primary","No diagnostic morphologic evidence of a hematolymphoid neoplasm.");setVal19("dx_pb","No significant morphologic abnormality identified.");setVal19("bx_architecture","Preserved architecture and distribution of hematopoietic elements.");setVal19("integrated_comment","The bone marrow shows maturing trilineage hematopoiesis without an increased blast population or abnormal infiltrate. Ancillary studies are integrated when available.");}
- if(t==="myeloid"){setVal19("classification_system","WHO-HAEM5 / ICC");setVal19("integrated_comment","Morphologic findings are integrated with blast percentage, dysplasia, flow cytometry, cytogenetic and molecular findings for final myeloid neoplasm classification.");}
- if(t==="acute"){setVal19("classification_system","WHO-HAEM5 / ICC");setVal19("integrated_comment","Blast morphology and percentage are integrated with flow cytometry and defining cytogenetic/molecular abnormalities for final acute leukemia classification.");}
- if(t==="lymphoma"){setVal19("integrated_comment","The extent and pattern of marrow involvement are integrated with immunohistochemistry and flow cytometry and compared with the known lymphoma phenotype where available.");}
- if(t==="plasma"){setVal19("classification_system","IMWG");setVal19("integrated_comment","Plasma cell quantity, distribution and clonality are integrated with flow cytometry, immunohistochemistry and available genetic studies.");}
- if(t==="followup"){setVal19("integrated_comment","Current findings are compared with the prior marrow and baseline disease-associated morphologic, immunophenotypic and genetic abnormalities, with emphasis on the most sensitive available disease-monitoring assay.");}
- collectCheckboxGroups();
+ checkVal19("asp_megas_num","Normal");checkVal19("asp_megas_morph","Normal morphology");
+ checkVal19("asp_ery_num","Normal");checkVal19("asp_ery_morph","Normoblastic maturation");
+ checkVal19("asp_gran_num","Normal");checkVal19("asp_gran_morph","Orderly maturation");
+ checkVal19("asp_iron","Adequate");checkVal19("asp_rs","Absent");
+ checkVal19("bx_quality","Satisfactory");setVal19("bx_architecture","Preserved architecture with normal distribution of hematopoietic elements.");
+ checkVal19("bx_megas_num","Normal");checkVal19("bx_ery_num","Normal");checkVal19("bx_gran_num","Normal");
+ setVal19("bx_megas_morph_free","No overt morphologic abnormality.");setVal19("bx_ery_morph_free","No overt morphologic abnormality.");setVal19("bx_gran_morph_free","Maturing forms present.");
+ checkVal19("bx_blasts","Not increased");checkVal19("bx_plasma","Not increased");checkVal19("bx_bone","Unremarkable");
+ setVal19("st_retic_grade","0");setVal19("st_trich_collagen","Absent");
 }
-document.addEventListener("DOMContentLoaded",()=>document.getElementById("builtin_template")?.addEventListener("change",applyBuiltinTemplate19));
-</script>
+function applyBuiltinTemplate19(){
+ const t=document.getElementById("builtin_template")?.value||"";if(!t)return;
+ if(["normal","lymphoma","plasma","followup"].includes(t))normalMorph19();
+ if(t==="normal"){
+   setVal19("dx_primary","No diagnostic morphologic evidence of a hematolymphoid neoplasm.");
+   setVal19("dx_pb","No significant morphologic abnormality identified.");
+   setVal19("flow_population","No abnormal population identified.");
+   setVal19("integrated_comment","The bone marrow demonstrates maturing trilineage hematopoiesis without increased blasts or an abnormal infiltrate. Flow cytometric and immunohistochemical findings show no abnormal population when performed. Cytogenetic and molecular studies are integrated when available. Overall, no diagnostic evidence of a hematolymphoid neoplasm is identified.");
+ }
+ if(t==="myeloid"){
+   setVal19("classification_system","WHO-HAEM5 / ICC");
+   setVal19("integrated_comment","The bone marrow demonstrates [summary of cellularity, blast percentage and dysplasia]. Flow cytometric and immunohistochemical findings [summary and correlation]. Cytogenetic and molecular studies [summary and correlation]. Overall, the findings are consistent with [integrated myeloid diagnosis and classification].");
+ }
+ if(t==="acute"){
+   setVal19("classification_system","WHO-HAEM5 / ICC");
+   setVal19("integrated_comment","The bone marrow demonstrates an increased blast population comprising approximately [__]% of cells. Flow cytometry shows [phenotype]. Cytogenetic and molecular studies [summary]. Overall, the findings are consistent with [integrated acute leukemia diagnosis and classification].");
+ }
+ if(t==="lymphoma"){
+   setVal19("integrated_comment","The bone marrow demonstrates [no involvement / involvement] by the patient's known lymphoma, with [pattern and extent]. Immunohistochemical and flow cytometric findings [summary and correlation]. Overall, the findings are consistent with [staging interpretation].");
+ }
+ if(t==="plasma"){
+   setVal19("classification_system","IMWG");
+   setVal19("integrated_comment","The bone marrow demonstrates plasma cells comprising approximately [__]% of marrow cellularity with [distribution/morphology]. Immunohistochemical and flow cytometric findings [clonality/phenotype]. Cytogenetic and molecular studies [summary]. Overall, the findings are consistent with [integrated plasma cell neoplasm interpretation].");
+ }
+ if(t==="followup"){
+   setVal19("integrated_comment","The bone marrow demonstrates [current morphologic findings]. Compared with the prior bone marrow, [interval change]. Flow cytometric and/or molecular disease-monitoring studies show [result]. Overall, the findings indicate [response / persistent disease / recurrent disease].");
+ }
+ collectCheckboxGroups();calcMERatioAuto();
+}
+document.addEventListener("DOMContentLoaded",()=>document.getElementById("builtin_template")?.addEventListener("change",applyBuiltinTemplate19));</script>
 
 <script>
 function makeSectionsResponsive(){
