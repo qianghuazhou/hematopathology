@@ -150,7 +150,7 @@ th{background:#edf3fb;color:var(--secondary)}
   background:#f8fbff;
   border:1px solid var(--border);
   border-radius:10px;
-  white-space:normal;
+  white-space:pre-wrap;
 }
 .copy-btn{
   margin-top:10px;
@@ -343,7 +343,13 @@ function updateDisplay(){
 }
 
 function calculateMERatio(){
-  const myeloidTotal = counts.blast + counts.promyelo + counts.myeloMeta + counts.segBand + counts.eosinophil + counts.basophil;
+  const total = totalCount();
+  const blastPct = total > 0 ? (counts.blast / total) * 100 : 0;
+  if (blastPct >= 20) return 'Not reported (blasts ≥20%)';
+
+  // ICSH-style M:E ratio: granulocytic + monocytic cells / erythroid precursors.
+  // Blasts are excluded from the myeloid numerator.
+  const myeloidTotal = counts.promyelo + counts.myeloMeta + counts.segBand + counts.monocyte + counts.eosinophil + counts.basophil;
   const erythroidTotal = counts.erythroid;
 
   if (myeloidTotal === 0 && erythroidTotal === 0) return 'N/A';
@@ -374,14 +380,28 @@ function generateReport(){
   reportHTML += '</table>';
 
   const meRatio = calculateMERatio();
-  let summaryText = 'Cells counted: ' + total + '. Cells: ';
-  summaryText += cellOrder.map(cellType => {
-    const pct = Math.round((counts[cellType] / total) * 100);
-    return summaryLabels[cellType] + ' ' + pct + '%';
-  }).join(', ');
-  summaryText += '. M:E ratio: ' + meRatio + '.';
+  const pct = cellType => Math.round((counts[cellType] / total) * 100);
+  const summaryLines = [
+    'DIFFERENTIAL:',
+    total + ' cells counted.',
+    '',
+    'Blasts: ' + pct('blast') + '%',
+    'Promyelocytes: ' + pct('promyelo') + '%',
+    'Myelocytes/metamyelocytes: ' + pct('myeloMeta') + '%',
+    'Neutrophils/bands: ' + pct('segBand') + '%',
+    'Monocytes: ' + pct('monocyte') + '%',
+    'Erythroid precursors: ' + pct('erythroid') + '%',
+    'Lymphocytes: ' + pct('lymphocyte') + '%',
+    'Plasma cells: ' + pct('plasma') + '%',
+    'Eosinophils: ' + pct('eosinophil') + '%',
+    'Basophils: ' + pct('basophil') + '%',
+    'Mast cells: ' + pct('mast') + '%',
+    '',
+    'M:E ratio: ' + meRatio
+  ];
+  const summaryText = summaryLines.join('\n');
 
-  reportHTML += '<div class="summary-box"><strong>Differential Count:</strong><br><span id="summaryText">' + summaryText + '</span></div>';
+  reportHTML += '<div class="summary-box"><span id="summaryText">' + summaryText + '</span></div>';
   reportHTML += '<button class="copy-btn" onclick="copyDifferentialSummary()">Copy Summary</button>';
   document.getElementById('report').innerHTML = reportHTML;
 }
