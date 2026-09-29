@@ -1210,6 +1210,7 @@ img, table, pre, code, textarea, select, input, button{
     <div class="row"><label>Eos (%)</label><input id="diff_eos" type="number" step="any"></div>
     <div class="row"><label>Basos (%)</label><input id="diff_baso" type="number" step="any"></div>
     <div class="row"><label>Plasma cells (%)</label><input id="diff_plasma" type="number" step="any"></div>
+    <div class="row"><label>Mast cells (%)</label><input id="diff_mast" type="number" step="any"></div>
 
     <div class="row"><label>M:E ratio</label><input id="diff_me" type="text" placeholder="e.g., 3:1" readonly></div>
 
@@ -1967,16 +1968,29 @@ function generateReport() {
   pushIf("Clot section", v("asp_clot"));
   add("");
 
-  // Diff count
-  add("DIFF COUNT");
-  pushIf("Total cells counted", v("diff_total"));
-  const diffParts = [
-    ["Blasts", v("diff_blast")], ["promyelocytes", v("diff_promy")], ["myelocytes", v("diff_myelo")],
-    ["metamyelocytes", v("diff_meta")], ["segs/bands", v("diff_segs")], ["erythroids", v("diff_ery")],
-    ["lymphs", v("diff_lymph")], ["monos", v("diff_mono")], ["eos", v("diff_eos")],
-    ["basos", v("diff_baso")], ["plasma cells", v("diff_plasma")]
-  ].filter(([, val]) => val && String(val).trim()).map(([lab, val]) => `${lab} ${val}%`);
-  if (diffParts.length) add(capitalizeFirst(diffParts.join(", ")));
+  // Differential count — ICSH-style terminology and line-by-line report
+  add("DIFFERENTIAL");
+  const totalCells = v("diff_total");
+  if (totalCells) add(totalCells + " cells counted.");
+  add("");
+  [
+    ["Blasts", "diff_blast"],
+    ["Promyelocytes", "diff_promy"],
+    ["Myelocytes", "diff_myelo"],
+    ["Metamyelocytes", "diff_meta"],
+    ["Neutrophils/bands", "diff_segs"],
+    ["Monocytes", "diff_mono"],
+    ["Erythroid precursors", "diff_ery"],
+    ["Lymphocytes", "diff_lymph"],
+    ["Plasma cells", "diff_plasma"],
+    ["Eosinophils", "diff_eos"],
+    ["Basophils", "diff_baso"],
+    ["Mast cells", "diff_mast"]
+  ].forEach(([label, id]) => {
+    const val = v(id);
+    if (val !== "" && val != null) add(label + ": " + val + "%");
+  });
+  add("");
   pushIf("M:E ratio", v("diff_me"));
   add("");
 
@@ -2085,7 +2099,7 @@ function fallbackCopyText(text) {
 <div class="footer-note">© 2025 Dr. Qianghua Zhou. All rights reserved.</div>
 
 <script>
-// Auto-calc M:E ratio (M = blasts+promy+myelo+meta+segs+eos+baso; E = erythroids)
+// Auto-calc ICSH-style M:E ratio (granulocytic + monocytic cells / erythroid precursors). Blasts excluded; suppress when blasts >=20%.
 function calcMERatioAuto() {
   const toNum = (id) => {
     const x = parseFloat((document.getElementById(id)?.value || "").trim());
@@ -2102,20 +2116,23 @@ function calcMERatioAuto() {
   const lymph  = toNum("diff_lymph");
   const mono   = toNum("diff_mono");
   const plasma = toNum("diff_plasma");
+  const mast   = toNum("diff_mast");
 
-  // M:E
-  const M = blasts + promy + myelo + meta + segs + eos + baso;
-  const E = ery > 0 ? ery : 1;
-  const ratio = (M / E);
-  if (isFinite(ratio)) {
-    const formatted = ratio >= 10 ? ratio.toFixed(1) : ratio.toFixed(2);
-    document.getElementById("diff_me").value = formatted + ":1";
+  // M:E: do not report when blasts/blast-equivalent cells are >=20%.
+  const meEl = document.getElementById("diff_me");
+  if (blasts >= 20) {
+    if (meEl) meEl.value = "Not reported (blasts ≥20%)";
+  } else if (ery <= 0) {
+    if (meEl) meEl.value = "N/A";
   } else {
-    document.getElementById("diff_me").value = "";
+    const M = promy + myelo + meta + segs + mono + eos + baso;
+    const ratio = M / ery;
+    const formatted = ratio.toFixed(1).replace(/\\.0$/, "");
+    if (meEl) meEl.value = formatted + ":1";
   }
 
   // Total sum
-  const total = blasts + promy + myelo + meta + segs + ery + lymph + mono + eos + baso + plasma;
+  const total = blasts + promy + myelo + meta + segs + ery + lymph + mono + eos + baso + plasma + mast;
   const sumEl = document.getElementById("diff_sum");
   const warnEl = document.getElementById("diff_warn");
   if (sumEl) sumEl.value = total.toFixed(1) + "%";
@@ -2134,7 +2151,7 @@ function calcMERatioAuto() {
 
 // Attach listeners on load
 document.addEventListener("DOMContentLoaded", function() {
-  const ids = ["diff_blast","diff_promy","diff_myelo","diff_meta","diff_segs","diff_ery","diff_lymph","diff_mono","diff_eos","diff_baso","diff_plasma"];
+  const ids = ["diff_blast","diff_promy","diff_myelo","diff_meta","diff_segs","diff_ery","diff_lymph","diff_mono","diff_eos","diff_baso","diff_plasma","diff_mast"];
   ids.forEach(id => {
     const el = document.getElementById(id);
     if (el) {
