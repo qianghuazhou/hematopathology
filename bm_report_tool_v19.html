@@ -1196,31 +1196,31 @@ button.secondary{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;}
     </div>
     </div>
 
-            <div class="row"><label>Clot section</label>
-    <div class="checkbox-group" data-target="asp_clot" data-hidden="asp_clot__val">
+            <div class="row"><label>Touch prep</label>
+    <div class="checkbox-group" data-target="bx_touch" data-hidden="bx_touch__val">
       <div class="cb-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));">
         
         <label class="cb-item">
-          <input type="checkbox" id="asp_clot__opt0" data-group="asp_clot" value="Marrow particles present with trilineage hematopoiesis, overall similar to aspirate findings.">
-          <span>Similar findings to aspirate</span>
+          <input type="checkbox" id="bx_touch__opt0" data-group="bx_touch" value="Adequate marrow elements present with findings similar to those seen in the aspirate smears.">
+          <span>Similar to aspirate</span>
         </label>
         
         <label class="cb-item">
-          <input type="checkbox" id="asp_clot__opt1" data-group="asp_clot" value="Limited marrow particles present; findings appear similar to the aspirate smears.">
+          <input type="checkbox" id="bx_touch__opt1" data-group="bx_touch" value="Limited marrow elements present.">
           <span>Limited</span>
         </label>
         
         <label class="cb-item">
-          <input type="checkbox" id="asp_clot__opt2" data-group="asp_clot" value="Predominantly blood clot with no significant marrow particles identified.">
+          <input type="checkbox" id="bx_touch__opt2" data-group="bx_touch" value="Predominantly blood with no significant marrow elements identified.">
           <span>Not contributory</span>
         </label>
         
       </div>
       <div class="cb-other">
         <span class="cb-other-label">Other:</span>
-        <input type="text" class="cb-other-input" id="asp_clot__other" data-group="asp_clot" placeholder="">
+        <input type="text" class="cb-other-input" id="bx_touch__other" data-group="bx_touch" placeholder="">
       </div>
-      <input type="hidden" id="asp_clot__val" />
+      <input type="hidden" id="bx_touch__val" />
     </div>
     </div>
           </div>
@@ -1516,31 +1516,31 @@ button.secondary{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;}
       <input type="hidden" id="bx_bone__val" />
     </div>
     </div>
-            <div class="row"><label>Touch prep</label>
-    <div class="checkbox-group" data-target="bx_touch" data-hidden="bx_touch__val">
+            <div class="row"><label>Clot section</label>
+    <div class="checkbox-group" data-target="asp_clot" data-hidden="asp_clot__val">
       <div class="cb-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));">
         
         <label class="cb-item">
-          <input type="checkbox" id="bx_touch__opt0" data-group="bx_touch" value="Adequate marrow elements present with findings similar to those seen in the aspirate smears.">
-          <span>Similar to aspirate</span>
+          <input type="checkbox" id="asp_clot__opt0" data-group="asp_clot" value="Marrow particles present with trilineage hematopoiesis, overall similar to aspirate findings.">
+          <span>Similar findings to aspirate</span>
         </label>
         
         <label class="cb-item">
-          <input type="checkbox" id="bx_touch__opt1" data-group="bx_touch" value="Limited marrow elements present.">
+          <input type="checkbox" id="asp_clot__opt1" data-group="asp_clot" value="Limited marrow particles present; findings appear similar to the aspirate smears.">
           <span>Limited</span>
         </label>
         
         <label class="cb-item">
-          <input type="checkbox" id="bx_touch__opt2" data-group="bx_touch" value="Predominantly blood with no significant marrow elements identified.">
+          <input type="checkbox" id="asp_clot__opt2" data-group="asp_clot" value="Predominantly blood clot with no significant marrow particles identified.">
           <span>Not contributory</span>
         </label>
         
       </div>
       <div class="cb-other">
         <span class="cb-other-label">Other:</span>
-        <input type="text" class="cb-other-input" id="bx_touch__other" data-group="bx_touch" placeholder="">
+        <input type="text" class="cb-other-input" id="asp_clot__other" data-group="asp_clot" placeholder="">
       </div>
-      <input type="hidden" id="bx_touch__val" />
+      <input type="hidden" id="asp_clot__val" />
     </div>
     </div>
           </div>
@@ -2027,7 +2027,8 @@ function generateReport() {
     value("asp_lymphs")&&"Lymphocytes: "+value("asp_lymphs"),
     value("asp_plasma")&&"Plasma cells: "+value("asp_plasma"),
     value("asp_mast")&&"Mast cells: "+value("asp_mast"),
-    value("asp_other_findings")
+    value("asp_other_findings"),
+    value("bx_touch")&&"Touch preparation: "+value("bx_touch")
   ].filter(Boolean).join("; ");
   paragraph("Other findings",otherAsp);
 
@@ -2066,7 +2067,7 @@ function generateReport() {
     value("bx_plasma")&&"Plasma cells: "+value("bx_plasma"),
     value("bx_infiltrate")&&"Abnormal infiltrate: "+value("bx_infiltrate"),
     value("bx_other"), value("bx_bone")&&"Bone: "+value("bx_bone"),
-    value("bx_touch")&&"Touch preparation: "+value("bx_touch")
+    value("asp_clot")&&"Clot section: "+value("asp_clot")
   ].filter(Boolean).join("; ");
   paragraph("Other findings",bxOther);
 
