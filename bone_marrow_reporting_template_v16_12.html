@@ -267,12 +267,12 @@
     <div class="row"><label>Patient age</label><input id="patientAge" type="number" min="0" max="120" placeholder="years; used for age-adjusted cellularity"></div>
     <div class="grid3">
       <div><label>Hb (g/L)</label><input id="hb"></div>
-      <div><label>WBC (x10E12/L)</label><input id="wbc"></div>
+      <div><label>WBC (x10E9/L)</label><input id="wbc"></div>
       <div><label>Platelets (x10E9/L)</label><input id="plt"></div>
 
       <div><label>MCV (fL)</label><input id="mcv"></div>
       <div><label>RDW (%)</label><input id="rdw"></div>
-      <div><label>RBC (x10E9/L)</label><input id="rbc"></div>
+      <div><label>RBC (x10E12/L)</label><input id="rbc"></div>
 
       <div><label>Neutrophils (x10E9/L)</label><input id="neutAbs"></div>
       <div><label>Lymphocytes (x10E9/L)</label><input id="lymphAbs"></div>
@@ -1376,11 +1376,11 @@ function generateReport(){
   r += 'PERIPHERAL BLOOD COUNT (Date: '+(v('cbcDate')||'[]')+'):\n';
   if(v('patientAge')) r += 'Age:\t'+v('patientAge')+' years\n';
   r += 'Hb:\t'+(v('hb')||'[]')+' g/L\n';
-  r += 'WBC:\t'+(v('wbc')||'[]')+' x10E12/L\n';
+  r += 'WBC:\t'+(v('wbc')||'[]')+' x10E9/L\n';
   r += 'Platelets:\t'+(v('plt')||'[]')+' x10E9/L\n';
   r += 'MCV:\t'+(v('mcv')||'[]')+' fL\n';
   r += 'RDW:\t'+(v('rdw')||'[]')+' %\n';
-  r += 'RBC:\t'+(v('rbc')||'[]')+' x10E9/L\n';
+  r += 'RBC:\t'+(v('rbc')||'[]')+' x10E12/L\n';
   r += 'Neutrophils:\t'+(v('neutAbs')||'[]')+' x10E9/L\n';
   r += 'Lymphocytes:\t'+(v('lymphAbs')||'[]')+' x10E9/L\n';
   r += 'Monocytes:\t'+(v('monoAbs')||'[]')+' x10E9/L\n';
