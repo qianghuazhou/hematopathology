@@ -98,6 +98,7 @@
 .choice-pill input{width:15px;height:15px;accent-color:#2563eb;flex:none}
 .choice-pill:has(input:checked){background:#eef6ff;border-color:#2563eb;color:#1d4ed8!important}
 .choice-pill:hover{border-color:#2563eb}
+.preset-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:12px 0}.preset-button{border:1px solid #dbe3ef;background:#fff;color:#334155;border-radius:8px;text-align:left;padding:9px;cursor:pointer;font-size:12px}.preset-button:hover,.preset-button.selected{background:#eef6ff;border-color:#2563eb;color:#1d4ed8}#morph-edit{width:100%;min-height:150px;border:1px solid #cbd5e1;border-radius:8px;padding:10px;font:13px/1.5 Arial,sans-serif}@media(max-width:600px){.preset-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -117,6 +118,7 @@
 
   <div class="layout">
     <div class="input-col">
+<div class="card" id="morph-presets"><h2>Diagnosis-based morphology starters</h2><div class="hint">Choose a subtype to populate an editable morphology paragraph. These are starting descriptions; confirm the findings in the actual sections. WHO5 terminology is used where applicable.</div><div class="preset-grid" id="preset-grid"></div><div class="field"><label for="morph-edit">Editable morphology</label><textarea id="morph-edit" rows="7" placeholder="Choose a starter above or write your own morphology..."></textarea></div><div class="check-row"><label><input type="checkbox" id="use-preset" checked> Use edited morphology in report</label></div><button type="button" id="clear-preset" class="copy-btn">Clear morphology starter</button></div>
 
       <!-- ================= EXCISIONAL FORM ================= -->
       <div id="form-exc" style="display:none;">
@@ -339,6 +341,8 @@ function cap(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
 
 function generate(){
   let paras = [];
+  const edited = document.getElementById("morph-edit").value.trim();
+  if(document.getElementById("use-preset").checked && edited){ document.getElementById("output").value = edited; return; }
 
   if (mode === 'exc'){
 
@@ -499,6 +503,18 @@ document.getElementById('copyBtn').onclick = () => {
     setTimeout(()=>{ btn.textContent='Copy'; btn.classList.remove('copied'); }, 1400);
   });
 };
+
+
+const morphologyPresets = [["Reactive lymph node","Sections show lymphoid tissue with preserved follicular and interfollicular compartments. Reactive secondary follicles contain polarized germinal centres with tingible body macrophages. The interfollicular areas contain predominantly small mature lymphocytes."],["Limited / nondiagnostic core","Sections show a limited amount of lymphoid tissue with predominantly small lymphocytes. The architecture is not adequately assessed in the available cores."],["Follicular lymphoma, low grade","Sections show an atypical nodular lymphoid proliferation with closely packed follicles and attenuated mantle zones. The follicles are composed predominantly of centrocytes with scattered centroblasts. Polarization is reduced and tingible body macrophages are inconspicuous."],["Follicular lymphoma, grade 3A","Sections show closely packed atypical follicles composed of increased centroblasts admixed with centrocytes. Mantle zones are attenuated and follicular polarization is reduced."],["Follicular lymphoma, grade 3B / follicular large B-cell","Sections show atypical follicles composed predominantly of large centroblastic cells with vesicular chromatin and prominent nucleoli. Centrocytes are not readily identified within the involved follicles."],["Follicular lymphoma with large-cell transformation","Sections show an atypical follicular lymphoid proliferation with an associated area of large atypical lymphoid cells. The large cells have vesicular chromatin and prominent nucleoli. The distribution and extent of the large-cell component are assessed in the available sections."],["Diffuse large B-cell lymphoma","Sections show a diffuse proliferation of large atypical lymphoid cells with irregular nuclear contours, vesicular chromatin, prominent nucleoli and moderate cytoplasm. Mitotic figures are readily identified."],["Marginal zone lymphoma","Sections show an atypical small to intermediate-sized lymphoid infiltrate with irregular nuclear contours, condensed chromatin and pale cytoplasm, including monocytoid forms. The infiltrate has a vaguely nodular to diffuse distribution."],["CD5-negative / CD10-negative B-cell lymphoma","Sections show an atypical small B-cell lymphoid infiltrate with a vaguely nodular to diffuse growth pattern. The cells are predominantly small to intermediate-sized with slightly irregular nuclei and condensed chromatin. The available tissue is limited for architectural assessment."],["Mantle cell lymphoma","Sections show a relatively monotonous proliferation of small to intermediate-sized lymphoid cells with irregular nuclear contours, condensed chromatin, inconspicuous nucleoli and scant cytoplasm."],["CLL / SLL","Sections show a proliferation of small mature lymphocytes with round nuclei, clumped chromatin and scant cytoplasm. Pale proliferation centres containing larger prolymphocytes and paraimmunoblasts are identified."],["Lymphoplasmacytic lymphoma","Sections show an infiltrate of small lymphocytes, plasmacytoid lymphocytes and plasma cells with variable maturation. The lymphoid cells have condensed chromatin and scant cytoplasm."],["Burkitt lymphoma","Sections show a diffuse proliferation of monotonous intermediate-sized lymphoid cells with round nuclei, multiple small nucleoli and basophilic cytoplasm. Numerous mitotic figures, apoptotic bodies and tingible body macrophages produce a starry-sky pattern."],["T-cell / NK-cell lymphoma, unspecified","Sections show an atypical lymphoid infiltrate composed of variably sized lymphoid cells with irregular nuclear contours. The growth pattern and inflammatory background are described based on the available sections."],["Nodal TFH-cell lymphoma","Sections show an atypical lymphoid infiltrate of small to intermediate-sized lymphocytes with irregular nuclei, associated with prominent arborizing vessels and an expanded follicular dendritic cell network."],["Anaplastic large cell lymphoma","Sections show a proliferation of large pleomorphic lymphoid cells with irregular, occasionally horseshoe-shaped nuclei, prominent nucleoli and abundant cytoplasm."],["Classic Hodgkin lymphoma, unclassified","Sections show scattered large atypical cells with Hodgkin/Reed-Sternberg-like morphology, prominent nucleoli and abundant cytoplasm in a mixed inflammatory background."],["Classic Hodgkin lymphoma, nodular sclerosis","Sections show a nodular lymphoid infiltrate separated by fibrous bands. Scattered large atypical cells with lacunar-type morphology and prominent nucleoli are present within a mixed inflammatory background."],["Classic Hodgkin lymphoma, mixed cellularity","Sections show scattered large mononuclear and binucleated Hodgkin/Reed-Sternberg-like cells in a polymorphous background of small lymphocytes, histiocytes, eosinophils and plasma cells."],["Classic Hodgkin lymphoma, lymphocyte rich","Sections show a lymphocyte-rich infiltrate with scattered large atypical Hodgkin/Reed-Sternberg-like cells with irregular nuclei and prominent nucleoli."],["Classic Hodgkin lymphoma, lymphocyte depleted","Sections show numerous large pleomorphic atypical cells, including Hodgkin/Reed-Sternberg-like forms, with relatively few background small lymphocytes."],["Nodular lymphocyte-predominant B-cell lymphoma (WHO5)","Sections show a nodular lymphoid proliferation containing scattered large lymphocyte-predominant (LP) cells with multilobated nuclei and vesicular chromatin in a background of small lymphocytes."]];
+const presetGrid = document.getElementById('preset-grid');
+morphologyPresets.forEach(([name, description], index)=>{
+ const b=document.createElement('button'); b.type='button';b.className='preset-button';b.textContent=name;
+ b.onclick=()=>{document.getElementById('morph-edit').value=description;document.getElementById('use-preset').checked=true;presetGrid.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');generate();};
+ presetGrid.appendChild(b);
+});
+document.getElementById('morph-edit').addEventListener('input',generate);
+document.getElementById('use-preset').addEventListener('change',generate);
+document.getElementById('clear-preset').onclick=()=>{document.getElementById('morph-edit').value='';presetGrid.querySelectorAll('button').forEach(x=>x.classList.remove('selected'));generate();};
 
 generate();
 </script>
