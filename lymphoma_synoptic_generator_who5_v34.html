@@ -494,7 +494,7 @@ select option{
 
       <div class="card">
         <h2>Pathology interpretation options <span class="pill">optional</span></h2>
-        <label><input type="checkbox" id="autoCommentChk" checked><span class="lbltxt">Add automatic pathology comment based on diagnosis/IHC</span></label>
+        <label><input type="checkbox" id="autoCommentChk" checked><span class="lbltxt">Add concise interpretive comment (avoid repeating IHC/synoptic findings)</span></label>
         <label><input type="checkbox" id="transformationChk"><span class="lbltxt">Add transformation comment</span></label>
         <input type="text" id="transformationTxt" class="hidden" placeholder="e.g., transformed from follicular lymphoma / marginal zone lymphoma..." />
         <label><input type="checkbox" id="limitedSampleChk"><span class="lbltxt">Limited/suboptimal sample wording</span></label>
@@ -797,14 +797,13 @@ Sections show lymph node architecture effaced by a diffuse proliferation of larg
       const t = clean(s);
       if (!t) return "See comment.";
       if (/see comment\.?$/i.test(t)) return t;
-    return ensureTerminalPeriod(t) + "\n- See comment.";
+    return ensureTerminalPeriod(t) + " See comment.";
     }
 
     function buildDxExtraLines(){
       const extraRaw = clean($("#dxAddComment").value);
       const lines = extraRaw
         ? extraRaw.split("\n").map(s => clean(s)).filter(Boolean).map(line => {
-            if (line.startsWith("-")) return `- ${clean(line.slice(1))}`;
             if (line.startsWith("-")) return `- ${clean(line.slice(1))}`;
             return `- ${line}`;
           })
@@ -1604,45 +1603,33 @@ const IHC_CATEGORIES = [
     }
 
     function transformationComment(){
-      if (!$("#transformationChk") || !$("#transformationChk").checked) return "";
-      const t = clean($("#transformationTxt").value);
-      return t ? "The findings support large-cell transformation (" + t + "). Clinical correlation is recommended." :
-                 "The findings support large-cell transformation. Clinical correlation is recommended.";
+      if (!$("#transformationChk")?.checked) return "";
+      const detail = clean($("#transformationTxt").value);
+      return detail ? "Findings support large-cell transformation (" + detail + ")." : "Findings support large-cell transformation.";
     }
 
+    // Preferred concise reporting: comments are interpretive, not a repeat of the synoptic/IHC.
     function autoPathologyComment(){
       if ($("#autoCommentChk") && !$("#autoCommentChk").checked) return "";
       const h = (buildHistType() || "").toLowerCase();
       const lines = [];
-
-      if ($("#limitedSampleChk") && $("#limitedSampleChk").checked) {
-        lines.push("The biopsy is limited by small size/crush artifact and may not fully represent the lesion. Excisional biopsy or additional tissue may be considered if clinically indicated.");
+      const limited = !!$("#limitedSampleChk")?.checked;
+      if (limited) {
+        lines.push("Limited tissue and architecture preclude full assessment. Excisional biopsy is recommended if clinically feasible.");
       }
-
+      // Do not automatically recommend tests already documented in the synoptic report.
+      // Avoid generic clinical-correlation statements and automatic negative transformation claims.
       if (h.includes("diffuse large b-cell lymphoma") || h.includes("high-grade b-cell lymphoma")) {
-        lines.push("Correlation with MYC, BCL2, and BCL6 rearrangement studies is recommended if clinically indicated.");
+        // Hans and double-expressor results are relevant only to large B-cell lymphoma.
+        const hans = hansInterpretation();
+        const de = doubleExpressorInterpretation();
+        if (hans) lines.push(hans.replace("non-GCB/ABC phenotype", "non-GCB phenotype"));
+        if (de && !de.includes("incomplete")) lines.push(de
+          .replace("MYC/BCL2 double-expressor phenotype is present by IHC cutoffs (MYC >=40%, BCL2 >=50%).", "MYC/BCL2 double-expressor phenotype.")
+          .replace("MYC/BCL2 double-expressor phenotype is not demonstrated by IHC cutoffs (MYC >=40%, BCL2 >=50%).", "MYC/BCL2 double-expressor phenotype not demonstrated."));
       }
-      if (h.includes("follicular lymphoma")) {
-        lines.push("Correlation with grading, follicular/diffuse growth pattern, and clinical/radiologic findings is recommended.");
-      }
-      if (h.includes("mantle cell lymphoma")) {
-        lines.push("Correlation with cyclin D1/SOX11 expression and CCND1 rearrangement studies is recommended if clinically indicated.");
-      }
-      if (h.includes("marginal zone lymphoma") || h.includes("malt lymphoma")) {
-        lines.push("No overt large-cell transformation is identified in the submitted material unless otherwise stated.");
-      }
-      if (h.includes("ptld")) {
-        lines.push("Correlation with transplant history, EBV studies, immunosuppression status, and clinical findings is recommended.");
-      }
-      if (h.includes("t-cell") || h.includes("nk-cell") || h.includes("tfh") || h.includes("anaplastic large cell")) {
-        lines.push("Correlation with flow cytometry, T-cell receptor clonality, cytogenetic/molecular studies, and clinical findings is recommended.");
-      }
-
-      const hans = hansInterpretation();
-      const de = doubleExpressorInterpretation();
-      const viral = viralInterpretation();
       const trans = transformationComment();
-      [hans, de, viral, trans].filter(Boolean).forEach(x => lines.push(x));
+      if (trans) lines.push(trans);
       return lines.join(" ");
     }
 
