@@ -1912,5 +1912,37 @@ $("#btnGen").addEventListener("click", () => {
   
 });
 </script>
+
+<!-- Concise lymphoma reporting companion: independent of Delabie generator -->
+<section class="card" id="zhou-report-style" style="margin:18px 0">
+<h2>Concise lymphoma reporting — preferred style</h2>
+<p class="hint">Short diagnostic lines, focused comments, cautious classification of limited biopsies. This companion does not replace the WHO5 synoptic fields.</p>
+<label for="zhou-template">Reporting situation</label>
+<select id="zhou-template">
+<option value="mzl">CD5-negative/CD10-negative B-cell lymphoma — favor MZL</option>
+<option value="limited">Low-grade B-cell lymphoma — limited tissue, unclassified</option>
+<option value="discordant">Cytospin large cells not confirmed on tissue</option>
+</select>
+<label for="zhou-dx">Diagnosis (editable)</label>
+<textarea id="zhou-dx" rows="3"></textarea>
+<label for="zhou-comment">Comment (editable)</label>
+<textarea id="zhou-comment" rows="6"></textarea>
+<p class="hint">Review morphology, pending stains and clinical findings before signing. Do not infer transformation from cytospin size alone.</p>
+<button type="button" id="zhou-copy">Copy diagnosis and comment</button>
+</section>
+<script>
+(function(){
+const templates={
+mzl:{dx:"- LOW-GRADE B-CELL LYMPHOMA, FAVOR MARGINAL ZONE LYMPHOMA. See comment.",comment:"The biopsy shows a small to intermediate-sized B-cell lymphoma with a CD5-negative, CD10-negative phenotype, favoring marginal zone lymphoma. Limited tissue and architecture preclude definitive subclassification. The differential includes lymphoplasmacytic lymphoma. Excisional biopsy is recommended if clinically feasible. MYD88 mutation analysis may be considered."},
+limited:{dx:"- LOW-GRADE B-CELL LYMPHOMA, NOT FURTHER CLASSIFIED. See comment.",comment:"The biopsy shows a low-grade B-cell lymphoma. Limited tissue and architecture preclude definitive subclassification. Excisional biopsy is recommended if clinically feasible."},
+discordant:{dx:"- LOW-GRADE B-CELL LYMPHOMA. See comment.",comment:"Flow cytometry reports intermediate to large-sized lymphoid cells on cytospin, but no sheets of large cells are identified in the tissue biopsy. Limited sampling does not entirely exclude an unsampled large-cell component. Excisional biopsy is recommended if clinically feasible."}
+};
+const sel=document.getElementById("zhou-template"),dx=document.getElementById("zhou-dx"),cm=document.getElementById("zhou-comment");
+function load(){const t=templates[sel.value];dx.value=t.dx;cm.value=t.comment;}
+sel.addEventListener("change",load);load();
+document.getElementById("zhou-copy").addEventListener("click",function(){navigator.clipboard.writeText("DIAGNOSIS\n"+dx.value+"\n\nCOMMENT\n"+cm.value);});
+})();
+</script>
+
 </body>
 </html>
