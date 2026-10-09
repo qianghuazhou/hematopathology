@@ -555,8 +555,8 @@ Sections show lymph node architecture effaced by a diffuse proliferation of larg
         <label>
           <span class="lbltxt" style="min-width:150px">Output style</span>
           <select id="ihcMode" style="margin-left:auto; min-width:220px; max-width:220px; flex:0 0 220px;">
-            <option value="descriptive">Descriptive list</option>
-            <option value="summary">One-line immunophenotype</option>
+            <option value="summary">Natural-language paragraph (preferred)</option>
+            <option value="descriptive">Marker-by-marker list</option>
           </select>
         </label>
 
@@ -1192,7 +1192,7 @@ const IHC_CATEGORIES = [
       if (!result && !pct) return "";
 
       if (marker.id === "ki67"){
-        return pct ? `Ki67 proliferation index: ${pct}%.` : "";
+        return pct ? `Ki-67 proliferation index is ${pct}%.` : "";
       }
       if (marker.special === "fdc"){
         if (result === "+") return `${marker.label}: Highlights follicular dendritic cell meshworks.`;
@@ -1250,7 +1250,7 @@ const IHC_CATEGORIES = [
       const bcl6Pos = isPositiveByCutoff(bcl6);
       const mum1Pos = isPositiveByCutoff(mum1);
       const call = cd10Pos ? "GCB phenotype" : ((bcl6Pos && !mum1Pos) ? "GCB phenotype" : "Non-GCB phenotype");
-      return `Hans algorithm: ${call}.`;
+      return `${call} by Hans algorithm.`;
     }
 
     function buildDoubleExpressorLine(){
@@ -1262,7 +1262,10 @@ const IHC_CATEGORIES = [
       if (!mycPct && !bcl2Pct) return "";
       const mycPos = isPositiveByCutoff(myc);
       const bcl2Pos = isPositiveByCutoff(bcl2);
-      return `Double expressor status: ${mycPos && bcl2Pos ? "Present" : "Not identified"} (MYC ${mycPct || "NA"}%, BCL2 ${bcl2Pct || "NA"}%).`;
+      if (!mycPct || !bcl2Pct) return "";
+      const hist = (buildHistType() || "").toLowerCase();
+      if (!(hist.includes("large b-cell") || hist.includes("high-grade b-cell"))) return "";
+      return `MYC/BCL2 double-expressor phenotype ${mycPos && bcl2Pos ? "present" : "not demonstrated"} (MYC ${mycPct}%, BCL2 ${bcl2Pct}%).`;
     }
 
     function buildSummaryLine(){
@@ -1272,7 +1275,7 @@ const IHC_CATEGORIES = [
 
       const formatMarkerToken = (marker, suffix) => {
         const pct = getMarkerPercent(marker);
-        return `${marker.label}${pct ? ` ${pct}%` : ""}${suffix}`;
+        return `${marker.label}${suffix}`;
       };
 
       // Include every selected checkbox-based marker in the one-line style.
@@ -1294,10 +1297,10 @@ const IHC_CATEGORIES = [
       const sentences = [];
       if (positive.length || partial.length || negative.length){
         const clauses = [];
-        if (positive.length) clauses.push(positive.join(", "));
-        if (partial.length) clauses.push(partial.join(", "));
-        if (negative.length) clauses.push(negative.join(", "));
-        sentences.push(`The atypical cells are ${clauses.join("; ")}.`);
+        if (positive.length) clauses.push("positive for " + joinNatural(positive.map(x => x.replace(/\\+$/, ""))));
+        if (partial.length) clauses.push("variably positive for " + joinNatural(partial.map(x => x.replace(/\\+\\-$/, ""))));
+        if (negative.length) clauses.push("negative for " + joinNatural(negative.map(x => x.replace(/-$/, ""))));
+        sentences.push(`The atypical cells are ${clauses.join(", and ")}.`);
       }
 
       const cd21 = getMarkerDef("cd21");
@@ -1337,7 +1340,7 @@ const IHC_CATEGORIES = [
     function syncPanelVisibility(){}
 
     function buildIHCText(){
-      const mode = $("#ihcMode") ? $("#ihcMode").value : "descriptive";
+      const mode = $("#ihcMode") ? $("#ihcMode").value : "summary";
       const extra = clean($("#ihcExtra").value);
       const lines = ["IMMUNOHISTOCHEMISTRY", ""];
 
@@ -1767,7 +1770,7 @@ lines.push("Specimen:");
         $$(`input[name="${g}"]`).forEach(x => x.dispatchEvent(new Event("change")));
       });
       syncHistOtherBoxes();
-      if ($("#ihcMode")) $("#ihcMode").value = "descriptive";
+      if ($("#ihcMode")) $("#ihcMode").value = "summary";
       $$('.marker-row input[type="number"]').forEach(i => i.value = "");
       $$('.marker-row input[type="text"]').forEach(i => i.value = "");
       $$('.marker-row select').forEach(i => i.value = "");
