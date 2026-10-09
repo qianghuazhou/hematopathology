@@ -1451,56 +1451,81 @@ const IHC_CATEGORIES = [
     function optimizedMorphologyTemplate(hist){
       const h = clean(hist).toLowerCase();
       if (!h) return "";
-
-      if (h.includes("diffuse large b-cell lymphoma") || h.includes("large b-cell lymphoma") || h.includes("high-grade b-cell lymphoma")){
-        return "Sections show effacement of the tissue architecture by a diffuse proliferation of large atypical lymphoid cells. The neoplastic cells have vesicular chromatin, irregular nuclear contours, variably conspicuous nucleoli, and moderate amounts of cytoplasm. Mitotic figures and apoptotic bodies are readily identified. Areas of necrosis are not prominent unless otherwise specified.";
+      // Editable morphology starters only. Avoid asserting transformation, necrosis,
+      // architectural preservation, grade or a background component without review.
+      if (h.includes("follicular") && (h.includes("transformation") || h.includes("transformed") || h.includes("diffuse large b-cell"))) {
+        return "Sections show follicular lymphoma with an associated area of large atypical B-cell proliferation. The large cells have vesicular chromatin and prominent nucleoli. The extent and growth pattern of the large-cell component should be described based on the tissue sections.";
       }
-      if (h.includes("follicular lymphoma")){
-        return "Sections show an atypical follicular lymphoid proliferation with closely packed follicles and attenuated mantle zones. The follicles are composed predominantly of centrocytes with admixed centroblasts. Tingible body macrophages are reduced and follicular polarization is not well developed. The interfollicular areas show scattered small lymphocytes.";
+      if (h.includes("diffuse variant") && h.includes("follicular")) {
+        return "Sections show an atypical B-cell proliferation with predominantly diffuse growth and focal follicular structures. The cells are mainly small to intermediate-sized with irregular nuclear contours and condensed chromatin.";
       }
-      if (h.includes("mantle cell lymphoma")){
-        return "Sections show architectural effacement by a monotonous proliferation of small to medium-sized atypical lymphoid cells arranged in diffuse, vaguely nodular, or mantle-zone patterns. The cells have irregular nuclear contours, condensed chromatin, inconspicuous nucleoli, and scant cytoplasm. Large cell transformation is not evident unless otherwise specified.";
+      if (h.includes("follicular") && (/3b|grade 3b|follicular large b-cell/.test(h))) {
+        return "Sections show an atypical follicular lymphoid proliferation composed predominantly of large centroblastic cells with vesicular chromatin and prominent nucleoli. Centrocytes are not readily identified in the involved follicles.";
       }
-      if (h.includes("chronic lymphocytic") || h.includes("small lymphocytic lymphoma")){
-        return "Sections show involvement by a proliferation of small mature lymphoid cells with round to slightly irregular nuclei, clumped chromatin, inconspicuous nucleoli, and scant cytoplasm. Pale proliferation centers/paraimmunoblast-rich areas may be present. Large cell transformation is not evident unless otherwise specified.";
+      if (h.includes("follicular") && (/3a|grade 3a/.test(h))) {
+        return "Sections show closely packed atypical follicles with attenuated mantle zones and loss of polarization. The follicles contain increased centroblasts admixed with centrocytes.";
       }
-      if (h.includes("marginal zone lymphoma") || h.includes("malt lymphoma")){
-        return "Sections show an atypical small B-cell lymphoid infiltrate with expansion of marginal zone/interfollicular areas. The infiltrate is composed of small to medium-sized lymphoid cells with slightly irregular nuclei and pale cytoplasm, with variable plasmacytic differentiation. Residual reactive follicles may be present. Large cell transformation is not evident unless otherwise specified.";
+      if (h.includes("follicular")) {
+        return "Sections show a predominantly nodular lymphoid proliferation with closely packed atypical follicles and attenuated mantle zones. The follicles are composed mainly of centrocytes with scattered centroblasts. Polarization is not evident and tingible body macrophages are decreased.";
       }
-      if (h.includes("lymphoplasmacytic lymphoma")){
-        return "Sections show an infiltrate of small lymphocytes, plasmacytoid lymphocytes, and plasma cells in an interstitial, nodular, or diffuse pattern. Dutcher bodies may be present. Large transformed cells are not increased unless otherwise specified.";
+      if (h.includes("t-cell/histiocyte-rich large b-cell")) {
+        return "Sections show scattered large atypical lymphoid cells in a background rich in small lymphocytes and histiocytes. The large cells have vesicular chromatin and prominent nucleoli.";
       }
-      if (h.includes("hairy cell leukemia") || h.includes("hairy cell leukaemia")){
-        return "Sections show involvement by a small mature B-cell infiltrate with widely spaced cells and abundant pale cytoplasm. The infiltrate may have an interstitial or diffuse pattern. Residual hematopoiesis is variably decreased depending on the extent of involvement.";
+      if (h.includes("diffuse large b-cell") || h.includes("large b-cell lymphoma") || h.includes("high-grade b-cell")) {
+        return "Sections show a diffuse proliferation of large atypical lymphoid cells with irregular nuclear contours, vesicular chromatin and prominent nucleoli. Mitotic figures are readily identified.";
       }
-      if (h.includes("burkitt")){
-        return "Sections show a diffuse proliferation of monotonous medium-sized atypical lymphoid cells with round nuclei, multiple small nucleoli, and deeply basophilic cytoplasm. Numerous mitotic figures and apoptotic bodies are present, with a starry-sky pattern created by tingible body macrophages.";
+      if (h.includes("mantle cell")) {
+        return "Sections show a proliferation of relatively monotonous small to intermediate-sized lymphoid cells with irregular nuclear contours, condensed chromatin, inconspicuous nucleoli and scant cytoplasm.";
       }
-      if (h.includes("plasmablastic lymphoma")){
-        return "Sections show a diffuse proliferation of large atypical plasmablastic cells with immunoblastic/plasmablastic morphology, prominent nucleoli, and moderate to abundant cytoplasm. Mitotic activity and apoptotic bodies are increased. Necrosis may be present.";
+      if (h.includes("chronic lymphocytic") || h.includes("small lymphocytic")) {
+        return "Sections show a proliferation of small mature lymphocytes with round nuclei, clumped chromatin and scant cytoplasm. Pale proliferation centres containing larger prolymphocytes and paraimmunoblasts are identified.";
       }
-      if (h.includes("plasma cell myeloma") || h.includes("plasmacytoma")){
-        return "Sections show sheets or aggregates of plasma cells with variable cytologic atypia. The plasma cells show eccentric nuclei, clumped chromatin, and variable nucleoli. Correlation with CD138 and light-chain studies is required to assess extent and clonality.";
+      if (h.includes("marginal zone") || h.includes("malt lymphoma")) {
+        return "Sections show an atypical lymphoid infiltrate composed predominantly of small to intermediate-sized cells with slightly irregular nuclei, condensed chromatin and pale cytoplasm, including monocytoid forms. The infiltrate has a nodular to diffuse distribution.";
       }
-      if (h.includes("classical hodgkin") || h.includes("classic hodgkin")){
-        return "Sections show an atypical lymphoid infiltrate containing scattered large atypical cells with Hodgkin/Reed-Sternberg-like morphology in a mixed inflammatory background. The large cells have abundant cytoplasm, vesicular chromatin, and prominent nucleoli. Correlation with immunohistochemistry is required for classification.";
+      if (h.includes("lymphoplasmacytic")) {
+        return "Sections show an infiltrate of small lymphocytes, plasmacytoid lymphocytes and plasma cells with variable maturation. The lymphoid cells have condensed chromatin and scant cytoplasm.";
       }
-      if (h.includes("nodular lymphocyte predominant hodgkin")){
-        return "Sections show a nodular lymphoid proliferation with scattered large atypical lymphoid cells with lymphocyte-predominant morphology in a background of small lymphocytes and histiocytes. The large cells have multilobated nuclei, vesicular chromatin, and small nucleoli. Correlation with immunohistochemistry is required for classification.";
+      if (h.includes("hairy cell")) {
+        return "Sections show an infiltrate of small mature lymphoid cells with round to oval nuclei and abundant pale cytoplasm, giving a widely spaced appearance.";
       }
-      if (h.includes("t-cell") || h.includes("nk-cell") || h.includes("tfh") || h.includes("anaplastic large cell")){
-        return "Sections show an atypical lymphoid infiltrate with architectural effacement and a proliferation of atypical T/NK-lineage cells. The cells vary from small to large with irregular nuclear contours and variable cytoplasm. The background may include admixed inflammatory cells and vascular proliferation, depending on subtype. Correlation with immunohistochemistry, flow cytometry, and molecular studies is required for final classification.";
+      if (h.includes("burkitt")) {
+        return "Sections show a diffuse proliferation of monotonous intermediate-sized lymphoid cells with round nuclei, multiple small nucleoli and basophilic cytoplasm. Numerous mitotic figures, apoptotic bodies and tingible body macrophages produce a starry-sky pattern.";
       }
-      if (h.includes("lymphoblastic")){
-        return "Sections show a diffuse infiltrate of immature-appearing lymphoid cells with high nuclear-to-cytoplasmic ratio, fine chromatin, inconspicuous nucleoli, and scant cytoplasm. Mitotic figures are increased. Correlation with TdT and lineage-associated markers is required for classification.";
+      if (h.includes("plasmablastic")) {
+        return "Sections show a proliferation of large atypical cells with plasmablastic morphology, prominent nucleoli and moderate to abundant cytoplasm. Mitotic figures and apoptotic bodies are readily identified.";
       }
-      if (h.includes("histiocytic") || h.includes("dendritic") || h.includes("langerhans")){
-        return "Sections show an atypical histiocytic/dendritic cell proliferation. The cells show variable cytologic atypia with irregular nuclei and pale to eosinophilic cytoplasm. The background inflammatory component is variable. Correlation with lineage-specific immunohistochemistry is required for classification.";
+      if (h.includes("plasma cell myeloma") || h.includes("plasmacytoma")) {
+        return "Sections show aggregates of plasma cells with eccentric nuclei, clumped chromatin and variable nucleoli.";
       }
-      if (h.includes("cannot be assessed") || h.includes("not further classified")){
-        return "Sections show an atypical lymphoid proliferation. The available material is limited and/or the features are insufficient for definitive subclassification on morphology alone. Correlation with immunohistochemistry, flow cytometry, cytogenetic/molecular studies, and clinical findings is required.";
+      if (h.includes("nodular lymphocyte predominant")) {
+        return "Sections show a nodular lymphoid proliferation containing scattered large lymphocyte-predominant (LP) cells with multilobated nuclei and vesicular chromatin in a background of small lymphocytes.";
       }
-      return "Sections show an atypical lymphoid proliferation. The morphologic features should be interpreted together with the immunophenotypic and ancillary study findings for final classification.";
+      if (h.includes("classical hodgkin") || h.includes("classic hodgkin")) {
+        return "Sections show scattered large atypical cells with Hodgkin/Reed-Sternberg morphology, prominent nucleoli and abundant cytoplasm in a mixed inflammatory background.";
+      }
+      if (h.includes("anaplastic large cell")) {
+        return "Sections show a proliferation of large pleomorphic lymphoid cells with irregular, sometimes horseshoe-shaped nuclei, prominent nucleoli and abundant cytoplasm.";
+      }
+      if (h.includes("tfh") || h.includes("angioimmunoblastic")) {
+        return "Sections show an atypical lymphoid proliferation with small to intermediate-sized lymphocytes with irregular nuclei, associated with prominent arborizing vessels and an expanded follicular dendritic cell network.";
+      }
+      if (h.includes("extranodal nk/t") || h.includes("nasal type")) {
+        return "Sections show an atypical lymphoid infiltrate with irregular nuclear contours and an angiocentric distribution. Necrosis should be described if identified.";
+      }
+      if (h.includes("t-cell") || h.includes("nk-cell")) {
+        return "Sections show an atypical lymphoid infiltrate composed of variable-sized lymphoid cells with irregular nuclear contours. Describe the distribution, vascular changes and inflammatory background where present.";
+      }
+      if (h.includes("lymphoblastic")) {
+        return "Sections show a diffuse proliferation of immature-appearing lymphoid cells with high nuclear-to-cytoplasmic ratios, fine chromatin and scant cytoplasm. Mitotic figures are frequent.";
+      }
+      if (h.includes("histiocytic") || h.includes("dendritic") || h.includes("langerhans")) {
+        return "Sections show an atypical histiocytic or dendritic cell proliferation with irregular nuclei and pale to eosinophilic cytoplasm.";
+      }
+      if (h.includes("not further classified") || h.includes("cannot be assessed")) {
+        return "Sections show a limited sample of lymphoid tissue with an atypical lymphoid infiltrate. The architecture is not adequately assessed in the available tissue.";
+      }
+      return "Sections show an atypical lymphoid proliferation. Describe the growth pattern, cell size, cytologic features and background.";
     }
 
     function buildMorphIHCText(){
