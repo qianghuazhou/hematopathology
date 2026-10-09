@@ -91,6 +91,13 @@
   .copy-btn:hover{ background:#d3e2e5; }
   .copy-btn.copied{ background:#2b5a63; color:#fff; }
   .hint{ color:var(--slate); font-size:11.5px; margin-top:8px; }
+
+/* Compact, directly selectable morphology choices */
+.choice-grid{display:flex;flex-wrap:wrap;gap:6px}
+.choice-pill{display:inline-flex!important;align-items:center;gap:6px;padding:7px 10px!important;border:1px solid #d9dee4;border-radius:8px;background:#fff;cursor:pointer;font-size:12.5px!important;margin:0!important;color:#1c2430!important}
+.choice-pill input{width:15px;height:15px;accent-color:#2563eb;flex:none}
+.choice-pill:has(input:checked){background:#eef6ff;border-color:#2563eb;color:#1d4ed8!important}
+.choice-pill:hover{border-color:#2563eb}
 </style>
 </head>
 <body>
@@ -104,41 +111,29 @@
   </header>
 
   <div class="specimen-toggle">
-    <button id="btn-exc" class="active">Excisional / Incisional</button>
-    <button id="btn-core">Core Needle</button>
+    <button id="btn-exc">Excisional / Incisional</button>
+    <button id="btn-core" class="active">Core Needle</button>
   </div>
 
   <div class="layout">
     <div class="input-col">
 
       <!-- ================= EXCISIONAL FORM ================= -->
-      <div id="form-exc">
+      <div id="form-exc" style="display:none;">
 
         <div class="card">
           <h2>Architecture</h2>
           <div class="field">
             <label>Nodal architecture</label>
-            <select data-k="arch">
-              <option value="preserved">preserved</option>
-              <option value="partially effaced">partially effaced</option>
-              <option value="diffusely effaced">diffusely effaced</option>
-            </select>
+            <div class="choice-grid" data-k="arch" role="group" aria-label="arch"><label class="choice-pill"><input type="checkbox" data-choice="arch" value="preserved"><span>preserved</span></label><label class="choice-pill"><input type="checkbox" data-choice="arch" value="partially effaced"><span>partially effaced</span></label><label class="choice-pill"><input type="checkbox" data-choice="arch" value="diffusely effaced"><span>diffusely effaced</span></label></div>
           </div>
           <div class="field">
             <label>Capsule</label>
-            <select data-k="capsule">
-              <option value="intact">intact</option>
-              <option value="thickened">thickened</option>
-              <option value="infiltrated by adjacent tissue">infiltrated by adjacent tissue</option>
-            </select>
+            <div class="choice-grid" data-k="capsule" role="group" aria-label="capsule"><label class="choice-pill"><input type="checkbox" data-choice="capsule" value="intact"><span>intact</span></label><label class="choice-pill"><input type="checkbox" data-choice="capsule" value="thickened"><span>thickened</span></label><label class="choice-pill"><input type="checkbox" data-choice="capsule" value="infiltrated by adjacent tissue"><span>infiltrated by adjacent tissue</span></label></div>
           </div>
           <div class="field">
             <label>Extranodal extension</label>
-            <select data-k="ene">
-              <option value="No">No</option>
-              <option value="Focal">Focal</option>
-              <option value="Extensive">Extensive</option>
-            </select>
+            <div class="choice-grid" data-k="ene" role="group" aria-label="ene"><label class="choice-pill"><input type="checkbox" data-choice="ene" value="No"><span>No</span></label><label class="choice-pill"><input type="checkbox" data-choice="ene" value="Focal"><span>Focal</span></label><label class="choice-pill"><input type="checkbox" data-choice="ene" value="Extensive"><span>Extensive</span></label></div>
           </div>
         </div>
 
@@ -146,28 +141,15 @@
           <h2>Follicles</h2>
           <div class="field">
             <label>Number / distribution</label>
-            <select data-k="follNum">
-              <option value="normal in number and distribution">normal in number and distribution</option>
-              <option value="increased in number">increased in number</option>
-              <option value="decreased in number">decreased in number</option>
-              <option value="absent">absent</option>
-            </select>
+            <div class="choice-grid" data-k="follNum" role="group" aria-label="follNum"><label class="choice-pill"><input type="checkbox" data-choice="follNum" value="normal in number and distribution"><span>normal in number and distribution</span></label><label class="choice-pill"><input type="checkbox" data-choice="follNum" value="increased in number"><span>increased in number</span></label><label class="choice-pill"><input type="checkbox" data-choice="follNum" value="decreased in number"><span>decreased in number</span></label><label class="choice-pill"><input type="checkbox" data-choice="follNum" value="absent"><span>absent</span></label></div>
           </div>
           <div class="field">
             <label>Germinal center quality</label>
-            <select data-k="follQuality">
-              <option value="reactive germinal centers with tingible body macrophages and polarization">reactive, tingible body macrophages, polarized</option>
-              <option value="expanded, coalescent, and back-to-back germinal centers">expanded, coalescent, back-to-back</option>
-              <option value="attenuated or absent mantle zones">attenuated / absent mantle zones</option>
-              <option value="follicle lysis">follicle lysis</option>
-            </select>
+            <div class="choice-grid" data-k="follQuality" role="group" aria-label="follQuality"><label class="choice-pill"><input type="checkbox" data-choice="follQuality" value="reactive germinal centers with tingible body macrophages and polarization"><span>reactive, tingible body macrophages, polarized</span></label><label class="choice-pill"><input type="checkbox" data-choice="follQuality" value="expanded, coalescent, and back-to-back germinal centers"><span>expanded, coalescent, back-to-back</span></label><label class="choice-pill"><input type="checkbox" data-choice="follQuality" value="attenuated or absent mantle zones"><span>attenuated / absent mantle zones</span></label><label class="choice-pill"><input type="checkbox" data-choice="follQuality" value="follicle lysis"><span>follicle lysis</span></label></div>
           </div>
           <div class="field">
             <label>Atypical / monotonous follicles</label>
-            <select data-k="follAtypia">
-              <option value="No">No</option>
-              <option value="Occasional">Occasional</option>
-            </select>
+            <div class="choice-grid" data-k="follAtypia" role="group" aria-label="follAtypia"><label class="choice-pill"><input type="checkbox" data-choice="follAtypia" value="No"><span>No</span></label><label class="choice-pill"><input type="checkbox" data-choice="follAtypia" value="Occasional"><span>Occasional</span></label></div>
           </div>
         </div>
 
@@ -175,32 +157,19 @@
           <h2>Interfollicular / Paracortex</h2>
           <div class="field">
             <label>Volume</label>
-            <select data-k="paraVol">
-              <option value="normal in volume">normal in volume</option>
-              <option value="expanded">expanded</option>
-            </select>
+            <div class="choice-grid" data-k="paraVol" role="group" aria-label="paraVol"><label class="choice-pill"><input type="checkbox" data-choice="paraVol" value="normal in volume"><span>normal in volume</span></label><label class="choice-pill"><input type="checkbox" data-choice="paraVol" value="expanded"><span>expanded</span></label></div>
           </div>
           <div class="field">
             <label>Composition</label>
-            <select data-k="paraComp">
-              <option value="small mature lymphocytes">small mature lymphocytes</option>
-              <option value="mixed small lymphocytes, histiocytes, and immunoblasts">mixed small lymphocytes, histiocytes, immunoblasts</option>
-              <option value="atypical lymphoid cells">atypical lymphoid cells</option>
-            </select>
+            <div class="choice-grid" data-k="paraComp" role="group" aria-label="paraComp"><label class="choice-pill"><input type="checkbox" data-choice="paraComp" value="small mature lymphocytes"><span>small mature lymphocytes</span></label><label class="choice-pill"><input type="checkbox" data-choice="paraComp" value="mixed small lymphocytes, histiocytes, and immunoblasts"><span>mixed small lymphocytes, histiocytes, immunoblasts</span></label><label class="choice-pill"><input type="checkbox" data-choice="paraComp" value="atypical lymphoid cells"><span>atypical lymphoid cells</span></label></div>
           </div>
           <div class="field">
             <label>Vascularity</label>
-            <select data-k="vasc">
-              <option value="normal high endothelial venules">normal high endothelial venules</option>
-              <option value="increased arborizing high endothelial venules">increased, arborizing HEVs</option>
-            </select>
+            <div class="choice-grid" data-k="vasc" role="group" aria-label="vasc"><label class="choice-pill"><input type="checkbox" data-choice="vasc" value="normal high endothelial venules"><span>normal high endothelial venules</span></label><label class="choice-pill"><input type="checkbox" data-choice="vasc" value="increased arborizing high endothelial venules"><span>increased, arborizing HEVs</span></label></div>
           </div>
           <div class="field">
             <label>Large atypical cells / immunoblasts</label>
-            <select data-k="paraAtypia">
-              <option value="No">No</option>
-              <option value="Occasional">Occasional</option>
-            </select>
+            <div class="choice-grid" data-k="paraAtypia" role="group" aria-label="paraAtypia"><label class="choice-pill"><input type="checkbox" data-choice="paraAtypia" value="No"><span>No</span></label><label class="choice-pill"><input type="checkbox" data-choice="paraAtypia" value="Occasional"><span>Occasional</span></label></div>
           </div>
         </div>
 
@@ -208,96 +177,53 @@
           <h2>Sinuses</h2>
           <div class="field">
             <label>Patency</label>
-            <select data-k="sinusPatency">
-              <option value="patent">patent</option>
-              <option value="distended">distended</option>
-              <option value="effaced">effaced</option>
-            </select>
+            <div class="choice-grid" data-k="sinusPatency" role="group" aria-label="sinusPatency"><label class="choice-pill"><input type="checkbox" data-choice="sinusPatency" value="patent"><span>patent</span></label><label class="choice-pill"><input type="checkbox" data-choice="sinusPatency" value="distended"><span>distended</span></label><label class="choice-pill"><input type="checkbox" data-choice="sinusPatency" value="effaced"><span>effaced</span></label></div>
           </div>
           <div class="field">
             <label>Sinus histiocytosis</label>
-            <select data-k="sinusHist">
-              <option value="present">present</option>
-              <option value="absent">absent</option>
-            </select>
+            <div class="choice-grid" data-k="sinusHist" role="group" aria-label="sinusHist"><label class="choice-pill"><input type="checkbox" data-choice="sinusHist" value="present"><span>present</span></label><label class="choice-pill"><input type="checkbox" data-choice="sinusHist" value="absent"><span>absent</span></label></div>
           </div>
           <div class="field">
             <label>Atypical cells within sinuses</label>
-            <select data-k="sinusAtypia">
-              <option value="No">No</option>
-              <option value="Occasional">Occasional</option>
-            </select>
+            <div class="choice-grid" data-k="sinusAtypia" role="group" aria-label="sinusAtypia"><label class="choice-pill"><input type="checkbox" data-choice="sinusAtypia" value="No"><span>No</span></label><label class="choice-pill"><input type="checkbox" data-choice="sinusAtypia" value="Occasional"><span>Occasional</span></label></div>
           </div>
         </div>
 
       </div>
 
       <!-- ================= CORE FORM ================= -->
-      <div id="form-core" style="display:none;">
+      <div id="form-core">
 
         <div class="card">
           <h2>Core Biopsy</h2>
           <div class="field">
             <label>Adequacy</label>
-            <select data-k="coreAdequacy">
-              <option value="adequate">adequate</option>
-              <option value="limited">limited</option>
-              <option value="scant">scant</option>
-            </select>
+            <div class="choice-grid" data-k="coreAdequacy" role="group" aria-label="coreAdequacy"><label class="choice-pill"><input type="checkbox" data-choice="coreAdequacy" value="adequate" checked><span>adequate</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreAdequacy" value="limited"><span>limited</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreAdequacy" value="scant"><span>scant</span></label></div>
           </div>
 
           <div class="field">
             <label>Architecture</label>
-            <select data-k="corePreservation">
-              <option value="preserved">preserved</option>
-              <option value="partially preserved">partially preserved</option>
-              <option value="partially effaced">partially effaced</option>
-              <option value="diffusely effaced">diffusely effaced</option>
-              <option value="not assessable">not reliably assessable</option>
-            </select>
+            <div class="choice-grid" data-k="corePreservation" role="group" aria-label="corePreservation"><label class="choice-pill"><input type="checkbox" data-choice="corePreservation" value="preserved"><span>preserved</span></label><label class="choice-pill"><input type="checkbox" data-choice="corePreservation" value="partially preserved"><span>partially preserved</span></label><label class="choice-pill"><input type="checkbox" data-choice="corePreservation" value="partially effaced"><span>partially effaced</span></label><label class="choice-pill"><input type="checkbox" data-choice="corePreservation" value="diffusely effaced"><span>diffusely effaced</span></label><label class="choice-pill"><input type="checkbox" data-choice="corePreservation" value="not assessable"><span>not reliably assessable</span></label></div>
           </div>
 
           <div class="field">
             <label>Follicular / interfollicular compartments</label>
-            <select data-k="coreCompartments">
-              <option value="preserved">preserved</option>
-              <option value="follicular structures identified">follicular structures identified</option>
-              <option value="follicular structures not identified">follicular structures not identified</option>
-              <option value="not assessable">not reliably assessable</option>
-            </select>
+            <div class="choice-grid" data-k="coreCompartments" role="group" aria-label="coreCompartments"><label class="choice-pill"><input type="checkbox" data-choice="coreCompartments" value="preserved"><span>preserved</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreCompartments" value="follicular structures identified"><span>follicular structures identified</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreCompartments" value="follicular structures not identified"><span>follicular structures not identified</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreCompartments" value="not assessable"><span>not reliably assessable</span></label></div>
           </div>
 
           <div class="field">
             <label>Follicles</label>
-            <select data-k="coreFolliclePattern">
-              <option value="reactive secondary follicles">reactive secondary follicles</option>
-              <option value="increased reactive follicles">increased reactive follicles</option>
-              <option value="decreased follicles">decreased follicles</option>
-              <option value="atypical follicles">atypical follicles</option>
-              <option value="not identified">not identified</option>
-              <option value="not assessable">not assessable</option>
-            </select>
+            <div class="choice-grid" data-k="coreFolliclePattern" role="group" aria-label="coreFolliclePattern"><label class="choice-pill"><input type="checkbox" data-choice="coreFolliclePattern" value="reactive secondary follicles"><span>reactive secondary follicles</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreFolliclePattern" value="increased reactive follicles"><span>increased reactive follicles</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreFolliclePattern" value="decreased follicles"><span>decreased follicles</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreFolliclePattern" value="atypical follicles"><span>atypical follicles</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreFolliclePattern" value="not identified"><span>not identified</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreFolliclePattern" value="not assessable"><span>not assessable</span></label></div>
           </div>
 
           <div class="field">
             <label>Interfollicular / paracortical compartment</label>
-            <select data-k="coreParacortex">
-              <option value="unremarkable">unremarkable</option>
-              <option value="mildly expanded">mildly expanded</option>
-              <option value="expanded">expanded</option>
-              <option value="atypical">atypical</option>
-              <option value="not assessable">not assessable</option>
-            </select>
+            <div class="choice-grid" data-k="coreParacortex" role="group" aria-label="coreParacortex"><label class="choice-pill"><input type="checkbox" data-choice="coreParacortex" value="unremarkable"><span>unremarkable</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreParacortex" value="mildly expanded"><span>mildly expanded</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreParacortex" value="expanded"><span>expanded</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreParacortex" value="atypical"><span>atypical</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreParacortex" value="not assessable"><span>not assessable</span></label></div>
           </div>
 
           <div class="field">
             <label>Cellular composition</label>
-            <select data-k="coreCellularity">
-              <option value="predominantly small mature lymphocytes">predominantly small mature lymphocytes</option>
-              <option value="polymorphous lymphoid population">polymorphous lymphoid population</option>
-              <option value="mixed small and large lymphoid cells">mixed small and large lymphoid cells</option>
-              <option value="monotonous atypical lymphoid population">monotonous atypical lymphoid population</option>
-            </select>
+            <div class="choice-grid" data-k="coreCellularity" role="group" aria-label="coreCellularity"><label class="choice-pill"><input type="checkbox" data-choice="coreCellularity" value="predominantly small mature lymphocytes"><span>predominantly small mature lymphocytes</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreCellularity" value="polymorphous lymphoid population"><span>polymorphous lymphoid population</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreCellularity" value="mixed small and large lymphoid cells"><span>mixed small and large lymphoid cells</span></label><label class="choice-pill"><input type="checkbox" data-choice="coreCellularity" value="monotonous atypical lymphoid population"><span>monotonous atypical lymphoid population</span></label></div>
           </div>
         </div>
 
@@ -312,52 +238,27 @@
         <div id="cytoBody" class="cyto-body">
           <div class="field">
             <label>Cell size</label>
-            <select data-k="cellSize">
-              <option value="small">small</option>
-              <option value="small-to-intermediate">small-to-intermediate</option>
-              <option value="intermediate">intermediate</option>
-              <option value="large">large</option>
-            </select>
+            <div class="choice-grid" data-k="cellSize" role="group" aria-label="cellSize"><label class="choice-pill"><input type="checkbox" data-choice="cellSize" value="small"><span>small</span></label><label class="choice-pill"><input type="checkbox" data-choice="cellSize" value="small-to-intermediate"><span>small-to-intermediate</span></label><label class="choice-pill"><input type="checkbox" data-choice="cellSize" value="intermediate"><span>intermediate</span></label><label class="choice-pill"><input type="checkbox" data-choice="cellSize" value="large"><span>large</span></label></div>
           </div>
           <div class="field">
             <label>Nuclear contour</label>
-            <select data-k="nucContour">
-              <option value="round">round</option>
-              <option value="irregular">irregular</option>
-              <option value="cleaved">cleaved</option>
-              <option value="convoluted">convoluted</option>
-            </select>
+            <div class="choice-grid" data-k="nucContour" role="group" aria-label="nucContour"><label class="choice-pill"><input type="checkbox" data-choice="nucContour" value="round"><span>round</span></label><label class="choice-pill"><input type="checkbox" data-choice="nucContour" value="irregular"><span>irregular</span></label><label class="choice-pill"><input type="checkbox" data-choice="nucContour" value="cleaved"><span>cleaved</span></label><label class="choice-pill"><input type="checkbox" data-choice="nucContour" value="convoluted"><span>convoluted</span></label></div>
           </div>
           <div class="field">
             <label>Chromatin</label>
-            <select data-k="chromatin">
-              <option value="condensed">condensed</option>
-              <option value="vesicular">vesicular</option>
-              <option value="fine">fine</option>
-            </select>
+            <div class="choice-grid" data-k="chromatin" role="group" aria-label="chromatin"><label class="choice-pill"><input type="checkbox" data-choice="chromatin" value="condensed"><span>condensed</span></label><label class="choice-pill"><input type="checkbox" data-choice="chromatin" value="vesicular"><span>vesicular</span></label><label class="choice-pill"><input type="checkbox" data-choice="chromatin" value="fine"><span>fine</span></label></div>
           </div>
           <div class="field">
             <label>Nucleoli</label>
-            <select data-k="nucleoli">
-              <option value="inconspicuous">inconspicuous</option>
-              <option value="small">small</option>
-              <option value="prominent">prominent</option>
-            </select>
+            <div class="choice-grid" data-k="nucleoli" role="group" aria-label="nucleoli"><label class="choice-pill"><input type="checkbox" data-choice="nucleoli" value="inconspicuous"><span>inconspicuous</span></label><label class="choice-pill"><input type="checkbox" data-choice="nucleoli" value="small"><span>small</span></label><label class="choice-pill"><input type="checkbox" data-choice="nucleoli" value="prominent"><span>prominent</span></label></div>
           </div>
           <div class="field">
             <label>Mitotic activity</label>
-            <select data-k="mitoses">
-              <option value="low">low</option>
-              <option value="brisk">brisk</option>
-            </select>
+            <div class="choice-grid" data-k="mitoses" role="group" aria-label="mitoses"><label class="choice-pill"><input type="checkbox" data-choice="mitoses" value="low"><span>low</span></label><label class="choice-pill"><input type="checkbox" data-choice="mitoses" value="brisk"><span>brisk</span></label></div>
           </div>
           <div class="field">
             <label>Necrosis</label>
-            <select data-k="necrosis">
-              <option value="not identified">not identified</option>
-              <option value="present, focal">present, focal</option>
-              <option value="present, extensive">present, extensive</option>
-            </select>
+            <div class="choice-grid" data-k="necrosis" role="group" aria-label="necrosis"><label class="choice-pill"><input type="checkbox" data-choice="necrosis" value="not identified"><span>not identified</span></label><label class="choice-pill"><input type="checkbox" data-choice="necrosis" value="present, focal"><span>present, focal</span></label><label class="choice-pill"><input type="checkbox" data-choice="necrosis" value="present, extensive"><span>present, extensive</span></label></div>
           </div>
         </div>
       </div>
@@ -383,19 +284,11 @@
         </div>
         <div class="field" style="margin-top:10px;">
           <label>Granulomas</label>
-          <select data-k="granulomas">
-            <option value="not identified">not identified</option>
-            <option value="present, non-necrotizing">present, non-necrotizing</option>
-            <option value="present, necrotizing">present, necrotizing</option>
-          </select>
+          <div class="choice-grid" data-k="granulomas" role="group" aria-label="granulomas"><label class="choice-pill"><input type="checkbox" data-choice="granulomas" value="not identified"><span>not identified</span></label><label class="choice-pill"><input type="checkbox" data-choice="granulomas" value="present, non-necrotizing"><span>present, non-necrotizing</span></label><label class="choice-pill"><input type="checkbox" data-choice="granulomas" value="present, necrotizing"><span>present, necrotizing</span></label></div>
         </div>
         <div class="field">
           <label>Fibrosis</label>
-          <select data-k="fibrosis">
-            <option value="not identified">not identified</option>
-            <option value="present, focal">present, focal</option>
-            <option value="present, sclerotic bands">present, sclerotic bands</option>
-          </select>
+          <div class="choice-grid" data-k="fibrosis" role="group" aria-label="fibrosis"><label class="choice-pill"><input type="checkbox" data-choice="fibrosis" value="not identified"><span>not identified</span></label><label class="choice-pill"><input type="checkbox" data-choice="fibrosis" value="present, focal"><span>present, focal</span></label><label class="choice-pill"><input type="checkbox" data-choice="fibrosis" value="present, sclerotic bands"><span>present, sclerotic bands</span></label></div>
         </div>
       </div>
 
@@ -419,7 +312,7 @@ const btnExc = document.getElementById('btn-exc');
 const btnCore = document.getElementById('btn-core');
 const formExc = document.getElementById('form-exc');
 const formCore = document.getElementById('form-core');
-let mode = 'exc';
+let mode = 'core';
 
 btnExc.onclick = () => { mode='exc'; btnExc.classList.add('active'); btnCore.classList.remove('active');
   formExc.style.display='block'; formCore.style.display='none'; generate(); };
@@ -431,7 +324,7 @@ const cytoBody = document.getElementById('cytoBody');
 cytoEnable.onchange = () => { cytoBody.classList.toggle('show', cytoEnable.checked); generate(); };
 
 function val(k){
-  const el = document.querySelector(`[data-k="${k}"]`);
+  const el = document.querySelector('[data-choice="'+k+'"]:checked');
   return el ? el.value : '';
 }
 
@@ -488,12 +381,12 @@ function generate(){
   } else {
 
     // --- Core biopsy: concise, complete, one-paragraph style ---
-    paras.push(`Multiple lymph node cores with ${val('coreAdequacy')} lymphoid tissue.`);
+    if (val('coreAdequacy')) paras.push(`Multiple lymph node cores with ${val('coreAdequacy')} lymphoid tissue.`);
 
     const arch = val('corePreservation');
     const comp = val('coreCompartments');
 
-    if (arch === 'not assessable') {
+    if (!arch) { /* Architecture not selected. */ } else if (arch === 'not assessable') {
       paras.push(`Architecture is not reliably assessable in the sampled cores.`);
     } else {
       let p2 = `Architecture is ${arch}`;
@@ -513,7 +406,7 @@ function generate(){
     const para = val('coreParacortex');
 
     let p3 = [];
-    if (foll !== 'not assessable') {
+    if (foll && foll !== 'not assessable') {
       if (foll === 'reactive secondary follicles') p3.push(`Reactive secondary follicles are present`);
       else if (foll === 'increased reactive follicles') p3.push(`Reactive follicles are increased`);
       else if (foll === 'decreased follicles') p3.push(`Follicles are decreased`);
@@ -521,7 +414,7 @@ function generate(){
       else if (foll === 'not identified') p3.push(`Follicles are not identified`);
     }
 
-    if (para !== 'not assessable') {
+    if (para && para !== 'not assessable') {
       if (para === 'unremarkable') p3.push(`the paracortex is unremarkable`);
       else if (para === 'mildly expanded') p3.push(`the paracortex is mildly expanded`);
       else if (para === 'expanded') p3.push(`the paracortex is expanded`);
@@ -545,9 +438,7 @@ function generate(){
   // --- Cytologic features paragraph ---
   if (cytoEnable.checked){
     paras.push(
-      `The atypical population is composed of ${val('cellSize')} cells with ${val('nucContour')} nuclear contours, `
-      + `${val('chromatin')} chromatin, and ${val('nucleoli')} nucleoli. Mitotic activity is ${val('mitoses')}, `
-      + `and necrosis is ${val('necrosis')}.`
+      [val('cellSize') ? `The atypical population is composed of ${val('cellSize')} cells.` : '', val('nucContour') ? `Nuclear contours are ${val('nucContour')}.` : '', val('chromatin') ? `Chromatin is ${val('chromatin')}.` : '', val('nucleoli') ? `Nucleoli are ${val('nucleoli')}.` : '', val('mitoses') ? `Mitotic activity is ${val('mitoses')}.` : '', val('necrosis') ? `Necrosis is ${val('necrosis')}.` : ''].filter(Boolean).join(' ')
     );
   }
 
@@ -568,14 +459,14 @@ function generate(){
   const fibrosis = val('fibrosis');
 
   let endSentence = '';
-  if (granulomas === 'not identified' && fibrosis === 'not identified') {
+  if (!granulomas && !fibrosis) { endSentence = ''; } else if (granulomas === 'not identified' && fibrosis === 'not identified') {
     endSentence = `No granulomas or significant fibrosis are identified.`;
   } else {
     const parts = [];
-    if (granulomas === 'not identified') parts.push(`No granulomas are identified.`);
+    if (!granulomas) {} else if (granulomas === 'not identified') parts.push(`No granulomas are identified.`);
     else parts.push(`Granulomas are ${granulomas}.`);
 
-    if (fibrosis === 'not identified') parts.push(`No significant fibrosis is identified.`);
+    if (!fibrosis) {} else if (fibrosis === 'not identified') parts.push(`No significant fibrosis is identified.`);
     else parts.push(`Fibrosis is ${fibrosis}.`);
 
     endSentence = parts.join(' ');
@@ -587,8 +478,15 @@ function generate(){
   document.getElementById('output').value = paras.filter(Boolean).join(' ');
 }
 
-document.querySelectorAll('select, input[type=checkbox]').forEach(el=>{
-  el.addEventListener('change', generate);
+document.querySelectorAll('input[type=checkbox], select').forEach(el=>{
+  el.addEventListener('change', ()=>{
+    if(el.matches('[data-choice]') && el.checked){
+      document.querySelectorAll('[data-choice="'+el.dataset.choice+'"]').forEach(other=>{
+        if(other!==el) other.checked=false;
+      });
+    }
+    generate();
+  });
 });
 
 document.getElementById('copyBtn').onclick = () => {
