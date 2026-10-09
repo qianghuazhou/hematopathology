@@ -1297,8 +1297,8 @@ const IHC_CATEGORIES = [
       const sentences = [];
       if (positive.length || partial.length || negative.length){
         const clauses = [];
-        if (positive.length) clauses.push("positive for " + joinNatural(positive.map(x => x.replace(/\\+$/, ""))));
-        if (partial.length) clauses.push("variably positive for " + joinNatural(partial.map(x => x.replace(/\\+\\-$/, ""))));
+        if (positive.length) clauses.push("positive for " + joinNatural(positive.map(x => x.replace(/\+$/, ""))));
+        if (partial.length) clauses.push("variably positive for " + joinNatural(partial.map(x => x.replace(/\+\-$/, ""))));
         if (negative.length) clauses.push("negative for " + joinNatural(negative.map(x => x.replace(/-$/, ""))));
         sentences.push(`The atypical cells are ${clauses.join(", and ")}.`);
       }
