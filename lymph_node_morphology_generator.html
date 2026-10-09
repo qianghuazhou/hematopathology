@@ -385,7 +385,7 @@ function generate(){
   } else {
 
     // --- Core biopsy: concise, complete, one-paragraph style ---
-    if (val('coreAdequacy')) paras.push(`Multiple lymph node cores with ${val('coreAdequacy')} lymphoid tissue.`);
+    if (val('coreAdequacy')) { const adequacy = val('coreAdequacy'); paras.push(adequacy === 'adequate' ? 'Sections show adequate lymphoid tissue.' : adequacy === 'limited' ? 'Sections show a limited amount of lymphoid tissue.' : 'Sections show scant lymphoid tissue.'); }
 
     const arch = val('corePreservation');
     const comp = val('coreCompartments');
