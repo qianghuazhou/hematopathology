@@ -41,6 +41,14 @@ button.secondary{background:#e2e8f0;color:#0f172a}button.ghost{background:#f8faf
  .main,.outPanel{grid-column:1/-1;min-width:0;min-height:auto}
  .outputBox{min-height:280px}
 }
+/* Two-column workspace: templates on left, editor and output on right. */
+@media(min-width:861px) and (max-width:1250px){
+ .app{display:grid;grid-template-columns:minmax(250px,32%) minmax(0,1fr);align-items:start}
+ .sidebar{grid-column:1;grid-row:1 / span 2;position:sticky;top:8px;max-height:calc(100vh - 16px);overflow-y:auto}
+ .main{grid-column:2;grid-row:1;min-height:0}
+ .outPanel{grid-column:2;grid-row:2;min-height:0}
+ .outputBox{min-height:220px}
+}
 </style>
 </head>
 <body>
