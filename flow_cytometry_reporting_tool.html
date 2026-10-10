@@ -32,6 +32,15 @@ button.secondary{background:#e2e8f0;color:#0f172a}button.ghost{background:#f8faf
 .pillbar{display:flex;flex-wrap:wrap;gap:6px}.pill{background:#f8fafc;border:1px solid #cbd5e1;border-radius:999px;padding:5px 8px;cursor:pointer;font-size:12px}.pill:hover{background:#eaf1ff}.switchRow{display:flex;align-items:center;gap:8px;margin:8px 0}.switchRow input{width:auto}.mono{font-family:Consolas,Monaco,monospace;font-size:12px}
 @media(max-width:1250px){.app{grid-template-columns:330px 1fr}.outPanel{grid-column:1/-1;min-height:auto}.main{min-height:auto}}
 @media(max-width:860px){.app{grid-template-columns:1fr}.sidebar{position:relative;max-height:none}.row,.row3,.refGrid{grid-template-columns:1fr}}
+/* Responsive layout for the unified Flow Cytometry workspace. */
+.app>*{min-width:0}
+.refBox,.outputBox,.miniOutput{overflow-wrap:anywhere;word-break:normal;max-width:100%}
+@media(max-width:1250px){
+ .app{grid-template-columns:minmax(0,1fr);max-width:100%}
+ .sidebar{position:relative;top:auto;max-height:none;overflow:visible}
+ .main,.outPanel{grid-column:1/-1;min-width:0;min-height:auto}
+ .outputBox{min-height:280px}
+}
 </style>
 </head>
 <body>
