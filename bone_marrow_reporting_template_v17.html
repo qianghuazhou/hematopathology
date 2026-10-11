@@ -1067,15 +1067,17 @@ function shortOtherCell(label, value){
   return label+': '+cap(t)+'.\n';
 }
 function diffCountOutput(){
-  const diffs=[['Blasts',v('dBlast')],['Promyelocytes',v('dPro')],['Myelocytes/metamyelocytes',v('dMyeloMeta')],['Segs/bands',v('dSeg')],['Erythroids',v('dEry')],['Lymphs',v('dLymph')],['Plasma cells',v('dPlasma')],['Monos',v('dMono')],['Eos',v('dEos')],['Basos',v('dBaso')]].filter(x=>x[1]);
+  const fields=[['Blasts','dBlast'],['Promyelocytes','dPro'],['Myelocytes/metamyelocytes','dMyeloMeta'],['Segs/bands','dSeg'],['Erythroids','dEry'],['Lymphs','dLymph'],['Plasma cells','dPlasma'],['Monos','dMono'],['Eos','dEos'],['Basos','dBaso']];
+  const values=fields.map(([name,id])=>[name,v(id)]).filter(x=>x[1] !== '');
+  const total=v('dTotal');
   const mer=calcAspirateMERatio();
   let out='';
-  if(diffs.length || v('dTotal') || mer){
-    out+='\n'+(v('dTotal')||'500')+' Cell Count:\n';
-    if(parseFloat(v('dTotal')) < 200) out+='Comment: Differential count is based on fewer than 200 cells; interpret with caution.\n';
-    out+=diffs.length ? diffs.map(x=>x[0]+' '+addPercent(x[1])).join(', ')+'.\n' : 'Blasts %, promyelocytes %, myelocytes %, metamyelocytes %, segs/bands %, erythroids %, lymphs %, plasma cells %, monos %, eos %, basos %.\n';
-    if(mer) out+='M:E ratio: '+mer+'.\n';
+  if(values.length){
+    out+='\n'+(total ? total+' Cell Count:' : 'Differential count:')+'\n';
+    if(total && parseFloat(total)<200) out+='Comment: Differential count is based on fewer than 200 cells; interpret with caution.\n';
+    out+=values.map(x=>x[0]+' '+addPercent(x[1])).join(', ')+'.\n';
   }
+  if(mer && mer !== 'N/A') out+='M:E ratio: '+mer+'.\n';
   return out;
 }
 function ihcLine2(id,label){const txt=v(id);if(!txt)return '';const low=txt.toLowerCase();const first=label.split(/[\/ ]/)[0].toLowerCase();return (low.startsWith(first)||low.startsWith(label.toLowerCase()))?sent(txt)+'\n':label+': '+sent(txt)+'\n';}
@@ -1198,24 +1200,9 @@ function finalizePresetInputs(){
   // Universal required marrow assessment fields.
   setIfBlank('specimenSite','');
   setIfBlank('aspQuality','contain adequate cellular marrow particles');
-  if(adequateAspirate){
-    setIfBlank('aspCell','normocellular for age');
-    setIfBlank('dTotal','500');
-    setIfBlank('dBlast','0');
-    setIfBlank('dPro','4');
-    setIfBlank('dMyeloMeta','10');
-    setIfBlank('dSeg','26');
-    setIfBlank('dEry','41');
-    setIfBlank('dLymph','13');
-    setIfBlank('dMono','2');
-    setIfBlank('dEos','2');
-    setIfBlank('dBaso','0');
-    setIfBlank('dPlasma','2');
-    setIfBlank('dMast','0');
-  } else {
-    setIfBlank('meRatio','N/A');
-    setIfBlank('dTotal','');
-  }
+  // Never synthesize patient differential counts or M:E ratios from presets.
+  // Leave numeric fields empty until the operator enters measured values.
+  if(!adequateAspirate) setIfBlank('meRatio','N/A');
   setIfBlank('ironStore', adequateAspirate ? 'adequate' : '');
   setIfBlank('ringSid', adequateAspirate ? 'not increased' : 'unable to assess due to hemodilution/aparticulate aspirate');
 
@@ -1414,6 +1401,8 @@ function generateReport(){
   if(v('aspVacuolation')) r += 'Vacuolation: '+sent(v('aspVacuolation'))+'\n';
   if(v('aspOther')) r += 'Other: '+sent(v('aspOther'))+'\n';
   r += ironStatusLine(v('ironStore'), v('ringSid'));
+  if(v('touchPrep')) r += 'Touch prep: '+sent(normPart(v('touchPrep')))+'\n';
+  if(v('touchPrepOther')) r += 'Touch prep comment: '+sent(v('touchPrepOther'))+'\n';
   r += diffCountOutput();
 
   r += '\n';
@@ -1431,8 +1420,6 @@ function generateReport(){
   if(v('bxMast')) r += 'Mast cells: '+sent(normPart(v('bxMast')))+'\n';
   if(v('trabBone')) r += 'Bone trabeculae: '+sent(v('trabBone'))+'\n';
   if(v('bxOther')) r += 'Other: '+sent(v('bxOther'))+'\n';
-  if(v('touchPrep')) r += 'Touch prep: '+sent(normPart(v('touchPrep')))+'\n';
-  if(v('touchPrepOther')) r += 'Touch prep comment: '+sent(v('touchPrepOther'))+'\n';
   if(v('clotDescription')) r += 'Clot section: '+sent(normPart(v('clotDescription')))+'\n';
   else if(v('clotQuality')) r += 'Clot section: '+sent(v('clotQuality'))+'\n';
   if(v('clotOther')) r += 'Clot section comment: '+sent(v('clotOther'))+'\n';
@@ -1468,7 +1455,7 @@ function clearAll(){
   document.querySelectorAll('input, textarea, select').forEach(el=>{ if(el.type==='checkbox'||el.type==='radio') el.checked=false; else el.value=''; }); syncAllPillGroups();
 }
 function applyCommonNormalPb(){set('pbRbc','Normocytic normochromic red blood cells.');set('pbWbc','No significant morphologic abnormality. No circulating blasts.');set('pbPlt','Normal in number and morphology.');}
-function applyNormalAspirate(){set('touchPrep','contains marrow elements');set('clotDescription','contains marrow fragments');set('aspQuality','contain adequate cellular marrow particles');set('aspSpicules','present');set('aspCell','normocellular for age');set('dTotal','500');set('dBlast','0');set('dPro','4');set('dMyeloMeta','10');set('dSeg','26');set('dEry','41');set('dLymph','13');set('dMono','2');set('dEos','2');set('dBaso','0');set('dPlasma','2');set('meRatio','1.1:1');set('aspEryNum','proportionately normal in number');set('aspEryMat','');set('aspEryMorph','mainly normoblastic maturation');set('aspMyeNum','proportionately normal in number');set('aspMyeMat','');set('aspMyeMorph','orderly maturation through all stages');set('aspMkNum','adequate in number');set('aspMkMorph','normal morphology');set('aspBlasts','are not increased (<5%)');set('aspLymph','not increased');set('aspPlasma','not increased');set('aspMast','not increased');set('ironStore','adequate');set('ringSid','not identified');}
+function applyNormalAspirate(){set('touchPrep','contains marrow elements');set('clotDescription','contains marrow fragments');set('aspQuality','contain adequate cellular marrow particles');set('aspSpicules','present');set('aspCell','normocellular for age');set('aspEryNum','proportionately normal in number');set('aspEryMat','');set('aspEryMorph','mainly normoblastic maturation');set('aspMyeNum','proportionately normal in number');set('aspMyeMat','');set('aspMyeMorph','orderly maturation through all stages');set('aspMkNum','adequate in number');set('aspMkMorph','normal morphology');set('aspBlasts','are not increased (<5%)');set('aspLymph','not increased');set('aspPlasma','not increased');set('aspMast','not increased');set('ironStore','adequate');set('ringSid','not identified');}
 function applyNormalBiopsy(cell='40%'){set('bxQuality','adequate for evaluation');set('bxCellPhrase','normocellular for age');set('bxCell',cell);set('bxArch','preserved');set('bxEryNum','normal in number');set('bxEryMat','');set('bxEryMorph','mainly normoblastic maturation');set('bxMyeNum','normal in number');set('bxMyeMat','');set('bxMyeMorph','orderly maturation through all stages');set('bxMkNum','adequate in number');set('bxMkMorph','normal morphology');set('bxBlasts','not increased (<5%)');set('bxLymph','not increased');set('bxPlasma','not increased');set('bxMast','not increased');set('trabBone','unremarkable');set('clot','contains marrow fragments.');set('retic','Reticulin: Not increased (MF grade 0 of 3 fibrosis).');set('trichrome','');}
 function applyBasicIhc(){set('ihcCd34','highlights no increase in blasts (<5%)');set('ihcCd117','highlights scattered immature myeloid precursors and mast cells');set('ihcCd61','highlights scattered megakaryocytes');set('ihcCd138','highlights scattered plasma cells');set('ihcKappaLambda','shows polytypic plasma cells');set('ihcCd3','highlights scattered small T cells');set('ihcCd20','highlights scattered small B cells');}
 function loadNormal(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('40%');applyBasicIhc();set('dx1','Normocellular/Hypercellular/Hypocellular bone marrow with trilineage hematopoiesis and no increase in blasts.');set('dx2','No morphologic or immunophenotypic evidence of a hematologic neoplasm.');set('pbdx','');set('commentType','normal');generateReport();}
