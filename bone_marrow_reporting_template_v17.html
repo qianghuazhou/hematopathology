@@ -1381,7 +1381,7 @@ function generateReport(){
   if(v('pbOther')) r += 'Other: '+sent(v('pbOther'))+'\n';
   if(!v('pbRbc')&&!v('pbWbc')&&!v('pbPlt')&&!v('pbOther')) r += 'RBC: ***\nWBC: ***\nPLT: ***\n';
   r += '\n';
-  r += 'BONE MARROW ASPIRATE AND TOUCH PREPARATION:\n';
+  r += 'BONE MARROW ASPIRATE:\n';
   if(v('aspQuality')) r += 'Sample quality: '+sent(normPart(v('aspQuality')))+'\n';
   if(v('aspSpicules')) r += 'Spicules: '+sent(v('aspSpicules'))+'\n';
   else if(/adequate|spicules|particles/i.test(v('aspQuality'))) r += 'Spicules: Present.\n';
