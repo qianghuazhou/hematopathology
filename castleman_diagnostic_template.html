@@ -218,7 +218,7 @@ pre{
         <textarea id="clinical" placeholder="Multicentric adenopathy, constitutional symptoms, HIV/immunosuppression, autoimmune disease, POEMS features, plasma cell neoplasm history..."></textarea>
       </div>
 
-      <h2>Morphologic Grading <span class="tag">0-3</span></h2>
+      <h2>Morphologic Assessment <span class="tag">0-3 descriptive</span></h2><p class="hint">Descriptive severity only; not a validated diagnostic score. Zero may mean absent or not evaluated.</p>
       <div class="score-grid"><label>Germinal center hyperplasia</label><select id="gcHyper"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
       <div class="score-grid"><label>Germinal center regression</label><select id="gcReg"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
       <div class="score-grid"><label>FDC prominence</label><select id="fdc"><option>0</option><option>1</option><option>2</option><option>3</option></select></div>
@@ -238,6 +238,7 @@ pre{
         <div class="field">
           <label>HHV8/LANA1</label>
           <select id="hhv8">
+            <option>Not assessed</option>
             <option>Pending</option>
             <option>Negative</option>
             <option>Positive</option>
@@ -268,6 +269,7 @@ pre{
         <div class="field">
           <label>IgG4</label>
           <select id="igg4">
+            <option>Not assessed</option>
             <option>Not increased</option>
             <option>Mildly increased, not diagnostic of IgG4-RD</option>
             <option>Increased; correlate for IgG4-RD</option>
@@ -276,11 +278,31 @@ pre{
         </div>
       </div>
 
+      <h2>Additional Assessment</h2>
+      <div class="grid2">
+        <div class="field"><label>IgG4+ plasma cells (max/HPF)</label><input id="igg4Count" type="number" min="0" placeholder="Not assessed"></div>
+        <div class="field"><label>IgG4/IgG ratio (%)</label><input id="igg4Ratio" type="number" min="0" max="100" placeholder="Not assessed"></div>
+        <div class="field"><label>HHV8-positive plasmablasts</label><select id="plasmablasts"><option>Not assessed</option><option>Present</option><option>Absent</option></select></div>
+        <div class="field"><label>Lymphadenopathy distribution</label><select id="distribution"><option>Unknown</option><option>Unicentric</option><option>Multicentric</option></select></div>
+        <div class="field"><label>iMCD clinical/laboratory criteria</label><select id="imcdCriteria"><option>Not assessed</option><option>Met</option><option>Not met</option></select></div>
+        <div class="field"><label>Mimickers excluded</label><select id="mimickers"><option>Not assessed</option><option>Yes</option><option>No</option></select></div>
+        <div class="field"><label>Associated lymphoma/neoplasm</label><select id="neoplasm"><option>Not assessed</option><option>Not identified</option><option>Suspected / identified</option></select></div>
+        <div class="field"><label>FDC expansion / dysplasia</label><select id="fdcPattern"><option>Not assessed</option><option>Not identified</option><option>Expanded</option><option>Dysplastic</option></select></div>
+      </div>
+      <details><summary>iMCD clinical reference checklist (not included in LIS report)</summary>
+        <p class="hint">Consensus criteria require both major criteria (multicentric lymphadenopathy and compatible histopathology), at least two minor criteria including at least one laboratory criterion, and exclusion of mimickers. Clinical review required.</p>
+        <label class="checkrow"><input type="checkbox" id="majorNodes"> Multicentric lymphadenopathy documented</label>
+        <label class="checkrow"><input type="checkbox" id="majorHist"> Compatible histopathology confirmed</label>
+        <label class="checkrow"><input type="checkbox" id="minorLab"> At least one laboratory minor criterion</label>
+        <label class="checkrow"><input type="checkbox" id="minorTwo"> At least two total minor criteria</label>
+        <label class="checkrow"><input type="checkbox" id="excludeDone"> Appropriate exclusions reviewed</label>
+        <p class="hint" id="criteriaStatus">Incomplete clinical assessment</p>
+      </details>
       <h2>Favored Interpretation</h2>
       <select id="favored">
         <option>Castleman disease-like lymph node changes</option>
-        <option>Favor hyaline vascular-type unicentric Castleman disease</option>
-        <option>HHV8-associated multicentric Castleman disease</option>
+        <option>Hyaline vascular-type Castleman morphology</option>
+        <option>HHV8-associated Castleman disease</option>
         <option>Concerning for plasma cell neoplasm/POEMS-associated Castleman-like changes</option>
         <option>Compatible with idiopathic multicentric Castleman disease in the appropriate clinical setting</option>
         <option>Castleman-like changes; autoimmune/inflammatory disorder remains in differential</option>
@@ -294,14 +316,14 @@ pre{
       <div class="actions">
         <button onclick="generateReport()">Generate Report</button>
         <button class="secondary" onclick="copyReport()">Copy Report</button>
-        <button class="secondary" onclick="generateShortComment()">Short Comment</button>
+        
         <button class="danger" onclick="clearForm()">Clear</button>
       </div>
       <p class="hint">Tip: HHV8-positive disease, monotypic plasma cells, and autoimmune mimickers should be excluded before diagnosing iMCD.</p>
     </section>
 
     <section class="panel">
-      <h2>Generated Report</h2>
+      <h2>Final Pathology Report</h2><p class="hint">Concise LIS output; morphology grading and clinical assessment remain on the left.</p>
       <pre id="output"></pre>
     </section>
   </main>
@@ -353,123 +375,61 @@ pre{
       return features.length ? features.join(', ') : 'no specific Castleman disease-like features selected';
     }
 
-    function diagnosticLine() {
-      const favored = v('favored');
-      if (favored === 'Favor hyaline vascular-type unicentric Castleman disease') {
-        return '- Lymph node with hyaline vascular-type Castleman disease morphology, favor unicentric Castleman disease. See comment.';
+    function diagnosticLine(){
+      const f=v('favored'),hh=v('hhv8'),cl=v('clonality'),dist=v('distribution');
+      if(f==='Hyaline vascular-type Castleman morphology')
+        return '- Castleman disease, hyaline vascular-type morphology. See comment.';
+      if(f==='HHV8-associated Castleman disease'){
+        if(hh==='Positive'&&v('plasmablasts')==='Present')return '- HHV8-associated Castleman disease. See comment.';
+        return '- Castleman disease-like lymph node changes; HHV8-associated disease not established. See comment.';
       }
-      if (favored === 'HHV8-associated multicentric Castleman disease') {
-        return '- HHV8-associated multicentric Castleman disease. See comment.';
+      if(f.includes('idiopathic multicentric')){
+        if(hh==='Negative'&&dist==='Multicentric'&&v('imcdCriteria')==='Met'&&v('mimickers')==='Yes')
+          return '- Castleman disease-like changes, compatible with idiopathic multicentric Castleman disease in the appropriate clinical setting. See comment.';
+        return '- Castleman disease-like lymph node changes; insufficient clinical information to establish idiopathic multicentric Castleman disease. See comment.';
       }
-      if (favored === 'Concerning for plasma cell neoplasm/POEMS-associated Castleman-like changes') {
-        return '- Castleman disease-like lymph node changes with monotypic plasma cell proliferation, concerning for plasma cell neoplasm/POEMS-associated disease. See comment.';
-      }
-      if (favored === 'Compatible with idiopathic multicentric Castleman disease in the appropriate clinical setting') {
-        return '- Castleman disease-like lymph node changes, compatible with idiopathic multicentric Castleman disease in the appropriate clinical setting. See comment.';
-      }
-      if (favored === 'Castleman-like changes; autoimmune/inflammatory disorder remains in differential') {
-        return '- Castleman disease-like lymph node changes; autoimmune/inflammatory disorder remains in the differential diagnosis. See comment.';
-      }
+      if(f.includes('plasma cell neoplasm'))return '- Castleman disease-like changes with plasmacytosis; evaluate for associated plasma cell neoplasm/POEMS syndrome. See comment.';
       return '- Castleman disease-like lymph node changes. See comment.';
     }
-
-    function buildComment() {
-      const lines = [];
-      const hhv8 = v('hhv8');
-      const clonality = v('clonality');
-      const favored = v('favored');
-      const extra = v('extra');
-
-      addLine(lines, 'Sections show lymph node with Castleman disease-like histopathologic features including ' + getMorphologySummary() + '.');
-
-      if (hhv8 === 'Positive') {
-        addLine(lines, 'HHV8/LANA1 is positive, supporting HHV8-associated multicentric Castleman disease in the appropriate clinical setting. Correlation with HIV status, immune status, and radiologic evidence of multicentric disease is recommended.');
-      } else if (hhv8 === 'Negative') {
-        addLine(lines, 'HHV8/LANA1 is negative.');
-      } else {
-        addLine(lines, 'HHV8/LANA1 is pending and is required to exclude HHV8-associated multicentric Castleman disease.');
-      }
-
-      if (clonality === 'Lambda-restricted' || clonality === 'Kappa-restricted') {
-        addLine(lines, 'Plasma cells show ' + clonality.toLowerCase() + ' light chain restriction. Correlation with serum protein studies, serum free light chains, bone marrow examination, VEGF level, and clinical assessment for plasma cell neoplasm/POEMS syndrome is recommended.');
-      } else if (clonality === 'Polytypic') {
-        addLine(lines, 'Plasma cells are polytypic by kappa/lambda assessment.');
-      } else {
-        addLine(lines, 'Kappa/lambda assessment is pending.');
-      }
-
-      if (v('isotype') !== 'Not assessed') {
-        addLine(lines, 'The predominant immunoglobulin isotype is ' + v('isotype') + '.');
-      }
-
-      if (v('igg4') !== 'Not increased') {
-        addLine(lines, 'IgG4: ' + v('igg4') + '.');
-      }
-
-      if (favored.includes('idiopathic multicentric')) {
-        addLine(lines, 'Diagnosis of idiopathic multicentric Castleman disease requires multicentric lymphadenopathy, supportive clinical/laboratory criteria, and exclusion of infection, autoimmune disease, malignancy, HHV8-associated disease, and plasma cell neoplasm/POEMS-associated disease.');
-      }
-
-      if (favored.includes('autoimmune')) {
-        addLine(lines, 'Clinical and serologic correlation is recommended, as systemic lupus erythematosus and other autoimmune/inflammatory disorders may closely mimic idiopathic multicentric Castleman disease.');
-      }
-
-      if (extra) addLine(lines, extra);
-
-      return lines.join('\n\n');
+    function buildComment(){
+      const out=[],f=v('favored'),hh=v('hhv8'),cl=v('clonality'),dist=v('distribution');
+      const morph=getMorphologySummary();
+      if(morph!=='no specific Castleman disease-like features selected')out.push('The lymph node shows '+morph+'.');
+      else out.push('No specific Castleman disease-like morphologic features have been entered.');
+      if(hh==='Positive')out.push('HHV8/LANA1 is positive'+(v('plasmablasts')==='Present'?' in plasmablasts':'')+'.');
+      else if(hh==='Negative')out.push('HHV8/LANA1 is negative.');
+      else if(hh==='Pending')out.push('HHV8/LANA1 is pending.');
+      if(cl==='Polytypic')out.push('Plasma cells are polytypic.');
+      else if(cl==='Lambda-restricted'||cl==='Kappa-restricted')out.push('Plasma cells show '+cl.toLowerCase()+' light-chain restriction; evaluate for an associated clonal process.');
+      if(f.includes('idiopathic multicentric'))out.push('iMCD requires multicentric adenopathy, consensus clinical/laboratory criteria and exclusion of mimicking disorders.');
+      else if(f==='Hyaline vascular-type Castleman morphology')out.push('Unicentric versus multicentric status requires clinical and imaging assessment'+(dist==='Unknown'?'.':'; entered distribution: '+dist.toLowerCase()+'.'));
+      else if(f==='HHV8-associated Castleman disease'&&!(hh==='Positive'&&v('plasmablasts')==='Present'))out.push('Characteristic HHV8-positive plasmablasts have not been documented; do not establish HHV8-associated Castleman disease from morphology alone.');
+      else out.push('Castleman-like morphology is nonspecific and requires clinicopathologic correlation.');
+      const count=v('igg4Count'),ratio=v('igg4Ratio');
+      if(count||ratio)out.push('IgG4-positive plasma cells: '+(count||'[n]')+'/HPF; IgG4/IgG ratio '+(ratio||'[ratio]')+'%. Increased IgG4-positive cells alone do not establish IgG4-related disease.');
+      if(v('neoplasm')==='Suspected / identified')out.push('An associated lymphoid or plasma cell neoplasm requires further evaluation.');
+      if(v('extra'))out.push(v('extra'));
+      return out.join(' ');
     }
-
-    function generateReport() {
-      const lines = [];
-      addLine(lines, 'SPECIMEN(S)');
-      addLine(lines, 'A. ' + v('site') + ', ' + v('procedure'));
-      addLine(lines, '');
-
-      addLine(lines, 'CLINICAL HISTORY');
-      addLine(lines, v('clinical') || '[Not provided]');
-      addLine(lines, '');
-
-      addLine(lines, 'DIAGNOSIS');
-      addLine(lines, v('site') + ', ' + v('procedure') + ':');
-      addLine(lines, diagnosticLine());
-      addLine(lines, '');
-
-      addLine(lines, 'COMMENT');
-      addLine(lines, buildComment());
-      addLine(lines, '');
-
-      addLine(lines, 'MICROSCOPIC DESCRIPTION');
-      addLine(lines, 'Sections show lymph node tissue with the following Castleman disease-like histopathologic features:');
-      addLine(lines, '- Germinal center hyperplasia: ' + scoreText(v('gcHyper')) + '');
-      addLine(lines, '- Germinal center regression: ' + scoreText(v('gcReg')) + '');
-      addLine(lines, '- Follicular dendritic cell prominence: ' + scoreText(v('fdc')) + '');
-      addLine(lines, '- Hypervascularity: ' + scoreText(v('vasc')) + '');
-      addLine(lines, '- Plasmacytosis: ' + scoreText(v('plasma')) + '');
-      if (checked('onion')) addLine(lines, '- Onion-skin mantle zones are present.');
-      if (checked('lollipop')) addLine(lines, '- Penetrating hyalinized vessels are present.');
-      if (checked('sclerosis')) addLine(lines, '- Interfollicular sclerosis is present.');
-      if (checked('sinus')) addLine(lines, '- Sinusoidal dilatation is present.');
-      if (checked('ks')) addLine(lines, '- Kaposi sarcoma-like spindle cell proliferation is present.');
-      if (checked('necrosis')) addLine(lines, '- Necrosis/hematoxylin bodies are present.');
-      addLine(lines, '');
-
-      addLine(lines, 'IMMUNOHISTOCHEMISTRY');
-      addLine(lines, 'CD20/PAX5 highlight B-cell follicles. CD3/CD5 highlight interfollicular T cells. CD21/CD23 highlight follicular dendritic cell meshworks. CD138 highlights interfollicular plasma cells.');
-      addLine(lines, 'HHV8/LANA1: ' + v('hhv8') + '.');
-      addLine(lines, 'Kappa/lambda: ' + v('clonality') + '.');
-      addLine(lines, 'Immunoglobulin isotype: ' + v('isotype') + '.');
-      addLine(lines, 'IgG4: ' + v('igg4') + '.');
-
-      document.getElementById('output').textContent = sanitizeReport(lines.join('\n'));
+    function generateReport(){
+      const lines=['DIAGNOSIS',v('site')+', '+v('procedure')+':',diagnosticLine(),'','COMMENT',buildComment(),'','MICROSCOPIC DESCRIPTION'];
+      const morph=getMorphologySummary();
+      lines.push(morph==='no specific Castleman disease-like features selected'?'Morphologic findings not entered.':'Lymph node with '+morph+'.');
+      lines.push('','IMMUNOHISTOCHEMISTRY');
+      if(v('hhv8')!=='Not assessed')lines.push('HHV8/LANA1: '+v('hhv8')+'.');
+      if(v('clonality')!=='Pending')lines.push('Kappa/lambda: '+v('clonality')+'.');
+      if(v('fdcPattern')!=='Not assessed')lines.push('Follicular dendritic cell meshworks: '+v('fdcPattern').toLowerCase()+'.');
+      if(v('igg4Count'))lines.push('IgG4: up to '+v('igg4Count')+'/HPF.');
+      if(v('igg4Ratio'))lines.push('IgG4/IgG ratio: '+v('igg4Ratio')+'%.');
+      document.getElementById('output').textContent=sanitizeReport(lines.join('\n'));
+      updateCriteria();
     }
-
-    function generateShortComment() {
-      const short = [];
-      short.push('COMMENT');
-      short.push('The lymph node shows Castleman disease-like changes including ' + getMorphologySummary() + '. These findings are not specific and may be seen in unicentric Castleman disease, HHV8-associated multicentric Castleman disease, idiopathic multicentric Castleman disease, plasma cell neoplasm/POEMS-associated disease, and autoimmune/inflammatory disorders. HHV8/LANA1: ' + v('hhv8') + '. Plasma cell clonality: ' + v('clonality') + '. Correlation with clinical, laboratory, radiologic, and ancillary findings is required.');
-      document.getElementById('output').textContent = sanitizeReport(short.join('\n'));
+    function updateCriteria(){
+      const ids=['majorNodes','majorHist','minorLab','minorTwo','excludeDone'];
+      const ok=ids.every(id=>checked(id))&&v('hhv8')==='Negative'&&v('mimickers')==='Yes';
+      document.getElementById('criteriaStatus').textContent=ok?'Checklist completed (clinical verification still required)':'Incomplete criteria/exclusion assessment; iMCD cannot be established by this checklist alone.';
     }
-
+    function generateShortComment(){generateReport();}
     function copyReport() {
       const text = document.getElementById('output').textContent;
       navigator.clipboard.writeText(sanitizeReport(text));
@@ -483,6 +443,10 @@ pre{
       document.getElementById('output').textContent = '';
     }
 
+    document.querySelectorAll('input,select,textarea').forEach(node=>{
+      node.addEventListener('input',generateReport);
+      node.addEventListener('change',generateReport);
+    });
     generateReport();
   </script>
 </body>
