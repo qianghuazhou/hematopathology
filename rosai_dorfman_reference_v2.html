@@ -104,6 +104,27 @@ function commentText(){
  if(val('extra'))out.push(val('extra'));
  return out.join(' ');
 }
+// Diagnosis presets are editable starting points, not assertions of unverified findings.
+function applyDiagnosisChecklist(){
+ const d=val('dx');
+ const profiles={
+  'Reactive lymph node with paracortical hyperplasia, sinus histiocytosis, and polytypic plasmacytosis':{preserved:true,sinus:true,plasma:true,noLpd:true},
+  'Rosai-Dorfman disease':{preserved:true,sinus:true,largeH:true,emper:true,s100:true,oct2:true,cd1aNeg:true,langerinNeg:true},
+  'Extranodal Rosai-Dorfman disease':{largeH:true,s100:true,oct2:true,cd1aNeg:true,langerinNeg:true},
+  'Rosai-Dorfman-like histiocytic proliferation':{largeH:true,s100:true,cd1aNeg:true},
+  'Reactive sinus histiocytosis; not diagnostic of Rosai-Dorfman disease':{preserved:true,sinus:true,noLpd:true}
+ };
+ const ids=['preserved','sinus','largeH','emper','plasma','s100','oct2','cd1aNeg','langerinNeg','noLpd','fibrosis','associated','mapk'];
+ const p=profiles[d]||{};
+ ids.forEach(id=>{el(id).checked=!!p[id]});
+ // Ancillary findings are not inferred from a diagnostic label.
+ el('cd68').value='Not assessed';
+ el('cd163').value='Not assessed';
+ el('igg4Count').value='';
+ el('igg4Ratio').value='';
+ el('eber').value='Not performed/not applicable';
+ generateReport();
+}
 function generateReport(){
  const d=val('dx'),extranodal=d==='Extranodal Rosai-Dorfman disease';
  const lines=['DIAGNOSIS',val('site')+':',diagnosisLine(),'','COMMENT',commentText(),'','MICROSCOPIC DESCRIPTION',
@@ -113,7 +134,7 @@ function generateReport(){
 function generateShortComment(){generateReport();}
 function copyReport(){navigator.clipboard.writeText(el('output').textContent||'')}
 function clearOutput(){el('output').textContent=''}
-document.querySelectorAll('#generator input,#generator select,#generator textarea').forEach(node=>{node.addEventListener('input',generateReport);node.addEventListener('change',generateReport)});generateReport();
+document.querySelectorAll('#generator input,#generator select,#generator textarea').forEach(node=>{if(node.id==='dx')return;node.addEventListener('input',generateReport);node.addEventListener('change',generateReport)});el('dx').addEventListener('change',applyDiagnosisChecklist);applyDiagnosisChecklist();
 </script>
 </body>
 </html>
