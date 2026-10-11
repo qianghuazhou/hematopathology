@@ -271,7 +271,6 @@
       <div><label>Platelets (x10E9/L)</label><input id="plt"></div>
 
       <div><label>MCV (fL)</label><input id="mcv"></div>
-      <div><label>RDW (%)</label><input id="rdw"></div>
       <div><label>RBC (x10E12/L)</label><input id="rbc"></div>
 
       <div><label>Neutrophils (x10E9/L)</label><input id="neutAbs"></div>
@@ -1367,7 +1366,6 @@ function generateReport(){
     'Hb '+(v('hb')||'[]')+' g/L',
     'RBC '+(v('rbc')||'[]')+' x10E12/L',
     'MCV '+(v('mcv')||'[]')+' fL',
-    'RDW '+(v('rdw')||'[]')+'%',
     'Platelets '+(v('plt')||'[]')+' x10E9/L'
   ];
   r += compactCBC.join(', ')+'.\n';
