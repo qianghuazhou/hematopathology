@@ -1355,8 +1355,8 @@ function generateComment(){
 }
 function generateReport(){
   if(window.__loadingTemplate){ finalizePresetInputs(); window.__loadingTemplate=false; } else { updateSmartLogic(); syncAllPillGroups(); }
-  let r='BONE MARROW REPORT\n';
-  r += section('FINAL DIAGNOSIS');
+  let r='';
+  r += section('DIAGNOSIS');
   const site = v('specimenSite');
   const pbdx = v('pbdx');
   const hasAbnormalPbDx = !!(pbdx && !/^no significant morphologic abnormality\.?$/i.test(pbdx));
@@ -1374,19 +1374,21 @@ function generateReport(){
   if(cmt || checked('reviewedQA')){r += section('COMMENT'); if(cmt) r += cmt.trim()+'\n'; if(checked('reviewedQA')) r += 'Selected slides reviewed with a second hematopathologist as part of quality assurance activities.\n';}
   r += section('MICROSCOPIC DESCRIPTION');
   r += 'PERIPHERAL BLOOD COUNT (Date: '+(v('cbcDate')||'[]')+'):\n';
-  if(v('patientAge')) r += 'Age:\t'+v('patientAge')+' years\n';
-  r += 'Hb:\t'+(v('hb')||'[]')+' g/L\n';
-  r += 'WBC:\t'+(v('wbc')||'[]')+' x10E9/L\n';
-  r += 'Platelets:\t'+(v('plt')||'[]')+' x10E9/L\n';
-  r += 'MCV:\t'+(v('mcv')||'[]')+' fL\n';
-  r += 'RDW:\t'+(v('rdw')||'[]')+' %\n';
-  r += 'RBC:\t'+(v('rbc')||'[]')+' x10E12/L\n';
-  r += 'Neutrophils:\t'+(v('neutAbs')||'[]')+' x10E9/L\n';
-  r += 'Lymphocytes:\t'+(v('lymphAbs')||'[]')+' x10E9/L\n';
-  r += 'Monocytes:\t'+(v('monoAbs')||'[]')+' x10E9/L\n';
-  r += 'Eosinophils:\t'+(v('eosAbs')||'[]')+' x10E9/L\n';
-  r += 'Basophils:\t'+(v('basoAbs')||'[]')+' x10E9/L\n\n';
-  r += 'PERIPHERAL BLOOD:\n';
+  const compactCBC=[
+    'WBC '+(v('wbc')||'[]')+' x10E9/L',
+    'Hb '+(v('hb')||'[]')+' g/L',
+    'RBC '+(v('rbc')||'[]')+' x10E12/L',
+    'MCV '+(v('mcv')||'[]')+' fL',
+    'RDW '+(v('rdw')||'[]')+'%',
+    'Platelets '+(v('plt')||'[]')+' x10E9/L'
+  ];
+  r += compactCBC.join(', ')+'.\n';
+  r += ['Neutrophils','Lymphocytes','Monocytes','Eosinophils','Basophils'].map((name,i)=>
+    name+' '+(v(['neutAbs','lymphAbs','monoAbs','eosAbs','basoAbs'][i])||'[]')+' x10E9/L'
+  ).join(', ')+'.\n';
+  if(v('patientAge')) r += 'Age: '+v('patientAge')+' years\n';
+  r += '\n';
+  r += 'BLOOD SMEAR:\n';
   r += finding('RBC', v('pbRbc'));
   r += finding('WBC', v('pbWbc'));
   r += finding('PLT', v('pbPlt'));
@@ -1412,9 +1414,6 @@ function generateReport(){
   if(v('aspVacuolation')) r += 'Vacuolation: '+sent(v('aspVacuolation'))+'\n';
   if(v('aspOther')) r += 'Other: '+sent(v('aspOther'))+'\n';
   r += ironStatusLine(v('ironStore'), v('ringSid'));
-  if(v('clotDescription')) r += 'Clot section: '+sent(normPart(v('clotDescription')))+'\n';
-  else if(v('clotQuality')) r += 'Clot section: '+sent(v('clotQuality'))+'\n';
-  if(v('clotOther')) r += 'Clot section comment: '+sent(v('clotOther'))+'\n';
   r += diffCountOutput();
 
   r += '\n';
@@ -1434,8 +1433,10 @@ function generateReport(){
   if(v('bxOther')) r += 'Other: '+sent(v('bxOther'))+'\n';
   if(v('touchPrep')) r += 'Touch prep: '+sent(normPart(v('touchPrep')))+'\n';
   if(v('touchPrepOther')) r += 'Touch prep comment: '+sent(v('touchPrepOther'))+'\n';
+  if(v('clotDescription')) r += 'Clot section: '+sent(normPart(v('clotDescription')))+'\n';
+  else if(v('clotQuality')) r += 'Clot section: '+sent(v('clotQuality'))+'\n';
+  if(v('clotOther')) r += 'Clot section comment: '+sent(v('clotOther'))+'\n';
   r += '\n';
-  r += section('ANCILLARY STUDIES');
   const specialLines=[];
   if(v('congo')) specialLines.push(v('congo'));
   if(v('retic')) specialLines.push(shortRetic2(v('retic')).trim());
@@ -1444,7 +1445,7 @@ function generateReport(){
   r += '\nIMMUNOHISTOCHEMISTRY:\n';
   r += ihcLine2('ihcCd34','CD34'); r += ihcLine2('ihcCd117','CD117'); r += ihcLine2('ihcCd61','CD61'); r += ihcLine2('ihcCd138','CD138'); r += ihcLine2('ihcKappaLambda','Kappa/Lambda'); r += ihcLine2('ihcCd3','CD3'); r += ihcLine2('ihcCd20','CD20');
   if(v('ihcExtra')) r += v('ihcExtra')+'\n';
-  r += '\nFLOW CYTOMETRY:\n'+sent(v('flow')||'See separate report, if performed')+'\n';
+  if(v('flow')) r += '\nFLOW CYTOMETRY:\n'+sent(v('flow'))+'\n';
   if(v('cyto')||checked('pendingCyto')) r += '\nCytogenetics:\n'+sent(v('cyto')||'Pending, will be reported as an addendum')+'\n';
   if(v('mol')||checked('pendingMol')) r += '\nMolecular:\n'+sent(v('mol')||'Pending, will be reported as an addendum')+'\n';
   if(v('addendum')){r += section('ADDENDUM'); r += v('addendum').trim()+'\n'; r += 'Diagnosis remains unchanged unless otherwise stated.\n';}
