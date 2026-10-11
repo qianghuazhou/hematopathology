@@ -1067,17 +1067,19 @@ function shortOtherCell(label, value){
   return label+': '+cap(t)+'.\n';
 }
 function diffCountOutput(){
-  const fields=[['Blasts','dBlast'],['Promyelocytes','dPro'],['Myelocytes/metamyelocytes','dMyeloMeta'],['Segs/bands','dSeg'],['Erythroids','dEry'],['Lymphs','dLymph'],['Plasma cells','dPlasma'],['Monos','dMono'],['Eos','dEos'],['Basos','dBaso']];
-  const values=fields.map(([name,id])=>[name,v(id)]).filter(x=>x[1] !== '');
+  const fields=[['Blasts','dBlast'],['Promyelocytes','dPro'],['Myelocytes/metamyelocytes','dMyeloMeta'],['Neutrophils/bands','dSeg'],['Monocytes','dMono'],['Erythroid precursors','dEry'],['Lymphocytes','dLymph'],['Plasma cells','dPlasma'],['Eosinophils','dEos'],['Basophils','dBaso'],['Mast cells','dMast']];
+  const values=fields.map(([name,id])=>[name,v(id)]).filter(x=>x[1].trim()!=='');
   const total=v('dTotal');
   const mer=calcAspirateMERatio();
-  let out='';
+  if(!values.length && !mer) return '';
+  let out='\\n';
   if(values.length){
-    out+='\n'+(total ? total+' Cell Count:' : 'Differential count:')+'\n';
-    if(total && parseFloat(total)<200) out+='Comment: Differential count is based on fewer than 200 cells; interpret with caution.\n';
-    out+=values.map(x=>x[0]+' '+addPercent(x[1])).join(', ')+'.\n';
+    out+='DIFFERENTIAL'+(total?' ('+total+' cells counted)':'')+':\\n';
+    if(total && Number(total)<200) out+='Comment: Limited differential ('+total+' cells counted); interpret with caution.\\n';
+    const items=values.map(([name,val])=>name+' '+addPercent(val));
+    for(let i=0;i<items.length;i+=6) out+=items.slice(i,i+6).join(', ')+'.\\n';
   }
-  if(mer && mer !== 'N/A') out+='M:E ratio: '+mer+'.\n';
+  if(mer) out+='M:E ratio: '+mer.replace(/\\.$/,'')+'.\\n';
   return out;
 }
 function ihcLine2(id,label){const txt=v(id);if(!txt)return '';const low=txt.toLowerCase();const first=label.split(/[\/ ]/)[0].toLowerCase();return (low.startsWith(first)||low.startsWith(label.toLowerCase()))?sent(txt)+'\n':label+': '+sent(txt)+'\n';}
@@ -1110,20 +1112,19 @@ function lineageWithExtras(label, baseParts, extraIds, extentId){
   return lineage(label, parts);
 }
 function calcAspirateMERatio(){
-  const aspq = v('aspQuality').toLowerCase();
-  if(/hemodilute|aparticulate|dry tap/.test(aspq)) return v('meRatio') || '';
-  if(v('meRatio')) return v('meRatio');
-  const n = id => {
-    const x = parseFloat(v(id));
-    return Number.isFinite(x) ? x : 0;
-  };
-  const myeloid = n('dBlast') + n('dPro') + n('dMyeloMeta') + n('dSeg') + n('dMono') + n('dEos') + n('dBaso');
-  const erythroid = n('dEry');
-  if(myeloid > 0 && erythroid > 0){
-    const ratio = myeloid / erythroid;
-    return (Math.round(ratio * 10) / 10).toString().replace(/\.0$/,'') + ':1';
-  }
-  return '';
+  const explicit=v('meRatio');
+  if(explicit) return explicit;
+  if(/hemodilute|aparticulate|dry tap/i.test(v('aspQuality'))) return '';
+  const erythroidText=v('dEry');
+  const erythroid=Number(erythroidText);
+  if(erythroidText.trim()==='' || !Number.isFinite(erythroid)) return '';
+  if(erythroid===0) return 'N/A (no erythroid cells)';
+  const ids=['dBlast','dPro','dMyeloMeta','dSeg','dMono','dEos','dBaso'];
+  const entered=ids.map(id=>v(id)).filter(x=>x.trim()!=='');
+  if(!entered.length) return '';
+  const myeloid=entered.reduce((sum,x)=>sum+Number(x),0);
+  if(!Number.isFinite(myeloid) || myeloid<=0) return '';
+  return (Math.round((myeloid/erythroid)*10)/10).toString()+':1';
 }
 function aspirateIsLimited(){
   return /hemodilute|aparticulate|dry tap/.test(v('aspQuality').toLowerCase());
