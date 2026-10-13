@@ -51,7 +51,7 @@ button{border:1px solid var(--line);background:white;border-radius:8px;padding:8
     <label>Minimum center distance</label>
     <div class="rangeRow"><input id="minDistance" type="range" min="8" max="32" value="18" oninput="minDistanceVal.value=this.value"><output id="minDistanceVal">18 px</output></div>
     <div id="cvStatus" class="status">Loading RBC detection library…</div>
-    <p class="small">Lower sensitivity values detect more circles but may add false positives. Enhanced two-pass detection is enabled. Adjust the radius range for image magnification.</p>
+    <p class="small">Lower sensitivity values detect more circles but may add false positives. Color-based RBC detection is enabled. Adjust the radius range for image magnification.</p>
   </div>
 
   <div class="card">
@@ -206,43 +206,43 @@ function detectRBCs(){
       cv.GaussianBlur(gray,blur,new cv.Size(5,5),1.2);
       cv.cvtColor(src,rgb,cv.COLOR_RGBA2RGB);
       cv.cvtColor(rgb,lab,cv.COLOR_RGB2Lab);
-      const scale=canvas.width/1280;
-      const minR=Math.max(4,Math.round(Number(minRadius.value)*scale));
-      const maxR=Math.max(minR+2,Math.round(Number(maxRadius.value)*scale));
-      const minD=Math.max(7,Math.round(Number(minDistance.value)*scale));
-      const threshold=Number(sensitivity.value);
-      const candidates=[];
-      // Two complementary circle searches recover weak-edged and slightly smaller cells.
-      for(const [input,p1,p2,distance] of [[blur,75,threshold,minD],[gray,65,Math.max(11,threshold-6),Math.max(7,Math.round(minD*.8))]]){
-        const circles=mat();
-        cv.HoughCircles(input,circles,cv.HOUGH_GRADIENT,1.2,distance,p1,p2,minR,maxR);
-        for(let i=0;i<circles.cols;i++){
-          const x=circles.data32F[i*3],y=circles.data32F[i*3+1],r=circles.data32F[i*3+2];
-          if(x-r<0||y-r<0||x+r>=canvas.width||y+r>=canvas.height)continue;
-          // Assess RBC-like pink/purple chromaticity across an annulus, avoiding central pallor.
-          let chroma=0,valid=0,brightness=0;
-          for(let k=0;k<24;k++){
-            const angle=k*Math.PI/12,rr=r*.68;
-            const xx=Math.round(x+Math.cos(angle)*rr),yy=Math.round(y+Math.sin(angle)*rr);
-            const idx=(yy*canvas.width+xx)*4;
-            const R=src.data[idx],G=src.data[idx+1],B=src.data[idx+2];
-            const A=lab.ucharPtr(yy,xx)[1];
-            brightness+=(R+G+B)/3;
-            if(A>=126 || (R>G*1.07&&R>B*.94) || (B>G*1.08&&R>G*.95))chroma++;
-            valid++;
-          }
-          if(chroma<Math.ceil(valid*.33)||brightness/valid>245)continue;
-          candidates.push({x,y,r,class:'rbc'});
+      // Color-segment RBC cytoplasm and find local maxima in its distance transform.
+      // This avoids the low recall of Hough circles on pale/irregular cells.
+      const channels=new cv.MatVector(),mask=mat(),opened=mat(),dist=mat(),norm=mat();
+      mats.push(channels);
+      cv.split(lab,channels);
+      const ach=channels.get(1);mats.push(ach);
+      const sensitivityValue=Number(sensitivity.value);
+      const colorThreshold=Math.max(131,Math.min(140,135+(sensitivityValue-24)*.3));
+      cv.threshold(ach,mask,colorThreshold,255,cv.THRESH_BINARY);
+      const kernel=cv.getStructuringElement(cv.MORPH_ELLIPSE,new cv.Size(3,3));mats.push(kernel);
+      cv.morphologyEx(mask,opened,cv.MORPH_OPEN,kernel);
+      cv.distanceTransform(opened,dist,cv.DIST_L2,5);
+      const scale=Math.max(canvas.width,canvas.height)/1280;
+      const minSeparation=Math.max(9,Math.round(Number(minDistance.value)*scale));
+      const minPeak=Math.max(3,Math.round(Number(minRadius.value)*scale*.45));
+      const maxRadius=Math.max(minPeak+4,Math.round(Number(maxRadius.value)*scale*2.4));
+      const found=[];
+      const d=dist.data32F,w=dist.cols,h=dist.rows;
+      const peaks=[];
+      for(let y=minPeak;y<h-minPeak;y+=2){
+        for(let x=minPeak;x<w-minPeak;x+=2){
+          const v=d[y*w+x];
+          if(v<minPeak||v>maxRadius)continue;
+          let peak=true;
+          for(let yy=Math.max(0,y-2);yy<=Math.min(h-1,y+2)&&peak;yy++)
+            for(let xx=Math.max(0,x-2);xx<=Math.min(w-1,x+2);xx++)
+              if(d[yy*w+xx]>v+.01){peak=false;break;}
+          if(peak)peaks.push({x,y,r:v,score:v});
         }
       }
-      // Suppress duplicate circles from the two passes without suppressing neighboring RBCs.
-      candidates.sort((a,b)=>b.r-a.r);
-      const found=[];
-      for(const c of candidates){
-        if(!found.some(p=>Math.hypot(p.x-c.x,p.y-c.y)<Math.min(p.r,c.r)*.72))found.push(c);
+      peaks.sort((a,b)=>b.score-a.score);
+      for(const p of peaks){
+        if(!found.some(c=>Math.hypot(c.x-p.x,c.y-p.y)<minSeparation))
+          found.push({x:p.x,y:p.y,r:Math.max(8,p.r*1.55),class:'rbc'});
       }
       autoCells=found;
-      cvStatus.textContent=`Detected ${autoCells.length} RBC candidates (enhanced two-pass detection). Review false positives and missed cells manually.`;
+      cvStatus.textContent=`Detected ${autoCells.length} RBC candidates (color segmentation). Review false positives and missed cells manually.`;
     }catch(err){
       console.error(err);cvStatus.textContent='Detection failed. Try a smaller image or different settings.';
     }finally{mats.forEach(m=>m.delete());detectBtn.disabled=false;updateAll();}
