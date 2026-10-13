@@ -157,7 +157,7 @@ upload.addEventListener('change',e=>{
     let w=img.width,h=img.height,max=1800;
     if(Math.max(w,h)>max){let s=max/Math.max(w,h);w=Math.round(w*s);h=Math.round(h*s);}
     canvas.width=w;canvas.height=h;imageLoaded=true;autoCells=[];manualMarks=[];history=[];
-    detectBtn.disabled=!cvReady;draw();updateAll();
+    detectBtn.disabled=false;draw();updateAll();
   };img.src=ev.target.result;};rd.readAsDataURL(f);
 });
 
@@ -190,63 +190,56 @@ function eraseManualNear(x,y){
 }
 
 function detectRBCs(){
-  if(!imageLoaded||!cvReady)return;
-  snapshot(); cvStatus.textContent='Detecting RBCs…'; detectBtn.disabled=true;
+  if(!imageLoaded)return;
+  snapshot();cvStatus.textContent='Detecting RBCs…';detectBtn.disabled=true;
   setTimeout(()=>{
-    const mats=[];
-    const mat=()=>{const m=new cv.Mat();mats.push(m);return m;};
     try{
-      // Read the original photograph, not the annotation overlay on the visible canvas.
-      const clean=document.createElement('canvas');
-      clean.width=canvas.width;clean.height=canvas.height;
-      clean.getContext('2d').drawImage(img,0,0,clean.width,clean.height);
-      const src=cv.imread(clean);mats.push(src);
-      const gray=mat(),blur=mat(),lab=mat(),rgb=mat();
-      cv.cvtColor(src,gray,cv.COLOR_RGBA2GRAY);
-      cv.GaussianBlur(gray,blur,new cv.Size(5,5),1.2);
-      cv.cvtColor(src,rgb,cv.COLOR_RGBA2RGB);
-      cv.cvtColor(rgb,lab,cv.COLOR_RGB2Lab);
-      // Color-segment RBC cytoplasm and find local maxima in its distance transform.
-      // This avoids the low recall of Hough circles on pale/irregular cells.
-      const channels=new cv.MatVector(),mask=mat(),opened=mat(),dist=mat(),norm=mat();
-      mats.push(channels);
-      cv.split(lab,channels);
-      const ach=channels.get(1);mats.push(ach);
+      const clean=document.createElement('canvas');clean.width=canvas.width;clean.height=canvas.height;
+      const cx=clean.getContext('2d',{willReadFrequently:true});
+      cx.drawImage(img,0,0,clean.width,clean.height);
+      const w=clean.width,h=clean.height,rgba=cx.getImageData(0,0,w,h).data;
+      const n=w*h,mask=new Uint8Array(n),dist=new Float32Array(n);
       const sensitivityValue=Number(sensitivity.value);
-      const colorThreshold=Math.max(131,Math.min(140,135+(sensitivityValue-24)*.3));
-      cv.threshold(ach,mask,colorThreshold,255,cv.THRESH_BINARY);
-      const kernel=cv.getStructuringElement(cv.MORPH_ELLIPSE,new cv.Size(3,3));mats.push(kernel);
-      cv.morphologyEx(mask,opened,cv.MORPH_OPEN,kernel);
-      cv.distanceTransform(opened,dist,cv.DIST_L2,5);
-      const scale=Math.max(canvas.width,canvas.height)/1280;
-      const minSeparation=Math.max(9,Math.round(Number(minDistance.value)*scale));
-      const minPeak=Math.max(3,Math.round(Number(minRadius.value)*scale*.45));
-      const maxRadius=Math.max(minPeak+4,Math.round(Number(maxRadius.value)*scale*2.4));
-      const found=[];
-      const d=dist.data32F,w=dist.cols,h=dist.rows;
-      const peaks=[];
-      for(let y=minPeak;y<h-minPeak;y+=2){
-        for(let x=minPeak;x<w-minPeak;x+=2){
-          const v=d[y*w+x];
-          if(v<minPeak||v>maxRadius)continue;
-          let peak=true;
-          for(let yy=Math.max(0,y-2);yy<=Math.min(h-1,y+2)&&peak;yy++)
-            for(let xx=Math.max(0,x-2);xx<=Math.min(w-1,x+2);xx++)
-              if(d[yy*w+xx]>v+.01){peak=false;break;}
-          if(peak)peaks.push({x,y,r:v,score:v});
+      // Approximate Lab-a pinkness directly in RGB, without OpenCV runtime dependencies.
+      const cutoff=9+(sensitivityValue-24)*.45;
+      for(let i=0;i<n;i++){
+        const j=i*4,R=rgba[j],G=rgba[j+1],B=rgba[j+2];
+        const pink=R-(G+B)*.5;
+        if(pink>cutoff && R>G*.97 && R>B*.86 && R<251 && G<245){
+          mask[i]=1;dist[i]=10000;
         }
       }
-      peaks.sort((a,b)=>b.score-a.score);
+      // Two-pass chamfer distance transform (pixels to nearest background).
+      for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){
+        const i=y*w+x;if(!mask[i])continue;
+        dist[i]=Math.min(dist[i],dist[i-1]+1,dist[i-w]+1,dist[i-w-1]+1.4142,dist[i-w+1]+1.4142);
+      }
+      for(let y=h-2;y>=1;y--)for(let x=w-2;x>=1;x--){
+        const i=y*w+x;if(!mask[i])continue;
+        dist[i]=Math.min(dist[i],dist[i+1]+1,dist[i+w]+1,dist[i+w+1]+1.4142,dist[i+w-1]+1.4142);
+      }
+      const scale=Math.max(w,h)/1280;
+      const minPeak=Math.max(4,Number(minRadius.value)*scale*.55);
+      const minSeparation=Math.max(12,Number(minDistance.value)*scale);
+      const maxPeak=Math.max(minPeak+5,Number(maxRadius.value)*scale*2);
+      const peaks=[];
+      for(let y=2;y<h-2;y+=2)for(let x=2;x<w-2;x+=2){
+        const i=y*w+x,v=dist[i];if(v<minPeak||v>maxPeak)continue;
+        if(v>=dist[i-2]&&v>=dist[i+2]&&v>=dist[i-2*w]&&v>=dist[i+2*w])peaks.push({x,y,r:v});
+      }
+      peaks.sort((a,b)=>b.r-a.r);
+      const found=[];
       for(const p of peaks){
         if(!found.some(c=>Math.hypot(c.x-p.x,c.y-p.y)<minSeparation))
-          found.push({x:p.x,y:p.y,r:Math.max(8,p.r*1.55),class:'rbc'});
+          found.push({x:p.x,y:p.y,r:Math.max(8,p.r*1.5),class:'rbc'});
       }
       autoCells=found;
-      cvStatus.textContent=`Detected ${autoCells.length} RBC candidates (color segmentation). Review false positives and missed cells manually.`;
+      cvStatus.textContent='Detected '+found.length+' RBC candidates (browser-native segmentation). Review and correct manually.';
     }catch(err){
-      console.error(err);cvStatus.textContent='Detection failed. Try a smaller image or different settings.';
-    }finally{mats.forEach(m=>m.delete());detectBtn.disabled=false;updateAll();}
-  },50);
+      console.error('RBC detection:',err);
+      cvStatus.textContent='Detection error: '+(err&&err.message?err.message:String(err));
+    }finally{detectBtn.disabled=false;updateAll();}
+  },30);
 }
 
 function clearAutoDetections(){snapshot();autoCells=[];updateAll();cvStatus.textContent=cvReady?'RBC detection library ready.':'Loading RBC detection library…';}
