@@ -247,9 +247,9 @@ function detectRBCs(){
       }
       const radii=found.map(c=>c.peakRadius).sort((a,b)=>a-b);
       const median=radii.length?radii[Math.floor(radii.length/2)]:0;
-      const cutoff=Math.max(4.5,median*.62);
+      const fragmentCutoff=Math.max(4.5,median*.62);
       let flagged=0;
-      found.forEach(c=>{if(c.peakRadius<cutoff){c.class='uncertain';flagged++;}delete c.peakRadius;});
+      found.forEach(c=>{if(c.peakRadius<fragmentCutoff){c.class='uncertain';flagged++;}delete c.peakRadius;});
       autoCells=found;
       cvStatus.textContent='Detected '+found.length+' RBC candidates; '+flagged+' small candidates flagged amber for review.';
     }catch(err){
