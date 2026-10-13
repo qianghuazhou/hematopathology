@@ -42,16 +42,16 @@ button{border:1px solid var(--line);background:white;border-radius:8px;padding:8
       <button id="detectBtn" class="green" onclick="detectRBCs()" disabled>Detect RBCs</button>
       <button onclick="clearAutoDetections()">Clear detection</button>
     </div>
-    <label>Detection sensitivity</label>
+    <label>Objective magnification</label><select id="magnification" onchange="applyMagnificationPreset()"><option value="40">40× objective</option><option value="60">60× objective</option></select><label>Detection sensitivity</label>
     <div class="rangeRow"><input id="sensitivity" type="range" min="14" max="36" value="24" oninput="sensVal.value=this.value"><output id="sensVal">24</output></div>
     <label>Minimum RBC radius</label>
     <div class="rangeRow"><input id="minRadius" type="range" min="5" max="18" value="8" oninput="minRadiusVal.value=this.value"><output id="minRadiusVal">8 px</output></div>
     <label>Maximum RBC radius</label>
-    <div class="rangeRow"><input id="maxRadius" type="range" min="10" max="30" value="18" oninput="maxRadiusVal.value=this.value"><output id="maxRadiusVal">18 px</output></div>
+    <div class="rangeRow"><input id="maxRadius" type="range" min="10" max="40" value="18" oninput="maxRadiusVal.value=this.value"><output id="maxRadiusVal">18 px</output></div>
     <label>Minimum center distance</label>
     <div class="rangeRow"><input id="minDistance" type="range" min="8" max="32" value="18" oninput="minDistanceVal.value=this.value"><output id="minDistanceVal">18 px</output></div>
     <div id="cvStatus" class="status">Loading RBC detection library…</div>
-    <p class="small">Lower sensitivity values detect more circles but may add false positives. Color-based RBC detection is enabled. Adjust the radius range for image magnification.</p>
+    <p class="small">40× and 60× presets adjust expected cell size and separation. Automated candidates require visual review; use manual marking for schistocytes.</p>
   </div>
 
   <div class="card">
@@ -189,6 +189,18 @@ function eraseManualNear(x,y){
   const radius=Number(markerSize.value)*2.5;if(bi>=0&&bd<radius*radius)manualMarks.splice(bi,1);
 }
 
+function applyMagnificationPreset(){
+  const is40=document.getElementById('magnification').value==='40';
+  sensitivity.value=is40?24:24;
+  minRadius.value=is40?7:9;
+  maxRadius.value=is40?18:25;
+  minDistance.value=is40?17:22;
+  sensVal.value=sensitivity.value;
+  minRadiusVal.value=minRadius.value+' px';
+  maxRadiusVal.value=maxRadius.value+' px';
+  minDistanceVal.value=minDistance.value+' px';
+  cvStatus.textContent='Preset applied. Run Detect RBCs to update the count.';
+}
 function detectRBCs(){
   if(!imageLoaded)return;
   snapshot();cvStatus.textContent='Detecting RBCs…';detectBtn.disabled=true;
