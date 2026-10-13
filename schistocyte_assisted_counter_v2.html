@@ -51,7 +51,7 @@ button{border:1px solid var(--line);background:white;border-radius:8px;padding:8
     <label>Minimum center distance</label>
     <div class="rangeRow"><input id="minDistance" type="range" min="8" max="32" value="18" oninput="minDistanceVal.value=this.value"><output id="minDistanceVal">18 px</output></div>
     <div id="cvStatus" class="status">Loading RBC detection library…</div>
-    <p class="small">Lower sensitivity values detect more circles but may add false positives. Adjust the radius range for image magnification.</p>
+    <p class="small">Lower sensitivity values detect more circles but may add false positives. Enhanced two-pass detection is enabled. Adjust the radius range for image magnification.</p>
   </div>
 
   <div class="card">
@@ -193,38 +193,59 @@ function detectRBCs(){
   if(!imageLoaded||!cvReady)return;
   snapshot(); cvStatus.textContent='Detecting RBCs…'; detectBtn.disabled=true;
   setTimeout(()=>{
+    const mats=[];
+    const mat=()=>{const m=new cv.Mat();mats.push(m);return m;};
     try{
-      const src=cv.imread(canvas);
-      const gray=new cv.Mat(), blur=new cv.Mat(), circles=new cv.Mat(), lab=new cv.Mat();
+      // Read the original photograph, not the annotation overlay on the visible canvas.
+      const clean=document.createElement('canvas');
+      clean.width=canvas.width;clean.height=canvas.height;
+      clean.getContext('2d').drawImage(img,0,0,clean.width,clean.height);
+      const src=cv.imread(clean);mats.push(src);
+      const gray=mat(),blur=mat(),lab=mat(),rgb=mat();
       cv.cvtColor(src,gray,cv.COLOR_RGBA2GRAY);
-      cv.medianBlur(gray,blur,5);
-      cv.cvtColor(src,lab,cv.COLOR_RGBA2RGB); cv.cvtColor(lab,lab,cv.COLOR_RGB2Lab);
-
+      cv.GaussianBlur(gray,blur,new cv.Size(5,5),1.2);
+      cv.cvtColor(src,rgb,cv.COLOR_RGBA2RGB);
+      cv.cvtColor(rgb,lab,cv.COLOR_RGB2Lab);
       const scale=canvas.width/1280;
       const minR=Math.max(4,Math.round(Number(minRadius.value)*scale));
       const maxR=Math.max(minR+2,Math.round(Number(maxRadius.value)*scale));
-      const minD=Math.max(8,Math.round(Number(minDistance.value)*scale));
-      const p2=Number(sensitivity.value);
-      cv.HoughCircles(blur,circles,cv.HOUGH_GRADIENT,1.2,minD,80,p2,minR,maxR);
-
+      const minD=Math.max(7,Math.round(Number(minDistance.value)*scale));
+      const threshold=Number(sensitivity.value);
+      const candidates=[];
+      // Two complementary circle searches recover weak-edged and slightly smaller cells.
+      for(const [input,p1,p2,distance] of [[blur,75,threshold,minD],[gray,65,Math.max(11,threshold-6),Math.max(7,Math.round(minD*.8))]]){
+        const circles=mat();
+        cv.HoughCircles(input,circles,cv.HOUGH_GRADIENT,1.2,distance,p1,p2,minR,maxR);
+        for(let i=0;i<circles.cols;i++){
+          const x=circles.data32F[i*3],y=circles.data32F[i*3+1],r=circles.data32F[i*3+2];
+          if(x-r<0||y-r<0||x+r>=canvas.width||y+r>=canvas.height)continue;
+          // Assess RBC-like pink/purple chromaticity across an annulus, avoiding central pallor.
+          let chroma=0,valid=0,brightness=0;
+          for(let k=0;k<24;k++){
+            const angle=k*Math.PI/12,rr=r*.68;
+            const xx=Math.round(x+Math.cos(angle)*rr),yy=Math.round(y+Math.sin(angle)*rr);
+            const idx=(yy*canvas.width+xx)*4;
+            const R=src.data[idx],G=src.data[idx+1],B=src.data[idx+2];
+            const A=lab.ucharPtr(yy,xx)[1];
+            brightness+=(R+G+B)/3;
+            if(A>=126 || (R>G*1.07&&R>B*.94) || (B>G*1.08&&R>G*.95))chroma++;
+            valid++;
+          }
+          if(chroma<Math.ceil(valid*.33)||brightness/valid>245)continue;
+          candidates.push({x,y,r,class:'rbc'});
+        }
+      }
+      // Suppress duplicate circles from the two passes without suppressing neighboring RBCs.
+      candidates.sort((a,b)=>b.r-a.r);
       const found=[];
-      for(let i=0;i<circles.cols;i++){
-        const x=circles.data32F[i*3], y=circles.data32F[i*3+1], r=circles.data32F[i*3+2];
-        if(x<0||y<0||x>=canvas.width||y>=canvas.height)continue;
-        const rr=Math.max(2,Math.floor(r*.75));
-        const x0=Math.max(0,Math.floor(x-rr)), y0=Math.max(0,Math.floor(y-rr));
-        const x1=Math.min(canvas.width-1,Math.ceil(x+rr)), y1=Math.min(canvas.height-1,Math.ceil(y+rr));
-        let sumA=0,n=0;
-        for(let yy=y0;yy<=y1;yy+=2){for(let xx=x0;xx<=x1;xx+=2){if((xx-x)*(xx-x)+(yy-y)*(yy-y)<=rr*rr){sumA+=lab.ucharPtr(yy,xx)[1];n++;}}}
-        const meanA=n?sumA/n:0;
-        if(meanA>=132) found.push({x,y,r,class:'rbc'});
+      for(const c of candidates){
+        if(!found.some(p=>Math.hypot(p.x-c.x,p.y-c.y)<Math.min(p.r,c.r)*.72))found.push(c);
       }
       autoCells=found;
-      src.delete();gray.delete();blur.delete();circles.delete();lab.delete();
-      cvStatus.textContent=`Detected ${autoCells.length} RBC candidates. Review the circles and adjust sensitivity/radius if needed.`;
+      cvStatus.textContent=`Detected ${autoCells.length} RBC candidates (enhanced two-pass detection). Review false positives and missed cells manually.`;
     }catch(err){
       console.error(err);cvStatus.textContent='Detection failed. Try a smaller image or different settings.';
-    }finally{detectBtn.disabled=false;updateAll();}
+    }finally{mats.forEach(m=>m.delete());detectBtn.disabled=false;updateAll();}
   },50);
 }
 
