@@ -245,13 +245,34 @@ function detectRBCs(){
         if(!found.some(c=>Math.hypot(c.x-p.x,c.y-p.y)<minSeparation))
           found.push({x:p.x,y:p.y,r:Math.max(7,Math.min(17,p.r*1.05)),peakRadius:p.r,class:'rbc'});
       }
+      // Conservative fragment flag: use local outer stained silhouette, not the
+      // distance-transform peak (which is misleading in centrally pale RBCs).
+      // Only flag small AND markedly elongated candidates; ambiguous cells stay green.
       const radii=found.map(c=>c.peakRadius).sort((a,b)=>a-b);
       const median=radii.length?radii[Math.floor(radii.length/2)]:0;
-      const fragmentCutoff=Math.max(4.5,median*.62);
       let flagged=0;
-      found.forEach(c=>{if(c.peakRadius<fragmentCutoff){c.class='uncertain';flagged++;}delete c.peakRadius;});
+      for(const c of found){
+        const window=Math.max(8,Math.round(median*2.2));
+        let npx=0,sx=0,sy=0,sxx=0,syy=0,sxy=0;
+        for(let yy=Math.max(0,c.y-window);yy<Math.min(h,c.y+window+1);yy+=2)
+          for(let xx=Math.max(0,c.x-window);xx<Math.min(w,c.x+window+1);xx+=2){
+            const k=yy*w+xx;
+            if(!mask[k])continue;
+            npx++;sx+=xx;sy+=yy;sxx+=xx*xx;syy+=yy*yy;sxy+=xx*yy;
+          }
+        if(npx>5){
+          const vx=sxx/npx-(sx/npx)**2,vy=syy/npx-(sy/npx)**2;
+          const cov=sxy/npx-(sx/npx)*(sy/npx);
+          const trace=vx+vy,delta=Math.sqrt((vx-vy)**2+4*cov*cov);
+          const elongation=(trace+delta)/Math.max(.01,trace-delta);
+          if(c.peakRadius<median*.57 && elongation>3.2){
+            c.class='uncertain';flagged++;
+          }
+        }
+        delete c.peakRadius;
+      }
       autoCells=found;
-      cvStatus.textContent='Detected '+found.length+' RBC candidates; '+flagged+' small candidates flagged amber for review.';
+      cvStatus.textContent='Detected '+found.length+' RBC candidates; '+flagged+' strongly elongated small candidates flagged amber for review (experimental).';
     }catch(err){
       console.error('RBC detection:',err);
       cvStatus.textContent='Detection error: '+(err&&err.message?err.message:String(err));
