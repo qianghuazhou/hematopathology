@@ -3,70 +3,43 @@ GI LYMPHOID INFILTRATES — QUICK INTERNAL HEMATOPATHOLOGY REVIEW
 REFERRAL REQUIREMENTS
 For GI biopsies referred for lymphoid aggregates/infiltrates, obtain CD3 and CD20 as the minimum initial stains. Include H&E, relevant clinical/endoscopic history, biopsy site, and any prior lymphoma diagnosis. Additional studies are directed by morphology and hematopathology review.
 
-MORPHOLOGY — FEATURES OF CONCERN
-- Dense, confluent, expansile, or deeply infiltrative lymphoid infiltrate rather than a discrete aggregate.
-- Monomorphic lymphocytes or cytologic atypia (irregular nuclei, conspicuous nucleoli, increased large cells).
-- Destruction or displacement of glands, convincing lymphoepithelial lesions, or architectural effacement.
-- Abnormal follicles (back-to-back follicles, absent polarization, attenuated mantle zones, or atypical follicular cytology).
-- Monocytoid B-cell appearance, plasmacytic differentiation with atypia, or Dutcher bodies.
-- Increased mitoses, apoptosis, necrosis, or a conspicuous high-grade component.
-- Discordance with the expected inflammatory pattern, a mass lesion, or known lymphoma.
-
-No single feature or numerical count establishes lymphoma. Evaluate morphology, CD3/CD20 distribution, biopsy site, and clinical history together. Lymphoepithelial lesions must be distinguished from reactive epithelial infiltration. Small or crushed samples may limit assessment.
-
-MORPHOLOGY — ADDITIONAL DESCRIPTIVE PHRASES
-- Small, well-circumscribed lymphoid aggregate in the lamina propria, composed of polymorphous small lymphocytes without glandular distortion.
-- Prominent lymphoid follicle with a polarized germinal center, tingible-body macrophages, and a well-defined mantle zone.
-- Patchy lymphoplasmacytic infiltrate within the lamina propria, with preserved crypt/gland architecture.
-- Multiple closely spaced lymphoid aggregates with focal confluence but without overt epithelial destruction.
-- Dense, monotonous small lymphoid infiltrate expanding the lamina propria and separating native glands.
-- Nodular or diffuse infiltrate extending into the muscularis mucosae or submucosa where sampled.
-- Small lymphocytes with irregular nuclear contours and scant cytoplasm, with focal monocytoid appearance.
-- Atypical lymphoid cells infiltrating and disrupting glandular epithelium, raising concern for lymphoepithelial lesions.
-- Follicles lacking polarization or mantle zones, with atypical germinal-center cells or follicular colonization.
-- Scattered large atypical lymphoid cells with vesicular chromatin and prominent nucleoli in a background of small lymphocytes.
-- Plasma-cell-rich infiltrate with possible cytologic atypia; consider light-chain studies if a clonal process is suspected.
-- Crush artifact, superficial sampling, or scant lymphoid tissue limits assessment of architecture and cytology.
-
-These are selectable morphologic descriptions, not diagnostic criteria; adapt to the observed tissue and avoid implying lymphoma from density or CD20 predominance alone.
-
 QUICK REVIEW COMMENTS
 
 1. REACTIVE LYMPHOID AGGREGATE
-The lymphoid aggregate is polymorphous, with admixed CD3-positive T cells and CD20-positive B cells. No significant cytologic atypia or destructive growth. Favor reactive lymphoid aggregate.
+The biopsy shows a small, well-circumscribed polymorphous lymphoid aggregate in the lamina propria, without glandular distortion or cytologic atypia. CD3 and CD20 highlight admixed T and B cells. Favor reactive lymphoid aggregate.
 
 2. REACTIVE LYMPHOID FOLLICLE
-The lymphoid follicle shows preserved architecture, with CD20-positive B cells and surrounding CD3-positive T cells. No concerning morphologic features. Favor reactive lymphoid follicle.
+The lymphoid follicle has a polarized germinal center with tingible-body macrophages and a well-defined mantle zone. CD20 highlights the follicular B cells and CD3 highlights surrounding T cells. Favor reactive lymphoid follicle.
 
 3. NONSPECIFIC LYMPHOID INFILTRATE
-Focal mixed T- and B-cell infiltrate without significant cytologic atypia or destructive features. No convincing morphologic evidence of lymphoma.
+Patchy lymphoplasmacytic infiltrate with scattered small lymphoid aggregates and preserved glandular architecture. CD3 and CD20 show a mixed T- and B-cell population. No significant atypia or destructive features. No convincing evidence of lymphoma.
 
 4. T-CELL-PREDOMINANT INFILTRATE
-Predominantly CD3-positive T-cell infiltrate with scattered CD20-positive B cells. No overt atypia or destructive features. Favor reactive/inflammatory infiltrate.
+The lamina propria contains predominantly small, mature-appearing lymphocytes without significant atypia, gland destruction, or expansile growth. CD3 highlights most lymphocytes, with scattered CD20-positive B cells. Favor reactive/inflammatory infiltrate.
 
 5. B-CELL-PREDOMINANT AGGREGATE
-CD20-positive B-cell-predominant aggregate with admixed CD3-positive T cells. No significant atypia or destructive features. Favor reactive lymphoid aggregate.
+The biopsy shows a discrete aggregate of predominantly small, mature-appearing lymphocytes without monomorphism, cytologic atypia, or glandular destruction. CD20 highlights the B-cell-predominant aggregate with admixed CD3-positive T cells. Favor reactive lymphoid aggregate.
 
 6. LIMITED LYMPHOID AGGREGATE
-Small/limited lymphoid aggregate without overt atypia on available sections. CD3 and CD20 demonstrate T and B cells. Definitive characterization is limited by sample size.
+A small lymphoid aggregate is present in a superficial/limited biopsy. The cells are predominantly small without overt atypia; CD3 and CD20 demonstrate T and B cells. Limited tissue precludes confident assessment of architecture. No overt lymphoma identified in the sampled tissue.
 
 7. ATYPICAL B-CELL INFILTRATE
-Atypical CD20-positive B-cell-predominant infiltrate with [specify concerning features]. A B-cell lymphoproliferative disorder cannot be excluded. Additional immunohistochemical studies are recommended.
+The biopsy shows a dense, focally confluent infiltrate of relatively monotonous small lymphocytes expanding the lamina propria and separating native glands. CD20 highlights the predominant B-cell population, with fewer admixed CD3-positive T cells. A B-cell lymphoproliferative disorder cannot be excluded. Recommend CD5, CD10, and cyclin D1, with further studies guided by findings.
 
 8. ATYPICAL T-CELL INFILTRATE
-Atypical CD3-positive T-cell-predominant infiltrate with [specify concerning features]. Further immunophenotypic characterization is recommended.
+The biopsy shows a dense T-cell-predominant infiltrate with focal cytologic atypia, including irregular nuclear contours, and associated glandular infiltration. CD3 highlights the predominant population, with few CD20-positive B cells. Further immunophenotypic characterization (CD4, CD8, CD5, CD7) is recommended.
 
 9. SUSPICIOUS FOR LYMPHOMA
-The infiltrate shows [specify concerning features], suspicious for lymphoma. Further hematopathology workup is required for classification.
+The biopsy shows a confluent, relatively monomorphic lymphoid infiltrate with architectural distortion and focal glandular destruction. The lymphocytes show nuclear irregularity and cytologic atypia. CD3/CD20 demonstrate [predominant population]. Findings are suspicious for lymphoma; further hematopathology workup is required for classification.
 
 10. POSSIBLE GASTRIC MALT LYMPHOMA
-Dense B-cell-predominant infiltrate with [specify concerning features, e.g., destructive lymphoepithelial lesions/monocytoid cytology]. Extranodal marginal zone lymphoma of MALT type cannot be excluded. Recommend targeted immunohistochemical studies and assessment of H. pylori status.
+The gastric biopsy shows a dense infiltrate of small to intermediate-sized lymphocytes with focal monocytoid features, expansion of the lamina propria, and possible lymphoepithelial lesions. CD20 highlights the predominant B-cell infiltrate, with scattered CD3-positive T cells. Extranodal marginal zone lymphoma of MALT type cannot be excluded. Recommend targeted IHC and assessment of H. pylori status.
 
 11. PRIOR LYMPHOMA
-Lymphoid infiltrate identified. Given the history of [lymphoma type], comparison with prior material and targeted immunohistochemical studies are recommended to assess involvement.
+The biopsy contains a [focal/dense] lymphoid infiltrate composed of [small/intermediate/large] lymphoid cells with [describe architecture and atypia]. CD3 and CD20 show [distribution]. Given the history of [lymphoma type], comparison with prior material and targeted immunohistochemical studies are recommended to assess involvement.
 
 12. NO EVIDENCE OF INVOLVEMENT BY KNOWN LYMPHOMA
-The infiltrate shows no convincing morphologic or CD3/CD20 immunophenotypic evidence of involvement by the patient's known [lymphoma type] in this limited biopsy. Additional targeted studies may be needed if clinical suspicion persists.
+The biopsy shows scattered small, polymorphous lymphoid aggregates with preserved glandular architecture and no cytologic atypia or destructive growth. CD3 and CD20 demonstrate admixed T and B cells. No convincing evidence of involvement by the patient's known [lymphoma type] in the sampled tissue; targeted studies may be required if clinical suspicion persists.
 
 ESCALATION
 - Reactive morphology: brief comment; no routine additional IHC.
