@@ -14,6 +14,22 @@ MORPHOLOGY — FEATURES OF CONCERN
 
 No single feature or numerical count establishes lymphoma. Evaluate morphology, CD3/CD20 distribution, biopsy site, and clinical history together. Lymphoepithelial lesions must be distinguished from reactive epithelial infiltration. Small or crushed samples may limit assessment.
 
+MORPHOLOGY — ADDITIONAL DESCRIPTIVE PHRASES
+- Small, well-circumscribed lymphoid aggregate in the lamina propria, composed of polymorphous small lymphocytes without glandular distortion.
+- Prominent lymphoid follicle with a polarized germinal center, tingible-body macrophages, and a well-defined mantle zone.
+- Patchy lymphoplasmacytic infiltrate within the lamina propria, with preserved crypt/gland architecture.
+- Multiple closely spaced lymphoid aggregates with focal confluence but without overt epithelial destruction.
+- Dense, monotonous small lymphoid infiltrate expanding the lamina propria and separating native glands.
+- Nodular or diffuse infiltrate extending into the muscularis mucosae or submucosa where sampled.
+- Small lymphocytes with irregular nuclear contours and scant cytoplasm, with focal monocytoid appearance.
+- Atypical lymphoid cells infiltrating and disrupting glandular epithelium, raising concern for lymphoepithelial lesions.
+- Follicles lacking polarization or mantle zones, with atypical germinal-center cells or follicular colonization.
+- Scattered large atypical lymphoid cells with vesicular chromatin and prominent nucleoli in a background of small lymphocytes.
+- Plasma-cell-rich infiltrate with possible cytologic atypia; consider light-chain studies if a clonal process is suspected.
+- Crush artifact, superficial sampling, or scant lymphoid tissue limits assessment of architecture and cytology.
+
+These are selectable morphologic descriptions, not diagnostic criteria; adapt to the observed tissue and avoid implying lymphoma from density or CD20 predominance alone.
+
 QUICK REVIEW COMMENTS
 
 1. REACTIVE LYMPHOID AGGREGATE
