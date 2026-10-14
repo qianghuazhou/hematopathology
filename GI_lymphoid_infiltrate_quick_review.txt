@@ -6,39 +6,99 @@ For GI biopsies referred for lymphoid aggregates/infiltrates, obtain CD3 and CD2
 QUICK REVIEW COMMENTS
 
 1. REACTIVE LYMPHOID AGGREGATE
+
+Random [GI site] Biopsy (Hematopathology):
+REACTIVE LYMPHOID AGGREGATE (see comment)
+
+COMMENT
 The biopsy shows a small, well-circumscribed polymorphous lymphoid aggregate in the lamina propria, without glandular distortion or cytologic atypia. CD3 and CD20 highlight admixed T and B cells. Favor reactive lymphoid aggregate.
 
 2. REACTIVE LYMPHOID FOLLICLE
+
+Random [GI site] Biopsy (Hematopathology):
+REACTIVE LYMPHOID FOLLICLE (see comment)
+
+COMMENT
 The lymphoid follicle has a polarized germinal center with tingible-body macrophages and a well-defined mantle zone. CD20 highlights the follicular B cells and CD3 highlights surrounding T cells. Favor reactive lymphoid follicle.
 
 3. NONSPECIFIC LYMPHOID INFILTRATE
+
+Random Stomach Biopsy (Hematopathology):
+NONSPECIFIC LYMPHOID INFILTRATE (see comment)
+
+COMMENT
 Patchy lymphoplasmacytic infiltrate with scattered small lymphoid aggregates and preserved glandular architecture. CD3 and CD20 show a mixed T- and B-cell population. No significant atypia or destructive features. No convincing evidence of lymphoma.
 
 4. T-CELL-PREDOMINANT INFILTRATE
+
+Random [GI site] Biopsy (Hematopathology):
+T-CELL-PREDOMINANT INFILTRATE (see comment)
+
+COMMENT
 The lamina propria contains predominantly small, mature-appearing lymphocytes without significant atypia, gland destruction, or expansile growth. CD3 highlights most lymphocytes, with scattered CD20-positive B cells. Favor reactive/inflammatory infiltrate.
 
 5. B-CELL-PREDOMINANT AGGREGATE
+
+Random [GI site] Biopsy (Hematopathology):
+B-CELL-PREDOMINANT AGGREGATE (see comment)
+
+COMMENT
 The biopsy shows a discrete aggregate of predominantly small, mature-appearing lymphocytes without monomorphism, cytologic atypia, or glandular destruction. CD20 highlights the B-cell-predominant aggregate with admixed CD3-positive T cells. Favor reactive lymphoid aggregate.
 
 6. LIMITED LYMPHOID AGGREGATE
+
+Random [GI site] Biopsy (Hematopathology):
+LIMITED LYMPHOID AGGREGATE (see comment)
+
+COMMENT
 A small lymphoid aggregate is present in a superficial/limited biopsy. The cells are predominantly small without overt atypia; CD3 and CD20 demonstrate T and B cells. Limited tissue precludes confident assessment of architecture. No overt lymphoma identified in the sampled tissue.
 
 7. ATYPICAL B-CELL INFILTRATE
+
+Random [GI site] Biopsy (Hematopathology):
+ATYPICAL B-CELL INFILTRATE (see comment)
+
+COMMENT
 The biopsy shows a dense, focally confluent infiltrate of relatively monotonous small lymphocytes expanding the lamina propria and separating native glands. CD20 highlights the predominant B-cell population, with fewer admixed CD3-positive T cells. A B-cell lymphoproliferative disorder cannot be excluded. Recommend CD5, CD10, and cyclin D1, with further studies guided by findings.
 
 8. ATYPICAL T-CELL INFILTRATE
+
+Random [GI site] Biopsy (Hematopathology):
+ATYPICAL T-CELL INFILTRATE (see comment)
+
+COMMENT
 The biopsy shows a dense T-cell-predominant infiltrate with focal cytologic atypia, including irregular nuclear contours, and associated glandular infiltration. CD3 highlights the predominant population, with few CD20-positive B cells. Further immunophenotypic characterization (CD4, CD8, CD5, CD7) is recommended.
 
 9. SUSPICIOUS FOR LYMPHOMA
+
+Random [GI site] Biopsy (Hematopathology):
+SUSPICIOUS FOR LYMPHOMA (see comment)
+
+COMMENT
 The biopsy shows a confluent, relatively monomorphic lymphoid infiltrate with architectural distortion and focal glandular destruction. The lymphocytes show nuclear irregularity and cytologic atypia. CD3/CD20 demonstrate [predominant population]. Findings are suspicious for lymphoma; further hematopathology workup is required for classification.
 
 10. POSSIBLE GASTRIC MALT LYMPHOMA
+
+Random [GI site] Biopsy (Hematopathology):
+POSSIBLE GASTRIC MALT LYMPHOMA (see comment)
+
+COMMENT
 The gastric biopsy shows a dense infiltrate of small to intermediate-sized lymphocytes with focal monocytoid features, expansion of the lamina propria, and possible lymphoepithelial lesions. CD20 highlights the predominant B-cell infiltrate, with scattered CD3-positive T cells. Extranodal marginal zone lymphoma of MALT type cannot be excluded. Recommend targeted IHC and assessment of H. pylori status.
 
 11. PRIOR LYMPHOMA
+
+Random [GI site] Biopsy (Hematopathology):
+PRIOR LYMPHOMA (see comment)
+
+COMMENT
 The biopsy contains a [focal/dense] lymphoid infiltrate composed of [small/intermediate/large] lymphoid cells with [describe architecture and atypia]. CD3 and CD20 show [distribution]. Given the history of [lymphoma type], comparison with prior material and targeted immunohistochemical studies are recommended to assess involvement.
 
 12. NO EVIDENCE OF INVOLVEMENT BY KNOWN LYMPHOMA
+
+Random [GI site] Biopsy (Hematopathology):
+NO EVIDENCE OF INVOLVEMENT BY KNOWN LYMPHOMA (see comment)
+
+COMMENT
 The biopsy shows scattered small, polymorphous lymphoid aggregates with preserved glandular architecture and no cytologic atypia or destructive growth. CD3 and CD20 demonstrate admixed T and B cells. No convincing evidence of involvement by the patient's known [lymphoma type] in the sampled tissue; targeted studies may be required if clinical suspicion persists.
 
 ESCALATION
