@@ -21,13 +21,13 @@ REACTIVE LYMPHOID FOLLICLE (see comment)
 COMMENT
 The lymphoid follicle has a polarized germinal center with tingible-body macrophages and a well-defined mantle zone. CD20 highlights the follicular B cells and CD3 highlights surrounding T cells. Favor reactive lymphoid follicle.
 
-3. REACTIVE PRIMARY LYMPHOID FOLLICLE
+4. REACTIVE PRIMARY LYMPHOID FOLLICLES
 
-Random [GI site] Biopsy (Hematopathology):
-REACTIVE LYMPHOID AGGREGATE, CONSISTENT WITH PRIMARY LYMPHOID FOLLICLE (see comment)
+Rectal Biopsy (Hematopathology):
+REACTIVE LYMPHOID AGGREGATES, CONSISTENT WITH PRIMARY LYMPHOID FOLLICLES (see comment)
 
 COMMENT
-A well-circumscribed lymphoid aggregate composed of small, mature-appearing lymphocytes without a recognizable germinal center. CD20 highlights predominantly B cells, with admixed peripheral CD3-positive T cells. No significant cytologic atypia or destructive features. Findings favor a reactive primary lymphoid follicle.
+A few lymphoid aggregates composed of small, mature-appearing lymphocytes without recognizable germinal centers. CD20 highlights predominantly B cells, with peripheral CD3-positive T cells. The follicles are positive for BCL2 and negative for BCL6 and CD10. CD5 highlights T cells, similar to CD3. Cyclin D1 is negative. CD21 highlights follicular dendritic cell meshworks. Ki-67 is less than 5%. Kappa and lambda highlight plasma cells. No significant cytologic atypia or destructive features. Findings favor reactive primary lymphoid follicles.
 
 3. NONSPECIFIC LYMPHOID INFILTRATE
 
@@ -37,7 +37,7 @@ NONSPECIFIC LYMPHOID INFILTRATE (see comment)
 COMMENT
 Patchy lymphoplasmacytic infiltrate with scattered small lymphoid aggregates and preserved glandular architecture. CD3 and CD20 show a mixed T- and B-cell population. No significant atypia or destructive features. No convincing evidence of lymphoma.
 
-4. T-CELL-PREDOMINANT INFILTRATE
+5. T-CELL-PREDOMINANT INFILTRATE
 
 Random [GI site] Biopsy (Hematopathology):
 T-CELL-PREDOMINANT INFILTRATE (see comment)
@@ -45,7 +45,7 @@ T-CELL-PREDOMINANT INFILTRATE (see comment)
 COMMENT
 The lamina propria contains predominantly small, mature-appearing lymphocytes without significant atypia, gland destruction, or expansile growth. CD3 highlights most lymphocytes, with scattered CD20-positive B cells. Favor reactive/inflammatory infiltrate.
 
-5. B-CELL-PREDOMINANT AGGREGATE
+6. B-CELL-PREDOMINANT AGGREGATE
 
 Random [GI site] Biopsy (Hematopathology):
 B-CELL-PREDOMINANT AGGREGATE (see comment)
@@ -53,7 +53,7 @@ B-CELL-PREDOMINANT AGGREGATE (see comment)
 COMMENT
 The biopsy shows a discrete aggregate of predominantly small, mature-appearing lymphocytes without monomorphism, cytologic atypia, or glandular destruction. CD20 highlights the B-cell-predominant aggregate with admixed CD3-positive T cells. Favor reactive lymphoid aggregate.
 
-6. LIMITED LYMPHOID AGGREGATE
+7. LIMITED LYMPHOID AGGREGATE
 
 Random [GI site] Biopsy (Hematopathology):
 LIMITED LYMPHOID AGGREGATE (see comment)
@@ -61,7 +61,7 @@ LIMITED LYMPHOID AGGREGATE (see comment)
 COMMENT
 A small lymphoid aggregate is present in a superficial/limited biopsy. The cells are predominantly small without overt atypia; CD3 and CD20 demonstrate T and B cells. Limited tissue precludes confident assessment of architecture. No overt lymphoma identified in the sampled tissue.
 
-7. ATYPICAL B-CELL INFILTRATE
+8. ATYPICAL B-CELL INFILTRATE
 
 Random [GI site] Biopsy (Hematopathology):
 ATYPICAL B-CELL INFILTRATE (see comment)
@@ -69,7 +69,7 @@ ATYPICAL B-CELL INFILTRATE (see comment)
 COMMENT
 The biopsy shows a dense, focally confluent infiltrate of relatively monotonous small lymphocytes expanding the lamina propria and separating native glands. CD20 highlights the predominant B-cell population, with fewer admixed CD3-positive T cells. A B-cell lymphoproliferative disorder cannot be excluded. Recommend CD5, CD10, and cyclin D1, with further studies guided by findings.
 
-8. ATYPICAL T-CELL INFILTRATE
+9. ATYPICAL T-CELL INFILTRATE
 
 Random [GI site] Biopsy (Hematopathology):
 ATYPICAL T-CELL INFILTRATE (see comment)
@@ -77,7 +77,7 @@ ATYPICAL T-CELL INFILTRATE (see comment)
 COMMENT
 The biopsy shows a dense T-cell-predominant infiltrate with focal cytologic atypia, including irregular nuclear contours, and associated glandular infiltration. CD3 highlights the predominant population, with few CD20-positive B cells. Further immunophenotypic characterization (CD4, CD8, CD5, CD7) is recommended.
 
-9. SUSPICIOUS FOR LYMPHOMA
+10. SUSPICIOUS FOR LYMPHOMA
 
 Random [GI site] Biopsy (Hematopathology):
 SUSPICIOUS FOR LYMPHOMA (see comment)
@@ -85,7 +85,7 @@ SUSPICIOUS FOR LYMPHOMA (see comment)
 COMMENT
 The biopsy shows a confluent, relatively monomorphic lymphoid infiltrate with architectural distortion and focal glandular destruction. The lymphocytes show nuclear irregularity and cytologic atypia. CD3/CD20 demonstrate [predominant population]. Findings are suspicious for lymphoma; further hematopathology workup is required for classification.
 
-10. POSSIBLE GASTRIC MALT LYMPHOMA
+11. POSSIBLE GASTRIC MALT LYMPHOMA
 
 Random [GI site] Biopsy (Hematopathology):
 POSSIBLE GASTRIC MALT LYMPHOMA (see comment)
@@ -93,7 +93,7 @@ POSSIBLE GASTRIC MALT LYMPHOMA (see comment)
 COMMENT
 The gastric biopsy shows a dense infiltrate of small to intermediate-sized lymphocytes with focal monocytoid features, expansion of the lamina propria, and possible lymphoepithelial lesions. CD20 highlights the predominant B-cell infiltrate, with scattered CD3-positive T cells. Extranodal marginal zone lymphoma of MALT type cannot be excluded. Recommend targeted IHC and assessment of H. pylori status.
 
-11. PRIOR LYMPHOMA
+12. PRIOR LYMPHOMA
 
 Random [GI site] Biopsy (Hematopathology):
 PRIOR LYMPHOMA (see comment)
@@ -101,7 +101,7 @@ PRIOR LYMPHOMA (see comment)
 COMMENT
 The biopsy contains a [focal/dense] lymphoid infiltrate composed of [small/intermediate/large] lymphoid cells with [describe architecture and atypia]. CD3 and CD20 show [distribution]. Given the history of [lymphoma type], comparison with prior material and targeted immunohistochemical studies are recommended to assess involvement.
 
-12. NO EVIDENCE OF INVOLVEMENT BY KNOWN LYMPHOMA
+13. NO EVIDENCE OF INVOLVEMENT BY KNOWN LYMPHOMA
 
 Random [GI site] Biopsy (Hematopathology):
 NO EVIDENCE OF INVOLVEMENT BY KNOWN LYMPHOMA (see comment)
