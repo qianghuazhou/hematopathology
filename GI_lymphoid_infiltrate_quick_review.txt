@@ -21,6 +21,14 @@ REACTIVE LYMPHOID FOLLICLE (see comment)
 COMMENT
 The lymphoid follicle has a polarized germinal center with tingible-body macrophages and a well-defined mantle zone. CD20 highlights the follicular B cells and CD3 highlights surrounding T cells. Favor reactive lymphoid follicle.
 
+3. REACTIVE PRIMARY LYMPHOID FOLLICLE
+
+Random [GI site] Biopsy (Hematopathology):
+REACTIVE LYMPHOID AGGREGATE, CONSISTENT WITH PRIMARY LYMPHOID FOLLICLE (see comment)
+
+COMMENT
+A well-circumscribed lymphoid aggregate composed of small, mature-appearing lymphocytes without a recognizable germinal center. CD20 highlights predominantly B cells, with admixed peripheral CD3-positive T cells. No significant cytologic atypia or destructive features. Findings favor a reactive primary lymphoid follicle.
+
 3. NONSPECIFIC LYMPHOID INFILTRATE
 
 Random Stomach Biopsy (Hematopathology):
