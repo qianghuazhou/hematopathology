@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fungal Histopathology & Mimics</title><style>body{font:15px system-ui,sans-serif;max-width:1200px;margin:auto;padding:24px;color:#183044;background:#f7f9fc}h1{color:#123b65}input,select{padding:11px;border:1px solid #aab9c9;border-radius:8px;margin:5px}input{width:min(450px,90%)}.card{background:white;border:1px solid #dce3eb;border-radius:10px;padding:16px;margin:12px 0}h3{margin:0 0 7px;color:#14538b}.meta{color:#52677c;font-size:13px}.note{background:#fff6df;padding:14px;border-radius:8px}button{padding:10px;cursor:pointer}@media print{input,select,button{display:none}body{background:white}.card{break-inside:avoid}}</style></head><body><h1>Fungal Histopathology & Mimics</h1><p>Practical tissue morphology, diagnostic clues and special stains.</p><p class="note"><b>Diagnostic caution:</b> Morphology often supports presumptive identification, not species confirmation. Correlate with culture, PCR/sequencing, antigen testing, epidemiology and immune status. Damaged molds may show atypical branching or septation.</p><input id="q" placeholder="Search organism, morphology, stain or differential"><select id="cat"><option value="">All categories</option></select><button onclick="window.print()">Print</button><div id="results"></div><script>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fungal Histopathology & Mimics</title><style>body{font:15px system-ui,sans-serif;max-width:1200px;margin:auto;padding:24px;color:#183044;background:#f7f9fc}h1{color:#123b65}input,select{padding:11px;border:1px solid #aab9c9;border-radius:8px;margin:5px}input{width:min(450px,90%)}.card{background:white;border:1px solid #dce3eb;border-radius:10px;padding:16px;margin:12px 0}h3{margin:0 0 7px;color:#14538b}.meta{color:#52677c;font-size:13px}.note{background:#fff6df;padding:14px;border-radius:8px}button{padding:10px;cursor:pointer}@media print{input,select,button{display:none}body{background:white}.card{break-inside:avoid}}.organism-layout{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:center}.organism-diagram{width:200px;max-width:100%;border:1px solid #e6dfe8;border-radius:12px}@media(max-width:600px){.organism-layout{grid-template-columns:1fr}}@media print{.organism-layout{grid-template-columns:150px 1fr}.organism-diagram{width:150px}}</style></head><body><h1>Fungal Histopathology & Mimics</h1><p>Practical tissue morphology, diagnostic clues and special stains. Each organism includes a simplified schematic (not a photomicrograph or scale drawing).</p><p class="note"><b>Diagnostic caution:</b> Morphology often supports presumptive identification, not species confirmation. Correlate with culture, PCR/sequencing, antigen testing, epidemiology and immune status. Damaged molds may show atypical branching or septation.</p><input id="q" placeholder="Search organism, morphology, stain or differential"><select id="cat"><option value="">All categories</option></select><button onclick="window.print()">Print</button><div id="results"></div><script>
 const data=[
 ["Budding yeasts","Histoplasma capsulatum","2–5 µm; intracellular macrophage-associated small yeasts; narrow-based budding; apparent halo/pseudocapsule","GMS+, PAS+","Leishmania amastigotes (kinetoplast, GMS−); Talaromyces (transverse septum); small Cryptococcus"],
 ["Budding yeasts","Blastomyces dermatitidis","8–15 µm; broad-based budding; thick double-contoured walls; sometimes multinucleate","GMS+, PAS+","Cryptococcus, Paracoccidioides"],
@@ -26,5 +26,40 @@ const data=[
 ["Algal mimic","Prototheca spp.","2–12 µm sporangia with multiple endospores, morula-like pattern","GMS+, PAS+","Coccidioides and other sporangia-forming organisms"]
 ];
 const cats=[...new Set(data.map(x=>x[0]))];document.querySelector('#cat').innerHTML+=[...cats].map(x=>'<option>'+x+'</option>').join('');
-function render(){const q=document.querySelector('#q').value.toLowerCase(),c=document.querySelector('#cat').value;let a=data.filter(x=>(!c||x[0]===c)&&x.join(' ').toLowerCase().includes(q));document.querySelector('#results').innerHTML='<p>'+a.length+' organisms</p>'+a.map(x=>'<article class="card"><h3>'+x[1]+'</h3><div class="meta">'+x[0]+'</div><p><b>Morphology:</b> '+x[2]+'</p><p><b>Stains:</b> '+x[3]+'</p><p><b>Differential / notes:</b> '+x[4]+'</p></article>').join('')}document.querySelector('#q').addEventListener('input',render);document.querySelector('#cat').addEventListener('change',render);render();
+
+function diagram(i){
+const circle=(x,y,r,fill='#e9b8c5',stroke='#693a65',sw=2)=>'<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+fill+'" stroke="'+stroke+'" stroke-width="'+sw+'"/>';
+const ellipse=(x,y,rx,ry,rot=0)=>'<ellipse cx="'+x+'" cy="'+y+'" rx="'+rx+'" ry="'+ry+'" transform="rotate('+rot+' '+x+' '+y+')" fill="#e9b8c5" stroke="#693a65" stroke-width="2"/>';
+const path=(d,w=7,color='#815476')=>'<path d="'+d+'" fill="none" stroke="'+color+'" stroke-width="'+w+'" stroke-linecap="round" stroke-linejoin="round"/>';
+const line=(x,y,X,Y,w=2)=>path('M'+x+' '+y+' L'+X+' '+Y,w);
+const dots=(n,fx)=>Array.from({length:n},(_,j)=>fx(j)).join('');
+let a='';
+switch(i){
+case 0: a=circle(100,75,56,'#f3e8e4','#c2a3a5',2)+dots(8,j=>circle(66+(j%4)*22,53+Math.floor(j/4)*32,6)+circle(72+(j%4)*22,48+Math.floor(j/4)*32,2));break;
+case 1:a=circle(99,80,37)+circle(146,98,18)+path('M127 92 Q133 86 133 94',2);break;
+case 2:a=circle(102,77,28)+dots(8,j=>{let t=j*Math.PI/4;return circle(102+42*Math.cos(t),77+42*Math.sin(t),12)});break;
+case 3:a=circle(98,77,38,'#f8f5ec','#8c7391',3)+circle(98,77,23)+circle(137,95,14,'#f8f5ec','#8c7391');break;
+case 4:a=ellipse(95,79,33,12,-26)+ellipse(136,58,15,8,-40)+circle(66,97,9);break;
+case 5:a=circle(102,77,56,'#f4e3e9')+dots(14,j=>{let t=j*2.399,rad=9+5*Math.sqrt(j);return circle(102+rad*Math.cos(t),77+rad*Math.sin(t),5)});break;
+case 6:a=dots(5,j=>ellipse(43+j*28,78+(j%2)*10,12,8,j%2?15:-15)+line(43+j*28,70+(j%2)*10,43+j*28,86+(j%2)*10));break;
+case 7:a=dots(7,j=>circle(48+(j%4)*32,57+Math.floor(j/4)*45,13,'#f8f5ec')+path('M'+(39+(j%4)*32)+' '+(57+Math.floor(j/4)*45)+' Q'+(48+(j%4)*32)+' '+(67+Math.floor(j/4)*45)+' '+(57+(j%4)*32)+' '+(57+Math.floor(j/4)*45),2));break;
+case 8:a=dots(3,j=>circle(54+j*46,78,19,'#c59b67','#71472c',3)+line(54+j*46,59,54+j*46,97)+line(35+j*46,78,73+j*46,78));break;
+case 9:a=path('M26 120 L100 70 L169 33',9)+path('M100 70 L153 121',8)+dots(6,j=>line(42+j*20,108-j*13,47+j*20,115-j*13));break;
+case 10:a=path('M22 122 Q72 123 92 76 T169 42',18)+path('M92 76 Q128 79 151 123',17);break;
+case 11:a=path('M22 125 L165 40',6)+dots(6,j=>line(38+j*20,115-j*12,43+j*20,124-j*12));break;
+case 12:a=path('M25 120 Q80 85 170 43',9,'#73533c')+path('M88 87 Q112 100 140 128',8,'#73533c')+dots(5,j=>circle(42+j*22,109-j*13,5,'#987049','#533f35'));break;
+case 13:a=path('M25 118 Q70 120 89 79 T173 37',13)+dots(5,j=>circle(45+j*26,116-j*16,10))+dots(3,j=>line(65+j*28,113-j*20,65+j*28,101-j*20));break;
+case 14:a=dots(8,j=>circle(48+(j%4)*31,55+Math.floor(j/4)*47,10))+path('M37 120 Q60 85 81 113 T125 112',6);break;
+case 15:a=path('M22 122 L91 79 L167 43',3)+path('M91 79 L150 126',3)+dots(14,j=>circle(34+(j%7)*19,108-Math.floor(j/7)*44-(j%7)*6,2,'#93668a'));break;
+case 16:a=dots(12,j=>line(101,77,101+62*Math.cos(j*Math.PI/6),77+62*Math.sin(j*Math.PI/6),2))+circle(101,77,15,'#ead4aa');break;
+case 17:case 18:a=circle(102,77,58,'#f3e8e4','#c2a3a5')+dots(7,j=>circle(64+(j%4)*23,62+Math.floor(j/4)*32,7)+circle(69+(j%4)*23,62+Math.floor(j/4)*32,2,'#5c448a'));break;
+case 19:a=dots(6,j=>ellipse(45+(j%3)*50,54+Math.floor(j/3)*48,17,6,-35));break;
+case 20:a=path('M20 115 L178 115',4,'#b5a2a0')+dots(8,j=>circle(34+j*19,103,7));break;
+case 21:a=dots(4,j=>ellipse(47+j*35,78,12,23,15));break;
+case 22:a=dots(14,j=>ellipse(32+(j%7)*23,53+Math.floor(j/7)*44,5,9,20));break;
+case 23:a=circle(100,78,53,'#f3e3ed')+dots(9,j=>{let t=j*2.4,r=12+10*Math.sqrt(j);return circle(100+r*Math.cos(t),78+r*Math.sin(t),10)});break;
+}
+return '<svg class="organism-diagram" role="img" aria-label="Schematic illustration of '+data[i][1].replace(/"/g,'')+'" viewBox="0 0 200 155" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="155" rx="12" fill="#fcf9fb"/>'+a+'</svg>';
+}
+\nfunction render(){const q=document.querySelector('#q').value.toLowerCase(),c=document.querySelector('#cat').value;let a=data.map((x,i)=>({x,i})).filter(o=>(!c||o.x[0]===c)&&o.x.join(' ').toLowerCase().includes(q));document.querySelector('#results').innerHTML='<p>'+a.length+' organisms</p>'+a.map(({x,i})=>'<article class="card"><h3>'+x[1]+'</h3><div class="meta">'+x[0]+'</div><div class="organism-layout">'+diagram(i)+'<div><p><b>Morphology:</b> '+x[2]+'</p><p><b>Stains:</b> '+x[3]+'</p><p><b>Differential / notes:</b> '+x[4]+'</p></div></div></article>').join('')}document.querySelector('#q').addEventListener('input',render);document.querySelector('#cat').addEventListener('change',render);render();
 </script></body></html>
