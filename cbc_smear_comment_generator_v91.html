@@ -116,7 +116,7 @@ function generate(){
  const cmpPltSeverityHigh = on('plt_high_mild') || on('plt_high_mod') || on('plt_high_sev') || on('plt_high_marked');
 
  // RBC compounds.
- if(cmpMicroAnemiaTarget) addc('Microcytic anemia with target cells. Consider iron deficiency and thalassemia trait/hemoglobinopathy. Recommend iron studies and, if indicated, hemoglobin analysis.');
+ if(cmpMicroAnemiaTarget) addc('Microcytic anemia with target cells. Consider iron deficiency and thalassemia trait. Recommend iron studies and hemoglobin analysis if clinically indicated.');
  if(on('rbc_anemia') && on('micro') && on('hypo') && on('poly')) addc('Microcytic hypochromic anemia with increased polychromasia suggests iron deficiency with recent or chronic blood loss. Correlation with ferritin/iron studies and investigation for blood loss are recommended as clinically indicated.');
  if(on('micro') && on('target') && on('stippling') && !cmpMicroHypoTargetStippleHighRbc) addc('Microcytosis with target cells and basophilic stippling raises consideration of thalassemia trait or another hemoglobinopathy. Hemoglobin analysis and family studies may be considered if not previously known.');
  if(on('rbc_anemia') && on('micro') && on('hypo') && on('target') && !cmpMicroHypoHighRbc && !cmpMicroAnemiaTarget) addc('Microcytic hypochromic anemia with target cells raises consideration of iron deficiency and/or thalassemia/hemoglobinopathy. Iron studies are recommended first; hemoglobin analysis may be considered if iron deficiency is excluded or corrected.');
