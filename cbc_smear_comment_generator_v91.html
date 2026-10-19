@@ -101,6 +101,7 @@ function generate(){
  const cmpNormoPolyAnemia = on('rbc_anemia') && on('normo') && on('poly');
  const cmpMicroHypoHighRbc = on('micro') && on('hypo') && on('highrbc');
  const cmpMicroHighRbc = on('micro') && on('highrbc');
+ const cmpMicroAnemiaTarget = on('rbc_anemia') && on('micro') && on('target') && !on('highrbc') && !on('stippling');
  const cmpMicroHypoTargetStippleHighRbc = on('micro') && on('hypo') && on('highrbc') && on('target') && on('stippling');
  const cmpDimorphicPappenheimer = on('dimorphic') && on('pappenheimer');
  const cmpMacroOvalAnemia = on('rbc_anemia') && on('macro') && on('ovalmacro');
@@ -115,9 +116,10 @@ function generate(){
  const cmpPltSeverityHigh = on('plt_high_mild') || on('plt_high_mod') || on('plt_high_sev') || on('plt_high_marked');
 
  // RBC compounds.
+ if(cmpMicroAnemiaTarget) addc('Microcytic anemia with target cells. Consider iron deficiency and thalassemia trait/hemoglobinopathy. Recommend iron studies and, if indicated, hemoglobin analysis.');
  if(on('rbc_anemia') && on('micro') && on('hypo') && on('poly')) addc('Microcytic hypochromic anemia with increased polychromasia suggests iron deficiency with recent or chronic blood loss. Correlation with ferritin/iron studies and investigation for blood loss are recommended as clinically indicated.');
  if(on('micro') && on('target') && on('stippling') && !cmpMicroHypoTargetStippleHighRbc) addc('Microcytosis with target cells and basophilic stippling raises consideration of thalassemia trait or another hemoglobinopathy. Hemoglobin analysis and family studies may be considered if not previously known.');
- if(on('rbc_anemia') && on('micro') && on('hypo') && on('target') && !cmpMicroHypoHighRbc) addc('Microcytic hypochromic anemia with target cells raises consideration of iron deficiency and/or thalassemia/hemoglobinopathy. Iron studies are recommended first; hemoglobin analysis may be considered if iron deficiency is excluded or corrected.');
+ if(on('rbc_anemia') && on('micro') && on('hypo') && on('target') && !cmpMicroHypoHighRbc && !cmpMicroAnemiaTarget) addc('Microcytic hypochromic anemia with target cells raises consideration of iron deficiency and/or thalassemia/hemoglobinopathy. Iron studies are recommended first; hemoglobin analysis may be considered if iron deficiency is excluded or corrected.');
  if(cmpNormoPolyAnemia) addc('Normocytic anemia with polychromasia suggests recent blood loss or hemolysis. Correlation with reticulocyte count and hemolysis studies is recommended as clinically indicated.');
  if(cmpRouleauxAnemia) addc('Anemia with prominent rouleaux formation. Consider increased serum proteins due to a monoclonal gammopathy or inflammatory hypergammaglobulinemia. Suggest serum protein studies if clinically indicated.');
  if(on('rbc_anemia') && on('pappenheimer') && !cmpDimorphicPappenheimer) addc('Anemia with Pappenheimer bodies may be seen with sideroblastic processes, iron-loading states, or reduced splenic function. Correlation with iron studies and clinical context is recommended.');
@@ -172,9 +174,9 @@ function generate(){
  else if(on('agglutination')) addc('Red cell agglutination suggests a cold-reactive antibody and may cause spurious CBC indices. DAT and hemolysis studies may be useful if hemolysis is suspected.');
  if(on('irondef') && !(on('rbc_anemia') && on('micro') && on('hypo') && on('poly'))) addc('Findings are suggestive of iron deficiency anemia. Suggest iron studies and exclude chronic blood loss if clinically indicated.');
  else if(on('rbc_anemia') && on('micro') && on('hypo') && (on('ellipto')||on('aniso')||on('poik')) && !cmpMicroHypoHighRbc) addc('Findings favour iron deficiency anemia. Suggest iron studies.');
- else if(on('rbc_anemia') && on('micro') && !on('thal') && !cmpMicroHighRbc) addc('Microcytic anemia. Consider iron deficiency, thalassemia trait and anemia of chronic disease/inflammation. Suggest iron studies.');
+ else if(on('rbc_anemia') && on('micro') && !on('thal') && !cmpMicroHighRbc && !cmpMicroAnemiaTarget) addc('Microcytic anemia. Consider iron deficiency, thalassemia trait and anemia of chronic disease/inflammation. Suggest iron studies.');
  if(on('thal') && !cmpMicroHypoTargetStippleHighRbc && !cmpMicroHypoHighRbc && !cmpMicroHighRbc) addc('Microcytosis with target cells and/or a relatively high RBC count suggests thalassemia trait or another hemoglobinopathy. Suggest iron studies and hemoglobin analysis if not previously known.');
- else if(on('micro') && on('target') && !on('irondef') && !on('liver') && !cmpMicroHighRbc && !cmpMicroHypoHighRbc) addc('Microcytosis with target cells raises consideration of thalassemia trait or another hemoglobinopathy. Iron studies and hemoglobin analysis may be useful if not previously known.');
+ else if(on('micro') && on('target') && !cmpMicroAnemiaTarget && !on('irondef') && !on('liver') && !cmpMicroHighRbc && !cmpMicroHypoHighRbc) addc('Microcytosis with target cells raises consideration of thalassemia trait or another hemoglobinopathy. Iron studies and hemoglobin analysis may be useful if not previously known.');
  if(on('sickle')) addc('Sickle cells are identified, consistent with a sickling disorder. Correlation with hemoglobin analysis is recommended if the hemoglobinopathy pattern is not previously established.');
  if(on('target') && on('sickle')) addc('If hemoglobin C crystals or prominent target cells are present, hemoglobin SC disease or S/beta-thalassemia may be considered depending on the hemoglobin analysis pattern.');
  if(on('mega')) addc('Findings raise consideration of a megaloblastic process, including vitamin B12 or folate deficiency. Correlation with vitamin B12 and folate studies is recommended.');
@@ -257,7 +259,7 @@ function generate(){
  if(on('hypo') && !on('irondef') && !cmpMicroHypoHighRbc && !cmpMicroHypoTargetStippleHighRbc) addc('Hypochromia supports impaired hemoglobinization, most commonly due to iron deficiency or thalassemia/hemoglobinopathy.');
  if(on('aniso') && !on('irondef') && !on('mega')) addc('Anisocytosis indicates increased variation in red cell size and is nonspecific.');
  if(on('poik') && !on('irondef') && !on('maha') && !on('marrowinf')) addc('Poikilocytosis indicates increased variation in red cell shape and is nonspecific.');
- if(on('target') && !on('thal') && !on('sickle') && !on('liver') && !cmpMicroHighRbc && !cmpMicroHypoHighRbc && !cmpMicroHypoTargetStippleHighRbc && !cmpMacroRoundTarget && !cmpMacroRoundTargetStomato && !(on('macro') && on('target'))) addc('Target cells may be seen with liver disease, thalassemia/hemoglobinopathy, iron deficiency, or post-splenectomy/hyposplenic states.');
+ if(on('target') && !cmpMicroAnemiaTarget && !on('thal') && !on('sickle') && !on('liver') && !cmpMicroHighRbc && !cmpMicroHypoHighRbc && !cmpMicroHypoTargetStippleHighRbc && !cmpMacroRoundTarget && !cmpMacroRoundTargetStomato && !(on('macro') && on('target'))) addc('Target cells may be seen with liver disease, thalassemia/hemoglobinopathy, iron deficiency, or post-splenectomy/hyposplenic states.');
  if(on('nrbc') && !on('leukoery') && !on('marrowinf')) addc('Nucleated red blood cells may be seen with marrow stress, hemolysis, hypoxia, marrow infiltration, or extramedullary hematopoiesis.');
  if(on('stippling') && !cmpMicroHypoTargetStippleHighRbc && !(on('micro') && on('target'))) addc('Basophilic stippling may be associated with lead exposure, thalassemia, sideroblastic processes, alcohol-related change, and other disorders of erythropoiesis.');
  if(on('leftshift') && !on('neutro') && !on('reactneut') && !on('leukemoid') && !on('cml') && !cmpNeutToxicLeft && !cmpNeutLeftMono && !cmpMacroLeftMono) addc('Granulocytic left shift is most commonly reactive, including infection, inflammation, physiologic stress, corticosteroid effect, or growth factor therapy.');
