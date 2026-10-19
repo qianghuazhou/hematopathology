@@ -206,6 +206,7 @@ function generate(){
 
  // WBC interpretations.
  if(on('leukemoid')) addc('Marked neutrophilia with prominent left shift supports a leukemoid reaction, most often associated with severe infection/inflammation, tissue injury, physiologic stress, or growth factor effect.');
+ else if(on('reactneut') && (on('toxic') || on('dohle') || on('vacuoles'))) addc('Reactive neutrophilia with toxic changes, which may be associated with infection, inflammation, tissue injury, or physiologic stress.');
  else if(on('reactneut') || (on('neutro') && (on('toxic')||on('dohle')||on('vacuoles')) && !on('leftshift') && !cmpNeutMono && !cmpNeutPlt && !cmpNeutToxicLeft)) addc('Findings support a reactive neutrophilic process, most commonly associated with infection, inflammation, tissue injury, corticosteroid therapy, growth factor effect, or physiologic stress.');
  else if(on('neutro') && !on('leftshift') && !cmpNeutMono && !cmpNeutPlt && !cmpNeutToxicLeft) addc('Neutrophilia is most commonly reactive, including infection, inflammation, physiologic stress, corticosteroid therapy, and growth factor effect.');
  if(on('leukocytosis') && !on('neutro') && !on('lympho') && !on('mono') && !on('eos') && !on('baso') && !on('acuteleuk') && !on('cml')) addc('Leukocytosis may be reactive or clonal depending on lineage, persistence, and associated smear findings.');
