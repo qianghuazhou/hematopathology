@@ -157,9 +157,9 @@ function generate(){
  if(cmpMacroLeftMono) addc('Macrocytosis, left shift, and monocytosis are present. The differential diagnosis includes reactive processes, nutritional deficiency, medication effect, and myeloid neoplasms. Clinical correlation required.');
 
  // Platelet/cytopenia compounds.
+ if(on('thrombocytopenia') && !cmpPancytopenia && !cmpSchistoThrombocytopenia && !cmpNeutropeniaThrombocytopenia && !cmpPltSeverityLow && !on('itp') && !on('consumption') && !on('hypersplenism')) addc('Thrombocytopenia may be associated with immune-mediated destruction, medication effect, hypersplenism, or bone marrow disorders.');
  if(cmpAnemiaThrombocytosis && !on('irondef') && !cmpNeutPlt) addc('Anemia with thrombocytosis may be seen with iron deficiency, inflammation, recent blood loss, or malignancy. Correlation with iron studies and clinical context is recommended.');
  if(cmpSchistoThrombocytopenia && !on('maha')) addc('Anemia, thrombocytopenia, and red cell fragments raise concern for DIC, TTP, or another microangiopathic/mechanical hemolytic process. Urgent clinical correlation is recommended.');
- if(cmpThrombocytopeniaNoLarge && !cmpPancytopenia && !cmpSchistoThrombocytopenia && !cmpLowPltNoGiant && !cmpPltSeverityLow) addc('Thrombocytopenia without increased large/giant platelets may suggest decreased platelet production or ineffective thrombopoiesis, depending on the clinical context.');
  if(cmpThrombocytopeniaLarge && !cmpPancytopenia && !cmpSchistoThrombocytopenia) addc('Thrombocytopenia with large/giant platelets suggests increased platelet turnover, as may be seen with peripheral destruction, sequestration in splenomegaly, or recovery from thrombocytopenia.');
  if(cmpPancytopeniaDysplasia) addc('Pancytopenia with dysplastic morphology. Consider a myelodysplastic neoplasm or other bone marrow disorder. Bone marrow examination is suggested if not previously performed.');
  else if(cmpPancytopenia) addc('Pancytopenia, etiology uncertain. Common causes include medication effect, infection, autoimmune disease, nutritional deficiency, hypersplenism and bone marrow disorders. Consider hematology assessment and bone marrow examination if unexplained.');
@@ -235,7 +235,7 @@ function generate(){
  if(on('plt_low_sev') && !cmpPancytopenia) addc('Severe thrombocytopenia has a broad differential, including immune-mediated destruction, medication effect, infection/sepsis, hypersplenism, liver disease, nutritional deficiency, consumption, and marrow disorders. Urgent clinical correlation is recommended.');
  else if(on('plt_low_mod') && !cmpPancytopenia) addc('Moderate thrombocytopenia may reflect infection, medication effect, immune-mediated destruction, hypersplenism, liver disease, nutritional deficiency, consumption, or marrow disease. Follow-up is recommended.');
  else if(on('plt_low_mild') && !cmpPancytopenia) addc('Mild thrombocytopenia may be seen with infection, medication effect, immune causes, hypersplenism, liver disease, or early marrow disorders. Follow-up is recommended if persistent.');
- if(cmpLowPltNoGiant) addc('Thrombocytopenia without increased large/giant platelets may suggest decreased platelet production or ineffective thrombopoiesis, depending on the clinical context.');
+
  if(on('plt_high_marked') || on('plt_high_sev')) addc('Marked/severe thrombocytosis may be reactive, but a myeloproliferative neoplasm should be considered if reactive causes are not evident or if thrombocytosis persists.');
  else if(on('plt_high_mod')) addc('Moderate thrombocytosis may be reactive, including infection, inflammation, iron deficiency, recent surgery, blood loss, or malignancy; persistence should prompt consideration of a clonal process.');
  else if(on('plt_high_mild')) addc('Mild thrombocytosis is often reactive, including infection, inflammation, iron deficiency, recent blood loss, surgery, or malignancy. Follow-up is recommended if persistent.');
@@ -244,7 +244,7 @@ function generate(){
  if(on('clump')) addc('Platelet clumping may cause pseudothrombocytopenia. Repeat collection in sodium citrate or another alternate anticoagulant may be considered if the platelet count is clinically important.');
  if(on('satellitism')) addc('Platelet satellitism may cause pseudothrombocytopenia. Repeat testing using an alternate anticoagulant may be useful.');
  if(on('itp') && !cmpThrombocytopeniaLarge) addc('Thrombocytopenia with large or giant platelets favors increased peripheral platelet destruction, including immune thrombocytopenia.');
- else if(on('thrombocytopenia') && !on('hypersplenism') && !on('consumption') && !cmpPancytopenia && !cmpSchistoThrombocytopenia && !cmpThrombocytopeniaLarge && !cmpThrombocytopeniaNoLarge && !cmpPltSeverityLow && !cmpLowPltNoGiant) addc('Thrombocytopenia may reflect decreased production, increased destruction/consumption, sequestration, infection, medication effect, immune causes, or marrow disease.');
+
  if(on('reactplt') && !cmpNeutPlt && !cmpAnemiaThrombocytosis) addc('Reactive thrombocytosis is favoured. Common causes include iron deficiency, infection/inflammation, tissue injury, recent blood loss and malignancy.');
  else if(on('thrombocytosis') && on('irondef') && !cmpNeutPlt) addc('Thrombocytosis in this setting is favored reactive and may be associated with iron deficiency.');
  else if(on('thrombocytosis') && !on('mpnplt') && !cmpNeutPlt && !cmpAnemiaThrombocytosis && !cmpPltSeverityHigh) addc('Thrombocytosis may be reactive or clonal. Further investigation is suggested if persistent.');
