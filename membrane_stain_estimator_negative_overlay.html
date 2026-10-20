@@ -146,7 +146,7 @@
 </head>
 <body>
 <header>
-    <h1>CD138 / Membrane-Cytoplasmic DAB Estimator — Negative Nuclear Overlay</h1>
+    <h1>CD138 / Membrane-Cytoplasmic DAB Estimator — Negative Nuclear Overlay v2</h1>
     <p>ROI-based visual assistant for CD138-positive plasma cell burden or other membrane/cytoplasmic IHC stains.</p>
 </header>
 
@@ -228,7 +228,7 @@
                 <button class="btn-primary" onclick="analyze()">Run analysis</button>
                 <button onclick="toggleOverlay()" id="overlayBtn" class="active">Overlay on</button>
             </div>
-            <p class="small">This uses color heuristics for DAB-positive membrane/cytoplasmic staining. Blue circles mark candidate hematoxylin-rich CD138-negative nuclei, not verified individual cells. They are not used as a denominator. The algorithm estimates positive area fraction, not plasma-cell percentage.</p>
+            <p class="small">This uses color heuristics for DAB-positive membrane/cytoplasmic staining. Blue circles mark candidate hematoxylin-rich CD138-negative nuclei using local contrast and shape filters. Bone, fat, and artifacts still require ROI exclusion; candidates are not verified individual cells. They are not used as a denominator. The algorithm estimates positive area fraction, not plasma-cell percentage.</p>
         </div>
 
         <div class="panel">
@@ -428,8 +428,10 @@ function analyze() {
             const isTissue = brightness < tissueThreshold && saturation > 8;
             if (!isTissue) continue;
             // Hematoxylin-rich dark blue/purple nuclei: heuristic candidates, not validated cell segmentation.
-            const blueExcess = b - Math.min(r,g);
-            if (brightness < (165 + negativeSensitivity * .45) && b > g * .82 && (blueExcess > -28 + negativeSensitivity*.12 || (r < 125 && b > r*.85)) && saturation > 10) nucleiMask[y*canvas.width+x] = 1;
+            const purple = (b - g) * .55 + (b-r)*.45;
+            const darkness = 255-brightness;
+            // Require hematoxylin-like blue/purple chroma and sufficiently dark nuclei.
+            if (brightness < (145 + negativeSensitivity*.55) && darkness > 46 && purple > (4-negativeSensitivity*.15) && b > g*.88 && b > r*.78 && saturation > 12) nucleiMask[y*canvas.width+x] = 1;
             tissue++;
             roiCount++;
 
@@ -452,48 +454,71 @@ function analyze() {
     stats.tissuePixels = tissue;
     stats.roiPixels = roiCount;
     analysisMask = mask;
-    negativeCandidates = findNegativeNuclei(nucleiMask, mask, canvas.width, canvas.height);
+    negativeCandidates = findNegativeNuclei(nucleiMask, mask, data, canvas.width, canvas.height);
 
     document.getElementById('areaPct').textContent = pct.toFixed(1) + '%';
     document.getElementById('algoBracket').textContent = stats.bracket;
     document.getElementById('analyzedPixels').textContent = tissue.toLocaleString();
     document.getElementById('statusBox').textContent = tissue > 0
-        ? 'Analysis complete. Review overlay and set the final pathologist estimate if needed.'
+        ? 'Analysis complete. Review blue nuclear candidates; manually exclude bone/fat/artifacts. Area fraction is not a plasma-cell count.'
         : 'No analyzable tissue detected. Adjust ROI or tissue/background threshold.';
 
     updateReport();
     drawAll();
 }
 
-function findNegativeNuclei(nuclear, dab, w, h) {
-    // Connected-component candidate finder. Conservative: no percentage inferred from these candidates.
-    const seen = new Uint8Array(nuclear.length), result = [];
-    const minArea = Math.max(10,Math.round(w*h/180000)), maxArea=Math.max(250,Math.round(w*h/140));
-    const stack=[];
-    for(let y=1;y<h-1;y++) for(let x=1;x<w-1;x++){
+function findNegativeNuclei(nuclear, dab, rgba, w, h) {
+    // Connected components with local contrast and morphological filters.
+    // No cell percentage is inferred from these candidates.
+    const seen=new Uint8Array(nuclear.length), out=[], stack=[];
+    const scale=Math.sqrt(w*h/750000);
+    const minArea=Math.max(7,Math.round(10*scale*scale));
+    const maxArea=Math.max(110,Math.round(200*scale*scale));
+    const rr=Math.max(5,Math.round(9*scale));
+    const active=roi||{x:0,y:0,w,h};
+    for(let y=Math.max(1,active.y|0);y<Math.min(h-1,active.y+active.h);y++)
+      for(let x=Math.max(1,active.x|0);x<Math.min(w-1,active.x+active.w);x++){
         const seed=y*w+x;
-        if(!nuclear[seed]||seen[seed])continue;
+        if(!nuclear[seed]||seen[seed]||isExcluded(x,y))continue;
         seen[seed]=1;stack.push(seed);
         let area=0,sx=0,sy=0,minx=x,maxx=x,miny=y,maxy=y,nearDab=0;
         while(stack.length){
             const k=stack.pop(),px=k%w,py=(k/w)|0;
-            area++;sx+=px;sy+=py;minx=Math.min(minx,px);maxx=Math.max(maxx,px);miny=Math.min(miny,py);maxy=Math.max(maxy,py);
+            area++;sx+=px;sy+=py;
+            minx=Math.min(minx,px);maxx=Math.max(maxx,px);
+            miny=Math.min(miny,py);maxy=Math.max(maxy,py);
             if(dab[k]||dab[k-1]||dab[k+1]||dab[k-w]||dab[k+w])nearDab++;
-            if(area>maxArea*3)continue;
+            if(area>maxArea*5)continue;
             for(const q of [k-1,k+1,k-w,k+w]){
                 if(q<0||q>=nuclear.length||seen[q]||!nuclear[q])continue;
                 const qx=q%w,qy=(q/w)|0;
-                if(Math.abs(qx-px)+Math.abs(qy-py)!==1)continue;
+                if(Math.abs(qx-px)+Math.abs(qy-py)!==1||isExcluded(qx,qy))continue;
                 seen[q]=1;stack.push(q);
             }
         }
+        if(area<minArea||area>maxArea||nearDab/area>.15)continue;
         const bw=maxx-minx+1,bh=maxy-miny+1,ratio=bw/bh;
-        if(area>=minArea&&area<=maxArea&&ratio>.35&&ratio<2.8&&nearDab/area<.12&&result.length<2500){
-            const cx=sx/area,cy=sy/area;
-            if(isInRect(cx,cy,roi||{x:0,y:0,w,h})&&!isExcluded(cx,cy))result.push({x:cx,y:cy,r:Math.max(3,Math.sqrt(area/Math.PI))});
-        }
+        const compact=area/(bw*bh);
+        if(ratio<.48||ratio>2.1||compact<.27)continue;
+        const cx=sx/area,cy=sy/area;
+        if(!isInRect(cx,cy,active)||isExcluded(cx,cy))continue;
+        // A true nucleus should be darker than its local surrounding tissue.
+        const luminance=k=>(rgba[k*4]+rgba[k*4+1]+rgba[k*4+2])/3;
+        let core=0,ncore=0,ring=0,nring=0,ringBlue=0;
+        for(let yy=Math.max(0,Math.round(cy)-rr);yy<=Math.min(h-1,Math.round(cy)+rr);yy+=2)
+          for(let xx=Math.max(0,Math.round(cx)-rr);xx<=Math.min(w-1,Math.round(cx)+rr);xx+=2){
+            const d=Math.hypot(xx-cx,yy-cy),k=yy*w+xx;
+            if(d<=Math.max(2,Math.sqrt(area/Math.PI))){core+=luminance(k);ncore++;}
+            else if(d>=rr*.6&&d<=rr){ring+=luminance(k);nring++;
+              ringBlue+=rgba[k*4+2]-rgba[k*4+1];}
+          }
+        if(!ncore||!nring||ring/nring-core/ncore<7)continue;
+        // Suppress diffuse bluish trabecular material: surroundings should not
+        // have nearly the same hematoxylin-rich color as the candidate.
+        if(ringBlue/nring>18)continue;
+        if(out.length<4000)out.push({x:cx,y:cy,r:Math.max(3,Math.sqrt(area/Math.PI))});
     }
-    return result;
+    return out;
 }
 function bracketFromPercent(p) {
     if (p < 5) return '<5%';
