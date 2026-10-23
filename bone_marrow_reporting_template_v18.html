@@ -1061,7 +1061,7 @@ function shortOtherCell(label, value){
   if(/^not increased$/i.test(t)){
     if(label==='Lymphocytes') return 'Lymphocytes: Present in normal numbers; predominantly small lymphocytes.\n';
     if(label==='Plasma cells') return 'Plasma cells: Present in normal numbers.\n';
-    if(label==='Mast cells') return 'Mast cells: Present in normal numbers.\n';
+    if(label==='Mast cells') return 'Mast cells: Not increased.\n';
   }
   return label+': '+cap(t)+'.\n';
 }
