@@ -1017,7 +1017,7 @@ function strip(txt){return clean(txt).replace(/[.;,\s]+$/,'');}
 function cap(txt){txt=clean(txt);return txt?txt.charAt(0).toUpperCase()+txt.slice(1):'';}
 function sent(txt){txt=cap(strip(txt));return txt?txt+'.':'';}
 function normPart(txt){txt=strip(txt);if(!txt)return '';txt=txt.replace(/^are\s+/i,'').replace(/^is\s+/i,'').replace(/^show(s)?\s+/i,'').replace(/^with\s+/i,'');const reps=[[/^contain adequate cellular marrow particles$/i,'adequate with numerous spicules'],[/^rare scattered mast cells$/i,'rare scattered forms'],[/^rare scattered blasts$/i,'rare scattered blasts'],[/^proportionately normal in number$/i,'normal in number'],[/^present in normal numbers$/i,'normal in number'],[/^proportionately increased$/i,'increased'],[/^proportionately decreased$/i,'decreased'],[/^markedly proportionately increased$/i,'markedly increased'],[/^markedly proportionately decreased$/i,'markedly decreased'],[/^moderately relatively increased$/i,'moderately increased'],[/^moderately relatively decreased$/i,'moderately decreased'],[/^mildly relatively increased$/i,'mildly increased'],[/^mildly relatively decreased$/i,'mildly decreased'],[/^show proper\/proper maturation$/i,'orderly maturation through all stages'],[/^proper\/proper maturation$/i,'orderly maturation through all stages'],[/^show proper maturation$/i,'orderly maturation through all stages'],[/^proper maturation$/i,'orderly maturation through all stages'],[/^unremarkable morphology$/i,'morphologically unremarkable'],[/^show no significant abnormalities$/i,'morphologically unremarkable'],[/^predominantly mature multilobated forms/i,'mature multilobated forms']];for(const [re,rep] of reps){txt=txt.replace(re,rep);}return txt;}
-function lineage(label,parts){let arr=parts.map(normPart).filter(Boolean);if(!arr.length)return '';let out=[];for(const p of arr){if(out.length&&/^(including|with|and)\b/i.test(p))out[out.length-1]+=', '+p.replace(/^with\s+/i,'');else out.push(p);}return label+': '+cap(out.join('; '))+'.\n';}
+function lineage(label,parts){let arr=[...new Set(parts.map(normPart).filter(Boolean))];if(!arr.length)return '';let out=[];for(const p of arr){if(out.length&&/^(including|with|and)\b/i.test(p))out[out.length-1]+=', '+p.replace(/^with\s+/i,'');else out.push(p);}return label+': '+cap(out.join('; '))+'.\n';}
 function finding(label,txt){txt=sent(txt);return txt?label+': '+txt+'\n':'';}
 function ironLine(store,ring){store=strip(store);ring=strip(ring);if(!store&&!ring)return '';let out='Iron: '+cap(store||'***')+'.';if(ring){if(/^(not identified|not seen|absent|none)$/i.test(ring))out+=' No ring sideroblasts identified.';else out+=' Ring sideroblasts '+ring+'.';}return out+'\n';}
 
@@ -1374,18 +1374,15 @@ function generateReport(){
   if(cmt || checked('reviewedQA')){r += section('COMMENT'); if(cmt) r += cmt.trim()+'\n'; if(checked('reviewedQA')) r += 'Selected slides reviewed with a second hematopathologist as part of quality assurance activities.\n';}
   r += section('MICROSCOPIC DESCRIPTION');
   r += 'PERIPHERAL BLOOD COUNT (Date: '+(v('cbcDate')||'[]')+'):\n';
-  const compactCBC=[
-    'WBC '+(v('wbc')||'[]')+' x10E9/L',
-    'Hb '+(v('hb')||'[]')+' g/L',
-    'RBC '+(v('rbc')||'[]')+' x10E12/L',
-    'MCV '+(v('mcv')||'[]')+' fL',
-    'RDW '+(v('rdw')||'[]')+'%',
-    'Platelets '+(v('plt')||'[]')+' x10E9/L'
+  // Fixed-width CBC output: one parameter per line for pathology-system copying.
+  const cbcRows = [
+    ['WBC','wbc','×10⁹/L'], ['Hb','hb','g/L'], ['RBC','rbc','×10¹²/L'],
+    ['MCV','mcv','fL'], ['RDW','rdw','%'], ['Platelets','plt','×10⁹/L'],
+    ['Neutrophils','neutAbs','×10⁹/L'], ['Lymphocytes','lymphAbs','×10⁹/L'],
+    ['Monocytes','monoAbs','×10⁹/L'], ['Eosinophils','eosAbs','×10⁹/L'],
+    ['Basophils','basoAbs','×10⁹/L']
   ];
-  r += compactCBC.join(', ')+'.\n';
-  r += ['Neutrophils','Lymphocytes','Monocytes','Eosinophils','Basophils'].map((name,i)=>
-    name+' '+(v(['neutAbs','lymphAbs','monoAbs','eosAbs','basoAbs'][i])||'[]')+' x10E9/L'
-  ).join(', ')+'.\n';
+  r += cbcRows.map(([label,id,unit]) => label.padEnd(14,' ') + (v(id)||'[]') + ' ' + unit).join('\\n') + '\\n';
   if(v('patientAge')) r += 'Age: '+v('patientAge')+' years\n';
   r += '\n';
   r += 'BLOOD SMEAR:\n';
