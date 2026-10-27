@@ -1374,7 +1374,7 @@ function generateReport(){
   ];
   const cbcLines=cbcFields.filter(([,id])=>v(id).trim()).map(([label,id,unit])=>
     label.padEnd(14,' ')+v(id).trim()+' '+unit);
-  if(cbcLines.length) r+=cbcLines.join('\\n')+'\\n';
+  if(cbcLines.length) r+=cbcLines.join('\n')+'\n';
   if(v('patientAge')) r += 'Age: '+v('patientAge')+' years\n';
   r += '\n';
   r += 'BLOOD SMEAR:\n';
