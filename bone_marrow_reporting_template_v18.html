@@ -1359,11 +1359,11 @@ function generateReport(){
   r += 'PERIPHERAL BLOOD COUNT (Date: '+(v('cbcDate')||'[]')+'):\n';
   // Preserve v18's omission of blank results; align populated CBC rows for copy/paste.
   const cbcFields=[
-    ['WBC','wbc','×10⁹/L'],['Hb','hb','g/L'],['RBC','rbc','×10¹²/L'],
-    ['MCV','mcv','fL'],['RDW','rdw','%'],['Platelets','plt','×10⁹/L'],
-    ['Neutrophils','neutAbs','×10⁹/L'],['Lymphocytes','lymphAbs','×10⁹/L'],
-    ['Monocytes','monoAbs','×10⁹/L'],['Eosinophils','eosAbs','×10⁹/L'],
-    ['Basophils','basoAbs','×10⁹/L']
+    ['WBC','wbc','x10E9/L'],['Hb','hb','g/L'],['RBC','rbc','x10E12/L'],
+    ['MCV','mcv','fL'],['RDW','rdw','%'],['Platelets','plt','x10E9/L'],
+    ['Neutrophils','neutAbs','x10E9/L'],['Lymphocytes','lymphAbs','x10E9/L'],
+    ['Monocytes','monoAbs','x10E9/L'],['Eosinophils','eosAbs','x10E9/L'],
+    ['Basophils','basoAbs','x10E9/L']
   ];
   const cbcLines=cbcFields.filter(([,id])=>v(id).trim()).map(([label,id,unit])=>
     label.padEnd(14,' ')+v(id).trim()+' '+unit);
