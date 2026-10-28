@@ -151,6 +151,7 @@ function generate(){
  if(on('neutropenia') && !cmpPancytopenia) addc('Leukopenia with neutropenia is commonly associated with infection, medication effect, immune causes, nutritional deficiency, hypersplenism, or marrow suppression.');
  if(cmpReactiveLymph) addc('Lymphocytosis with reactive/atypical lymphocytes favours a reactive viral process, including infectious mononucleosis in the appropriate clinical setting.');
  if(cmpLymphSmudge && !on('cll')) addc('Lymphocytosis with increased smudge cells raises consideration of CLL/MBL or another low-grade B-cell lymphoproliferative disorder. Flow cytometric immunophenotyping is recommended if not previously performed.');
+ if(on('atyplymph') && !cmpLymphAtyp && !on('circlymphoma')) addc('Atypical lymphoid cells are identified. The findings may represent a reactive or clonal lymphoid process. Clinical correlation and flow cytometric immunophenotyping may be considered if persistent or clinically concerning.');
  if(cmpLymphAtyp) addc('Lymphocytosis with atypical lymphoid cells raises consideration of a lymphoproliferative disorder. Flow cytometry is recommended for characterization if persistent or clinically unexplained.');
  if(cmpMacroLeftMono) addc('Macrocytosis, left shift, and monocytosis are present. The differential diagnosis includes reactive processes, nutritional deficiency, medication effect, and myeloid neoplasms. Clinical correlation required.');
 
