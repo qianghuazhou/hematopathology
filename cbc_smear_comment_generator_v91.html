@@ -111,7 +111,7 @@ function generate(){
  const cmpModSevereNeutropenia = on('neutropenia') && on('anc_lt1') && !on('anc_lt05');
  const cmpLowPltGiant = on('thrombocytopenia') && (on('largeplt') || on('giantplt'));
  const cmpPltSeverityLow = on('plt_low_mild') || on('plt_low_mod') || on('plt_low_sev');
- const cmpPltSeverityHigh = on('plt_high_mild') || on('plt_high_mod') || on('plt_high_sev') || on('plt_high_marked');
+ const cmpPltSeverityHigh = on('plt_high_mild') || on('plt_high_mod') || on('plt_high_marked');
 
  // RBC compounds.
  if(cmpMicroAnemiaTarget) addc('Microcytic anemia with target cells. Consider iron deficiency and thalassemia trait. Recommend iron studies and hemoglobin analysis if clinically indicated.');
@@ -266,14 +266,14 @@ function generate(){
  if(on('reactlymph') && !on('reactlymphint') && !cmpReactiveLymph) addc('Reactive lymphocytes are most commonly seen with viral infection or other immune stimulation.');
  if(on('largeplt') && !on('itp') && !cmpThrombocytopeniaLarge && !on('giantplt')) addc('Large platelets may reflect increased platelet turnover or regeneration, and may be seen in peripheral platelet destruction or recovery from thrombocytopenia.');
  if(on('giantplt') && !on('itp') && !cmpThrombocytopeniaLarge) addc('Giant platelets may be seen with increased platelet turnover, inherited macrothrombocytopenias, or myeloid neoplasms depending on the clinical context.');
- if(on('plt_normal')) addc('Platelets are normal in number and morphology.');
+ if(on('plt_normal')) addc('Platelet count is within normal limits.');
 
  let custom=$('custom').value.trim();
  if(custom)addc(custom);
  if(!comments.length)addc('No interpretive comment generated for the selected inputs.');
  $('final').value=ascii(comments.join(' '));
 }
-function clearAll(){document.querySelectorAll('input[type=checkbox]').forEach(x=>x.checked=false);$('custom').value='';$('final').value='';}
+function clearAll(){document.querySelectorAll('input[type=checkbox],input[type=radio]').forEach(x=>x.checked=false);$('custom').value='';$('final').value='';}
 function copyText(id){navigator.clipboard.writeText(ascii($(id).value));}
 const b1=$('blasts_lt20'), b2=$('blasts_ge20'); if(b1&&b2){b1.addEventListener('change',()=>{if(b1.checked)b2.checked=false; generate();}); b2.addEventListener('change',()=>{if(b2.checked)b1.checked=false; generate();});}
 function exclusive(ids){ids.forEach(id=>{const el=$(id); if(el)el.addEventListener('change',()=>{if(el.checked)ids.filter(x=>x!==id).forEach(x=>{const y=$(x); if(y)y.checked=false;}); generate();});});}
