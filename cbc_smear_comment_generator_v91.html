@@ -72,7 +72,7 @@ function generate(){
  if(on('blasts_ge20') || on('acuteleuk')) addc('Numerous circulating blasts are identified. The findings are consistent with acute leukemia. Definitive lineage assignment and classification require flow cytometric immunophenotyping together with bone marrow examination and cytogenetic/molecular studies.');
  else if(on('blasts_lt20')) addc('Circulating blasts are identified. Finding raises concern for an underlying myeloid neoplasm, including acute leukemia or myelodysplastic neoplasm with increased blasts. Clinical correlation required. Bone marrow examination with flow cytometric immunophenotyping, cytogenetic, and molecular studies is advised if not already performed.');
  if(on('cml')) addc('Marked leukocytosis with granulocytic left shift and basophilia and/or eosinophilia raises consideration of chronic myeloid leukemia. Correlation with BCR::ABL1 testing is recommended.');
- else if(on('neutro') && on('leftshift') && on('baso')) addc('Leukocytosis with left shift and basophilia raises consideration of a myeloproliferative neoplasm, particularly chronic myeloid leukemia. BCR::ABL1 testing may be considered if persistent or unexplained.');
+ else if(on('neutro') && on('leftshift') && on('baso')) addc('Neutrophilia with left shift and basophilia raises consideration of a myeloproliferative neoplasm, particularly chronic myeloid leukemia. BCR::ABL1 testing may be considered if persistent or unexplained.');
  if(on('mdsmpn')) addc('The findings raise consideration of an underlying myeloid neoplasm, including an MDS/MPN overlap disorder. Bone marrow evaluation with cytogenetic and molecular studies may be required for classification.');
 
 
@@ -147,10 +147,10 @@ function generate(){
  if(cmpSevereNeutropenia) addc('Severe neutropenia with ANC less than 0.5 x 10^9/L indicates significant risk of serious infection/sepsis. Clinical correlation and appropriate follow-up are recommended.');
  else if(cmpModSevereNeutropenia) addc('Neutropenia with ANC less than 1.0 x 10^9/L is associated with increased infection risk. Clinical correlation and follow-up suggested.');
  if(on('nl_reversal')) addc('Reversal of the neutrophil-to-lymphocyte ratio may be seen in viral infection or other reactive/immune-stimulatory states. Clinical correlation required.');
- if(on('neutropenia') && !cmpPancytopenia) addc('Leukopenia with neutropenia is commonly associated with infection, medication effect, immune causes, nutritional deficiency, hypersplenism, or marrow suppression.');
+ if(on('neutropenia') && !cmpPancytopenia && !cmpSevereNeutropenia && !cmpModSevereNeutropenia && !cmpNeutropeniaThrombocytopenia) addc('Neutropenia may be associated with infection, medication effect, immune causes, nutritional deficiency, hypersplenism, or marrow suppression.');
  if(cmpReactiveLymph) addc('Lymphocytosis with reactive/atypical lymphocytes favours a reactive viral process, including infectious mononucleosis in the appropriate clinical setting.');
  if(cmpLymphSmudge && !on('cll')) addc('Lymphocytosis with increased smudge cells raises consideration of CLL/MBL or another low-grade B-cell lymphoproliferative disorder. Flow cytometric immunophenotyping is recommended if not previously performed.');
- if(on('atyplymph') && !cmpLymphAtyp && !on('circlymphoma')) addc('Atypical lymphoid cells are identified. The findings may represent a reactive or clonal lymphoid process. Clinical correlation and flow cytometric immunophenotyping may be considered if persistent or clinically concerning.');
+ if(on('atyplymph') && !cmpLymphAtyp && !on('circlymphoma')) addc('Atypical lymphoid cells are present. Flow cytometry may be considered for further characterization if clinically indicated.');
  if(cmpLymphAtyp) addc('Lymphocytosis with atypical lymphoid cells raises consideration of a lymphoproliferative disorder. Flow cytometry is recommended for characterization if persistent or clinically unexplained.');
  if(cmpMacroLeftMono) addc('Macrocytosis, left shift, and monocytosis are present. The differential diagnosis includes reactive processes, nutritional deficiency, medication effect, and myeloid neoplasms. Clinical correlation required.');
 
@@ -168,7 +168,7 @@ function generate(){
  if(on('aiha')) addc('The findings raise consideration of immune-mediated hemolysis. Correlation with DAT and hemolysis studies is recommended.');
  else if(on('spher') && (on('poly')||on('nrbc')||on('rbc_anemia')) && !on('heredspher')) addc('Microspherocytes with a regenerative response raise consideration of immune-mediated hemolysis. Correlation with DAT and hemolysis studies is recommended.');
  if(on('heredspher')) addc('Hereditary spherocytosis is a consideration in the appropriate clinical and family context. Correlation with hemolysis studies and confirmatory testing may be considered.');
- if(on('coldagg')) addc('Red cell agglutination is present, consistent with a cold agglutinin (typically IgM-mediated). Cold agglutinins may be associated with infections (including atypical pneumonia), lymphoproliferative disorders, or primary cold agglutinin disease. Clinical correlation required. If clinically indicated, consider DAT (C3), a hemolytic work-up (LDH, haptoglobin, bilirubin, reticulocyte count), and cold agglutinin titre.');
+ if(on('coldagg')) addc('Red cell agglutination may be associated with cold-reactive antibodies and can affect automated CBC indices. Correlation with DAT and hemolysis studies may be considered if clinically indicated.');
  else if(on('agglutination')) addc('Red cell agglutination suggests a cold-reactive antibody and may cause spurious CBC indices. DAT and hemolysis studies may be useful if hemolysis is suspected.');
  if(on('irondef') && !(on('rbc_anemia') && on('micro') && on('hypo') && on('poly'))) addc('Findings are suggestive of iron deficiency anemia. Suggest iron studies and exclude chronic blood loss if clinically indicated.');
  else if(on('rbc_anemia') && on('micro') && on('hypo') && (on('ellipto')||on('aniso')||on('poik')) && !cmpMicroHypoHighRbc) addc('Findings favour iron deficiency anemia. Suggest iron studies.');
@@ -242,7 +242,7 @@ function generate(){
  // Platelet / cytopenia interpretations.
  if(on('clump')) addc('Platelet clumping may cause pseudothrombocytopenia. Repeat collection in sodium citrate or another alternate anticoagulant may be considered if the platelet count is clinically important.');
  if(on('satellitism')) addc('Platelet satellitism may cause pseudothrombocytopenia. Repeat testing using an alternate anticoagulant may be useful.');
- if(on('itp') && !cmpThrombocytopeniaLarge) addc('Thrombocytopenia with large or giant platelets favors increased peripheral platelet destruction, including immune thrombocytopenia.');
+ if(on('itp') && !cmpThrombocytopeniaLarge) addc('Thrombocytopenia may be associated with increased peripheral platelet destruction, including immune thrombocytopenia, in the appropriate clinical setting.');
 
  if(on('reactplt') && !cmpNeutPlt && !cmpAnemiaThrombocytosis) addc('Reactive thrombocytosis is favoured. Common causes include iron deficiency, infection/inflammation, tissue injury, recent blood loss and malignancy.');
  else if(on('thrombocytosis') && on('irondef') && !cmpNeutPlt) addc('Thrombocytosis in this setting is favored reactive and may be associated with iron deficiency.');
@@ -267,7 +267,7 @@ function generate(){
  if(on('reactlymph') && !on('reactlymphint') && !cmpReactiveLymph) addc('Reactive lymphocytes are most commonly seen with viral infection or other immune stimulation.');
  if(on('largeplt') && !on('itp') && !cmpThrombocytopeniaLarge && !on('giantplt')) addc('Large platelets may reflect increased platelet turnover or regeneration, and may be seen in peripheral platelet destruction or recovery from thrombocytopenia.');
  if(on('giantplt') && !on('itp') && !cmpThrombocytopeniaLarge) addc('Giant platelets may be seen with increased platelet turnover, inherited macrothrombocytopenias, or myeloid neoplasms depending on the clinical context.');
- if(on('plt_normal')) addc('Platelet count is within normal limits.');
+ if(on('plt_normal') && !comments.length) addc('Platelet count is within normal limits.');
 
  let custom=$('custom').value.trim();
  if(custom)addc(custom);
