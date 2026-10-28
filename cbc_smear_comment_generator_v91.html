@@ -106,8 +106,8 @@ function generate(){
  const cmpMacroRoundTargetStomato = on('roundmacro') && on('target') && on('stomato');
  const cmpMacroRoundTarget = on('roundmacro') && on('target') && !on('stomato');
  const cmpNeutropeniaThrombocytopenia = on('neutropenia') && on('thrombocytopenia') && !cmpPancytopenia;
- const cmpSevereNeutropenia = on('neutropenia') && on('anc_lt05');
- const cmpModSevereNeutropenia = on('neutropenia') && on('anc_lt1') && !on('anc_lt05');
+ const cmpSevereNeutropenia = on('anc_lt05');
+ const cmpModSevereNeutropenia = on('anc_lt1') && !on('anc_lt05');
  const cmpLowPltGiant = on('thrombocytopenia') && (on('largeplt') || on('giantplt'));
  const cmpPltSeverityLow = on('plt_low_mild') || on('plt_low_mod') || on('plt_low_sev');
  const cmpPltSeverityHigh = on('plt_high_mild') || on('plt_high_mod') || on('plt_high_marked');
@@ -215,7 +215,7 @@ function generate(){
  else if(on('lympho') && !on('cll') && !on('pll') && !on('sezary') && !on('acuteleuk') && !cmpReactiveLymph && !cmpLymphSmudge && !cmpLymphAtyp) addc('Lymphocytosis may be reactive or clonal. If persistent or unexplained, consider flow cytometry.');
  if(on('cll') || (cmpLymphSmudge && !on('reactlymph'))) addc('Findings raise consideration of a chronic B-cell lymphoproliferative disorder, including CLL/SLL. Flow cytometric immunophenotyping is recommended if not previously performed.');
  else if(on('smudge') && !on('lympho')) addc('Smudge cells are nonspecific in isolation; significance depends on the absolute lymphocyte count and persistence.');
- if(on('lympho') && on('plasmacytoid') && !on('reactlymph')) addc('A lymphoproliferative disorder is a diagnostic consideration. Correlation with flow cytometric immunophenotyping is recommended.');
+ if(on('plasmacytoid')) addc('Plasmacytoid lymphocytes may be seen with viral infection or other immune stimulation. Clinical correlation is recommended.');
  if(on('pll') || on('prolymph')) addc('Increased prolymphocytes or larger lymphoid cells with prominent nucleoli raise consideration of prolymphocytic leukemia or another mature lymphoid neoplasm. Flow cytometry is recommended.');
  if(on('lgl')) addc('Large granular lymphocytes may be reactive; persistent expansion raises consideration of T-cell large granular lymphocytic leukemia or an NK-cell lymphoproliferative disorder. Flow cytometry may be considered if persistent or clinically unexplained.');
  
