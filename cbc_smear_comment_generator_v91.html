@@ -64,8 +64,8 @@ function generate(){
  const c=(id,t)=>{if(on(id))addc(t)};
 
  // Context comments first.
- if(on('ctx_neonate')) addc('Normochromic normocytic RBCs with anisopoikilocytosis, few NRBCs, polychromasia, normal number and morphology of leukocytes and platelets. Findings are within expected physiologic limits for a neonate.');
- if(on('ctx_premature')) addc('Normochromic normocytic anemia with few NRBCs, and marked polychromasia, leukocytosis with reactive neutrophils, and adequate platelet count. Findings are most likely associated with prematurity in this neonate.');
+ if(on('ctx_neonate')) addc('Neonatal blood counts and red cell morphology should be interpreted using age-appropriate reference ranges.');
+ if(on('ctx_premature')) addc('Prematurity may be associated with age-dependent changes in blood counts and red cell morphology. Correlation with gestational age and clinical findings is recommended.');
  if(on('ctx_neopoly')) addc('Neonatal polycythemia is often secondary; common associations include small-for-gestational-age status, maternal diabetes, and perinatal hypoxia.');
 
  // High-priority hematologic neoplasm / urgent patterns.
@@ -114,7 +114,7 @@ function generate(){
 
  // RBC compounds.
  if(cmpMicroAnemiaTarget) addc('Microcytic anemia with target cells. Consider iron deficiency and thalassemia trait. Recommend iron studies and hemoglobin analysis if clinically indicated.');
- if(on('rbc_anemia') && on('micro') && on('hypo') && on('poly')) addc('Microcytic hypochromic anemia with increased polychromasia suggests iron deficiency with recent or chronic blood loss. Correlation with ferritin/iron studies and investigation for blood loss are recommended as clinically indicated.');
+ if(on('rbc_anemia') && on('micro') && on('hypo') && on('poly')) addc('Microcytic hypochromic anemia with polychromasia is present. Correlation with iron studies and reticulocyte count is recommended; blood loss or hemolysis may be considered as clinically indicated.');
  if(on('micro') && on('target') && on('stippling') && !cmpMicroHypoTargetStippleHighRbc) addc('Microcytosis with target cells and basophilic stippling raises consideration of thalassemia trait or another hemoglobinopathy. Hemoglobin analysis and family studies may be considered if not previously known.');
  if(on('rbc_anemia') && on('micro') && on('hypo') && on('target') && !cmpMicroHypoHighRbc && !cmpMicroAnemiaTarget) addc('Microcytic hypochromic anemia with target cells raises consideration of iron deficiency and/or thalassemia/hemoglobinopathy. Iron studies are recommended first; hemoglobin analysis may be considered if iron deficiency is excluded or corrected.');
  if(cmpNormoPolyAnemia) addc('Normocytic anemia with polychromasia suggests recent blood loss or hemolysis. Correlation with reticulocyte count and hemolysis studies is recommended as clinically indicated.');
@@ -126,8 +126,8 @@ function generate(){
  if(cmpDimorphicPappenheimer) addc('Dimorphic red cell population with Pappenheimer bodies raises consideration of a sideroblastic process, partial treatment of deficiency, recent transfusion, or myelodysplasia. Clinical correlation required.');
  else if(on('dimorphic')) addc('Dimorphic red cell population may be seen with recent transfusion, partially treated iron deficiency, combined nutritional deficiency, sideroblastic processes, or myelodysplastic syndromes. Clinical correlation required.');
  if(cmpMacroOvalAnemia) addc('Macrocytic anemia with oval macrocytes raises consideration of vitamin B12 or folate deficiency. Correlation with vitamin B12 and folate studies is recommended.');
- if(on('macro') && on('target') && on('stomato')) addc('Round macrocytosis with target cells and stomatocytes suggests alcohol-related change and/or liver disease. Correlation with liver enzymes, alcohol history, and clinical context is recommended.');
- else if(on('macro') && on('target')) addc('Round macrocytosis with target cells may be seen with liver disease or alcohol-related change. Clinical correlation required.');
+ if(on('macro') && on('target') && on('stomato') && !on('roundmacro')) addc('Macrocytosis with target cells and stomatocytes may be seen with liver disease or alcohol-related changes. Clinical correlation is recommended.');
+ else if(on('macro') && on('target') && !on('roundmacro')) addc('Macrocytosis with target cells may be seen with liver disease or alcohol-related changes.');
  if(cmpMacroRoundTargetStomato && !(on('macro') && on('target') && on('stomato'))) addc('Round macrocytosis with target cells and stomatocytes suggests alcohol-related change and/or liver disease. Clinical correlation required.');
  else if(cmpMacroRoundTarget && !(on('macro') && on('target'))) addc('Round macrocytosis with target cells suggests possible liver disease. Clinical correlation with liver function studies and alcohol history is recommended.');
  else if(on('roundmacro') && !on('macro') && !on('target')) addc('Round macrocytosis may be associated with alcohol use, liver disease, hypothyroidism, or medication effect.');
@@ -176,7 +176,7 @@ function generate(){
  if(on('thal') && !cmpMicroHypoTargetStippleHighRbc && !cmpMicroHypoHighRbc && !cmpMicroHighRbc) addc('Microcytosis with target cells and/or a relatively high RBC count suggests thalassemia trait or another hemoglobinopathy. Suggest iron studies and hemoglobin analysis if not previously known.');
  else if(on('micro') && on('target') && !cmpMicroAnemiaTarget && !on('irondef') && !on('liver') && !cmpMicroHighRbc && !cmpMicroHypoHighRbc) addc('Microcytosis with target cells raises consideration of thalassemia trait or another hemoglobinopathy. Iron studies and hemoglobin analysis may be useful if not previously known.');
  if(on('sickle')) addc('Sickle cells are identified, consistent with a sickling disorder. Correlation with hemoglobin analysis is recommended if the hemoglobinopathy pattern is not previously established.');
- if(on('target') && on('sickle')) addc('If hemoglobin C crystals or prominent target cells are present, hemoglobin SC disease or S/beta-thalassemia may be considered depending on the hemoglobin analysis pattern.');
+ // Do not infer hemoglobin C crystals or a specific sickling genotype from target cells.
  if(on('mega')) addc('Findings raise consideration of a megaloblastic process, including vitamin B12 or folate deficiency. Correlation with vitamin B12 and folate studies is recommended.');
  else if(on('macro') && on('hyperseg')) addc('Macrocytosis with neutrophil hypersegmentation raises consideration of vitamin B12 or folate deficiency. Correlation with vitamin B12 and folate studies is recommended.');
  else if(on('rbc_anemia') && on('macro') && !on('liver') && !cmpMacroDysplasia && !cmpMacroOvalAnemia) addc('Macrocytic anemia. Consider vitamin B12/folate deficiency, drug effect, liver disease, hypothyroidism, alcohol use, reticulocytosis and myelodysplasia.');
@@ -208,7 +208,7 @@ function generate(){
  else if(on('reactneut') || (on('neutro') && on('toxic') && !on('leftshift') && !cmpNeutMono && !cmpNeutPlt && !cmpNeutToxicLeft)) addc('Findings support a reactive neutrophilic process, most commonly associated with infection, inflammation, tissue injury, corticosteroid therapy, growth factor effect, or physiologic stress.');
  else if(on('neutro') && !on('leftshift') && !cmpNeutMono && !cmpNeutPlt && !cmpNeutToxicLeft) addc('Neutrophilia is most commonly reactive, including infection, inflammation, physiologic stress, corticosteroid therapy, and growth factor effect.');
  
- if(on('neutropenia') && !cmpPancytopenia && !cmpSevereNeutropenia && !cmpModSevereNeutropenia && !cmpNeutropeniaThrombocytopenia) addc('Neutropenia is a nonspecific finding. Common causes include infection, drug effect, autoimmune disease, nutritional deficiency, hypersplenism and bone marrow disorders.');
+ // General neutropenia interpretation is generated above; avoid a second overlapping comment.
  
  if(on('lymphopenia')) addc('Lymphopenia is nonspecific and may be seen with acute illness/stress, corticosteroid effect, immunosuppression, autoimmune disease, or viral infection.');
  if(on('reactlymphint') && !cmpReactiveLymph) addc('Findings favor reactive lymphocytosis, as may be seen with viral infection and other immune stimulation.');
