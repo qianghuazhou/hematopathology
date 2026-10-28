@@ -752,15 +752,8 @@ function normalizeUSSpelling(s){
 
     
 function sanitizeReport(txt){
-  const map = {
-    "\u2013":"-", "\u2014":"-", "\u2212":"-",
-    "\u201c":"\"", "\u201d":"\"",
-    "\u2018":"'", "\u2019":"'",
-    "\u2265":">=", "\u2264":"<=", "\u00b1":"+/-",
-    "\u00d7":"x", "\u03bc":"u", "\u2022":"-",
-    "\u2026":"...", "\u00a0":" "
-  };
-  return String(txt || "").replace(/[\u2013\u2014\u2212\u201c\u201d\u2018\u2019\u2265\u2264\u00b1\u00d7\u03bc\u2022\u2026\u00a0]/g, ch => map[ch] || ch);
+  const map = {"\u2013":"-","\u2014":"-","\u2212":"-","\u2018":"'","\u2019":"'","\u201c":'"',"\u201d":'"',"\u2265":">=","\u2264":"<=","\u00b1":"+/-","\u00d7":"x","\u2022":"-","\u2026":"...","\u00a0":" ","\u00b5":"u","\u03bc":"u","\u03b1":"alpha","\u03b2":"beta","\u03b3":"gamma","\u03b4":"delta","\u03ba":"kappa","\u03bb":"lambda","\u03c9":"omega","\u0391":"Alpha","\u0392":"Beta","\u0393":"Gamma","\u0394":"Delta","\u039a":"Kappa","\u039b":"Lambda","\u00b2":"^2","\u00b3":"^3","\u00b9":"^1","\u2070":"^0","\u2074":"^4","\u2075":"^5","\u2076":"^6","\u2077":"^7","\u2078":"^8","\u2079":"^9","\u2260":"!=","\u2192":"->","\u2190":"<-","\u00b0":" degrees"};
+  return String(txt == null ? '' : txt).replace(/[^\x00-\x7F]/g,ch=>map[ch]!==undefined?map[ch]:ch.normalize('NFKD').replace(/[\u0300-\u036f]/g,'')).replace(/[^\x00-\x7F]/g,ch=>'\\u'+ch.charCodeAt(0).toString(16).toUpperCase().padStart(4,'0'));
 }
 
 function ensureTerminalPeriod(s){
@@ -1071,7 +1064,7 @@ function buildOutput(){
 
     $("#btnGenDx").addEventListener("click", () => {
   const { text, missing } = buildDiagnosis();
-  $("#dxOutput").value = text;
+  $("#dxOutput").value = sanitizeReport(text);
   if (missing.length){
     $("#dxStatus").innerHTML = ` Missing: <b>${missing.join(", ")}</b> (diagnosis still generated).`;
   } else {
@@ -1080,7 +1073,7 @@ function buildOutput(){
 });
 
 $("#btnCopyDx").addEventListener("click", async () => {
-  const t = $("#dxOutput").value || "";
+  const t = sanitizeReport($("#dxOutput").value || "");
   if (!t.trim()){
     $("#dxStatus").textContent = "Nothing to copy (generate first).";
     return;
@@ -1122,7 +1115,7 @@ $("#btnClearDx")?.addEventListener("click", () => {
 
     $("#btnGenIHC")?.addEventListener("click", () => {
       const t = buildBmIhcText();
-      $("#bmIhcOutput").value = t;
+      $("#bmIhcOutput").value = sanitizeReport(t);
       $("#bmIhcStatus").textContent = t ? "IHC generated." : "No immunohistochemistry lines selected.";
     });
 
@@ -1154,7 +1147,7 @@ $("#btnClearDx")?.addEventListener("click", () => {
 
 $("#btnGen").addEventListener("click", () => {
       const { text, missing } = buildOutput();
-      $("#output").value = text;
+      $("#output").value = sanitizeReport(text);
 
       if (missing.length){
         $("#status").innerHTML = ` Missing: <b>${missing.join(", ")}</b> (optional, but usually expected).`;
@@ -1164,7 +1157,7 @@ $("#btnGen").addEventListener("click", () => {
     });
 
     $("#btnCopy").addEventListener("click", async () => {
-      const t = $("#output").value || "";
+      const t = sanitizeReport($("#output").value || "");
       if (!t.trim()){
         $("#status").textContent = "Nothing to copy (generate first).";
         return;
