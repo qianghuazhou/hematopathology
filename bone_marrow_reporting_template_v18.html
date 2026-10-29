@@ -771,6 +771,7 @@
 
   <details class="card" open>
     <summary>Comment / Addendum Library</summary>
+<a href="#who5-reference" onclick="document.getElementById('who5-reference').open=true" style="display:inline-block;padding:9px 13px;margin:5px 0;background:#dbeafe;color:#1d4ed8;border-radius:8px;font-weight:700">WHO-HAEM5 / Synoptic classification</a>
     <div class="inner">
       <div class="row"><label>Comment type</label><select id="commentType">
         <option></option>
@@ -782,9 +783,8 @@
         <option value="plasma">Plasma cell neoplasm</option>
         <option value="posttx">Post-treatment marrow</option>
       </select></div>
-      <div class="row"><label>Custom comment</label><textarea id="customComment" style="min-height:120px"></textarea></div>
-      <details style="margin:12px 0">
-        <summary>WHO-HAEM5 classification reference (optional)</summary>
+      <details id="who5-reference" open style="margin:12px 0;border:2px solid #2563eb;border-radius:10px;padding:12px;background:#eef6ff">
+        <summary>WHO-HAEM5 Classification / Former Synoptic (optional)</summary>
         <p class="small">Reuses 142 diagnostic categories from the former BM Synoptic. Select a category only after confirming the diagnostic criteria. No classification is added automatically.</p>
         <div class="row"><label>Search/select classification</label><input id="who5Class" list="who5ClassList" placeholder="Type MDS, AML, MPN, lymphoma..." autocomplete="off"></div>
         <datalist id="who5ClassList">
@@ -933,6 +933,8 @@
         </datalist>
         <button type="button" class="light" onclick="insertWho5Comment()">Insert into custom COMMENT</button>
       </details>
+      <div class="row"><label>Custom comment</label><textarea id="customComment" style="min-height:120px"></textarea></div>
+
       <div class="sectionTitle">Addendum</div>
       <div class="row"><label>Addendum results</label><textarea id="addendum" placeholder="Karyotype/FISH/NGS result and whether diagnosis remains unchanged."></textarea></div>
     </div>
