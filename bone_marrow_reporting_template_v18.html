@@ -772,7 +772,7 @@
   <details class="card" open>
     <summary>Comment / Addendum Library</summary>
     <div class="inner">
-      <div class="row"><label>Comment type</label><select id="commentType">
+      <div class="row"><label>Comment type</label><select id="commentType" onchange="applySelectedComment()">
         <option></option>
         <option value="normal">Normal marrow</option>
         <option value="nonspecific">Nonspecific cytopenia / reactive differential</option>
@@ -783,7 +783,7 @@
         <option value="posttx">Post-treatment marrow</option>
       </select></div>
 
-      <div class="row"><label>Custom comment</label><textarea id="customComment" style="min-height:120px"></textarea></div>
+      <div class="row"><label>Selected comment preview (editable)</label><textarea id="customComment" style="min-height:160px" placeholder="Choose a comment type above to populate this field, or write your own comment."></textarea></div>
 
       <div class="sectionTitle">Addendum</div>
       <div class="row"><label>Addendum results</label><textarea id="addendum" placeholder="Karyotype/FISH/NGS result and whether diagnosis remains unchanged."></textarea></div>
@@ -1337,6 +1337,14 @@ function generateComment(){
     posttx:'No morphologic or immunophenotypic evidence of residual/recurrent disease is identified in the current specimen. Correlation with concurrent minimal residual disease and molecular studies is recommended if clinically indicated.'
   };
   return map[t] || '';
+}
+function applySelectedComment(){
+  const field=document.getElementById('customComment');
+  const type=v('commentType');
+  if(!field) return;
+  if(!type){ field.value=''; }
+  else { field.value=generateComment(); }
+  generateReport();
 }
 function generateReport(){
   if(window.__loadingTemplate){ finalizePresetInputs(); window.__loadingTemplate=false; } else { updateSmartLogic(); syncAllPillGroups(); }
