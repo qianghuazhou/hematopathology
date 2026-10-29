@@ -771,7 +771,6 @@
 
   <details class="card" open>
     <summary>Comment / Addendum Library</summary>
-<a href="#who5-reference" onclick="document.getElementById('who5-reference').open=true" style="display:inline-block;padding:9px 13px;margin:5px 0;background:#dbeafe;color:#1d4ed8;border-radius:8px;font-weight:700">WHO-HAEM5 / Synoptic classification</a>
     <div class="inner">
       <div class="row"><label>Comment type</label><select id="commentType">
         <option></option>
@@ -783,156 +782,7 @@
         <option value="plasma">Plasma cell neoplasm</option>
         <option value="posttx">Post-treatment marrow</option>
       </select></div>
-      <details id="who5-reference" open style="margin:12px 0;border:2px solid #2563eb;border-radius:10px;padding:12px;background:#eef6ff">
-        <summary>WHO-HAEM5 Classification / Former Synoptic (optional)</summary>
-        <p class="small">Reuses 142 diagnostic categories from the former BM Synoptic. Select a category only after confirming the diagnostic criteria. No classification is added automatically.</p>
-        <div class="row"><label>Search/select classification</label><input id="who5Class" list="who5ClassList" placeholder="Type MDS, AML, MPN, lymphoma..." autocomplete="off"></div>
-        <datalist id="who5ClassList">
-          <option value="Chronic myeloid leukaemia, BCR::ABL1-positive"></option>
-          <option value="Polycythaemia vera"></option>
-          <option value="Essential thrombocythaemia"></option>
-          <option value="Primary myelofibrosis"></option>
-          <option value="Chronic neutrophilic leukaemia"></option>
-          <option value="Chronic eosinophilic leukaemia, not otherwise specified"></option>
-          <option value="Juvenile myelomonocytic leukaemia"></option>
-          <option value="Myeloproliferative neoplasm, not otherwise specified"></option>
-          <option value="Bone marrow mastocytosis"></option>
-          <option value="Indolent systemic mastocytosis"></option>
-          <option value="Smouldering systemic mastocytosis"></option>
-          <option value="Aggressive systemic mastocytosis"></option>
-          <option value="Systemic mastocytosis with an associated haematologic neoplasm"></option>
-          <option value="Mast cell leukaemia"></option>
-          <option value="Myeloid/lymphoid neoplasm with PDGFRA rearrangement"></option>
-          <option value="Myeloid neoplasm with PDGFRB rearrangement"></option>
-          <option value="Myeloid/lymphoid neoplasm with FGFR1 rearrangement"></option>
-          <option value="Myeloid/lymphoid neoplasm with JAK2 rearrangement"></option>
-          <option value="Myeloid/lymphoid neoplasm with FLT3 rearrangement"></option>
-          <option value="Myeloid/lymphoid neoplasm with ABL1 rearrangement"></option>
-          <option value="Myeloid/lymphoid neoplasm with eosinophilia and tyrosine kinase gene fusion (other)"></option>
-          <option value="Chronic myelomonocytic leukaemia"></option>
-          <option value="Myelodysplastic/myeloproliferative neoplasm with neutrophilia"></option>
-          <option value="Myelodysplastic/myeloproliferative neoplasm with SF3B1 mutation and thrombocytosis"></option>
-          <option value="Myelodysplastic/myeloproliferative neoplasm, not otherwise specified"></option>
-          <option value="MDS with low blasts and isolated del(5q)"></option>
-          <option value="MDS with low blasts and SF3B1 mutation"></option>
-          <option value="MDS with biallelic TP53 inactivation"></option>
-          <option value="MDS with low blasts"></option>
-          <option value="MDS with increased blasts"></option>
-          <option value="MDS with fibrosis"></option>
-          <option value="Hypoplastic MDS"></option>
-          <option value="MDS, not otherwise specified"></option>
-          <option value="AML with t(8;21)(q22;q22.1); RUNX1::RUNX1T1"></option>
-          <option value="AML with inv(16)(p13.1q22) or t(16;16)(p13.1;q22); CBFB::MYH11"></option>
-          <option value="Acute promyelocytic leukaemia with PML::RARA"></option>
-          <option value="AML with KMT2A rearrangement"></option>
-          <option value="AML with DEK::NUP214"></option>
-          <option value="AML with inv(3)(q21.3q26.2) or t(3;3)(q21.3;q26.2); MECOM rearrangement"></option>
-          <option value="AML (megakaryoblastic) with t(1;22)(p13.3;q13.1); RBM15::MKL1"></option>
-          <option value="AML with NPM1 mutation"></option>
-          <option value="AML with in-frame bZIP CEBPA mutation"></option>
-          <option value="AML with BCR::ABL1"></option>
-          <option value="AML with other defining genetic abnormality (specify)"></option>
-          <option value="AML, myelodysplasia-related (AML-MR)"></option>
-          <option value="Therapy-related AML"></option>
-          <option value="Therapy-related myelodysplastic syndrome"></option>
-          <option value="Therapy-related myelodysplastic/myeloproliferative neoplasm"></option>
-          <option value="Acute myeloid leukaemia with minimal differentiation"></option>
-          <option value="Acute myeloid leukaemia without maturation"></option>
-          <option value="Acute myeloid leukaemia with maturation"></option>
-          <option value="Acute basophilic leukaemia"></option>
-          <option value="Acute myelomonocytic leukaemia"></option>
-          <option value="Acute monocytic leukaemia"></option>
-          <option value="Acute erythroid leukaemia"></option>
-          <option value="Acute megakaryoblastic leukaemia"></option>
-          <option value="Transient abnormal myelopoiesis"></option>
-          <option value="Myeloid leukemia associated with Down syndrome"></option>
-          <option value="Mixed-phenotype acute leukaemia with BCR::ABL1 fusion"></option>
-          <option value="Mixed-phenotype acute leukaemia with KMT2A rearrangement"></option>
-          <option value="Mixed-phenotype acute leukaemia with ZNF384 rearrangement"></option>
-          <option value="Acute leukaemia of ambiguous lineage with BCL11B rearrangement"></option>
-          <option value="Mixed-phenotype acute leukaemia, B/myeloid"></option>
-          <option value="Mixed-phenotype acute leukaemia, T/myeloid"></option>
-          <option value="Mixed-phenotype acute leukaemia, rare types"></option>
-          <option value="Acute leukaemia of ambiguous lineage, not otherwise specified"></option>
-          <option value="Acute undifferentiated leukaemia"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma, NOS"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma with BCR::ABL1 fusion"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma with KMT2A rearrangement"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma with ETV6::RUNX1 fusion"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma with TCF3::PBX1 fusion"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma with IGH::IL3 fusion"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma with high hyperdiploidy"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma with hypodiploidy"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma with iAMP21"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma with TCF3::HLF fusion"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma with BCR::ABL1-like features"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma with ETV6::RUNX1-like features"></option>
-          <option value="B-lymphoblastic leukaemia/lymphoma with other defined genetic abnormalities"></option>
-          <option value="T-lymphoblastic leukaemia/lymphoma"></option>
-          <option value="Chronic lymphocytic leukemia/small lymphocytic lymphoma"></option>
-          <option value="Monoclonal B-cell lymphocytosis"></option>
-          <option value="Mantle cell lymphoma"></option>
-          <option value="In situ mantle cell neoplasm"></option>
-          <option value="Follicular lymphoma"></option>
-          <option value="In situ follicular neoplasm"></option>
-          <option value="Nodal marginal zone lymphoma"></option>
-          <option value="Extranodal marginal zone lymphoma of mucosa-associated lymphoid tissue (MALT lymphoma)"></option>
-          <option value="Splenic marginal zone lymphoma"></option>
-          <option value="Hairy cell leukemia"></option>
-          <option value="Splenic B-cell lymphoma/leukaemia with prominent nucleoli (provisional)"></option>
-          <option value="Splenic diffuse red pulp small B-cell lymphoma"></option>
-          <option value="Lymphoplasmacytic lymphoma"></option>
-          <option value="Plasma cell myeloma"></option>
-          <option value="Solitary plasmacytoma of bone"></option>
-          <option value="Extramedullary plasmacytoma"></option>
-          <option value="Diffuse large B-cell lymphoma, NOS"></option>
-          <option value="Primary mediastinal (thymic) large B-cell lymphoma"></option>
-          <option value="Primary large B-cell lymphoma of immune-privileged sites"></option>
-          <option value="Intravascular large B-cell lymphoma"></option>
-          <option value="EBV-positive diffuse large B-cell lymphoma"></option>
-          <option value="High-grade B-cell lymphoma with MYC and BCL2 and/or BCL6 rearrangements"></option>
-          <option value="High-grade B-cell lymphoma, NOS"></option>
-          <option value="Burkitt lymphoma"></option>
-          <option value="Burkitt-like lymphoma with 11q aberration"></option>
-          <option value="Plasmablastic lymphoma"></option>
-          <option value="Primary effusion lymphoma"></option>
-          <option value="Other (Mature B-cell)"></option>
-          <option value="T-cell lymphoma, subtype cannot be determined"></option>
-          <option value="T-cell prolymphocytic leukemia"></option>
-          <option value="T-cell large granular lymphocytic leukemia"></option>
-          <option value="NK-large granular lymphocytic leukaemia (NK-LGLL)"></option>
-          <option value="Aggressive NK-cell leukemia"></option>
-          <option value="Adult T-cell leukemia/lymphoma"></option>
-          <option value="Extranodal NK/T-cell lymphoma, nasal type"></option>
-          <option value="Enteropathy-associated T-cell lymphoma"></option>
-          <option value="Hepatosplenic T-cell lymphoma"></option>
-          <option value="Mycosis fungoides"></option>
-          <option value="Peripheral T-cell lymphoma, NOS"></option>
-          <option value="Angioimmunoblastic T-cell lymphoma"></option>
-          <option value="Anaplastic large cell lymphoma, ALK-positive"></option>
-          <option value="Anaplastic large cell lymphoma, ALK-negative"></option>
-          <option value="Nodular lymphocyte predominant Hodgkin lymphoma"></option>
-          <option value="Classical Hodgkin lymphoma"></option>
-          <option value="Blastic plasmacytoid dendritic cell neoplasm"></option>
-          <option value="Mature plasmacytoid dendritic cell proliferation associated with myeloid neoplasm"></option>
-          <option value="Langerhans cell histiocytosis"></option>
-          <option value="Langerhans cell sarcoma"></option>
-          <option value="Indeterminate dendritic cell tumour"></option>
-          <option value="Interdigitating dendritic cell sarcoma"></option>
-          <option value="Juvenile xanthogranuloma"></option>
-          <option value="Erdheim-Chester disease"></option>
-          <option value="Rosai-Dorfman disease"></option>
-          <option value="ALK-positive histiocytosis"></option>
-          <option value="Histiocytic sarcoma"></option>
-          <option value="PTLD - Plasmacytic hyperplasia"></option>
-          <option value="PTLD - Infectious mononucleosis-like PTLD"></option>
-          <option value="PTLD - Polymorphic PTLD"></option>
-          <option value="PTLD - Monomorphic PTLD"></option>
-          <option value="PTLD - Classical Hodgkin lymphoma type PTLD"></option>
-          <option value="Other (PTLD)"></option>
-        </datalist>
-        <button type="button" class="light" onclick="insertWho5Comment()">Insert into custom COMMENT</button>
-      </details>
+
       <div class="row"><label>Custom comment</label><textarea id="customComment" style="min-height:120px"></textarea></div>
 
       <div class="sectionTitle">Addendum</div>
@@ -956,17 +806,6 @@
 </main>
 
 <script>
-function insertWho5Comment(){
-  const chosen=v('who5Class');
-  if(!chosen){ alert('Select a WHO-HAEM5 category first.'); return; }
-  const allowed=Array.from(document.querySelectorAll('#who5ClassList option')).some(o=>o.value===chosen);
-  if(!allowed){ alert('Choose a category from the WHO-HAEM5 reference list.'); return; }
-  const field=document.getElementById('customComment');
-  const line='WHO-HAEM5 classification: '+chosen+'.';
-  if(!field.value.includes(line)) field.value=(field.value.trim() ? field.value.trim()+'\n' : '')+line;
-  field.focus();
-  generateReport();
-}
 function v(id){return (document.getElementById(id)?.value || '').trim();}
 function checked(id){return document.getElementById(id)?.checked;}
 function addCM(x){
