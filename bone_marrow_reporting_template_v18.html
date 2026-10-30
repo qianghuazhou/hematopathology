@@ -242,6 +242,12 @@
 
   .pillOpt:has(input:checked){border-color:var(--accent); background:var(--accent2); color:#0f172a;}
   .pillOpt input[type="radio"], .pillOpt input[type="checkbox"]{accent-color:var(--accent);}
+  /* Square selection indicators throughout aspirate and biopsy forms; radio groups remain single-select. */
+  .pillOpt input[type="radio"]{appearance:none;-webkit-appearance:none;width:13px;height:13px;border:1px solid #64748b;border-radius:2px;background:#fff;display:inline-grid;place-content:center;vertical-align:middle;flex-shrink:0;margin:0 7px 0 0;}
+  .pillOpt input[type="radio"]:checked{background:var(--accent);border-color:var(--accent);}
+  .pillOpt input[type="radio"]:checked::before{content:"";width:6px;height:6px;background:#fff;}
+  .pillOpt input[type="radio"]:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
   .pillGrid3{display:grid; grid-template-columns:repeat(3,minmax(150px,1fr)); gap:7px; margin-top:4px}
   .lineagePanel .pillGrid3{grid-template-columns:1fr}
   @media(max-width:700px){.pillGrid3{grid-template-columns:1fr}}
