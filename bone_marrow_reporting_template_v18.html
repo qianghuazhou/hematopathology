@@ -1077,13 +1077,13 @@ function diffCountOutput(){
   if(values.length){
     out+='DIFFERENTIAL'+(total?' ('+total+' cells counted)':'')+':\n';
     if(total && Number(total)<200) out+='Comment: Limited differential ('+total+' cells counted); interpret with caution.\n';
-    out+=values.map(([name,val])=>name+' '+addPercent(val)).join(', ')+'.\n';
+    out+=values.map(([name,val])=>name+' '+addPercent(val)).join('\n')+'\n';
     if(values.length===fields.length){
       const sum=values.reduce((s,x)=>s+Number(x[1]),0);
       if(Math.abs(sum-100)>1) out+='Comment: Differential totals '+Number(sum.toFixed(2))+'%; verify counts.\n';
     }
   }
-  if(mer) out+='M:E ratio: '+mer.replace(/\.$/,'')+'.\n';
+  if(mer) out+='M:E ratio: '+mer.replace(/\.$/,'')+'\n';
   return out;
 }
 function ihcLine2(id,label){const txt=v(id);if(!txt)return '';const low=txt.toLowerCase();const first=label.split(/[\/ ]/)[0].toLowerCase();return (low.startsWith(first)||low.startsWith(label.toLowerCase()))?sent(txt)+'\n':label+': '+sent(txt)+'\n';}
