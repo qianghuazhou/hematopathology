@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flow Cytometry Lymphoma Phenotype Summarizer</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#182333;background:#f4f7fb}*{box-sizing:border-box}main{max-width:1000px;margin:32px auto;padding:0 18px}h1{font-size:1.65rem}p{line-height:1.5}.panel{background:white;border:1px solid #dbe3eb;border-radius:12px;padding:22px;margin:16px 0}textarea{width:100%;min-height:175px;padding:12px;border:1px solid #bbc7d3;border-radius:8px;font:14px/1.5 Consolas,monospace}button,select,input[type=file]{font:inherit}button{border:0;border-radius:7px;background:#164b78;color:white;padding:10px 14px;cursor:pointer;margin:6px 8px 6px 0}button:disabled{opacity:.45;cursor:default}.muted{color:#536579}.warning{color:#92400e;background:#fff7e8;border:1px solid #f3d5a5;border-radius:8px;padding:10px}.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.output{min-height:120px}.small{font-size:13px}label{font-weight:600}code{font-size:12px}#status{min-height:22px}#flags{white-space:pre-wrap}</style></head>
+<body><main><h1>Flow Cytometry — Lymphoma Phenotype Summarizer</h1>
+<p class="muted">Local, review-required drafting aid. Extracts an abnormal B-cell phenotype from an imported report without generating a lymphoma diagnosis. Do not upload identifiable patient reports to a public repository.</p>
+<div class="panel"><label for="file">Import report</label><p class="small muted">TXT, PDF (text-based), DOCX, PNG or JPG. Files are processed in your browser. Image OCR and PDF/DOCX extraction load open-source libraries from a CDN; do not use with identifiable patient data unless your institution approves the software and its dependencies.</p>
+<input id="file" type="file" accept=".txt,.pdf,.docx,.png,.jpg,.jpeg,.webp,text/plain,application/pdf,image/*">
+<div id="status" role="status" class="muted"></div>
+<label for="source">Extracted / pasted report text — verify against original</label><textarea id="source" placeholder="Paste flow cytometry interpretation or marker list here..."></textarea>
+<div class="row"><label for="mode">Output</label><select id="mode"><option value="concise">Concise</option><option value="complete">Complete markers</option></select><button id="generate">Summarize phenotype</button></div></div>
+<div class="panel"><label for="output">Editable report paragraph</label><textarea id="output" class="output" placeholder="Summary appears here after review..."></textarea><button id="copy">Copy paragraph</button><div id="flags" class="warning" hidden></div></div>
+<p class="small muted">Quality controls: explicitly detected positive and negative markers only; light-chain restriction and population percentages are included only when documented. Ambiguous/variable markers are flagged. This tool does not infer CD5/CD10 status from a diagnosis, determine Hans cell of origin, or replace flow report review.</p>
+</main>
+<script type="module">
+const $=id=>document.getElementById(id),status=s=>$('status').textContent=s;
+const markers=['CD5','CD10','CD11c','CD19','CD20','CD23','CD31','CD43','CD45','CD79b','CD81','CD200','CD305','CD38','CD25','CD103','CD22','CD79a','CD3','CD4','CD8','CD30','CD56','CD57','CD7','CD2','CD34','CD117','CD138','FMC7','CD49d','CD200','IGK','IGL','IGM','IGD','IGG','KAPPA','LAMBDA'];
+const important=new Set(['CD5','CD10','CD19','CD20','CD23','CD45','CD79b','CD200','CD11c','CD103','CD25','CD38','CD43','CD30','CD34','CD117','CD138','IGM','KAPPA','LAMBDA']);
+function parse(text,complete){
+ const flags=[];const clean=text.replace(/[−–]/g,'-').replace(/[＋]/g,'+');
+ // Only accept marker + explicit +/- adjacent to marker; reject borderline/variable patterns.
+ const results=new Map();
+ const re=/\b(CD\s*\d+[a-z]?|FMC\s*7|IG[KM DG]|KAPPA|LAMBDA)\s*([+-])(?!\s*\d)/gi;
+ for(const m of clean.matchAll(re)){let marker=m[1].replace(/\s/g,'').toUpperCase();if(!markers.includes(marker))continue;
+ const prior=clean.slice(Math.max(0,m.index-16),m.index).toLowerCase();
+ if(/(?:partial|variable|dim|subset|equivocal|weak|heterogeneous)\s*$/.test(prior)){flags.push('Variable expression near '+marker+' — verify manually');continue}
+ const val=m[2];if(results.has(marker)&&results.get(marker)!==val){flags.push('Conflicting '+marker+' results — verify manually');results.delete(marker);continue}results.set(marker,val)}
+ // Restriction only when explicitly asserted, not merely IGK-/IGL+ in unrelated lists.
+ let restriction=null;
+ if(/(?:lambda|igl)[- ]restricted|(?:lambda|igl)\s+light[- ]chain restriction/i.test(clean))restriction='lambda';
+ if(/(?:kappa|igk)[- ]restricted|(?:kappa|igk)\s+light[- ]chain restriction/i.test(clean))restriction=restriction?'conflicting':'kappa';
+ if(!restriction&&results.get('IGK')==='-'&&results.get('IGL')==='+')restriction='lambda';
+ if(!restriction&&results.get('IGK')==='+'&&results.get('IGL')==='-')restriction='kappa';
+ if(restriction==='conflicting'){flags.push('Conflicting light-chain restriction');restriction=null}
+ const percent=clean.match(/(?:^|[\s:])(\d{1,3}(?:\.\d+)?)\s*%\s*(?:of\s+(?:all|total)\s+(?:cells|events|leukocytes)|B\s*(?:lymphoid\s*)?cells)/i);
+ let pop=percent?percent[1]+'% of '+(/events/i.test(percent[0])?'analyzed events':/leukocytes/i.test(percent[0])?'analyzed leukocytes':'analyzed cells'):null;
+ if(!pop)flags.push('Population percentage/denominator not safely identified; omitted.');
+ const positive=[...results].filter(([k,v])=>v==='+'&&(complete||important.has(k))&&!['IGK','IGL'].includes(k)).map(([k])=>k==='IGM'?'surface IgM':k);
+ const negative=[...results].filter(([k,v])=>v==='-'&&(complete||important.has(k))&&!['IGK','IGL'].includes(k)).map(([k])=>k);
+ if(!results.size)flags.push('No explicit +/- marker pairs found. Verify report format.');
+ if(!restriction)flags.push('Light-chain restriction not established by recognized text; omitted.');
+ if(!/\b(?:abnormal|aberrant|clonal|monotypic|restricted)\b/i.test(clean))flags.push('Abnormal/clonal population not explicitly stated; review before describing as abnormal.');
+ if(/(?:\bT[- ]cell\b|\bplasma cell\b)/i.test(clean)&&!/\bB[- ]cell\b/i.test(clean))flags.push('Possible non-B-cell phenotype: this B-cell-focused summarizer may be unsuitable.');
+ const label=/\b(?:abnormal|aberrant|clonal|monotypic)\b/i.test(clean)?'an abnormal':'a reported';
+ let sentence='Flow cytometry identifies '+label+' '+(restriction?restriction+'-restricted ':'')+'B-cell population'+(pop?' ('+pop+')':'')+'.';
+ if(positive.length)sentence+=' The cells are positive for '+positive.join(', ')+'.';
+ if(negative.length)sentence+=' They are negative for '+negative.join(', ')+'.';
+ if(!positive.length&&!negative.length)sentence+=' No reliably parsed marker expression is available.';
+ if(/hemodilut|low viability|limited by|poor viability|insufficient/i.test(clean))flags.push('Potential specimen limitation mentioned: inspect and manually add exact wording.');
+ flags.push('Verify extracted text, cell population identity, marker polarity and denominator against original flow report.');
+ return {sentence,flags};
+}
+$('generate').onclick=()=>{const v=$('source').value.trim();if(!v){status('Paste or import report text first.');return}const r=parse(v,$('mode').value==='complete');$('output').value=r.sentence;$('flags').hidden=false;$('flags').textContent=r.flags.join('\n• ');};
+$('copy').onclick=async()=>{try{await navigator.clipboard.writeText($('output').value);status('Copied.')}catch{status('Copy unavailable; select text manually.')}};
+$('file').onchange=async()=>{const f=$('file').files[0];if(!f)return;status('Reading '+f.name+' ...');
+ try{let s='';const ext=f.name.split('.').pop().toLowerCase();
+ if(ext==='txt')s=await f.text();
+ else if(ext==='docx'){const m=await import('https://cdn.jsdelivr.net/npm/mammoth@1.9.1/+esm');s=(await m.extractRawText({arrayBuffer:await f.arrayBuffer()})).value;}
+ else if(ext==='pdf'){const pdfjs=await import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.mjs');pdfjs.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.mjs';const doc=await pdfjs.getDocument({data:new Uint8Array(await f.arrayBuffer())}).promise;for(let i=1;i<=doc.numPages;i++){const page=await doc.getPage(i),c=await page.getTextContent();s+='\n'+c.items.map(x=>x.str).join(' ')}if(s.trim().length<20)throw Error('Scanned PDF has little extractable text. Convert to PNG/JPG for OCR.');}
+ else if(['png','jpg','jpeg','webp'].includes(ext)){const t=await import('https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.esm.min.js');const worker=await t.createWorker('eng');try{s=(await worker.recognize(f)).data.text}finally{await worker.terminate()}}
+ else throw Error('Unsupported file type');
+ $('source').value=s;status('Imported '+f.name+'. Verify extraction before summarizing.');
+ }catch(e){status('Import failed: '+e.message+'. You can paste the text manually.');}
+};
+</script></body></html>
