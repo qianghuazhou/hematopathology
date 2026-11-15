@@ -18,40 +18,70 @@ const $=id=>document.getElementById(id),status=s=>$('status').textContent=s;
 const markers=['CD5','CD10','CD11c','CD19','CD20','CD23','CD31','CD43','CD45','CD79b','CD81','CD200','CD305','CD38','CD25','CD103','CD22','CD79a','CD3','CD4','CD8','CD30','CD56','CD57','CD7','CD2','CD34','CD117','CD138','FMC7','CD49d','CD200','IGK','IGL','IGM','IGD','IGG','KAPPA','LAMBDA'];
 const important=new Set(['CD5','CD10','CD19','CD20','CD23','CD45','CD79b','CD200','CD11c','CD103','CD25','CD38','CD43','CD30','CD34','CD117','CD138','IGM','KAPPA','LAMBDA']);
 function parse(text,complete){
- const flags=[];const clean=text.replace(/[−–]/g,'-').replace(/[＋]/g,'+');
- // Only accept marker + explicit +/- adjacent to marker; reject borderline/variable patterns.
+ const flags=[];
+ const clean=text.replace(/[−–]/g,'-').replace(/＋/g,'+').replace(/\u00a0/g,' ');
+ // Only parse the immunophenotype attached to an explicitly described monoclonal/abnormal B-cell population.
+ // Never scan T-cell, NK, CD34, monocyte or other population paragraphs.
+ const sentences=clean.split(/(?<=[.!?])\s+|\n+/).map(x=>x.trim()).filter(Boolean);
+ const anchor=sentences.findIndex(x=>/\b(?:monoclonal|abnormal|aberrant|clonal|monotypic)\s+(?:B[- ](?:cell|lymphoid)|population)|\b(?:B[- ]cells?)\b.{0,100}\b(?:monoclonal|abnormal|aberrant|clonal|monotypic)\b/i.test(x));
+ if(anchor<0)return {sentence:'',flags:['BLOCKED: Cannot identify an explicitly described abnormal/monoclonal B-cell population. Review the source report manually.'],blocked:true};
+ const a=sentences[anchor];
+ // The marker list must appear in the anchor sentence after "immunophenotype:" or in the following sentence
+ // when it starts with a marker; stop before a new cell-population paragraph.
+ const markerIntro=a.match(/\bimmunophenotype\s*:/i);
+ let phenotype=markerIntro?a.slice(markerIntro.index+markerIntro[0].length):'';
+ if(!phenotype){
+   const following=sentences[anchor+1]||'';
+   if(/^(?:CD\d|Ig[KM DG]\b|kappa\b|lambda\b)/i.test(following))phenotype=following;
+ }
+ // A phrase like "has the immunophenotype: CD19+" must be present; otherwise block.
+ if(!phenotype||!/\b(?:CD\d+|IG[KM DG])\s*[+-]/i.test(phenotype))
+   return {sentence:'',flags:['BLOCKED: Abnormal B-cell phenotype cannot be isolated from other cell populations.'],blocked:true};
+ const markerRe=/\b(CD\s*\d+[a-z]?|FMC\s*7|IG[KM DG])\s*([+-])(?:\s*\(([^)]*)\))?/gi;
  const results=new Map();
- const re=/\b(CD\s*\d+[a-z]?|FMC\s*7|IG[KM DG]|KAPPA|LAMBDA)\s*([+-])(?!\s*\d)/gi;
- for(const m of clean.matchAll(re)){let marker=m[1].replace(/\s/g,'').toUpperCase();if(!markers.includes(marker))continue;
- const prior=clean.slice(Math.max(0,m.index-16),m.index).toLowerCase();
- if(/(?:partial|variable|dim|subset|equivocal|weak|heterogeneous)\s*$/.test(prior)){flags.push('Variable expression near '+marker+' — verify manually');continue}
- const val=m[2];if(results.has(marker)&&results.get(marker)!==val){flags.push('Conflicting '+marker+' results — verify manually');results.delete(marker);continue}results.set(marker,val)}
- // Restriction only when explicitly asserted, not merely IGK-/IGL+ in unrelated lists.
+ for(const m of phenotype.matchAll(markerRe)){
+   const marker=m[1].replace(/\s/g,'').toUpperCase();
+   if(!markers.includes(marker))continue;
+   const qualifier=(m[3]||'').trim();
+   if(results.has(marker)){flags.push('Duplicate '+marker+' entry: verify manually');continue}
+   results.set(marker,{sign:m[2],qualifier});
+ }
+ if(!results.size)return {sentence:'',flags:['BLOCKED: No reliably isolated B-cell marker pairs.'],blocked:true};
+ // Only take population percentage from the abnormal B-cell anchor, never the lymphocyte gate.
+ let pct=null;
+ const matches=[...a.matchAll(/(\d{1,3}(?:\.\d+)?)\s*%\s*of\s*(?:all|total)\s*(?:analyzed\s*)?(leukocytes|cells|events)/gi)];
+ if(matches.length===1)pct=matches[0][1]+'% of total '+matches[0][2].toLowerCase();
+ if(matches.length>1)flags.push('Multiple percentages in abnormal-population sentence; percentage omitted.');
+ if(!pct)flags.push('Abnormal population percentage/denominator not safely isolated; omitted.');
  let restriction=null;
- if(/(?:lambda|igl)[- ]restricted|(?:lambda|igl)\s+light[- ]chain restriction/i.test(clean))restriction='lambda';
- if(/(?:kappa|igk)[- ]restricted|(?:kappa|igk)\s+light[- ]chain restriction/i.test(clean))restriction=restriction?'conflicting':'kappa';
- if(!restriction&&results.get('IGK')==='-'&&results.get('IGL')==='+')restriction='lambda';
- if(!restriction&&results.get('IGK')==='+'&&results.get('IGL')==='-')restriction='kappa';
- if(restriction==='conflicting'){flags.push('Conflicting light-chain restriction');restriction=null}
- const percent=clean.match(/(?:^|[\s:])(\d{1,3}(?:\.\d+)?)\s*%\s*(?:of\s+(?:all|total)\s+(?:cells|events|leukocytes)|B\s*(?:lymphoid\s*)?cells)/i);
- let pop=percent?percent[1]+'% of '+(/events/i.test(percent[0])?'analyzed events':/leukocytes/i.test(percent[0])?'analyzed leukocytes':'analyzed cells'):null;
- if(!pop)flags.push('Population percentage/denominator not safely identified; omitted.');
- const positive=[...results].filter(([k,v])=>v==='+'&&(complete||important.has(k))&&!['IGK','IGL'].includes(k)).map(([k])=>k==='IGM'?'surface IgM':k);
- const negative=[...results].filter(([k,v])=>v==='-'&&(complete||important.has(k))&&!['IGK','IGL'].includes(k)).map(([k])=>k);
- if(!results.size)flags.push('No explicit +/- marker pairs found. Verify report format.');
- if(!restriction)flags.push('Light-chain restriction not established by recognized text; omitted.');
- if(!/\b(?:abnormal|aberrant|clonal|monotypic|restricted)\b/i.test(clean))flags.push('Abnormal/clonal population not explicitly stated; review before describing as abnormal.');
- if(/(?:\bT[- ]cell\b|\bplasma cell\b)/i.test(clean)&&!/\bB[- ]cell\b/i.test(clean))flags.push('Possible non-B-cell phenotype: this B-cell-focused summarizer may be unsuitable.');
- const label=/\b(?:abnormal|aberrant|clonal|monotypic)\b/i.test(clean)?'an abnormal':'a reported';
- let sentence='Flow cytometry identifies '+label+' '+(restriction?restriction+'-restricted ':'')+'B-cell population'+(pop?' ('+pop+')':'')+'.';
+ const context=a+' '+(sentences[anchor+1]||'');
+ if(/\bexpressing\s+kappa\s+light\s+chains?\b|\bkappa[- ]restricted\b|\bkappa\s+light[- ]chain restriction\b/i.test(context))restriction='kappa';
+ if(/\bexpressing\s+lambda\s+light\s+chains?\b|\blambda[- ]restricted\b|\blambda\s+light[- ]chain restriction\b/i.test(context))restriction=restriction?'conflict':'lambda';
+ if(!restriction&&results.get('IGK')?.sign==='+'&&results.get('IGL')?.sign==='-')restriction='kappa';
+ if(!restriction&&results.get('IGK')?.sign==='-'&&results.get('IGL')?.sign==='+')restriction='lambda';
+ if(restriction==='conflict')return {sentence:'',flags:['BLOCKED: Conflicting light-chain assignments.'],blocked:true};
+ if(!restriction)flags.push('No explicit light-chain restriction identified.');
+ const positive=[],negative=[];
+ for(const [marker,info] of results){
+   if(['IGK','IGL'].includes(marker))continue;
+   if(!complete&&!important.has(marker))continue;
+   let display=marker==='IGM'?'surface IgM':marker;
+   if(info.qualifier){
+     display+=' ('+info.qualifier+')';
+     if(!/^(?:minor subset\s*[+-]|subset\s*[+-]|dim|weak|partial|variable|heterogeneous)$/i.test(info.qualifier))
+       flags.push('Unrecognized qualifier for '+marker+': '+info.qualifier);
+   }
+   (info.sign==='+'?positive:negative).push(display);
+ }
+ let sentence='Flow cytometry identifies a '+(restriction?restriction+'-restricted ':'monoclonal ')+'B-cell population'+(pct?' ('+pct+')':'')+'.';
  if(positive.length)sentence+=' The cells are positive for '+positive.join(', ')+'.';
  if(negative.length)sentence+=' They are negative for '+negative.join(', ')+'.';
- if(!positive.length&&!negative.length)sentence+=' No reliably parsed marker expression is available.';
- if(/hemodilut|low viability|limited by|poor viability|insufficient/i.test(clean))flags.push('Potential specimen limitation mentioned: inspect and manually add exact wording.');
- flags.push('Verify extracted text, cell population identity, marker polarity and denominator against original flow report.');
- return {sentence,flags};
+ const scatter=sentences.find(x=>/\bmonoclonal B cells\b/i.test(x)&&/\bforward scatter\b/i.test(x));
+ if(scatter&&/\bsmall to medium sized\b/i.test(scatter))sentence+=' The monoclonal B cells are small to medium sized by forward scatter.';
+ flags.push('Verify original report, OCR accuracy, marker qualifiers and abnormal-population percentage before clinical use.');
+ return {sentence,flags,blocked:false};
 }
-$('generate').onclick=()=>{const v=$('source').value.trim();if(!v){status('Paste or import report text first.');return}const r=parse(v,$('mode').value==='complete');$('output').value=r.sentence;$('flags').hidden=false;$('flags').textContent=r.flags.join('\n• ');};
+$('generate').onclick=()=>{const v=$('source').value.trim();if(!v){status('Paste or import report text first.');return}const r=parse(v,$('mode').value==='complete');$('output').value=r.sentence;status(r.blocked?'Generation blocked: check flags.':'Draft generated: manual verification required.');$('flags').hidden=false;$('flags').textContent=r.flags.join('\n• ');};
 $('copy').onclick=async()=>{try{await navigator.clipboard.writeText($('output').value);status('Copied.')}catch{status('Copy unavailable; select text manually.')}};
 $('file').onchange=async()=>{const f=$('file').files[0];if(!f)return;status('Reading '+f.name+' ...');
  try{let s='';const ext=f.name.split('.').pop().toLowerCase();
