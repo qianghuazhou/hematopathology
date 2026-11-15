@@ -23,7 +23,7 @@ function parse(text,complete){
  // Only parse the immunophenotype attached to an explicitly described monoclonal/abnormal B-cell population.
  // Never scan T-cell, NK, CD34, monocyte or other population paragraphs.
  const sentences=clean.split(/(?<=[.!?])\s+|\n+/).map(x=>x.trim()).filter(Boolean);
- const anchor=sentences.findIndex(x=>/\b(?:monoclonal|abnormal|aberrant|clonal|monotypic)\s+(?:B[- ](?:cell|lymphoid)|population)|\b(?:B[- ]cells?)\b.{0,100}\b(?:monoclonal|abnormal|aberrant|clonal|monotypic)\b/i.test(x));
+ const anchor=sentences.findIndex((x,i)=>/\b(?:monoclonal|abnormal|aberrant|clonal|monotypic)\s+(?:B[- ](?:cell|lymphoid)|population)|\b(?:B[- ]cells?)\b.{0,100}\b(?:monoclonal|abnormal|aberrant|clonal|monotypic)\b/i.test(x) && (/\bB[- ]cell/i.test(x)||/\bB[- ]cells?\b/i.test(sentences[i-1]||'')));
  if(anchor<0)return {sentence:'',flags:['BLOCKED: Cannot identify an explicitly described abnormal/monoclonal B-cell population. Review the source report manually.'],blocked:true};
  const a=sentences[anchor];
  // The marker list must appear in the anchor sentence after "immunophenotype:" or in the following sentence
