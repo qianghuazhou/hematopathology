@@ -1,0 +1,171 @@
+NEONATAL AND INFANT PERIPHERAL BLOOD MORPHOLOGY - SIGN-OUT LIBRARY
+
+Use gestational-age and postnatal-age reference intervals. Templates are examples and require clinical and laboratory correlation.
+
+1. NORMAL AND PHYSIOLOGIC FINDINGS
+
+Normal term newborn:
+Peripheral blood morphology is within expected limits for gestational and postnatal age.
+
+Normal premature newborn:
+Macrocytosis, polychromasia, and occasional NRBCs, compatible with physiologic changes of prematurity.
+
+Physiologic macrocytosis:
+Macrocytosis with mild polychromasia, compatible with neonatal erythropoiesis.
+
+Physiologic NRBCs:
+Occasional circulating NRBCs, within expected limits for gestational and postnatal age.
+
+Physiologic lymphocytosis:
+Relative lymphocytosis, within expected limits for age.
+
+Mild anisopoikilocytosis:
+Mild red blood cell anisopoikilocytosis, which may be physiologic in this newborn.
+
+2. ANEMIA AND RED BLOOD CELL ABNORMALITIES
+
+Normocytic anemia:
+Normocytic anemia; correlation with gestational and postnatal age is recommended.
+
+Anemia of prematurity:
+Normocytic anemia with no significant morphologic abnormalities, compatible with anemia of prematurity in the appropriate clinical setting.
+
+Anemia with polychromasia:
+Normocytic anemia with increased polychromasia, suggesting increased erythropoietic activity.
+
+Anemia with NRBCs:
+Normocytic anemia with polychromasia and circulating NRBCs, suggesting increased erythropoietic activity or hematopoietic stress.
+
+Macrocytic anemia:
+Macrocytic anemia with polychromasia; correlation with gestational age and reticulocyte count is recommended.
+
+Microcytic anemia:
+Microcytic anemia; consider iron deficiency and thalassemia, with correlation to age-specific indices and iron studies.
+
+Suspected hemolysis:
+Anemia with polychromasia and increased NRBCs, raising the possibility of hemolysis or blood loss.
+
+Spherocytosis:
+Anemia with spherocytes and polychromasia; consider immune hemolysis and hereditary spherocytosis.
+
+Schistocytosis:
+Red blood cell fragmentation (schistocytes X%); correlation with gestational age and evidence of hemolysis is recommended.
+
+Target cells:
+Target cells are present; clinical significance depends on age, degree, and associated red blood cell abnormalities.
+
+Pyknocytosis:
+Increased pyknocytes with polychromasia; consider neonatal hemolysis, including infantile pyknocytosis.
+
+Persistent NRBCs:
+Increased circulating NRBCs for age, suggesting erythropoietic or hematopoietic stress; clinical correlation is recommended.
+
+3. WHITE BLOOD CELL ABNORMALITIES
+
+Neutrophilia:
+Neutrophilia, which may be reactive or stress-related in the neonatal setting.
+
+Neutrophilia with left shift:
+Neutrophilia with left shift, favouring a reactive or stress-related process.
+
+Reactive neutrophils:
+Reactive neutrophilic changes, which may be associated with infection, inflammation, or perinatal stress.
+
+Neutropenia:
+Neutropenia for age; clinical correlation and follow-up CBC are recommended.
+
+Severe neutropenia:
+Severe neutropenia for age; prompt clinical correlation is recommended.
+
+Neutropenia with reactive changes:
+Neutropenia with reactive neutrophilic changes, potentially associated with infection or neonatal stress.
+
+Leukocytosis:
+Leukocytosis for age, favouring a reactive or stress-related process in the appropriate clinical setting.
+
+Leukocytosis with left shift:
+Leukocytosis with neutrophilic left shift and reactive changes, favouring a reactive process.
+
+Lymphocytosis:
+Lymphocytosis, which may be physiologic for age.
+
+Reactive lymphocytosis:
+Lymphocytosis with reactive lymphocytes, favouring a reactive process.
+
+Monocytosis:
+Monocytosis, which may be reactive; follow-up is suggested if persistent.
+
+Leukopenia:
+Leukopenia for age; clinical correlation and follow-up CBC are recommended.
+
+Immature granulocytes:
+Circulating immature granulocytes, which may be associated with prematurity or hematopoietic stress.
+
+Circulating blasts:
+Circulating blasts (X%); further hematologic evaluation is recommended to exclude a neonatal myeloid proliferation.
+
+4. PLATELET ABNORMALITIES
+
+Normal platelets:
+Platelets are adequate in number and unremarkable in morphology.
+
+Mild thrombocytopenia:
+Mild thrombocytopenia without significant platelet morphologic abnormalities; clinical correlation is recommended.
+
+Severe thrombocytopenia:
+Severe thrombocytopenia, confirmed on peripheral smear; urgent clinical correlation is recommended.
+
+Large platelets:
+Thrombocytopenia with large platelets, suggesting increased platelet turnover or an inherited platelet disorder.
+
+Giant platelets:
+Giant platelets are present; consider an inherited macrothrombocytopenia if persistent.
+
+Thrombocytosis:
+Thrombocytosis, favouring a reactive process in the appropriate clinical setting.
+
+Platelet clumping:
+Platelet clumping is present, potentially resulting in a spuriously decreased automated platelet count.
+
+5. COMBINED ABNORMALITIES - COMMON NICU SCENARIOS
+
+Prematurity with anemia and neutropenia:
+Normocytic anemia with polychromasia and occasional NRBCs, and neutropenia; findings may be associated with prematurity in this newborn.
+
+Prematurity with anemia:
+Normocytic anemia with polychromasia and occasional NRBCs; findings may be associated with prematurity and neonatal hematopoietic stress.
+
+Anemia with neutrophilia:
+Normocytic anemia with polychromasia and reactive neutrophilia, suggesting increased erythropoietic activity and a reactive or stress-related process.
+
+Anemia with neutropenia:
+Normocytic anemia with polychromasia and neutropenia; clinical correlation and follow-up CBC are recommended.
+
+Anemia with thrombocytopenia:
+Normocytic anemia with polychromasia and thrombocytopenia; correlation with evidence of hemolysis, infection, or other neonatal stressors is recommended.
+
+Leukocytosis and neutropenia:
+Leukocytosis with absolute neutropenia and reactive neutrophilic changes; clinical correlation is recommended.
+
+Leukopenia and thrombocytopenia:
+Leukopenia with neutropenia and thrombocytopenia; clinical correlation to exclude infection or other causes of marrow suppression is recommended.
+
+Anemia with NRBCs and left shift:
+Normocytic anemia with polychromasia, circulating NRBCs, and granulocytic left shift, suggesting hematopoietic stress.
+
+Suspected neonatal infection:
+Neutrophilic left shift with toxic changes, favouring a reactive inflammatory process; neonatal infection cannot be excluded.
+
+Anemia with fragmentation:
+Normocytic anemia with polychromasia and increased red blood cell fragmentation; correlation with evidence of hemolysis and coagulation abnormalities is recommended.
+
+Multiple cytopenias:
+Anemia, neutropenia, and thrombocytopenia; clinical correlation and follow-up CBC are recommended.
+
+6. IMPORTANT CAUTIONS
+
+- Do not attribute significant anemia, marked polychromasia, or neutropenia solely to prematurity.
+- Interpret ANC against gestational- and postnatal-age-specific intervals, especially in the first 72 hours.
+- ICSH schistocyte reference limits: <=1% for term and <=5% for preterm neonates; interpret in context.
+- NRBC significance depends strongly on gestational and postnatal age.
+- Concerning blasts require assessment; a 20% threshold alone does not exclude congenital leukemia or transient abnormal myelopoiesis.
