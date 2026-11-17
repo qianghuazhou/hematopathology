@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Research Literature Digest | Hematopathology</title>
+<style>
+body{font:16px/1.55 system-ui,Segoe UI,sans-serif;background:#f5f7fa;color:#243447;margin:0}
+main{max-width:1080px;margin:auto;padding:30px 20px}a{color:#176aa2}
+header{background:#243447;color:white;padding:25px;border-radius:14px}
+header a{color:#c5e4ff}.topic{margin-top:28px}article{background:white;border:1px solid #dde4ec;border-radius:12px;padding:16px;margin:12px 0}
+small,.meta{color:#596b79}.notice{background:#fff8e7;padding:12px;border-radius:8px}
+</style></head><body><main><header><a href="index.html">← Hematopathology home</a><h1>Research Literature Digest</h1><p>Weekly PubMed surveillance: lymphoma, MDS, OGM, AML and transfusion medicine.</p></header>
+<p class="notice">Automated retrieval of public bibliographic records. Inclusion is not an endorsement or critical appraisal. Verify all source articles before research or clinical use.</p>
+<p id="status">Loading verified PubMed records…</p><div id="results"></div>
+<script>
+const root=document.getElementById('results'),status=document.getElementById('status');
+const el=(tag,text)=>{const x=document.createElement(tag);x.textContent=text||'';return x};
+fetch('data/literature_digest.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Digest not yet published');return r.json()}).then(data=>{
+ status.textContent='Retrieved '+(data.window_start||'?')+' to '+(data.window_end||'?')+'. Last generated: '+(data.generated_at||'unknown')+'.';
+ for(const [topic,papers] of Object.entries(data.topics||{})){
+  const section=el('section');section.className='topic';section.append(el('h2',topic+' ('+papers.length+')'));
+  if(!papers.length)section.append(el('p','No matching new PubMed records in this window.'));
+  for(const p of papers){const card=el('article'),h=el('h3'),link=el('a',p.title||'Untitled');
+   link.href='https://pubmed.ncbi.nlm.nih.gov/'+encodeURIComponent(p.pmid)+'/';link.rel='noopener noreferrer';link.target='_blank';h.append(link);card.append(h,el('p',(p.journal||'')+' · PMID: '+p.pmid+(p.doi?' · DOI: '+p.doi:'')));
+   if(p.abstract)card.append(el('p',p.abstract));section.append(card)}
+  root.append(section)}
+}).catch(e=>{status.textContent='No published digest available yet. The scheduled workflow must run and its pull request must be reviewed and merged.'});
+</script></main></body></html>
