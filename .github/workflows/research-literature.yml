@@ -1,0 +1,39 @@
+name: Weekly research literature digest
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 13 * * 5' # Friday 08:00 EST / 09:00 EDT
+permissions:
+  contents: read
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch public PubMed records
+        env:
+          NCBI_EMAIL: ${{ vars.NCBI_EMAIL }}
+        run: python scripts/research_literature_agent.py
+      - name: Open review pull request for changed digest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- data/literature_digest.json && [ -f data/literature_digest.json ]; then
+            echo "No digest changes"
+            exit 0
+          fi
+          BRANCH="automation/literature-digest"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add data/literature_digest.json
+          git commit -m "Update weekly PubMed literature digest"
+          git push --force-with-lease origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" --title "Review weekly literature digest" --body "Automated public PubMed metadata. Verify study relevance, PMID/DOI, and interpretation before merging." || echo "Existing PR may already be open"
