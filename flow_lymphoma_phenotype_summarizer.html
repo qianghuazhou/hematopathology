@@ -21,7 +21,7 @@ function parse(text,mode){
  const flags=[];
  const clean=text.replace(/[−–]/g,'-').replace(/＋/g,'+').replace(/\u00a0/g,' ');
  const sentences=clean.split(/(?<=[.!?])\s+|\n+/).map(x=>x.trim()).filter(Boolean);
- const anchor=sentences.findIndex(x=>/\b(?:kappa|lambda)[- ]restricted B[- ]cell population\b|\b(?:monoclonal|abnormal|aberrant|clonal|monotypic)\s+B[- ]cell(?:s|\s+population)?\b|\bB[- ]cells?\b.{0,100}\b(?:monoclonal|abnormal|aberrant|clonal|monotypic)\b/i.test(x));
+ const anchor=sentences.findIndex(x=>/\b(?:kappa|lambda)[- ]restricted B[- ]cell population\b|\b(?:monoclonal|abnormal|aberrant|clonal|monotypic)\s+(?:B[- ]cell(?:s|\s+population)?|population)\b|\bB[- ]cells?\b.{0,100}\b(?:monoclonal|abnormal|aberrant|clonal|monotypic)\b/i.test(x));
  if(anchor<0)return {sentence:'',flags:['BLOCKED: No explicitly identified abnormal or light-chain-restricted B-cell population.'],blocked:true};
  const a=sentences[anchor];
  const stop=/\b(?:T[- ]cells?|NK[- ]cells?|monocytes?|granulocytes?|blasts?|hematogones?)\b/i;
@@ -60,8 +60,8 @@ function parse(text,mode){
  const pct=match?match[1]+'% of total '+match[2].toLowerCase():null;
  let restriction=null;
  const light=context.slice(0,2).join(' ');
- if(/\bkappa[- ]restricted\b|\bkappa\s+light[- ]chain restriction\b/i.test(light))restriction='kappa';
- if(/\blambda[- ]restricted\b|\blambda\s+light[- ]chain restriction\b/i.test(light))restriction=restriction?'conflict':'lambda';
+ if(/\bkappa[- ]restricted\b|\bkappa\s+light[- ]chain restriction\b|\bexpressing\s+kappa\s+light\s+chains?\b/i.test(light))restriction='kappa';
+ if(/\blambda[- ]restricted\b|\blambda\s+light[- ]chain restriction\b|\bexpressing\s+lambda\s+light\s+chains?\b/i.test(light))restriction=restriction?'conflict':'lambda';
  if(restriction==='conflict')return {sentence:'',flags:['BLOCKED: Conflicting light-chain restriction.'],blocked:true};
  if(!restriction)flags.push('Light-chain restriction not explicitly established.');
  const complete=mode==='complete';
