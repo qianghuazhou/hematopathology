@@ -1418,9 +1418,11 @@ function generateReport(){
   if(v('aspVacuolation')) r += 'Vacuolation: '+sent(v('aspVacuolation'))+'\n';
   if(v('aspOther')) r += 'Other: '+sent(v('aspOther'))+'\n';
   r += ironStatusLine(v('ironStore'), v('ringSid'));
-  if(v('touchPrep')) r += 'Touch preparation: '+sent(normPart(v('touchPrep')))+'\n';
-  if(v('touchPrepOther')) r += 'Touch prep comment: '+sent(v('touchPrepOther'))+'\n';
   r += diffCountOutput();
+  if(v('clotDescription')) r += 'Clot section: '+sent(normPart(v('clotDescription')))+'\n';
+  else if(v('clotQuality')) r += 'Clot section: '+sent(v('clotQuality'))+'\n';
+  if(v('clotOther')) r += 'Clot section comment: '+sent(v('clotOther'))+'\n';
+
 
   r += '\n';
   r += 'BONE MARROW CORE BIOPSY:\n';
@@ -1437,9 +1439,9 @@ function generateReport(){
   if(v('bxMast')) r += 'Mast cells: '+sent(normPart(v('bxMast')))+'\n';
   if(v('trabBone')) r += 'Bone trabeculae: '+sent(v('trabBone'))+'\n';
   if(v('bxOther')) r += 'Other: '+sent(v('bxOther'))+'\n';
-  if(v('clotDescription')) r += 'Clot section: '+sent(normPart(v('clotDescription')))+'\n';
-  else if(v('clotQuality')) r += 'Clot section: '+sent(v('clotQuality'))+'\n';
-  if(v('clotOther')) r += 'Clot section comment: '+sent(v('clotOther'))+'\n';
+  if(v('touchPrep')) r += 'Touch preparation: '+sent(normPart(v('touchPrep')))+'\n';
+  if(v('touchPrepOther')) r += 'Touch prep comment: '+sent(v('touchPrepOther'))+'\n';
+
   r += '\n';
   const specialLines=[];
   if(v('congo')) specialLines.push(v('congo'));
