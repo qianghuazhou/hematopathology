@@ -720,7 +720,8 @@
 
   <details class="card" id="plasmaModule"><summary>Plasma Cell Neoplasm — Standardized Diagnosis Generator</summary><div class="inner" style="padding:14px">
 <div class="row"><label>Clinical / reporting category</label><select id="pcCategory"><option value="clonal">Clonal plasma cell neoplasm (MGUS/SMM classification pending)</option><option value="myeloma">Established plasma cell myeloma</option><option value="residual">Persistent / residual myeloma</option><option value="negative">Post-treatment: no detectable disease</option><option value="equivocal">Equivocal / limited specimen</option><option value="concurrent">Plasma cell neoplasm with concurrent marrow disorder</option></select></div>
-<div class="row"><label>Plasma cell burden (%; use &lt;5, 5-10, 10-15, 30, etc.)</label><input id="pcPercent" placeholder="e.g. 10-15"></div>
+<div class="row"><label>Level of plasma cell involvement</label><select id="pcLevel" onchange="updatePlasmaLevel()"><option value="">Select level / custom</option><option value="lt5">&lt;5%</option><option value="5to10">5 to &lt;10%</option><option value="10to20">10 to &lt;20%</option><option value="20to60">20 to &lt;60%</option><option value="ge60">60% or more</option></select></div>
+<div class="row"><label>Actual plasma cell involvement (%) — preferred over category</label><input id="pcPercent" placeholder="e.g. 3, 7, 10-15, 40, 60, &lt;5"></div>
 <div class="row"><label>Light-chain restriction</label><select id="pcLight"><option value="">Not established</option><option value="kappa">Kappa</option><option value="lambda">Lambda</option></select></div>
 <div class="row"><label>Marrow cellularity</label><select id="pcCell"><option>Normocellular</option><option>Hypercellular</option><option>Hypocellular</option><option>Cellular</option><option value="">Not assessable</option></select></div>
 <div class="row"><label>Trilineage hematopoiesis</label><select id="pcHeme"><option value="preserved">Preserved</option><option value="reduced">Reduced</option><option value="none">Do not mention</option></select></div>
@@ -2140,10 +2141,18 @@ function loadMpalTMyeloid(){
 }
 
 
+function updatePlasmaLevel(){
+ const level=document.getElementById('pcLevel')?.value;
+ const pct=document.getElementById('pcPercent');
+ if(!pct)return;
+ const suggestions={lt5:'<5', '5to10':'5-<10', '10to20':'10-<20', '20to60':'20-<60',ge60:'60'};
+ if(!pct.value.trim()||Object.values(suggestions).includes(pct.value.trim()))pct.value=suggestions[level]||'';
+}
 function applyPlasmaCategory(){
  const get=id=>(document.getElementById(id)?.value||'').trim();
- const cat=get('pcCategory'),pct=get('pcPercent'),light=get('pcLight'),cell=get('pcCell');
- const burden=pct?(pct.includes('%')?pct:pct+'%'):'[X]%';
+ const cat=get('pcCategory'),pct=get('pcPercent'),level=get('pcLevel'),light=get('pcLight'),cell=get('pcCell');
+ const ranges={lt5:'<5%', '5to10':'5-<10%', '10to20':'10-<20%', '20to60':'20-<60%',ge60:'>=60%'};
+ const burden=pct?(pct.includes('%')?pct:pct+'%'):(ranges[level]||'[X]%');
  const restriction=light?light+'-restricted ':'';
  const burdenText='involving '+burden+' of marrow cellularity';
  let dx1='';
@@ -2176,7 +2185,8 @@ function applyPlasmaCategory(){
  if(mo)mo.checked=document.getElementById('pcMol').checked;
  setField('commentType','plasma');
  let comment='Correlation with clinical findings, serum and urine monoclonal protein studies, serum free light chains, and imaging is required for integrated classification.';
- if(cat==='myeloma')comment='The clinical diagnosis of plasma cell myeloma is noted. Correlate with current disease markers, imaging, and plasma cell FISH for risk assessment.';
+ if(cat==='myeloma')comment='The findings are consistent with the established diagnosis of plasma cell myeloma. Correlation with serum and urine monoclonal protein studies, serum free light chains, imaging, and plasma cell FISH is recommended for disease assessment and risk stratification.';
+ if(cat==='myeloma' && (level==='ge60'||/^\\s*(?:6[0-9]|[7-9][0-9]|100)(?:\\s*%|\\s*$)/.test(pct)))comment='Clonal plasma cells comprising at least 60% of marrow cellularity meet an IMWG myeloma-defining biomarker criterion. Correlation with serum and urine monoclonal protein studies, serum free light chains, imaging, and plasma cell FISH is recommended for disease assessment and risk stratification.';
  if(cat==='residual')comment='The findings support persistent marrow involvement by the previously diagnosed plasma cell myeloma. Correlate with treatment history and current disease markers.';
  if(cat==='negative')comment='No residual plasma cell neoplasm is identified by the methods performed; this does not establish measurable residual disease negativity. Correlate with disease markers and any dedicated MRD assay.';
  if(cat==='equivocal')comment='The available specimen does not permit reliable quantification or definitive classification of the plasma cell population. Repeat sampling may be considered if clinically indicated.';
