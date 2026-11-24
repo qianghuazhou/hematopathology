@@ -1985,7 +1985,7 @@ function loadEssentialThrombocythemia(){
   applyBasicIhc();
 
   set('dx1','Normocellular bone marrow with increased large mature hyperlobulated megakaryocytes, without significant granulocytic or erythroid proliferation or increased blasts.');
-  set('dx2','Morphologic findings favour ESSENTIAL THROMBOCYTHEMIA (ET); correlate with molecular and clinical criteria.');
+  set('dx2','Findings favour ESSENTIAL THROMBOCYTHEMIA (ET).');
   set('pbdx','Thrombocytosis.');
   set('customComment','The marrow morphology favours essential thrombocythemia (ET). Correlation with platelet count, JAK2/CALR/MPL mutation status and clinical findings is required, including exclusion of reactive thrombocytosis and other myeloid neoplasms, particularly prefibrotic primary myelofibrosis and polycythemia vera. Report pending genetic studies separately when applicable.');
 
@@ -1998,7 +1998,8 @@ function loadEssentialThrombocythemia(){
   set('aspCell','normocellular for age');
   set('aspMkNum','proportionately increased');
   set('aspMkMorph','');
-  set('aspMkMorphOther','Large to giant mature megakaryocytes with abundant cytoplasm and deeply folded, hyperlobulated staghorn-like nuclei; marked nuclear atypia is not a feature.');
+  // Clear inherited normal-morphology pill selection before applying ET-specific description.
+  set('aspMkMorphOther','large mature megakaryocytes with abundant cytoplasm and deeply folded, hyperlobulated (staghorn-like) nuclei');
   set('aspEryNum','proportionately normal in number');
   set('aspEryMat','show proper maturation');
   set('aspEryMorph','mainly normoblastic maturation');
@@ -2010,14 +2011,15 @@ function loadEssentialThrombocythemia(){
   set('aspPlasma','not increased');
   set('aspMast','not increased');
   set('ironStore','adequate');
-  set('ringSid','not increased');
+  set('ringSid','not identified');
 
   set('bxQuality','adequate for evaluation');
   set('bxCellPhrase','normocellular for age');
   set('bxArch','preserved');
   set('bxMkNum','increased');
   set('bxMkMorph','');
-  set('bxMkMorphOther','Large to giant mature megakaryocytes with abundant cytoplasm and deeply folded, hyperlobulated staghorn-like nuclei, distributed singly and in loose clusters; dense atypical clustering and bulbous/cloud-like hypolobated nuclei are not identified.');
+  // ET shows mature hyperlobulated megakaryocytes, not the normal-morphology default.
+  set('bxMkMorphOther','large to giant mature megakaryocytes with abundant cytoplasm and deeply folded, hyperlobulated (staghorn-like) nuclei, distributed singly and in loose clusters without dense atypical clustering');
   set('bxEryNum','normal in number');
   set('bxEryMat','show proper maturation');
   set('bxEryMorph','mainly normoblastic maturation');
@@ -2031,7 +2033,7 @@ function loadEssentialThrombocythemia(){
   set('bxMast','not increased');
   set('trabBone','unremarkable');
 
-  set('retic','Reticulin: Not increased (MF-0); grade 1 fibrosis is uncommon in ET and should prompt careful exclusion of prefibrotic PMF.');
+  set('retic','Reticulin: Not increased (MF grade 0 of 3 fibrosis).');
   set('trichrome','');
   set('ihcCd34','highlights no increase in blasts (<5%)');
   set('ihcCd117','highlights scattered immature myeloid precursors and mast cells');
