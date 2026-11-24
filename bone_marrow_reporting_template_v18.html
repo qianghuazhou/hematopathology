@@ -786,8 +786,9 @@
         <h3>Mature B-cell / plasma cell</h3>
         <div class="presetBtns">
           <button class="light" onclick="loadCd5Cd10NegativeBLpd()">CD5-/CD10- B-LPD</button>
-          <button class="light" onclick="loadLplLimited()">LPL Limited</button>
-          <button class="light" onclick="loadLplExtensive()">LPL Extensive</button>
+          <label for="lplPattern" style="align-self:center">LPL pattern</label>
+          <select id="lplPattern" aria-label="LPL marrow involvement pattern" style="max-width:240px"><option value="limited">Predominantly plasmacytic</option><option value="extensive">Predominantly B-cell</option></select>
+          <button class="light" onclick="loadLpl()">Lymphoplasmacytic Lymphoma (LPL)</button>
           <button class="light" onclick="loadAggressiveBCellLarge()">Aggressive B-cell / DLBCL</button>
           <button class="light" onclick="loadHgblDoubleHit()">HGBL Double-hit</button>
           <button class="light" onclick="loadPlasmaCellNeoplasm()">Plasma Cell Neoplasm</button>
@@ -1528,6 +1529,11 @@ function loadCd5Cd10NegativeBLpd(){
   generateReport();
 }
 
+function loadLpl(){
+  const pattern=document.getElementById('lplPattern')?.value || 'limited';
+  if(pattern==='extensive') loadLplExtensive();
+  else loadLplLimited();
+}
 function loadLplLimited(){
   clearAll();window.__loadingTemplate=true;
   applyCommonNormalPb();
