@@ -1569,7 +1569,7 @@ function loadMantleCellLymphoma(){
   set('dx1','MANTLE CELL LYMPHOMA, involving '+fraction+' of marrow cellularity.');
   set('dx2','');
   set('pbdx',minimal?'Occasional circulating atypical lymphoid cells.':'Lymphocytosis with circulating atypical lymphoid cells.');
-  set('customComment','The marrow contains a small mature B-cell infiltrate with CD5 and cyclin D1 expression, consistent with involvement by mantle cell lymphoma in the context of the established diagnosis. The infiltrate comprises '+fraction+' of marrow cellularity. Correlation with SOX11 immunohistochemistry, CCND1::IGH rearrangement studies and prior tissue findings is recommended as appropriate. The proliferation index is low in the reference cases. No morphologic large cell transformation is identified.');
+  set('customComment','The marrow contains a small mature B-cell infiltrate with CD5 and cyclin D1 expression, consistent with involvement by mantle cell lymphoma in the context of the established diagnosis. The infiltrate comprises '+fraction+' of marrow cellularity. FISH for IGH::CCND1 t(11;14) is pending and will be reported in an addendum. Correlation with prior pathology is recommended. The proliferation index is low in the reference cases. No morphologic large cell transformation is identified.');
   set('pbWbc',minimal?'Occasional atypical small lymphoid cells with irregular nuclei are present.':'Increased small atypical lymphoid cells with scant cytoplasm and irregular, occasionally clefted nuclei.');
   set('aspLymph','atypical lymphoid cells are present');
   set('aspOther','Small atypical lymphoid cells with irregular nuclear contours are present. Maturing trilineage hematopoiesis is preserved.');
@@ -1579,7 +1579,7 @@ function loadMantleCellLymphoma(){
   set('ihcCd3','highlights background reactive small T cells');
   set('ihcExtra','The atypical B cells are positive for CD20, PAX5, CD5 and cyclin D1; CD23 is negative. SOX11: ___ (positive in one reference case, equivocal in another). Ki-67 proliferation index: ___% (approximately 10% in the limited-involvement reference case).');
   set('flow','See separate flow cytometry report, if performed.');
-  set('mol','CCND1::IGH t(11;14) FISH: ___ (positive in the limited-involvement reference case).');
+  set('mol','IGH::CCND1 t(11;14) FISH pending.');
   generateReport();
 }
 function loadLpl(){
@@ -1699,7 +1699,7 @@ function loadAggressiveBCellLarge(){
   set('dx2','');
   
   set('pbdx','Normocytic anemia with rare circulating atypical lymphoid cells.');
-  set('customComment','The findings favor diffuse large B-cell lymphoma. MYC, BCL2 and BCL6 rearrangement studies are recommended for definitive classification, including assessment for a genetically defined high-grade B-cell lymphoma. Correlation with prior pathology and clinical findings is recommended.');
+  set('customComment','The findings favor diffuse large B-cell lymphoma. FISH for MYC, BCL2 and BCL6 rearrangements is pending and will be reported in an addendum for definitive classification. Correlation with prior pathology and clinical findings is recommended.');
   set('pbRbc','Normocytic anemia.');
   set('pbWbc','No circulating blasts. Occasional large atypical lymphoid cells with dispersed chromatin and abundant cytoplasm may be present.');
   set('pbPlt','Mildly decreased in number.');
@@ -1752,7 +1752,7 @@ function loadAggressiveBCellLarge(){
   set('ihcExtra','The atypical lymphoid cells are positive for CD20, CD10, BCL2, BCL6, MYC (~60%), and LMO2, and are negative for MUM1, Cyclin D1, TdT, EBER, CD21, and significant TP53 expression. TTF1, S100, and AE1/AE3 do not reveal a non-hematolymphoid component. Ki-67 proliferation index is approximately 60%.');
   set('retic','Reticulin: Moderately increased (MF grade 2 of 3 fibrosis).');
   set('flow','See separate flow cytometry report, if performed.');
-  set('cyto','');
+  set('cyto','FISH for MYC, BCL2 and BCL6 rearrangements pending.');
   generateReport();
 }
 
@@ -1766,7 +1766,7 @@ function loadHgblDoubleHit(){
   set('dx2','');
   
   set('pbdx','Pancytopenia with rare circulating atypical lymphoid cells.');
-  set('customComment','Definitive classification requires confirmation and integration of MYC and BCL2 rearrangement results. Correlation with the complete cytogenetic/molecular profile and prior pathology is recommended.');
+  set('customComment','FISH for MYC, BCL2 and BCL6 rearrangements is pending and will be reported in an addendum; definitive genetic classification awaits these results. Correlation with the complete cytogenetic/molecular profile and prior pathology is recommended.');
   set('pbRbc','Anemia.');
   set('pbWbc','Rare small to medium-sized atypical lymphoid cells with scant basophilic cytoplasm, irregular/occasionally clefted nuclei, and slightly dispersed chromatin are present.');
   set('pbPlt','Markedly decreased in number.');
@@ -1814,7 +1814,7 @@ function loadHgblDoubleHit(){
   set('ihcCd20','highlights the extensive atypical B-cell infiltrate');
   set('ihcExtra','The atypical cells are positive for CD20, strong CD10, and MUM1, and are negative for CD5, CD23, CD21, CD30, and Cyclin D1. MYC is positive in approximately 80% of nuclei in evaluable areas. BCL2 expression is variable/clone-dependent and should be correlated with FISH. Ki-67 proliferation index is very high, approximately 100%.');
   set('flow','See separate flow cytometry report, if performed.');
-  set('cyto','');
+  set('cyto','FISH for MYC, BCL2 and BCL6 rearrangements pending.');
   generateReport();
 }
 
