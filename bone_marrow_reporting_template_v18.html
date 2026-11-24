@@ -2042,7 +2042,37 @@ function loadEssentialThrombocythemia(){
   generateReport();
 }
 
-function loadMyelofibrosis(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('>90%');applyBasicIhc();set('dx1','Hypercellular bone marrow with marked megakaryocytic atypia and severe reticulin fibrosis (MF-3 of 3).');set('dx2','No increase in blasts.');set('pbdx','Macrocytic anemia with nucleated red blood cells and thrombocytopenia.');set('customComment','The overall findings are in keeping with the patient\'s known JAK2-positive myeloid neoplasm, previously classified as primary myelofibrosis. Evaluating atypical megakaryocytes in this biopsy is difficult due to background fibrosis; however, blasts are not increased. Clinical correlation is advised.');set('pbRbc','Macrocytic anemia with nucleated red blood cells and leukoerythroblastosis.');set('pbWbc','Leukoerythroblastosis. Blasts are not increased.');set('pbPlt','Decreased in number.');set('aspQuality','are hemodilute with rare marrow particles');set('aspCell','hypocellular with increased adipocytes');set('aspEryNum','sparse');set('aspEryMat','');set('aspEryMorph','');set('aspMyeNum','proportionately decreased');set('aspMyeMat','');set('aspMyeMorph','');set('aspMkNum','sparse');set('aspMkMorph','');set('aspBlasts','are not increased (<5%)');set('meRatio','N/A');set('aspPlasma','not increased');set('aspMast','not increased');set('ironStore','');set('ringSid','not seen');set('bxQuality','adequate; architectural distortion is present due to background fibrosis');set('bxCellPhrase','markedly hypercellular for age');set('bxEryNum','reduced');set('bxEryMat','limited assessment');set('bxEryMorph','');set('bxMyeNum','reduced/variable');set('bxMyeMat','limited assessment');set('bxMyeMorph','');set('bxMkNum','increased');set('bxMkMorph','');set('bxBlasts','not increased (<5%)');set('retic','Reticulin: Markedly increased (MF grade 3 of 3 fibrosis).');set('trichrome','Trichrome: Focal paratrabecular or central collagen deposition without a connecting meshwork.');set('ihcCd34','highlights blasts (<5% of cells)');set('ihcExtra','CD61 highlights increased atypical megakaryocytes.');generateReport();}
+function loadMyelofibrosis(){
+  clearAll();window.__loadingTemplate=true;
+  applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('variable');applyBasicIhc();
+  set('dx1','Bone marrow with atypical megakaryocytic proliferation and moderate to marked reticulin fibrosis (MF-2/3), suspicious for overt primary myelofibrosis.');
+  set('dx2','No increase in blasts.');
+  set('pbdx','[Insert peripheral blood findings, including anemia and leukoerythroblastosis if present.]');
+  set('customComment','The marrow morphology raises the possibility of overt primary myelofibrosis. Definitive classification requires correlation with clinical findings, peripheral blood parameters, JAK2/CALR/MPL or other clonal markers, and exclusion of other myeloid neoplasms, including post-PV/post-ET myelofibrosis. WHO-HAEM5 criteria require all three major criteria and at least one minor criterion confirmed on two consecutive determinations.');
+  set('pbRbc','[Describe anemia, nucleated red blood cells and tear-drop cells if present.]');
+  set('pbWbc','[Describe leukocytosis, left shift and circulating blasts if present.]');
+  set('pbPlt','[Describe platelet count and morphology.]');
+  set('aspQuality','may be hemodilute or aparticulate due to fibrosis');
+  set('aspCell','limited assessment due to paucity of marrow particles');
+  set('aspMkMorph','assessment limited by aspirate quality');
+  set('aspBlasts','are not increased (<5%)');
+  set('meRatio','N/A');
+  set('bxQuality','adequate; architecture is distorted by stromal fibrosis');
+  set('bxCellPhrase','variably cellular, with patchy residual hematopoiesis alternating with hypocellular fibrotic areas');
+  set('bxArch','distorted by increased stromal fibrosis, with variably prominent dilated and tortuous sinusoids and possible intrasinusoidal hematopoiesis');
+  set('bxEryNum','variable, focally reduced');
+  set('bxEryMat','present in residual hematopoietic foci');
+  set('bxMyeNum','variable, focally reduced');
+  set('bxMyeMat','present in residual hematopoietic foci');
+  set('bxMkNum','increased, forming frequent dense clusters and occasional sheets');
+  set('bxMkMorph','markedly atypical with variable size, increased nuclear-to-cytoplasmic ratios, hyperchromatic bulbous/cloud-like hypolobated or irregularly folded nuclei; occasional intrasinusoidal megakaryocytes may be seen');
+  set('bxBlasts','not increased (<5%)');
+  set('retic','Reticulin: Moderate to marked fibrosis (MF grade 2-3 of 3); specify the observed grade.');
+  set('trichrome','Trichrome: Assess and describe collagen deposition (absent, focal or diffuse).');
+  set('ihcCd34','highlights blasts (<5% of cells), if confirmed');
+  set('ihcExtra','CD61 highlights increased atypical megakaryocytes, including dense clusters. Assess for osteosclerosis with irregular trabecular thickening and endophytic new bone formation.');
+  generateReport();
+}
 window.addEventListener('load', ()=>{initPillGroups(); initSmartLogic(); generateReport();});
 
 function loadBall(){
