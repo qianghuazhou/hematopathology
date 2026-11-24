@@ -777,6 +777,8 @@
           <button class="light" onclick="loadCml()">CML</button>
           <button class="light" onclick="loadCmml()">CMML</button>
           <button class="light" onclick="loadEssentialThrombocythemia()">Essential Thrombocythemia</button>
+          <button class="light" onclick="loadPolycythemiaVera()">Polycythemia Vera (PV)</button>
+          <button class="light" onclick="loadPostPvMyelofibrosis()">Post-PV Myelofibrosis</button>
           <button class="light" onclick="loadMyelofibrosis()">Myelofibrosis</button>
         </div>
       </div>
@@ -1977,6 +1979,63 @@ function loadMdsEb(){loadMdsLowGrade();set('dx1','Moderately hypercellular bone 
 function loadAml(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('XX%');applyBasicIhc();set('dx1','ACUTE MYELOID LEUKEMIA with XX% blasts.');set('pbdx','See peripheral blood smear description.');set('commentType','mDS');set('customComment','Correlation with clinical, cytogenetic, molecular diagnostic and laboratory findings is advised. AML genetic risk classification should be finalized after integration of cytogenetic and molecular results.');set('pbRbc','Anemia with anisopoikilocytosis.');set('pbWbc','Circulating blasts are present/increased.');set('pbPlt','Decreased in number.');set('aspCell','hypercellular for bone marrow');set('aspEryNum','proportionately decreased');set('aspMyeNum','proportionately decreased');set('aspMyeMat','');set('aspMyeMorph','');set('aspMkNum','proportionately decreased');set('aspMkMorph','');set('aspBlasts','are increased (>=20%)');set('bxCellPhrase','hypercellular for age');set('bxEryNum','decreased');set('bxMyeNum','decreased');set('bxMyeMat','');set('bxMyeMorph','');set('bxMkNum','decreased');set('bxMkMorph','');set('bxBlasts','increased (>=20%)');set('ihcCd34','highlights increased blasts');set('ihcCd117','highlights increased blasts');set('ihcExtra','CD61 highlights megakaryocytes. CD3 and CD20 highlight scattered T cells and fewer B cells, respectively.');generateReport();}
 function loadCml(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('90%');applyBasicIhc();set('dx1','Markedly hypercellular bone marrow with granulocytic proliferation, left-shifted myelopoiesis and small hypolobated megakaryocytes, without increased blasts.');set('dx2','');set('pbdx','Leukocytosis with maturing myeloid cells and basophilia.');set('customComment','The morphologic findings raise the possibility of chronic myeloid leukemia (CML). Confirmation of BCR::ABL1 is required for diagnosis. Correlation with molecular/cytogenetic studies and clinical findings is recommended.');set('pbWbc','Leukocytosis with full-spectrum maturing myeloid cells and basophilia. No circulating blast increase.');set('aspCell','hypercellular for bone marrow');set('aspEryNum','proportionately decreased');set('aspMyeNum','proportionately increased');set('aspMyeMorph','orderly maturation through all stages');set('aspMkNum','proportionately increased');set('aspMkMorph','small mononuclear megakaryocytes; hypolobated megakaryocytes');set('aspBlasts','are not increased (<5%)');set('bxCellPhrase','markedly hypercellular for age');set('bxEryNum','markedly decreased');set('bxMyeNum','markedly increased');set('bxMyeMorph','orderly maturation through all stages');set('bxMkNum','increased');set('bxMkMorph','small mononuclear megakaryocytes; hypolobated megakaryocytes');set('bxBlasts','not increased (<5%)');generateReport();}
 function loadCmml(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('XX%');applyBasicIhc();set('dx1','Hypercellular bone marrow with dysplastic hematopoiesis and absolute peripheral blood monocytosis.');set('dx2','');set('pbdx','Neutrophilia and monocytosis with dysplastic features.');set('customComment','The findings raise the possibility of chronic myelomonocytic leukemia (CMML). Definitive classification requires assessment of persistent absolute and relative monocytosis, exclusion of reactive causes and other myeloid neoplasms, and integration of clinical, cytogenetic and molecular findings.');set('pbWbc','Neutrophilia and monocytosis with dysplastic features including hypolobulation and hypogranulation. No circulating blast increase.');set('aspCell','hypercellular for bone marrow');set('aspEryNum','proportionately decreased');set('aspEryMat','show dysplastic maturation');set('aspEryMorph','nuclear budding');set('aspMyeNum','proportionately increased');set('aspMyeMat','show left-shifted maturation');set('aspMyeMorph','hypogranularity; hyposegmentation (pseudo-Pelger-Huet anomaly)');set('aspMkNum','proportionately decreased');set('aspMkMorph','small mononuclear megakaryocytes; hypolobated megakaryocytes');set('aspBlasts','are not increased (<5%)');set('bxCellPhrase','hypercellular for age');set('bxEryNum','decreased');set('bxEryMat','dysplastic maturation');set('bxMyeNum','increased');set('bxMyeMat','show left-shifted maturation');set('bxMkNum','decreased/variable');set('bxMkMorph','small mononuclear megakaryocytes; hypolobated megakaryocytes');generateReport();}
+function loadPolycythemiaVera(){
+  clearAll();window.__loadingTemplate=true;
+  applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('XX%');applyBasicIhc();
+  set('dx1','Hypercellular bone marrow with trilineage proliferation (panmyelosis), including erythroid, granulocytic and megakaryocytic hyperplasia with pleomorphic mature megakaryocytes, without increased blasts.');
+  set('dx2','');
+  set('pbdx','Erythrocytosis (confirm haemoglobin/haematocrit and RBC count).');
+  set('customComment','The marrow morphology raises the possibility of polycythaemia vera (PV). WHO-HAEM5 (2022) diagnostic criteria require all three major criteria or the first two major criteria and the minor criterion: (1) haemoglobin >16.5 g/dL in men or >16.0 g/dL in women, or haematocrit >49% in men or >48% in women; (2) age-adjusted hypercellular marrow with panmyelosis and pleomorphic mature megakaryocytes; (3) JAK2 V617F or exon 12 mutation. The minor criterion is subnormal serum erythropoietin. Correlate with JAK2 testing, serum erythropoietin, CBC, iron status and clinical findings; exclude secondary erythrocytosis and other MPNs. LDH is not a PV minor criterion.');
+  set('pbRbc','Erythrocytosis; assess for microcytosis and iron deficiency.');
+  set('pbWbc','Assess for leukocytosis/neutrophilia.');
+  set('pbPlt','Assess for thrombocytosis.');
+  set('aspCell','hypercellular for age');
+  set('aspMkNum','proportionately increased');
+  set('aspMkMorph','');
+  set('aspMkMorphOther','Pleomorphic mature megakaryocytes of variable size with hyperlobulated nuclei.');
+  set('aspEryNum','proportionately increased');
+  set('aspMyeNum','proportionately increased');
+  set('aspBlasts','are not increased (<5%)');
+  set('bxCellPhrase','hypercellular for age');
+  set('bxCell','XX%');
+  set('bxArch','preserved');
+  set('bxMkNum','increased');
+  set('bxMkMorph','');
+  set('bxMkMorphOther','Pleomorphic mature megakaryocytes varying in size, distributed singly and in loose clusters.');
+  set('bxEryNum','increased');
+  set('bxMyeNum','increased');
+  set('bxBlasts','not increased (<5%)');
+  set('retic','Reticulin: Not increased (MF grade 0 of 3 fibrosis).');
+  set('ihcCd61','highlights increased pleomorphic mature megakaryocytes');
+  set('pendingCyto',true);set('pendingMol',true);
+  generateReport();
+}
+function loadPostPvMyelofibrosis(){
+  clearAll();window.__loadingTemplate=true;
+  applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('XX%');applyBasicIhc();
+  set('dx1','Bone marrow with megakaryocytic atypia and moderate to marked reticulin fibrosis (MF-2/3), with variable residual trilineage hematopoiesis.');
+  set('dx2','');
+  set('pbdx','[Document anaemia and/or leukoerythroblastosis if present.]');
+  set('customComment','In a patient with previously established WHO-defined polycythaemia vera, the findings raise the possibility of post-PV myelofibrosis. Diagnostic criteria require BOTH a documented prior PV diagnosis and marrow fibrosis grade 2-3 (0-3 scale), PLUS at least TWO additional criteria: (1) anaemia or sustained loss of phlebotomy/cytoreductive treatment requirement for erythrocytosis, as specified by the criteria; (2) leukoerythroblastosis; (3) newly palpable splenomegaly or an increase in palpable spleen size >5 cm from baseline; (4) at least two of >10% weight loss in six months, night sweats, or unexplained fever >37.5 degrees C. Correlate with longitudinal counts, treatment history, spleen examination and constitutional symptoms. The marrow biopsy alone does not establish post-PV MF.');
+  set('pbRbc','Assess for anaemia, anisopoikilocytosis and tear-drop cells.');
+  set('pbWbc','Assess for leukoerythroblastosis.');
+  set('pbPlt','Assess for thrombocytopenia or thrombocytosis.');
+  set('aspQuality','are hemodilute with few marrow particles');
+  set('aspMkNum','not reliably assessable');
+  set('aspMkMorph','');
+  set('aspBlasts','cannot be reliably assessed on a hemodilute aspirate');
+  set('bxCellPhrase','variable cellularity for age');
+  set('bxCell','XX%');
+  set('bxArch','distorted by fibrosis');
+  set('bxMkNum','increased');
+  set('bxMkMorph','');
+  set('bxMkMorphOther','Atypical megakaryocytes with variable nuclear-to-cytoplasmic ratios and irregular nuclear contours, including clusters.');
+  set('bxBlasts','not increased (<5%)');
+  set('retic','Reticulin: Moderately to markedly increased (MF grade 2-3 of 3 fibrosis); select the observed grade.');
+  set('trichrome','');
+  set('ihcCd61','highlights atypical megakaryocytes, including clusters');
+  generateReport();
+}
 function loadEssentialThrombocythemia(){
   clearAll();window.__loadingTemplate=true;
   applyCommonNormalPb();
