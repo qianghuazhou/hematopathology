@@ -2043,7 +2043,7 @@ function loadEssentialThrombocythemia(){
   applyNormalBiopsy('40%');
   applyBasicIhc();
 
-  set('dx1','Normocellular bone marrow with increased large mature hyperlobulated megakaryocytes, without significant granulocytic or erythroid proliferation or increased blasts.');
+  set('dx1','Normocellular bone marrow with increased large mature hyperlobulated megakaryocytes and no increase in blasts.');
   set('dx2','');
   set('pbdx','Thrombocytosis.');
   set('customComment','The marrow morphology favours essential thrombocythemia (ET). Correlation with platelet count, JAK2/CALR/MPL mutation status and clinical findings is required, including exclusion of reactive thrombocytosis and other myeloid neoplasms, particularly prefibrotic primary myelofibrosis and polycythemia vera. Report pending genetic studies separately when applicable.');
@@ -2110,8 +2110,8 @@ function loadEssentialThrombocythemia(){
 function loadMyelofibrosis(){
   clearAll();window.__loadingTemplate=true;
   applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('variable');applyBasicIhc();
-  set('dx1','Bone marrow with atypical megakaryocytic proliferation and moderate to marked reticulin fibrosis (MF-2/3).');
-  set('dx2','No increase in blasts.');
+  set('dx1','Bone marrow with atypical megakaryocytic proliferation, marked reticulin fibrosis (MF-3 of 3), and no increase in blasts.');
+  set('dx2','');
   set('pbdx','[Insert peripheral blood findings, including anemia and leukoerythroblastosis if present.]');
   set('customComment','The marrow morphology raises the possibility of overt primary myelofibrosis. Definitive classification requires correlation with clinical findings, peripheral blood parameters, JAK2/CALR/MPL or other clonal markers, and exclusion of other myeloid neoplasms, including post-PV/post-ET myelofibrosis. WHO-HAEM5 criteria require all three major criteria and at least one minor criterion confirmed on two consecutive determinations.');
   set('pbRbc','[Describe anemia, nucleated red blood cells and tear-drop cells if present.]');
@@ -2121,9 +2121,13 @@ function loadMyelofibrosis(){
   set('aspCell','limited assessment due to paucity of marrow particles');
   set('aspMkNum','not reliably assessable');
   set('aspMkMorph','');
-  set('aspMkMorphOther','Assessment of megakaryocytic morphology is limited by hemodilution.');
+  set('aspMkMorphOther','');
   set('aspSpicules','rare');
-  set('aspBlasts','assessment limited by hemodilution');
+  set('aspBlasts','cannot be reliably assessed on the limited aspirate');
+  set('aspEryNum','');set('aspEryMat','');set('aspEryMorph','');
+  set('aspMyeNum','');set('aspMyeMat','');set('aspMyeMorph','');
+  set('ironStore','');set('ringSid','');
+  set('aspLymph','');set('aspPlasma','');set('aspMast','');
   set('meRatio','N/A');
   set('bxQuality','adequate; architecture is distorted by stromal fibrosis');
   set('bxCellPhrase','variably cellular with patchy residual hematopoiesis and fibrotic areas');
@@ -2135,11 +2139,11 @@ function loadMyelofibrosis(){
   set('bxMyeMat','present in residual hematopoietic foci');
   set('bxMkNum','increased, forming frequent dense clusters and occasional sheets');
   set('bxMkMorph','');
-  set('bxMkMorphOther','Markedly atypical megakaryocytes with variable size, hyperchromatic bulbous/cloud-like, hypolobated or irregularly folded nuclei, forming dense clusters; adjust according to observed findings.');
+  set('bxMkMorphOther','markedly atypical megakaryocytes with variable size and hyperchromatic bulbous/cloud-like, hypolobated or irregularly folded nuclei');
   set('bxBlasts','not increased (<5%)');
   set('retic','Reticulin: Markedly increased (MF grade 3 of 3 fibrosis).');
   set('trichrome','');
-  set('ihcCd34','highlights blasts (<5% of cells), if confirmed');
+  set('ihcCd34','highlights no increase in blasts (<5%), if supported by the stain');
   set('ihcCd61','highlights increased atypical megakaryocytes, including dense clusters');
   set('ihcExtra','');
   set('trabBone','unremarkable');
