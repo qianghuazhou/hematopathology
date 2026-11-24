@@ -789,6 +789,10 @@
           <label for="lplPattern" style="align-self:center">LPL pattern</label>
           <select id="lplPattern" aria-label="LPL marrow involvement pattern" style="max-width:240px"><option value="limited">Predominantly plasmacytic</option><option value="extensive">Predominantly B-cell</option></select>
           <button class="light" onclick="loadLpl()">Lymphoplasmacytic Lymphoma (LPL)</button>
+          <button class="light" onclick="loadMarginalZoneSplenic()">Marginal Zone / Splenic Lymphoma</button>
+          <label for="mclExtent" style="align-self:center">MCL involvement</label>
+          <select id="mclExtent" aria-label="Mantle cell lymphoma marrow involvement" style="max-width:185px"><option value="minimal">Minimal (&lt;5%)</option><option value="limited">Limited (~15%)</option><option value="extensive">Extensive (___%)</option></select>
+          <button class="light" onclick="loadMantleCellLymphoma()">Mantle Cell Lymphoma (MCL)</button>
           <button class="light" onclick="loadAggressiveBCellLarge()">Aggressive B-cell / DLBCL</button>
           <button class="light" onclick="loadHgblDoubleHit()">HGBL Double-hit</button>
           <button class="light" onclick="loadPlasmaCellNeoplasm()">Plasma Cell Neoplasm</button>
@@ -1529,6 +1533,55 @@ function loadCd5Cd10NegativeBLpd(){
   generateReport();
 }
 
+function loadMarginalZoneSplenic(){
+  clearAll();window.__loadingTemplate=true;
+  applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('95%');applyBasicIhc();
+  set('dx1','B-CELL LYMPHOMA/LEUKEMIA, involving approximately 90% of marrow cellularity; favor marginal zone/splenic lymphoma.');
+  set('dx2','');
+  set('pbdx','Marked lymphocytosis with atypical lymphoid cells, severe anemia and thrombocytopenia.');
+  set('customComment','The peripheral blood and bone marrow show extensive involvement by a mature B-cell lymphoma/leukemia with a CD5-negative, CD10-negative, surface lambda-restricted phenotype. The cytologic features, including occasional polylobated or flower-like nuclei, and the clinical splenomegaly favor a marginal zone/splenic lymphoma; however, the immunophenotype is not specific for definitive subtype classification. No morphologic large B-cell transformation is identified. Correlation with clinical and imaging findings and biopsy of a suspicious extramedullary site, if present, is recommended. MYD88 L265P testing may be considered in the differential diagnosis.');
+  set('pbRbc','Severe anemia.');
+  set('pbWbc','Marked lymphocytosis with numerous small to medium-sized atypical lymphoid cells with variable clear cytoplasm, irregular or polylobated nuclei, including occasional flower-like forms, and coarse chromatin.');
+  set('pbPlt','Decreased in number.');
+  set('aspLymph','atypical lymphoid cells are present');
+  set('aspOther','Numerous atypical small to medium-sized lymphoid cells with irregular nuclei and variable clear cytoplasm are present. Residual maturing trilineage hematopoiesis is markedly reduced.');
+  set('aspEryNum','proportionately decreased');set('aspMyeNum','proportionately decreased');
+  set('bxCellPhrase','markedly hypercellular for age');set('bxCell','95%');
+  set('bxArch','partially effaced by abnormal cellular infiltrates');
+  set('bxLymph','increased lymphoid infiltrate in a diffuse pattern');
+  set('bxEryNum','decreased');set('bxMyeNum','decreased');
+  set('bxOther','A diffuse infiltrate of predominantly small to occasional medium-sized atypical lymphoid cells with irregular nuclei and coarse chromatin comprises approximately 90% of marrow cellularity. Large atypical cells are not significantly increased. Plasma cells are rare and scattered. Residual trilineage hematopoiesis is reduced.');
+  set('ihcCd20','highlights the extensive atypical B-cell infiltrate');
+  set('ihcCd3','highlights scattered background T cells');
+  set('ihcCd138','highlights rare scattered plasma cells');
+  set('ihcKappaLambda','shows polytypic scattered plasma cells');
+  set('ihcExtra','The atypical B cells are positive for PAX5, BCL2 and IgD, show dim/partial TCL1 and MYC expression in approximately 40%, and are negative for CD5, CD10, CD30, BCL6, LMO2, MUM1, cyclin D1, DBA44, SOX11, EBER and significant TP53 expression. Ki-67 proliferation index is approximately 20%.');
+  set('flow','An abnormal surface lambda-restricted B-cell population is positive for CD19, bright CD20, CD24, CD27, CD38, CD79b, IgM and HLA-DR; negative for CD5, CD10, CD11c, CD23, CD25, CD30, CD103, CD123 and CD200. Correlate with the separate flow cytometry report.');
+  set('mol','MYD88 L265P testing: ___ (if performed).');
+  generateReport();
+}
+function loadMantleCellLymphoma(){
+  const extent=document.getElementById('mclExtent')?.value || 'minimal';
+  clearAll();window.__loadingTemplate=true;
+  applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy(extent==='minimal'?'30%':'50%');applyBasicIhc();
+  const minimal=extent==='minimal',limited=extent==='limited';
+  const fraction=minimal?'less than 5%':limited?'approximately 15%':'approximately ___%';
+  set('dx1','MANTLE CELL LYMPHOMA, involving '+fraction+' of marrow cellularity.');
+  set('dx2','');
+  set('pbdx',minimal?'Occasional circulating atypical lymphoid cells.':'Lymphocytosis with circulating atypical lymphoid cells.');
+  set('customComment','The marrow contains a small mature B-cell infiltrate with CD5 and cyclin D1 expression, consistent with involvement by mantle cell lymphoma in the context of the established diagnosis. The infiltrate comprises '+fraction+' of marrow cellularity. Correlation with SOX11 immunohistochemistry, CCND1::IGH rearrangement studies and prior tissue findings is recommended as appropriate. The proliferation index is low in the reference cases. No morphologic large cell transformation is identified.');
+  set('pbWbc',minimal?'Occasional atypical small lymphoid cells with irregular nuclei are present.':'Increased small atypical lymphoid cells with scant cytoplasm and irregular, occasionally clefted nuclei.');
+  set('aspLymph','atypical lymphoid cells are present');
+  set('aspOther','Small atypical lymphoid cells with irregular nuclear contours are present. Maturing trilineage hematopoiesis is preserved.');
+  set('bxLymph',minimal?'increased lymphoid infiltrate in an interstitial pattern':'increased lymphoid infiltrate in a focal/nodular pattern');
+  set('bxOther',minimal?'Scattered small mature atypical lymphoid cells are present in an interstitial distribution, involving less than 5% of marrow cellularity.':'A small non-paratrabecular lymphoid aggregate and interstitial atypical small lymphoid cells are present, involving '+fraction+' of marrow cellularity.');
+  set('ihcCd20','highlights atypical B cells in interstitial and/or focal aggregates');
+  set('ihcCd3','highlights background reactive small T cells');
+  set('ihcExtra','The atypical B cells are positive for CD20, PAX5, CD5 and cyclin D1; CD23 is negative. SOX11: ___ (positive in one reference case, equivocal in another). Ki-67 proliferation index: ___% (approximately 10% in the limited-involvement reference case).');
+  set('flow','An abnormal surface lambda-restricted B-cell population is positive for CD19, CD20, CD5 and IgM and negative for CD10 and CD23. Other markers vary by case; correlate with the separate flow cytometry report.');
+  set('mol','CCND1::IGH t(11;14) FISH: ___ (positive in the limited-involvement reference case).');
+  generateReport();
+}
 function loadLpl(){
   const pattern=document.getElementById('lplPattern')?.value || 'limited';
   if(pattern==='extensive') loadLplExtensive();
