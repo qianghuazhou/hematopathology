@@ -786,12 +786,8 @@
         <h3>Mature B-cell / plasma cell</h3>
         <div class="presetBtns">
           <button class="light" onclick="loadCd5Cd10NegativeBLpd()">CD5-/CD10- B-LPD</button>
-          <label for="lplPattern" style="align-self:center">LPL pattern</label>
-          <select id="lplPattern" aria-label="LPL marrow involvement pattern" style="max-width:240px"><option value="limited">Predominantly plasmacytic</option><option value="extensive">Predominantly B-cell</option></select>
           <button class="light" onclick="loadLpl()">Lymphoplasmacytic Lymphoma (LPL)</button>
           <button class="light" onclick="loadMarginalZoneSplenic()">Marginal Zone / Splenic Lymphoma</button>
-          <label for="mclExtent" style="align-self:center">MCL involvement</label>
-          <select id="mclExtent" aria-label="Mantle cell lymphoma marrow involvement" style="max-width:185px"><option value="minimal">Minimal (&lt;5%)</option><option value="limited">Limited (~15%)</option><option value="extensive">Extensive (___%)</option></select>
           <button class="light" onclick="loadMantleCellLymphoma()">Mantle Cell Lymphoma (MCL)</button>
           <button class="light" onclick="loadAggressiveBCellLarge()">Aggressive B-cell / DLBCL</button>
           <button class="light" onclick="loadHgblDoubleHit()">HGBL Double-hit</button>
@@ -1561,20 +1557,18 @@ function loadMarginalZoneSplenic(){
   generateReport();
 }
 function loadMantleCellLymphoma(){
-  const extent=document.getElementById('mclExtent')?.value || 'minimal';
   clearAll();window.__loadingTemplate=true;
-  applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy(extent==='minimal'?'30%':'50%');applyBasicIhc();
-  const minimal=extent==='minimal',limited=extent==='limited';
-  const fraction=minimal?'less than 5%':limited?'approximately 15%':'approximately ___%';
+  applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('50%');applyBasicIhc();
+  const fraction='approximately ___%';
   set('dx1','MANTLE CELL LYMPHOMA, involving '+fraction+' of marrow cellularity.');
   set('dx2','');
-  set('pbdx',minimal?'Occasional circulating atypical lymphoid cells.':'Lymphocytosis with circulating atypical lymphoid cells.');
-  set('customComment','The marrow contains a small mature B-cell infiltrate with CD5 and cyclin D1 expression, consistent with involvement by mantle cell lymphoma in the context of the established diagnosis. The infiltrate comprises '+fraction+' of marrow cellularity. FISH for IGH::CCND1 t(11;14) is pending and will be reported in an addendum. Correlation with prior pathology is recommended. The proliferation index is low in the reference cases. No morphologic large cell transformation is identified.');
-  set('pbWbc',minimal?'Occasional atypical small lymphoid cells with irregular nuclei are present.':'Increased small atypical lymphoid cells with scant cytoplasm and irregular, occasionally clefted nuclei.');
+  set('pbdx','Lymphocytosis with circulating atypical lymphoid cells.');
+  set('customComment','FISH for IGH::CCND1 t(11;14) is pending and will be reported in an addendum. Correlation with prior pathology is recommended.');
+  set('pbWbc','Increased small atypical lymphoid cells with scant cytoplasm and irregular, occasionally clefted nuclei.');
   set('aspLymph','atypical lymphoid cells are present');
   set('aspOther','Small atypical lymphoid cells with irregular nuclear contours are present. Maturing trilineage hematopoiesis is preserved.');
-  set('bxLymph',minimal?'increased lymphoid infiltrate in an interstitial pattern':'increased lymphoid infiltrate in a focal/nodular pattern');
-  set('bxOther',minimal?'Scattered small mature atypical lymphoid cells are present in an interstitial distribution, involving less than 5% of marrow cellularity.':'A small non-paratrabecular lymphoid aggregate and interstitial atypical small lymphoid cells are present, involving '+fraction+' of marrow cellularity.');
+  set('bxLymph','increased lymphoid infiltrate in a focal/nodular pattern');
+  set('bxOther','A small non-paratrabecular lymphoid aggregate and interstitial atypical small lymphoid cells are present, involving '+fraction+' of marrow cellularity.');
   set('ihcCd20','highlights atypical B cells in interstitial and/or focal aggregates');
   set('ihcCd3','highlights background reactive small T cells');
   set('ihcExtra','The atypical B cells are positive for CD20, PAX5, CD5 and cyclin D1; CD23 is negative. SOX11: ___ (positive in one reference case, equivocal in another). Ki-67 proliferation index: ___% (approximately 10% in the limited-involvement reference case).');
@@ -1583,10 +1577,9 @@ function loadMantleCellLymphoma(){
   generateReport();
 }
 function loadLpl(){
-  const pattern=document.getElementById('lplPattern')?.value || 'limited';
-  if(pattern==='extensive') loadLplExtensive();
-  else loadLplLimited();
+  loadLplExtensive();
 }
+
 function loadLplLimited(){
   clearAll();window.__loadingTemplate=true;
   applyCommonNormalPb();
@@ -1638,11 +1631,11 @@ function loadLplExtensive(){
   applyNormalAspirate();
   applyNormalBiopsy('70%');
   applyBasicIhc();
-  set('dx1','LYMPHOPLASMACYTIC LYMPHOMA, MYD88 L265P-POSITIVE, involving approximately 90% of marrow cellularity.');
+  set('dx1','LYMPHOPLASMACYTIC LYMPHOMA, involving approximately ___% of marrow cellularity.');
   set('dx2','');
   
   set('pbdx','Anemia with rouleaux formation and circulating atypical lymphoid cells.');
-  set('customComment','The immunophenotypic and MYD88 L265P findings support involvement by lymphoplasmacytic lymphoma. Correlation with clinical findings and serum paraprotein studies is recommended.');
+  set('customComment','Correlation with clinical findings, serum monoclonal protein studies and MYD88 L265P mutation status is recommended.');
   set('pbRbc','Anemia with rouleaux formation.');
   set('pbWbc','Increased atypical lymphoid cells with variable pale basophilic cytoplasm, irregular nuclei, and variably condensed chromatin.');
   set('pbPlt','Normal in number.');
@@ -1677,7 +1670,7 @@ function loadLplExtensive(){
   set('bxLymph','increased lymphoid infiltrate in a diffuse pattern');
   set('bxPlasma','mildly increased and scattered interstitially');
   set('bxMast','mildly increased');
-  set('bxOther','The atypical infiltrate represents approximately 90% of marrow cellularity and is composed of monomorphic small to medium-sized lymphoid cells with scant clear cytoplasm and irregular, occasionally plasmacytoid nuclei, admixed with scattered plasmacytoid cells with prominent Dutcher bodies. Residual trilineage hematopoiesis shows maturation without significant dysplasia.');
+  set('bxOther','The atypical infiltrate represents approximately ___% of marrow cellularity and is composed of monomorphic small to medium-sized lymphoid cells with scant clear cytoplasm and irregular, occasionally plasmacytoid nuclei, admixed with scattered plasmacytoid cells with prominent Dutcher bodies. Residual trilineage hematopoiesis shows maturation without significant dysplasia.');
   set('ihcCd138','highlights scattered plasma cells, which are kappa light chain restricted');
   set('ihcKappaLambda','shows kappa light chain restriction in the plasma cells');
   set('ihcCd20','highlights the atypical B-cell infiltrate');
@@ -1685,7 +1678,7 @@ function loadLplExtensive(){
   set('ihcCd117','highlights reactive mast cells');
   set('ihcExtra','The atypical B cells are positive for CD20 and negative for CD5, CD10, CD43, CD138, BCL6, DBA44, and Cyclin D1. CD21 does not show follicular dendritic cell meshworks. Ki-67 proliferation index is low, approximately 10%.');
   set('flow','See separate flow cytometry report, if performed.');
-  set('mol','MYD88 L265P mutation detected.');
+  set('mol','MYD88 L265P mutation status: ___ (if tested).');
   generateReport();
 }
 
