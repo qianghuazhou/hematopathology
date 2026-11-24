@@ -1511,18 +1511,18 @@ function loadCd5Cd10NegativeBLpd(){
   applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('');applyBasicIhc();
   set('dx1','Bone marrow involved by a CD5-negative, CD10-negative monoclonal B-cell lymphoproliferative disorder (~___% of marrow cellularity).');
   set('dx2','');
-  set('pbdx','');
+  set('pbdx','No significant morphologic abnormalities.');
   set('customComment','The marrow shows a small B-cell lymphoproliferative disorder with a CD5-negative, CD10-negative phenotype and ___ light chain restriction. This immunophenotype is not specific for further classification; the main differential diagnosis includes marginal zone lymphoma and lymphoplasmacytic lymphoma. Correlation with serum paraprotein studies, MYD88 L265P mutation testing as indicated, prior tissue findings, and clinical/imaging findings is recommended. No large cell component is identified.');
   set('aspLymph','atypical lymphoid cells are present');
   set('aspOther','Small to medium-sized mature lymphoid cells with condensed chromatin and scant cytoplasm are present.');
-  set('bxLymph','atypical small B-cell infiltrate, interstitial and/or nodular in distribution');
-  set('bxOther','The atypical lymphoid infiltrate comprises approximately ___% of marrow cellularity, with an interstitial/nodular/diffuse distribution. No sheets of large lymphoid cells are identified.');
+  set('bxLymph','increased, with an atypical small B-cell infiltrate involving approximately ___% of marrow cellularity');
+  set('bxOther','The infiltrate consists of small mature lymphoid cells in an interstitial/nodular/diffuse pattern. No sheets of large lymphoid cells are identified.');
   set('ihcCd20','highlights the atypical B-cell infiltrate (~___% of marrow cellularity)');
   set('ihcCd3','highlights background T cells');
   set('ihcCd138','highlights scattered plasma cells; assess for plasmacytic differentiation');
   set('ihcKappaLambda','light chain restriction: ___ (if assessed)');
   set('ihcExtra','The atypical B cells are negative for CD5 and CD10. Additional markers as indicated: BCL2 ___; BCL6 ___; cyclin D1 ___; LEF1 ___; Ki-67 ___%.');
-  set('flow','A monoclonal CD5-negative, CD10-negative B-cell population with ___ light chain restriction is detected, comprising ___% of leukocytes. Correlation with morphology and ancillary studies is required for classification.');
+  set('flow','See separate flow cytometry report, if performed.');
   generateReport();
 }
 
@@ -1532,8 +1532,8 @@ function loadLplLimited(){
   applyNormalAspirate();
   applyNormalBiopsy('40%');
   applyBasicIhc();
-  set('dx1','Lymphoplasmacytic lymphoma involving approximately 10-15% of marrow cellularity, represented mainly by kappa-restricted plasma cells by CD138 immunostain.');
-  set('dx2','Residual maturing trilineage hematopoiesis without increased blasts.');
+  set('dx1','Bone marrow with a kappa-restricted plasma cell infiltrate involving approximately 10-15% of marrow cellularity.');
+  set('dx2','');
   
   set('pbdx','Macrocytic anemia and leukopenia. No significant circulating plasma cells identified.');
   set('customComment','Similar to the previous study, the marrow shows a kappa-light chain restricted plasma cell infiltrate comprising approximately 10-15% of marrow cellularity by CD138 immunostain on the core biopsy. In the context of the patient\'s history of kappa-restricted lymphoplasmacytic lymphoma, the findings are consistent with limited marrow involvement by the same process. There is no evidence of a large cell component in this specimen. Clinical correlation is advised.');
@@ -1547,7 +1547,7 @@ function loadLplLimited(){
   set('aspEryMorph','mainly normoblastic maturation');
   set('aspMyeNum','proportionately normal in number');
   set('aspMyeMat','show proper maturation');
-  set('aspMyeMorph','orderly maturation through all stages; hypersegmentation');
+  set('aspMyeMorph','hypersegmented granulocytes');
   set('aspMkNum','adequate in number');
   set('aspMkMorph','normal morphology');
   set('aspBlasts','are not increased (<5%)');
@@ -1559,11 +1559,11 @@ function loadLplLimited(){
   set('bxCell','40%');
   set('bxArch','preserved');
   set('bxLymph','not increased');
-  set('bxPlasma','increased plasma cells in interstitial/focal aggregates, comprising approximately ___% of marrow cellularity');
+  set('bxPlasma','increased in interstitial and small aggregate patterns, comprising approximately 10-15% of marrow cellularity');
   set('bxMast','mildly increased');
-  set('bxOther','Atypical plasma cells are present in a diffuse interstitial pattern with multiple small aggregates. The plasma cells are medium sized and show occasional intranuclear inclusions/Dutcher bodies. No atypical lymphoid infiltrate is identified.');
+  set('bxOther','The plasma cells are medium sized and show occasional intranuclear inclusions/Dutcher bodies. No distinct atypical B-cell infiltrate is identified.');
   set('ihcCd138','highlights an abnormal plasma cell infiltrate comprising approximately 10-15% of marrow cellularity');
-  set('ihcKappaLambda','shows kappa/lambda light chain restriction in the plasma cells');
+  set('ihcKappaLambda','shows kappa light chain restriction in the plasma cells');
   set('ihcCd20','is negative in the abnormal plasma cell infiltrate');
   set('ihcCd3','highlights predominantly small reactive interstitial T cells');
   set('ihcCd117','highlights increased mast cells associated with the plasma cell infiltrate');
@@ -1578,7 +1578,7 @@ function loadLplExtensive(){
   applyNormalBiopsy('70%');
   applyBasicIhc();
   set('dx1','Lymphoplasmacytic lymphoma, MYD88 L265P-positive, involving approximately 90% of marrow cellularity.');
-  set('dx2','Residual maturing trilineage hematopoiesis without increased blasts.');
+  set('dx2','');
   
   set('pbdx','Anemia with rouleaux formation and circulating atypical lymphoid cells.');
   set('customComment','The peripheral blood, aspirate, core biopsy, immunophenotype, and MYD88 L265P mutation support extensive bone marrow involvement by lymphoplasmacytic lymphoma. The marrow infiltrate is composed predominantly of small to medium-sized B cells with plasmacytoid forms and scattered kappa-restricted plasma cells with Dutcher bodies. The proliferation index is low. There is no evidence of a large cell component in this specimen. Clinical correlation is advised.');
@@ -1618,7 +1618,7 @@ function loadLplExtensive(){
   set('bxMast','mildly increased');
   set('bxOther','The atypical infiltrate represents approximately 90% of marrow cellularity and is composed of monomorphic small to medium-sized lymphoid cells with scant clear cytoplasm and irregular, occasionally plasmacytoid nuclei, admixed with scattered plasmacytoid cells with prominent Dutcher bodies. Residual trilineage hematopoiesis shows maturation without significant dysplasia.');
   set('ihcCd138','highlights scattered plasma cells, which are kappa light chain restricted');
-  set('ihcKappaLambda','shows kappa/lambda light chain restriction in the plasma cells');
+  set('ihcKappaLambda','shows kappa light chain restriction in the plasma cells');
   set('ihcCd20','highlights the atypical B-cell infiltrate');
   set('ihcCd3','highlights fewer background small T cells');
   set('ihcCd117','highlights reactive mast cells');
@@ -1634,8 +1634,8 @@ function loadAggressiveBCellLarge(){
   applyNormalAspirate();
   applyNormalBiopsy('95%');
   applyBasicIhc();
-  set('dx1','Aggressive large B-cell lymphoma, favor diffuse large B-cell lymphoma, involving approximately ___% of marrow cellularity.');
-  set('dx2','Residual maturing trilineage hematopoiesis.');
+  set('dx1','LARGE B-CELL LYMPHOMA involving approximately ___% of marrow cellularity.');
+  set('dx2','');
   
   set('pbdx','Normocytic anemia with rare circulating atypical lymphoid cells.');
   set('customComment','Morphologic and immunophenotypic evaluation demonstrates extensive bone marrow involvement by an aggressive large B-cell lymphoma, favor diffuse large B-cell lymphoma. The neoplastic cells express CD20, CD10, BCL2, BCL6, and MYC, supporting a germinal center B-cell phenotype with MYC and BCL2 protein co-expression. These findings raise the possibility of double-hit lymphoma and/or dark-zone phenotype. Correlation with clinical, radiologic, and cytogenetic/FISH studies, including MYC, BCL2, and BCL6 rearrangement analysis, is recommended for definitive classification. No morphologic evidence of an underlying low-grade B-cell lymphoma is identified in this specimen.');
@@ -1690,7 +1690,7 @@ function loadAggressiveBCellLarge(){
   set('ihcCd20','highlights markedly increased atypical B cells');
   set('ihcExtra','The atypical lymphoid cells are positive for CD20, CD10, BCL2, BCL6, MYC (~60%), and LMO2, and are negative for MUM1, Cyclin D1, TdT, EBER, CD21, and significant TP53 expression. TTF1, S100, and AE1/AE3 do not reveal a non-hematolymphoid component. Ki-67 proliferation index is approximately 60%.');
   set('retic','Reticulin: Moderately increased (MF grade 2 of 3 fibrosis).');
-  set('flow','Flow cytometry is non-diagnostic or should be correlated with morphology and immunohistochemistry.');
+  set('flow','See separate flow cytometry report, if performed.');
   set('cyto','');
   generateReport();
 }
@@ -1702,7 +1702,7 @@ function loadHgblDoubleHit(){
   applyNormalBiopsy('90%');
   applyBasicIhc();
   set('dx1','High-grade B-cell lymphoma involving approximately ___% of marrow cellularity.');
-  set('dx2','Residual maturing trilineage hematopoiesis.');
+  set('dx2','');
   
   set('pbdx','Pancytopenia with rare circulating atypical lymphoid cells.');
   set('customComment','Morphologic and immunophenotypic evaluation demonstrates extensive marrow involvement by a high-grade B-cell lymphoma composed predominantly of small to medium-sized blastoid lymphoid cells with frequent mitoses/apoptotic bodies and a very high proliferative index. The neoplastic cells express CD20 and CD10 and show MYC protein expression. In the appropriate cytogenetic context, including MYC and BCL2 rearrangements, the findings are consistent with high-grade B-cell lymphoma with MYC and BCL2 rearrangements (double-hit lymphoma). No morphologic evidence of residual low-grade lymphoma is identified in this specimen. Clinical correlation is advised.');
@@ -1752,7 +1752,7 @@ function loadHgblDoubleHit(){
   set('ihcCd3','highlights scattered small T cells');
   set('ihcCd20','highlights the extensive atypical B-cell infiltrate');
   set('ihcExtra','The atypical cells are positive for CD20, strong CD10, and MUM1, and are negative for CD5, CD23, CD21, CD30, and Cyclin D1. MYC is positive in approximately 80% of nuclei in evaluable areas. BCL2 expression is variable/clone-dependent and should be correlated with FISH. Ki-67 proliferation index is very high, approximately 100%.');
-  set('flow','Flow cytometry shows an abnormal kappa-restricted B-cell population expressing CD19, CD20, CD10, and CD38, negative for CD5, CD23, CD11c, CD25, and CD103. Correlate with the separate flow cytometry report.');
+  set('flow','See separate flow cytometry report, if performed.');
   set('cyto','');
   generateReport();
 }
@@ -1971,7 +1971,7 @@ function loadEtpAll(){
   generateReport();
 }
 
-function loadPlasmaCellNeoplasm(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('XX%');applyBasicIhc();set('dx1','Kappa/lambda-restricted plasma cell neoplasm involving approximately __% of marrow cellularity.');set('dx2','Normocellular/Hypercellular/Hypocellular bone marrow with residual maturing trilineage hematopoiesis.');set('pbdx','Normocytic anemia.');set('commentType','plasma');set('customComment','The bone marrow shows involvement by a plasma cell neoplasm. Correlation with serum and urine protein studies, serum free light chains, imaging findings, and plasma cell FISH/cytogenetic studies is recommended for complete classification and risk assessment.');set('pbRbc','Normocytic anemia.');set('pbWbc','No circulating plasma cells or blasts identified.');set('pbPlt','Normal/decreased in number.');set('dPlasma','XX');set('aspPlasma','atypical plasma cells are present');set('bxPlasma','increased plasma cells in interstitial/focal aggregates, comprising approximately ___% of marrow cellularity');set('ihcCd138','highlights increased plasma cells, approximately XX% of marrow cellularity');set('ihcKappaLambda','shows kappa/lambda light chain restriction in the plasma cells');set('ihcExtra','Cyclin D1 ___. CD56 ___.');generateReport();}
+function loadPlasmaCellNeoplasm(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('XX%');applyBasicIhc();set('dx1','PLASMA CELL NEOPLASM involving approximately ___% of marrow cellularity, with ___ light chain restriction.');set('dx2','');set('pbdx','Normocytic anemia.');set('commentType','plasma');set('customComment','The bone marrow shows involvement by a plasma cell neoplasm. Correlation with serum and urine protein studies, serum free light chains, imaging findings, and plasma cell FISH/cytogenetic studies is recommended for complete classification and risk assessment.');set('pbRbc','Normocytic anemia.');set('pbWbc','No circulating plasma cells or blasts identified.');set('pbPlt','Normal/decreased in number.');set('dPlasma','XX');set('aspPlasma','atypical plasma cells are present');set('bxPlasma','increased plasma cells in interstitial/focal aggregates, comprising approximately ___% of marrow cellularity');set('ihcCd138','highlights increased plasma cells, approximately XX% of marrow cellularity');set('ihcKappaLambda','shows ___ light chain restriction in the plasma cells');set('ihcExtra','Cyclin D1 ___. CD56 ___.');generateReport();}
 function loadMdsLowGrade(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('70%');applyBasicIhc();set('dx1','Hypercellular bone marrow with erythroid and megakaryocytic dysplasia, no increase in blasts.');set('pbdx','Mildly macrocytic anemia.');set('commentType','mDS');set('customComment','The morphologic findings raise concern for a myelodysplastic neoplasm. Definitive classification requires integration of persistent cytopenias, clinical history, cytogenetic and molecular studies, and exclusion of non-neoplastic causes of dysplasia.');set('pbRbc','Mild macrocytic anemia with anisopoikilocytosis.');set('aspCell','hypercellular for bone marrow');set('aspEryNum','proportionately increased');set('aspEryMat','show dysplastic maturation');set('aspEryMorph','nuclear budding; multinuclearity; megaloblastoid changes');set('aspMyeNum','proportionately decreased');set('aspMyeMat','show left-shifted maturation');set('aspMyeMorph','hypogranularity');set('aspMkNum','proportionately increased');set('aspMkMorph','small mononuclear megakaryocytes; hypolobated megakaryocytes');set('ringSid','not increased');set('bxCellPhrase','hypercellular for age');set('bxEryNum','increased');set('bxEryMat','dysplastic maturation');set('bxMyeNum','relatively decreased');set('bxMyeMat','show left-shifted maturation');set('bxMkNum','increased');set('bxMkMorph','small mononuclear megakaryocytes; hypolobated megakaryocytes');set('retic','Reticulin: Mildly diffusely increased (MF grade 1 of 3 fibrosis).');set('ihcCd61','highlights variable megakaryocytes, including small forms');generateReport();}
 function loadMdsEb(){loadMdsLowGrade();set('dx1','Moderately hypercellular bone marrow with trilineage dysplasia and increased blasts (5-9%).');set('pbdx','Myeloid dysplasia with leukoerythroblastosis.');set('customComment','The findings raise concern for a myelodysplastic neoplasm with increased blasts. Definitive classification requires integration of blast percentage, cytopenias, clinical history, cytogenetic and molecular findings, and exclusion of other causes of dysplasia. Verify the blast estimate using an adequate aspirate when available.');set('pbWbc','Myeloid dysplasia with leukoerythroblastosis. Blasts are not markedly increased in peripheral blood.');set('aspBlasts','are mildly increased (5-9%)');set('bxBlasts','mildly increased (5-9%)');set('ihcCd34','highlights increased blasts (5-9%)');set('ihcCd117','highlights increased immature precursors');generateReport();}
 function loadAml(){clearAll();window.__loadingTemplate=true;applyCommonNormalPb();applyNormalAspirate();applyNormalBiopsy('XX%');applyBasicIhc();set('dx1','ACUTE MYELOID LEUKEMIA with XX% blasts.');set('pbdx','See peripheral blood smear description.');set('commentType','mDS');set('customComment','Correlation with clinical, cytogenetic, molecular diagnostic and laboratory findings is advised. AML genetic risk classification should be finalized after integration of cytogenetic and molecular results.');set('pbRbc','Anemia with anisopoikilocytosis.');set('pbWbc','Circulating blasts are present/increased.');set('pbPlt','Decreased in number.');set('aspCell','hypercellular for bone marrow');set('aspEryNum','proportionately decreased');set('aspMyeNum','proportionately decreased');set('aspMyeMat','');set('aspMyeMorph','');set('aspMkNum','proportionately decreased');set('aspMkMorph','');set('aspBlasts','are increased (>=20%)');set('bxCellPhrase','hypercellular for age');set('bxEryNum','decreased');set('bxMyeNum','decreased');set('bxMyeMat','');set('bxMyeMorph','');set('bxMkNum','decreased');set('bxMkMorph','');set('bxBlasts','increased (>=20%)');set('ihcCd34','highlights increased blasts');set('ihcCd117','highlights increased blasts');set('ihcExtra','CD61 highlights megakaryocytes. CD3 and CD20 highlight scattered T cells and fewer B cells, respectively.');generateReport();}
