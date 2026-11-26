@@ -1407,8 +1407,8 @@ function generateReport(){
   r += 'PERIPHERAL BLOOD COUNT (Date: '+(v('cbcDate')||'[]')+'):\n';
   // Preserve v18's omission of blank results; align populated CBC rows for copy/paste.
   const cbcFields=[
-    ['WBC','wbc','x10E9/L'],['Hb','hb','g/L'],['RBC','rbc','x10E12/L'],
-    ['MCV','mcv','fL'],['RDW','rdw','%'],['Platelets','plt','x10E9/L'],
+    ['Hb','hb','g/L'],['WBC','wbc','x10E9/L'],['Platelets','plt','x10E9/L'],
+    ['MCV','mcv','fL'],['RBC','rbc','x10E12/L'],
     ['Neutrophils','neutAbs','x10E9/L'],['Lymphocytes','lymphAbs','x10E9/L'],
     ['Monocytes','monoAbs','x10E9/L'],['Eosinophils','eosAbs','x10E9/L'],
     ['Basophils','basoAbs','x10E9/L']
