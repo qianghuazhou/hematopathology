@@ -134,7 +134,7 @@ function generate(){
  if(on('rbc_poly')) addc('Polycythemia may be relative, secondary, or primary. If persistent or unexplained, correlation with oxygenation status, serum erythropoietin level, and JAK2 mutation testing is recommended.');
 
  // WBC compounds.
- if(cmpNeutMonoPlt) addc('Neutrophilia, monocytosis and thrombocytosis favour a reactive/inflammatory process. If persistent or unexplained, consider an underlying myeloid neoplasm, including an MDS/MPN.');
+ if(cmpNeutMonoPlt) addc('Neutrophilia, monocytosis and thrombocytosis favour a reactive/inflammatory process; if persistent or unexplained, further evaluation for an underlying myeloid neoplasm, including MDS/MPN, is recommended.');
  else if(cmpNeutPlt) addc('Neutrophilia and thrombocytosis favour a reactive process. If persistent, consider investigation for a myeloproliferative neoplasm.');
  else if(cmpNeutLeftMono) addc('Neutrophilia with left shift and monocytosis favour a reactive/inflammatory process. If monocytosis persists or dysplasia is present, consider CMML or another myeloid neoplasm.');
  else if(cmpNeutMono) addc('Neutrophilia and monocytosis favour a reactive/infectious or inflammatory process. Follow-up is suggested if persistent.');
@@ -235,9 +235,9 @@ function generate(){
  else if(on('plt_low_mod') && !cmpPancytopenia) addc('Moderate thrombocytopenia may reflect infection, medication effect, immune-mediated destruction, hypersplenism, liver disease, nutritional deficiency, consumption, or marrow disease. Follow-up is recommended.');
  else if(on('plt_low_mild') && !cmpPancytopenia) addc('Mild thrombocytopenia may be seen with infection, medication effect, immune causes, hypersplenism, liver disease, or early marrow disorders. Follow-up is recommended if persistent.');
 
- if(on('plt_high_marked') && !on('mpnplt')) addc('Marked thrombocytosis may be reactive or associated with a myeloproliferative neoplasm. If persistent and unexplained, investigation for an underlying myeloproliferative neoplasm, including JAK2, CALR and MPL mutation testing, is recommended.');
- else if(on('plt_high_mod')) addc('Moderate thrombocytosis may be reactive, including infection, inflammation, iron deficiency, recent surgery, blood loss, or malignancy; persistence should prompt consideration of a clonal process.');
- else if(on('plt_high_mild')) addc('Mild thrombocytosis is often reactive, including infection, inflammation, iron deficiency, recent blood loss, surgery, or malignancy. Follow-up is recommended if persistent.');
+ if(on('plt_high_marked') && !on('mpnplt') && !cmpNeutPlt) addc('Marked thrombocytosis may be reactive or associated with a myeloproliferative neoplasm. If persistent and unexplained, investigation for an underlying myeloproliferative neoplasm, including JAK2, CALR and MPL mutation testing, is recommended.');
+ else if(on('plt_high_mod') && !cmpNeutPlt) addc('Moderate thrombocytosis may be reactive, including infection, inflammation, iron deficiency, recent surgery, blood loss, or malignancy; persistence should prompt consideration of a clonal process.');
+ else if(on('plt_high_mild') && !cmpNeutPlt) addc('Mild thrombocytosis is often reactive, including infection, inflammation, iron deficiency, recent blood loss, surgery, or malignancy. Follow-up is recommended if persistent.');
 
  // Platelet / cytopenia interpretations.
  if(on('clump')) addc('Platelet clumping may cause pseudothrombocytopenia. Repeat collection in sodium citrate or another alternate anticoagulant may be considered if the platelet count is clinically important.');
